@@ -71,6 +71,9 @@ class Sector extends Model
         return $v;
     }
 
+    public function chances(){
+        return $this->belongsToMany(Chance::class, "chances_sectors", "sector_id", "chance_id");
+    }
 
 
 }

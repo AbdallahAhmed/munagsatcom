@@ -36,5 +36,6 @@ Route::group([
         $route->any('/{sector_id}/edit', ["as" => "admin.sectors.edit", "uses" => "SectorsController@edit"]);
         $route->any('/delete', ["as" => "admin.sectors.delete", "uses" => "SectorsController@delete"]);
         $route->any('/search', ["as" => "admin.sectors.search", "uses" => "SectorsController@search"]);
+        $route->any('/status', ["as" => "admin.sectors.status", "uses" => "SectorsController@status"]);
     });
 });

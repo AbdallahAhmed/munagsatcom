@@ -90,7 +90,7 @@ class UnitsController extends Controller
             $unit = new Unit();
 
             $unit->name = Request::get("name");
-            $unit->status = Request::get("status");
+            $unit->status = Request::get("status", 0);
             $unit->user_id = Auth::user()->id;
 
 
@@ -122,7 +122,7 @@ class UnitsController extends Controller
         if (Request::isMethod("post")) {
 
             $unit->name = Request::get("name");
-            $unit->status = Request::get("status");
+            $unit->status = Request::get("status", 0);
 
             if (!$unit->validate()) {
                 return Redirect::back()->withErrors($unit->errors())->withInput(Request::all());
@@ -145,9 +145,10 @@ class UnitsController extends Controller
      * @param $status
      * @return mixed
      */
-    public function status($status)
+    public function status()
     {
         $ids = Request::get("id");
+        $status = Request::get("status");
 
         $ids = is_array($ids) ? $ids : [$ids];
 

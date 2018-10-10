@@ -30,13 +30,13 @@
                 @if ($unit)
                     <a href="{{ route("admin.units.create") }}"
                        class="btn btn-primary btn-labeled btn-main"> <span
-                            class="btn-label icon fa fa-plus"></span>
+                                class="btn-label icon fa fa-plus"></span>
                         {{ trans("chances::units.add_new") }}</a>
                 @endif
 
                 <button type="submit" class="btn btn-flat btn-danger btn-main">
                     <i class="fa fa-download" aria-hidden="true"></i>
-                    {{ trans("chances::units.save_sector") }}
+                    {{ trans("chances::units.save_unit") }}
                 </button>
 
             </div>
@@ -63,7 +63,7 @@
 
                         </div>
                     </div>
-                    
+
                 </div>
 
                 <div class="col-md-4">
@@ -83,21 +83,12 @@
                                 </div>
                             </div>
 
-                            <div class="form-group format-area event-format-area">
-                                <div class="input-group date datetimepick">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                    <input name="published_at" type="text"
-                                           value="{{ (!$unit->id) ? date("Y-m-d H:i:s") : @Request::old('published_at', $unit->published_at) }}"
-                                           class="form-control" id="input-published_at"
-                                           placeholder="{{ trans("posts::posts.attributes.published_at") }}">
-                                </div>
-                            </div>
                         </div>
                     </div>
 
                 </div>
 
-        </div>
+            </div>
 
     </form>
 

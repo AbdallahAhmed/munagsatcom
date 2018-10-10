@@ -73,6 +73,8 @@ class Unit extends Model
         return $v;
     }
 
-
+    public function chances(){
+        return $this->belongsToMany(Chance::class, "chances_units", "unit_id", "chance_id");
+    }
 
 }

@@ -90,7 +90,7 @@ class SectorsController extends Controller
             $sector = new Sector();
 
             $sector->name = Request::get("name");
-            $sector->status = Request::get("status");
+            $sector->status = Request::get("status", 0);
             $sector->user_id = Auth::user()->id;
 
 
@@ -122,7 +122,7 @@ class SectorsController extends Controller
         if (Request::isMethod("post")) {
 
             $sector->name = Request::get("name");
-            $sector->status = Request::get("status");
+            $sector->status = Request::get("status", 0);
 
             if (!$sector->validate()) {
                 return Redirect::back()->withErrors($sector->errors())->withInput(Request::all());
@@ -144,9 +144,10 @@ class SectorsController extends Controller
      * @param $status
      * @return mixed
      */
-    public function status($status)
+    public function status()
     {
         $ids = Request::get("id");
+        $status = Request::get("status");
 
         $ids = is_array($ids) ? $ids : [$ids];
 

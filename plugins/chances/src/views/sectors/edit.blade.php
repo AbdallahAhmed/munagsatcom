@@ -65,6 +65,27 @@
                     </div>
                     
                 </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-check-square"></i>
+                            {{ trans("posts::posts.post_status") }}
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group switch-row">
+                                <label class="col-sm-9 control-label"
+                                       for="input-status">{{ trans("posts::posts.attributes.status") }}</label>
+                                <div class="col-sm-3">
+                                    <input @if (@Request::old("status", $sector->status)) checked="checked" @endif
+                                    type="checkbox" id="input-status" name="status" value="1"
+                                           class="status-switcher switcher-sm">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
 
 
             </div>
@@ -86,74 +107,27 @@
     <script>
         $(document).ready(function () {
 
-            $("#mytags").tagit({
-                singleField: true,
-                singleFieldNode: $('#tags_names'),
-                allowSpaces: true,
-                minLength: 2,
-                placeholderText: "",
-                removeConfirmation: true,
-                tagSource: function (request, response) {
-                    $.ajax({
-                        url: "{{ route("admin.tags.search") }}",
-                        data: {q: request.term},
-                        dataType: "json",
-                        success: function (data) {
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.name,
-                                    value: item.name
-                                }
-                            }));
-                        }
-                    });
-                },
-                beforeTagAdded: function (event, ui) {
-                    $("#metakeywords").tagit("createTag", ui.tagLabel);
-                }
+            $("[name=format]").on('ifChecked', function () {
+                $(this).iCheck('check');
+                $(this).change();
+                switch_format($(this));
             });
 
+            switch_format($("[name=format]:checked"));
 
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
-            $('.tree-views input[type=checkbox]').on('ifChecked', function () {
-                var checkbox = $(this).closest('ul').parent("li").find("input[type=checkbox]").first();
-                checkbox.iCheck('check');
-                checkbox.change();
-            });
-            $('.tree-views input[type=checkbox]').on('ifUnchecked', function () {
-                var checkbox = $(this).closest('ul').parent("li").find("input[type=checkbox]").first();
-                checkbox.iCheck('uncheck');
-                checkbox.change();
-            });
-            $(".expand").each(function (index, element) {
-                var base = $(this);
-                if (base.parents("li").find("ul").first().length > 0) {
-                    base.text("+");
-                } else {
-                    base.text("-");
-                }
-            });
+            function switch_format(radio) {
 
-            $("body").on("click", ".expand", function () {
-                var base = $(this);
-                if (base.text() == "+") {
-                    if (base.closest("li").find("ul").length > 0) {
-                        base.closest("li").find("ul").first().slideDown("fast");
-                        base.text("-");
-                    }
-                    base.closest("li").find(".expand").last().text("-");
-                } else {
-                    if (base.closest("li").find("ul").length > 0) {
-                        base.closest("li").find("ul").first().slideUp("fast");
-                        base.text("+");
-                    }
-                }
-                return false;
-            });
+                var format = radio.val();
 
+                $(".format-area").hide();
+                $("." + format + "-format-area").show();
+            }
+
+
+            var elems = Array.prototype.slice.call(document.querySelectorAll('.status-switcher'));
+            elems.forEach(function (html) {
+                var switchery = new Switchery(html, {size: 'small'});
+            });
         });
 
     </script>

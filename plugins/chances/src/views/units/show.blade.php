@@ -158,8 +158,8 @@
                                                 @else
                                                     <a data-toggle="tooltip" data-placement="bottom"
                                                        title="{{ trans("chances::units.deactivated") }}" class="ask"
-                                                       message="{{ trans('chances::chances.sure_activate') }}"
-                                                       href="{{ URL::route("admin.chances.status", array("id" => $unit->id, "status" => 1)) }}">
+                                                       message="{{ trans('chances::units.sure_activate') }}"
+                                                       href="{{ URL::route("admin.units.status", array("id" => $unit->id, "status" => 1)) }}">
                                                         <i class="fa fa-toggle-off text-danger"></i>
                                                     </a>
                                                 @endif

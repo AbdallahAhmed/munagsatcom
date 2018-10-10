@@ -127,6 +127,8 @@
                                                                       name="ids[]"/>
                                         </th>
                                         <th>{{ trans("chances::sectors.attributes.name") }}</th>
+                                        <th>{{ trans("chances::units.attributes.status") }}</th>
+
                                         <th>{{ trans("chances::sectors.actions") }}</th>
                                     </tr>
                                     </thead>
@@ -138,6 +140,7 @@
                                                        value="{{ $sector->id }}"/>
                                             </td>
 
+
                                             <td>
                                                 <a data-toggle="tooltip" data-placement="bottom" class="text-navy"
                                                    title="{{ trans("chances::sectors.edit") }}"
@@ -145,7 +148,23 @@
                                                     <strong>{{ $sector->name }}</strong>
                                                 </a>
                                             </td>
-
+                                            <td>
+                                                @if ($sector->status)
+                                                    <a data-toggle="tooltip" data-placement="bottom"
+                                                       title="{{ trans("chances::sectors.activated") }}" class="ask"
+                                                       message="{{ trans('chances::sectors.sure_deactivate') }}"
+                                                       href="{{ URL::route("admin.sectors.status", array("id" => $sector->id, "status" => 0)) }}">
+                                                        <i class="fa fa-toggle-on text-success"></i>
+                                                    </a>
+                                                @else
+                                                    <a data-toggle="tooltip" data-placement="bottom"
+                                                       title="{{ trans("chances::sectors.deactivated") }}" class="ask"
+                                                       message="{{ trans('chances::sectors.sure_activate') }}"
+                                                       href="{{ URL::route("admin.sectors.status", array("id" => $sector->id, "status" => 1)) }}">
+                                                        <i class="fa fa-toggle-off text-danger"></i>
+                                                    </a>
+                                                @endif
+                                            </td>
                                             <td class="center">
                                                 <a data-toggle="tooltip" data-placement="bottom"
                                                    title="{{ trans("chances::sectors.edit") }}"

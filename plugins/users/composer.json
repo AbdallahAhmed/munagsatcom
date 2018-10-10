@@ -1,0 +1,24 @@
+{
+    "name": "dot/users",
+    "description": "The users plugin of dot/platform",
+    "keywords": [
+        "framework",
+        "laravel",
+        "cms",
+        "plugins",
+        "platform",
+        "dot",
+        "users"
+    ],
+    "license": "MIT",
+    "type": "package",
+    "require": {
+        "dot/platform": "0.4.*",
+        "dot/roles": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dot\\Users\\": "src"
+        }
+    }
+}

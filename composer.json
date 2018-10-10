@@ -1,0 +1,70 @@
+{
+    "name": "laravel/laravel",
+    "description": "The Laravel Framework.",
+    "keywords": ["framework", "laravel"],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": ">=7.0.0",
+        "dot/categories": "^0.2.2",
+        "dot/i18n": "^0.2.1",
+        "dot/platform": "^0.4.59",
+        "dot/posts": "^0.2.6",
+        "fideloper/proxy": "~3.3",
+        "laravel/framework": "5.5.*",
+        "laravel/tinker": "~1.0"
+    },
+    "require-dev": {
+        "filp/whoops": "~2.0",
+        "fzaninotto/faker": "~1.4",
+        "mockery/mockery": "~1.0",
+        "phpunit/phpunit": "~6.0",
+        "symfony/thanks": "^1.0"
+    },
+    "autoload": {
+        "classmap": [
+            "database/seeds",
+            "database/factories"
+        ],
+        "psr-4": {
+            "App\\": "app/",
+            "Dot\\Posts\\": "plugins/posts/src/",
+            "Dot\\Blocks\\": "plugins/blocks/src/",
+            "Dot\\Categories\\": "plugins/categories/src/",
+            "Dot\\Media\\": "plugins/media/src/",
+            "Dot\\Options\\": "plugins/options/src/",
+            "Dot\\Seo\\": "plugins/seo/src/",
+            "Dot\\Tags\\": "plugins/tags/src/",
+            "Dot\\Users\\": "plugins/Users/src/",
+            "Dot\\I18n\\": "plugins/i18n/src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": [
+            ]
+        }
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    }
+}

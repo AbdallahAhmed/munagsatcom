@@ -1,0 +1,25 @@
+{
+    "name": "dot/media",
+    "description": "The media plugin of dot/platform",
+    "keywords": [
+        "framework",
+        "laravel",
+        "cms",
+        "plugins",
+        "platform",
+        "dot",
+        "media"
+    ],
+    "license": "MIT",
+    "type": "package",
+    "require": {
+        "dot/platform": "0.4.*",
+        "intervention/image": "2.*",
+        "aws/aws-sdk-php-laravel": "2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dot\\Media\\": "src"
+        }
+    }
+}

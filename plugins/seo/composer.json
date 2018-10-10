@@ -1,0 +1,28 @@
+{
+    "name": "dot/seo",
+    "description": "The seo plugin of dot/platform",
+    "keywords": [
+        "framework",
+        "laravel",
+        "cms",
+        "plugins",
+        "platform",
+        "dot",
+        "seo",
+        "search",
+        "optimization"
+    ],
+    "license": "MIT",
+    "type": "package",
+    "require": {
+        "dot/platform": "0.4.*",
+        "roumen/sitemap": "2.*",
+        "sunra/php-simple-html-dom-parser": "^1.5",
+        "davechild/textstatistics": "1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dot\\Seo\\": "src"
+        }
+    }
+}

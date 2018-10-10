@@ -1,0 +1,23 @@
+{
+    "name": "dot/categories",
+    "description": "The categories plugin of dot/platform",
+    "keywords": [
+        "framework",
+        "laravel",
+        "cms",
+        "plugins",
+        "platform",
+        "dot",
+        "categories"
+    ],
+    "license": "MIT",
+    "type": "package",
+    "require": {
+        "dot/platform": "0.4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dot\\Categories\\": "src"
+        }
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "name": "dot/tags",
+    "description": "The tags plugin of dot/platform",
+    "keywords": [
+        "framework",
+        "laravel",
+        "cms",
+        "plugins",
+        "platform",
+        "dot",
+        "tags"
+    ],
+    "license": "MIT",
+    "type": "package",
+    "require": {
+        "dot/platform": "0.4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dot\\Tags\\": "src"
+        }
+    }
+}

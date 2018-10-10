@@ -1,0 +1,24 @@
+{
+    "name": "dot/i18n",
+    "description": "The i18n plugin of dot/platform",
+    "keywords": [
+        "framework",
+        "laravel",
+        "cms",
+        "plugins",
+        "platform",
+        "dot",
+        "users",
+        "i18n"
+    ],
+    "license": "MIT",
+    "type": "package",
+    "require": {
+        "dot/platform": "0.4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dot\\I18n\\": "src"
+        }
+    }
+}

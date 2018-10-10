@@ -36,7 +36,8 @@
             "Dot\\Seo\\": "plugins/seo/src/",
             "Dot\\Tags\\": "plugins/tags/src/",
             "Dot\\Users\\": "plugins/Users/src/",
-            "Dot\\I18n\\": "plugins/i18n/src/"
+            "Dot\\I18n\\": "plugins/i18n/src/",
+            "Dot\\Chances\\": "plugins/chances/src/"
         }
     },
     "autoload-dev": {

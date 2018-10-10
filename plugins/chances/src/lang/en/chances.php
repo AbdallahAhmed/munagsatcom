@@ -1,10 +1,10 @@
 <?php
 return [
 
-    'module' => 'blocks',
-    'blocks' => 'Chances',
-    'block' => 'block',
-    'add_new' => 'Add New Block',
+    'module' => 'chances',
+    'chances' => 'Chances',
+    'chance' => 'chance',
+    'add_new' => 'Add New Chance',
     'edit' => 'Edit Block',
     'back_to_blocks' => 'Back To Chances',
     'no_records' => 'No Chances Found',

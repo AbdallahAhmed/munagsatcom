@@ -10,7 +10,7 @@ use Dot\Tags\Models\Tag;
 
 /*
  * Class Block
- * @package Dot\Blocks\Models
+ * @package Dot\Chances\Models
  */
 class Block extends Model
 {

@@ -150,7 +150,7 @@ class Post extends Model
     }
 
     /**
-     * Blocks relation
+     * Chances relation
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function blocks()

@@ -1,6 +1,6 @@
 <?php
 
-namespace Dot\Blocks\Controllers;
+namespace Dot\Chances\Controllers;
 
 use Action;
 use Dot\Blocks\Models\Block;
@@ -13,7 +13,7 @@ use View;
  * Class ChancesController
  * @package Dot\Chances\Controllers
  */
-class BlocksController extends Controller
+class ChancesController extends Controller
 {
 
     /*
@@ -52,7 +52,7 @@ class BlocksController extends Controller
 
         $this->data["blocks"] = $blocks;
 
-        return View::make("blocks::show", $this->data);
+        return View::make("chances::show", $this->data);
     }
 
     /*
@@ -82,7 +82,7 @@ class BlocksController extends Controller
             Action::fire("block.deleted", $block);
         }
 
-        return Redirect::back()->with("message", trans("blocks::blocks.events.deleted"));
+        return Redirect::back()->with("message", trans("chances::chances.events.deleted"));
     }
 
     /*
@@ -117,15 +117,15 @@ class BlocksController extends Controller
 
             Action::fire("block.saved", $block);
 
-            return Redirect::route("admin.blocks.edit", array("id" => $block->id))
-                ->with("message", trans("blocks::blocks.events.created"));
+            return Redirect::route("admin.chances.edit", array("id" => $block->id))
+                ->with("message", trans("chances::chances.events.created"));
         }
 
         $this->data["block"] = false;
         $this->data["block_tags"] = array();
         $this->data["block_categories"] = collect([]);
 
-        return View::make("blocks::edit", $this->data);
+        return View::make("chances::edit", $this->data);
     }
 
     /*
@@ -161,14 +161,14 @@ class BlocksController extends Controller
 
             Action::fire("block.saved", $block);
 
-            return Redirect::route("admin.blocks.edit", array("id" => $id))->with("message", trans("blocks::blocks.events.updated"));
+            return Redirect::route("admin.chances.edit", array("id" => $id))->with("message", trans("chances::chances.events.updated"));
         }
 
         $this->data["block"] = $block;
         $this->data["block_tags"] = $block->tags->pluck("name")->toArray();
         $this->data["block_categories"] = $block->categories;
 
-        return View::make("blocks::edit", $this->data);
+        return View::make("chances::edit", $this->data);
     }
 
     /*

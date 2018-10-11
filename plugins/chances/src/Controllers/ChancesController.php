@@ -4,7 +4,11 @@ namespace Dot\Chances\Controllers;
 
 use Action;
 use Dot\Blocks\Models\Block;
+use Dot\Chances\Models\Chance;
 use Dot\Platform\Controller;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\MessageBag;
 use Redirect;
 use Request;
 use View;
@@ -13,6 +17,7 @@ use View;
  * Class ChancesController
  * @package Dot\Chances\Controllers
  */
+
 class ChancesController extends Controller
 {
 
@@ -94,34 +99,49 @@ class ChancesController extends Controller
 
         if (Request::isMethod("post")) {
 
-            $block = new Block();
+            $chance = new Chance();
 
-            $block->name = Request::get("name");
-            $block->type = Request::get("type");
-            $block->limit = Request::get("limit", 0);
-            $block->lang = app()->getLocale();
+            $chance->name = "ss";//Request::get("name");
+            $chance->number = "ss";//Request::get("number");
+            $chance->closing_date = Carbon::createFromFormat('Y-m-d\TH:i',Request::get("closing_date"));
+            $chance->file_name = "ss";//Request::get("file_name");
+            $chance->file_description = "Ss";//Request::get("file_description");
+            $chance->status = Request::get("status", 0);
+            $chance->approved = "SS";//Request::get('approved');
+            $chance->reason = Request::get("reason", "");
+            $chance->user_id = Auth::user()->id;
+            $chance->media_id = "0";//Request::get("media_id");
+            $units = Request::get("units", []);
+            $units_names = Request::get("units_names", []);
+            $sectors = Request::get("sectors", []);
+die(Carbon::createFromFormat('Y-m-d\TH:i',Request::get("closing_date")));
+$chance->save();
+            $errors = new MessageBag();
 
-            // Fire Saving block
+            if (!$units)
+                $errors->add("units", trans("chances::chances.attributes.units") . " " . trans("chances::chances.required") . ".");
+            if (!$sectors)
+                $errors->add("sectors", trans("chances::chances.attributes.sectors") . " " . trans("chances::chances.required") . ".");
+            if (!$units_names)
+                $errors->add("units_names", trans("chances::chances.attributes.units_names") . " " . trans("chances::chances.required") . ".");
 
-            Action::fire("block.saving", $block);
-
-            if (!$block->validate()) {
-                return Redirect::back()->withErrors($block->errors())->withInput(Request::all());
+            if (!$chance->validate()) {
+                $errors->merge($chance->errors());
+                return Redirect::back()->withErrors($errors)->withInput(Request::all());
             }
-
-            $block->save();
-            $block->syncTags(Request::get("tags", []));
-            $block->categories()->sync(Request::get("categories", []));
+            $chance->save();
+            $chance->syncSectors(Request::get("sectors", []));
+            $chance->units()->sync(Request::get("units", []), Request::get("sectors_names", []));
 
             // Fire saved action
 
-            Action::fire("block.saved", $block);
+            Action::fire("chance.saved", $chance);
 
-            return Redirect::route("admin.chances.edit", array("id" => $block->id))
+            return Redirect::route("admin.chances.edit", array("id" => $chance->id))
                 ->with("message", trans("chances::chances.events.created"));
         }
 
-        $this->data["block"] = false;
+        $this->data["chance"] = Chance::find(1);
         $this->data["block_tags"] = array();
         $this->data["block_categories"] = collect([]);
 

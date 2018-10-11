@@ -35,19 +35,19 @@ class Chance extends Model
      * @var int
      */
     protected $perPage = 20;
-    /*
-     * @var array
-     */
-    protected $sluggable = [
-        'slug' => 'name',
-    ];
+
 
     /*
      * @var array
      */
     protected $creatingRules = [
         "name" => "required",
-        "limit" => "required|numeric"
+        "number" => "required",
+        "closing_date" => "required",
+        "file_name" => "required",
+        "file_description" => "required",
+        "media_id" => "required",
+
     ];
 
     /*

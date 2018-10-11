@@ -3,11 +3,12 @@ return [
 
     'chances' => 'فرص',
     'chance' => 'فرصة',
+    'side_bar' => 'مشاهدة الفرص و تعديلها',
     'add_new' => 'أضف فرصة جديدة',
     'edit' => 'تعديل الفرصة',
     'back_to_chances' => 'العودة للفرص',
     'no_records' => 'لا توجد فرص',
-    'save_block' => 'حفظ الفرصة',
+    'save_chance' => 'حفظ الفرصة',
     'search' => 'بحث',
     'search_chances' => 'البحث فى الفرص',
     'per_page' => 'لكل صفحة',
@@ -27,7 +28,7 @@ return [
     "close" => "إلغاء",
     'add_category' => "أضف إلي قسم",
     'add_tag' => 'أضف وسوم',
-
+    'required' => "مطلوب",
     "not_categorized" => "غير محدد",
 
     "yes" => "نعم",
@@ -40,8 +41,15 @@ return [
 
     'attributes' => [
         'name' => 'إسم الفرصة',
-        "type" => "النوع",
-        'limit' => "عدد الأخبار"
+        "number" => 'الرقم المرجعي',
+        "media_id" => "الملف",
+        "closing_date" => "تاريخ الاغلاق",
+        "file_name" => "اسم الملف",
+        "file_description" => "تفاصيل الملف",
+        "units" => "وحدات القياس",
+        "units_names" => "اسامي وحدات القطاع",
+        "sectors" => "القطاعات"
+
     ],
 
     "events" => [

@@ -29,6 +29,10 @@ class Chances extends \Dot\Platform\Plugin
             if (Auth::user()->can("chances.manage")) {
                 $menu->item('chances.sectors', trans("chances::sectors.sectors"), route("admin.sectors.show"))->icon("fa-th-large")->order(4);
             }
+            if (Auth::user()->can("chances.manage")) {
+                $menu->item('chances.chances', trans("chances::chances.side_bar"), route("admin.chances.show"))->icon("fa-align-left")->order(4);
+            }
+
 
         });
     }

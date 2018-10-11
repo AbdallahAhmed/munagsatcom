@@ -21,6 +21,8 @@ class CreateChancesTable extends Migration
             $table->string("file_description")->index();
             $table->integer("media_id")->index();
             $table->string("status")->default(0)->index();
+            $table->string("approved")->default(0)->index();
+            $table->string("reason")->default("")->index();
             $table->integer("user_id")->index();
         });
     }

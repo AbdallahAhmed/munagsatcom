@@ -27,7 +27,11 @@ return [
     "close" => "إلغاء",
     'add_category' => "أضف إلي قسم",
     'add_tag' => 'أضف وسوم',
-
+    'sure_activate' => "هل تريد تفعيل القطاع؟",
+    'sure_deactivate' => "هل تريد إلغاء تفعيل القطاع",
+    'activate' => 'تفعيل',
+    'activated' => 'مفعل',
+    'deactivated' => 'غير مفعل',
     "not_categorized" => "غير محدد",
 
     "yes" => "نعم",

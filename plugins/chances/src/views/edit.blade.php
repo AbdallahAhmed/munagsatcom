@@ -8,7 +8,7 @@
             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                 <h2>
                     <i class="fa fa-th-large"></i>
-                    {{ $block ? trans("chances::chances.edit") : trans("chances::chances.add_new") }}
+                    {{ $chance ? trans("chances::chances.edit") : trans("chances::chances.add_new") }}
                 </h2>
                 <ol class="breadcrumb">
                     <li>
@@ -19,7 +19,7 @@
                     </li>
                     <li class="active">
                         <strong>
-                            {{ $block ? trans("chances::chances.edit") : trans("chances::chances.add_new") }}
+                            {{ $chance ? trans("chances::chances.edit") : trans("chances::chances.add_new") }}
                         </strong>
                     </li>
                 </ol>
@@ -27,7 +27,7 @@
 
             <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12 text-right">
 
-                @if ($block)
+                @if ($chance)
                     <a href="{{ route("admin.chances.create") }}"
                        class="btn btn-primary btn-labeled btn-main"> <span
                             class="btn-label icon fa fa-plus"></span>
@@ -36,7 +36,7 @@
 
                 <button type="submit" class="btn btn-flat btn-danger btn-main">
                     <i class="fa fa-download" aria-hidden="true"></i>
-                    {{ trans("chances::chances.save_unit") }}
+                    {{ trans("chances::chances.save_chance") }}
                 </button>
 
             </div>
@@ -48,50 +48,82 @@
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-4">
                     <div class="panel panel-default">
                         <div class="panel-body">
-
                             <div class="form-group">
                                 <label for="input-name">{{ trans("chances::chances.attributes.name") }}</label>
                                 <input name="name" type="text"
-                                       value="{{ @Request::old("name", $block->name) }}"
+                                       value="{{ @Request::old("name", $chance->name) }}"
                                        class="form-control" id="input-name"
                                        placeholder="{{ trans("chances::chances.attributes.name") }}">
                             </div>
-
-                            <div class="form-group">
-                                <label for="input-type">{{ trans("chances::chances.attributes.type") }}</label>
-                                <select id="input-type" class="form-control chosen-select chosen-rtl" name="type">
-                                    @foreach(array("post", "tag", "category") as $type)
-                                        <option value="{{ $type }}"
-                                                @if($block and $block->type == $type) selected="selected" @endif>{{ trans("chances::chances.type_" . $type) }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="input-limit">{{ trans("chances::chances.attributes.limit") }}</label>
-                                <input name="limit" min="0" type="number"
-                                       value="{{ @Request::old("limit", $block->limit, 0) }}"
-                                       class="form-control"
-                                       id="input-limit"
-                                       placeholder="{{ trans("chances::chances.attributes.limit") }}">
-                            </div>
-
                         </div>
                     </div>
-
-                    @foreach(Action::fire("block.form.featured") as $output)
-                        {!! $output !!}
-                    @endforeach
-
                 </div>
-                <div class="col-md-4">
-                </div>
-
             </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="input-number">{{ trans("chances::chances.attributes.number") }}</label>
+                                <input name="number" type="text"
+                                       value="{{ @Request::old("number", $chance->number) }}"
+                                       class="form-control" id="input-name"
+                                       placeholder="{{ trans("chances::chances.attributes.number") }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label
+                                    for="input-number">{{ trans("chances::chances.attributes.closing_date") }}</label>
+                                <input name="closing_date" type="datetime-local"
+                                       value="{{ @Request::old("closing_date", $chance->closing_date)}}"
+                                       class="form-control" id="input-name"
+                                       placeholder="{{ trans("chances::chances.attributes.closing_date") }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-folder"></i>
+                            {{ trans("posts::posts.add_category") }}
+                        </div>
+                        <div class="panel-body">
 
+                            @if (Dot\Categories\Models\Category::count())
+                                <ul class='tree-views'>
+                                    <?php
+                                    echo Dot\Categories\Models\Category::tree(array(
+                                        "row" => function ($row, $depth) use ($post, $post_categories) {
+                                            $html = "<li><div class='tree-row checkbox i-checks'><a class='expand' href='javascript:void(0)'>+</a> <label><input type='checkbox' ";
+                                            if ($post and in_array($row->id, $post_categories->pluck("id")->toArray())) {
+                                                $html .= 'checked="checked"';
+                                            }
+                                            $html .= "name='categories[]' value='" . $row->id . "'> &nbsp;" . $row->name . "</label></div>";
+                                            return $html;
+                                        }
+                                    ));
+                                    ?>
+                                </ul>
+                            @else
+                                {{ trans("categories::categories.no_records") }}
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </form>
@@ -108,33 +140,6 @@
 
     <script>
         $(document).ready(function () {
-
-            $("#mytags").tagit({
-                singleField: true,
-                singleFieldNode: $('#tags_names'),
-                allowSpaces: true,
-                minLength: 2,
-                placeholderText: "",
-                removeConfirmation: true,
-                tagSource: function (request, response) {
-                    $.ajax({
-                        url: "{{ route("admin.tags.search") }}",
-                        data: {q: request.term},
-                        dataType: "json",
-                        success: function (data) {
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.name,
-                                    value: item.name
-                                }
-                            }));
-                        }
-                    });
-                },
-                beforeTagAdded: function (event, ui) {
-                    $("#metakeywords").tagit("createTag", ui.tagLabel);
-                }
-            });
 
 
             $('.i-checks').iCheck({

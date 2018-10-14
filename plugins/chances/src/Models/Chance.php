@@ -46,7 +46,8 @@ class Chance extends Model
         "closing_date" => "required",
         "file_name" => "required",
         "file_description" => "required",
-        "media_id" => "required",
+        //"media_id" => "required",
+        "value" => "required"
 
     ];
 
@@ -55,7 +56,11 @@ class Chance extends Model
      */
     protected $updatingRules = [
         "name" => "required",
-        "limit" => "required|numeric"
+        "number" => "required",
+        "closing_date" => "required",
+        "file_name" => "required",
+        "file_description" => "required",
+        "value" => "required"
     ];
 
     /*
@@ -79,6 +84,13 @@ class Chance extends Model
         return $v;
     }
 
+    public function sectors(){
+        return $this->belongsToMany(Sector::class, "chances_sectors", "chance_id", "sector_id");
+    }
+
+    public function units(){
+        return $this->belongsToMany(Unit::class, "chances_units", "chance_id", "unit_id")->withPivot("quantity");
+    }
 
 
 }

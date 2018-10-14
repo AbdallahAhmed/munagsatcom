@@ -14,7 +14,7 @@
                 </li>
                 <li>
                     <a href="{{ route("admin.chances.show") }}">{{ trans("chances::chances.chances") }}
-                        ({{ $blocks->total() }})</a>
+                        ({{ $chances->total() }})</a>
                 </li>
             </ol>
         </div>
@@ -90,7 +90,7 @@
                         </h5>
                     </div>
                     <div class="ibox-content">
-                        @if (count($blocks))
+                        @if (count($chances))
                             <div class="row">
 
                                 <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 action-box">
@@ -132,37 +132,37 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($blocks as $block)
+                                    @foreach ($chances as $chance)
                                         <tr>
                                             <td>
                                                 <input type="checkbox" class="i-checks" name="id[]"
-                                                       value="{{ $block->id }}"/>
+                                                       value="{{ $chance->id }}"/>
                                             </td>
 
                                             <td>
                                                 <a data-toggle="tooltip" data-placement="bottom" class="text-navy"
                                                    title="{{ trans("chances::chances.edit") }}"
-                                                   href="{{ route("admin.chances.edit", array("id" => $block->id)) }}">
-                                                    <strong>{{ $block->name }}</strong>
+                                                   href="{{ route("admin.chances.edit", array("id" => $chance->id)) }}">
+                                                    <strong>{{ $chance->name }}</strong>
                                                 </a>
                                             </td>
 
                                             <td>
-                                                {{ $block->limit }}
+                                                {{ $chance->limit }}
                                             </td>
 
                                             <td class="center">
                                                 <a data-toggle="tooltip" data-placement="bottom"
                                                    title="{{ trans("chances::chances.edit") }}"
-                                                   href="{{ route("admin.chances.edit", array("id" => $block->id)) }}">
+                                                   href="{{ route("admin.chances.edit", array("id" => $chance->id)) }}">
                                                     <i class="fa fa-pencil text-navy"></i>
                                                 </a>
                                                 <a <?php /* data-toggle="tooltip" data-placement="bottom" */ ?>
                                                    title="{{ trans("chances::chances.delete") }}"
                                                    class="ask delete_block"
-                                                   data-block-id="{{ $block->id }}"
+                                                   data-block-id="{{ $chance->id }}"
                                                    message="{{ trans("chances::chances.sure_delete") }}"
-                                                   href="{{ URL::route("admin.chances.delete", array("id" => $block->id)) }}">
+                                                   href="{{ URL::route("admin.chances.delete", array("id" => $chance->id)) }}">
                                                     <i class="fa fa-times text-navy"></i>
                                                 </a>
                                             </td>
@@ -174,12 +174,12 @@
                             <div class="row">
                                 <div class="col-lg-12 text-center">
                                     {{ trans("chances::chances.page") }}
-                                    {{ $blocks->currentPage() }}
+                                    {{ $chances->currentPage() }}
                                     {{ trans("chances::chances.of") }}
-                                    {{ $blocks->lastPage() }}
+                                    {{ $chances->lastPage() }}
                                 </div>
                                 <div class="col-lg-12 text-center">
-                                    {{ $blocks->appends(Request::all())->render() }}
+                                    {{ $chances->appends(Request::all())->render() }}
                                 </div>
                             </div>
                         @else

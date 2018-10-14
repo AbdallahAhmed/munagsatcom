@@ -77,4 +77,8 @@ class Unit extends Model
         return $this->belongsToMany(Chance::class, "chances_units", "unit_id", "chance_id");
     }
 
+    public function scopePublished($query){
+        return $query->where('status', 1);
+    }
+
 }

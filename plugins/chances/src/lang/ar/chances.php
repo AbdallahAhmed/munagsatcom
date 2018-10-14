@@ -30,6 +30,7 @@ return [
     'add_tag' => 'أضف وسوم',
     'required' => "مطلوب",
     "not_categorized" => "غير محدد",
+    'add_sector' => "أضف قطاعات",
 
     "yes" => "نعم",
     "no" => "لا",
@@ -48,7 +49,10 @@ return [
         "file_description" => "تفاصيل الملف",
         "units" => "وحدات القياس",
         "units_names" => "اسامي وحدات القطاع",
-        "sectors" => "القطاعات"
+        "sectors" => "القطاعات",
+        "value" => "قيمة الفرصة",
+        "file" => "الملف",
+        "quantity" => "الكمية"
 
     ],
 

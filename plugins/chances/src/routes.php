@@ -17,6 +17,7 @@ Route::group([
         $route->any('/{chance_id}/edit', ["as" => "admin.chances.edit", "uses" => "ChancesController@edit"]);
         $route->any('/delete', ["as" => "admin.chances.delete", "uses" => "ChancesController@delete"]);
         $route->any('/search', ["as" => "admin.chances.search", "uses" => "ChancesController@search"]);
+        $route->any('/addunit', ["as" => "admin.chances.addUnitUI", "uses" => "ChancesController@addUnitUI"]);
     });
 
     //Units

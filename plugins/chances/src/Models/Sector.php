@@ -75,5 +75,9 @@ class Sector extends Model
         return $this->belongsToMany(Chance::class, "chances_sectors", "sector_id", "chance_id");
     }
 
+    public function scopePublished($query){
+        return $query->where('status', 1);
+    }
+
 
 }

@@ -3,8 +3,12 @@
 namespace Dot\Chances\Controllers;
 
 use Action;
+use DateTime;
 use Dot\Blocks\Models\Block;
+use Dot\Chances\Chances;
 use Dot\Chances\Models\Chance;
+use Dot\Chances\Models\Sector;
+use Dot\Chances\Models\Unit;
 use Dot\Platform\Controller;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +16,8 @@ use Illuminate\Support\MessageBag;
 use Redirect;
 use Request;
 use View;
+use File;
+
 
 /*
  * Class ChancesController
@@ -28,7 +34,7 @@ class ChancesController extends Controller
     protected $data = [];
 
     /*
-     * Show all blocks
+     * Show all chances
      * @return mixed
      */
     function index()
@@ -47,21 +53,21 @@ class ChancesController extends Controller
         $this->data["order"] = $order = (Request::filled("order")) ? Request::get("order") : "DESC";
         $this->data['per_page'] = (Request::filled("per_page")) ? (int)Request::get("per_page") : 40;
 
-        $query = Block::orderBy($this->data["sort"], $this->data["order"]);
+        $query = Chance::orderBy($this->data["sort"], $this->data["order"]);
 
         if (Request::filled("q")) {
             $query->search(Request::get("q"));
         }
 
-        $blocks = $query->paginate($this->data['per_page']);
+        $chances = $query->paginate($this->data['per_page']);
 
-        $this->data["blocks"] = $blocks;
+        $this->data["chances"] = $chances;
 
         return View::make("chances::show", $this->data);
     }
 
     /*
-     * Delete block by id
+     * Delete chance by id
      * @return mixed
      */
     public function delete()
@@ -72,127 +78,85 @@ class ChancesController extends Controller
 
         foreach ($ids as $id) {
 
-            $block = Block::findOrFail($id);
+            $chance = Chance::findOrFail($id);
 
-            // Fire deleting action
+            $chance->delete();
+            $chance->units()->detach();
+            $chance->sectors()->detach();
 
-            Action::fire("block.deleting", $block);
-
-            $block->delete();
-            $block->tags()->detach();
-            $block->categories()->detach();
-
-            // Fire deleted action
-
-            Action::fire("block.deleted", $block);
         }
 
         return Redirect::back()->with("message", trans("chances::chances.events.deleted"));
     }
 
     /*
-     * Create a new block
-     * @return mixed
-     */
-    public function create()
-    {
-
-        if (Request::isMethod("post")) {
-
-            $chance = new Chance();
-
-            $chance->name = "ss";//Request::get("name");
-            $chance->number = "ss";//Request::get("number");
-            $chance->closing_date = Carbon::createFromFormat('Y-m-d\TH:i',Request::get("closing_date"));
-            $chance->file_name = "ss";//Request::get("file_name");
-            $chance->file_description = "Ss";//Request::get("file_description");
-            $chance->status = Request::get("status", 0);
-            $chance->approved = "SS";//Request::get('approved');
-            $chance->reason = Request::get("reason", "");
-            $chance->user_id = Auth::user()->id;
-            $chance->media_id = "0";//Request::get("media_id");
-            $units = Request::get("units", []);
-            $units_names = Request::get("units_names", []);
-            $sectors = Request::get("sectors", []);
-die(Carbon::createFromFormat('Y-m-d\TH:i',Request::get("closing_date")));
-$chance->save();
-            $errors = new MessageBag();
-
-            if (!$units)
-                $errors->add("units", trans("chances::chances.attributes.units") . " " . trans("chances::chances.required") . ".");
-            if (!$sectors)
-                $errors->add("sectors", trans("chances::chances.attributes.sectors") . " " . trans("chances::chances.required") . ".");
-            if (!$units_names)
-                $errors->add("units_names", trans("chances::chances.attributes.units_names") . " " . trans("chances::chances.required") . ".");
-
-            if (!$chance->validate()) {
-                $errors->merge($chance->errors());
-                return Redirect::back()->withErrors($errors)->withInput(Request::all());
-            }
-            $chance->save();
-            $chance->syncSectors(Request::get("sectors", []));
-            $chance->units()->sync(Request::get("units", []), Request::get("sectors_names", []));
-
-            // Fire saved action
-
-            Action::fire("chance.saved", $chance);
-
-            return Redirect::route("admin.chances.edit", array("id" => $chance->id))
-                ->with("message", trans("chances::chances.events.created"));
-        }
-
-        $this->data["chance"] = Chance::find(1);
-        $this->data["block_tags"] = array();
-        $this->data["block_categories"] = collect([]);
-
-        return View::make("chances::edit", $this->data);
-    }
-
-    /*
-     * Edit block by id
+     * Edit chance by id
      * @param $id
      * @return mixed
      */
     public function edit($id)
     {
 
-        $block = Block::findOrFail($id);
+        $chance = Chance::findOrFail($id);
 
         if (Request::isMethod("post")) {
+            $chance = new Chance();
 
-            $block->name = Request::get("name");
-            $block->type = Request::get("type");
-            $block->limit = Request::get("limit", 0);
-            $block->lang = app()->getLocale();
+            $chance->name = Request::get("name");
+            $chance->number = Request::get("number");
+            $chance->closing_date = Carbon::now();//createFromFormat('Y-m-d\TH:i', Request::get("closing_date"));
+            $chance->file_name = Request::get("file_name", "sa");
+            $chance->file_description = Request::get("file_description","sa");
+            $chance->status = Request::get("status", 1);
+            $chance->approved = Request::get('approved',"a");
+            $chance->reason = Request::get("reason","sa");
+            $chance->value = Request::get("value","ssa");
+            $chance->user_id = Auth::user()->id;
+            $chance->media_id = Request::get("media_id",1);
+            $units = Request::get("units",[]);
+            $units_names = Request::get("units_names", []);
+            $sectors = Request::get("sectors", []);
+            //$file = Request::file("file");
 
-            // Fire saving action
+            $errors = new MessageBag();
 
-            Action::fire("block.saving", $block);
-
-            if (!$block->validate()) {
-                return Redirect::back()->withErrors($block->errors())->withInput(Request::all());
+            $syncUnit = array();
+            foreach ($units as $key => $unit){
+                if(!$units_names[$key]){
+                    $errors->add("units_names",trans("chances::chances.attributes.units_names"));
+                    break;
+                }
+                $syncUnit[$unit] = ["quantity" => $units_names[$key]];
             }
 
-            $block->save();
-            $block->syncTags(Request::get("tags", []));
-            $block->categories()->sync(Request::get("categories", []));
+            if (!$units)
+                $errors->add("units", trans("chances::chances.attributes.units") . " " . trans("chances::chances.required") . ".");
+            if (!$sectors)
+                $errors->add("sectors", trans("chances::chances.attributes.sectors") . " " . trans("chances::chances.required") . ".");
 
-            // Fire saved action
+            if (!$chance->validate()) {
+                $errors->merge($chance->errors());
+                return Redirect::back()->withErrors($errors)->withInput(Request::all());
+            }
+            $chance->save();
+            $chance->sectors()->sync($sectors);
+            $chance->units()->sync($syncUnit);
 
-            Action::fire("block.saved", $block);
-
-            return Redirect::route("admin.chances.edit", array("id" => $id))->with("message", trans("chances::chances.events.updated"));
+            return Redirect::route("admin.chances.edit", array("id" => $chance->id))
+                ->with("message", trans("chances::chances.events.created"));
         }
 
-        $this->data["block"] = $block;
-        $this->data["block_tags"] = $block->tags->pluck("name")->toArray();
-        $this->data["block_categories"] = $block->categories;
+        $this->data["chance"] = $chance;
+        $this->data["chances_sectors"] = $chance->sectors->pluck('id')->toArray();
+        $this->data["units_quantity"] = $chance->units;
+        $this->data["sectors"] = Sector::published()->get();
+        $this->data["units"] = Unit::published()->get();
 
         return View::make("chances::edit", $this->data);
     }
 
     /*
-     * Rest Service to search blocks
+     * Rest Service to search chances
      * @return string
      */
     function search()
@@ -200,8 +164,8 @@ $chance->save();
 
         $q = trim(urldecode(Request::get("q")));
 
-        $blocks = Block::search($q)->get()->toArray();
+        $chances = Chance::search($q)->get()->toArray();
 
-        return json_encode($blocks);
+        return json_encode($chances);
     }
 }

@@ -39,6 +39,6 @@ return [
         "posts" => Dot\Posts\Posts::class,
         "seo" => Dot\Seo\Seo::class,
         "chances" => Dot\Chances\Chances::class,
-        "tenders" => Dot\Tenders\Tenders::class,
+        //"tenders" => Dot\Tenders\Tenders::class,
     ]
 ];

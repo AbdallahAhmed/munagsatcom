@@ -44,7 +44,7 @@ class ChanceController extends Controller
         $chance->closing_date = Request::get("closing_date") ? Carbon::createFromFormat('Y-m-d\TH:i', Request::get("closing_date")) : null;
 
         $units = Request::get("units", []);
-        $units_names = Request::get("units_names", []);
+        $units_quantity = Request::get("units_quantity", []);
         $sectors = Request::get("sectors", []);
         $file = Request::file("file");
 
@@ -55,11 +55,11 @@ class ChanceController extends Controller
 
         $syncUnit = array();
         foreach ($units as $key => $unit) {
-            if (!$units_names[$key]) {
+            if (!$units_quantity[$key]) {
                 $this->errors->add("units_names", trans("chances::chances.attributes.units_names"));
                 break;
             }
-            $syncUnit[$unit] = ["quantity" => $units_names[$key]];
+            $syncUnit[$unit] = ["quantity" => $units_quantity[$key]];
         }
 
         if (!$units)
@@ -98,7 +98,6 @@ class ChanceController extends Controller
         File::makeDirectory($file_directory, 0777, true, true);
 
         $file->move($file_directory, $filename);
-        dd(date("/Y/m")."/".$filename);
 
         return  date("/Y/m")."/".$filename;
     }

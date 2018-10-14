@@ -7,7 +7,7 @@
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                 <h2>
-                    <i class="fa fa-th-large"></i>
+                    <i class="fa fa-align-left"></i>
                     {{ $chance ? trans("chances::chances.edit") : trans("chances::chances.add_new") }}
                 </h2>
                 <ol class="breadcrumb">
@@ -48,7 +48,7 @@
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-8">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="form-group">
@@ -58,12 +58,6 @@
                                        class="form-control" id="input-name"
                                        placeholder="{{ trans("chances::chances.attributes.name") }}">
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
                             <div class="form-group">
                                 <label for="input-number">{{ trans("chances::chances.attributes.number") }}</label>
                                 <input name="number" type="text"
@@ -71,28 +65,14 @@
                                        class="form-control" id="input-name"
                                        placeholder="{{ trans("chances::chances.attributes.number") }}">
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
                             <div class="form-group">
                                 <label
                                         for="input-number">{{ trans("chances::chances.attributes.closing_date") }}</label>
                                 <input name="closing_date" type="datetime-local"
                                        value="{{ DateTime::createFromFormat('Y-m-d H:i:s', $chance->closing_date)->format("Y-m-d\TH:i") }}"
-                                       class="form-control" id="input-name"
+                                       class="chosen-rtl form-control" id="input-name"
                                        placeholder="{{ trans("chances::chances.attributes.closing_date") }}">
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
                             <div class="form-group">
                                 <label
                                         for="input-number">{{ trans("chances::chances.attributes.value") }}</label>
@@ -101,17 +81,76 @@
                                        class="form-control" id="input-name"
                                        placeholder="{{ trans("chances::chances.attributes.value") }}">
                             </div>
+                            <div class="form-group">
+                                <label
+                                        for="input-number">{{ trans("chances::chances.attributes.file_description") }}</label>
+                                <input name="file_description" type="text"
+                                       value="{{ @Request::old("file_description", $chance->file_description)}}"
+                                       class="form-control" id="input-name"
+                                       placeholder="{{ trans("chances::chances.attributes.file_description") }}">
+                            </div>
+                            <div class="form-group">
+                                <label
+                                        for="input-number">{{ trans("chances::chances.attributes.file_name") }}</label>
+                                <input name="file_name" type="text"
+                                       value="{{ @Request::old("file_name", $chance->file_name)}}"
+                                       class="form-control" id="input-name"
+                                       placeholder="{{ trans("chances::chances.attributes.file_name") }}">
+                            </div>
                         </div>
                     </div>
                 </div>
-
-            </div>
-
-            <div class="row">
                 <div class="col-md-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-check-square"></i>
+                            {{ trans("chances::chances.approve") }}
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <select name="approved" class="form-control chosen-select chosen-rtl">
+                                    @if($chance->approved == 0)
+                                        <option value="0" selected="selected">{{trans("chances::chances.reject")}}</option>
+                                        <option value="1">{{trans("chances::chances.approve")}}</option>
+                                    @else
+                                        <option value="1" selected="selected">{{trans("chances::chances.approve")}}</option>
+                                        <option value="0">{{trans("chances::chances.reject")}}</option>
+                                    @endif
+                                </select>
+                                <div id="reason" style="display: @if($chance->approved == 1) none @else block @endif; margin-top: 20px">
+                                    <label
+                                            for="input-number">{{ trans("chances::chances.attributes.reason") }}</label>
+                                    <input name="reason" type="text"
+                                           value="{{$chance->reason}}"
+                                           class="form-control" id="input-name"
+                                           placeholder="{{ trans("chances::chances.attributes.reason") }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-check-square"></i>
+                            {{ trans("chances::chances.attributes.status_name") }}
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <select name="status" class="form-control chosen-select chosen-rtl">
+                                    @foreach($status as $st)
+                                        @if($chance->status == $st)
+                                            <option value="{{$st}}"
+                                                    selected="selected">{{trans("chances::chances.status.$st")}}</option>
+                                        @else
+                                            <option value="{{$st}}">{{trans("chances::chances.status.$st")}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa fa-th-large"></i>
                             {{ trans("chances::chances.add_sector") }}
                         </div>
                         <div class="panel-body">
@@ -134,42 +173,15 @@
                             @endif
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
                     <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <label
-                                        for="input-number">{{ trans("chances::chances.attributes.file") }}</label>
-                                <a href="{{route("index")}}/uploads/chances{{$chance->file_path}}" target="_blank">{{$chance->file_name}}</a>
-                            </div>
+                        <div class="panel-heading">
+                            <i class="fa fa-folder"></i>
+                            {{ trans("chances::chances.file_download") }}
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="form-group">
-                                <label
-                                        for="input-number">{{ trans("chances::chances.attributes.file_description") }}</label>
-                                <input name="file_description" type="text"
-                                       value="{{ @Request::old("file_description", $chance->file_description)}}"
-                                       class="form-control" id="input-name"
-                                       placeholder="{{ trans("chances::chances.attributes.file_description") }}">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <label
-                                        for="input-number">{{ trans("chances::chances.attributes.file_name") }}</label>
-                                <input name="file_name" type="text"
-                                       value="{{ @Request::old("file_name", $chance->file_name)}}"
-                                       class="form-control" id="input-name"
-                                       placeholder="{{ trans("chances::chances.attributes.file_name") }}">
+                                <a href="{{route("index")}}/uploads/chances{{$chance->file_path}}"
+                                   target="_blank">{{$chance->file_name}}</a>
                             </div>
                         </div>
                     </div>
@@ -183,11 +195,12 @@
                                 <div class="panel-body">
                                     <div class="form-group">
                                         <label
-                                                for="input-number">{{ trans("chances::chances.attributes.units") }}</label>
+                                                for="input-number">{{ trans("chances::units.unit") }}</label>
                                         <select name="units[]" class="form-control chosen-select chosen-rtl">
                                             @foreach($units as $unit)
                                                 @if($unit->id == $uq->id)
-                                                    <option value="{{$unit->id}}" selected="selected">{{$unit->name}}</option>
+                                                    <option value="{{$unit->id}}"
+                                                            selected="selected">{{$unit->name}}</option>
                                                 @else
                                                     <option value="{{$unit->id}}">{{$unit->name}}</option>
                                                 @endif
@@ -203,7 +216,7 @@
                                     <div class="form-group">
                                         <label
                                                 for="input-number">{{ trans("chances::chances.attributes.quantity") }}</label>
-                                        <input name="units_names[]" type="text"
+                                        <input name="units_quantity[]" type="text"
                                                value="{{$uq->pivot->quantity}}"
                                                class="form-control" id="input-name"
                                                placeholder="{{ trans("chances::chances.attributes.quantity") }}">
@@ -245,6 +258,13 @@
                         $(this).remove();
                     }
                 })
+            });
+
+            $('[name=approved]').change(function () {
+                if (this.value == 0)
+                    $("#reason").css('display', 'block');
+                else
+                    $("#reason").css('display', 'none');
             })
 
             $('.i-checks').iCheck({

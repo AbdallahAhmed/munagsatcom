@@ -4,7 +4,7 @@
             <div class="panel-body">
                 <div class="form-group">
                     <label
-                            for="input-number">{{ trans("chances::chances.attributes.units") }}</label>
+                            for="input-number">{{ trans("chances::units.unit") }}</label>
                     <select name="units[]" class="form-control chosen-select chosen-rtl">
                         @if($units)
                             @foreach($units as $unit)
@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <label
                             for="input-number">{{ trans("chances::chances.attributes.quantity") }}</label>
-                    <input name="units_names[]" type="text"
+                    <input name="units_quantity[]" type="text"
                            value=""
                            class="form-control" id="input-name"
                            placeholder="{{ trans("chances::chances.attributes.quantity") }}">

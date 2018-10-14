@@ -33,6 +33,8 @@ class ChancesController extends Controller
      */
     protected $data = [];
 
+    public $errors = array();
+
     /*
      * Show all chances
      * @return mixed
@@ -98,46 +100,44 @@ class ChancesController extends Controller
     {
 
         $chance = Chance::findOrFail($id);
-
+        $this->errors = new MessageBag();
         if (Request::isMethod("post")) {
-            $chance = new Chance();
-
             $chance->name = Request::get("name");
             $chance->number = Request::get("number");
-            $chance->closing_date = Carbon::now();//createFromFormat('Y-m-d\TH:i', Request::get("closing_date"));
-            $chance->file_name = Request::get("file_name", "sa");
-            $chance->file_description = Request::get("file_description","sa");
-            $chance->status = Request::get("status", 1);
-            $chance->approved = Request::get('approved',"a");
-            $chance->reason = Request::get("reason","sa");
-            $chance->value = Request::get("value","ssa");
-            $chance->user_id = Auth::user()->id;
-            $chance->media_id = Request::get("media_id",1);
-            $units = Request::get("units",[]);
-            $units_names = Request::get("units_names", []);
-            $sectors = Request::get("sectors", []);
-            //$file = Request::file("file");
+            $chance->closing_date = Request::get("closing_date") ? Carbon::createFromFormat('Y-m-d\TH:i', Request::get("closing_date")) : null;
+            $chance->file_name = Request::get("file_name", "");
+            $chance->file_description = Request::get("file_description", "");
+            $chance->status = Request::get("status", 3);
+            $chance->approved = Request::get('approved', 1);
+            $chance->reason = Request::get("reason", "");
+            $chance->value = Request::get("value", "");
 
-            $errors = new MessageBag();
+            $units = Request::get("units", []);
+            $units_quantity = Request::get("units_quantity", []);
+            $sectors = Request::get("sectors", []);
 
             $syncUnit = array();
-            foreach ($units as $key => $unit){
-                if(!$units_names[$key]){
-                    $errors->add("units_names",trans("chances::chances.attributes.units_names"));
+            foreach ($units as $key => $unit) {
+                if (!$units_quantity[$key]) {
+                    $this->errors->add("units_names", trans("chances::chances.attributes.units_names") . " " . trans("chances::chances.required") . ".");
                     break;
                 }
-                $syncUnit[$unit] = ["quantity" => $units_names[$key]];
+                $syncUnit[$unit] = ["quantity" => $units_quantity[$key]];
             }
 
+            if ($chance->approved == 0 && $chance->reason == "")
+                $this->errors->add("reason", trans("chances::chances.attributes.reason") . " " . trans("chances::chances.required") . ".");
             if (!$units)
-                $errors->add("units", trans("chances::chances.attributes.units") . " " . trans("chances::chances.required") . ".");
+                $this->errors->add("units", trans("chances::chances.attributes.units") . " " . trans("chances::chances.required") . ".");
             if (!$sectors)
-                $errors->add("sectors", trans("chances::chances.attributes.sectors") . " " . trans("chances::chances.required") . ".");
+                $this->errors->add("sectors", trans("chances::chances.attributes.sectors") . " " . trans("chances::chances.required") . ".");
 
-            if (!$chance->validate()) {
-                $errors->merge($chance->errors());
-                return Redirect::back()->withErrors($errors)->withInput(Request::all());
-            }
+            $chance->validate();
+            if($chance->errors() != null)
+                $this->errors->merge($chance->errors());
+            if ($this->errors->messages())
+                return Redirect::back()->withErrors($this->errors)->withInput(Request::all());
+
             $chance->save();
             $chance->sectors()->sync($sectors);
             $chance->units()->sync($syncUnit);
@@ -151,6 +151,7 @@ class ChancesController extends Controller
         $this->data["units_quantity"] = $chance->units;
         $this->data["sectors"] = Sector::published()->get();
         $this->data["units"] = Unit::published()->get();
+        $this->data['status'] = [0, 1, 2, 3, 4, 5];
 
         return View::make("chances::edit", $this->data);
     }

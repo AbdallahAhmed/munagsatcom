@@ -163,7 +163,7 @@
                             <div class="form-group">
                                 <label
                                         for="input-number">{{ trans("chances::chances.attributes.quantity") }}</label>
-                                <input name="units_names[]" type="text"
+                                <input name="units_quantity[]" type="text"
                                        value=""
                                        class="form-control" id="input-name"
                                        placeholder="{{ trans("chances::chances.attributes.quantity") }}">
@@ -198,7 +198,8 @@
                     }
                 });
                 $.ajax({
-                    url: "{{route("admin.chances.addUnitUI")}}",
+                    url: "{{route("chance.units")}}",
+                    type: "POST",
                     success: function (data) {
                         $(data.view).insertAfter($("#add-unit"))
                         $(this).remove();

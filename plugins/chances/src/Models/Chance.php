@@ -84,6 +84,31 @@ class Chance extends Model
         return $v;
     }
 
+    public function scopeOpened($query){
+        return $query->where('status',0);
+    }
+
+    public function scopeClosed($query){
+        return $query->where('status',1);
+    }
+
+    public function scopeCancelled($query){
+        return $query->where('status',2);
+    }
+
+    public function scopePending($query){
+        return $query->where('status',3);
+    }
+
+    public function scopeApproved($query){
+        return $query->where('status',4);
+    }
+
+    public function scopeRejected($query){
+        return $query->where('status',5);
+    }
+
+
     public function sectors(){
         return $this->belongsToMany(Sector::class, "chances_sectors", "chance_id", "sector_id");
     }

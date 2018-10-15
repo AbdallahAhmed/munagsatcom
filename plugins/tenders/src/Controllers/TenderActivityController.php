@@ -5,17 +5,17 @@ namespace Dot\Tenders\Controllers;
 use Action;
 use Illuminate\Support\Facades\Auth;
 use Dot\Platform\Controller;
-use Dot\Tenders\Models\TenderType;
+use Dot\Tenders\Models\TenderActivity;
 use Redirect;
 use Request;
 use View;
 
 
 /**
- * Class TenderTypeController
+ * Class TenderActivityController
  * @package Dot\Tender\Controllers
  */
-class TenderTypeController extends Controller
+class TenderActivityController extends Controller
 {
 
     /**
@@ -49,7 +49,7 @@ class TenderTypeController extends Controller
         $this->data["order"] = (Request::filled("order")) ? Request::get("order") : "DESC";
         $this->data['per_page'] = (Request::filled("per_page")) ? Request::get("per_page") : NULL;
 
-        $query = TenderType::with( 'user')->orderBy($this->data["sort"], $this->data["order"]);
+        $query = TenderActivity::with( 'user')->orderBy($this->data["sort"], $this->data["order"]);
 
         if (Request::filled("tag_id")) {
             $query->whereHas("tags", function ($query) {
@@ -81,13 +81,13 @@ class TenderTypeController extends Controller
         }
 
 
-        $this->data["types"] = $query->paginate($this->data['per_page']);
+        $this->data["activities"] = $query->paginate($this->data['per_page']);
 
-        return View::make("tenders::types.show", $this->data);
+        return View::make("tenders::activities.show", $this->data);
     }
 
     /**
-     * Delete type by id
+     * Delete activity by id
      * @return mixed
      */
     public function delete()
@@ -98,25 +98,25 @@ class TenderTypeController extends Controller
 
         foreach ($ids as $ID) {
 
-            $type = TenderType::findOrFail($ID);
+            $activity = TenderActivity::findOrFail($ID);
 
             // Fire deleting action
 
-            Action::fire("type.deleting", $type);
+            Action::fire("activity.deleting", $activity);
 
 
-            $type->delete();
+            $activity->delete();
 
             // Fire deleted action
 
-            Action::fire("type.deleted", $type);
+            Action::fire("activity.deleted", $activity);
         }
 
-        return Redirect::back()->with("message", trans("tenders::types.events.deleted"));
+        return Redirect::back()->with("message", trans("tenders::activities.events.deleted"));
     }
 
     /**
-     * Activating / Deactivating type by id
+     * Activating / Deactivating activity by id
      * @param $status
      * @return mixed
      */
@@ -128,100 +128,100 @@ class TenderTypeController extends Controller
 
         foreach ($ids as $id) {
 
-            $type = TenderType::findOrFail($id);
+            $activity = TenderActivity::findOrFail($id);
 
             // Fire saving action
-            Action::fire("type.saving", $type);
+            Action::fire("activity.saving", $activity);
 
-            $type->status = $status;
-            $type->save();
+            $activity->status = $status;
+            $activity->save();
 
             // Fire saved action
 
-            Action::fire("type.saved", $type);
+            Action::fire("activity.saved", $activity);
         }
 
         if ($status) {
-            $message = trans("tenders::types.events.activated");
+            $message = trans("tenders::activities.events.activated");
         } else {
-            $message = trans("tenders::types.events.deactivated");
+            $message = trans("tenders::activities.events.deactivated");
         }
 
         return Redirect::back()->with("message", $message);
     }
 
     /**
-     * Create a new type
+     * Create a new activity
      * @return mixed
      */
     public function create()
     {
 
-        $type = new TenderType();
+        $activity = new TenderActivity();
 
         if (Request::isMethod("post")) {
 
-            $type->name = Request::get('name');
-            $type->status = Request::get('status',0);
+            $activity->name = Request::get('name');
+            $activity->status = Request::get('status',0);
 
-            $type->user_id = Auth::user()->id;
+            $activity->user_id = Auth::user()->id;
             // Fire saving action
 
-            Action::fire("type.saving", $type);
+            Action::fire("activity.saving", $activity);
 
-            if (!$type->validate()) {
-                return Redirect::back()->withErrors($type->errors())->withInput(Request::all());
+            if (!$activity->validate()) {
+                return Redirect::back()->withErrors($activity->errors())->withInput(Request::all());
             }
 
-            $type->save();
+            $activity->save();
             // Fire saved action
 
-            Action::fire("type.saved", $type);
+            Action::fire("activity.saved", $activity);
 
-            return Redirect::route("admin.tenders.types.edit", array("id" => $type->id))
-                ->with("message", trans("tenders::types.events.created"));
+            return Redirect::route("admin.tenders.activities.edit", array("id" => $activity->id))
+                ->with("message", trans("tenders::activities.events.created"));
         }
-        $this->data["type"] = $type;
+        $this->data["activity"] = $activity;
 
-        return View::make("tenders::types.edit", $this->data);
+        return View::make("tenders::activities.edit", $this->data);
     }
 
     /**
-     * Edit type by id
+     * Edit activity by id
      * @param $id
      * @return mixed
      */
     public function edit($id)
     {
 
-        $type = TenderType::findOrFail($id);
+        $activity = TenderActivity::findOrFail($id);
 
         if (Request::isMethod("post")) {
 
-            $type->name = Request::get('name');
+            $activity->name = Request::get('name');
 
-            $type->status = Request::get('status',0);
+            $activity->status = Request::get('status',0);
 
             // Fire saving action
 
-            Action::fire("type.saving", $type);
+            Action::fire("activity.saving", $activity);
 
-            if (!$type->validate()) {
-                return Redirect::back()->withErrors($type->errors())->withInput(Request::all());
+            if (!$activity->validate()) {
+                return Redirect::back()->withErrors($activity->errors())->withInput(Request::all());
             }
 
-            $type->save();
+            $activity->save();
 
             // Fire saved action
 
-            Action::fire("type.saved", $type);
+            Action::fire("activity.saved", $activity);
 
-            return Redirect::route("admin.tenders.types.edit", array("id" => $id))->with("message", trans("tenders::types.events.updated"));
+            return Redirect::route("admin.tenders.activities.edit", array("id" => $id))->with("message", trans("tenders::activities.events.updated"));
         }
 
 
-        $this->data["type"] = $type;
-        return View::make("tenders::types.edit", $this->data);
+        $this->data["activity"] = $activity;
+        return View::make("tenders::activities.edit", $this->data);
     }
 
 }

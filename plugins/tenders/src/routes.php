@@ -37,6 +37,16 @@ Route::group([
             $route->any('/delete', ["as" => "admin.tenders.orgs.delete", "uses" => "TenderOrgController@delete"]);
             $route->any('/{status}/status', ["as" => "admin.tenders.orgs.status", "uses" => "TenderOrgController@status"]);
         });
+
+
+        // tenders >> activities
+        $route->group(["prefix" => "activities"], function ($route) {
+            $route->any('/', ["as" => "admin.tenders.activities.show", "uses" => "TenderActivityController@index"]);
+            $route->any('/create', ["as" => "admin.tenders.activities.create", "uses" => "TenderActivityController@create"]);
+            $route->any('/{id}/edit', ["as" => "admin.tenders.activities.edit", "uses" => "TenderActivityController@edit"]);
+            $route->any('/delete', ["as" => "admin.tenders.activities.delete", "uses" => "TenderActivityController@delete"]);
+            $route->any('/{status}/status', ["as" => "admin.tenders.activities.status", "uses" => "TenderActivityController@status"]);
+        });
     });
 
 

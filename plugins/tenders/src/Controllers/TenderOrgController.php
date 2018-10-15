@@ -32,7 +32,7 @@ class TenderOrgController extends Controller
     function index()
     {
 
-        if (Request::isMethod("org")) {
+        if (Request::isMethod("post")) {
             if (Request::filled("action")) {
                 switch (Request::get("action")) {
                     case "delete":

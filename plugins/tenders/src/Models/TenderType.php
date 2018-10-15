@@ -8,7 +8,7 @@ use Dot\Users\Models\User;
 
 /**
  * Class TenderType
- * @package Dot\TenderType\Models
+ * @package Dot\Tenders\Models
  */
 class TenderType extends Model
 {

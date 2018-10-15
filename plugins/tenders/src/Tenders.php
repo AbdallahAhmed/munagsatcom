@@ -45,8 +45,14 @@ class Tenders extends \Dot\Platform\Plugin
 
 
                 $menu->item('tenders.orgs', trans("tenders::orgs.orgs"),route('admin.tenders.orgs.show'))
-                    ->order(1)
+                    ->order(2)
                     ->icon("fa-globe");
+
+
+                $menu->item('tenders.activities', trans("tenders::activities.activities"),route('admin.tenders.activities.show'))
+                    ->order(2)
+                    ->icon("fa-cube");
+
 
 
             }

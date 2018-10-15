@@ -8,16 +8,16 @@ use Dot\Users\Models\User;
 
 
 /**
- * Class TenderOrg
+ * Class TenderActivity
  * @package Dot\Tenders\Models
  */
-class TenderOrg extends Model
+class TenderActivity extends Model
 {
 
     /**
      * @var string
      */
-    protected $table = 'tender_orgs';
+    protected $table = 'activities';
     /**
      * @var string
      */
@@ -46,7 +46,6 @@ class TenderOrg extends Model
      */
     protected $creatingRules = [
         'name' => 'required',
-        'logo_id'=>'required|not_in:0'
     ];
 
     /**
@@ -54,7 +53,6 @@ class TenderOrg extends Model
      */
     protected $updatingRules = [
         'name' => 'required',
-        'logo_id'=>'required|not_in:0'
 
     ];
 
@@ -92,7 +90,7 @@ class TenderOrg extends Model
      */
     protected function setValidationAttributes()
     {
-        return trans('tenders::orgs.attributes');
+        return trans('tenders::activities.attributes');
     }
 
     /**
@@ -104,15 +102,6 @@ class TenderOrg extends Model
         return $this->hasOne(User::class, "id", "user_id");
     }
 
-
-    /**
-     * Image relation
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function logo()
-    {
-        return $this->hasOne(Media::class, "id", "logo_id");
-    }
 
 
 }

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTenderActivitiesTable extends Migration
+class CreateActivitiesTable extends Migration
 {
     /*
      * Run the migrations.

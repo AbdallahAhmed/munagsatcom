@@ -30,6 +30,8 @@ return [
     'change_image' => 'تغيير الصورة',
     'add_image' => 'أضف صورة',
     'not_allowed_file' => 'ملف غير مسموح به',
+    'add_sector' => "أضف قطاعات",
+
     'attributes' => [
         'name' => 'إسم التصنيف',
         'parent' => 'القسم الرئيسى',

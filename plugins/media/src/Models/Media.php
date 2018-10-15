@@ -79,8 +79,7 @@ class Media extends Model
     {
 
         $media = Media::where("hash", sha1_file($file->getRealPath()))->first();
-
-        if (count($media)) {
+        if ($media) {
             $media->touch();
             return $media->id;
         }

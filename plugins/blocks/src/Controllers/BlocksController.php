@@ -10,8 +10,8 @@ use Request;
 use View;
 
 /*
- * Class BlocksController
- * @package Dot\Blocks\Controllers
+ * Class ChancesController
+ * @package Dot\Chances\Controllers
  */
 class BlocksController extends Controller
 {

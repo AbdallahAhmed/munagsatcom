@@ -54,7 +54,7 @@ return [
     'templates' => 'Templates',
 
     'all_categories' => "All Categories",
-    'all_blocks' => "All Blocks",
+    'all_blocks' => "All Chances",
     'all_formats' => "All Formats",
     'add_category' => "Add To Category",
 
@@ -69,8 +69,8 @@ return [
     "custom_value" => "Value",
     "sure_delete_field" => "Are you sure to delete custom field ?",
 
-    "add_block" => "Add To Blocks",
-    "no_blocks" => "No Blocks Found",
+    "add_block" => "Add To Chances",
+    "no_blocks" => "No Chances Found",
 
     "add_gallery" => "Add gallery",
     "no_galleries_found" => "No Galleries Found",

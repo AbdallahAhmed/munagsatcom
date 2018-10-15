@@ -38,6 +38,7 @@ return [
         "i18n" => Dot\I18n\I18n::class,
         "posts" => Dot\Posts\Posts::class,
         "seo" => Dot\Seo\Seo::class,
-        "tenders" => Dot\Tenders\Tenders::class,
+        "chances" => Dot\Chances\Chances::class,
+        //"tenders" => Dot\Tenders\Tenders::class,
     ]
 ];

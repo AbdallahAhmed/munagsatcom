@@ -42,6 +42,13 @@ class Tenders extends \Dot\Platform\Plugin
                 $menu->item('tenders.types', trans("tenders::types.types"),route('admin.tenders.types.show'))
                     ->order(1)
                     ->icon(" fa-clone");
+
+
+                $menu->item('tenders.orgs', trans("tenders::orgs.orgs"),route('admin.tenders.orgs.show'))
+                    ->order(1)
+                    ->icon("fa-globe");
+
+
             }
         });
     }

@@ -5,17 +5,17 @@ namespace Dot\Tenders\Controllers;
 use Action;
 use Illuminate\Support\Facades\Auth;
 use Dot\Platform\Controller;
-use Dot\Tenders\Models\TenderType;
+use Dot\Tenders\Models\TenderOrg;
 use Redirect;
 use Request;
 use View;
 
 
 /**
- * Class TenderTypeController
+ * Class TenderOrgController
  * @package Dot\Tender\Controllers
  */
-class TenderTypeController extends Controller
+class TenderOrgController extends Controller
 {
 
     /**
@@ -32,7 +32,7 @@ class TenderTypeController extends Controller
     function index()
     {
 
-        if (Request::isMethod("type")) {
+        if (Request::isMethod("org")) {
             if (Request::filled("action")) {
                 switch (Request::get("action")) {
                     case "delete":
@@ -49,7 +49,7 @@ class TenderTypeController extends Controller
         $this->data["order"] = (Request::filled("order")) ? Request::get("order") : "DESC";
         $this->data['per_page'] = (Request::filled("per_page")) ? Request::get("per_page") : NULL;
 
-        $query = TenderType::with( 'user')->orderBy($this->data["sort"], $this->data["order"]);
+        $query = TenderOrg::with( 'user')->orderBy($this->data["sort"], $this->data["order"]);
 
         if (Request::filled("tag_id")) {
             $query->whereHas("tags", function ($query) {
@@ -81,13 +81,13 @@ class TenderTypeController extends Controller
         }
 
 
-        $this->data["types"] = $query->paginate($this->data['per_page']);
+        $this->data["orgs"] = $query->paginate($this->data['per_page']);
 
-        return View::make("tenders::types.show", $this->data);
+        return View::make("tenders::orgs.show", $this->data);
     }
 
     /**
-     * Delete type by id
+     * Delete org by id
      * @return mixed
      */
     public function delete()
@@ -98,25 +98,25 @@ class TenderTypeController extends Controller
 
         foreach ($ids as $ID) {
 
-            $type = TenderType::findOrFail($ID);
+            $org = TenderOrg::findOrFail($ID);
 
             // Fire deleting action
 
-            Action::fire("type.deleting", $type);
+            Action::fire("org.deleting", $org);
 
 
-            $type->delete();
+            $org->delete();
 
             // Fire deleted action
 
-            Action::fire("type.deleted", $type);
+            Action::fire("org.deleted", $org);
         }
 
-        return Redirect::back()->with("message", trans("tenders::types.events.deleted"));
+        return Redirect::back()->with("message", trans("tenders::orgs.events.deleted"));
     }
 
     /**
-     * Activating / Deactivating type by id
+     * Activating / Deactivating org by id
      * @param $status
      * @return mixed
      */
@@ -128,100 +128,101 @@ class TenderTypeController extends Controller
 
         foreach ($ids as $id) {
 
-            $type = TenderType::findOrFail($id);
+            $org = TenderOrg::findOrFail($id);
 
             // Fire saving action
-            Action::fire("type.saving", $type);
+            Action::fire("org.saving", $org);
 
-            $type->status = $status;
-            $type->save();
+            $org->status = $status;
+            $org->save();
 
             // Fire saved action
 
-            Action::fire("type.saved", $type);
+            Action::fire("org.saved", $org);
         }
 
         if ($status) {
-            $message = trans("tenders::types.events.activated");
+            $message = trans("tenders::orgs.events.activated");
         } else {
-            $message = trans("tenders::types.events.deactivated");
+            $message = trans("tenders::orgs.events.deactivated");
         }
 
         return Redirect::back()->with("message", $message);
     }
 
     /**
-     * Create a new type
+     * Create a new org
      * @return mixed
      */
     public function create()
     {
 
-        $type = new TenderType();
+        $org = new TenderOrg();
 
         if (Request::isMethod("post")) {
 
-            $type->name = Request::get('name');
-            $type->status = Request::get('status',0);
+            $org->name = Request::get('name');
+            $org->status = Request::get('status',0);
+            $org->logo_id = Request::get('logo_id',0);
 
-            $type->user_id = Auth::user()->id;
+            $org->user_id = Auth::user()->id;
             // Fire saving action
 
-            Action::fire("type.saving", $type);
+            Action::fire("org.saving", $org);
 
-            if (!$type->validate()) {
-                return Redirect::back()->withErrors($type->errors())->withInput(Request::all());
+            if (!$org->validate()) {
+                return Redirect::back()->withErrors($org->errors())->withInput(Request::all());
             }
 
-            $type->save();
+            $org->save();
             // Fire saved action
 
-            Action::fire("type.saved", $type);
+            Action::fire("org.saved", $org);
 
-            return Redirect::route("admin.tenders.types.edit", array("id" => $type->id))
-                ->with("message", trans("tenders::types.events.created"));
+            return Redirect::route("admin.tenders.orgs.edit", array("id" => $org->id))
+                ->with("message", trans("tenders::orgs.events.created"));
         }
-        $this->data["type"] = $type;
+        $this->data["org"] = $org;
 
-        return View::make("tenders::types.edit", $this->data);
+        return View::make("tenders::orgs.edit", $this->data);
     }
 
     /**
-     * Edit type by id
+     * Edit org by id
      * @param $id
      * @return mixed
      */
     public function edit($id)
     {
 
-        $type = TenderType::findOrFail($id);
+        $org = TenderOrg::findOrFail($id);
 
         if (Request::isMethod("post")) {
 
-            $type->name = Request::get('name');
-
-            $type->status = Request::get('status',0);
+            $org->name = Request::get('name');
+            $org->status = Request::get('status',0);
+            $org->logo_id = Request::get('logo_id',0);
 
             // Fire saving action
 
-            Action::fire("type.saving", $type);
+            Action::fire("org.saving", $org);
 
-            if (!$type->validate()) {
-                return Redirect::back()->withErrors($type->errors())->withInput(Request::all());
+            if (!$org->validate()) {
+                return Redirect::back()->withErrors($org->errors())->withInput(Request::all());
             }
 
-            $type->save();
+            $org->save();
 
             // Fire saved action
 
-            Action::fire("type.saved", $type);
+            Action::fire("org.saved", $org);
 
-            return Redirect::route("admin.tenders.types.edit", array("id" => $id))->with("message", trans("tenders::types.events.updated"));
+            return Redirect::route("admin.tenders.orgs.edit", array("id" => $id))->with("message", trans("tenders::orgs.events.updated"));
         }
 
 
-        $this->data["type"] = $type;
-        return View::make("tenders::types.edit", $this->data);
+        $this->data["org"] = $org;
+        return View::make("tenders::orgs.edit", $this->data);
     }
 
 }

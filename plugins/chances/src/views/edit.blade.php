@@ -99,6 +99,49 @@
                             </div>
                         </div>
                     </div>
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading">
+                            <i class="fa fa-balance-scale"></i>
+                            {{ trans("chances::chances.attributes.units") }}
+                            <a class="add-custom-field pull-right" href="javascript:void(0)">
+                                <i class="fa fa-plus text-navy"></i>
+                            </a>
+
+                        </div>
+
+                        <div class="panel-body">
+
+                            <div class="form-group meta-rows">
+                                @foreach($units_quantity as $uq)
+                                    <div class="meta-row">
+
+                                        <select name="units[]"  class="form-control chosen-rtl pull-left custom-field-name">
+                                            @foreach($units as $unit)
+                                                @if($unit->id == $uq->id)
+                                                    <option value="{{$unit->id}}"
+                                                            selected="selected">{{$unit->name}}</option>
+                                                @else
+                                                    <option value="{{$unit->id}}">{{$unit->name}}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+
+                                        <input name="units_quantity[]"
+                                                  class="form-control input-md pull-left custom-field-value"
+                                                  placeholder="{{ trans("chances::chances.attributes.quantity") }}"
+                                                  value="{{$uq->pivot->quantity}}">
+
+                                        <a class="remove-custom-field pull-right" href="javascript:void(0)">
+                                            <i class="fa fa-times text-navy"></i>
+                                        </a>
+
+                                    </div>
+                                    @endforeach
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <div class="panel panel-default">
@@ -110,14 +153,17 @@
                             <div class="form-group">
                                 <select name="approved" class="form-control chosen-select chosen-rtl">
                                     @if($chance->approved == 0)
-                                        <option value="0" selected="selected">{{trans("chances::chances.reject")}}</option>
+                                        <option value="0"
+                                                selected="selected">{{trans("chances::chances.reject")}}</option>
                                         <option value="1">{{trans("chances::chances.approve")}}</option>
                                     @else
-                                        <option value="1" selected="selected">{{trans("chances::chances.approve")}}</option>
+                                        <option value="1"
+                                                selected="selected">{{trans("chances::chances.approve")}}</option>
                                         <option value="0">{{trans("chances::chances.reject")}}</option>
                                     @endif
                                 </select>
-                                <div id="reason" style="display: @if($chance->approved == 1) none @else block @endif; margin-top: 20px">
+                                <div id="reason"
+                                     style="display: @if($chance->approved == 1) none @else block @endif; margin-top: 20px">
                                     <label
                                             for="input-number">{{ trans("chances::chances.attributes.reason") }}</label>
                                     <input name="reason" type="text"
@@ -187,47 +233,8 @@
                     </div>
                 </div>
             </div>
-            @if($units)
-                @foreach($units_quantity as $uq)
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <div class="form-group">
-                                        <label
-                                                for="input-number">{{ trans("chances::units.unit") }}</label>
-                                        <select name="units[]" class="form-control chosen-select chosen-rtl">
-                                            @foreach($units as $unit)
-                                                @if($unit->id == $uq->id)
-                                                    <option value="{{$unit->id}}"
-                                                            selected="selected">{{$unit->name}}</option>
-                                                @else
-                                                    <option value="{{$unit->id}}">{{$unit->name}}</option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <div class="form-group">
-                                        <label
-                                                for="input-number">{{ trans("chances::chances.attributes.quantity") }}</label>
-                                        <input name="units_quantity[]" type="text"
-                                               value="{{$uq->pivot->quantity}}"
-                                               class="form-control" id="input-name"
-                                               placeholder="{{ trans("chances::chances.attributes.quantity") }}">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            @endif
         </div>
+
 
     </form>
 
@@ -236,6 +243,33 @@
 @section("head")
     <link href="{{ assets("admin::tagit") }}/jquery.tagit.css" rel="stylesheet" type="text/css">
     <link href="{{ assets("admin::tagit") }}/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+
+    <style>
+        .custom-field-name {
+            width: 40%;
+            margin: 5px;
+        }
+
+        .custom-field-value {
+            width: 50%;
+            margin: 5px;
+        }
+
+        .remove-custom-field {
+            margin: 10px;
+        }
+
+        .meta-rows {
+
+        }
+
+        .meta-row {
+            background: #f1f1f1;
+            overflow: hidden;
+            margin-top: 4px;
+        }
+
+    </style>
 @stop
 
 @section("footer")
@@ -243,6 +277,42 @@
 
     <script>
         $(document).ready(function () {
+
+            $(".add-custom-field").click(function () {
+
+                var html = '    <div class="meta-row">\n' +
+                    '\n' +
+                    '                                        <select name="units[]"  class="form-control chosen-rtl pull-left custom-field-name">\n' +
+                    '                                            @foreach($units as $unit)\n' +
+                    '                                                    <option value="{{$unit->id}}">{{$unit->name}}</option>\n' +
+                    '                                            @endforeach\n' +
+                    '                                        </select>\n' +
+                    '\n' +
+                    '                                        <input name="units_quantity[]"\n' +
+                    '                                                  class="form-control input-md pull-left custom-field-value"\n' +
+                    '                                                  placeholder="{{ trans("chances::chances.attributes.quantity") }}"\n' +
+                    '                                                  value="">\n' +
+                    '\n' +
+                    '                                        <a class="remove-custom-field pull-right" href="javascript:void(0)">\n' +
+                    '                                            <i class="fa fa-times text-navy"></i>\n' +
+                    '                                        </a>\n' +
+                    '\n' +
+                    '                                    </div>';
+
+                $(".meta-rows").append(html);
+
+
+            });
+
+            $("body").on("click", ".remove-custom-field", function () {
+
+                var item = $(this);
+                confirm_box("{{ trans("posts::posts.sure_delete_field") }}", function () {
+                    item.parents(".meta-row").remove();
+                });
+
+            });
+
             $(document).on('click', '#add-unit', function (e) {
                 e.preventDefault();
                 $(this).hide();

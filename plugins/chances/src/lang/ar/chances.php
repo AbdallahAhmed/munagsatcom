@@ -66,7 +66,8 @@ return [
         "file" => "الملف",
         "quantity" => "الكمية",
         "status_name" => 'الحالة',
-        "reason" => "سبب الرفض"
+        "reason" => "سبب الرفض",
+        "author" => 'الكاتب'
 
     ],
 

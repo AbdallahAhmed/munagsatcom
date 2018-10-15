@@ -127,7 +127,8 @@
                                                                       name="ids[]"/>
                                         </th>
                                         <th>{{ trans("chances::chances.attributes.name") }}</th>
-                                        <th>{{ trans("chances::chances.attributes.limit") }}</th>
+                                        <th>{{ trans("chances::chances.attributes.status_name") }}</th>
+                                        <th>{{ trans("chances::chances.attributes.author") }}</th>
                                         <th>{{ trans("chances::chances.actions") }}</th>
                                     </tr>
                                     </thead>
@@ -148,7 +149,13 @@
                                             </td>
 
                                             <td>
-                                                {{ $chance->limit }}
+                                                {{trans("chances::chances.status.$chance->status")}}
+
+                                            </td>
+                                            <td>
+                                                <a href="?user_id={{ @$chance->user->id }}" class="text-navy">
+                                                    <small> {{ @$chance->user->first_name }}</small>
+                                                </a>
                                             </td>
 
                                             <td class="center">

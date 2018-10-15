@@ -57,6 +57,10 @@ class ChancesController extends Controller
 
         $query = Chance::orderBy($this->data["sort"], $this->data["order"]);
 
+        if (Request::filled("user_id")) {
+            $query->where("user_id", Request::get("user_id"));
+        }
+
         if (Request::filled("q")) {
             $query->search(Request::get("q"));
         }
@@ -133,7 +137,7 @@ class ChancesController extends Controller
                 $this->errors->add("sectors", trans("chances::chances.attributes.sectors") . " " . trans("chances::chances.required") . ".");
 
             $chance->validate();
-            if($chance->errors() != null)
+            if ($chance->errors() != null)
                 $this->errors->merge($chance->errors());
             if ($this->errors->messages())
                 return Redirect::back()->withErrors($this->errors)->withInput(Request::all());

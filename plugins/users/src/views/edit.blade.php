@@ -91,7 +91,7 @@
                                     <div class="row">
 
                                         <input type="hidden"
-                                               value="{{ ($user and $user->photo) ? $user->photo->id : 0 }}"
+                                               value="{{ ($user && $user->photo) ? $user->photo->id : 0 }}"
                                                id="user_photo_id" name="photo_id"/>
 
                                         <img class="col-lg-12" id="user_photo" style="width: 100%"
@@ -100,13 +100,13 @@
 
                                         <a href="javascript:void(0)"
 
-                                           @if($user and $user->photo) style="display: none" @endif
+                                           @if($user && $user->photo) style="display: none" @endif
 
                                            id="change_photo"
                                            class="col-lg-12 image-label">{{ trans("users::users.change") }}</a>
 
                                         <a href="javascript:void(0)"
-                                           @if(!$user or ($user and !$user->photo)) style="display: none" @endif
+                                           @if(!$user or ($user && !$user->photo)) style="display: none" @endif
                                            id="remove_photo"
                                            class="col-lg-12 image-label">{{ trans("users::users.remove_photo") }}</a>
                                     </div>
@@ -159,7 +159,7 @@
 
                                             @foreach ($roles as $role)
                                                 <option
-                                                    {{ $user and $user->role_id == $role->id ? 'selected="selected"' : '' }}
+                                                    {{ $user && $user->role_id == $role->id ? 'selected="selected"' : '' }}
                                                     value="{{ $role->id }}">{{ $role->name }}</option>
                                             @endforeach
 
@@ -176,7 +176,7 @@
 
                                             @foreach([1 => "activated", 0 => "deactivated"] as $status => $title)
                                                 <option
-                                                    value="{{ $status }}" {{ ($user and $user->status == $status) ? 'selected="selected"' : '' }}>{{ trans("users::users.".$title) }}</option>
+                                                    value="{{ $status }}" {{ ($user && $user->status == $status) ? 'selected="selected"' : '' }}>{{ trans("users::users.".$title) }}</option>
                                             @endforeach
 
                                         </select>
@@ -203,7 +203,7 @@
 
                                             @foreach (config("i18n.locales") as $code => $lang)
                                                 <option
-                                                    {{  ((($user and $code == $user->lang) or (!$user and $code == app()->getLocale()))) ? 'selected="selected"' : '' }}
+                                                    {{  ((($user && $code == $user->lang) or (!$user && $code == app()->getLocale()))) ? 'selected="selected"' : '' }}
                                                     value="{{ $code }}">{{ $lang["title"] }}</option>
                                             @endforeach
 
@@ -222,7 +222,7 @@
                                         @foreach (["blue", "green"] as $color)
 
                                             <option
-                                                {{ ($user and $color == $user->color) ? 'selected="selected"' : '' }}
+                                                {{ ($user && $color == $user->color) ? 'selected="selected"' : '' }}
                                                 value="{{ $color }}">{{ trans("users::users.color_" . $color) }}</option>
 
                                         @endforeach

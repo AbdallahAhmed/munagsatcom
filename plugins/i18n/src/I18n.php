@@ -30,11 +30,11 @@ class I18n extends \Dot\Platform\Plugin
 
         Navigation::menu("sidebar", function ($menu) {
 
-            if (Auth::user()->can("i18n.manage_places")) {
-                $menu->item('places', trans("i18n::places.places"), route("admin.places.show"))
-                    ->order(5.5)
-                    ->icon("fa-map-marker");
-            }
+//            if (Auth::user()->can("i18n.manage_places")) {
+//                $menu->item('places', trans("i18n::places.places"), route("admin.places.show"))
+//                    ->order(5.5)
+//                    ->icon("fa-map-marker");
+//            }
         });
 
         $this->app->bind('i18n', function ($app) {

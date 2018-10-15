@@ -20,9 +20,9 @@ class Categories extends \Dot\Platform\Plugin
 
         Navigation::menu("sidebar", function ($menu) {
 
-            if (Auth::user()->can("categories.manage")) {
-                $menu->item('categories', trans("categories::categories.categories"), route("admin.categories.show"))->icon("fa-folder")->order(1);
-            }
+//            if (Auth::user()->can("categories.manage")) {
+//                $menu->item('tenders.categories', trans("categories::categories.categories"), route("admin.categories.show"))->icon("fa-folder")->order(0);
+//            }
         });
     }
 }

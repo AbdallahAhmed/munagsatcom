@@ -54,6 +54,15 @@ class Tenders extends \Dot\Platform\Plugin
                     ->icon("fa-cube");
 
 
+                if (\Auth::user()->can("categories.manage")) {
+                $menu->item('tenders.categories', trans("categories::categories.categories"), route("admin.categories.show"))->icon("fa-folder")->order(0);
+
+                    if (\Auth::user()->can("i18n.manage_places")) {
+                        $menu->item('tenders.splaces', trans("i18n::places.places"), route("admin.places.show"))
+                            ->order(5.5)
+                            ->icon("fa-map-marker");
+                    }
+            }
 
             }
         });

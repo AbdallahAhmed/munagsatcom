@@ -40,5 +40,6 @@ return [
         "seo" => Dot\Seo\Seo::class,
         "chances" => Dot\Chances\Chances::class,
         "tenders" => Dot\Tenders\Tenders::class,
+        "services" => Dot\Services\Services::class,
     ]
 ];

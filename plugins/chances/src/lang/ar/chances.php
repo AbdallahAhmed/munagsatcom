@@ -67,7 +67,8 @@ return [
         "quantity" => "الكمية",
         "status_name" => 'الحالة',
         "reason" => "سبب الرفض",
-        "author" => 'الكاتب'
+        "author" => 'الكاتب',
+        'created_at' => 'تاريخ الإضافة',
 
     ],
 

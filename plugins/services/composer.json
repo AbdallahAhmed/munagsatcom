@@ -1,0 +1,26 @@
+{
+    "name": "dot/blocks",
+    "description": "The blocks plugin of dot/platform",
+    "keywords": [
+        "framework",
+        "laravel",
+        "cms",
+        "plugins",
+        "platform",
+        "dot",
+        "blocks"
+    ],
+    "license": "MIT",
+    "type": "package",
+    "require": {
+        "dot/platform": "0.4.*",
+        "dot/tags": "*",
+        "dot/categories": "*",
+        "dot/posts": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dot\\Blocks\\": "src"
+        }
+    }
+}

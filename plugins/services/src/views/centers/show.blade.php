@@ -6,19 +6,22 @@
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
             <h2>
                 <i class="fa fa-th-large"></i>
-                {{ trans("chances::chances.chances") }}
+                {{ trans("services::centers.centers") }}
             </h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="{{ route("admin") }}">{{ trans("admin::common.admin") }}</a>
                 </li>
                 <li>
-                    <a href="{{ route("admin.chances.show") }}">{{ trans("chances::chances.chances") }}
-                        ({{ $chances->total() }})</a>
+                    <a href="{{ route("admin.centers.show") }}">{{ trans("services::centers.centers") }}
+                        ({{ $centers->total() }})</a>
                 </li>
             </ol>
         </div>
-       
+        <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12 text-right">
+            <a href="{{ route("admin.centers.create") }}" class="btn btn-primary btn-labeled btn-main"> <span
+                    class="btn-label icon fa fa-plus"></span> {{ trans("services::centers.add_new") }}</a>
+        </div>
     </div>
 
     <div class="wrapper wrapper-content fadeInRight">
@@ -34,18 +37,18 @@
                             <select name="sort" class="form-control chosen-select chosen-rtl">
                                 <option
                                     value="name"
-                                    @if ($sort == "name")  selected='selected' @endif>{{ ucfirst(trans("chances::chances.attributes.name")) }}</option>
+                                    @if ($sort == "name")  selected='selected' @endif>{{ ucfirst(trans("services::centers.attributes.name")) }}</option>
                             </select>
                             <select name="order" class="form-control chosen-select chosen-rtl">
                                 <option
                                     value="DESC"
-                                    @if (Request::get("order") == "DESC") selected='selected' @endif>{{ trans("chances::chances.desc") }}</option>
+                                    @if (Request::get("order") == "DESC") selected='selected' @endif>{{ trans("services::centers.desc") }}</option>
                                 <option
                                     value="ASC"
-                                    @if (Request::get("order") == "ASC") selected='selected' @endif>{{ trans("chances::chances.asc") }}</option>
+                                    @if (Request::get("order") == "ASC") selected='selected' @endif>{{ trans("services::centers.asc") }}</option>
                             </select>
                             <button type="submit"
-                                    class="btn btn-primary">{{ trans("chances::chances.order") }}</button>
+                                    class="btn btn-primary">{{ trans("services::centers.order") }}</button>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4">
@@ -58,7 +61,7 @@
                                 <div class="autocomplete_area">
                                     <input type="text" name="q" value="{{ Request::get("q") }}"
                                            autocomplete="off"
-                                           placeholder="{{ trans("chances::chances.search_chances") }} ..."
+                                           placeholder="{{ trans("services::centers.search_centers") }} ..."
                                            class="form-control linked-text">
 
                                     <div class="autocomplete_result">
@@ -82,22 +85,24 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>
-                            <i class="fa fa-blocks"></i>
-                            {{ trans("chances::chances.chances") }}
+                            <i class="fa fa-services"></i>
+                            {{ trans("services::centers.centers") }}
                         </h5>
                     </div>
                     <div class="ibox-content">
-                        @if (count($chances))
+                        @if (count($centers))
                             <div class="row">
 
                                 <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 action-box">
                                     <select name="action" class="form-control pull-left">
                                         <option value="-1"
-                                                selected="selected">{{ trans("chances::chances.bulk_actions") }}</option>
-                                        <option value="delete">{{ trans("chances::chances.delete") }}</option>
+                                                selected="selected">{{ trans("services::centers.bulk_actions") }}</option>
+                                        <option value="delete">{{ trans("services::centers.delete") }}</option>
+                                        <option value="activate">{{ trans("services::centers.activate") }}</option>
+                                        <option value="deactivate">{{ trans("services::centers.deactivate") }}</option>
                                     </select>
                                     <button type="submit"
-                                            class="btn btn-primary pull-right">{{ trans("chances::chances.apply") }}</button>
+                                            class="btn btn-primary pull-right">{{ trans("services::centers.apply") }}</button>
                                 </div>
 
                                 <div class="col-lg-6 col-md-4 hidden-sm hidden-xs"></div>
@@ -105,7 +110,7 @@
                                 <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
                                     <select class="form-control per_page_filter">
                                         <option value="" selected="selected">
-                                            -- {{ trans("chances::chances.per_page") }}--
+                                            -- {{ trans("services::centers.per_page") }}--
                                         </option>
                                         @foreach (array(10, 20, 30, 40, 60, 80, 100, 150) as $num)
                                             <option
@@ -123,55 +128,63 @@
                                         <th style="width:35px"><input type="checkbox" class="i-checks check_all"
                                                                       name="ids[]"/>
                                         </th>
-                                        <th>{{ trans("chances::chances.attributes.name") }}</th>
-                                        <th>{{ trans("chances::chances.attributes.status_name") }}</th>
-                                        <th>{{ trans("chances::chances.attributes.author") }}</th>
-                                        <th>{{ trans("chances::chances.attributes.created_at") }}</th>
-                                        <th>{{ trans("chances::chances.actions") }}</th>
+                                        <th>{{ trans("services::centers.attributes.name") }}</th>
+                                        <th>{{ trans("services::centers.attributes.created_at") }}</th>
+                                        <th>{{ trans("services::centers.attributes.status") }}</th>
+                                        <th>{{ trans("services::centers.actions") }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($chances as $chance)
+                                    @foreach ($centers as $center)
                                         <tr>
                                             <td>
                                                 <input type="checkbox" class="i-checks" name="id[]"
-                                                       value="{{ $chance->id }}"/>
+                                                       value="{{ $center->id }}"/>
                                             </td>
 
                                             <td>
                                                 <a data-toggle="tooltip" data-placement="bottom" class="text-navy"
-                                                   title="{{ trans("chances::chances.edit") }}"
-                                                   href="{{ route("admin.chances.edit", array("id" => $chance->id)) }}">
-                                                    <strong>{{ $chance->name }}</strong>
+                                                   title="{{ trans("services::centers.edit") }}"
+                                                   href="{{ route("admin.centers.edit", array("id" => $center->id)) }}">
+                                                    <strong>{{ $center->name }}</strong>
                                                 </a>
                                             </td>
 
-                                            <td>
-                                                {{trans("chances::chances.status.$chance->status")}}
 
-                                            </td>
                                             <td>
-                                                <a href="?user_id={{ @$chance->user->id }}" class="text-navy">
-                                                    <small> {{ @$chance->user->first_name }}</small>
-                                                </a>
+                                                <small>{{ $center->created_at->render() }}</small>
                                             </td>
 
                                             <td>
-                                                <small>{{ $chance->created_at->render() }}</small>
+                                                @if ($center->status)
+                                                    <a data-toggle="tooltip" data-placement="bottom"
+                                                       title="{{ trans("services::centers.activated") }}" class="ask"
+                                                       message="{{ trans('services::centers.sure_deactivate') }}"
+                                                       href="{{ URL::route("admin.centers.status", array("id" => $center->id, "status" => 0)) }}">
+                                                        <i class="fa fa-toggle-on text-success"></i>
+                                                    </a>
+                                                @else
+                                                    <a data-toggle="tooltip" data-placement="bottom"
+                                                       title="{{ trans("services::centers.deactivated") }}" class="ask"
+                                                       message="{{ trans('services::centers.sure_activate') }}"
+                                                       href="{{ URL::route("admin.centers.status", array("id" => $center->id, "status" => 1)) }}">
+                                                        <i class="fa fa-toggle-off text-danger"></i>
+                                                    </a>
+                                                @endif
                                             </td>
 
                                             <td class="center">
                                                 <a data-toggle="tooltip" data-placement="bottom"
-                                                   title="{{ trans("chances::chances.edit") }}"
-                                                   href="{{ route("admin.chances.edit", array("id" => $chance->id)) }}">
+                                                   title="{{ trans("services::centers.edit") }}"
+                                                   href="{{ route("admin.centers.edit", array("id" => $center->id)) }}">
                                                     <i class="fa fa-pencil text-navy"></i>
                                                 </a>
                                                 <a <?php /* data-toggle="tooltip" data-placement="bottom" */ ?>
-                                                   title="{{ trans("chances::chances.delete") }}"
+                                                   title="{{ trans("services::centers.delete") }}"
                                                    class="ask delete_block"
-                                                   data-block-id="{{ $chance->id }}"
-                                                   message="{{ trans("chances::chances.sure_delete") }}"
-                                                   href="{{ URL::route("admin.chances.delete", array("id" => $chance->id)) }}">
+                                                   data-center-id="{{ $center->id }}"
+                                                   message="{{ trans("centers::centers.sure_delete") }}"
+                                                   href="{{ URL::route("admin.centers.delete", array("id" => $center->id)) }}">
                                                     <i class="fa fa-times text-navy"></i>
                                                 </a>
                                             </td>
@@ -182,17 +195,17 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 text-center">
-                                    {{ trans("chances::chances.page") }}
-                                    {{ $chances->currentPage() }}
-                                    {{ trans("chances::chances.of") }}
-                                    {{ $chances->lastPage() }}
+                                    {{ trans("services::centers.page") }}
+                                    {{ $centers->currentPage() }}
+                                    {{ trans("services::centers.of") }}
+                                    {{ $centers->lastPage() }}
                                 </div>
                                 <div class="col-lg-12 text-center">
-                                    {{ $chances->appends(Request::all())->render() }}
+                                    {{ $centers->appends(Request::all())->render() }}
                                 </div>
                             </div>
                         @else
-                            {{ trans("chances::chances.no_records") }}
+                            {{ trans("services::centers.no_records") }}
                         @endif
                     </div>
                 </div>

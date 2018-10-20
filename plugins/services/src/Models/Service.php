@@ -2,15 +2,11 @@
 
 namespace Dot\Services\Models;
 
-use DB;
-use Dot\Categories\Models\Category;
 use Dot\Platform\Model;
-use Dot\Posts\Models\Post;
-use Dot\Tags\Models\Tag;
 
 /*
- * Class Block
- * @package Dot\Chances\Models
+ * Class Service
+ * @package Dot\Services\Models
  */
 class Service extends Model
 {

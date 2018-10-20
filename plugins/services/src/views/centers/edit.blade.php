@@ -128,11 +128,11 @@
                                     @endif
                                 </select>
                                 <div id="reason"
-                                     style="display: @if($center && $center->approved == 1) none @else block @endif; margin-top: 20px">
+                                     style="display: @if(($center && $center->approved == 1) || !$center) none @else block @endif; margin-top: 20px">
                                     <label
                                             for="input-number">{{ trans("services::centers.attributes.reason") }}</label>
                                     <input name="reason" type="text"
-                                           value="{{$center->reason}}"
+                                           value="{{ $center ? $center->reason : ''}}"
                                            class="form-control" id="input-name"
                                            placeholder="{{ trans("services::centers.attributes.reason") }}">
                                 </div>

@@ -4,7 +4,6 @@ namespace Dot\Services;
 
 use Illuminate\Support\Facades\Auth;
 use Navigation;
-use URL;
 
 class Services extends \Dot\Platform\Plugin
 {

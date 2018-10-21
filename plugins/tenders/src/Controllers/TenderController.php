@@ -5,16 +5,16 @@ namespace Dot\Tenders\Controllers;
 use Action;
 use Illuminate\Support\Facades\Auth;
 use Dot\Platform\Controller;
-use Dot\Posts\Models\Post;
-use Dot\Posts\Models\PostMeta;
+use Dot\Tenders\Models\Tender;
+use Dot\Tenders\Models\TenderMeta;
 use Redirect;
 use Request;
 use View;
 
 
 /**
- * Class PostsController
- * @package Dot\Posts\Controllers
+ * Class TendersController
+ * @package Dot\Tenders\Controllers
  */
 class TenderController extends Controller
 {
@@ -50,29 +50,8 @@ class TenderController extends Controller
         $this->data["order"] = (Request::filled("order")) ? Request::get("order") : "DESC";
         $this->data['per_page'] = (Request::filled("per_page")) ? Request::get("per_page") : NULL;
 
-        $query = Post::with('image', 'user', 'tags')->orderBy($this->data["sort"], $this->data["order"]);
+        $query = Tender::with('user')->orderBy($this->data["sort"], $this->data["order"]);
 
-        if (Request::filled("tag_id")) {
-            $query->whereHas("tags", function ($query) {
-                $query->where("tags.id", Request::get("tag_id"));
-            });
-        }
-
-        if (Request::filled("category_id") and Request::get("category_id") != 0) {
-            $query->whereHas("categories", function ($query) {
-                $query->where("categories.id", Request::get("category_id"));
-            });
-        }
-
-        if (Request::filled("block_id") and Request::get("block_id") != 0) {
-            $query->whereHas("blocks", function ($query) {
-                $query->where("blocks.id", Request::get("block_id"));
-            });
-        }
-
-        if (Request::filled("format")) {
-            $query->where("format", Request::get("format"));
-        }
 
         if (Request::filled("from")) {
             $query->where("created_at", ">=", Request::get("from"));
@@ -95,13 +74,14 @@ class TenderController extends Controller
         if (Request::filled("q")) {
             $query->search(urldecode(Request::get("q")));
         }
-        $this->data["posts"] = $query->paginate($this->data['per_page']);
 
-        return View::make("posts::show", $this->data);
+        $this->data["tenders"] = $query->paginate($this->data['per_page']);
+
+        return View::make("tenders::show", $this->data);
     }
 
     /**
-     * Delete post by id
+     * Delete tender by id
      * @return mixed
      */
     public function delete()
@@ -112,25 +92,25 @@ class TenderController extends Controller
 
         foreach ($ids as $ID) {
 
-            $post = Post::findOrFail($ID);
+            $tender = Tender::findOrFail($ID);
 
             // Fire deleting action
 
-            Action::fire("post.deleting", $post);
+            Action::fire("tender.deleting", $tender);
 
-            $post->tags()->detach();
-            $post->categories()->detach();
-            $post->galleries()->detach();
-            $post->blocks()->detach();
+            $tender->tags()->detach();
+            $tender->categories()->detach();
+            $tender->galleries()->detach();
+            $tender->blocks()->detach();
 
-            $post->delete();
+            $tender->delete();
 
             // Fire deleted action
 
-            Action::fire("post.deleted", $post);
+            Action::fire("tender.deleted", $tender);
         }
 
-        return Redirect::back()->with("message", trans("posts::posts.events.deleted"));
+        return Redirect::back()->with("message", trans("tenders::tenders.events.deleted"));
     }
 
     /**
@@ -146,23 +126,23 @@ class TenderController extends Controller
 
         foreach ($ids as $id) {
 
-            $post = Post::findOrFail($id);
+            $tender = Tender::findOrFail($id);
 
             // Fire saving action
-            Action::fire("post.saving", $post);
+            Action::fire("tender.saving", $tender);
 
-            $post->status = $status;
-            $post->save();
+            $tender->status = $status;
+            $tender->save();
 
             // Fire saved action
 
-            Action::fire("post.saved", $post);
+            Action::fire("tender.saved", $tender);
         }
 
         if ($status) {
-            $message = trans("posts::posts.events.activated");
+            $message = trans("tenders::tenders.events.activated");
         } else {
-            $message = trans("posts::posts.events.deactivated");
+            $message = trans("tenders::tenders.events.deactivated");
         }
 
         return Redirect::back()->with("message", $message);
@@ -175,66 +155,66 @@ class TenderController extends Controller
     public function create()
     {
 
-        $post = new Post();
+        $tender = new Tender();
 
         if (Request::isMethod("post")) {
 
-            $post->title = Request::get('title');
-            $post->excerpt = Request::get('excerpt');
-            $post->content = Request::get('content');
-            $post->image_id = Request::get('image_id', 0);
-            $post->media_id = Request::get('media_id', 0);
-            $post->user_id = Auth::user()->id;
-            $post->status = Request::get("status", 0);
-            $post->format = Request::get("format", "post");
-            $post->lang = app()->getLocale();
+            $tender->title = Request::get('title');
+            $tender->excerpt = Request::get('excerpt');
+            $tender->content = Request::get('content');
+            $tender->image_id = Request::get('image_id', 0);
+            $tender->media_id = Request::get('media_id', 0);
+            $tender->user_id = Auth::user()->id;
+            $tender->status = Request::get("status", 0);
+            $tender->format = Request::get("format", "post");
+            $tender->lang = app()->getLocale();
 
-            $post->published_at = Request::get('published_at');
+            $tender->published_at = Request::get('published_at');
 
-            if (in_array($post->published_at, [NULL, ""])) {
-                $post->published_at = date("Y-m-d H:i:s");
+            if (in_array($tender->published_at, [NULL, ""])) {
+                $tender->published_at = date("Y-m-d H:i:s");
             }
 
             // Fire saving action
 
-            Action::fire("post.saving", $post);
+            Action::fire("tender.saving", $tender);
 
-            if (!$post->validate()) {
-                return Redirect::back()->withErrors($post->errors())->withInput(Request::all());
+            if (!$tender->validate()) {
+                return Redirect::back()->withErrors($tender->errors())->withInput(Request::all());
             }
 
-            $post->save();
-            $post->syncTags(Request::get("tags", []));
-            $post->categories()->sync(Request::get("categories", []));
-            $post->galleries()->sync(Request::get("galleries", []));
-            $post->syncBlocks(Request::get("blocks", []));
+            $tender->save();
+            $tender->syncTags(Request::get("tags", []));
+            $tender->categories()->sync(Request::get("categories", []));
+            $tender->galleries()->sync(Request::get("galleries", []));
+            $tender->syncBlocks(Request::get("blocks", []));
 
             // Saving post meta
 
             $custom_fields = array_filter(array_combine(Request::get("custom_names", []), Request::get("custom_values", [])));
 
             foreach ($custom_fields as $name => $value) {
-                $meta = new PostMeta();
+                $meta = new TenderMeta();
                 $meta->name = $name;
                 $meta->value = $value;
-                $post->meta()->save($meta);
+                $tender->meta()->save($meta);
             }
 
             // Fire saved action
 
-            Action::fire("post.saved", $post);
+            Action::fire("tender.saved", $tender);
 
-            return Redirect::route("admin.posts.edit", array("id" => $post->id))
-                ->with("message", trans("posts::posts.events.created"));
+            return Redirect::route("admin.posts.edit", array("id" => $tender->id))
+                ->with("message", trans("tenders::tenders.events.created"));
         }
 
         $this->data["post_tags"] = array();
         $this->data["post_categories"] = collect([]);
         $this->data["post_galleries"] = collect([]);
         $this->data["post_blocks"] = collect([]);
-        $this->data["post"] = $post;
+        $this->data["post"] = $tender;
 
-        return View::make("posts::edit", $this->data);
+        return View::make("tenders::edit", $this->data);
     }
 
     /**
@@ -245,61 +225,61 @@ class TenderController extends Controller
     public function edit($id)
     {
 
-        $post = Post::findOrFail($id);
+        $tender = Tender::findOrFail($id);
 
         if (Request::isMethod("post")) {
 
-            $post->title = Request::get('title');
-            $post->excerpt = Request::get('excerpt');
-            $post->content = Request::get('content');
-            $post->image_id = Request::get('image_id', 0);
-            $post->media_id = Request::get('media_id', 0);
-            $post->status = Request::get("status", 0);
-            $post->format = Request::get("format", "post");
-            $post->published_at = Request::get('published_at') != "" ? Request::get('published_at') : date("Y-m-d H:i:s");
-            $post->lang = app()->getLocale();
+            $tender->title = Request::get('title');
+            $tender->excerpt = Request::get('excerpt');
+            $tender->content = Request::get('content');
+            $tender->image_id = Request::get('image_id', 0);
+            $tender->media_id = Request::get('media_id', 0);
+            $tender->status = Request::get("status", 0);
+            $tender->format = Request::get("format", "post");
+            $tender->published_at = Request::get('published_at') != "" ? Request::get('published_at') : date("Y-m-d H:i:s");
+            $tender->lang = app()->getLocale();
 
             // Fire saving action
 
-            Action::fire("post.saving", $post);
+            Action::fire("tender.saving", $tender);
 
-            if (!$post->validate()) {
-                return Redirect::back()->withErrors($post->errors())->withInput(Request::all());
+            if (!$tender->validate()) {
+                return Redirect::back()->withErrors($tender->errors())->withInput(Request::all());
             }
 
-            $post->save();
-            $post->categories()->sync(Request::get("categories", []));
-            $post->galleries()->sync(Request::get("galleries", []));
-            $post->syncTags(Request::get("tags", []));
-            $post->syncBlocks(Request::get("blocks", []));
+            $tender->save();
+            $tender->categories()->sync(Request::get("categories", []));
+            $tender->galleries()->sync(Request::get("galleries", []));
+            $tender->syncTags(Request::get("tags", []));
+            $tender->syncBlocks(Request::get("blocks", []));
 
             // Fire saved action
 
-            PostMeta::where("post_id", $post->id)->delete();
+            TenderMeta::where("post_id", $tender->id)->delete();
 
             $custom_fields = array_filter(array_combine(Request::get("custom_names", []), Request::get("custom_values", [])));
 
             foreach ($custom_fields as $name => $value) {
-                $meta = new PostMeta();
+                $meta = new TenderMeta();
                 $meta->name = $name;
                 $meta->value = $value;
-                $post->meta()->save($meta);
+                $tender->meta()->save($meta);
             }
 
             // Fire saved action
 
-            Action::fire("post.saved", $post);
+            Action::fire("tender.saved", $tender);
 
-            return Redirect::route("admin.posts.edit", array("id" => $id))->with("message", trans("posts::posts.events.updated"));
+            return Redirect::route("admin.posts.edit", array("id" => $id))->with("message", trans("tenders::tenders.events.updated"));
         }
 
-        $this->data["post_tags"] = $post->tags->pluck("name")->toArray();
-        $this->data["post_categories"] = $post->categories;
-        $this->data["post_galleries"] = $post->galleries;
-        $this->data["post_blocks"] = $post->blocks;
-        $this->data["post"] = $post;
+        $this->data["post_tags"] = $tender->tags->pluck("name")->toArray();
+        $this->data["post_categories"] = $tender->categories;
+        $this->data["post_galleries"] = $tender->galleries;
+        $this->data["post_blocks"] = $tender->blocks;
+        $this->data["post"] = $tender;
 
-        return View::make("posts::edit", $this->data);
+        return View::make("tenders::edit", $this->data);
     }
 
 }

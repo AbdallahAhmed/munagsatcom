@@ -9,18 +9,18 @@
             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                 <h2>
                     <i class="fa fa-newspaper-o"></i>
-                    {{ $post->id ? trans("posts::posts.edit") : trans("posts::posts.add_new") }}
+                    {{ $post->id ? trans("tenders::tenders.edit") : trans("tenders::tenders.add_new") }}
                 </h2>
                 <ol class="breadcrumb">
                     <li>
                         <a href="{{ route("admin") }}">{{ trans("admin::common.admin") }}</a>
                     </li>
                     <li>
-                        <a href="{{ route("admin.posts.show") }}">{{ trans("posts::posts.posts") }}</a>
+                        <a href="{{ route("admin.posts.show") }}">{{ trans("tenders::tenders.posts") }}</a>
                     </li>
                     <li class="active">
                         <strong>
-                            {{ $post->id ? trans("posts::posts.edit") : trans("posts::posts.add_new") }}
+                            {{ $post->id ? trans("tenders::tenders.edit") : trans("tenders::tenders.add_new") }}
                         </strong>
                     </li>
                 </ol>
@@ -31,12 +31,12 @@
                 @if ($post->id)
                     <a href="{{ route("admin.posts.create") }}" class="btn btn-primary btn-labeled btn-main"> <span
                             class="btn-label icon fa fa-plus"></span>
-                        {{ trans("posts::posts.add_new") }}</a>
+                        {{ trans("tenders::tenders.add_new") }}</a>
                 @endif
 
                 <button type="submit" class="btn btn-flat btn-danger btn-main">
                     <i class="fa fa-download" aria-hidden="true"></i>
-                    {{ trans("posts::posts.save_post") }}
+                    {{ trans("tenders::tenders.save_post") }}
                 </button>
 
             </div>
@@ -54,13 +54,13 @@
 
                             <div class="form-group">
                         <textarea name="title" class="form-control input-lg" rows="1" id="post_title"
-                                  placeholder="{{ trans("posts::posts.attributes.title") }}">{{ @Request
+                                  placeholder="{{ trans("tenders::tenders.attributes.title") }}">{{ @Request
                                 ::old("title", $post->title) }}</textarea>
                             </div>
 
                             <div class="form-group">
                         <textarea name="excerpt" class="form-control" id="post_excerpt"
-                                  placeholder="{{ trans("posts::posts.attributes.excerpt") }}">{{ @Request
+                                  placeholder="{{ trans("tenders::tenders.attributes.excerpt") }}">{{ @Request
                                 ::old("excerpt", $post->excerpt) }}</textarea>
                             </div>
 
@@ -75,7 +75,7 @@
 
                         <div class="panel-heading">
                             <i class="fa fa-camera"></i>
-                            {{ trans("posts::posts.add_fields") }}
+                            {{ trans("tenders::tenders.add_fields") }}
                             <a class="add-custom-field pull-right" href="javascript:void(0)">
                                 <i class="fa fa-plus text-navy"></i>
                             </a>
@@ -91,12 +91,12 @@
 
                                         <input type="text" name="custom_names[]" value="{{ $meta->name }}"
                                                class="form-control input-md pull-left custom-field-name"
-                                               placeholder="{{ trans("posts::posts.custom_name") }}"/>
+                                               placeholder="{{ trans("tenders::tenders.custom_name") }}"/>
 
                                         <textarea name="custom_values[]"
                                                   class="form-control input-lg pull-left custom-field-value"
                                                   rows="1"
-                                                  placeholder="{{ trans("posts::posts.custom_value") }}">{{ $meta->value }}</textarea>
+                                                  placeholder="{{ trans("tenders::tenders.custom_value") }}">{{ $meta->value }}</textarea>
 
                                         <a class="remove-custom-field pull-right" href="javascript:void(0)">
                                             <i class="fa fa-times text-navy"></i>
@@ -109,12 +109,12 @@
 
                                     <input type="text" name="custom_names[]"
                                            class="form-control input-md pull-left custom-field-name"
-                                           placeholder="{{ trans("posts::posts.custom_name") }}"/>
+                                           placeholder="{{ trans("tenders::tenders.custom_name") }}"/>
 
                                     <textarea name="custom_values[]"
                                               class="form-control input-lg pull-left custom-field-value"
                                               rows="1"
-                                              placeholder="{{ trans("posts::posts.custom_value") }}"></textarea>
+                                              placeholder="{{ trans("tenders::tenders.custom_value") }}"></textarea>
 
                                     <a class="remove-custom-field pull-right" href="javascript:void(0)">
                                         <i class="fa fa-times text-navy"></i>
@@ -135,7 +135,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <i class="fa fa-camera"></i>
-                                    {{ trans("posts::posts.add_image") }}
+                                    {{ trans("tenders::tenders.add_image") }}
                                     <a class="remove-post-image pull-right" href="javascript:void(0)">
                                         <i class="fa fa-times text-navy"></i>
                                     </a>
@@ -147,7 +147,7 @@
 
                                         <a class="change-post-image label" href="javascript:void(0)">
                                             <i class="fa fa-pencil text-navy"></i>
-                                            {{ trans("posts::posts.change_image") }}
+                                            {{ trans("tenders::tenders.change_image") }}
                                         </a>
 
                                         <a class="post-media-preview" href="javascript:void(0)">
@@ -163,7 +163,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <i class="fa fa-camera"></i>
-                                    {{ trans("posts::posts.add_media") }}
+                                    {{ trans("tenders::tenders.add_media") }}
                                     <a class="remove-post-media pull-right" href="javascript:void(0)">
                                         <i class="fa fa-times text-navy"></i>
                                     </a>
@@ -176,7 +176,7 @@
 
                                         <a class="change-post-media label" href="javascript:void(0)">
                                             <i class="fa fa-pencil text-navy"></i>
-                                            {{ trans("posts::posts.change_media") }}
+                                            {{ trans("tenders::tenders.change_media") }}
                                         </a>
 
                                         <a class="post-media-preview" href="javascript:void(0)">
@@ -190,7 +190,7 @@
 
                     </div>
 
-                    @foreach(Action::fire("post.form.featured", $post) as $output)
+                    @foreach(Action::fire("tender.form.featured", $post) as $output)
                         {!!  $output !!}
                     @endforeach
 
@@ -199,12 +199,12 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-check-square"></i>
-                            {{ trans("posts::posts.post_status") }}
+                            {{ trans("tenders::tenders.post_status") }}
                         </div>
                         <div class="panel-body">
                             <div class="form-group switch-row">
                                 <label class="col-sm-9 control-label"
-                                       for="input-status">{{ trans("posts::posts.attributes.status") }}</label>
+                                       for="input-status">{{ trans("tenders::tenders.attributes.status") }}</label>
                                 <div class="col-sm-3">
                                     <input @if (@Request::old("status", $post->status)) checked="checked" @endif
                                     type="checkbox" id="input-status" name="status" value="1"
@@ -218,7 +218,7 @@
                                     <input name="published_at" type="text"
                                            value="{{ (!$post->id) ? date("Y-m-d H:i:s") : @Request::old('published_at', $post->published_at) }}"
                                            class="form-control" id="input-published_at"
-                                           placeholder="{{ trans("posts::posts.attributes.published_at") }}">
+                                           placeholder="{{ trans("tenders::tenders.attributes.published_at") }}">
                                 </div>
                             </div>
                         </div>
@@ -227,7 +227,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-folder"></i>
-                            {{ trans("posts::posts.attributes.format") }}
+                            {{ trans("tenders::tenders.attributes.format") }}
                         </div>
                         <div class="panel-body">
                             <div class="form-group" style="margin-bottom:0px">
@@ -239,7 +239,7 @@
                                                    class="i-checks"
                                                    @if ((!$post->id and $format == "post") or ($post and $post->format == $format)) checked @endif>&nbsp;
                                             <i class="fa {{ $icon }}"></i>&nbsp;
-                                            <span class="lbl">{{ trans('posts::posts.format_' . $format) }}</span>
+                                            <span class="lbl">{{ trans('tenders::tenders.format_' . $format) }}</span>
                                         </label>
                                     </div>
                                 @endforeach
@@ -252,7 +252,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-folder"></i>
-                            {{ trans("posts::posts.add_category") }}
+                            {{ trans("tenders::tenders.add_category") }}
                         </div>
                         <div class="panel-body">
 
@@ -280,7 +280,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-th-large"></i>
-                            {{ trans("posts::posts.add_block") }}
+                            {{ trans("tenders::tenders.add_block") }}
                         </div>
                         <div class="panel-body">
                             @if (Dot\Blocks\Models\Block::count())
@@ -300,7 +300,7 @@
                                     @endforeach
                                 </ul>
                             @else
-                                {{ trans("posts::posts.no_blocks") }}
+                                {{ trans("tenders::tenders.no_blocks") }}
                             @endif
                         </div>
                     </div>
@@ -309,14 +309,14 @@
                     <div class="panel panel-default format-area album-format-area">
                         <div class="panel-heading">
                             <i class="fa fa-camera"></i>
-                            {{ trans("posts::posts.add_gallery") }}
+                            {{ trans("tenders::tenders.add_gallery") }}
                             <a href="javascript:void(0)" class="add_gallery pull-right text-navy"><i
                                     class="fa fa-plus"></i></a>
                         </div>
                         <div class="panel-body">
                             <div class="iwell add_gallery"
                                  @if ($post and count($post_galleries->toArray()) > 0) style="display:none" @endif>
-                                {{ trans("posts::posts.no_galleries_found") }}
+                                {{ trans("tenders::tenders.no_galleries_found") }}
                                 <a href="javascript:void(0)" class="add_gallery pull-right text-navy"><i
                                         class="fa fa-info-circle"></i></a>
                             </div>
@@ -343,7 +343,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-tags"></i>
-                            {{ trans("posts::posts.add_tag") }}
+                            {{ trans("tenders::tenders.add_tag") }}
                         </div>
                         <div class="panel-body">
                             <div class="form-group" style="position:relative">
@@ -448,7 +448,7 @@
             $("body").on("click", ".remove-custom-field", function () {
 
                 var item = $(this);
-                confirm_box("{{ trans("posts::posts.sure_delete_field") }}", function () {
+                confirm_box("{{ trans("tenders::tenders.sure_delete_field") }}", function () {
                     item.parents(".meta-row").remove();
                 });
 
@@ -459,10 +459,10 @@
                 var html = ' <div class="meta-row">'
                     + '<input type="text" name="custom_names[]"'
                     + 'class="form-control input-md pull-left custom-field-name"'
-                    + ' placeholder="{{ trans("posts::posts.custom_name") }}"/>'
+                    + ' placeholder="{{ trans("tenders::tenders.custom_name") }}"/>'
                     + '   <textarea name="custom_values[]" class="form-control input-lg pull-left custom-field-value"'
                     + '   rows="1"'
-                    + '   placeholder="{{ trans("posts::posts.custom_value") }}"></textarea>'
+                    + '   placeholder="{{ trans("tenders::tenders.custom_value") }}"></textarea>'
                     + '   <a class="remove-custom-field pull-right" href="javascript:void(0)">'
                     + '   <i class="fa fa-times text-navy"></i>'
                     + '   </a>'
@@ -527,7 +527,7 @@
                     }
                 },
                 error: function (media_path) {
-                    alert_box("{{ trans("posts::posts.not_image_file") }}");
+                    alert_box("{{ trans("tenders::tenders.not_image_file") }}");
                 }
             });
 
@@ -542,7 +542,7 @@
                     }
                 },
                 error: function (media_path) {
-                    alert_box("{{ trans("posts::posts.not_media_file") }}");
+                    alert_box("{{ trans("tenders::tenders.not_media_file") }}");
                 }
             });
 

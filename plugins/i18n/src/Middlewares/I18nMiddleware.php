@@ -51,9 +51,9 @@ class I18nMiddleware
                 } else {
                     app()->setLocale(config()->get('app.locale'));
                 }
-                app()->setLocale('ar');
+                //app()->setLocale('ar');
 
-                define("DIRECTION", config()->get("i18n.locales")["ar"]["direction"]);
+                define("DIRECTION", config()->get("i18n.locales")[app()->getLocale()]["direction"]);
 
             } catch (Exception $error) {
                 abort(500, "System locales is not configured successfully");

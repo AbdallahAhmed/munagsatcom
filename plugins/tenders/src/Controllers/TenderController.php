@@ -159,22 +159,37 @@ class TenderController extends Controller
 
         if (Request::isMethod("post")) {
 
-            $tender->title = Request::get('title');
-            $tender->excerpt = Request::get('excerpt');
-            $tender->content = Request::get('content');
-            $tender->image_id = Request::get('image_id', 0);
-            $tender->media_id = Request::get('media_id', 0);
-            $tender->user_id = Auth::user()->id;
-            $tender->status = Request::get("status", 0);
-            $tender->format = Request::get("format", "post");
-            $tender->lang = app()->getLocale();
+            $tender->name = Request::get('name');
+            $tender->objective = Request::get('objective');
 
-            $tender->published_at = Request::get('published_at');
+            $tender->address_get_offer = Request::get('address_get_offer');
+            $tender->address_files_open = Request::get('address_files_open');
+            $tender->address_execute = Request::get('address_execute');
+            $tender->is_cb_ratio_active = Request::get("is_cb_ratio_active", 0);
 
-            if (in_array($tender->published_at, [NULL, ""])) {
-                $tender->published_at = date("Y-m-d H:i:s");
+
+            $tender->cb_real_price = Request::get('cb_real_price');
+
+            // wait for setting
+            if ($tender->is_cb_ratio_active) {
+                $tender->cb_downloaded_price = Request::get('cb_downloaded_price');
             }
 
+            $tender->org_id = Request::get('org_id', 0);
+            $tender->cb_id = Request::get('cb_id', 0);
+            $tender->type_id = Request::get('type_id', 0);
+            $tender->activity_id = Request::get('type_id', 0);
+
+
+            $tender->user_id = Auth::user()->id;
+
+            $tender->status = Request::get("status", 0);
+
+            //dates
+            $tender->published_at = Request::get('published_at', date("Y-m-d H:i:s"));
+            $tender->last_queries_at = Request::get('last_queries_at', date("Y-m-d H:i:s"));
+            $tender->last_get_offer_at = Request::get('last_get_offer_at', date("Y-m-d H:i:s"));
+            $tender->files_opened_at = Request::get('files_opened_at', date("Y-m-d H:i:s"));
             // Fire saving action
 
             Action::fire("tender.saving", $tender);
@@ -184,35 +199,19 @@ class TenderController extends Controller
             }
 
             $tender->save();
-            $tender->syncTags(Request::get("tags", []));
+
             $tender->categories()->sync(Request::get("categories", []));
-            $tender->galleries()->sync(Request::get("galleries", []));
-            $tender->syncBlocks(Request::get("blocks", []));
-
-            // Saving post meta
-
-            $custom_fields = array_filter(array_combine(Request::get("custom_names", []), Request::get("custom_values", [])));
-
-            foreach ($custom_fields as $name => $value) {
-                $meta = new TenderMeta();
-                $meta->name = $name;
-                $meta->value = $value;
-                $tender->meta()->save($meta);
-            }
 
             // Fire saved action
 
             Action::fire("tender.saved", $tender);
 
-            return Redirect::route("admin.posts.edit", array("id" => $tender->id))
+            return Redirect::route("admin.tenders.edit", array("id" => $tender->id))
                 ->with("message", trans("tenders::tenders.events.created"));
         }
 
-        $this->data["post_tags"] = array();
-        $this->data["post_categories"] = collect([]);
-        $this->data["post_galleries"] = collect([]);
-        $this->data["post_blocks"] = collect([]);
-        $this->data["post"] = $tender;
+        $this->data["tender_categories"] = collect([]);
+        $this->data["tender"] = $tender;
 
         return View::make("tenders::edit", $this->data);
     }
@@ -229,16 +228,37 @@ class TenderController extends Controller
 
         if (Request::isMethod("post")) {
 
-            $tender->title = Request::get('title');
-            $tender->excerpt = Request::get('excerpt');
-            $tender->content = Request::get('content');
-            $tender->image_id = Request::get('image_id', 0);
-            $tender->media_id = Request::get('media_id', 0);
-            $tender->status = Request::get("status", 0);
-            $tender->format = Request::get("format", "post");
-            $tender->published_at = Request::get('published_at') != "" ? Request::get('published_at') : date("Y-m-d H:i:s");
-            $tender->lang = app()->getLocale();
+            $tender->name = Request::get('name');
+            $tender->objective = Request::get('objective');
 
+            $tender->address_get_offer = Request::get('address_get_offer');
+            $tender->address_files_open = Request::get('address_files_open');
+            $tender->address_execute = Request::get('address_execute');
+            $tender->is_cb_ratio_active = Request::get("is_cb_ratio_active", 0);
+
+
+            $tender->cb_real_price = Request::get('cb_real_price');
+
+            // wait for setting
+            if ($tender->is_cb_ratio_active) {
+                $tender->cb_downloaded_price = Request::get('cb_downloaded_price');
+            }
+
+            $tender->org_id = Request::get('org_id', 0);
+            $tender->cb_id = Request::get('cb_id', 0);
+            $tender->type_id = Request::get('type_id', 0);
+            $tender->activity_id = Request::get('type_id', 0);
+
+
+            $tender->user_id = Auth::user()->id;
+
+            $tender->status = Request::get("status", 0);
+
+            //dates
+            $tender->published_at = Request::get('published_at', date("Y-m-d H:i:s"));
+            $tender->last_queries_at = Request::get('last_queries_at', date("Y-m-d H:i:s"));
+            $tender->last_get_offer_at = Request::get('last_get_offer_at', date("Y-m-d H:i:s"));
+            $tender->files_opened_at = Request::get('files_opened_at', date("Y-m-d H:i:s"));
             // Fire saving action
 
             Action::fire("tender.saving", $tender);
@@ -249,35 +269,16 @@ class TenderController extends Controller
 
             $tender->save();
             $tender->categories()->sync(Request::get("categories", []));
-            $tender->galleries()->sync(Request::get("galleries", []));
-            $tender->syncTags(Request::get("tags", []));
-            $tender->syncBlocks(Request::get("blocks", []));
-
-            // Fire saved action
-
-            TenderMeta::where("post_id", $tender->id)->delete();
-
-            $custom_fields = array_filter(array_combine(Request::get("custom_names", []), Request::get("custom_values", [])));
-
-            foreach ($custom_fields as $name => $value) {
-                $meta = new TenderMeta();
-                $meta->name = $name;
-                $meta->value = $value;
-                $tender->meta()->save($meta);
-            }
 
             // Fire saved action
 
             Action::fire("tender.saved", $tender);
 
-            return Redirect::route("admin.posts.edit", array("id" => $id))->with("message", trans("tenders::tenders.events.updated"));
+            return Redirect::route("admin.tenders.edit", array("id" => $id))->with("message", trans("tenders::tenders.events.updated"));
         }
 
-        $this->data["post_tags"] = $tender->tags->pluck("name")->toArray();
-        $this->data["post_categories"] = $tender->categories;
-        $this->data["post_galleries"] = $tender->galleries;
-        $this->data["post_blocks"] = $tender->blocks;
-        $this->data["post"] = $tender;
+        $this->data["tender_categories"] = $tender->categories;
+        $this->data["tender"] = $tender;
 
         return View::make("tenders::edit", $this->data);
     }

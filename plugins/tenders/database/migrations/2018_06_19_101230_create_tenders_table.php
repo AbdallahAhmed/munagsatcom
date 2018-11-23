@@ -24,6 +24,8 @@ class CreateTendersTable extends Migration
 
 
             $table->integer('type_id')->default(0)->index();
+            $table->integer('cb_id')->default(0)->index();
+            $table->integer('is_cb_ratio_active')->default(0)->index();
             $table->integer('org_id')->default(0)->index();
             $table->integer('activity_id')->default(0)->index();
             $table->integer('user_id')->default(0)->index();

@@ -5,14 +5,14 @@
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
             <h2>
                 <i class="fa fa-newspaper-o"></i>
-                {{ trans("tenders::tenders.posts") }}
+                {{ trans("tenders::tenders.tenders") }}
             </h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="{{ route("admin") }}">{{ trans("admin::common.admin") }}</a>
                 </li>
                 <li>
-                    <a href="{{ route("admin.tenders.show") }}">{{ trans("tenders::tenders.posts") }}
+                    <a href="{{ route("admin.tenders.show") }}">{{ trans("tenders::tenders.tenders") }}
                         ({{ $tenders->total() }})</a>
                 </li>
             </ol>
@@ -90,8 +90,8 @@
 
                             <div class="input-group">
                                 <input name="q" value="{{ Request::get("q") }}" type="text"
-                                       class=" form-control"
-                                       placeholder="{{ trans("tenders::tenders.search_posts") }} ...">
+                                       class="form-control"
+                                       placeholder="{{ trans("tenders::tenders.search_tenders") }} ...">
                                 <span class="input-group-btn">
                                     <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
                                 </span>
@@ -122,7 +122,7 @@
                     <div class="ibox-title">
                         <h5>
                             <i class="fa fa-file-text-o"></i>
-                            {{ trans("tenders::tenders.posts") }}
+                            {{ trans("tenders::tenders.tenders") }}
                         </h5>
                     </div>
                     <div class="ibox-content">

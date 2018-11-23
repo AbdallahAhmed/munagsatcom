@@ -22,11 +22,11 @@ return [
             "title" => "العربية",
             "direction" => "rtl"
         ],
-
-        'en' => [
-            "title" => "English",
-            "direction" => "ltr"
-        ]
+//
+//        'en' => [
+//            "title" => "English",
+//            "direction" => "ltr"
+//        ]
 
     ]
 ];

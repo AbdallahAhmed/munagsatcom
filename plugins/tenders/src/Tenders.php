@@ -35,34 +35,34 @@ class Tenders extends \Dot\Platform\Plugin
 
             if (\Auth::user()->can("tenders.manage")) {
 
-                $menu->item('tenders', trans("tenders::tenders.tenders"),'#')
+                $menu->item('tenders', trans("tenders::tenders.tenders"), route('admin.tenders.show'))
                     ->order(1)
                     ->icon(" fa-clone");
 
-                $menu->item('tenders.types', trans("tenders::types.types"),route('admin.tenders.types.show'))
+                $menu->item('tenders.types', trans("tenders::types.types"), route('admin.tenders.types.show'))
                     ->order(1)
                     ->icon(" fa-clone");
 
 
-                $menu->item('tenders.orgs', trans("tenders::orgs.orgs"),route('admin.tenders.orgs.show'))
+                $menu->item('tenders.orgs', trans("tenders::orgs.orgs"), route('admin.tenders.orgs.show'))
                     ->order(2)
                     ->icon("fa-globe");
 
 
-                $menu->item('tenders.activities', trans("tenders::activities.activities"),route('admin.tenders.activities.show'))
+                $menu->item('tenders.activities', trans("tenders::activities.activities"), route('admin.tenders.activities.show'))
                     ->order(2)
                     ->icon("fa-cube");
 
 
                 if (\Auth::user()->can("categories.manage")) {
-                $menu->item('tenders.categories', trans("categories::categories.categories"), route("admin.categories.show"))->icon("fa-folder")->order(0);
+                    $menu->item('tenders.categories', trans("categories::categories.categories"), route("admin.categories.show"))->icon("fa-folder")->order(0);
 
                     if (\Auth::user()->can("i18n.manage_places")) {
                         $menu->item('tenders.splaces', trans("i18n::places.places"), route("admin.places.show"))
                             ->order(5.5)
                             ->icon("fa-map-marker");
                     }
-            }
+                }
 
             }
         });

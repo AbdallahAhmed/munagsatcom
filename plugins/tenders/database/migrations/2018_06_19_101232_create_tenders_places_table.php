@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTenderPlacessTable extends Migration
+class CreateTendersPlacesTable extends Migration
 {
     /*
      * Run the migrations.

@@ -19,7 +19,7 @@
                     </li>
                     <li class="active">
                         <strong>
-                            {{ $chance ? trans("chances::chances.edit") : trans("chances::chances.add_new") }}
+                            {{ trans("chances::chances.edit") }}
                         </strong>
                     </li>
                 </ol>
@@ -27,12 +27,6 @@
 
             <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12 text-right">
 
-                @if ($chance)
-                    <a href="{{ route("admin.chances.create") }}"
-                       class="btn btn-primary btn-labeled btn-main"> <span
-                                class="btn-label icon fa fa-plus"></span>
-                        {{ trans("chances::chances.add_new") }}</a>
-                @endif
 
                 <button type="submit" class="btn btn-flat btn-danger btn-main">
                     <i class="fa fa-download" aria-hidden="true"></i>
@@ -311,23 +305,6 @@
                     item.parents(".meta-row").remove();
                 });
 
-            });
-
-            $(document).on('click', '#add-unit', function (e) {
-                e.preventDefault();
-                $(this).hide();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                    url: "{{route("admin.chances.addUnitUI")}}",
-                    success: function (data) {
-                        $(data.view).insertAfter($("#add-unit"))
-                        $(this).remove();
-                    }
-                })
             });
 
             $('[name=approved]').change(function () {

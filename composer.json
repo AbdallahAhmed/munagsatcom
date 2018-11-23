@@ -38,7 +38,8 @@
             "Dot\\Users\\": "plugins/Users/src/",
             "Dot\\I18n\\": "plugins/i18n/src/",
             "Dot\\Chances\\": "plugins/chances/src/",
-            "Dot\\Tenders\\": "plugins/tenders/src/"
+            "Dot\\Tenders\\": "plugins/tenders/src/",
+            "Dot\\Services\\": "plugins/services/src/"
         }
     },
     "autoload-dev": {

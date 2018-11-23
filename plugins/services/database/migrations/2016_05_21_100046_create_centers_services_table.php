@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateChancesUnitsTable extends Migration
+class CreateCentersServicesTable extends Migration
 {
     /*
      * Run the migrations.
@@ -11,11 +11,10 @@ class CreateChancesUnitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('chances_units', function ($table) {
+        Schema::create('centers_services', function ($table) {
+            $table->integer("center_id")->index();
+            $table->integer('service_id')->index();
 
-            $table->integer('chance_id');
-            $table->integer('unit_id');
-            $table->string('quantity');
         });
     }
 
@@ -26,6 +25,6 @@ class CreateChancesUnitsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('chances_units');
+        Schema::drop('centers_services');
     }
 }

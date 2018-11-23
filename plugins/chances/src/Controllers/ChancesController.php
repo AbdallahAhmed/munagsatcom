@@ -123,7 +123,7 @@ class ChancesController extends Controller
             $syncUnit = array();
             foreach ($units as $key => $unit) {
                 if (!$units_quantity[$key]) {
-                    $this->errors->add("units_names", trans("chances::chances.attributes.units_names") . " " . trans("chances::chances.required") . ".");
+                    $this->errors->add("units_names", trans("chances::chances.attributes.reason") . " " . trans("services::centers.required") . ".");
                     break;
                 }
                 $syncUnit[$unit] = ["quantity" => $units_quantity[$key]];

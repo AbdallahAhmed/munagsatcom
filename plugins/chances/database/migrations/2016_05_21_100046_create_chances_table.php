@@ -25,6 +25,8 @@ class CreateChancesTable extends Migration
             $table->string("reason")->nullable()->default("")->index();
             $table->string("value")->nullable()->default("")->index();
             $table->integer("user_id")->index();
+            $table->timestamp('created_at')->nullable()->index();
+            $table->timestamp('updated_at')->nullable()->index();
         });
     }
 

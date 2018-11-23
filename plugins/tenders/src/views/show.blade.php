@@ -5,21 +5,21 @@
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
             <h2>
                 <i class="fa fa-newspaper-o"></i>
-                {{ trans("posts::posts.posts") }}
+                {{ trans("tenders::tenders.tenders") }}
             </h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="{{ route("admin") }}">{{ trans("admin::common.admin") }}</a>
                 </li>
                 <li>
-                    <a href="{{ route("admin.posts.show") }}">{{ trans("posts::posts.posts") }}
-                        ({{ $posts->total() }})</a>
+                    <a href="{{ route("admin.tenders.show") }}">{{ trans("tenders::tenders.tenders") }}
+                        ({{ $tenders->total() }})</a>
                 </li>
             </ol>
         </div>
         <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12 text-right">
-            <a href="{{ route("admin.posts.create") }}" class="btn btn-primary btn-labeled btn-main"> <span
-                    class="btn-label icon fa fa-plus"></span> {{ trans("posts::posts.add_new") }}</a>
+            <a href="{{ route("admin.tenders.create") }}" class="btn btn-primary btn-labeled btn-main"> <span
+                    class="btn-label icon fa fa-plus"></span> {{ trans("tenders::tenders.add_new") }}</a>
         </div>
     </div>
 
@@ -34,37 +34,37 @@
                         <div class="form-group">
                             <select name="sort" class="form-control chosen-select chosen-rtl">
                                 <option
-                                    value="title"
-                                    @if ($sort == "title") selected='selected' @endif>{{ ucfirst(trans("posts::posts.attributes.title")) }}</option>
+                                    value="name"
+                                    @if ($sort == "name") selected='selected' @endif>{{ ucfirst(trans("tenders::tenders.attributes.title")) }}</option>
                                 <option
                                     value="created_at"
-                                    @if ($sort == "created_at") selected='selected' @endif>{{ ucfirst(trans("posts::posts.attributes.created_at")) }}</option>
+                                    @if ($sort == "created_at") selected='selected' @endif>{{ ucfirst(trans("tenders::tenders.attributes.created_at")) }}</option>
                             </select>
                             <select name="order" class="form-control chosen-select chosen-rtl">
                                 <option
                                     value="DESC"
-                                    @if ($order == "DESC") selected='selected' @endif>{{ trans("posts::posts.desc") }}</option>
+                                    @if ($order == "DESC") selected='selected' @endif>{{ trans("tenders::tenders.desc") }}</option>
                                 <option
                                     value="ASC"
-                                    @if ($order == "ASC") selected='selected' @endif>{{ trans("posts::posts.asc") }}</option>
+                                    @if ($order == "ASC") selected='selected' @endif>{{ trans("tenders::tenders.asc") }}</option>
                             </select>
                             <button type="submit"
-                                    class="btn btn-primary">{{ trans("posts::posts.order") }}</button>
+                                    class="btn btn-primary">{{ trans("tenders::tenders.order") }}</button>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4">
                         <div class="form-group">
 
                             <select name="status" class="form-control chosen-select chosen-rtl">
-                                <option value="">{{ trans("posts::posts.all") }}</option>
+                                <option value="">{{ trans("tenders::tenders.all") }}</option>
                                 <option @if (Request::get("status") == "1") selected='selected' @endif
-                                value="1">{{ trans("posts::posts.activated") }}</option>
+                                value="1">{{ trans("tenders::tenders.activated") }}</option>
                                 <option @if (Request::get("status") == "0") selected='selected' @endif
-                                value="0">{{ trans("posts::posts.deactivated") }}</option>
+                                value="0">{{ trans("tenders::tenders.deactivated") }}</option>
                             </select>
 
                             <select name="category_id" class="form-control chosen-select chosen-rtl">
-                                <option value="">{{ trans("posts::posts.all_categories") }}</option>
+                                <option value="">{{ trans("tenders::tenders.all_categories") }}</option>
                                 <?php
                                 echo Dot\Categories\Models\Category::tree(array(
                                     "row" => function ($row, $depth) {
@@ -80,25 +80,8 @@
                             </select>
 
 
-                            <select name="block_id" class="form-control chosen-select chosen-rtl">
-                                <option value="">{{ trans("posts::posts.all_blocks") }}</option>
-                                @foreach(Dot\Blocks\Models\Block::all() as $block)
-                                    <option @if (Request::get("block_id") == $block->id) selected='selected' @endif
-                                    value="{{ $block->id }}">{{ $block->name }}</option>
-                                @endforeach
-                            </select>
-
-                            <select name="format" class="form-control chosen-select chosen-rtl">
-                                <option value="">{{ trans("posts::posts.all_formats") }}</option>
-                                @foreach (config("posts.formats") as $format => $icon)
-                                    <option @if (Request::get("format") == $format) selected='selected' @endif
-                                    value="{{ $format }}">
-                                        {{ trans("posts::posts.format_" . $format) }}</option>
-                                @endforeach
-                            </select>
-
                             <button type="submit"
-                                    class="btn btn-primary">{{ trans("posts::posts.filter") }}</button>
+                                    class="btn btn-primary">{{ trans("tenders::tenders.filter") }}</button>
                         </div>
                     </div>
 
@@ -107,8 +90,8 @@
 
                             <div class="input-group">
                                 <input name="q" value="{{ Request::get("q") }}" type="text"
-                                       class=" form-control"
-                                       placeholder="{{ trans("posts::posts.search_posts") }} ...">
+                                       class="form-control"
+                                       placeholder="{{ trans("tenders::tenders.search_tenders") }} ...">
                                 <span class="input-group-btn">
                                     <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
                                 </span>
@@ -118,14 +101,14 @@
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 <input name="from" type="text" value="{{ @Request::get("from") }}"
                                        class="form-control" id="input-from"
-                                       placeholder="{{ trans("posts::posts.from") }}">
+                                       placeholder="{{ trans("tenders::tenders.from") }}">
                             </div>
 
                             <div class="input-group date datetimepick col-sm-6 pull-left" style="margin-top: 5px">
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 <input name="to" type="text" value="{{ @Request::get("to") }}"
                                        class="form-control" id="input-to"
-                                       placeholder="{{ trans("posts::posts.to") }}">
+                                       placeholder="{{ trans("tenders::tenders.to") }}">
                             </div>
 
 
@@ -139,24 +122,24 @@
                     <div class="ibox-title">
                         <h5>
                             <i class="fa fa-file-text-o"></i>
-                            {{ trans("posts::posts.posts") }}
+                            {{ trans("tenders::tenders.tenders") }}
                         </h5>
                     </div>
                     <div class="ibox-content">
-                        @if (count($posts))
+                        @if (count($tenders))
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 action-box">
 
                                     <select name="action" class="form-control pull-left">
                                         <option value="-1"
-                                                selected="selected">{{ trans("posts::posts.bulk_actions") }}</option>
-                                        <option value="delete">{{ trans("posts::posts.delete") }}</option>
-                                        <option value="activate">{{ trans("posts::posts.activate") }}</option>
-                                        <option value="deactivate">{{ trans("posts::posts.deactivate") }}</option>
+                                                selected="selected">{{ trans("tenders::tenders.bulk_actions") }}</option>
+                                        <option value="delete">{{ trans("tenders::tenders.delete") }}</option>
+                                        <option value="activate">{{ trans("tenders::tenders.activate") }}</option>
+                                        <option value="deactivate">{{ trans("tenders::tenders.deactivate") }}</option>
                                     </select>
 
                                     <button type="submit"
-                                            class="btn btn-primary pull-right">{{ trans("posts::posts.apply") }}</button>
+                                            class="btn btn-primary pull-right">{{ trans("tenders::tenders.apply") }}</button>
 
                                 </div>
 
@@ -164,7 +147,7 @@
 
                                 <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
                                     <select class="form-control per_page_filter">
-                                        <option value="" selected="selected">-- {{ trans("posts::posts.per_page") }}
+                                        <option value="" selected="selected">-- {{ trans("tenders::tenders.per_page") }}
                                             --
                                         </option>
                                         @foreach (array(10, 20, 30, 40) as $num)
@@ -183,67 +166,55 @@
                                         <th style="width:35px">
                                             <input type="checkbox" class="i-checks check_all" name="ids[]"/>
                                         </th>
-                                        <th>{{ trans("posts::posts.attributes.title") }}</th>
-                                        <th>{{ trans("posts::posts.attributes.created_at") }}</th>
-                                        <th>{{ trans("posts::posts.user") }}</th>
-                                        <th>{{ trans("posts::posts.tags") }}</th>
-                                        <th>{{ trans("posts::posts.attributes.status") }}</th>
-                                        <th>{{ trans("posts::posts.actions") }}</th>
+                                        <th>{{ trans("tenders::tenders.attributes.title") }}</th>
+                                        <th>{{ trans("tenders::tenders.attributes.created_at") }}</th>
+                                        <th>{{ trans("tenders::tenders.user") }}</th>
+                                        <th>{{ trans("tenders::tenders.attributes.status") }}</th>
+                                        <th>{{ trans("tenders::tenders.actions") }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($posts as $post)
+                                    @foreach ($tenders as $tender)
                                         <tr>
 
                                             <td>
                                                 <input type="checkbox" class="i-checks" name="id[]"
-                                                       value="{{ $post->id }}"/>
+                                                       value="{{ $tender->id }}"/>
                                             </td>
 
                                             <td>
                                                 <a data-toggle="tooltip" data-placement="bottom"
-                                                   title="{{ trans("posts::posts.edit") }}" class="text-navy"
-                                                   href="{{ route("admin.posts.edit", array("id" => $post->id)) }}">
-                                                    <strong>{{ $post->title }}</strong>
+                                                   title="{{ trans("tenders::tenders.edit") }}" class="text-navy"
+                                                   href="{{ route("admin.tenders.edit", array("id" => $tender->id)) }}">
+                                                    <strong>{{ $tender->name }}</strong>
                                                 </a>
 
                                             </td>
 
                                             <td>
-                                                <small>{{ $post->created_at->render() }}</small>
+                                                <small>{{ $tender->created_at->render() }}</small>
                                             </td>
 
                                             <td>
-                                                <a href="?user_id={{ @$post->user->id }}" class="text-navy">
-                                                    <small> {{ @$post->user->first_name }}</small>
+                                                <a href="?user_id={{ @$tender->user->id }}" class="text-navy">
+                                                    <small> {{ @$tender->user->first_name }}</small>
                                                 </a>
                                             </td>
 
-                                            <td>
-                                                @if (count($post->tags))
-                                                    @foreach ($post->tags as $tag)
-                                                        <a href="?tag_id={{ $tag->id }}" class="text-navy">
-                                                            <span class="badge badge-primary">{{ $tag->name }}</span>
-                                                        </a>
-                                                    @endforeach
-                                                @else
-                                                    -
-                                                @endif
-                                            </td>
 
                                             <td>
-                                                @if ($post->status)
+                                                @if ($tender->status)
                                                     <a data-toggle="tooltip" data-placement="bottom"
-                                                       title="{{ trans("posts::posts.activated") }}" class="ask"
-                                                       message="{{ trans('posts::posts.sure_deactivate') }}"
-                                                       href="{{ URL::route("admin.posts.status", array("id" => $post->id, "status" => 0)) }}">
+                                                       title="{{ trans("tenders::tenders.activated") }}" class="ask"
+                                                       message="{{ trans('tenders::tenders.sure_deactivate') }}"
+                                                       href="{{ URL::route("admin.tenders.status", array("id" => $tender->id, "status" => 0)) }}">
                                                         <i class="fa fa-toggle-on text-success"></i>
                                                     </a>
                                                 @else
                                                     <a data-toggle="tooltip" data-placement="bottom"
-                                                       title="{{ trans("posts::posts.deactivated") }}" class="ask"
-                                                       message="{{ trans('posts::posts.sure_activate') }}"
-                                                       href="{{ URL::route("admin.posts.status", array("id" => $post->id, "status" => 1)) }}">
+                                                       title="{{ trans("tenders::tenders.deactivated") }}" class="ask"
+                                                       message="{{ trans('tenders::tenders.sure_activate') }}"
+                                                       href="{{ URL::route("admin.tenders.status", array("id" => $tender->id, "status" => 1)) }}">
                                                         <i class="fa fa-toggle-off text-danger"></i>
                                                     </a>
                                                 @endif
@@ -251,14 +222,14 @@
 
                                             <td class="center">
                                                 <a data-toggle="tooltip" data-placement="bottom"
-                                                   title="{{ trans("posts::posts.edit") }}"
-                                                   href="{{ route("admin.posts.edit", array("id" => $post->id)) }}">
+                                                   title="{{ trans("tenders::tenders.edit") }}"
+                                                   href="{{ route("admin.tenders.edit", array("id" => $tender->id)) }}">
                                                     <i class="fa fa-pencil text-navy"></i>
                                                 </a>
                                                 <a data-toggle="tooltip" data-placement="bottom"
-                                                   title="{{ trans("posts::posts.delete") }}" class="delete_user ask"
-                                                   message="{{ trans("posts::posts.sure_delete") }}"
-                                                   href="{{ URL::route("admin.posts.delete", array("id" => $post->id)) }}">
+                                                   title="{{ trans("tenders::tenders.delete") }}" class="delete_user ask"
+                                                   message="{{ trans("tenders::tenders.sure_delete") }}"
+                                                   href="{{ URL::route("admin.tenders.delete", array("id" => $tender->id)) }}">
                                                     <i class="fa fa-times text-navy"></i>
                                                 </a>
                                             </td>
@@ -269,17 +240,17 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 text-center">
-                                    {{ trans("posts::posts.page") }}
-                                    {{ $posts->currentPage() }}
-                                    {{ trans("posts::posts.of") }}
-                                    {{ $posts->lastPage() }}
+                                    {{ trans("tenders::tenders.page") }}
+                                    {{ $tenders->currentPage() }}
+                                    {{ trans("tenders::tenders.of") }}
+                                    {{ $tenders->lastPage() }}
                                 </div>
                                 <div class="col-lg-12 text-center">
-                                    {{ $posts->appends(Request::all())->render() }}
+                                    {{ $tenders->appends(Request::all())->render() }}
                                 </div>
                             </div>
                         @else
-                            {{ trans("posts::posts.no_records") }}
+                            {{ trans("tenders::tenders.no_records") }}
                         @endif
                     </div>
                 </div>

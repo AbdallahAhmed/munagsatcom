@@ -3,19 +3,15 @@
 namespace Dot\Tenders\Models;
 
 use Cache;
-use Dot\Blocks\Models\Block;
 use Dot\Categories\Models\Category;
-use Dot\Galleries\Models\Gallery;
+use Dot\I18n\Models\Place;
 use Dot\Media\Models\Media;
 use Dot\Platform\Model;
-use Dot\Posts\Scopes\Post as PostScope;
-use Dot\Seo\Models\SEO;
-use Dot\Tags\Models\Tag;
 use Dot\Users\Models\User;
 
 
 /**
- * Class Post
+ * Class Tender
  * @package Dot\Posts\Models
  */
 class Tender extends Model
@@ -37,9 +33,7 @@ class Tender extends Model
      * @var array
      */
     protected $searchable = [
-        'title',
-        'excerpt',
-        'content'
+        'name',
 
     ];
 
@@ -52,21 +46,21 @@ class Tender extends Model
      * @var array
      */
     protected $sluggable = [
-        'slug' => 'title',
+        'slug' => 'name',
     ];
 
     /**
      * @var array
      */
     protected $creatingRules = [
-        'title' => 'required'
+        'name' => 'required'
     ];
 
     /**
      * @var array
      */
     protected $updatingRules = [
-        'title' => 'required'
+        'name' => 'required'
     ];
 
     /**
@@ -103,6 +97,33 @@ class Tender extends Model
      */
     public function categories()
     {
-        return $this->belongsToMany(Category::class, "posts_categories", "post_id", "category_id");
+        return $this->belongsToMany(Category::class, "tenders_categories", "tender_id", "category_id");
     }
+
+    /**
+     * places relation
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function places()
+    {
+        return $this->belongsToMany(Place::class, "tenders_places", "tender_id", "place_id");
+    }
+
+    /**
+     * files relation
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function files()
+    {
+        return $this->belongsToMany(Media::class, "tenders_places", "tender_id", "file_id");
+    }
+    /**
+     * User relation
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user()
+    {
+        return $this->hasOne(User::class, "id", "user_id");
+    }
+
 }

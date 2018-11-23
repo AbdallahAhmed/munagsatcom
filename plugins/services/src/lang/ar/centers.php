@@ -35,6 +35,7 @@ return [
     'add_tag' => 'أضف وسوم',
     'approve' => 'الموافقة',
     'reject' => 'رفض',
+    'required' => 'مطلوب',
 
 
     "not_categorized" => "غير محدد",

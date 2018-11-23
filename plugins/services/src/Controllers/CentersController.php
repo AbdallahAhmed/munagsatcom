@@ -112,16 +112,16 @@ class CentersController extends Controller
             $center->reason = Request::get('reason');
 
             if ($center->approved == 0 && $center->reason == '') {
-                $this->errors->add('reason_reject', '');
+                $this->errors->add('reason_reject', trans("services::centers.attributes.reason") . " " . trans("chances::chances.required") . ".");
             }
             $center->validate();
             if ($center->errors() != null)
                 $this->errors->merge($center->errors());
             if ($this->errors->messages())
-                return Redirect::back()->withErrors($center->errors())->withInput(Request::all());
+                return Redirect::back()->withErrors($this->errors->messages())->withInput(Request::all());
 
             $center->save();
-            $center->services()->sync(Request::get("services", []));
+            $center->services()->sync(Request::get("centers_services", []));
 
             return Redirect::route("admin.centers.edit", array("id" => $center->id))
                 ->with("message", trans("services::centers.events.created"));

@@ -25,6 +25,13 @@ Route::group([
             $route->any('/search', ["as" => "admin.centers.search", "uses" => "CentersController@search"]);
             $route->any('/{status}/status', ["as" => "admin.centers.status", "uses" => "CentersController@status"]);
         });
-
+    });
+    $route->group(["prefix" => "points"], function ($route) {
+        /* $route->any('/', ["as" => "admin.centers.show", "uses" => "CentersController@index"]);
+         $route->any('/create', ["as" => "admin.centers.create", "uses" => "CentersController@create"]);*/
+        $route->any('/', ["as" => "admin.points", "uses" => "PointsController@index"]);
+        /*$route->any('/delete', ["as" => "admin.centers.delete", "uses" => "CentersController@delete"]);
+        $route->any('/search', ["as" => "admin.centers.search", "uses" => "CentersController@search"]);
+        $route->any('/{status}/status', ["as" => "admin.centers.status", "uses" => "CentersController@status"]);*/
     });
 });

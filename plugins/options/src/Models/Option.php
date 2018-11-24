@@ -24,6 +24,8 @@ class Option extends Model
      */
     protected $table = "options";
 
+    protected $fillable = ['name', 'value'];
+
     /*
      * Delete options cache on deleting and saving
      */

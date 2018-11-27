@@ -98,10 +98,7 @@ class TenderController extends Controller
 
             Action::fire("tender.deleting", $tender);
 
-            $tender->tags()->detach();
             $tender->categories()->detach();
-            $tender->galleries()->detach();
-            $tender->blocks()->detach();
 
             $tender->delete();
 
@@ -171,8 +168,10 @@ class TenderController extends Controller
             $tender->cb_real_price = Request::get('cb_real_price');
 
             // wait for setting
-            if ($tender->is_cb_ratio_active) {
+            if (!$tender->is_cb_ratio_active) {
                 $tender->cb_downloaded_price = Request::get('cb_downloaded_price');
+            } else {
+                $tender->cb_downloaded_price = .01 * $tender->cb_real_price;
             }
 
             $tender->org_id = Request::get('org_id', 0);
@@ -240,17 +239,16 @@ class TenderController extends Controller
             $tender->cb_real_price = Request::get('cb_real_price');
 
             // wait for setting
-            if ($tender->is_cb_ratio_active) {
+            if (!$tender->is_cb_ratio_active) {
                 $tender->cb_downloaded_price = Request::get('cb_downloaded_price');
+            } else {
+                $tender->cb_downloaded_price = .01 * $tender->cb_real_price;
             }
 
             $tender->org_id = Request::get('org_id', 0);
             $tender->cb_id = Request::get('cb_id', 0);
             $tender->type_id = Request::get('type_id', 0);
             $tender->activity_id = Request::get('type_id', 0);
-
-
-            $tender->user_id = Auth::user()->id;
 
             $tender->status = Request::get("status", 0);
 

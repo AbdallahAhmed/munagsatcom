@@ -77,6 +77,8 @@ return [
     'no_cb_uploaded' => 'لا يوجد كراسة شروط مختارة ',
     "cb_real_price" => 'قيمة الكراسة الشروط الحقيقة',
     "cb_downloaded_price" => 'قيمة تحميل كراسة الشروط',
+    "views"=>'عدد المشاهدات',
+    'downloads'=>'التحميل',
 
     'attributes' => [
         'name' => 'الاسم المناقصة',

@@ -49,10 +49,9 @@ class I18nMiddleware
                 if (session()->has('locale')) {
                     app()->setLocale(session()->get('locale'));
                 } else {
-                    app()->setLocale(config()->get('app.locale'));
+                    app()->setLocale(config()->get('app.fallback_locale'));
                 }
-                //app()->setLocale('ar');
-
+                app()->setLocale('ar');
                 define("DIRECTION", config()->get("i18n.locales")[app()->getLocale()]["direction"]);
 
             } catch (Exception $error) {

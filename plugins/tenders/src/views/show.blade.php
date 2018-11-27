@@ -19,7 +19,7 @@
         </div>
         <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12 text-right">
             <a href="{{ route("admin.tenders.create") }}" class="btn btn-primary btn-labeled btn-main"> <span
-                    class="btn-label icon fa fa-plus"></span> {{ trans("tenders::tenders.add_new") }}</a>
+                        class="btn-label icon fa fa-plus"></span> {{ trans("tenders::tenders.add_new") }}</a>
         </div>
     </div>
 
@@ -34,19 +34,19 @@
                         <div class="form-group">
                             <select name="sort" class="form-control chosen-select chosen-rtl">
                                 <option
-                                    value="name"
-                                    @if ($sort == "name") selected='selected' @endif>{{ ucfirst(trans("tenders::tenders.attributes.title")) }}</option>
+                                        value="name"
+                                        @if ($sort == "name") selected='selected' @endif>{{ ucfirst(trans("tenders::tenders.attributes.title")) }}</option>
                                 <option
-                                    value="created_at"
-                                    @if ($sort == "created_at") selected='selected' @endif>{{ ucfirst(trans("tenders::tenders.attributes.created_at")) }}</option>
+                                        value="created_at"
+                                        @if ($sort == "created_at") selected='selected' @endif>{{ ucfirst(trans("tenders::tenders.attributes.created_at")) }}</option>
                             </select>
                             <select name="order" class="form-control chosen-select chosen-rtl">
                                 <option
-                                    value="DESC"
-                                    @if ($order == "DESC") selected='selected' @endif>{{ trans("tenders::tenders.desc") }}</option>
+                                        value="DESC"
+                                        @if ($order == "DESC") selected='selected' @endif>{{ trans("tenders::tenders.desc") }}</option>
                                 <option
-                                    value="ASC"
-                                    @if ($order == "ASC") selected='selected' @endif>{{ trans("tenders::tenders.asc") }}</option>
+                                        value="ASC"
+                                        @if ($order == "ASC") selected='selected' @endif>{{ trans("tenders::tenders.asc") }}</option>
                             </select>
                             <button type="submit"
                                     class="btn btn-primary">{{ trans("tenders::tenders.order") }}</button>
@@ -152,8 +152,8 @@
                                         </option>
                                         @foreach (array(10, 20, 30, 40) as $num)
                                             <option
-                                                value="{{ $num }}"
-                                                @if ($num == $per_page) selected="selected" @endif>{{ $num }}</option>
+                                                    value="{{ $num }}"
+                                                    @if ($num == $per_page) selected="selected" @endif>{{ $num }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -166,10 +166,17 @@
                                         <th style="width:35px">
                                             <input type="checkbox" class="i-checks check_all" name="ids[]"/>
                                         </th>
-                                        <th>{{ trans("tenders::tenders.attributes.title") }}</th>
+                                        <th>{{ trans("tenders::tenders.attributes.name") }}</th>
                                         <th>{{ trans("tenders::tenders.attributes.created_at") }}</th>
                                         <th>{{ trans("tenders::tenders.user") }}</th>
                                         <th>{{ trans("tenders::tenders.attributes.status") }}</th>
+                                        <th>
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                            {{ trans("tenders::tenders.views") }}
+
+                                        </th>
+                                        <th><i class="fa fa-download" aria-hidden="true"></i>
+                                            {{ trans("tenders::tenders.downloads") }}</th>
                                         <th>{{ trans("tenders::tenders.actions") }}</th>
                                     </tr>
                                     </thead>
@@ -196,8 +203,8 @@
                                             </td>
 
                                             <td>
-                                                <a href="?user_id={{ @$tender->user->id }}" class="text-navy">
-                                                    <small> {{ @$tender->user->first_name }}</small>
+                                                <a href="?user_id={{  @$tender->user_id }}" class="text-navy">
+                                                    <small> {{ @$tender->user->first_name }}ss</small>
                                                 </a>
                                             </td>
 
@@ -220,6 +227,14 @@
                                                 @endif
                                             </td>
 
+                                            <td>
+
+                                                {{$tender->downloaded}}
+                                            </td>
+                                            <td>
+
+                                                {{$tender->views}}
+                                            </td>
                                             <td class="center">
                                                 <a data-toggle="tooltip" data-placement="bottom"
                                                    title="{{ trans("tenders::tenders.edit") }}"
@@ -227,7 +242,8 @@
                                                     <i class="fa fa-pencil text-navy"></i>
                                                 </a>
                                                 <a data-toggle="tooltip" data-placement="bottom"
-                                                   title="{{ trans("tenders::tenders.delete") }}" class="delete_user ask"
+                                                   title="{{ trans("tenders::tenders.delete") }}"
+                                                   class="delete_user ask"
                                                    message="{{ trans("tenders::tenders.sure_delete") }}"
                                                    href="{{ URL::route("admin.tenders.delete", array("id" => $tender->id)) }}">
                                                     <i class="fa fa-times text-navy"></i>

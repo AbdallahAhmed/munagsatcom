@@ -105,8 +105,8 @@
                                 <a href="javascript:void(0)" class="btn btn-primary change-pdf">
                                     {{trans('tenders::tenders.cb_upload_or_choice')}}
                                 </a>
-                                <input type="hidden" name="cb_id" id="cb-id">
-                                <span id="cp-title"> {{trans('tenders::tenders.no_cb_uploaded')}}</span>
+                                <input type="hidden" name="cb_id" id="cb-id" value="{{old('cb_id',@$tender->cb_id)}}">
+                                <span id="cp-title"> {{$tender->id&&$tender->cb_id!=0?\Dot\Media\Models\Media::find($tender->cb_id)->title.'.pdf':trans('tenders::tenders.no_cb_uploaded')}}</span>
                             </div>
 
                             <div id="cb-price" style="display: {{$tender->cb_id==0?'none':'block'}}">
@@ -134,10 +134,14 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>{{ trans("tenders::tenders.attributes.cb_downloaded_price") }}</label>
+                                    <label id="cb_downloaded_price"
+                                            @if (@Request::old("is_cb_ratio_active", $tender->is_cb_ratio_active)) style="display: none"
+                                            @endif
+
+                                    >{{ trans("tenders::tenders.attributes.cb_downloaded_price") }}</label>
                                     <input type="text" name="cb_downloaded_price" class="form-control input-lg"
 
-                                           @if (@Request::old("is_cb_ratio_active", $tender->is_cb_ratio_active)) disabled
+                                           @if (@Request::old("is_cb_ratio_active", $tender->is_cb_ratio_active)) style="display: none"
                                            @endif
 
                                            placeholder="{{ trans("tenders::tenders.attributes.cb_downloaded_price") }}"
@@ -383,9 +387,12 @@
             $('#input-is_cb_ratio_active').change(function (e) {
 
                 if (e.target.checked) {
-                    $('#input-cb_downloaded_price').attr('disabled', true)
+                    $('#input-cb_downloaded_price').hide()
+                    $('#cb_downloaded_price').hide()
                 } else {
-                    $('#input-cb_downloaded_price').removeAttr('disabled')
+                    $('#input-cb_downloaded_price').show()
+                    $('#cb_downloaded_price').show()
+
 
                 }
             })

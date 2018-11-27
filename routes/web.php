@@ -26,4 +26,6 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
 
     Route::any('register', 'UserController@register')->name('register');
 
+    Route::get('centers', 'CenterController@index')->name('centers');
+
 });

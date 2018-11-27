@@ -15,10 +15,10 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="navbar-form navbar-left nav navbar-nav menu">
-                <li><a href="#"> الرئيسية<span class="sr-only">(current)</span></a></li>
-                <li><a href="#">حول البوابه</a></li>
-                <li><a href="#">الأنظمة و اللوائح</a></li>
-                <li><a href="#">اتصل بنا</a></li>
+                <li><a href="javascript:void(0)"> {{trans('app.home')}}<span class="sr-only">(current)</span></a></li>
+                <li><a href="javascript:void(0)"> {{trans('app.about_website')}}</a></li>
+                <li><a href="javascript:void(0)">{{trans('app.terms_conditions')}}</a></li>
+                <li><a href="javascript:void(0)">{{trans('app.contact_us')}}</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -45,8 +45,8 @@
     <div class="header"><div class="container">
             <ul class="nav nav-pills nav-justified tab">
                 <li><a href="javascript:void(0)">{{trans('app.government_tenders')}}</a> </li>
-                <li><a href="javascript:void(0)">{{trans('service_centers')}}</a></li>
-                <li><a href="javascript:void(0)">{{trans('investment_opportunities')}}</a></li>
+                <li><a href="javascript:void(0)">{{trans('app.service_centers')}}</a></li>
+                <li><a href="javascript:void(0)">{{trans('app.investment_opportunities')}}</a></li>
             </ul>
         </div></div>
 </header>

@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img src="{{asset('/assets')}}/images/logo.jpg" alt=""></a>
+            <a class="navbar-brand" href="#"><img src="{{asset('/assets')}}/images/logo.jpg" alt="{{trans('app.name')}}"></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -22,7 +22,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <button class="fbutcenter" type="button" onclick="location.href = 'registration.html';"> تسجيل</button>
+                    <button class="fbutcenter" type="button" onclick="location.href = 'registration.html';"> {{trans('app.login')}}</button>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -30,9 +30,9 @@
                         <img src="{{asset('/assets')}}/images/avatar.jpg" alt="">
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">اعدادت</a></li>
+                        <li><a href="#">{{trans('app.setting')}}</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج </a></li>
+                        <li><a href="#"><i class="fas fa-sign-out-alt"></i>{{trans('app.logout')}}</a></li>
                     </ul>
                 </li>
             </ul>

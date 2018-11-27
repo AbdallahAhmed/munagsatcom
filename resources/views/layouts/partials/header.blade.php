@@ -1,4 +1,3 @@
-
 <!--Begin:navbar-->
 <nav class="navbar navbar-default">
     <div class="container">
@@ -23,8 +22,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <button class="fbutcenter" type="button" onclick="location.href = 'registration.html';"> تسجيل
-                    </button>
+                    <button class="fbutcenter" type="button" onclick="location.href = 'registration.html';"> تسجيل</button>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -46,9 +44,9 @@
 <header>
     <div class="header"><div class="container">
             <ul class="nav nav-pills nav-justified tab">
-                <li><a href="monaasat.html">مناقصات حكومية</a> </li>
-                <li><a href="marakz.html">مراكز خدمية</a></li>
-                <li><a href="foras.html">فرص استثماريه</a></li>
+                <li><a href="javascript:void(0)">{{trans('app.government_tenders')}}</a> </li>
+                <li><a href="javascript:void(0)">{{trans('service_centers')}}</a></li>
+                <li><a href="javascript:void(0)">{{trans('investment_opportunities')}}</a></li>
             </ul>
         </div></div>
 </header>

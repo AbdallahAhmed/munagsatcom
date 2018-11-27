@@ -17,7 +17,7 @@
                 </div></div>
 
             <div class="col-md-4 col-md-pull-4">
-                <div class="copyright"><a href="#">جميع الحقوق محفوظة - دوبارتر مصر ©2018  </a></div>
+                <div class="copyright"><a href="#">جميع الحقوق محفوظة - دوبارتر مصر ©{{date('Y')}}  </a></div>
             </div>
         </div></div>
 </footer>

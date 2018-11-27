@@ -1,9 +1,11 @@
 @extends('layouts.master')
 
+@section('title',trans('app.register'))
+
 @section('content')
     <section class="container">
         <div class="res-box">
-            <h2 class="text-center">تسجيل جديد</h2>
+            <h2 class="text-center">{{trans('app.register')}}</h2>
             <div class="feildcont">
                 <form>
                     <div class="reg-part">

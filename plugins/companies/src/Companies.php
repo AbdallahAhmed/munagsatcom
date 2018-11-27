@@ -21,7 +21,7 @@ class Companies extends \Dot\Platform\Plugin
         Navigation::menu("sidebar", function ($menu) {
 
             if (Auth::user()->can("companies.manage")) {
-                $menu->item('companies', trans("companies::companies.companies"), route("admin.companies.show"))->icon("fa-folder")->order(0);
+                $menu->item('companies', trans("companies::companies.companies"), route("admin.companies.show"))->icon("fa-folder")->order(1);
             }
         });
     }

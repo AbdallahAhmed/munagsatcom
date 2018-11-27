@@ -30,7 +30,7 @@
                 @if ($center)
                     <a href="{{ route("admin.centers.create") }}"
                        class="btn btn-primary btn-labeled btn-main"> <span
-                                class="btn-label icon fa fa-plus"></span>
+                            class="btn-label icon fa fa-plus"></span>
                         {{ trans("services::centers.add_new") }}</a>
                 @endif
 
@@ -66,14 +66,16 @@
                                        placeholder="{{ trans("services::centers.attributes.address") }}">
                             </div>
                             <div class="form-group">
-                                <label for="input-mobile-number">{{ trans("services::centers.attributes.mobile_number") }}</label>
+                                <label
+                                    for="input-mobile-number">{{ trans("services::centers.attributes.mobile_number") }}</label>
                                 <input name="mobile_number" type="text"
                                        value="{{ @Request::old("mobile_number", $center->mobile_number) }}"
                                        class="form-control" id="input-name"
                                        placeholder="{{ trans("services::centers.attributes.mobile_number") }}">
                             </div>
                             <div class="form-group">
-                                <label for="input-phone-number">{{ trans("services::centers.attributes.phone_number") }}</label>
+                                <label
+                                    for="input-phone-number">{{ trans("services::centers.attributes.phone_number") }}</label>
                                 <input name="phone-number" type="text"
                                        value="{{ @Request::old("phone_number", $center->phone_number) }}"
                                        class="form-control" id="input-name"
@@ -117,7 +119,7 @@
                         <div class="panel-body">
                             <div class="form-group">
                                 <select name="approved" class="form-control chosen-select chosen-rtl">
-                                    @if($center && $center->approved == 0)
+                                    @if(!($center && $center->approved == 0))
                                         <option value="0"
                                                 selected="selected">{{trans("services::centers.reject")}}</option>
                                         <option value="1">{{trans("services::centers.approve")}}</option>
@@ -130,7 +132,7 @@
                                 <div id="reason"
                                      style="display: @if(($center && $center->approved == 1) || !$center) none @else block @endif; margin-top: 20px">
                                     <label
-                                            for="input-number">{{ trans("services::centers.attributes.reason") }}</label>
+                                        for="input-number">{{ trans("services::centers.attributes.reason") }}</label>
                                     <input name="reason" type="text"
                                            value="{{ $center ? $center->reason : ''}}"
                                            class="form-control" id="input-name"
@@ -148,8 +150,12 @@
                         <div class="panel-body">
                             <div class="form-group">
                                 <select name="sector_id" class="form-control chosen-select chosen-rtl">
+
+                                    @if(count($sectors)==0)
+                                        <option>{{trans("chances::sectors.no_found")}}</option>
+                                    @endif
                                     @foreach($sectors as $sector)
-                                        @if($center )
+                                        @if($center)
                                             @if($center->sector->id == $sector->id)
                                                 <option value="{{$sector->id}}"
                                                         selected="selected">{{$sector->name}}</option>

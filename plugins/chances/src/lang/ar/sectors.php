@@ -37,7 +37,7 @@ return [
     "yes" => "نعم",
     "no" => "لا",
 
-
+    "no_found"=>"لا يوجد قطاع",
     'type_post' => "خبر",
     'type_category' => "تصنيف",
     'type_tag' => "وسم",

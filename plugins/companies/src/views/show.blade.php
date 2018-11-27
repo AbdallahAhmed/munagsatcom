@@ -5,26 +5,32 @@
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
             <h2>
-                <i class="fa fa-th-large"></i>
-                {{ trans("chances::chances.chances") }}
+                <i class="fa fa-folder"></i>
+                {{ trans("companies::companies.companies") }}
             </h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="{{ route("admin") }}">{{ trans("admin::common.admin") }}</a>
                 </li>
                 <li>
-                    <a href="{{ route("admin.chances.show") }}">{{ trans("chances::chances.chances") }}
-                        ({{ $chances->total() }})</a>
+                    <a href="{{ route("admin.companies.show") }}">{{ trans("companies::companies.companies") }}
+                        ({{ $companies->total() }})</a>
                 </li>
             </ol>
         </div>
-       
+        <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12 text-right">
+            <a href="{{ route("admin.companies.create") }}" class="btn btn-primary btn-labeled btn-main">
+                <span class="btn-label icon fa fa-plus"></span>
+                {{ trans("companies::companies.add_new") }}</a>
+        </div>
     </div>
 
     <div class="wrapper wrapper-content fadeInRight">
 
         <div id="content-wrapper">
+
             @include("admin::partials.messages")
+
             <form action="" method="get" class="filter-form">
                 <input type="hidden" name="per_page" value="{{ Request::get('per_page') }}"/>
 
@@ -32,47 +38,35 @@
                     <div class="col-lg-4 col-md-4">
                         <div class="form-group">
                             <select name="sort" class="form-control chosen-select chosen-rtl">
-                                <option
-                                    value="name"
-                                    @if ($sort == "name")  selected='selected' @endif>{{ ucfirst(trans("chances::chances.attributes.name")) }}</option>
+
+                                <option value="name"
+                                        @if($sort == "name") selected='selected' @endif>{{ trans("companies::companies.attributes.name") }}</option>
                             </select>
                             <select name="order" class="form-control chosen-select chosen-rtl">
-                                <option
-                                    value="DESC"
-                                    @if (Request::get("order") == "DESC") selected='selected' @endif>{{ trans("chances::chances.desc") }}</option>
-                                <option
-                                    value="ASC"
-                                    @if (Request::get("order") == "ASC") selected='selected' @endif>{{ trans("chances::chances.asc") }}</option>
+                                <option value="DESC"
+                                        @if($order == "DESC") selected='selected' @endif>{{ trans("companies::companies.desc") }}</option>
+                                <option value="ASC"
+                                        @if($order == "ASC") selected='selected' @endif>{{ trans("companies::companies.asc") }}</option>
                             </select>
                             <button type="submit"
-                                    class="btn btn-primary">{{ trans("chances::chances.order") }}</button>
+                                    class="btn btn-primary">{{ trans("companies::companies.order") }}</button>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4">
-
+                        <div class="form-group">
+                        </div>
                     </div>
+
                     <div class="col-lg-4 col-md-4">
                         <form action="" method="get" class="search_form">
-
                             <div class="input-group">
-                                <div class="autocomplete_area">
-                                    <input type="text" name="q" value="{{ Request::get("q") }}"
-                                           autocomplete="off"
-                                           placeholder="{{ trans("chances::chances.search_chances") }} ..."
-                                           class="form-control linked-text">
-
-                                    <div class="autocomplete_result">
-                                        <div class="result_body"></div>
-                                    </div>
-
-                                </div>
-
+                                <input name="q" value="{{ Request::get("q") }}" type="text"
+                                       class=" form-control"
+                                       placeholder="{{ trans("companies::companies.search_companies") }} ...">
                                 <span class="input-group-btn">
-                            <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                            <button class="btn btn-primary" type="submit"> <i class="fa fa-search"></i> </button>
                         </span>
-
                             </div>
-
                         </form>
                     </div>
                 </div>
@@ -82,22 +76,25 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>
-                            <i class="fa fa-blocks"></i>
-                            {{ trans("chances::chances.chances") }}
+                            <i class="fa fa-folder"></i>
+                            {{ trans("companies::companies.companies") }}
                         </h5>
                     </div>
                     <div class="ibox-content">
-                        @if (count($chances))
+                        @if(count($companies))
                             <div class="row">
-
                                 <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 action-box">
+
                                     <select name="action" class="form-control pull-left">
                                         <option value="-1"
-                                                selected="selected">{{ trans("chances::chances.bulk_actions") }}</option>
-                                        <option value="delete">{{ trans("chances::chances.delete") }}</option>
+                                                selected="selected">{{ trans("companies::companies.bulk_actions") }}</option>
+                                        <option
+                                            value="delete">{{ trans("companies::companies.delete") }}</option>
+
                                     </select>
                                     <button type="submit"
-                                            class="btn btn-primary pull-right">{{ trans("chances::chances.apply") }}</button>
+                                            class="btn btn-primary pull-right">{{ trans("companies::companies.apply") }}</button>
+
                                 </div>
 
                                 <div class="col-lg-6 col-md-4 hidden-sm hidden-xs"></div>
@@ -105,12 +102,11 @@
                                 <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
                                     <select class="form-control per_page_filter">
                                         <option value="" selected="selected">
-                                            -- {{ trans("chances::chances.per_page") }}--
+                                            -- {{ trans("companies::companies.per_page") }} --
                                         </option>
-                                        @foreach (array(10, 20, 30, 40, 60, 80, 100, 150) as $num)
-                                            <option
-                                                value="{{ $num }}"
-                                                @if ($num == $per_page) selected="selected" @endif>{{ $num }}</option>
+                                        @foreach (array(10, 20, 30, 40) as $num)
+                                            <option value="{{ $num }}"
+                                                    @if ($num == $per_page) selected="selected" @endif>{{ $num }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -121,56 +117,53 @@
                                     <thead>
                                     <tr>
                                         <th style="width:35px"><input type="checkbox" class="i-checks check_all"
-                                                                      name="ids[]"/>
-                                        </th>
-                                        <th>{{ trans("chances::chances.attributes.name") }}</th>
-                                        <th>{{ trans("chances::chances.attributes.status_name") }}</th>
-                                        <th>{{ trans("chances::chances.attributes.author") }}</th>
-                                        <th>{{ trans("chances::chances.attributes.created_at") }}</th>
-                                        <th>{{ trans("chances::chances.actions") }}</th>
+                                                                      name="ids[]"/></th>
+                                        <th>{{ trans("companies::companies.attributes.name") }}</th>
+                                        <th>{{ trans("companies::companies.attributes.user") }}</th>
+                                        <th>{{ trans("companies::companies.attributes.status") }}</th>
+                                        <th>{{ trans("companies::companies.attributes.created_at") }}</th>
+                                        <th>{{ trans("companies::companies.actions") }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($chances as $chance)
+                                    @foreach ($companies as $company)
                                         <tr>
                                             <td>
                                                 <input type="checkbox" class="i-checks" name="id[]"
-                                                       value="{{ $chance->id }}"/>
+                                                       value="{{ $company->id }}"/>
                                             </td>
 
                                             <td>
-                                                <a data-toggle="tooltip" data-placement="bottom" class="text-navy"
-                                                   title="{{ trans("chances::chances.edit") }}"
-                                                   href="{{ route("admin.chances.edit", array("id" => $chance->id)) }}">
-                                                    <strong>{{ $chance->name }}</strong>
+                                                <a data-toggle="tooltip" data-placement="bottom"
+                                                   class="text-navy"
+                                                   href="{{ route("admin.companies.edit", array("id" => $company->id)) }}">
+                                                    <strong>{{ $company->name }}</strong>
                                                 </a>
                                             </td>
-
                                             <td>
-                                                {{trans("chances::chances.status.$chance->status")}}
-                                            </td>
-                                            <td>
-                                                <a href="?user_id={{ @$chance->user->id }}" class="text-navy">
-                                                    <small> {{ @$chance->user->first_name }}</small>
+                                                <a href="?user_id={{ @$company->user->id }}" class="text-navy">
+                                                    <small> {{ @$company->user->first_name }}</small>
                                                 </a>
                                             </td>
+                                            <td>
+                                                {{trans("companies::companies.status.$company->status")}}
+                                            </td>
 
                                             <td>
-                                                <small>{{ $chance->created_at->render() }}</small>
+                                                <small>{{ $company->created_at->render() }}</small>
                                             </td>
 
                                             <td class="center">
                                                 <a data-toggle="tooltip" data-placement="bottom"
-                                                   title="{{ trans("chances::chances.edit") }}"
-                                                   href="{{ route("admin.chances.edit", array("id" => $chance->id)) }}">
+                                                   title="{{ trans("companies::companies.edit") }}"
+                                                   href="{{ route("admin.companies.edit", array("id" => $company->id)) }}">
                                                     <i class="fa fa-pencil text-navy"></i>
                                                 </a>
-                                                <a <?php /* data-toggle="tooltip" data-placement="bottom" */ ?>
-                                                   title="{{ trans("chances::chances.delete") }}"
-                                                   class="ask delete_block"
-                                                   data-block-id="{{ $chance->id }}"
-                                                   message="{{ trans("chances::chances.sure_delete") }}"
-                                                   href="{{ URL::route("admin.chances.delete", array("id" => $chance->id)) }}">
+                                                <a data-toggle="tooltip" data-placement="bottom"
+                                                   title="{{ trans("companies::companies.delete") }}"
+                                                   class="delete_user ask"
+                                                   message="{{ trans("companies::companies.sure_delete") }}"
+                                                   href="{{ URL::route("admin.companies.delete", array("id" => $company->id)) }}">
                                                     <i class="fa fa-times text-navy"></i>
                                                 </a>
                                             </td>
@@ -181,17 +174,14 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 text-center">
-                                    {{ trans("chances::chances.page") }}
-                                    {{ $chances->currentPage() }}
-                                    {{ trans("chances::chances.of") }}
-                                    {{ $chances->lastPage() }}
+                                    {{ trans("companies::companies.page") }} {{ $companies->currentPage() }} {{ trans("companies::companies.of") }} {{ $companies->lastPage() }}
                                 </div>
                                 <div class="col-lg-12 text-center">
-                                    {{ $chances->appends(Request::all())->render() }}
+                                    {{ $companies->appends(Request::all())->render() }}
                                 </div>
                             </div>
                         @else
-                            {{ trans("chances::chances.no_records") }}
+                            {{ trans("companies::companies.no_records") }}
                         @endif
                     </div>
                 </div>
@@ -202,11 +192,13 @@
 
 @stop
 
-
 @section("footer")
 
     <script>
+
         $(document).ready(function () {
+
+            $('[data-toggle="tooltip"]').tooltip();
 
             $('.i-checks').iCheck({
                 checkboxClass: 'icheckbox_square-green',
@@ -232,6 +224,7 @@
                 $(".filter-form").submit();
             });
         });
+
     </script>
 
 @stop

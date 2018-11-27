@@ -41,5 +41,6 @@ return [
         "chances" => Dot\Chances\Chances::class,
         "tenders" => Dot\Tenders\Tenders::class,
         "services" => Dot\Services\Services::class,
+        "companies" => Dot\Companies\Companies::class,
     ]
 ];

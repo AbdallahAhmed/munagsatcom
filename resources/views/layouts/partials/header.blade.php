@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img src="{{asset('/assets')}}/images/logo.jpg" alt="{{trans('app.name')}}"></a>
+            <a class="navbar-brand" href="{{asset(app()->getLocale())}}"><img src="{{asset('/assets')}}/images/logo.jpg" alt="{{trans('app.name')}}"></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

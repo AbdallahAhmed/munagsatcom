@@ -1,0 +1,17 @@
+@charset "utf-8";
+/*bootstrap css*/
+@import "bootstrap.css"; 
+/*bootstrap arabic css*/
+@import "bootstrap.rtl.css";
+/*fontawesom css*/
+@import "fontawesome.min.css";
+/*datepicker input css*/
+@import "datepicker.css";
+/*Range css*/
+@import "asRange.css";
+/*social share css*/
+@import "hideshare.css";
+/*main style css*/
+@import "mainstyle.css";
+/*responsive css*/
+@import "responsive.css";

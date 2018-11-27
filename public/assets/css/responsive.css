@@ -1,0 +1,52 @@
+@media only screen and (min-width:1023px) and (max-width:1100px) {}
+
+@media only screen and (min-width:700px) and (max-width:1023px) {
+	.one_thrd{width: 100%;float: none;}
+	.one_half {width: 100%;float: none;}
+	.card-date .item {padding: 4px 0;border: none;border-bottom: 1px solid #ddd;}
+}
+
+@media (max-width:1023px) {
+	
+}
+
+@media (max-width:767px) {
+	.navbar {top: 0;}
+	.navbar-form {margin-right: 0;}
+	.fbutcenter {margin: 5px auto;width: 90%;padding: 7px 15px;}
+	.navbar .fbutcenter {margin: 5px 15px;}
+	.header {padding: 30px 0}
+	.tab .active a:after {left: 48%;top: 45px;border: 10px solid transparent;border-top: 9px solid #ffffff;}
+	.nav-justified > li > a {margin-bottom: 10px;}
+	.partner{margin-top: 20px;}
+	footer {padding: 40px 0 20px;color: #c2c0c0;text-align: center;margin-top: 30px;/* font-size: 14px; */}
+	.copyright {line-height: 3em;}
+	.one_thrd{width: 100%;float: none;}
+	.one_half {width: 100%;float: none;}
+	.card-date .item {padding: 4px 0;border: none;border-bottom: 1px solid #ddd;}
+	.one_thrd,.one_half,.one_small,.one_larg,.one_xsmall,.one_xlarg{width: 100% !important;float: none;}
+	.card-details .card-price div {border-right: none;}
+	.reg-part {padding: 10px 10px;margin: 0 10px 25px;}
+	.feildcont {padding: 10px 5px 10px;}
+	.res-box {padding: 10px 4px 20px;}
+}
+
+@media (max-width:480px) {
+	.navbar {top: 0;}
+	.navbar-form {margin-right: 0;}
+	.fbutcenter {margin: 5px auto;width: 90%;padding: 7px 15px;}
+	.navbar .fbutcenter {margin: 5px 15px;}
+	.header {padding: 30px 0}
+	.tab .active a:after {left: 48%;top: 45px;border: 10px solid transparent;border-top: 9px solid #ffffff;}
+	.nav-justified > li > a {margin-bottom: 10px;}
+	.partner{margin-top: 20px;}
+	footer {padding: 40px 0 20px;color: #c2c0c0;text-align: center;margin-top: 30px;/* font-size: 14px; */}
+	.copyright {line-height: 3em;}
+	.card-date .item {padding: 4px 0;border: none;border-bottom: 1px solid #ddd;}
+	.card-details .card-date .item {border-right:none;}
+	.one_thrd, .one_half, .one_small, .one_larg, .one_xsmall, .one_xlarg{width: 100% !important;float: none;}
+	.card-details .card-price div {border-right: none;}
+	.reg-part {padding: 10px 10px;margin: 0 10px 25px;}
+	.feildcont {padding: 10px 5px 10px;}
+	.res-box {padding: 10px 4px 20px;}
+}

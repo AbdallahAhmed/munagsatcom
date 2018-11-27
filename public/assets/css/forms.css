@@ -1,0 +1,192 @@
+@charset "utf-8";
+/* -- effect  -- */
+.effect-9{border: 1px solid #bfbfbf !important;padding: 7px 14px 9px;transition: 0.4s;}
+.effect-9 ~ .focus-border:before,
+.effect-9 ~ .focus-border:after{content: "";position: absolute;top: 0;right: 0;width: 0;height: 2px;background-color: #325d90;transition: 0.2s;transition-delay: 0.2s;}
+.effect-9 ~ .focus-border:after{top: auto; bottom: 0; right: auto; left: 0; transition-delay: 0.6s;}
+.effect-9 ~ .focus-border i:before,
+.effect-9 ~ .focus-border i:after{content: ""; position: absolute; top: 0; left: 0; width: 2px; height: 0; background-color: #325d90; transition: 0.2s;}
+.effect-9 ~ .focus-border i:after{left: auto; right: 0; top: auto; bottom: 0; transition-delay: 0.4s;}
+.effect-9:focus ~ .focus-border:before,
+.effect-9:focus ~ .focus-border:after{width: 100%; transition: 0.2s; transition-delay: 0.6s;}
+.effect-9:focus ~ .focus-border:after{transition-delay: 0.2s;}
+.effect-9:focus ~ .focus-border i:before,
+.effect-9:focus ~ .focus-border i:after{height: 100%; transition: 0.2s;}
+.effect-9:focus ~ .focus-border i:after{transition-delay: 0.4s;}
+/* --   -- */
+.feildcont {width: 100%;padding: 30px 15px 20px;font-size: 17px !important;}
+.feildcont form .form-group-lg {position: relative;margin-bottom: .75em;vertical-align: middle;line-height: 2.5em;}
+.feildcont .form-control {
+   padding: 2px 7px;
+   font-size: 15px !important;
+   line-height: 1.3333333;
+   border-radius: 0;
+   text-align: inherit;
+   /* height: 2.6em; */
+   border-color: #d8d2d2;
+   box-shadow: none;
+}
+.feildcont form .form-group {position: relative;margin-bottom: .75em;}
+ .feildcont .no-dropdown select {
+
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border-radius: 2px;
+    background-color: #ffffff;
+
+    padding: 9px 16px !important;
+    font-size: 13px;
+
+
+    font-weight: 100;
+    border-color: #aaa !important;
+}
+.feildcont label {
+	/* float: left; */
+	/* width: 100%; */
+	font-weight: 500;
+	font-size: 15px !important;
+	color: #727272;
+	padding: 0 15px;
+	/* margin-bottom: 10px; */
+	/* margin-top: 3px; */
+}
+.feildcont label em {
+	color: #ff7a59;
+	font-style: normal;
+}
+ .feildcont input {
+	padding: 5px 12px;
+	/*border: 1px solid #e3e3e3;
+	margin-bottom: 10px;*/
+	border-radius:2px;
+
+}
+.feildcont .fbut {
+	background: #ff7a59;
+	padding: 10px ;
+	border: none;
+	width:100%;
+	color: #fff;
+	font-size: 15px;
+	font-weight: bold;
+	transition: all 0.3s ease;
+	margin-top: 15px;
+	border-radius:2px;
+}
+.feildcont .fbut:hover {	background: #E06045;}
+.feildcont select {
+	/* float: left; */
+	/* width: 100%; */
+	border: 1px solid #aaa;
+	padding: 9px 5px 10px 5px;
+	text-align: center;
+	-webkit-padding-after:7px;
+	color: #7d7b7b;
+	font-size: 13px !important;
+}
+/* input */
+.input-append .add-on:last-child, .input-append .btn:last-child, .input-append .btn-group:last-child > .dropdown-toggle {
+    position: absolute;
+    left: 0px;
+    top: 7px;
+    margin-left: 7px;
+    font-size: 18px;
+    color: #b9b7b7;
+}
+.input-append, .input-prepend {
+    display: inline-flex;
+    white-space: nowrap;
+    vertical-align: middle;
+    width: 100%;
+}
+/* radio */
+.radio, .checkbox {position: relative;display: block;margin-top: 4px !important;margin-bottom: 3px;/* margin-right: 15px; */}
+
+.radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
+    margin-left: initial;
+    margin-right: -6px;
+    margin-top: 5px;
+    bottom: -6px;
+}
+.radio label, .checkbox label {
+    padding-left: initial;
+    padding-right: 16px !important;
+    position: relative;
+    top: -12px;
+}
+/* search bar */
+.search-bar{
+    margin-bottom: 15px;
+}
+.search-bar input{height: 42px !important;}
+.searh-icn{
+    position: absolute;
+    z-index: 2;
+    left: 10px;
+    font-size: 14px;
+    width: 20px;
+    margin-left: -2.5px;
+    text-align: center;
+    padding: 10px 17px;
+    top: 0;
+}
+
+/* --  icon addon   -- */
+.icon-addon .form-control {border-radius: 0;}
+.icon-addon label{
+    margin: 0;
+}
+.icon-addon {position: relative;color: #555; display: block;}
+.icon-addon input{}
+.icon-addon:after,
+.icon-addon:before {display: table; content: " ";}
+.icon-addon:after {clear: both;}
+.icon-addon.addon-md .glyphicon,
+.icon-addon .glyphicon, 
+.icon-addon.addon-md .fa,
+.icon-addon .fa {
+    position: absolute;
+    z-index: 2;
+    left: 10px;
+    font-size: 14px;
+    width: 20px;
+    margin-left: -2.5px;
+    text-align: center;
+    padding: 14px 20px;
+    top: 0px;
+    border-right: 1px solid #ccc;
+}
+.icon-addon.addon-lg .form-control {
+    line-height: 1.33;
+    height: 46px;
+    font-size: 18px;
+    padding: 10px 16px 10px 40px;
+}
+.icon-addon.addon-lg .fa,
+.icon-addon.addon-lg .glyphicon {font-size: 18px;margin-left: 0;left: 11px;top: 4px;}
+.icon-addon.addon-md .form-control,
+.icon-addon .form-control {
+    padding-left: 30px;
+    float: left;
+    height: 2.8em;
+    border-radius: 3px;
+    font-weight: normal;
+    font-size: 13px;
+}
+.icon-addon .form-control:focus + .glyphicon,
+.icon-addon:hover .glyphicon, .icon-addon .form-control:focus + .fa ,.icon-addon:hover .fa {color: #315d90;}
+/**/
+.form-marakz{margin: 0 24%;}
+.form-marakz h3 {
+    padding: 4px 15px !important;
+    font-size: 16pt !important;
+    border-bottom: none !important;
+    line-height: normal !important;
+    margin: 40px 0 0 !important;
+}
+/**/
+input[type="file"] {border: 1px solid #e6e0e0;padding: 4px 0;margin-bottom: 16px;display: inline-block;line-height: 1;}
+
+
+/* ---  radio box ---- */

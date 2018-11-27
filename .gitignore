@@ -4,6 +4,7 @@
 composer.lock
 package.lock
 /public/storage
+/public/uploads/*
 /storage/*.key
 /vendor
 /.idea

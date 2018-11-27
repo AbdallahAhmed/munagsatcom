@@ -1,0 +1,22 @@
+@charset "utf-8";
+/* CSS Document */
+
+/**/
+footer{background-color: #142436;padding: 55px 0 50px;color:#c2c0c0;/* text-align: center; */margin-top: 50px;font-size: 13px;}
+footer a{color:#c2c0c0;}
+footer a:hover{color: #ffffff;transition: all 0.3s ease;text-decoration: none;}
+.partner ul{display: inline-flex;padding-right: 0;}
+.partner ul li{margin: 0 10px 5px;border: 1px solid #b7b7b7;border-radius: 5px;padding: 3px;}
+.partner ul li img{width: 98%;}
+.copyright{line-height: 5em;}
+.mail-text{
+    line-height: 1.6em;
+    margin-top: 15px;
+}
+.mail-text span{
+    letter-spacing: 2px;
+    font-size: 16px;
+}
+.mail-text .mail{
+    letter-spacing: 0;
+}

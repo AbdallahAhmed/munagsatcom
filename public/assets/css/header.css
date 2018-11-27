@@ -1,0 +1,74 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/**/
+.navbar {
+    min-height: 50px;
+ rightx-shadow: 4px 3px 7px #1d1c1c;
+    margin-bottom: 0;
+    border: 1px solid transparent;
+    border-radius: 0;
+}
+.navbar-default {background-color: #ffffff;border-color: #f1f1f1;border-top: 3px solid #315d90;}
+.navbar-brand {height: auto;padding: 10px 15px;}
+.navbar-brand img{width: 85%;}
+.navbar-form {margin-right: 100px;margin-left: 0;}
+.navbar-default .navbar-toggle {border-color: #fff0;}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus { background-color: #fff;box-shadow: 1px -1px 5px #6666666e;}
+.navbar-toggle {margin-top: 20px;}
+.navbar-toggle .icon-bar {width: 30px;height: 3px;}
+.navbar-form {margin-top: 15px;}
+.dropdown{margin: 0;}
+.dropdown img{border-radius: 50%;border: 1px solid #ccc;transition: all 0.3s ease;/* max-width: 40px !important; */margin-top: 3px;background-color: #c9c9c9;}
+.dropdown img:hover{box-shadow: 1px 1px 7px 0px #888;}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {color: #286090;background-color: #fff;}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {color: #555;background-color: #e7e7e700;}
+.nav-pills > li > a {border-radius: 0;}
+.nav-pills {font-size: 20px;}
+.nav-pills > li{background-color: #315d90;font-size: 20px;font-weight: 500;/* color: #fff; */}
+.nav-pills > li a{ color: #fff; }
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {color: #315d90;background-color: #ffffff;}
+.nav > li > a:hover, .nav > li > a:focus {background-color: #eee;color: #337ab7;}
+button:active, button:focus, button:hover, input:active, input:focus, input:hover, textarea:active, textarea:focus, textarea:hover, select:hover, select:focus {border-color: #ddd!important;box-shadow: none!important;outline: 0!important;}
+.dropdown-menu > li > a {
+    padding: 7px 15px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #333;
+}
+
+/**/
+.navbar .fbutcenter {
+    background-color: #315d90;
+    padding: 10px 35px;
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    margin: 20px 15px;
+    border-radius: 4px;
+}
+
+
+.menu{margin-top: 20px;font-size: 19px;font-weight: 500;}
+.menu li a{padding: 10px 15px;}
+.header{
+    background-image: url(../images/bg.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-origin: padding-box;
+    background-size: cover;
+    padding: 60px 0 32px;
+    margin-bottom: 60px;
+}
+.tab .active a:after{
+      content:"";
+      position:absolute;
+      height:0;
+      width:0;
+      left: 49%;
+      top: 46px;
+      border: 9px solid transparent;
+      border-top: 9px solid #fff;
+}

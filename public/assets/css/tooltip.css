@@ -1,0 +1,14 @@
+@charset "utf-8";
+/* CSS Document */
+/**/
+.tooltip{position:relative;float: right;top: -41px !important;}
+.tooltip > .tooltip-inner {
+	background-color: #fff;
+	  background-image: -moz-linear-gradient( 90deg, rgb(242,244,247) 0%, rgb(254,255,255) 100%);
+  background-image: -webkit-linear-gradient( 90deg, rgb(242,244,247) 0%, rgb(254,255,255) 100%);
+  background-image: -ms-linear-gradient( 90deg, rgb(242,244,247) 0%, rgb(254,255,255) 100%);
+	padding: 5px 8px;color:rgb(23,44,66);
+	font-weight:bold;font-size:13px;border: 1px solid #ced0da;width: 145px;max-width: 145px;}
+.popOver + .tooltip > .tooltip-arrow {border-left: 5px solid transparent;border-right: 5px solid transparent;border-top: 5px solid #ccc;}
+.progress{overflow: visible;height: 5px;margin: 30px 5px 6px;}
+.progress-bar{background: #135cb3;-webkit-transition: width 1.5s ease-in-out;transition: width 1.5s ease-in-out;}

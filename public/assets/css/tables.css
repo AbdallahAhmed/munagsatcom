@@ -1,0 +1,27 @@
+@charset "utf-8";
+.unit-table .table {
+    margin-bottom: 0;
+}
+.unit-table .table>thead>tr>th {
+    vertical-align: bottom;
+    text-align: center;
+    border-bottom: none;
+    font-size: 12pt;
+}
+.unit-table .table>tbody>tr>td,
+.unit-table .table>tbody>tr>th,
+.unit-table .table>tfoot>tr>td,
+.unit-table .table>tfoot>tr>th,
+.unit-table .table>thead>tr>td,
+.unit-table .table>thead>tr>th {
+    padding: 9px 15px;
+    line-height: 1.42857143;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.table-right table>tbody>tr>td,
+.table-right table>tbody>tr>th
+{
+    text-align: right !important;
+}

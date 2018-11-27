@@ -1,0 +1,108 @@
+@charset "utf-8";
+/* profile menu side */
+.profile-side{}
+.profile-side ul{
+    padding: 15px 0 15px;
+    margin: 0;
+}
+.profile-side ul li{
+    /* margin: 5px 0; */
+    color: #5e5e5f !important;
+    font-size: 14pt;
+    padding: 12px 25px;
+}
+.profile-side ul li:hover{color: #315d90 !important;border-right: 7px solid #244469;}
+.profile-side ul li a{color: #5e5e5f;}
+.profile-side ul li a:hover{text-decoration: none;}
+.profile-side .active{
+    background-color: #315d90;
+     color: #fff; 
+    border-right: 8px solid #244469;
+}
+.profile-side .active a {color: #fff; }
+
+/**/
+.profile-box {
+    border: 1px rgb(215, 215, 215)solid;
+    background-color: rgb(255, 255, 255);
+    margin: 0 0 0;
+    padding: 30px 25px 20px;
+}
+.profile-item{
+    margin: 0px 0 15px;
+    padding: 0 0 25px;
+    border-bottom: 1px solid #ccc;
+}
+.profile-item h3{
+   
+font-size: 15pt;
+   
+padding: 10px 0;
+   
+margin: 15px 0;
+}
+.profile-item:last-child{ border-bottom: none;}
+.profile-item .feildcont {
+    width: 100%;
+    padding: 0px 15px 0 0;
+    font-size: 17px !important;
+}
+.profile-item .feildcont .form-group{
+    margin-left: 20px;
+}
+.profile-item .details-item ul{padding-right: 0;}
+.profile-item .details-item ul li{
+    border-bottom: none;
+    margin: 5px 15px 5px;
+    padding: 5px 0 5px;
+    font-weight: 500;
+    font-size: 19px;
+}
+.profile-attch{}
+.profile-attch a{
+    color: #565151;
+}
+.profile-attch a:hover{
+    color: #337ab7;
+}
+.profile-attch ul{
+    padding-right: 0;
+}
+.profile-attch ul li{
+    border: 1px solid #ddd;
+    margin: 10px 0;
+    padding: 10px 15px;
+}
+.profile-search{
+    background-color: #f9fbfb;
+    padding: 15px 40px;
+    border: 1px solid #ddd;
+    line-height: 2.1;
+    font-weight: 400 !important;
+}
+.profile-search .icon-addon .form-control {
+    padding-left: 30px;
+    float: left;
+    height: 3.2em;
+    border-radius: 3px;
+    font-weight: normal;
+    font-size: 13px;
+}
+.profile-filter{
+     border: 1px solid #ddd;
+     border-top:none;
+     padding: 25px 15px 0;
+}
+.profile-circle{
+    padding: 15px 0 36px;
+}
+.circle-item{
+    text-align: center;
+    border: 2px solid #c7c7c9;
+    border-radius: 100%;
+    padding: 31px 15px;
+    line-height: 1;
+    height: 149px;
+    width: 149px;
+    margin: 0 auto;
+}

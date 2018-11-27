@@ -1,0 +1,37 @@
+@charset "utf-8";
+.res-box{
+    border: 1px rgb(215, 215, 215)solid;
+    background-color: rgb(255, 255, 255);
+    margin: 0 0 0;
+    padding: 10px 15px 20px;
+}
+.res-box h2{
+    font-size: 20px;
+    /* text-align: center; */
+    color: #5e5e5f;
+}
+.reg-part{
+    border: 1px solid #ddd;
+    padding: 40px 100px;
+    margin: 0 95px 30px;
+}
+.reg-part label{
+  
+color: #315d90;
+  
+font-size: 16px !important;
+}
+.icony {
+    position: absolute;
+    border-right: solid #999 thin;
+    height: 45px;
+    padding: 12px;
+    left: 0;
+    line-height: normal;
+    width: 55px;
+    color: #999;
+    text-align: center;
+    }
+    .eye-color {
+    color: #315d90;
+}

@@ -15,8 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 })->name("index");
 
-Route::group(['prefix' => 'chances'],function ($route){
-    $route->get('/create', "ChanceController@create")->name("chance.create");
-    $route->post('/store', "ChanceController@store")->name("chance.store");
-    $route->post('/getUnits', "ChanceController@getUnits")->name("chance.units");
+//Route::group(['prefix' => 'chances'],function ($route){
+//    $route->get('/create', "ChanceController@create")->name("chance.create");
+//    $route->post('/store', "ChanceController@store")->name("chance.store");
+//    $route->post('/getUnits', "ChanceController@getUnits")->name("chance.units");
+//});
+
+
+Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], function () {
+
+    Route::get('register', 'UserController@register')->name('register');
+
 });

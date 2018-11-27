@@ -1,0 +1,86 @@
+@charset "utf-8";
+.card{
+  border: 1px rgb(215, 215, 215)solid;
+  background-color: rgb(255, 255, 255);
+  margin: 20px 0;
+  padding-top: 10px;
+}
+.card-header{
+    border-bottom: #ebebeb solid 1px;
+    padding: 15px 15px 5px;
+    position: relative;
+}
+.title{
+    line-height: 2em;
+    margin-bottom: 5px;
+}
+.title span{color: #315d90;margin-right: 15px;font-weight: 500;font-size: 19px !important;}
+.card-header .title h2{
+    background-color: transparent;
+    color: #315d90;
+    text-align: right;
+    font-size: 20px;
+    padding: 0;
+    line-height: 1.;
+    margin: 0 0 9px;
+}
+.card-header .title p{
+    font-size: 17px;
+    line-height: 1.4;
+}
+.card-img{
+	 border: #ebebeb solid 1px;
+	 padding: 0 5px;
+	 text-align: center;
+	 margin-bottom: 10px;
+}
+.card-img img{
+	 max-width:100%;
+	 margin: 3px auto;
+}
+.card-share{text-align: left;position: absolute;/* top: 68px; */bottom: 6px;left: 15px;/* padding: 10px 0 0; *//* margin-top: 10px; */}
+.card-share svg{ /* font-size: 20px; */}
+.card-date{padding: 4px 15px 5px;border-bottom: #ebebeb solid 1px;}
+.card-date .item{text-align: center;font-size: 15px;line-height: 0.8;color: #939393;margin: 6px 1px 2px;padding: 4px 0 0;border-left: 1px solid #ddd;}
+.card-date .item i{font-size: 1.3em;}
+.card-date .item span{
+    font-size: 17px;
+    padding: 0 6px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+.card-date .item:first-child{ border-left: none;}
+.card-cont{
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: #ebebeb solid 1px;
+}
+.card-price{
+    text-align: center;
+    font-size: 17px;
+    background-color: #f9f9f9;
+}
+.card-price span{
+    font-size: 16px;
+    font-weight: 600;
+    color: #315d90;
+}
+.card-price div{
+    padding: 10px 30px;
+}
+.priceshadow {
+  box-shadow: inset -3px 0px 4px 0px rgba(0, 0, 0, 0.06);
+  background-color: #fff;
+}
+.pad {padding: 15px;}
+.markaz ,.markaz a{color: #474748;}
+.markaz .item {
+    text-align: right;
+    font-size: 19px;
+    line-height: 1.6;
+    color: initial;
+    margin: 5px 1px 2px;
+    padding: 5px 15px;
+    border-bottom: 1px solid #ddd;
+}
+.markaz .item:last-child {border-bottom: none;}

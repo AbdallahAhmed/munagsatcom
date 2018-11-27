@@ -1,0 +1,28 @@
+@charset "utf-8";
+/* CSS Document */
+
+.fbutcenter:hover{background-color: #456fa1;}
+.fbutcenter {
+    background-color: #315d90;
+    padding: 7px 50px;
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    margin: 0 15px;
+    border-radius: 4px;
+    line-height: normal;
+}
+.fbutcenter1:hover{background-color: #999;}
+.fbutcenter1 {
+    background-color: #bbc1c1;
+    padding: 7px 50px;
+    border: none;
+    color: #4c4c4c;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    margin: 0 15px;
+    border-radius: 4px;
+      line-height: normal;
+}
+

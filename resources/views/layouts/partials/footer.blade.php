@@ -2,8 +2,7 @@
 <footer>
     <div class="container"><div class="row">
             <div class="col-md-4">
-                <div class="mail-text">
-                    رقم موحد:  <span>154515454545</span><br>
+                <div class="mail-text">{{trans('app.phone')}} : <span>154515454545</span><br>
                     <span class="mail"><a href="#">info@monaasat.com</a></span>
                 </div>
             </div>
@@ -17,7 +16,7 @@
                 </div></div>
 
             <div class="col-md-4 col-md-pull-4">
-                <div class="copyright"><a href="#">جميع الحقوق محفوظة - دوبارتر مصر ©{{date('Y')}}  </a></div>
+                <div class="copyright"><a href="javascript:void(0)"> {{trans('app.rights')}}©{{date('Y')}}  </a></div>
             </div>
         </div></div>
 </footer>

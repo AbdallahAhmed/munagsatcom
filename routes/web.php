@@ -24,6 +24,6 @@ Route::get('/', function () {
 
 Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], function () {
 
-    Route::get('register', 'UserController@register')->name('register');
+    Route::any('register', 'UserController@register')->name('register');
 
 });

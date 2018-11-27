@@ -109,9 +109,10 @@
                             <div class="panel-body">
                                 <div class="form-group">
                                     @foreach($files as $file)
-                                        <span><i class="fa fa-file-{{$file->type == "application" ? "word" : "image"}}-o"></i></span> <a href="{{uploads_url().$file->path}}"
+                                        <span><i class="fa fa-file-{{$file->type == "application" ? "word" : "image"}}-o"></i></span>
+                                        <a href="{{uploads_url().$file->path}}"
                                            target="_blank">{{$file->title}}</a>
-                                       <br>
+                                        <br>
                                     @endforeach
                                 </div>
                             </div>
@@ -171,8 +172,32 @@
                             </div>
                         </div>
                     </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-th-large"></i>
+                            {{ trans("chances::sectors.sector") }}
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <select name="sector_id" class="form-control chosen-select chosen-rtl">
+                                    @foreach($sectors as $sector)
+                                        <option value="{{$sector->id}}"
+                                                @if($company->sector_id == $sector->id)selected="selected"@endif>{{$sector->name}}</option>
+                                    @endforeach
+                                </select>
+                                <div id="reason"
+                                     style="display: @if($company->blocked == 1) block @else none @endif; margin-top: 20px">
+                                    <label
+                                            for="input-number">{{ trans("companies::companies.attributes.block_reason") }}</label>
+                                    <input name="block_reason" type="text"
+                                           value="{{$company->block_reason}}"
+                                           class="form-control" id="input-name"
+                                           placeholder="{{ trans("companies::companies.attributes.block_reason") }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
 
 
             </div>

@@ -3,6 +3,7 @@
 namespace Dot\Companies\Controllers;
 
 use Action;
+use Dot\Chances\Models\Sector;
 use Dot\Companies\Models\Company;
 use Dot\Platform\Controller;
 use Dot\Users\Models\User;
@@ -99,6 +100,7 @@ class CompaniesController extends Controller
             $company->blocked = Request::get('blocked');
             Request::get('blocked') == 1 ? $company->block_reason = Request::get('block_reason') : $company->block_reason = null;
             $company->status = Request::get('status');
+            $company->sector_id = Request::get('sector_id');
 
             Action::fire("company.saving", $company);
 
@@ -116,6 +118,7 @@ class CompaniesController extends Controller
         $this->data["company"] = $company;
         $this->data["files"] = $company->files;
         $this->data['status'] = [0,1,2];
+        $this->data['sectors'] = Sector::published()->get();
 
         return view("companies::edit", $this->data);
     }

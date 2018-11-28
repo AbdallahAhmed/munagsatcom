@@ -49,7 +49,7 @@ class UserController extends Controller
             }
 
             $user = new User();
-            $user->username = $request->get('name');
+            $user->username = $request->get('email');
             $user->first_name = $request->get('first_name');
             $user->last_name = $request->get('last_name');
             $user->email = $request->get('email');

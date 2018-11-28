@@ -1,4 +1,4 @@
-@extends("admin::layouts.master")
+    @extends("admin::layouts.master")
 @section("content")
 
     <div class="row wrapper border-bottom white-bg page-heading">

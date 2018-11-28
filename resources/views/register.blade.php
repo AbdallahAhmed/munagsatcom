@@ -7,7 +7,8 @@
         <div class="res-box">
             <h2 class="text-center">{{trans('app.register')}}</h2>
             <div class="feildcont">
-                <form>
+                <form method="POST" action="{{route('register')}}" enctype="multipart/form-data">
+                    {{csrf_field()}}
                     <div class="reg-part">
                         <div class="form-group-lg row">
                             <label class="col-xs-12 col-md-3">الاسم الاول</label>
@@ -15,7 +16,7 @@
                                 <div class="new-f-group">
                                     <div class="form-group clearfix">
                                         <span class="icony"><i class="fa fa-user"></i></span>
-                                        <input type="text" class="effect-9 form-control" placeholder="الاسم الاول">
+                                        <input name="first_name" type="text" class="effect-9 form-control" placeholder="الاسم الاول">
                                         <span class="focus-border"><i></i></span>
                                     </div>
                                 </div>
@@ -27,7 +28,7 @@
                                 <div class="new-f-group">
                                     <div class="form-group clearfix">
                                         <span class="icony"><i class="fa fa-user"></i></span>
-                                        <input type="text" class="effect-9 form-control" placeholder="الاسم الثانى">
+                                        <input name="last_name" type="text" class="effect-9 form-control" placeholder="الاسم الثانى">
                                         <span class="focus-border"><i></i></span>
                                     </div>
                                 </div>
@@ -39,7 +40,7 @@
                                 <div class="new-f-group">
                                     <div class="form-group clearfix">
                                         <span class="icony"><i class="fa fa-user"></i></span>
-                                        <input type="text" class="effect-9 form-control" placeholder="اسم المستخدم ">
+                                        <input name="name" type="text" class="effect-9 form-control" placeholder="اسم المستخدم ">
                                         <span class="focus-border"><i></i></span>
                                     </div>
                                 </div>
@@ -51,7 +52,7 @@
                                 <div class="new-f-group">
                                     <div class="form-group clearfix">
                                         <span class="icony"><i class="fa fa-envelope"></i></span>
-                                        <input type="email" class="effect-9 form-control"
+                                        <input name="email" type="email" class="effect-9 form-control"
                                                placeholder="البريد الالكترونى">
                                         <span class="focus-border"><i></i></span>
                                     </div>
@@ -65,7 +66,7 @@
                                 <div class="form-group">
                                     <span class="icony"><i class="fa fa-fw field-icon toggle-password fa-eye"
                                                            toggle="#password-field"></i></span>
-                                    <input type="password" class="effect-9 form-control" id="password-field"
+                                    <input name="password" type="password" class="effect-9 form-control" id="password-field"
                                            placeholder="***">
                                     <span class="focus-border"><i></i></span>
                                 </div>
@@ -89,10 +90,10 @@
                             <label class="col-xs-12 col-md-3"></label>
                             <div class="col-xs-12 col-md-9">
                                 <label class="radio-inline"> فرد</label>
-                                <input type="radio" name="optradio" value="igotnone" onclick="show1();">
+                                <input type="radio" name="user_type" value="1" onclick="show1();">
 
                                 <label class="radio-inline">شركة</label>
-                                <input type="radio" name="optradio" value="igottwo" onclick="show2();">
+                                <input type="radio" name="user_type" value="2" onclick="show2();">
                             </div>
                         </div>
                     </div>
@@ -102,9 +103,11 @@
                                 <label class="col-xs-12 col-md-3"> القطاع</label>
                                 <div class="col-xs-12 col-md-9 new-f-group">
                                     <div class="form-group clearfix">
-                                        <select type="text" class="effect-9 form-control">
-                                            <option>اختار القطاع</option>
-                                            <option>القطاع</option>
+                                        <select type="text" class="effect-9 form-control" name="sector_id">
+                                            <option value="0">اختار القطاع</option>
+                                          @foreach($sectors as $sector)
+                                                <option value="{{$sector->id}}">{{$sector->name}}</option>
+                                            @endforeach
                                         </select><span class="focus-border"><i></i></span>
                                     </div>
                                 </div>
@@ -114,7 +117,7 @@
                                 <div class="col-xs-12 col-md-9">
                                     <div class="new-f-group">
                                         <div class="form-group clearfix">
-                                            <textarea class="effect-9 form-control" rows="8"
+                                            <textarea name="details" class="effect-9 form-control" rows="8"
                                                       placeholder="المزيد عن الشركة ..."></textarea>
                                             <span class="focus-border"><i></i></span>
                                         </div>
@@ -131,7 +134,7 @@
                                 <div class="col-xs-12 col-md-5">
                                     <div class="file-upload1">
                                         <label for="upload" class="file-upload__label">تحميل اللوجو</label>
-                                        <input id="upload" class="file-upload__input" type="file" name="file-upload1">
+                                        <input id="upload" class="file-upload__input" type="file" name="logo">
                                     </div>
                                 </div>
                             </div>
@@ -141,13 +144,13 @@
                                 <label>مرفقات اواراق الشركة</label>
                                 <div class="row">
                                     <label for="upload" class="col-xs-12 col-md-1">مرفق </label>
-                                    <input id="" class="col-xs-12 col-md-11" type="file" name="file-upload1"
+                                    <input id="" class="col-xs-12 col-md-11" type="file" name="files[]"
                                            placeholder="Choose">
                                 </div>
 
                                 <div class="row">
                                     <label for="upload" class="col-xs-12 col-md-1"> مرفق </label>
-                                    <input id="" class="col-xs-12 col-md-11" type="file" name="file-upload1">
+                                    <input id="" class="col-xs-12 col-md-11" type="file" name="files[]">
                                 </div>
 
                                 <a class="add_field_button" role="button" data-toggle="collapse" href="#collapseExample"
@@ -157,11 +160,11 @@
                                 <div class="clearfix collapse" id="collapseExample" aria-expanded="true" style="">
                                     <div class="row">
                                         <label for="upload" class="col-xs-12 col-md-1">مرفق </label>
-                                        <input id="" class="col-xs-12 col-md-11" type="file" name="file-upload1">
+                                        <input id="" class="col-xs-12 col-md-11" type="file" name="files[]">
                                     </div>
                                     <div class="row">
                                         <label for="upload" class="col-xs-12 col-md-1">مرفق </label>
-                                        <input id="" class="col-xs-12 col-md-11" type="file" name="file-upload1">
+                                        <input id="" class="col-xs-12 col-md-11" type="file" name="files[]">
                                     </div>
                                 </div>
 
@@ -169,7 +172,7 @@
                         </div>
                     </div>
                     <div class="form-group-lg text-center">
-                        <button type="submit" form="" class="uperc padding-md fbutcenter"> تسجيل</button>
+                        <button type="submit"  class="uperc padding-md fbutcenter"> تسجيل</button>
                     </div>
                 </form>
             </div>
@@ -186,7 +189,7 @@
     </script>
 
     <script>
-        $(".toggle-password").click(function() {
+        $(".toggle-password").click(function () {
             $(this).toggleClass("fa-eye fa-eye-slash");
             var input = $($(this).attr("toggle"));
             if (input.attr("type") == "password") {
@@ -195,7 +198,7 @@
                 input.attr("type", "password");
             }
         });
-        $(".toggle-password2").click(function() {
+        $(".toggle-password2").click(function () {
             $(this).toggleClass("fa-eye fa-eye  fa-eye-slash");
             var input = $($(this).attr("toggle"));
             if (input.attr("type") == "password") {
@@ -207,10 +210,11 @@
     </script>
 
     <script>
-        function show1(){
-            document.getElementById('compres').style.display ='none';
+        function show1() {
+            document.getElementById('compres').style.display = 'none';
         }
-        function show2(){
+
+        function show2() {
             document.getElementById('compres').style.display = 'block';
         }
     </script>

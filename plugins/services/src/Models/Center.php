@@ -86,5 +86,9 @@ class Center extends Model
         return $this->belongsToMany(Service::class, 'centers_services','center_id','service_id');
     }
 
+    public function scopePublished($query){
+        return $query->where('status', 1);
+    }
+
 
 }

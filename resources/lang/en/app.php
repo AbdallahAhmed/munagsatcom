@@ -42,8 +42,8 @@ return [
     'file'=>'File',
     'attachments_company'=>'Attachments of company papers',
     'choose_file' => 'Choose file',
-
     'upload_more_files'=>'Upload more files',
+    'company_name' => 'Company name',
     ''=>'',
     ''=>'',
     ''=>'',

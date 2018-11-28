@@ -44,7 +44,7 @@ return [
     'attachments_company'=>'مرفقات اواراق الشركة',
     'choose_file' => 'أختر ملف',
     'upload_more_files' => 'تحميل المزيد من المرفقات',
-    '' => '',
+    'company_name' => ' اسم الشركة',
     '' => '',
     '' => '',
 

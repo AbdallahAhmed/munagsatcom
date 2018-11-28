@@ -17,6 +17,7 @@ class UserController extends Controller
      * @var array
      */
     public $data = array();
+
     /**
      * GET {lang}/register
      * @route register
@@ -30,13 +31,13 @@ class UserController extends Controller
             $rules = [
                 'email' => 'required|email|unique:users',
                 'password' => 'required|min:6',
-                'name' => 'required',
                 'first_name' => 'required',
                 'last_name' => 'required',
             ];
             if ($request->get('user_type') == 2) {
                 $rules += [
-                    'sector_id' => 'required',
+                    'company_name' => 'required|max:255|min:8',
+                    'sector_id' => 'required|exists:sectors,id',
                     'details' => 'max:255',
                     'logo' => 'mimes:jpg,png,jpeg',
                     'files.*.mimes' => 'jpg,png,jpeg,doc,docx,txt,pdf,zip'
@@ -45,7 +46,7 @@ class UserController extends Controller
 
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
-                dd($validator->errors()->all());
+                return redirect()->back()->withErrors($validator)->withInput($request->all());
             }
 
             $user = new User();
@@ -60,7 +61,7 @@ class UserController extends Controller
             $user->save();
             if ($request->get('user_type') == 2) {
                 $company = new Company();
-                $company->name = $user->name;
+                $company->name = $request->get('company_name');
                 $company->details = $request->get('details');
                 $company->first_name = $user->first_name;
                 $company->last_name = $user->last_name;
@@ -71,7 +72,7 @@ class UserController extends Controller
                 $company->image_id = $media->saveFile($request->file('logo'));
 
                 $files = array();
-                foreach ($request->file('files') as $file){
+                foreach ($request->file('files') as $file) {
                     $media = new Media();
                     $files[] = $media->saveFile($file);
                 }

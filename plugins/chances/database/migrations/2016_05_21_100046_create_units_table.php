@@ -15,6 +15,7 @@ class CreateUnitsTable extends Migration
 
             $table->increments('id');
             $table->string("name")->index();
+            $table->string("details")->nullable()->index();
             $table->integer("status")->default(0)->index();
             $table->integer("user_id")->index();
         });

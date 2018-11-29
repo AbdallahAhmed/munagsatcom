@@ -20,6 +20,9 @@ class CreateChancesTable extends Migration
             $table->string("file_name")->nullable()->default("")->index();
             $table->string("file_description")->nullable()->default("")->index();
             $table->string("file_path")->nullable()->default("")->index();
+            $table->integer("media_id")->nullable()->index();
+            $table->integer("image_id")->nullable()->index();
+            $table->integer("company_id")->nullable()->index();
             $table->string("status")->default(3)->index();
             $table->string("approved")->nullable()->default("")->index();
             $table->string("reason")->nullable()->default("")->index();

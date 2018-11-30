@@ -27,6 +27,7 @@ class MakeUsersTable extends Migration
             $table->integer('last_login')->nullable()->index();
             $table->integer('status')->default(0)->index();
             $table->integer('backend')->default(0)->index();
+            $table->integer('type')->default(1)->index();
             $table->integer('root')->default(0)->index();
             $table->integer('photo_id')->default(0)->index();
             $table->string('lang', 5)->default("en")->index();

@@ -4,6 +4,8 @@ namespace Dot\Chances\Models;
 
 use DB;
 use Dot\Categories\Models\Category;
+use Dot\Companies\Models\Company;
+use Dot\Media\Models\Media;
 use Dot\Platform\Model;
 use Dot\Posts\Models\Post;
 use Dot\Tags\Models\Tag;
@@ -120,6 +122,18 @@ class Chance extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function media(){
+        return $this->belongsTo(Media::class);
+    }
+
+    public function image(){
+        return $this->belongsTo(Media::class);
+    }
+
+    public function company(){
+        return $this->belongsTo(Company::class);
     }
 
 

@@ -4,6 +4,7 @@ namespace Dot\Services\Models;
 
 use DB;
 use Dot\Chances\Models\Sector;
+use Dot\Media\Media;
 use Dot\Platform\Model;
 
 /*
@@ -88,6 +89,11 @@ class Center extends Model
 
     public function scopePublished($query){
         return $query->where('status', 1);
+    }
+
+    public function image()
+    {
+        return $this->hasOne(\Dot\Media\Models\Media::class, "id", "image_id");
     }
 
 

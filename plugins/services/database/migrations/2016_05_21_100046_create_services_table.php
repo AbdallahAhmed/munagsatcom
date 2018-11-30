@@ -15,6 +15,9 @@ class CreateServicesTable extends Migration
 
             $table->increments('id');
             $table->string("name")->index();
+            $table->string("details")->nullable()->index();
+            $table->integet("price_from")->index();
+            $table->string("price_to")->index();
             $table->string('status')->default(0)->index();
             $table->timestamp('created_at')->nullable()->index();
             $table->timestamp('updated_at')->nullable()->index();

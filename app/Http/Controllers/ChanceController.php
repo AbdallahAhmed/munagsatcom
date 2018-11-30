@@ -8,11 +8,11 @@ use Dot\Chances\Models\Chance;
 use Dot\Chances\Models\Sector;
 use Dot\Chances\Models\Unit;
 use Dot\Platform\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\MessageBag;
 use Redirect;
-use Request;
 use View;
 use File;
 
@@ -29,7 +29,63 @@ class ChanceController extends Controller
         return view('chances.create', $this->data);
     }
 
-    public function store()
+    public function index(Request $request){
+        $query = \App\Models\Chance::query();
+        $this->data['q'] = null;
+        $this->data['created_at'] = null;
+        $status = $request->get('status');
+        $status = $status ? $status : [];
+        $this->data['status'] = $status;
+
+        foreach ($status as $st){
+            switch ($st){
+                case 0:
+                    $query = $query->orWhere(function ($q){
+                        $q->opened();
+                    });
+                    break;
+                case 1:
+                    $query = $query->orWhere(function ($q){
+                        $q->closed();
+                    });
+                    break;
+                case 2:
+                    $query = $query->orWhere(function ($q){
+                        $q->cancelled();
+                    });
+                    break;
+                case 3:
+                    $query = $query->orWhere(function ($q){
+                        $q->pending();
+                    });
+                    break;
+                case 4:
+                    $query = $query->orWhere(function ($q){
+                        $q->approved();
+                    });
+                    break;
+                case 5:
+                    $query = $query->orWhere(function ($q){
+                        $q->rejected();
+                    });
+                    break;
+            }
+        }
+        if($request->get('q')){
+            $q = trim(urldecode($request->get('q')));
+            $query = $query->where('name','like', '%'.$q.'%');
+            $this->data['q'] = $q;
+        }
+        if($request->get('created_at')){
+            $query = $query->whereDate('created_at', '=', \Carbon\Carbon::parse($request->get('created_at'))->toDateString());
+            $this->data['created_at'] = $request->get('created_at');
+        }
+        $this->data['chances'] = $query->paginate(1);
+        $this->data['status'] = [0,1];//[0,1,2,3,4,5];
+        return view('chances.index', $this->data);
+    }
+
+    /*public function store()
     {
 
         $this->errors = new MessageBag();
@@ -77,46 +133,14 @@ class ChanceController extends Controller
 
         return Redirect::route("chance.create");
 
-    }
+    }*/
+    public function show(Request $request, $id){
 
-    public function getUnits()
-    {
-        return response()->json([
-            "view" => view("chances::add-units", ['units' => Unit::published()->get()])->render()
-        ]);
-    }
+        $chance = \App\Models\Chance::findOrFail($id);
+        $diff = \Carbon\Carbon::parse($chance->closing_date)->diffForHumans(\Carbon\Carbon::now());
 
-    public function saveFile($file)
-    {
-
-        $parts = explode(".", $file->getClientOriginalName());
-        $extension = end($parts);
-        $filename = time() * rand() . "." . strtolower($extension);
-
-        $file_directory = UPLOADS_PATH . "/chances" . date("/Y/m");
-
-        File::makeDirectory($file_directory, 0777, true, true);
-
-        $file->move($file_directory, $filename);
-
-        return  date("/Y/m")."/".$filename;
-    }
-
-    public function validateFile($file)
-    {
-        $flag = true;
-        $allowed_types = option("media_allowed_file_types");
-        $parts = explode(".", $file->getClientOriginalName());
-        $extension = end($parts);
-        if (!in_array($extension, explode(',', $allowed_types))){
-            $this->errors->add("file type", "File type not supported");
-            $flag = false;
-        }
-        if ($file->getSize() > option("media_max_file_size")){
-            $this->errors->add("file size", "File size is too large");
-            $flag = false;
-        }
-        return $flag;
+        $this->data['chance'] = $chance;
+        return view('chances.chance', $this->data);
     }
 
 }

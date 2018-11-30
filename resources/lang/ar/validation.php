@@ -1,121 +1,161 @@
 <?php
 
-return [
-
+return array(
     /*
-    |--------------------------------------------------------------------------
-    | Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines contain the default error messages used by
-    | the validator class. Some of these rules have multiple versions such
-    | as the size rules. Feel free to tweak each of these messages here.
-    |
-    */
+      |--------------------------------------------------------------------------
+      | Validation Language Lines
+      |
+      | اسطر التحقق والتصديق للغة العربية
+      |--------------------------------------------------------------------------
+      |
+      | The following language lines contain the default error messages used by
+      | the validator class.
+      |
+      | الاسطر ادناه تحتوي علي رسائل الخطأ الافتراضية المستخدمة في فئة التحقق.
+      |
+      | Some of these rules have multiple versions such as the size rules.
+      |
+      | بعض هذه القواعد تحتوي علي عدة نسخ مثل قاعدة الحجم.
+      |
+      | Feel free to tweak each of these messages.
+      |
+      | لا تتردد في تعديل اي منها.
+      |
+     */
 
-    'accepted'             => 'The :attribute must be accepted.',
-    'active_url'           => 'The :attribute is not a valid URL.',
-    'after'                => 'The :attribute must be a date after :date.',
-    'after_or_equal'       => 'The :attribute must be a date after or equal to :date.',
-    'alpha'                => 'The :attribute may only contain letters.',
-    'alpha_dash'           => 'The :attribute may only contain letters, numbers, and dashes.',
-    'alpha_num'            => 'The :attribute may only contain letters and numbers.',
-    'array'                => 'The :attribute must be an array.',
-    'before'               => 'The :attribute must be a date before :date.',
-    'before_or_equal'      => 'The :attribute must be a date before or equal to :date.',
-    'between'              => [
-        'numeric' => 'The :attribute must be between :min and :max.',
-        'file'    => 'The :attribute must be between :min and :max kilobytes.',
-        'string'  => 'The :attribute must be between :min and :max characters.',
-        'array'   => 'The :attribute must have between :min and :max items.',
-    ],
-    'boolean'              => 'The :attribute field must be true or false.',
-    'confirmed'            => 'The :attribute confirmation does not match.',
-    'date'                 => 'The :attribute is not a valid date.',
-    'date_format'          => 'The :attribute does not match the format :format.',
-    'different'            => 'The :attribute and :other must be different.',
-    'digits'               => 'The :attribute must be :digits digits.',
-    'digits_between'       => 'The :attribute must be between :min and :max digits.',
-    'dimensions'           => 'The :attribute has invalid image dimensions.',
-    'distinct'             => 'The :attribute field has a duplicate value.',
-    'email'                => 'The :attribute must be a valid email address.',
-    'exists'               => 'The selected :attribute is invalid.',
-    'file'                 => 'The :attribute must be a file.',
-    'filled'               => 'The :attribute field must have a value.',
-    'image'                => 'The :attribute must be an image.',
-    'in'                   => 'The selected :attribute is invalid.',
-    'in_array'             => 'The :attribute field does not exist in :other.',
-    'integer'              => 'The :attribute must be an integer.',
-    'ip'                   => 'The :attribute must be a valid IP address.',
-    'ipv4'                 => 'The :attribute must be a valid IPv4 address.',
-    'ipv6'                 => 'The :attribute must be a valid IPv6 address.',
-    'json'                 => 'The :attribute must be a valid JSON string.',
-    'max'                  => [
-        'numeric' => 'The :attribute may not be greater than :max.',
-        'file'    => 'The :attribute may not be greater than :max kilobytes.',
-        'string'  => 'The :attribute may not be greater than :max characters.',
-        'array'   => 'The :attribute may not have more than :max items.',
-    ],
-    'mimes'                => 'The :attribute must be a file of type: :values.',
-    'mimetypes'            => 'The :attribute must be a file of type: :values.',
-    'min'                  => [
-        'numeric' => 'The :attribute must be at least :min.',
-        'file'    => 'The :attribute must be at least :min kilobytes.',
-        'string'  => 'The :attribute must be at least :min characters.',
-        'array'   => 'The :attribute must have at least :min items.',
-    ],
-    'not_in'               => 'The selected :attribute is invalid.',
-    'numeric'              => 'The :attribute must be a number.',
-    'present'              => 'The :attribute field must be present.',
-    'regex'                => 'The :attribute format is invalid.',
-    'required'             => 'The :attribute field is required.',
-    'required_if'          => 'The :attribute field is required when :other is :value.',
-    'required_unless'      => 'The :attribute field is required unless :other is in :values.',
-    'required_with'        => 'The :attribute field is required when :values is present.',
-    'required_with_all'    => 'The :attribute field is required when :values is present.',
-    'required_without'     => 'The :attribute field is required when :values is not present.',
-    'required_without_all' => 'The :attribute field is required when none of :values are present.',
-    'same'                 => 'The :attribute and :other must match.',
-    'size'                 => [
-        'numeric' => 'The :attribute must be :size.',
-        'file'    => 'The :attribute must be :size kilobytes.',
-        'string'  => 'The :attribute must be :size characters.',
-        'array'   => 'The :attribute must contain :size items.',
-    ],
-    'string'               => 'The :attribute must be a string.',
-    'timezone'             => 'The :attribute must be a valid zone.',
-    'unique'               => 'The :attribute has already been taken.',
-    'uploaded'             => 'The :attribute failed to upload.',
-    'url'                  => 'The :attribute format is invalid.',
-
+    "accepted" => ":attribute يجب أن يتم قبول.",
+    "active_url" => ":attribute ليس عنوان إنترنت صالحًا.",
+    "before" => ":attribute يجب أن يكون تاريخ قبل :date.",
+    "after" => ":attribute يجب أن يكون تاريخًا بعد :date.",
+    "alpha" => ":attribute يجب أن يحتوي  على أحرفاً فقط.",
+    "alpha_dash" => ":attribute يجب أن يحتوي  على أحرف وأرقام وإشارة ناقص.",
+    "alpha_num" => ":attribute يجب أن يحتوي  على أحرف وأرقام.",
+    "array" => ":attribute يجب ان تكون مصفوفة.",
+    "between" => array(
+        "numeric" => ":attribute يجب أن يكون رقم بين :min - :max.",
+        "file" => ":attribute يجب أن يكون بين :min - :max كيلو بايت.",
+        "string" => ":attribute يجب أن يكون طوله بين :min - :max من الأحرف.",
+        "array" => ":attribute يجب ان يحتوي علي :min - :max بنود."
+    ),
+    "boolean" => "The :attribute field must be true or false",
+    "confirmed" => "تأكيد :attribute لا يتطابق.",
+    "date" => ":attribute ليس تاريخ صحيح.",
+    "date_format" => ":attribute لا يطابق اليصغة :format.",
+    "different" => ":attribute و :other يجب أن يكونا مختلفين.",
+    "digits" => ":attribute يجب أن يتكون من :digits أرقام.",
+    "digits_between" => ":attribute يجب أن يكون بين :min و :max أرقام.",
+    "email" => ":attribute بصيغة خاطئة.",
+    "exists" => ":attribute المختار غير صالح.",
+    "image" => ":attribute يجب أن يكون صورة",
+    "in" => "قيمة :attribute المختارة غير صالح.",
+    "integer" => ":attribute يجب أن يكون رقماً صحيحاً.",
+    "ip" => ":attribute يجب أن يكون عنوان أنترنت (IP) صحيحاً.",
+    "max" => array(
+        "numeric" => ":attribute يجب ألا يكون أكبر من :max.",
+        "file" => ":attribute يجب ألا يكون أكبر من :max كيلو بايت.",
+        "string" => ":attribute يجب ألا يكون أكبر من :max حرف.",
+        "array" => ":attribute يجب ان لا يزيد علي :max بنود."
+    ),
+    "mimes" => ":attribute يجب أن يكون ملف من نوع: :values.",
+    "min" => array(
+        "numeric" => ":attribute يجب أن يكون على الأقل :min.",
+        "file" => ":attribute يجب أن يكون على الأقل :min كيلو بايت.",
+        "string" => ":attribute يجب أن يكون طوله على الأقل :min أحرف.",
+        "array" => ":attribute يجب ان يحتوي علي الاقل :min بنود."
+    ),
+    "not_in" => ":attribute المختار غير صالح.",
+    "numeric" => ":attribute يجب أن يكون رقم.",
+    "regex" => ":attribute صيغته غير صالحة.",
+    "required" => ":attribute مطلوب.",
+    "required_if" => ":attribute مطلوب عندما :other يساوي :value.",
+    "required_with" => ":attribute مطلوب عندما يكون :values موجوداً.",
+    "required_with_all" => ":attribute مطلوب عندما يكون :values is موجوداً.",
+    "required_without" => ":attribute مطلوب عندما لا يكون :values موجوداً.",
+    "required_without_all" => " :attribute مطلوب عندما لا يكون :values موجوداً.",
+    "same" => ":attribute و :other يجب أن يتطابقا",
+    "size" => array(
+        "numeric" => ":attribute يجب أن يكون :size.",
+        "file" => ":attribute يجب أن يكون :size كيلو بايت.",
+        "string" => ":attribute يجب أن يتكون من :size أحرف.",
+        "array" => ":attribute يجب ان يحتوي على :size بنود."
+    ),
+    "timezone" => "The :attribute must be a valid zone.",
+    "unique" => "قيمة :attribute تم استخدامها مسبقاً.",
+    "url" => ":attribute صيغته غير صحيحة.",
     /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
-
-    'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
-    ],
-
+      |--------------------------------------------------------------------------
+      | Custom Validation Language Lines
+      |
+      | اسطر التحقق المخصصه للغة العربية
+      |
+      |--------------------------------------------------------------------------
+      |
+      | Here you may specify custom validation messages for attributes using the
+      | convention "attribute.rule" to name the lines.
+      |
+      | من هنا يمكنك تحديد رسائل تحقق مخصصه للسمات باستخدام مجمع "attribute.rule"
+      | لتسمية السطر.
+      |
+      | his makes it quick to specify a specific custom language line for a given
+      | attribute rule.
+      |
+      | يكون التحديد سريعا عند استخدام سمه معينة للغة المخصصة
+      |
+     */
+    'custom' => array(
+        'page_title' => array(
+            'required' => 'custom-message'
+        ),
+    ),
     /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Attributes
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are used to swap attribute place-holders
-    | with something more reader friendly such as E-Mail Address instead
-    | of "email". This simply helps us make messages a little cleaner.
-    |
-    */
+      |--------------------------------------------------------------------------
+      | Custom Validation Attributes
+      |
+      | سمات التحقق المخصصه
+      |
+      |--------------------------------------------------------------------------
+      |
+      | The following language lines are used to swap attribute place-holders
+      | with something more reader friendly such as E-Mail Address instead
+      | of "email". This simply helps us make messages a little cleaner.
+      |
+      | الاسطر ادناه تستخدم لتبديل السمات بشكل مقروء اكثر مثل "البريد الالكتروني"
+      | بدلا عن "الايميل". هذه سيساعد في جعل الرسائل اوضح.
+      |
+     */
+    'attributes' => array(
+        "page_title" => "عنوان الصفحة",
+        "name" => "الاسم",
+        "username" => "اسم المستخدم",
+        "email" => "البريد الالكتروني",
+        "first_name" => "الاسم الأول",
+        "last_name" => "اسم الثانى",
+        "password" => "كلمة السر",
+        "city" => "المدينة",
+        "country" => "الدولة",
+        "address" => "العنوان",
+        "phone" => "الهاتف",
+        "mobile" => "الجوال",
+        "age" => "العمر",
+        "sex" => "الجنس",
+        "gender" => "النوع",
+        "day" => "اليوم",
+        "month" => "الشهر",
+        "year" => "السنة",
+        "hour" => "ساعة",
+        "minute" => "دقيقة",
+        "second" => "ثانية",
+        "title" => "العنوان",
+        "content" => "المحتوى",
+        "description" => "الوصف",
+        "excerpt" => "الملخص",
+        "date" => "التاريخ",
+        "time" => "الوقت",
+        "available" => "متاح",
+        "size" => "الحجم",
+        'company_name'=>'أسم الشركة',
+        'sector_id' => 'القطاع',
+        'details'=>'تفاصيل الشركة'
 
-    'attributes' => [],
-
-];
+    ),
+);

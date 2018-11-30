@@ -30,8 +30,9 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
     Route::get('centers/{id}', 'CenterController@show')->name('centers.show');
     Route::post('centers/contact', 'CenterController@contact')->name('centers.contact');
 
-    Route::get('chances/{id}', 'ChanceController@show')->name('chances.show');
     Route::get('chances', 'ChanceController@index')->name('chances');
+    Route::get('chances/{id}', 'ChanceController@show')->name('chances.show');
+    Route::post('chances/offers', 'ChanceController@addOffer')->name('chances.offers');
 
 
 });

@@ -136,5 +136,8 @@ class Chance extends Model
         return $this->belongsTo(Company::class);
     }
 
+    public function offers(){
+        return $this->belongsToMany(Media::class, 'chances_offers_files', 'chance_id', 'media_id');
+    }
 
 }

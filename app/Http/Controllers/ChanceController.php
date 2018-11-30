@@ -7,7 +7,10 @@ use Dot\Chances\Chances;
 use Dot\Chances\Models\Chance;
 use Dot\Chances\Models\Sector;
 use Dot\Chances\Models\Unit;
+use Dot\Media\Models\Media;
 use Dot\Platform\Controller;
+use Illuminate\Support\Facades\Validator;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +32,8 @@ class ChanceController extends Controller
         return view('chances.create', $this->data);
     }
 
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         $query = \App\Models\Chance::query();
         $this->data['q'] = null;
         $this->data['created_at'] = null;
@@ -37,51 +41,51 @@ class ChanceController extends Controller
         $status = $status ? $status : [];
         $this->data['status'] = $status;
 
-        foreach ($status as $st){
-            switch ($st){
+        foreach ($status as $st) {
+            switch ($st) {
                 case 0:
-                    $query = $query->orWhere(function ($q){
+                    $query = $query->orWhere(function ($q) {
                         $q->opened();
                     });
                     break;
                 case 1:
-                    $query = $query->orWhere(function ($q){
+                    $query = $query->orWhere(function ($q) {
                         $q->closed();
                     });
                     break;
                 case 2:
-                    $query = $query->orWhere(function ($q){
+                    $query = $query->orWhere(function ($q) {
                         $q->cancelled();
                     });
                     break;
                 case 3:
-                    $query = $query->orWhere(function ($q){
+                    $query = $query->orWhere(function ($q) {
                         $q->pending();
                     });
                     break;
                 case 4:
-                    $query = $query->orWhere(function ($q){
+                    $query = $query->orWhere(function ($q) {
                         $q->approved();
                     });
                     break;
                 case 5:
-                    $query = $query->orWhere(function ($q){
+                    $query = $query->orWhere(function ($q) {
                         $q->rejected();
                     });
                     break;
             }
         }
-        if($request->get('q')){
+        if ($request->get('q')) {
             $q = trim(urldecode($request->get('q')));
-            $query = $query->where('name','like', '%'.$q.'%');
+            $query = $query->where('name', 'like', '%' . $q . '%');
             $this->data['q'] = $q;
         }
-        if($request->get('created_at')){
+        if ($request->get('created_at')) {
             $query = $query->whereDate('created_at', '=', \Carbon\Carbon::parse($request->get('created_at'))->toDateString());
             $this->data['created_at'] = $request->get('created_at');
         }
         $this->data['chances'] = $query->paginate(1);
-        $this->data['status'] = [0,1];//[0,1,2,3,4,5];
+        $this->data['status'] = [0, 1];//[0,1,2,3,4,5];
         return view('chances.index', $this->data);
     }
 
@@ -134,13 +138,32 @@ class ChanceController extends Controller
         return Redirect::route("chance.create");
 
     }*/
-    public function show(Request $request, $id){
+    public function show(Request $request, $id)
+    {
 
         $chance = \App\Models\Chance::findOrFail($id);
         $diff = \Carbon\Carbon::parse($chance->closing_date)->diffForHumans(\Carbon\Carbon::now());
 
         $this->data['chance'] = $chance;
         return view('chances.chance', $this->data);
+    }
+
+    public function addOffer(Request $request)
+    {
+        $chance = \App\Models\Chance::find($request->get('chance_id'));
+        $file = $request->file('file');
+        $validator = Validator::make($request->all(), [
+            'file' => 'mimes:jpg,png,jpeg,zip'
+        ]);
+
+        if ($validator->fails()){
+            return response()->json(['success' => false, 'errors' => $validator->messages()->toArray()['file'][0]], 200);
+        }
+        $media = new Media();
+        $file_id = $media->saveFile($file);
+        $chance->offers()->syncWithoutDetaching($file_id);
+
+        return response()->json(["success" => true], 200);
     }
 
 }

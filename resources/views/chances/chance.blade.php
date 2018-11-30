@@ -14,7 +14,8 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="light-white">
-                                    <div class="card-img"><img src="{{thumbnail($chance->image->path, 'single_center')}}" alt=""></div>
+                                    <div class="card-img"><img
+                                                src="{{thumbnail($chance->image->path, 'single_center')}}" alt=""></div>
                                     <div class="padt">{{trans('app.chances.remaining_date')}}</div>
                                     <div class="progress ">
                                         <div class="progress-bar" role="progressbar"
@@ -61,7 +62,9 @@
                                         </li>
                                         <li class="clearfix">
                                             <div class="one_xsmall title">{{trans('app.chances.rules_book')}}</div>
-                                            <div class="one_xlarg"><a class="btn btn-default" target="_blank" href="{{uploads_url().$chance->media->path}}"> {{trans('app.chances.rules_book_download')}}</a></div>
+                                            <div class="one_xlarg"><a class="btn btn-default" target="_blank"
+                                                                      href="{{uploads_url().$chance->media->path}}"> {{trans('app.chances.rules_book_download')}}</a>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
@@ -80,13 +83,13 @@
                                 </thead>
                                 <tbody>
                                 @foreach($chance->units as $unit)
-                                <tr>
-                                    <td>
-                                        <h3>{{$unit->name}}</h3>
-                                        <p>{{$unit->details}}</p>
-                                    </td>
-                                    <td>{{$unit->pivot->quantity}}</td>
-                                </tr>
+                                    <tr>
+                                        <td>
+                                            <h3>{{$unit->name}}</h3>
+                                            <p>{{$unit->details}}</p>
+                                        </td>
+                                        <td>{{$unit->pivot->quantity}}</td>
+                                    </tr>
                                 @endforeach
                                 </tbody>
                             </table>
@@ -108,18 +111,37 @@
                                     </div>
                                     <div class="modal-body">
                                         <p>قم بتحميل العرض التفصيلى و ستقوم الشركة بالاطلاع عليه</p>
-                                        <form>
+                                        <form id="upload" name="upload" enctype="multipart/form-data">
                                             <div class="custom-file form-group pad">
-                                                <input type="file" class="form-control-file custom-file-input"
+                                                <input name="file" type="file"
+                                                       class="form-control-file custom-file-input"
                                                        id="exampleFormControlFile1">
+                                                <input type="hidden" name="chance_id" value="{{$chance->id}}">
                                             </div>
+                                            <p class="alert-danger" style="display: none"></p>
                                         </form>
                                     </div>
                                     <div class="modal-footer text-center">
-                                        <button type="submit" form="" class="uperc padding-md fbutcenter">تقديم</button>
+                                        <button type="submit" form="upload" class="uperc padding-md fbutcenter">تقديم
+                                        </button>
                                         <button type="submit" class="uperc padding-md fbutcenter1" data-dismiss="modal">
                                             الغاء
                                         </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal fade" id="SuccessModal" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title"> تقديم على الفرصة </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>تم ارسال الطلب بنجاح و ستقوم الشركة بالاطلاع عليه</p>
                                     </div>
                                 </div>
 
@@ -137,14 +159,14 @@
             $(function () {
                 $('[data-toggle="tooltip"]').tooltip({trigger: 'manual'}).tooltip('show');
             });
-            $(document).ready(function(){
-                $(".btn-mas").click(function(){
+            $(document).ready(function () {
+                $(".btn-mas").click(function () {
                     $("#myModal").modal('show');
                 });
             });
             // $( window ).scroll(function() {
             // if($( window ).scrollTop() > 10){  // scroll down abit and get the action
-            $(".progress-bar").each(function(){
+            $(".progress-bar").each(function () {
                 each_bar_width = $(this).attr('aria-valuenow');
                 $(this).width(each_bar_width + '%');
             });
@@ -166,6 +188,41 @@
                     return value;
                 }
             });
+
+            $(function () {
+                $('#upload').on('submit', function (e) {
+                    e.preventDefault();
+                    var form = $(this);
+                    var file = $('[name="file"]');
+                    var formData = new FormData();
+                    formData.append('file', file[0].files[0]);
+                    formData.append('chance_id', "{{$chance->id}}")
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        type: "post",
+                        url: "{{route('chances.offers')}}",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (data) {
+                            if (data.success) {
+                                $("#myModal").modal('hide');
+                                $("#SuccessModal").modal('show');
+                            }else{
+                                $('.alert-danger').html(data.errors);
+                                $('.alert-danger').show();
+                            }
+                        },
+                        error: function () {
+                            alert("Internal Server Error")
+                        }
+                    })
+                })
+            })
         </script>
 
     @endpush

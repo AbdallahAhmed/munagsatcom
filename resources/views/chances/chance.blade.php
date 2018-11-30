@@ -98,7 +98,7 @@
 
                     <div class="text-center">
                         <button type="button" class="padding-lg fbutcenter btn-mas" data-dismiss="modal"
-                                data-target="#myModal"><i class="fa fa-arrow-right"></i> قدم على الفرصه
+                                data-target="#myModal"><i class="fa fa-arrow-right"></i>{{trans('app.chances.apply_chance')}}
                         </button>
                         <!-- Modal -->
                         <div class="modal fade" id="myModal" role="dialog">
@@ -107,10 +107,10 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title"> تقديم على الفرصة </h4>
+                                        <h4 class="modal-title"> {{trans('app.chances.apply')}}</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <p>قم بتحميل العرض التفصيلى و ستقوم الشركة بالاطلاع عليه</p>
+                                        <p>{{trans('app.chances.upload_request')}}</p>
                                         <form id="upload" name="upload" enctype="multipart/form-data">
                                             <div class="custom-file form-group pad">
                                                 <input name="file" type="file"
@@ -122,10 +122,10 @@
                                         </form>
                                     </div>
                                     <div class="modal-footer text-center">
-                                        <button type="submit" form="upload" class="uperc padding-md fbutcenter">تقديم
+                                        <button type="submit" form="upload" class="uperc padding-md fbutcenter">{{trans('app.chances.apply_done')}}
                                         </button>
                                         <button type="submit" class="uperc padding-md fbutcenter1" data-dismiss="modal">
-                                            الغاء
+                                            {{trans('app.cancel')}}
                                         </button>
                                     </div>
                                 </div>
@@ -138,10 +138,10 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title"> تقديم على الفرصة </h4>
+                                        <h4 class="modal-title"> {{trans('app.chances.apply_chance')}} </h4>
                                     </div>
                                     <div class="modal-body">
-                                        <p>تم ارسال الطلب بنجاح و ستقوم الشركة بالاطلاع عليه</p>
+                                        <p>{{trans('app.chances.success')}}</p>
                                     </div>
                                 </div>
 

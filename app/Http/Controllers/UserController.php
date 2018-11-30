@@ -7,7 +7,10 @@ use Dot\Chances\Models\Sector;
 use Dot\Companies\Models\Company;
 use Dot\Media\Models\Media;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
 
 class UserController extends Controller
 {
@@ -85,6 +88,44 @@ class UserController extends Controller
 
         $this->data['sectors'] = Sector::published()->get();
         return view('register', $this->data);
+    }
+
+    public function login(Request $request)
+    {
+
+        if (!fauth()->check()) {
+            if ($request->method() == "POST") {
+                $error = new MessageBag();
+                $validator = Validator::make($request->all(), [
+                    'username' => 'required|email',
+                    'password' => 'required',
+                    'user_type' => 'required'
+                ]);
+                if ($validator->fails()) {
+                    return redirect()->back()->withErrors($validator)->withInput($request->all());
+                }
+
+                $isAuthed = fauth()->attempt([
+                    'email' => $request->get('username'),
+                    'password' => $request->get('password'),
+                    'backend' => 0
+                ]);
+
+                if (!$isAuthed) {
+                    $error->add('invalid', trans('validation.invalid_login'));
+                    return redirect()->back()->withErrors($error->messages())->withInput($request->all());
+                }
+                if (fauth()->user()->type == 2 && fauth()->user()->status == 0) {
+                    fauth()->logout();
+                    //$error->add('not verified', "This company isn't verified yes.");
+                    return redirect()->back()->withErrors($validator)->withInput($request->all());
+                }
+                fauth()->login(fauth()->user());
+                return redirect()->route('index');
+            }
+            return view('login');
+        }
+        return redirect()->route('index');
     }
 
 }

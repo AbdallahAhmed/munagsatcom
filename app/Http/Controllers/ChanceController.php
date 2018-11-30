@@ -153,7 +153,7 @@ class ChanceController extends Controller
         $chance = \App\Models\Chance::find($request->get('chance_id'));
         $file = $request->file('file');
         $validator = Validator::make($request->all(), [
-            'file' => 'mimes:jpg,png,jpeg,zip'
+            'file' => 'mimes:jpg,png,jpeg,doc,docx,txt,pdf,zip'
         ]);
 
         if ($validator->fails()){

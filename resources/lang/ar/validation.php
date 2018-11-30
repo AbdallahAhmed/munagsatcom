@@ -50,6 +50,7 @@ return array(
     "in" => "قيمة :attribute المختارة غير صالح.",
     "integer" => ":attribute يجب أن يكون رقماً صحيحاً.",
     "ip" => ":attribute يجب أن يكون عنوان أنترنت (IP) صحيحاً.",
+    "invalid_login" => "خطأ في اسم المستخدم او كلمة المرور.",
     "max" => array(
         "numeric" => ":attribute يجب ألا يكون أكبر من :max.",
         "file" => ":attribute يجب ألا يكون أكبر من :max كيلو بايت.",
@@ -155,7 +156,8 @@ return array(
         "size" => "الحجم",
         'company_name'=>'أسم الشركة',
         'sector_id' => 'القطاع',
-        'details'=>'تفاصيل الشركة'
+        'details'=>'تفاصيل الشركة',
+        'user_type' => 'نوع المستخدم'
 
     ),
 );

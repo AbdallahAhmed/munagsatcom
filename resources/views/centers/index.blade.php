@@ -13,10 +13,10 @@
                                 <div class="search-bar">
                                     <div class="icon-addon">
                                         @if($q)
-                                            <input name="search_q" type="text" placeholder="{{trans('search_query')}}..."
+                                            <input name="search_q" type="text" placeholder="{{trans('app.centers.search_query')}}..."
                                                    class="form-control" value="{{$q}}">
                                         @else
-                                            <input name="search_q" type="text" placeholder="{{trans('search_query')}}..."
+                                            <input name="search_q" type="text" placeholder="{{trans('app.centers.search_query')}}..."
                                                    class="form-control">
                                         @endif
                                         <div class="searh-icn" rel="tooltip"><i class="fa fa-search"></i></div>
@@ -126,9 +126,6 @@
                     var search_q = $('[name="search_q"]').val();
                     var service_id = $('[name="service_id"]').val();
                     var sector_id = $('[name="sector_id"]').val();
-                    var price_from = $('[name="points"]').attr('min');
-                    console.log($('.example').attr('min'));
-                    return
                     var url = "{{route("centers")}}" + "?";
                     url += search_q == !search_q || search_q.length === 0 ||
                     search_q === "" || !/[^\s]/.test(search_q) ||

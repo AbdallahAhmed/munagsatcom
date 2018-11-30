@@ -51,8 +51,8 @@
         <div class="container">
             <ul class="nav nav-pills nav-justified tab">
                 <li><a href="javascript:void(0)">{{trans('app.government_tenders')}}</a></li>
-                <li><a href="javascript:void(0)">{{trans('app.service_centers')}}</a></li>
-                <li><a href="javascript:void(0)">{{trans('app.investment_opportunities')}}</a></li>
+                <li><a href="{{route('centers')}}">{{trans('app.service_centers')}}</a></li>
+                <li><a href="{{route('chances')}}">{{trans('app.investment_opportunities')}}</a></li>
             </ul>
         </div>
     </div>

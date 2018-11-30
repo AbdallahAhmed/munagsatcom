@@ -10,6 +10,22 @@
                     <h2>{{trans('app.chances.search_chances')}}</h2>
                     <div class="feildcont">
                         <form id="search">
+                            <div class="form-group clearfix">
+                                <div class="search-bar">
+                                    <div class="icon-addon">
+                                        @if($q)
+                                            <input name="search_q" type="text"
+                                                   placeholder="{{trans('app.chances.search_query')}}..."
+                                                   class="form-control" value="{{$q}}">
+                                        @else
+                                            <input name="search_q" type="text"
+                                                   placeholder="{{trans('app.chances.search_query')}}..."
+                                                   class="form-control">
+                                        @endif
+                                        <div class="searh-icn" rel="tooltip"><i class="fa fa-search"></i></div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group-lg clearfix">
                                 <p>{{trans('app.fields.status')}}:</p>
                                 <div class="checkbox">
@@ -27,7 +43,7 @@
                                     <div class="form-group clearfix">
                                         <div class="input-append date" id="dp3" data-date="12-02-2012"
                                              data-date-format="dd-mm-yyyy">
-                                            <input class="effect-9 form-control" id="date" placeholder="mm/dd/yyyy"
+                                            <input name="created_date" value="{{$created_at? $created_at : ""}}" data-date-format="dd-mm-yyyy" class="effect-9 form-control" id="date" placeholder="dd-mm-yyyy"
                                                    type="text">
                                             <span class="add-on"><i class="fa fa-calendar"></i></span>
                                         </div>
@@ -47,24 +63,19 @@
             @foreach($chances as $chance)
                 <div class="col-md-8 content">
                     <h2>{{trans('app.chances.chances_est')}}</h2>
-                    <div class="search-bar">
-                        <div class="icon-addon">
-                            <input type="text" placeholder="{{trans('app.chances.search')}}..." class="form-control">
-                            <div class="searh-icn"><i class="fa fa-search"></i></div>
-                        </div>
-                    </div>
                     <!-------------- Begin:Card -------------->
                     <div class="card foras">
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-2">
-                                    <div class="card-img"><a href="foras-details.html"><img src="{{thumbnail($chance->image->path)}}"
-                                                                                            alt=""></a></div>
+                                    <div class="card-img"><a href="{{$chance->path}}"><img
+                                                    src="{{thumbnail($chance->image->path)}}"
+                                                    alt=""></a></div>
                                 </div>
                                 <div class="col-md-10">
                                     <div class="title">
                                         <p> {{trans('app.chances.chance')}}<span><a
-                                                        href="foras-details.html">{{$chance->name}}</a></span></p>
+                                                        href="{{$chance->path}}">{{$chance->name}}</a></span></p>
                                         <p>{{trans('app.the_company')}} <span>{{$chance->company->name}}</span></p>
                                     </div>
                                 </div>
@@ -143,8 +154,12 @@
     </section>
     @push('scripts')
         <script>
-            $('#dp3',).datepicker();
-            $('#date',).datepicker();
+            $('#dp3').datepicker({
+                dateFormat: "yyyy-mm-dd"
+            });
+            $('#date').datepicker({
+                dateFormat: "yyyy-mm-dd"
+            });
         </script>
         <script>
             $(function () {
@@ -152,7 +167,7 @@
             });
             // $( window ).scroll(function() {
             // if($( window ).scrollTop() > 10){  // scroll down abit and get the action
-            $(".progress-bar").each(function(){
+            $(".progress-bar").each(function () {
                 each_bar_width = $(this).attr('aria-valuenow');
                 $(this).width(each_bar_width + '%');
             });
@@ -160,14 +175,14 @@
             // });
         </script>
         <script type="text/javascript">
-            $(document).ready(function(){
-                $(".btn-mas").click(function(){
+            $(document).ready(function () {
+                $(".btn-mas").click(function () {
                     $("#myModal").modal('show');
                 });
             });
         </script>
         <script>
-            $(document).ready(function() {
+            $(document).ready(function () {
                 $(".share").hideshare({
                     link: "",           // Link to URL defaults to document.URL
                     title: "",          // Title for social post defaults to document.title
@@ -187,10 +202,24 @@
                 $('#search').on('submit', function (e) {
                     e.preventDefault();
                     var status = [];
-                    $("input:checkbox[name=status]:checked").each(function(){
+                    var search_q = $('[name="search_q"]').val();
+                    var created_date = $('#date').datepicker().val();
+                    $("input:checkbox[name=status]:checked").each(function () {
                         status.push($(this).val());
                     });
-                    console.log(status);
+                    var url = "{{route('chances')}}" + "?";
+                    url += search_q == !search_q || search_q.length === 0 ||
+                    search_q === "" || !/[^\s]/.test(search_q) ||
+                    /^\s*$/.test(search_q) || search_q.replace(/\s/g, "") === "" ? "" : "q=" + search_q + "&";
+                    url = created_date.length > 0 ? url+"created_at="+created_date+"&" : url ;
+                    for (var i = 0; i < status.length; i++) {
+                        url += "status[]=" + status[i];
+                        url = i != status.length - 1 ? url + "&" : url;
+                    }
+                    url = url[url.length-1] == "&" ? url.slice(0, -1): url;
+
+                    if (url != "{{route('chances')}}" + "?")
+                        window.location.href = url;
 
                 })
             })

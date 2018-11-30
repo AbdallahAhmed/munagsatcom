@@ -30,9 +30,12 @@ class ChanceController extends Controller
     }
 
     public function index(Request $request){
-        $query = Chance::query();
+        $query = \App\Models\Chance::query();
+        $this->data['q'] = null;
+        $this->data['created_at'] = null;
         $status = $request->get('status');
         $status = $status ? $status : [];
+        $this->data['status'] = $status;
 
         foreach ($status as $st){
             switch ($st){
@@ -68,7 +71,15 @@ class ChanceController extends Controller
                     break;
             }
         }
-
+        if($request->get('q')){
+            $q = trim(urldecode($request->get('q')));
+            $query = $query->where('name','like', '%'.$q.'%');
+            $this->data['q'] = $q;
+        }
+        if($request->get('created_at')){
+            $query = $query->whereDate('created_at', '=', \Carbon\Carbon::parse($request->get('created_at'))->toDateString());
+            $this->data['created_at'] = $request->get('created_at');
+        }
         $this->data['chances'] = $query->paginate(1);
         $this->data['status'] = [0,1];//[0,1,2,3,4,5];
         return view('chances.index', $this->data);
@@ -125,7 +136,7 @@ class ChanceController extends Controller
     }*/
     public function show(Request $request, $id){
 
-        $chance = Chance::findOrFail($id);
+        $chance = \App\Models\Chance::findOrFail($id);
         $diff = \Carbon\Carbon::parse($chance->closing_date)->diffForHumans(\Carbon\Carbon::now());
 
         $this->data['chance'] = $chance;

@@ -3,13 +3,14 @@
 <html dir="ltr" lang="en-US" class="no-js ie8 oldie ie"> <![endif]-->
 <!--[if IE 9 ]>
 <html dir="ltr" lang="en-US" class="no-js ie9 oldie ie"> <![endif]-->
-<html lang="ar">
+<html lang="{{app()->getLocale()}}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{trans('app.name')}} | @yield("title")</title>
     <link href="{{asset('/assets')}}/css/maincss.css" rel="stylesheet">
+    <link href="{{asset('/')}}/css/developer.css" rel="stylesheet">
 
 
     <meta name="copyright" content="munagasatcom">
@@ -53,7 +54,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body class="{{app()->getLocale()}}">
 
 <!--End:navbar-->
 @include('layouts.partials.header')

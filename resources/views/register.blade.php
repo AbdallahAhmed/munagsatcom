@@ -11,6 +11,18 @@
                     {{csrf_field()}}
                     <div class="reg-part">
                         <div class="form-group-lg row">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <label class="col-xs-12 col-md-3">{{trans('app.fields.first_name')}}</label>
                             <div class="col-xs-12 col-md-9">
                                 <div class="new-f-group">
@@ -81,15 +93,18 @@
                         <div class="form-group-lg row">
                             <label class="col-xs-12 col-md-3"></label>
                             <div class="col-xs-12 col-md-9">
-                                <label class="radio-inline"> {{trans('app.personal')}}</label>
-                                <input type="radio" name="user_type" value="1" onclick="show1();" checked>
+                                <label class="radio-inline" for="for_personal"> {{trans('app.personal')}}</label>
+                                <input type="radio" name="user_type" id="for_personal"
+                                       {{old('user_type')==1||!old('user_type')?'checked':''}} value="1"
+                                       onclick="show1();">
 
-                                <label class="radio-inline"> {{trans('app.company')}}</label>
-                                <input type="radio" name="user_type" value="2" onclick="show2();">
+                                <label class="radio-inline" for="for_company"> {{trans('app.company')}}</label>
+                                <input type="radio" name="user_type"  id="for_company" {{old('user_type')==2?'checked':''}} value="2"
+                                       onclick="show2();">
                             </div>
                         </div>
                     </div>
-                    <div id="compres" class="hidd">
+                    <div id="company-form" class="hidd" style="display:{{old('user_type')==2?'block':''}}">
 
 
                         <div class="reg-part">
@@ -222,12 +237,16 @@
 
     <script>
         function show1() {
-            document.getElementById('compres').style.display = 'none';
+            // document.getElementById('company-form').style.display = 'none';
+            $('#company-form').fadeOut(700);
         }
 
         function show2() {
-            document.getElementById('compres').style.display = 'block';
+            // document.getElementById('company-form').style.display = 'block';
+            $('#company-form').fadeIn(700);
+
         }
+
     </script>
 @endpush
 

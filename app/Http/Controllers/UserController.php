@@ -38,8 +38,8 @@ class UserController extends Controller
                 $rules += [
                     'company_name' => 'required|max:255|min:8',
                     'sector_id' => 'required|exists:sectors,id',
-                    'details' => 'max:255',
-                    'logo' => 'mimes:jpg,png,jpeg',
+                    'details' => 'required|max:255',
+                    'logo' => 'required|mimes:jpg,png,jpeg',
                     'files.*.mimes' => 'jpg,png,jpeg,doc,docx,txt,pdf,zip'
                 ];
             }

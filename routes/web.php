@@ -35,5 +35,9 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
     Route::get('chances/{id}', 'ChanceController@show')->name('chances.show');
     Route::post('chances/offers', 'ChanceController@addOffer')->name('chances.offers');
 
+    Route::group(['middleware' => ['company']], function ($router){
+        $router->get('company/{id}', 'CompanyController@show')->name('company.show');
+    });
+
 
 });

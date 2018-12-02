@@ -123,20 +123,42 @@
                                         <!-- Modal content-->
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;
-                                                </button>
-                                                <h4 class="modal-title"> تقديم على الفرصة </h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title"> {{trans('app.chances.apply')}}</h4>
                                             </div>
                                             <div class="modal-body">
-                                                <p>غير مؤهل للتسجيل فى هذه الفرصه</p>
+                                                <p>{{trans('app.chances.upload_request')}}</p>
+                                                <form id="upload" name="upload" enctype="multipart/form-data">
+                                                    <div class="custom-file form-group pad">
+                                                        <input name="file" type="file"
+                                                               class="form-control-file custom-file-input"
+                                                               id="exampleFormControlFile1">
+                                                        <input type="hidden" name="chance_id" value="{{$chance->id}}">
+                                                    </div>
+                                                    <p class="alert-danger" style="display: none"></p>
+                                                </form>
                                             </div>
                                             <div class="modal-footer text-center">
-                                                <button type="submit" form="" class="uperc padding-md fbutcenter">
-                                                    تقديم
+                                                <button type="submit" form="upload" class="uperc padding-md fbutcenter">{{trans('app.chances.apply_done')}}
                                                 </button>
-                                                <button type="submit" class="uperc padding-md fbutcenter1"
-                                                        data-dismiss="modal">الغاء
+                                                <button type="submit" class="uperc padding-md fbutcenter1" data-dismiss="modal">
+                                                    {{trans('app.cancel')}}
                                                 </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="modal fade" id="SuccessModal" role="dialog">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title"> {{trans('app.chances.apply_chance')}} </h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>{{trans('app.chances.success')}}</p>
                                             </div>
                                         </div>
 
@@ -229,6 +251,41 @@
                         window.location.href = url;
 
                 })
+                $(function () {
+                    $('#upload').on('submit', function (e) {
+                        e.preventDefault();
+                        var form = $(this);
+                        var file = $('[name="file"]');
+                        var formData = new FormData();
+                        formData.append('file', file[0].files[0]);
+                        formData.append('chance_id', "{{$chance->id}}")
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        $.ajax({
+                            type: "post",
+                            url: "{{route('chances.offers')}}",
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function (data) {
+                                if (data.success) {
+                                    $("#myModal").modal('hide');
+                                    $("#SuccessModal").modal('show');
+                                }else{
+                                    $('.alert-danger').html(data.errors);
+                                    $('.alert-danger').show();
+                                }
+                            },
+                            error: function () {
+                                alert("Internal Server Error")
+                            }
+                        })
+                    })
+                })
+
             })
         </script>
     @endpush

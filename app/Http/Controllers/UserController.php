@@ -61,6 +61,7 @@ class UserController extends Controller
             $user->role_id = 2;
             $user->backend = 0;
             $user->status = 0;
+            $user->type = $request->get('user_type', 1);
             $user->save();
             if ($request->get('user_type') == 2) {
                 $company = new Company();

@@ -13,9 +13,20 @@ use Illuminate\Support\Facades\Mail;
 
 class CenterController extends Controller
 {
+    /**
+     * Data unit
+     * @var array
+     */
     public $data = array();
 
+    /**
+     * GET {lang}/centers
+     * @route centers
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Request $request){
+
         $query = Center::published();
         $this->data['sector_id'] = null;
         $this->data['service_id'] = null;
@@ -48,12 +59,23 @@ class CenterController extends Controller
         return view('centers.index', $this->data);
     }
 
+    /**
+     * GET {lang}/centers/{id}
+     * @route centers.show
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(Request $request, $id){
         $center = Center::published()->where('id', $id)->firstOrFail();
         $this->data['center'] = $center;
         return view('centers.center', $this->data);
     }
 
+    /**
+     * POST {lang}/centers/contact
+     * @route centers.contact
+     * @param Request $request
+     */
     public function contact(Request $request){
         Mail::to($request->get('email'))->send(new CenterContactEmail($request));
     }

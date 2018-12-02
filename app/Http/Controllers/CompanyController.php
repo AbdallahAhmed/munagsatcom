@@ -7,13 +7,23 @@ use App\Models\Company;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 
 class CompanyController extends Controller
 {
+
+    /**
+     * Data unit
+     * @var array
+     */
     public $data = array();
 
+    /**
+     * GET {lang}/company/{id}
+     * @route company.show
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(Request $request, $id){
         $company = Company::findOrFail($id);
         $this->data['company'] = $company;
@@ -21,6 +31,12 @@ class CompanyController extends Controller
         return view('companies.company', $this->data);
     }
 
+    /**
+     * GET {lang}/company/{id}/chances
+     * @route company.chances
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function chances(Request $request, $id){
         $company = Company::findOrFail($id);
         $this->data['company'] = $company;
@@ -81,6 +97,12 @@ class CompanyController extends Controller
         return view('companies.chances', $this->data);
     }
 
+    /**
+     * POST {lang}/company/{id}/password
+     * @route company.password
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function updatePassword(Request $request, $id){
 
         $validator = Validator::make($request->all(),[

@@ -7,8 +7,6 @@ use Dot\Chances\Models\Sector;
 use Dot\Companies\Models\Company;
 use Dot\Media\Models\Media;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 
@@ -22,7 +20,7 @@ class UserController extends Controller
     public $data = array();
 
     /**
-     * GET {lang}/register
+     * GET/POST {lang}/register
      * @route register
      * @param Request $request
      * @return string
@@ -92,6 +90,12 @@ class UserController extends Controller
         return view('register', $this->data);
     }
 
+    /**
+     * GET/POST {lang}/login
+     * @route login
+     * @param Request $request
+     * @return string
+     */
     public function login(Request $request)
     {
 

@@ -111,7 +111,6 @@ class Chance extends Model
         return $query->where('status',5);
     }
 
-
     public function sectors(){
         return $this->belongsToMany(Sector::class, "chances_sectors", "chance_id", "sector_id");
     }

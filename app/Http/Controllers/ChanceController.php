@@ -2,36 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use Action;
-use Dot\Chances\Chances;
-use Dot\Chances\Models\Chance;
 use Dot\Chances\Models\Sector;
 use Dot\Chances\Models\Unit;
 use Dot\Media\Models\Media;
 use Dot\Platform\Controller;
-use Illuminate\Support\Facades\Validator;
 use http\Env\Response;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\MessageBag;
-use Redirect;
-use View;
-use File;
 
 class ChanceController extends Controller
 {
+    /**
+     * Data unit
+     * @var array
+     */
     public $data = array();
-    public $errors = null;
 
-
-    public function create()
-    {
-        $this->data['sectors'] = Sector::published()->get();
-        $this->data['units'] = Unit::published()->get();
-        return view('chances.create', $this->data);
-    }
-
+    /**
+     * GET {lang}/chances
+     * @route chances
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Request $request)
     {
         $query = \App\Models\Chance::query();
@@ -89,6 +81,45 @@ class ChanceController extends Controller
         return view('chances.index', $this->data);
     }
 
+    /**
+     * GET {lang}/chances/{id}
+     * @route chances.show
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show(Request $request, $id)
+    {
+
+        $chance = \App\Models\Chance::findOrFail($id);
+
+        $this->data['chance'] = $chance;
+        return view('chances.chance', $this->data);
+    }
+
+    /**
+     * POST {lang}/chances/offers
+     * @route chances.offers
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function addOffer(Request $request)
+    {
+        $chance = \App\Models\Chance::find($request->get('chance_id'));
+        $file = $request->file('file');
+        $validator = Validator::make($request->all(), [
+            'file' => 'mimes:jpg,png,jpeg,doc,docx,txt,pdf,zip'
+        ]);
+
+        if ($validator->fails()){
+            return response()->json(['success' => false, 'errors' => $validator->messages()->toArray()['file'][0]], 200);
+        }
+        $media = new Media();
+        $file_id = $media->saveFile($file);
+        $chance->offers()->syncWithoutDetaching($file_id);
+
+        return response()->json(["success" => true], 200);
+    }
+
     /*public function store()
     {
 
@@ -138,31 +169,5 @@ class ChanceController extends Controller
         return Redirect::route("chance.create");
 
     }*/
-    public function show(Request $request, $id)
-    {
-
-        $chance = \App\Models\Chance::findOrFail($id);
-
-        $this->data['chance'] = $chance;
-        return view('chances.chance', $this->data);
-    }
-
-    public function addOffer(Request $request)
-    {
-        $chance = \App\Models\Chance::find($request->get('chance_id'));
-        $file = $request->file('file');
-        $validator = Validator::make($request->all(), [
-            'file' => 'mimes:jpg,png,jpeg,doc,docx,txt,pdf,zip'
-        ]);
-
-        if ($validator->fails()){
-            return response()->json(['success' => false, 'errors' => $validator->messages()->toArray()['file'][0]], 200);
-        }
-        $media = new Media();
-        $file_id = $media->saveFile($file);
-        $chance->offers()->syncWithoutDetaching($file_id);
-
-        return response()->json(["success" => true], 200);
-    }
 
 }

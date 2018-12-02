@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUnitsTable extends Migration
+class CreateChancesOffersFilesTable extends Migration
 {
     /*
      * Run the migrations.
@@ -11,7 +11,7 @@ class CreateUnitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('units', function ($table) {
+        Schema::create('chances_offers_files', function ($table) {
             $table->integer("chance_id")->default(0)->index();
             $table->integer("media_id")->index();
         });

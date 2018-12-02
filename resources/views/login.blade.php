@@ -9,6 +9,11 @@
                 <i class="fa fa-5x fa-fw fa-user-circle"></i>
             </div>
             <div class="feildcont">
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
                 <form method="post" action="{{route('login')}}">
                     {{csrf_field()}}
                     <div class="form-group-lg row">

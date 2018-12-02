@@ -45,6 +45,7 @@ return [
     'search_employee' => 'Search for employee',
     'add_delegate' => 'Add delegate',
     'messages' => 'Messages',
+    'user_profile' => 'User details',
     'fields'=>[
         "username" => "Username",
         "password" => "Password",
@@ -55,6 +56,8 @@ return [
         'name' => 'Name',
         'your_message' => 'Your Message',
         'status' => 'Status',
+        'mobile_number' => 'Mobile number',
+        'phone_number' => 'Telephone number',
     ],
     'centers' => [
         'centers' => 'Services centers',

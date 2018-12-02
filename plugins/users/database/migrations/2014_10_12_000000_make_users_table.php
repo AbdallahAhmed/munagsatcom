@@ -17,6 +17,8 @@ class MakeUsersTable extends Migration
             $table->renameColumn('name', 'first_name');
             $table->index('first_name');
             $table->string('last_name')->nullable()->index();
+            $table->string('phone_number')->nullable()->index();
+            $table->string('mobile_number')->nullable()->index();
             $table->index('created_at');
             $table->index('updated_at');
             $table->string('provider')->nullable()->index();

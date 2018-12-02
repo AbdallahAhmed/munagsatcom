@@ -43,6 +43,7 @@ return [
     'search_employee' => 'البحث عن موظف',
     'add_delegate' => 'اضافة مندوب',
     'messages' => 'الرسائل',
+    'user_profile' => 'بيانات عامة',
     'centers' => [
         'centers' => 'مراكز خدمية',
         'center_name' => 'اسم المركز الخدمى',
@@ -120,6 +121,8 @@ return [
         'username' => 'إسم المسخدم',
         'your_message' => 'رسالتك',
         'status' => 'الحاله',
+        'mobile_number' => 'رقم الموبايل',
+        'phone_number' => 'رقم الهاتف',
     ],
     'status_array' => [
         0 => 'مفتوحة',

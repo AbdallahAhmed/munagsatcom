@@ -26,6 +26,10 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
 
     Route::any('register', 'UserController@register')->name('register');
     Route::any('login', 'UserController@login')->name('login');
+    Route::group(['middleware' => ['fauth']], function () {
+        Route::get('user/update', 'UserController@show')->name('user.show');
+        Route::post('user/update', 'UserController@update')->name('user.update');
+    });
 
     Route::get('centers', 'CenterController@index')->name('centers');
     Route::get('centers/{id}', 'CenterController@show')->name('centers.show');

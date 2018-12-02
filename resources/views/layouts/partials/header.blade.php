@@ -31,10 +31,10 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">
-                            <img src="{{asset('/assets')}}/images/avatar.jpg" alt="">
+                            <img src="{{thumbnail(fauth()->user()->photo->path, 'avatar')}}" alt="">
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">{{trans('app.setting')}}</a></li>
+                            <li><a href="{{route('user.show')}}">{{trans('app.setting')}}</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#"><i class="fas fa-sign-out-alt"></i>{{trans('app.logout')}}</a></li>
                         </ul>

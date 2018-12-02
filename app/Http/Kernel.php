@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\FrontAuth;
 use App\Http\Middleware\Localization;
 use App\Http\Middleware\RedirectIfCompany;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -60,6 +61,7 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'localization' => Localization::class,
-        'company' => RedirectIfCompany::class
+        'company' => RedirectIfCompany::class,
+        'fauth' => FrontAuth::class
     ];
 }

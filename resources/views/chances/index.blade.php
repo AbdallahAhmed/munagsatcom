@@ -29,11 +29,13 @@
                             <div class="form-group-lg clearfix">
                                 <p>{{trans('app.fields.status')}}:</p>
                                 <div class="checkbox">
-                                    <input name="status" value="0" type="checkbox" @if(in_array(0, $chosen_status)) checked @endif>
+                                    <input name="status" value="0" type="checkbox"
+                                           @if(in_array(0, $chosen_status)) checked @endif>
                                     <label>{{trans('app.status_array.0')}}</label>
                                 </div>
                                 <div class="checkbox">
-                                    <input name="status" value="1" type="checkbox" @if(in_array(1, $chosen_status)) checked @endif>
+                                    <input name="status" value="1" type="checkbox"
+                                           @if(in_array(1, $chosen_status)) checked @endif>
                                     <label>  {{trans('app.status_array.1')}} </label>
                                 </div>
                             </div>
@@ -64,7 +66,7 @@
             <!-------------- Begin:left side -------------->
 
             @if(count($chances)==0)
-                    <p class="col-md-8 not-found">{{trans('app.chances.not_found')}}</p>
+                <p class="col-md-8 not-found">{{trans('app.chances.not_found')}}</p>
             @endif
             @foreach($chances as $chance)
                 <div class="col-md-8 content">
@@ -87,7 +89,25 @@
                                 </div>
                             </div>
                             <div class="card-share">
-                                <a class="share" href="#"><i class="fa fa-share-alt"></i></a>
+                                <div class="hideshare-wrap" style="width:40px; height:40px;">
+                                    <a class="share hideshare-btn" href="#">
+                                        <i class="fa fa-share-alt"></i>
+                                    </a>
+                                    <ul class="hideshare-list shown" style="width: 80px; left: 50px; right: -50px;">
+                                        <li>
+                                            <a class="shareBtn" data-title="{{$chance->name}}" data-sharer="facebook" href="{{$chance->path}}">
+                                                <i class="fa fa-facebook fa-2x"></i>
+                                                <span>Facebook</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="shareBtn" data-title="{{$chance->name}}" data-sharer="twitter" href="{{$chance->path}}">
+                                                <i class="fa fa-twitter-square fa-2x"></i>
+                                                <span>Twitter</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <div class="card-date clearfix">
@@ -115,7 +135,7 @@
                         </div>
                         <div class="card-price clearfix">
                             <div class="priceshadow one_half">
-                                <button type="button"  class="uperc padding-md fbutcenter btn-mas" data-dismiss="modal"
+                                <button type="button" class="uperc padding-md fbutcenter btn-mas" data-dismiss="modal"
                                         data-target="#myModal">{{trans('app.chances.apply')}}</button>
                                 <!-- Modal -->
                                 <div class="modal fade" id="myModal" role="dialog">
@@ -123,7 +143,8 @@
                                         <!-- Modal content-->
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <button type="button" class="close" data-dismiss="modal">&times;
+                                                </button>
                                                 <h4 class="modal-title"> {{trans('app.chances.apply')}}</h4>
                                             </div>
                                             <div class="modal-body">
@@ -139,9 +160,11 @@
                                                 </form>
                                             </div>
                                             <div class="modal-footer text-center">
-                                                <button type="submit" form="upload" class="uperc padding-md fbutcenter">{{trans('app.chances.apply_done')}}
+                                                <button type="submit" form="upload"
+                                                        class="uperc padding-md fbutcenter">{{trans('app.chances.apply_done')}}
                                                 </button>
-                                                <button type="submit" class="uperc padding-md fbutcenter1" data-dismiss="modal">
+                                                <button type="submit" class="uperc padding-md fbutcenter1"
+                                                        data-dismiss="modal">
                                                     {{trans('app.cancel')}}
                                                 </button>
                                             </div>
@@ -154,7 +177,8 @@
                                         <!-- Modal content-->
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <button type="button" class="close" data-dismiss="modal">&times;
+                                                </button>
                                                 <h4 class="modal-title"> {{trans('app.chances.apply_chance')}} </h4>
                                             </div>
                                             <div class="modal-body">
@@ -211,20 +235,20 @@
             });
         </script>
         <script>
-            $(document).ready(function () {
+           /* $(document).ready(function () {
                 $(".share").hideshare({
                     link: "",           // Link to URL defaults to document.URL
                     title: "",          // Title for social post defaults to document.title
                     media: "",          // Link to image file defaults to null
                     facebook: true,     // Turns on Facebook sharing
                     twitter: true,      // Turns on Twitter sharing
-                    pinterest: true,    // Turns on Pinterest sharing
+                    pinterest: false,    // Turns on Pinterest sharing
                     googleplus: false,   // Turns on Google Plus sharing
                     linkedin: false,     // Turns on LinkedIn sharing
                     position: "right", // Options: Top, Bottom, Left, Right
                     speed: 150           // Speed of transition
                 });
-            });
+            });*/
         </script>
         <script>
             $(function () {
@@ -251,23 +275,23 @@
                         window.location.href = url;
 
                 })
-              /*  $(function () {
-                    $('#upload').on('submit', function (e) {
-                        e.preventDefault();
-                        var form = $(this);
-                        var chance_id =
-                        var file = $('[name="file"]');
-                        var formData = new FormData();
-                        formData.append('file', file[0].files[0]);
-                        formData.append('chance_id', chance_id)
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
-                        });
-                        $.ajax({
-                            type: "post",
-                            url: "{{route('chances.offers')}}",
+                /*  $(function () {
+                      $('#upload').on('submit', function (e) {
+                          e.preventDefault();
+                          var form = $(this);
+                          var chance_id =
+                          var file = $('[name="file"]');
+                          var formData = new FormData();
+                          formData.append('file', file[0].files[0]);
+                          formData.append('chance_id', chance_id)
+                          $.ajaxSetup({
+                              headers: {
+                                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                              }
+                          });
+                          $.ajax({
+                              type: "post",
+                              url: "{{route('chances.offers')}}",
                             data: formData,
                             processData: false,
                             contentType: false,
@@ -286,7 +310,31 @@
                         })
                     })
                 })*/
+                $("body").on("click", ".shareBtn", function (e) {
+                    e.preventDefault
+                    var base = $(this);
 
+                    url = base.attr('href');
+                    title = base.data('title');
+
+                    if (base.data("sharer") == "facebook") {
+                        link = "https://www.facebook.com/sharer/sharer.php?u=" + url;
+                    }
+
+                    if (base.data("sharer") == "twitter") {
+                        link = "https://twitter.com/intent/tweet?url=" + url + "&via=monaasat&text=" + title.replace('#', '');
+                    }
+
+                    var winWidth = 650;
+                    var winHeight = 350;
+                    var winTop = (screen.height / 2) - (winHeight / 2);
+                    var winLeft = (screen.width / 2) - (winWidth / 2);
+
+                    window.open(link, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+
+                    return false;
+
+                });
             })
         </script>
     @endpush

@@ -7,8 +7,10 @@ use Dot\Chances\Models\Sector;
 use Dot\Companies\Models\Company;
 use Dot\Media\Models\Media;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
@@ -134,5 +136,35 @@ class UserController extends Controller
         return redirect()->route('index');
     }
 
+    /**
+     * GET {lang}/user/update
+     * @route user.show
+     * @param Request $request
+     * @return View
+     */
+    public function show(){
+        return view('users.profile', ['user' => fauth()->user()]);
+    }
 
+    /**
+     * POST {lang}/user/update
+     * @route user.update
+     * @param Request $request
+     * @return string
+     */
+    public function update(Request $request){
+        $validator = Validator::make($request->all(),[
+            'current_password' => 'required',
+            'password' => 'required|confirmed|min:6',
+        ]);
+
+        if($validator->fails())
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        if(!(Hash::check($request->get('current_password'), fauth()->user()->password)))
+            return redirect()->back()->withErrors(['wrong_current' => trans('validation.wrong_current')])->withInput($request->all());
+        $user = User::where('email', fauth()->user()->email)->first();
+        $user->password = $request->get('password');
+        $user->save();
+        return redirect()->route('user.show', ['user' => $user])->with('status', trans('app.events.password_changed'));
+    }
 }

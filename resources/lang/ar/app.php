@@ -42,7 +42,10 @@ return [
         'name' => 'اسم المركز',
         'rate' => 'تقيم المركز',
         'contact' => 'راسل مركز الخدمة',
-        'not_found'=>'لا يوجد مراكز خدمة'
+        'not_found' => 'لا يوجد مراكز خدمة',
+    ],
+    'events' => [
+        'successfully_register' => 'تم التسجيل بنجاح',
     ],
     'sectors' => [
         'sector' => 'القطاع',
@@ -50,7 +53,7 @@ return [
         'choose_sector' => 'اختار القطاع',
         'sector_name' => 'اسم الوحدة',
         'sector_name_provided' => 'اسم الوحدة المقدمة',
-        'price_detail'=>'تفاصيل السعر',
+        'price_detail' => 'تفاصيل السعر',
     ],
     'services' => [
         'services' => 'الخدمات',
@@ -84,7 +87,7 @@ return [
         'value' => 'قيمة الفرصة',
         'search_query' => 'بحث في الفرص',
         'success' => 'تم ارسال الطلب بنجاح و ستقوم الشركة بالاطلاع عليه',
-        'not_found'=>'لا يوجد فرص متاحة'
+        'not_found' => 'لا يوجد فرص متاحة'
     ],
     'fields' => [
         "password" => "كلمة المرور",
@@ -98,8 +101,8 @@ return [
         'status' => 'الحاله',
     ],
     'status_array' => [
-      0 => 'مفتوحة',
-      1 => 'مغلقة',
+        0 => 'مفتوحة',
+        1 => 'مغلقة',
     ],
     'add_logo' => 'اضافة اللوجو ',
     'upload_logo' => 'تحميل اللوجو',

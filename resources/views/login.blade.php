@@ -27,10 +27,9 @@
                         <label class="col-xs-12 col-md-3">{{trans('app.fields.password')}}</label>
                         <div class="new-f-group col-xs-12 col-md-9">
                             <div class="form-group">
-                                <span class="icony"><i class="fa fa-fw field-icon toggle-password fa-eye"
-                                                       toggle="#password-field"></i></span>
+                                <span class="icony"><i class="fa fa-fw field-icon toggle-password fa-eye" toggle="#password-field"></i></span>
                                 <input name="password" type="password" class="effect-9 form-control" id="password-field"
-                                       placeholder="***">
+                                       placeholder="{{trans('app.fields.repassword')}}">
                                 <span class="focus-border"><i></i></span>
                             </div>
                         </div>
@@ -38,11 +37,11 @@
                     <div class="form-group-lg row">
                         <label class="col-xs-12 col-md-3"></label>
                         <div class="col-xs-12 col-md-9">
-                            <label class="radio-inline"> {{trans('app.personal')}}</label>
-                            <input type="radio" name="user_type" value="1" onclick="show1();">
+                            <label class="radio-inline" id="input-user_type-personal"> {{trans('app.personal')}}</label>
+                            <input type="radio"   {{old('user_type')==1||!old('user_type')?'checked':''}} id="input-user_type-personal" name="user_type" value="1" onclick="show1();">
 
-                            <label class="radio-inline">{{trans('app.company')}}</label>
-                            <input type="radio" name="user_type" value="2" onclick="show2();">
+                            <label class="radio-inline" id="input-user_type-company">{{trans('app.company')}}</label>
+                            <input type="radio"   {{old('user_type')==2?'checked':''}} name="user_type" value="2"  id="input-user_type-company" onclick="show2();">
                         </div>
                     </div>
                     <ul>

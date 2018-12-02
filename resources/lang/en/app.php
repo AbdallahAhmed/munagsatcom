@@ -56,6 +56,9 @@ return [
         'contact' => 'Message center',
         'not_found'=>'Not found Sector'
     ],
+    'events' => [
+        'successfully_register' => 'Registered successfully',
+    ],
     'sectors' => [
         'sector' => 'Sector',
         'price_detail'=>'price details',

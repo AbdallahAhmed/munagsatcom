@@ -157,7 +157,8 @@ return array(
         'company_name'=>'أسم الشركة',
         'sector_id' => 'القطاع',
         'details'=>'تفاصيل الشركة',
-        'user_type' => 'نوع المستخدم'
+        'user_type' => 'نوع المستخدم',
+        'logo'=>'شعار',
 
     ),
 );

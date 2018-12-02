@@ -83,6 +83,7 @@ class UserController extends Controller
                 $company->files()->sync($files);
             }
 
+            return redirect()->route('login')->with('status',trans('app.events.successfully_register'));
             //return success or redirect
         }
 

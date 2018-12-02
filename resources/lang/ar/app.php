@@ -33,6 +33,16 @@ return [
     'address' => 'العنوان',
     'quantity' => 'الكمية',
     'filter' => 'تصفية',
+    'current_password' => ' كلمة المرور الحاليه',
+    'update_password' => 'تغير كلمة المرور',
+    'new_password' => 'كلمة المرور الجديده ',
+    'confirm_password' => 'تاكيد كلمة المرور',
+    'company_files' => 'مرفقات اواراق الشركة',
+    'employees' => 'الموظفين',
+    'requests' => 'طلبات الاضافة',
+    'search_employee' => 'البحث عن موظف',
+    'add_delegate' => 'اضافة مندوب',
+    'messages' => 'الرسائل',
     'centers' => [
         'centers' => 'مراكز خدمية',
         'center_name' => 'اسم المركز الخدمى',
@@ -46,6 +56,7 @@ return [
     ],
     'events' => [
         'successfully_register' => 'تم التسجيل بنجاح',
+        'password_changed' => 'تم تغير كلمة المرور بنجاح'
     ],
     'sectors' => [
         'sector' => 'القطاع',
@@ -62,12 +73,15 @@ return [
         'service_provided' => 'اسم الخدمة المقدمة',
     ],
     'chances' => [
-        'chances' => 'فرض استثمارية ',
+        'chances' => 'فرص استثمارية ',
+        'the_chances' => 'الفرص',
         'chance' => 'الفرصة',
         'chances_est' => 'فرص استثماريه',
         'search' => 'بحث فى الفرص  ',
         'company_name' => ' أسم الشركة',
         'chance_name' => 'اسم الفرصه',
+        'downloads' => 'عدد التحميل',
+        'provided_offers' => ' عدد العروض المقدمة',
         'chance_details' => 'تفاصيل  الفرصه',
         'internal_number' => 'الرقم المرجعى الداخلى',
         'closing_date' => 'تاريخ الاغلاق',
@@ -87,7 +101,14 @@ return [
         'value' => 'قيمة الفرصة',
         'search_query' => 'بحث في الفرص',
         'success' => 'تم ارسال الطلب بنجاح و ستقوم الشركة بالاطلاع عليه',
-        'not_found' => 'لا يوجد فرص متاحة'
+        'not_found' => 'لا يوجد فرص متاحة',
+        'approved' => 'تم',
+        'not_approved' => 'لا',
+        'declined' => 'الغاء',
+        'my_chances' => 'فرصي',
+        'details' => 'تفاصيل',
+        'accepted' => ' اعتماد',
+        'posted' => 'فرص تم نشرها'
     ],
     'fields' => [
         "password" => "كلمة المرور",
@@ -103,6 +124,10 @@ return [
     'status_array' => [
         0 => 'مفتوحة',
         1 => 'مغلقة',
+        2 => 'ملغاة من الشركة',
+        3 => 'قيد المراجعة من الإدارة',
+        4 => 'تم التعميد',
+        5 => 'مرفوضة من الإدارة'
     ],
     'add_logo' => 'اضافة اللوجو ',
     'upload_logo' => 'تحميل اللوجو',

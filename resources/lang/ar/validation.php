@@ -51,6 +51,7 @@ return array(
     "integer" => ":attribute يجب أن يكون رقماً صحيحاً.",
     "ip" => ":attribute يجب أن يكون عنوان أنترنت (IP) صحيحاً.",
     "invalid_login" => "خطأ في اسم المستخدم او كلمة المرور.",
+    'wrong_current' => 'خطأ في كلمة المرور الحالية',
     "max" => array(
         "numeric" => ":attribute يجب ألا يكون أكبر من :max.",
         "file" => ":attribute يجب ألا يكون أكبر من :max كيلو بايت.",

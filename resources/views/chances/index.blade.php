@@ -29,11 +29,11 @@
                             <div class="form-group-lg clearfix">
                                 <p>{{trans('app.fields.status')}}:</p>
                                 <div class="checkbox">
-                                    <input name="status" value="0" type="checkbox">
+                                    <input name="status" value="0" type="checkbox" @if(in_array(0, $chosen_status)) checked @endif>
                                     <label>{{trans('app.status_array.0')}}</label>
                                 </div>
                                 <div class="checkbox">
-                                    <input name="status" value="1" type="checkbox">
+                                    <input name="status" value="1" type="checkbox" @if(in_array(1, $chosen_status)) checked @endif>
                                     <label>  {{trans('app.status_array.1')}} </label>
                                 </div>
                             </div>
@@ -115,7 +115,7 @@
                         </div>
                         <div class="card-price clearfix">
                             <div class="priceshadow one_half">
-                                <button type="button" class="uperc padding-md fbutcenter btn-mas" data-dismiss="modal"
+                                <button type="button"  class="uperc padding-md fbutcenter btn-mas" data-dismiss="modal"
                                         data-target="#myModal">{{trans('app.chances.apply')}}</button>
                                 <!-- Modal -->
                                 <div class="modal fade" id="myModal" role="dialog">
@@ -251,14 +251,15 @@
                         window.location.href = url;
 
                 })
-                $(function () {
+              /*  $(function () {
                     $('#upload').on('submit', function (e) {
                         e.preventDefault();
                         var form = $(this);
+                        var chance_id =
                         var file = $('[name="file"]');
                         var formData = new FormData();
                         formData.append('file', file[0].files[0]);
-                        formData.append('chance_id', "{{$chance->id}}")
+                        formData.append('chance_id', chance_id)
                         $.ajaxSetup({
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -284,7 +285,7 @@
                             }
                         })
                     })
-                })
+                })*/
 
             })
         </script>

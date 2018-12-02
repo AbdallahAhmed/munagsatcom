@@ -51,6 +51,7 @@ return [
     'ipv6' => 'The :attribute must be a valid IPv6 address.',
     'json' => 'The :attribute must be a valid JSON string.',
     'invalid_login' => 'Email or password incorrect.',
+    'wrong_current' => 'Incorrect current password',
     'max' => [
         'numeric' => 'The :attribute may not be greater than :max.',
         'file' => 'The :attribute may not be greater than :max kilobytes.',

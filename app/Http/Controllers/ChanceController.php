@@ -39,7 +39,7 @@ class ChanceController extends Controller
         $this->data['created_at'] = null;
         $status = $request->get('status');
         $status = $status ? $status : [];
-        $this->data['status'] = $status;
+        $this->data['chosen_status'] = $status;
 
         foreach ($status as $st) {
             switch ($st) {
@@ -142,7 +142,6 @@ class ChanceController extends Controller
     {
 
         $chance = \App\Models\Chance::findOrFail($id);
-        $diff = \Carbon\Carbon::parse($chance->closing_date)->diffForHumans(\Carbon\Carbon::now());
 
         $this->data['chance'] = $chance;
         return view('chances.chance', $this->data);

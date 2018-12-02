@@ -43,7 +43,9 @@ a:hover{transition: 0.2s;transition-delay: 0.2s;}
 .right{float: right;margin-left: 30px;text-align: right;}
 .right:last-child{margin-left: 0;}
 .left{float: left;}
-.padding-md{}
+.padding-md{
+    padding: 11px 30px;
+}
 .padding-lg{padding: 15px 50px;}
 /* ---------------- */
 .title-small{font-size: 15px;font-weight: 500;color: #315d90;}

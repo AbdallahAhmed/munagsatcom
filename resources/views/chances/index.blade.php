@@ -43,7 +43,9 @@
                                     <div class="form-group clearfix">
                                         <div class="input-append date" id="dp3" data-date="12-02-2012"
                                              data-date-format="dd-mm-yyyy">
-                                            <input name="created_date" value="{{$created_at? $created_at : ""}}" data-date-format="dd-mm-yyyy" class="effect-9 form-control" id="date" placeholder="dd-mm-yyyy"
+                                            <input name="created_date" value="{{$created_at? $created_at : ""}}"
+                                                   data-date-format="dd-mm-yyyy" class="effect-9 form-control" id="date"
+                                                   placeholder="dd-mm-yyyy"
                                                    type="text">
                                             <span class="add-on"><i class="fa fa-calendar"></i></span>
                                         </div>
@@ -60,6 +62,10 @@
             </div>
             <!-------------- End:right side -------------->
             <!-------------- Begin:left side -------------->
+
+            @if(count($chances)==0)
+                    <p class="col-md-8 not-found">{{trans('app.chances.not_found')}}</p>
+            @endif
             @foreach($chances as $chance)
                 <div class="col-md-8 content">
                     <h2>{{trans('app.chances.chances_est')}}</h2>
@@ -149,6 +155,7 @@
                     <!-------------- End:pagination -------------->
                 </div>
         @endforeach
+
         <!-------------- End:left side -------------->
         </div>
     </section>
@@ -211,12 +218,12 @@
                     url += search_q == !search_q || search_q.length === 0 ||
                     search_q === "" || !/[^\s]/.test(search_q) ||
                     /^\s*$/.test(search_q) || search_q.replace(/\s/g, "") === "" ? "" : "q=" + search_q + "&";
-                    url = created_date.length > 0 ? url+"created_at="+created_date+"&" : url ;
+                    url = created_date.length > 0 ? url + "created_at=" + created_date + "&" : url;
                     for (var i = 0; i < status.length; i++) {
                         url += "status[]=" + status[i];
                         url = i != status.length - 1 ? url + "&" : url;
                     }
-                    url = url[url.length-1] == "&" ? url.slice(0, -1): url;
+                    url = url[url.length - 1] == "&" ? url.slice(0, -1) : url;
 
                     if (url != "{{route('chances')}}" + "?")
                         window.location.href = url;

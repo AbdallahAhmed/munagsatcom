@@ -13,10 +13,12 @@
                                 <div class="search-bar">
                                     <div class="icon-addon">
                                         @if($q)
-                                            <input name="search_q" type="text" placeholder="{{trans('app.centers.search_query')}}..."
+                                            <input name="search_q" type="text"
+                                                   placeholder="{{trans('app.centers.search_query')}}..."
                                                    class="form-control" value="{{$q}}">
                                         @else
-                                            <input name="search_q" type="text" placeholder="{{trans('app.centers.search_query')}}..."
+                                            <input name="search_q" type="text"
+                                                   placeholder="{{trans('app.centers.search_query')}}..."
                                                    class="form-control">
                                         @endif
                                         <div class="searh-icn" rel="tooltip"><i class="fa fa-search"></i></div>
@@ -70,14 +72,19 @@
 
                             </div>
                             <div class="form-group text-center">
-                                <button type="submit" class="uperc padding-md fbutcenter"> {{trans('app.search')}}</button>
+                                <button type="submit"
+                                        class="uperc padding-md fbutcenter"> {{trans('app.search')}}</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
             <div class="col-md-8 content">
-                <h2>{{trans('app.centers.centers')}}</h2>
+                @if(count($centers)==0)
+                    <p class="col-md-12 not-found">{{trans('app.centers.not_found')}}</p>
+                @else
+                    <h2>{{trans('app.centers.centers')}}</h2>
+                @endif
                 @foreach($centers as $center)
                     <div class="card row markaz">
                         <div class="col-md-9">
@@ -94,9 +101,13 @@
                                 <div class="one_larg title-larg">
                                     <ul>
                                         @foreach($center->services as $service)
-                                            <li class=""><a href="#" title="تفاصيل السعر" data-toggle="popover"
-                                                            data-trigger="hover" data-placement="bottom"
-                                                            data-content="{{trans('app.from').$service->price_from.trans("app.reyal")." : ".trans('app.to').$service->price_from.trans("app.reyal")}}"> {{$service->name}} </a>
+                                            <li class="">
+                                                <a href="#" title="{{trans('app.sectors.price_detail')}}"
+                                                   data-toggle="popover"
+                                                   data-trigger="hover" data-placement="bottom"
+                                                   data-content="{{trans('app.from').$service->price_from.trans("app.reyal")." : ".trans('app.to').$service->price_from.trans("app.reyal")}}">
+                                                    {{$service->name}}
+                                                </a>
                                             </li>
                                         @endforeach
 
@@ -111,6 +122,7 @@
                         </div>
                     </div>
                 @endforeach
+
                 <div class="text-center">
                     {{$centers->appends(Request::all())->render()}}
                 </div>

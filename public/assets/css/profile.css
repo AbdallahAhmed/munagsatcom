@@ -30,7 +30,7 @@
 }
 .profile-item{
     margin: 0px 0 15px;
-    padding: 0 0 25px;
+    padding: 0 0 20px;
     border-bottom: 1px solid #ccc;
 }
 .profile-item h3{
@@ -105,4 +105,20 @@ margin: 15px 0;
     height: 149px;
     width: 149px;
     margin: 0 auto;
+}
+
+.masg-details {
+    line-height: 1.5;
+    border: 1px solid #ebebeb;
+    padding: 25px 30px;
+    margin: 50px 90px 20px;
+    background-color: #f9f9f9;
+}
+.masg-footer{
+    border-top: 1px solid #c3bebe;
+    padding: 15px;
+    margin: 15px 0 0;
+}
+.masg-item{
+    margin-bottom: 20px;
 }

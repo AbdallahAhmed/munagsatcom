@@ -1,3 +1,8 @@
 alert>p, .alert>ul {
     list-style:circle;
 }
+
+.not-found{
+    text-align: center;
+    margin-top: 120px;
+}

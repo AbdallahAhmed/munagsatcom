@@ -14,10 +14,11 @@
 .unit-table .table>tfoot>tr>th,
 .unit-table .table>thead>tr>td,
 .unit-table .table>thead>tr>th {
-    padding: 9px 15px;
+    padding: 9px 5px;
     line-height: 1.42857143;
     vertical-align: middle;
     text-align: center;
+    /* font-weight: 500; */
 }
 
 .table-right table>tbody>tr>td,

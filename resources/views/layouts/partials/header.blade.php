@@ -25,7 +25,7 @@
                 @if(!fauth()->check())
                     <li>
                         <button class="fbutcenter" type="button"
-                                onclick="location.href = 'registration.html';"> {{trans('app.login')}}</button>
+                                onclick="location.href = '{{route('login')}}';"> {{trans('app.login')}}</button>
                     </li>
                 @else
                     <li class="dropdown">
@@ -51,8 +51,8 @@
         <div class="container">
             <ul class="nav nav-pills nav-justified tab">
                 <li><a href="javascript:void(0)">{{trans('app.government_tenders')}}</a></li>
-                <li><a href="{{route('centers')}}">{{trans('app.service_centers')}}</a></li>
-                <li><a href="{{route('chances')}}">{{trans('app.investment_opportunities')}}</a></li>
+                <li class="{{\Request::route()->getName()=="centers"?'active':''}}"><a href="{{route('centers')}}">{{trans('app.service_centers')}}</a></li>
+                <li class="{{\Request::route()->getName()=="chances"?'active':''}}"><a href="{{route('chances')}}">{{trans('app.investment_opportunities')}}</a></li>
             </ul>
         </div>
     </div>

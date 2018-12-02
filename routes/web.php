@@ -37,6 +37,14 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
 
     Route::group(['middleware' => ['company']], function ($router){
         $router->get('company/{id}', 'CompanyController@show')->name('company.show');
+        $router->get('company/{id}', 'CompanyController@show')->name('company.chances');
+        $router->get('company/{id}', 'CompanyController@show')->name('company.tenders');
+        $router->get('company/{id}', 'CompanyController@show')->name('company.employees');
+        $router->get('company/{id}', 'CompanyController@show')->name('company.centers');
+        $router->get('company/{id}', 'CompanyController@show')->name('company.requests');
+        $router->get('company/{id}', 'CompanyController@show')->name('company.employer.search');
+        $router->get('company/{id}', 'CompanyController@show')->name('company.add_delegate');
+        $router->get('company/{id}', 'CompanyController@show')->name('company.messsages');
     });
 
 

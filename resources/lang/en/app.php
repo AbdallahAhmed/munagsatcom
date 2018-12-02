@@ -6,6 +6,7 @@ return [
     'government_tenders'=>'Government tenders',
     'service_centers'=>'Service center',
     'investment_chances'=>'Investment chances',
+    'investment_opportunities' => 'Investment chances',
     'home'=>'Home',
     'about_website'=>'About website',
     'terms_conditions '=>'Terms & conditions',
@@ -139,15 +140,8 @@ return [
         5 => 'rejected'
     ],
     ''=>'',
-    ''=>'',
-    ''=>'',
-    ''=>'',
-    ''=>'',
-    ''=>'',
-    ''=>'',
-    ''=>'',
-    ''=>'',
-    ''=>'',
-    ''=>'',
-    ''=>'',
+
+
+
+
 ];

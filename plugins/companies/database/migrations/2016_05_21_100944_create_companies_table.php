@@ -17,6 +17,9 @@ class CreateCompaniesTable extends Migration
             $table->string("first_name")->index();
             $table->string("last_name")->index();
             $table->string("details")->index();
+            $table->string("address")->nullable()->index();
+            $table->string("mobile_number")->nullable()->index();
+            $table->string("phone_number")->nullable()->index();
             $table->integer("sector_id")->index();
             $table->string("image_id")->nullable()->index();
             $table->integer("user_id")->default(0)->index();

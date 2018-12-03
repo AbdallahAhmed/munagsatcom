@@ -65,6 +65,14 @@
                                           placeholder="{{ trans("tenders::tenders.attributes.objective") }}">{{ @Request::old("objective", $tender->objective) }}</textarea>
                             </div>
 
+
+                            <div class="form-group">
+                                <label>$ {{ trans("tenders::tenders.attributes.price") }} </label>
+                                <input name="price" type="number"  step="0.01" class="form-control" rows="1"
+                                          id="tender-goal"
+                                          placeholder="{{ trans("tenders::tenders.attributes.price") }}" value="{{ @Request::old("price", $tender->price) }}">
+                            </div>
+
                             <div class="form-group">
                                 <label>{{ trans("tenders::tenders.attributes.org_id") }}</label>
                                 <select name="org_id" class="form-control chosen-select chosen-rtl"
@@ -183,6 +191,16 @@
                                           placeholder="{{ trans("tenders::tenders.attributes.address_execute") }}">{{ @Request::old("address_execute", $tender->address_execute) }}</textarea>
                             </div>
 
+
+                            <div class="form-group" style="position:relative">
+                                <label>{{ trans("tenders::tenders.attributes.places") }}</label>
+
+                                <select name="tender_places[]" class="form-control" multiple="multiple" id="tender_places">
+                                    @foreach($tender->places as $place)
+                                        <option value="{{$place->id}}" selected>{{$place->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
 
@@ -327,6 +345,7 @@
 
     <link href="{{ assets("admin::tagit") }}/jquery.tagit.css" rel="stylesheet" type="text/css">
     <link href="{{ assets("admin::tagit") }}/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('/css') }}/select2.min.css" rel="stylesheet" type="text/css">
 
     <link href="{{ assets('admin::css/plugins/datetimepicker/bootstrap-datetimepicker.min.css') }}"
           rel="stylesheet" type="text/css">
@@ -373,12 +392,44 @@
 
     <script type="text/javascript" src="{{ assets("admin::tagit") }}/tag-it.js"></script>
     <script type="text/javascript" src="{{ assets('admin::js/plugins/moment/moment.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/select2.min.js') }}"></script>
     <script type="text/javascript"
             src="{{ assets('admin::js/plugins/datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
 
     <script>
 
         $(document).ready(function () {
+
+            $("#tender_places").select2({
+                ajax: {
+                    url: "<?php echo route("admin.places.search"); ?>",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        var query = {
+                            q: params.term
+                        };
+
+                        // Query parameters will be ?search=[term]&type=public
+                        return query;
+                    },
+                    processResults: function (data) {
+                        // Tranforms the top-level key of the response object from 'items' to 'results'
+                        console.log(data);
+                        var items = data.map(function (e) {
+                            return {
+                                text: e.name['{{app()->getLocale()}}'],
+                                id: e.id,
+                                self: e,
+                            }
+                        });
+                        return {
+                            results: items
+                        };
+                    }
+                },
+                dir: "{{app()->getLocale()=="ar"?"rtl":"ltr"}}"
+            });
 
             $('.datetimepick').datetimepicker({
                 format: 'YYYY-MM-DD HH:mm:ss',

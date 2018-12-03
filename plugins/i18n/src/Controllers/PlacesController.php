@@ -54,6 +54,9 @@ class PlacesController extends Controller
 
         $places = $query->paginate($this->data['per_page']);
 
+        if(Request::ajax()){
+            return response()->json($places);
+        }
         $this->data["places"] = $places;
         $this->data["country"] = Place::find($parent);
 

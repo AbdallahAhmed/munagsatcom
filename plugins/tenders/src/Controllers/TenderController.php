@@ -99,6 +99,7 @@ class TenderController extends Controller
             Action::fire("tender.deleting", $tender);
 
             $tender->categories()->detach();
+            $tender->places()->detach();
 
             $tender->delete();
 
@@ -183,6 +184,7 @@ class TenderController extends Controller
             $tender->user_id = Auth::user()->id;
 
             $tender->status = Request::get("status", 0);
+            $tender->price = Request::get("price", 0);
 
             //dates
             $tender->published_at = Request::get('published_at', date("Y-m-d H:i:s"));
@@ -200,6 +202,7 @@ class TenderController extends Controller
             $tender->save();
 
             $tender->categories()->sync(Request::get("categories", []));
+            $tender->places()->sync(Request::get("tender_places", []));
 
             // Fire saved action
 
@@ -234,7 +237,7 @@ class TenderController extends Controller
             $tender->address_files_open = Request::get('address_files_open');
             $tender->address_execute = Request::get('address_execute');
             $tender->is_cb_ratio_active = Request::get("is_cb_ratio_active", 0);
-
+            $tender->price = Request::get("price", 0);
 
             $tender->cb_real_price = Request::get('cb_real_price');
 
@@ -267,6 +270,8 @@ class TenderController extends Controller
 
             $tender->save();
             $tender->categories()->sync(Request::get("categories", []));
+            $tender->places()->sync(Request::get("tender_places", []));
+
 
             // Fire saved action
 

@@ -32,8 +32,9 @@ class CreateTendersTable extends Migration
             $table->integer('status')->default(0)->index();
 
 
-            $table->float('cb_real_price')->default(0)->index();
-            $table->float('cb_downloaded_price')->default(0)->index();
+            $table->double('cb_real_price',15,2)->default(0)->index();
+            $table->double('price',15,2)->default(0)->index();
+            $table->double('cb_downloaded_price',15,2)->default(0)->index();
 
 
             $table->integer('views')->default(0)->index();
@@ -52,7 +53,7 @@ class CreateTendersTable extends Migration
 
     }
 
-    /*
+    /**
      * Reverse the migrations.
      *
      * @return void

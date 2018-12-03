@@ -55,6 +55,10 @@ return [
         'contact' => 'راسل مركز الخدمة',
         'not_found' => 'لا يوجد مراكز خدمة',
     ],
+
+    'tenders'=>[
+        'tenders'=>'مناقصات حكومية '
+    ],
     'events' => [
         'successfully_register' => 'تم التسجيل بنجاح',
         'password_changed' => 'تم تغير كلمة المرور بنجاح'

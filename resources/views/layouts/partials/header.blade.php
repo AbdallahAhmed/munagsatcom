@@ -23,10 +23,17 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if(!fauth()->check())
-                    <li>
-                        <button class="fbutcenter" type="button"
-                                onclick="location.href = '{{route('login')}}';"> {{trans('app.login')}}</button>
-                    </li>
+                    @if(\Request::route()->getName()=="login")
+                        <li>
+                            <button class="fbutcenter" type="button"
+                                    onclick="location.href = '{{route('register')}}';"> {{trans('app.register')}}</button>
+                        </li>
+                    @else
+                        <li>
+                            <button class="fbutcenter" type="button"
+                                    onclick="location.href = '{{route('login')}}';"> {{trans('app.login')}}</button>
+                        </li>
+                    @endif
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -51,8 +58,10 @@
         <div class="container">
             <ul class="nav nav-pills nav-justified tab">
                 <li><a href="javascript:void(0)">{{trans('app.government_tenders')}}</a></li>
-                <li class="{{\Request::route()->getName()=="centers"?'active':''}}"><a href="{{route('centers')}}">{{trans('app.service_centers')}}</a></li>
-                <li class="{{\Request::route()->getName()=="chances"?'active':''}}"><a href="{{route('chances')}}">{{trans('app.investment_opportunities')}}</a></li>
+                <li class="{{\Request::route()->getName()=="centers"?'active':''}}"><a
+                            href="{{route('centers')}}">{{trans('app.service_centers')}}</a></li>
+                <li class="{{\Request::route()->getName()=="chances"?'active':''}}"><a
+                            href="{{route('chances')}}">{{trans('app.investment_opportunities')}}</a></li>
             </ul>
         </div>
     </div>

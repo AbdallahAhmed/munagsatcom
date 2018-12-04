@@ -78,7 +78,11 @@ return [
         "address_get_offer" => "مكان تقديم العروض",
         "address_files_open" => "مكان فتح المظاريف",
         "address_execute" => "مكان  التنفيذ",
+        'id'=>' رقم المناقصة',
+        'cb'=>'قيمة الكراسة',
+        'remaining_hours'=>'الايام الباقية / الساعات اذا كان اقل من 24 ساعة ',
     ],
+    '$'=>'ريال سعودى',
     'events' => [
         'successfully_register' => 'تم التسجيل بنجاح',
         'password_changed' => 'تم تغير كلمة المرور بنجاح'

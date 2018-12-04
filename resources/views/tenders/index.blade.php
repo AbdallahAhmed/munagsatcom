@@ -31,9 +31,10 @@
                                 <label class="col-xs-12 col-md-3">{{trans('app.tenders.places')}}</label>
                                 <div class="col-xs-12 col-md-9 new-f-group">
                                     <div class="form-group clearfix">
+
                                         <select name="place_id" class="effect-9 form-control">
                                             @foreach(Dot\I18n\Models\Place::where('status',1)->get() as $place)
-                                                <option value="{{$place->id}}" {{old('place_id',Request::get('place_id'))==$place->id?' selected ':''}}>{{$place->name}}</option>
+                                                <option value="{{$place->id}}" {{old('place_id',Request::get('place_id'))==$place->id?' selected ':''}}>{{($place->t_name)}}</option>
                                             @endforeach
                                         </select><span class="focus-border"><i></i></span>
                                     </div>
@@ -116,7 +117,8 @@
                                 </div>
                                 <div class="col-md-10">
                                     <div class="title">
-                                        <a href="{{$tender->path}}" title="{{$tender->name}}"><h2>{{$tender->name}}</h2></a>
+                                        <a href="{{$tender->path}}" title="{{$tender->name}}"><h2>{{$tender->name}}</h2>
+                                        </a>
                                         <p>{{$tender->objective}}</p>
                                     </div>
                                 </div>
@@ -128,33 +130,40 @@
                         <div class="card-date clearfix">
                             <div class="item one_thrd">
                                 <p>{{trans('app.tenders.files_opened_at')}}</p>
-                                <p><i class="fa  fa-calendar"></i> <span class="text-grey">{{$tender->files_opened_at->format('Y/m/d')}}</span>-<span class="text-grey">{{$tender->files_opened_at->format('H:s')}}</span></p>
+                                <p><i class="fa  fa-calendar"></i> <span
+                                            class="text-grey">{{$tender->files_opened_at->format('Y/m/d')}}</span>-<span
+                                            class="text-grey">{{$tender->files_opened_at->format('H:s')}}</span></p>
                             </div>
                             <div class="item one_thrd">
                                 <p>{{trans('app.tenders.last_get_offer_at')}}</p>
-                                <p><i class="fa  fa-calendar"></i> <span class="text-grey">{{$tender->last_get_offer_at->format('Y/m/d')}}</span>-<span class="text-grey">{{$tender->last_get_offer_at->format('H:s')}}</span></p>
+                                <p><i class="fa  fa-calendar"></i> <span
+                                            class="text-grey">{{$tender->last_get_offer_at->format('Y/m/d')}}</span>-<span
+                                            class="text-grey">{{$tender->last_get_offer_at->format('H:s')}}</span></p>
                             </div>
                             <div class="item one_thrd">
                                 <p>{{trans('app.tenders.created')}}ا</p>
-                                <p><i class="fa  fa-calendar"></i> <span class="text-grey">{{$tender->published_at->format('Y/m/d')}}</span></p>
+                                <p><i class="fa  fa-calendar"></i> <span
+                                            class="text-grey">{{$tender->published_at->format('Y/m/d')}}</span></p>
                             </div>
 
                         </div>
                         <div class="card-cont row">
-                            <div class="col-md-6 padt"> الايام الباقية / الساعات اذا كان اقل من 24 ساعه</div>
+                            <div class="col-md-6 padt">{{trans('app.tenders.remaining_hours')}}</div>
                             <div class="col-md-6">
                                 <div class="progress ">
                                     <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
                                          aria-valuemax="0" style="">
-                                    <span class="popOver" data-toggle="tooltip" data-placement="top" title=" 5 ايام و 10 ساعات"> </span>
+                                        <span class="popOver" data-toggle="tooltip" data-placement="top"
+                                              title=" 5 ايام و 10 ساعات"> </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-price clearfix">
-                            <div class="priceshadow one_half"> قيمة الكراسه <span
-                                        class="text-blue">10.000 ريال سعودى </span></div>
-                            <div class="light-white one_half"> رقم المناقصه <span class="text-blue">2018/217/33 </span>
+                            <div class="priceshadow one_half"> {{trans('app.tenders.cb')}} <span
+                                        class="text-blue">{{$tender->cb_real_price}} {{trans('app.$')}} </span></div>
+                            <div class="light-white one_half">{{trans('app.tenders.id')}} <span
+                                        class="text-blue">{{$tender->id}}</span>
                             </div>
                         </div>
                     </div>
@@ -162,16 +171,7 @@
 
             <!-------------- Begin:pagination -------------->
                 <div class="text-center">
-                    <ul class="pagination">
-                        <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a>
-                        </li>
-                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-                    </ul>
+                    {{$tenders->appends(Request::all())->render()}}
                 </div>
                 <!---------------- End:pagination ---------------->
             </div>

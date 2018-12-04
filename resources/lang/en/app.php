@@ -46,6 +46,7 @@ return [
     'add_delegate' => 'Add delegate',
     'messages' => 'Messages',
     'user_profile' => 'User details',
+    '$'=>'SR',
     'tenders' => [
         'tenders' => 'Government tenders',
         'search' => "Search for tenders ",
@@ -67,6 +68,9 @@ return [
         "address_get_offer" => "Place of presentation",
         "address_files_open" => "Place open envelopes",
         "address_execute" => "Place of execution",
+        'id'=>'Tender id',
+        'cb'=>'the booklet price',
+        'remaining_hours'=>'Days remaining / hours if less than 24 hours'
     ],
     'fields' => [
         "username" => "Username",

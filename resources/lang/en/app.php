@@ -46,6 +46,13 @@ return [
     'add_delegate' => 'Add delegate',
     'messages' => 'Messages',
     'user_profile' => 'User details',
+    'tenders'=>[
+        'tenders'=>'Government tenders',
+        'search'=>"Search for tenders ",
+        'activity'=>'Activity',
+
+        'places'=>'Places',
+    ],
     'fields'=>[
         "username" => "Username",
         "password" => "Password",

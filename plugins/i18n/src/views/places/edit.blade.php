@@ -36,7 +36,8 @@
             <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12 text-right">
 
                 @if ($place)
-                    <a href="{{ @route("admin.places.create", ["parent" => $country->id])}}" class="btn btn-primary btn-labeled btn-main"> <span
+                    <a href="{{ @route("admin.places.create", ["parent" => $country->id])}}"
+                       class="btn btn-primary btn-labeled btn-main"> <span
                             class="btn-label icon fa fa-plus"></span> &nbsp;{{trans("i18n::places.add_new")}}</a>
                 @endif
 
@@ -62,8 +63,8 @@
 
                             <div class="panel-options">
                                 <ul class="nav nav-tabs">
-                                    @if(count(config("i18n.locales")))
-                                        @foreach(config("i18n.locales") as $key => $locale)
+                                    @if(true)
+                                        @foreach(['ar' => ["title" => "العربية","direction" => "rtl"], 'en' => ["title" => "English","direction" => "ltr"]] as $key => $locale)
                                             <li @if($key == app()->getLocale()) class="active" @endif>
                                                 <a data-toggle="tab" href="#tab-{{ $key }}" aria-expanded="true">
                                                     {{ $locale["title"] }}
@@ -77,14 +78,16 @@
 
                             <div class="tab-content">
 
-                                @foreach(config("i18n.locales") as $key => $locale)
+                                @foreach(['ar' => ["title" => "العربية","direction" => "rtl"], 'en' => ["title" => "English","direction" => "ltr"]] as $key => $locale)
 
                                     <div id="tab-{{ $key }}"
-                                         class="tab-pane @if($key == app()->getLocale()) active @endif" style="direction: {{ $locale["direction"] }}">
+                                         class="tab-pane @if($key == app()->getLocale()) active @endif"
+                                         style="direction: {{ $locale["direction"] }}">
 
                                         <div class="form-group">
 
-                                            <label for="input-name">{{ trans("i18n::places.attributes.name", [], $key) }}</label>
+                                            <label
+                                                for="input-name">{{ trans("i18n::places.attributes.name", [], $key) }}</label>
 
                                             <input type="text" class="form-control" id="input-name"
                                                    value="{{ @Request::old("name.".$key, $place->name->$key) }}"
@@ -98,12 +101,13 @@
                                                 for="input-currency">{{ trans("i18n::places.attributes.currency", [], $key) }}</label>
 
                                             @if($country)
-                                                <input type="text" readonly class="form-control" name="currency[{{ $key }}]" value="{{ $country->currency }}">
+                                                <input type="text" readonly class="form-control"
+                                                       name="currency[{{ $key }}]" value="{{ $country->currency }}">
                                             @else
                                                 <input type="text" class="form-control" id="input-currency"
-                                                   value="{{ @Request::old("currency.".$key, $place->currency->$key) }}"
-                                                   name="currency[{{ $key }}]"
-                                                   placeholder="{{trans("i18n::places.attributes.currency", [], $key)}}">
+                                                       value="{{ @Request::old("currency.".$key, $place->currency->$key) }}"
+                                                       name="currency[{{ $key }}]"
+                                                       placeholder="{{trans("i18n::places.attributes.currency", [], $key)}}">
                                             @endif
                                         </div>
 
@@ -124,11 +128,12 @@
                                 <label>{{ trans("i18n::places.attributes.code") }}</label>
 
                                 @if($country)
-                                    <input type="text" class="form-control" readonly name="code" value="{{ $country->code }}">
+                                    <input type="text" class="form-control" readonly name="code"
+                                           value="{{ $country->code }}">
                                 @else
-                                <input type="text" class="form-control" id="code" name="code"
-                                       value="{{ @Request::old('code', $place->code) }}"
-                                       placeholder="{{trans("i18n::places.attributes.code")}}">
+                                    <input type="text" class="form-control" id="code" name="code"
+                                           value="{{ @Request::old('code', $place->code) }}"
+                                           placeholder="{{trans("i18n::places.attributes.code")}}">
                                 @endif
                             </div>
 
@@ -189,7 +194,6 @@
                         </div>
                     </div>
 
-
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-camera"></i>
@@ -219,7 +223,6 @@
                     </div>
 
                 </div>
-
 
             </div>
 

@@ -105,7 +105,7 @@ class UserController extends Controller
             if ($request->method() == "POST") {
                 $error = new MessageBag();
                 $validator = Validator::make($request->all(), [
-                    'username' => 'required|email',
+                    'email' => 'required|email',
                     'password' => 'required',
                     'user_type' => 'required'
                 ]);
@@ -114,7 +114,7 @@ class UserController extends Controller
                 }
 
                 $isAuthed = fauth()->attempt([
-                    'email' => $request->get('username'),
+                    'email' => $request->get('email'),
                     'password' => $request->get('password'),
                     'backend' => 0
                 ]);

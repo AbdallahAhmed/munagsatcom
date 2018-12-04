@@ -79,4 +79,13 @@ class Place extends Model
         return strtoupper($code);
     }
 
+    public function getTNameAttribute()
+    {
+        if(app()->getLocale()=="ar"){
+            return $this->name->ar;
+        }else{
+           return  $this->name->en;
+        }
+    }
+
 }

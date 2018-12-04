@@ -57,7 +57,9 @@
     <div class="header">
         <div class="container">
             <ul class="nav nav-pills nav-justified tab">
-                <li><a href="javascript:void(0)">{{trans('app.government_tenders')}}</a></li>
+                <li class="{{\Request::route()->getName()=="index"?'active':''}}"><a
+                            href="{{route('index',['lang'=>app()->getLocale()])}}">{{trans('app.government_tenders')}}</a>
+                </li>
                 <li class="{{\Request::route()->getName()=="centers"?'active':''}}"><a
                             href="{{route('centers')}}">{{trans('app.service_centers')}}</a></li>
                 <li class="{{\Request::route()->getName()=="chances"?'active':''}}"><a

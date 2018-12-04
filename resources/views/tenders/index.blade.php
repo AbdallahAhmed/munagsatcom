@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                             <div class="form-group clearfix">
-                                <label class="col-xs-12 col-md-3">{{app('app.tenders.category')}}</label>
+                                <label class="col-xs-12 col-md-3">{{trans('app.tenders.category')}}</label>
                                 <div class="col-xs-12 col-md-9 new-f-group">
                                     <div class="form-group clearfix">
                                         <select name="catgory_id" class="effect-9 form-control">
@@ -95,15 +95,13 @@
                                 </div>
                             </div>
                             <div class="form-group-lg text-center">
-                                <button type="submit" form=""
+                                <button type="submit"
                                         class="uperc padding-md fbutcenter"> {{trans('app.search')}}</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <!-------------- End:right side -------------->
-            <!-------------- Begin:left side -------------->
             <div class="col-md-8 content">
                 <h2>{{trans('app.tenders.tenders')}}</h2>
                 @foreach($tenders as $tender)
@@ -111,37 +109,34 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-2">
-                                    <div class="card-img"><a href="monaasat-details.html"><img src="images/pic1.png"
-                                                                                               alt=""></a>
+                                    <div class="card-img"><a href="monaasat-details.html">
+                                            <img src="{{thumbnail($tender->org->logo->path)}}"
+                                                 alt="{{$tender->org->name}}"></a>
                                     </div>
                                 </div>
                                 <div class="col-md-10">
                                     <div class="title">
-                                        <a href="monaasat-details.html"><h2>مناقصة نظام مكافحة الحريق بمركز اورام جدة
-                                                بمدينة
-                                                الملك عبدالله الطبية بالعاصمة المقدسه</h2></a>
-                                        <p>مدينة الملك عبدالله الطبيه بالعاصمة المقدسة- إدارة العقود و المشتريات</p>
+                                        <a href="{{$tender->path}}" title="{{$tender->name}}"><h2>{{$tender->name}}</h2></a>
+                                        <p>{{$tender->objective}}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-share">
-                                <a class="share" href="#"><i class="fa fa-share-alt"></i></a>
+                                <a class="share" href="javascript:void(0)"><i class="fa fa-share-alt"></i></a>
                             </div>
                         </div>
                         <div class="card-date clearfix">
                             <div class="item one_thrd">
-                                <p>تاريخ و وقت فتح المظاريف</p>
-                                <p><i class="fa  fa-calendar"></i> <span class="text-grey">1440/01/22</span>-<span
-                                            class="text-grey">14:00</span></p>
+                                <p>{{trans('app.tenders.files_opened_at')}}</p>
+                                <p><i class="fa  fa-calendar"></i> <span class="text-grey">{{$tender->files_opened_at->format('Y/m/d')}}</span>-<span class="text-grey">{{$tender->files_opened_at->format('H:s')}}</span></p>
                             </div>
                             <div class="item one_thrd">
-                                <p>اخر موعد إاستلام العروض</p>
-                                <p><i class="fa  fa-calendar"></i> <span class="text-grey">1440/01/21</span>-<span
-                                            class="text-grey">14:00</span></p>
+                                <p>{{trans('app.tenders.last_get_offer_at')}}</p>
+                                <p><i class="fa  fa-calendar"></i> <span class="text-grey">{{$tender->last_get_offer_at->format('Y/m/d')}}</span>-<span class="text-grey">{{$tender->last_get_offer_at->format('H:s')}}</span></p>
                             </div>
                             <div class="item one_thrd">
-                                <p>تاريخ نشر المنافسة إلكترونيا</p>
-                                <p><i class="fa  fa-calendar"></i> <span class="text-grey">1439/12/04 </span></p>
+                                <p>{{trans('app.tenders.created')}}ا</p>
+                                <p><i class="fa  fa-calendar"></i> <span class="text-grey">{{$tender->published_at->format('Y/m/d')}}</span></p>
                             </div>
 
                         </div>
@@ -149,10 +144,9 @@
                             <div class="col-md-6 padt"> الايام الباقية / الساعات اذا كان اقل من 24 ساعه</div>
                             <div class="col-md-6">
                                 <div class="progress ">
-                                    <div cl0ass="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
                                          aria-valuemax="0" style="">
-                                    <span class="popOver" data-toggle="tooltip" data-placement="top"
-                                          title=" 5 ايام و 10 ساعات"> </span>
+                                    <span class="popOver" data-toggle="tooltip" data-placement="top" title=" 5 ايام و 10 ساعات"> </span>
                                     </div>
                                 </div>
                             </div>
@@ -187,3 +181,59 @@
     <!--End:content-->
 
 @endsection
+
+@push('scripts')
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip({trigger: 'manual'}).tooltip('show');
+        });
+        // $( window ).scroll(function() {
+        // if($( window ).scrollTop() > 10){  // scroll down abit and get the action
+        $(".progress-bar").each(function () {
+            each_bar_width = $(this).attr('aria-valuenow');
+            $(this).width(each_bar_width + '%');
+        });
+        //  }
+        // });
+    </script>
+    <script>
+        $('#dp3',).datepicker();
+        $('#date',).datepicker();
+    </script>
+    <script>
+        $(".range-example").asRange({
+            range: true,
+            limit: false,
+            //tip: {
+//    active: 'onMove'
+//    },
+            tip: true,
+            max: 10000,
+            min: 100,
+            value: true,
+            step: 10,
+            keyboard: true,
+            replaceFirst: true, // false, 'inherit', {'inherit': 'default'}
+            scale: true,
+            format(value) {
+                return value;
+            }
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(".share").hideshare({
+                link: "",           // Link to URL defaults to document.URL
+                title: "",          // Title for social post defaults to document.title
+                media: "",          // Link to image file defaults to null
+                facebook: true,     // Turns on Facebook sharing
+                twitter: true,      // Turns on Twitter sharing
+                pinterest: true,    // Turns on Pinterest sharing
+                googleplus: false,   // Turns on Google Plus sharing
+                linkedin: false,     // Turns on LinkedIn sharing
+                position: "right", // Options: Top, Bottom, Left, Right
+                speed: 150           // Speed of transition
+            });
+        });
+    </script>
+@endpush

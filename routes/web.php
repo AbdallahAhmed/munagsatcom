@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name("index");
+//Route::get('/', function () {
+//    return view('welcome');
+//})->name("index");
 
 //Route::group(['prefix' => 'chances'],function ($route){
 //    $route->get('/create', "ChanceController@create")->name("chance.create");
@@ -24,6 +24,8 @@ Route::get('/', function () {
 
 Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], function () {
 
+
+    Route::get('/','TenderController@index')->name('index');
     Route::any('register', 'UserController@register')->name('register');
     Route::any('login', 'UserController@login')->name('login');
     Route::group(['middleware' => ['fauth']], function () {
@@ -38,6 +40,7 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
     Route::get('chances', 'ChanceController@index')->name('chances');
     Route::get('chances/{id}', 'ChanceController@show')->name('chances.show');
     Route::post('chances/offers', 'ChanceController@addOffer')->name('chances.offers');
+
 
     Route::group(['middleware' => ['company']], function ($router){
         $router->get('company/{id}', 'CompanyController@show')->name('company.show');

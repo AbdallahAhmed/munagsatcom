@@ -57,7 +57,15 @@ return [
     ],
 
     'tenders'=>[
-        'tenders'=>'مناقصات حكومية '
+        'tenders'=>'مناقصات حكومية ',
+        'search'=>"بحث عن مناقصات ",
+        'activity'=>'النشاط',
+        'places'=>'المناطق',
+        'org'=>'الجهة الحكومية',
+        'category'=>'التصنيف',
+        'expired_at'=>'أظهار المناقصات المنتهيه',
+        'price'=>'السعر',
+        'offers_expired'=>'أخر ميعاد لإستلام العروض',
     ],
     'events' => [
         'successfully_register' => 'تم التسجيل بنجاح',

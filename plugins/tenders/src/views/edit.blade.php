@@ -16,7 +16,7 @@
                         <a href="{{ route("admin") }}">{{ trans("admin::common.admin") }}</a>
                     </li>
                     <li>
-                        <a href="{{ route("admin.posts.show") }}">{{ trans("tenders::tenders.tenders") }}</a>
+                        <a href="{{ route("admin.tenders.show") }}">{{ trans("tenders::tenders.tenders") }}</a>
                     </li>
                     <li class="active">
                         <strong>
@@ -29,7 +29,7 @@
             <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12 text-right">
 
                 @if ($tender->id)
-                    <a href="{{ route("admin.posts.create") }}" class="btn btn-primary btn-labeled btn-main"> <span
+                    <a href="{{ route("admin.tenders.create") }}" class="btn btn-primary btn-labeled btn-main"> <span
                                 class="btn-label icon fa fa-plus"></span>
                         {{ trans("tenders::tenders.add_new") }}</a>
                 @endif

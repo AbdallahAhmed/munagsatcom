@@ -97,6 +97,10 @@ class CompaniesController extends Controller
             $company->name = Request::get('name');
             $company->first_name = Request::get('first_name');
             $company->last_name = Request::get('last_name');
+            $company->details = Request::get('details');
+            $company->phone_number = Request::get('phone_number');
+            $company->mobile_number = Request::get('mobile_number');
+            $company->address = Request::get('address');
             $company->blocked = Request::get('blocked');
             Request::get('blocked') == 1 ? $company->block_reason = Request::get('block_reason') : $company->block_reason = null;
             $company->status = Request::get('status');

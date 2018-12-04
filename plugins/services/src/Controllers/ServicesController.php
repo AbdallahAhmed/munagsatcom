@@ -120,6 +120,9 @@ class ServicesController extends Controller
         if (Request::isMethod("post")) {
 
             $service->name = Request::get("name");
+            $service->details = Request::get("details");
+            $service->price_from = Request::get("price_from");
+            $service->price_to = Request::get("price_to");
             $service->status = Request::get("status", 0);
 
 

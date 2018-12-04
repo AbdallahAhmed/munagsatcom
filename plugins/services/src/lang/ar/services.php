@@ -48,6 +48,8 @@ return [
         'name' => 'إسم الخدمة',
         'status' => 'حالة الخدمة',
         'created_at' => 'تاريخ الإضافة',
+        'price_from' => 'السعر من',
+        'price_to' => 'السعر الى'
     ],
 
     "events" => [

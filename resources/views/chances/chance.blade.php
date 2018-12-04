@@ -40,7 +40,7 @@
                                         </li>
                                         <li class="clearfix">
                                             <div class="one_xsmall title">{{trans('app.chances.internal_number')}}</div>
-                                            <div class="one_xlarg"> TAR18090404</div>
+                                            <div class="one_xlarg"> {{$chance->number}}</div>
                                         </li>
                                         <li class="clearfix">
                                             <div class="one_xsmall title">{{trans('app.chances.closing_date')}}</div>

@@ -76,7 +76,39 @@
                                            class="form-control" id="input-slug"
                                            placeholder="{{ trans("companies::companies.attributes.last_name") }}">
                                 </div>
-
+                                <div class="form-group">
+                                    <label
+                                            for="input-slug">{{ trans("app.details") }}</label>
+                                    <textarea name="details"
+                                           value="{{ @Request::old("details", $company->details) }}"
+                                           class="form-control" id="input-slug"
+                                              rows="4"
+                                              placeholder="{{ trans("app.details") }}"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label
+                                            for="input-slug">{{ trans("app.fields.phone_number") }}</label>
+                                    <input name="phone_number" type="text"
+                                           value="{{ @Request::old("phone_number", $company->phone_number) }}"
+                                           class="form-control" id="input-slug"
+                                           placeholder="{{ trans("app.fields.phone_number") }}">
+                                </div>
+                                <div class="form-group">
+                                    <label
+                                            for="input-slug">{{ trans("app.fields.mobile_number") }}</label>
+                                    <input name="phone_number" type="text"
+                                           value="{{ @Request::old("mobile_number", $company->mobile_number) }}"
+                                           class="form-control" id="input-slug"
+                                           placeholder="{{ trans("app.fields.mobile_number") }}">
+                                </div>
+                                <div class="form-group">
+                                    <label
+                                            for="input-slug">{{ trans("app.address") }}</label>
+                                    <input name="phone_number" type="text"
+                                           value="{{ @Request::old("address", $company->address) }}"
+                                           class="form-control" id="input-slug"
+                                           placeholder="{{ trans("app.address") }}">
+                                </div>
                             </div>
                         </div>
                     </div>

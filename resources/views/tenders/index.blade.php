@@ -153,8 +153,7 @@
                                 <div class="progress ">
                                     <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
                                          aria-valuemax="0" style="">
-                                        <span class="popOver" data-toggle="tooltip" data-placement="top"
-                                              title=" 5 ايام و 10 ساعات"> </span>
+                                        <span class="popOver" data-toggle="tooltip" data-placement="top" title=" 5 ايام و 10 ساعات"> </span>
                                     </div>
                                 </div>
                             </div>

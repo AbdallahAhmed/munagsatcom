@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Company;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -26,4 +27,8 @@ class User extends \Dot\Users\Models\User
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function requests(){
+        return $this->belongsToMany(Company::class, 'companies_requests', 'receiver_id', 'sender_id');
+    }
 }

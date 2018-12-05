@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Companies_empolyees;
 use App\User;
 use Dot\Chances\Models\Sector;
 use Dot\Companies\Models\Company;
 use Dot\Media\Models\Media;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
@@ -81,10 +83,17 @@ class UserController extends Controller
                     $files[] = $media->saveFile($file);
                 }
                 $company->save();
+                Companies_empolyees::create([
+                    'company_id' => $company->id,
+                    'employee_id' => $user->id,
+                    'role' => 1,
+                    'status' => 1,
+                    'accepted' => 1
+                ]);
                 $company->files()->sync($files);
             }
 
-            return redirect()->route('login')->with('status',trans('app.events.successfully_register'));
+            return redirect()->route('login')->with('status', trans('app.events.successfully_register'));
             //return success or redirect
         }
 
@@ -142,7 +151,8 @@ class UserController extends Controller
      * @param Request $request
      * @return View
      */
-    public function show(){
+    public function show()
+    {
         return view('users.profile', ['user' => fauth()->user()]);
     }
 
@@ -152,19 +162,59 @@ class UserController extends Controller
      * @param Request $request
      * @return string
      */
-    public function update(Request $request){
-        $validator = Validator::make($request->all(),[
+    public function update(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
             'current_password' => 'required',
             'password' => 'required|confirmed|min:6',
         ]);
 
-        if($validator->fails())
+        if ($validator->fails())
             return redirect()->back()->withErrors($validator)->withInput($request->all());
-        if(!(Hash::check($request->get('current_password'), fauth()->user()->password)))
+        if (!(Hash::check($request->get('current_password'), fauth()->user()->password)))
             return redirect()->back()->withErrors(['wrong_current' => trans('validation.wrong_current')])->withInput($request->all());
         $user = User::where('email', fauth()->user()->email)->first();
         $user->password = $request->get('password');
         $user->save();
         return redirect()->route('user.show', ['user' => $user])->with('status', trans('app.events.password_changed'));
+    }
+
+    /**
+     * GET {lang}/user/requests
+     * @route user.requests
+     * @param Request $request
+     * @return View
+     */
+    public function requests(Request $request)
+    {
+        $id = fauth()->user()->id;
+        $this->data['is_employee'] = false;
+        if (count(Companies_empolyees::where('employee_id', $id)->get()) > 0)
+            $this->data['is_employee'] = true;
+
+        $this->data['requests'] = $requests = User::find($id)->requests()->paginate(4);
+
+        return view('users.requests', $this->data);
+    }
+
+    /**
+     * post {lang}/user/requests/update
+     * @route user.requests.update
+     * @param Request $request
+     * @return View
+     */
+    public function updateRequests(Request $request){
+        $company = $request->get('accepted', null);
+        if ($company){
+            DB::table('companies_requests')->where([
+                ['receiver_id', fauth()->user()->id],
+                ['sender_id', $company]
+            ])->delete();
+            Companies_empolyees::where([
+                ['company_id',$company],
+                ['employee_id', fauth()->user()->id]
+            ])->update(['accepted' => 1]);
+            return redirect()->route('user.show')->with('status', 'ssss');
+        }
     }
 }

@@ -5,20 +5,7 @@
 @section('content')
     <section class="container">
         <div class="row">
-            <div class="col-xs-12 col-md-3">
-                <div class="side-box">
-                    <div class="profile-side">
-                        <ul>
-                            <li class="active"><a class="" href="{{route('user.show')}}">{{trans('app.user_profile')}}</a></li>
-                            <li><a href="user-profile2.html">طلبات الاضافه</a></li>
-                            <li><a href="user-profile3.html">بحث عن الشركة</a></li>
-                            <li><a href="user-profile4.html">الرسائل</a></li>
-                            <li><a href="user-profile5.html">المراكز الخدمية التى تم اضافتها </a></li>
-                            <li><a href="user-profile6.html">النقاط المستخدمة </a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            @include('users.sidebar')
             <div class="col-xs-12 col-md-9">
                 <div class="profile-box">
                     <div class="profile-item">

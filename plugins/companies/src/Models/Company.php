@@ -103,5 +103,13 @@ class Company extends Model
         return $this->belongsToMany(Media::class, 'companies_files', 'company_id', 'file_id');
     }
 
+    function rrequests(){
+        return $this->belongsToMany(User::class, 'companies_requests', 'receiver_id', 'sender_id');
+    }
+
+    function srequests(){
+        return $this->belongsToMany(User::class, 'companies_requests', 'sender_id', 'receiver_id');
+    }
+
 }
 

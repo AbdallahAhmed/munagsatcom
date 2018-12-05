@@ -238,4 +238,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return str_random(60);
     }
 
+
+
 }

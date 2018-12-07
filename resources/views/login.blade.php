@@ -40,6 +40,9 @@
                                 <span class="focus-border"><i></i></span>
                             </div>
                         </div>
+                        <div class="text-center" style="cursor: pointer">
+                            <a href="{{route('forget-password')}}"><p>{{trans('app.forget_password')}}</p></a>
+                        </div>
                     </div>
                     <div class="form-group-lg row">
                         <label class="col-xs-12 col-md-3"></label>
@@ -66,7 +69,7 @@
                     @endif
 
                     <div class="form-group-lg text-center">
-                        <button type="submit" class="padding-md fbutcenter width"> دخول</button>
+                        <button type="submit" class="padding-md fbutcenter width"> {{trans('app.enter')}}</button>
                     </div>
                 </form>
             </div>

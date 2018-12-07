@@ -28,6 +28,9 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
     Route::get('/','TenderController@index')->name('index');
     Route::any('register', 'UserController@register')->name('register');
     Route::any('login', 'UserController@login')->name('login');
+    Route::any('logout', 'UserController@logout')->name('flogout');
+    Route::any('forgetpassword', 'UserController@forgetPassword')->name('forget-password');
+    Route::any('reset', 'UserController@reset')->name('reset-password');
     Route::group(['middleware' => ['fauth']], function () {
         Route::get('user/update', 'UserController@show')->name('user.show');
         Route::post('user/update', 'UserController@update')->name('user.update');

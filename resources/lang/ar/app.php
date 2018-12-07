@@ -71,6 +71,14 @@ return [
     'requests_sent_successfully' => 'تم ارسال طلبات الاضافة بنجاح',
     'password_updated_successfully' => 'تم تعديل كلمة المرور',
     'accepted_successfully' => 'تم الحفظ بنجاح',
+    'email_not_found' => 'البريد الالكتروني غير صحيح',
+    'reset_code_sent' => 'تم ارسال الكود الى البريد الالكتروني الخاص بك',
+    'send' => 'ارسال',
+    'wrong_code' => 'الكود الذي ادخلته غير صحيح',
+    'company_not_verified' => 'لم يتم اعتماد الشركة حتى الان',
+    'forget_password' => 'نسيت كلمة المرور؟',
+    'enter' => 'دخول',
+    'resend_code' => 'ارسال كود جديد',
     'centers' => [
         'centers' => 'مراكز خدمية',
         'center_name' => 'اسم المركز الخدمى',
@@ -177,6 +185,7 @@ return [
         'status' => 'الحاله',
         'mobile_number' => 'رقم الموبايل',
         'phone_number' => 'رقم الهاتف',
+        'code' => 'الكود'
     ],
     'status_array' => [
         0 => 'مفتوحة',

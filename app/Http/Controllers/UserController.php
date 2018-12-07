@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ResetPasswordMail;
 use App\Models\Companies_empolyees;
 use App\User;
 use Dot\Chances\Models\Sector;
 use Dot\Companies\Models\Company;
 use Dot\Media\Models\Media;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
@@ -135,8 +138,7 @@ class UserController extends Controller
                 }
                 if (fauth()->user()->type == 2 && fauth()->user()->status == 0) {
                     fauth()->logout();
-                    //$error->add('not verified', "This company isn't verified yes.");
-                    return redirect()->back()->withErrors($validator)->withInput($request->all());
+                    return redirect()->back()->withErrors(new MessageBag(['not_verified' => trans('app.company_not_verified')]));
                 }
                 fauth()->login(fauth()->user());
                 return redirect()->route('index');
@@ -144,6 +146,78 @@ class UserController extends Controller
             return view('login');
         }
         return redirect()->route('index');
+    }
+
+    /**
+     * POST {lang}/logout
+     * @route login
+     * @param Request $request
+     * @return string
+     */
+    public function logout(){
+        Auth::guard('frontend')->logout();
+        return redirect()->route('index');
+    }
+
+    /**
+     * POST/GET {lang}/forgetPassword
+     * @route forget-password
+     * @param Request $request
+     * @return string
+     */
+    public function forgetPassword(Request $request){
+        if($request->method() == 'POST') {
+            $user = User::where([
+                ['email', $request->get('email')],
+                ['backend', 0]
+            ])->first();
+            if (!$user)
+                return redirect()->back()->withErrors(new MessageBag(['wrong_email' => trans('app.email_not_found')]));
+            $user->code = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
+            $user->save();
+            Mail::to($user->email)->send(new ResetPasswordMail($user));
+            return redirect()->route('reset-password');
+        }
+        return view('forgetpassword');
+    }
+
+    /**
+     * POST/GET {lang}/forgetPassword
+     * @route forget-password
+     * @param Request $request
+     * @return string
+     */
+    public function reset(Request $request){
+        if($request->method() == 'POST') {
+            $user = User::where('email', $request->get('email', ""))->first();
+            if (!$user)
+                return redirect()->back()->withErrors(new MessageBag(['wrong_email' => trans('app.email_not_found')]));
+            $validator = Validator::make($request->all(), [
+                'code' => 'required',
+                'password' => 'required|min:6'
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator->errors());
+            }
+            if ($user->code != $request->get('code'))
+                return redirect()->back()->withErrors(new MessageBag(['wrong_conde' => trans('app.wrong_code')]));
+            $user->code = null;
+            $user->password = $request->get('password');
+            $user->save();
+
+            $isAuthed = fauth()->attempt([
+                'email' => $request->get('email'),
+                'password' => $request->get('password'),
+                'backend' => 0
+            ]);
+
+            if ($isAuthed) {
+                return redirect()->route('index');
+            }
+            return redirect()->back()->with('status', trans('app.password_changed'));
+        }
+        return view('reset');
     }
 
     /**

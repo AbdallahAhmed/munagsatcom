@@ -31,8 +31,10 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
     Route::group(['middleware' => ['fauth']], function () {
         Route::get('user/update', 'UserController@show')->name('user.show');
         Route::post('user/update', 'UserController@update')->name('user.update');
+        Route::get('user/search/companies', 'UserController@searchCompanies')->name('user.company.search');
         Route::get('user/requests', 'UserController@requests')->name('user.requests');
         Route::post('user/requests/update', 'UserController@updateRequests')->name('user.requests.update');
+        Route::post('user/requests/send', 'UserController@sendRequests')->name('user.requests.send');
     });
 
     Route::get('centers', 'CenterController@index')->name('centers');
@@ -48,9 +50,9 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
         $router->get('company/{id}', 'CompanyController@show')->name('company.show');
         $router->get('company/{id}/chances', 'CompanyController@chances')->name('company.chances');
         $router->get('company/{id}/tenders', 'CompanyController@show')->name('company.tenders');
-        $router->get('company/{id}/employees', 'CompanyController@show')->name('company.employees');
+        $router->any('company/{id}/employees', 'CompanyController@employees')->name('company.employees');
         $router->get('company/{id}/centers', 'CompanyController@show')->name('company.centers');
-        $router->get('company/{id}/requests', 'CompanyController@show')->name('company.requests');
+        $router->any('company/{id}/requests', 'CompanyController@requests')->name('company.requests');
         $router->get('company/{id}/search', 'CompanyController@employerSearch')->name('company.employees.search');
         $router->post('company/{id}/addEmployees', 'CompanyController@addEmployees')->name('company.employees.add');
         $router->post('company/{id}/send', 'CompanyController@send')->name('company.employees.send');

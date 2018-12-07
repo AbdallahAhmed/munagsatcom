@@ -7,6 +7,11 @@
         <div class="row">
             @include('users.sidebar')
             <div class="col-xs-12 col-md-9">
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
                 @if($requests->total())
                 <div class="profile-box">
                     <form name="form" id="form" method="post" action="{{route('user.requests.update')}}">
@@ -16,9 +21,9 @@
                                 <table class="table table-striped">
                                     <thead>
                                     <tr>
-                                        <th scope="col"> اسم الشركة</th>
-                                        <th scope="col"> البريد الالكترونى</th>
-                                        <th scope="col"> القبول</th>
+                                        <th scope="col">{{trans('app.chances.company_name')}}</th>
+                                        <th scope="col"> {{trans('app.fields.email')}}</th>
+                                        <th scope="col"> {{trans('app.accept')}}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -38,7 +43,7 @@
                             </div>
                         </div>
                         <div>
-                            <p>بقبولك لأي شركة سوف يتم حذفك من شركتك الحالية و الانضمام الى الشركة المختارة </p>
+                            <p>{{trans('app.accept_company_request')}}</p>
                         </div>
                         <div class="text-center">
                             {{$requests->appends(Request::all())->render()}}
@@ -48,17 +53,18 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title"> تاكيد القبول</h4>
+                                            <h4 class="modal-title"> {{trans('app.sure_accept')}}</h4>
                                         </div>
                                         <div class="modal-body">
-                                            <p>هل انت متأكد لقبول الشركة و الخروج من الشركة الحالية اذا كنت مشترك؟</p>
+                                            <p>{{trans('app.sure_accept_ask')}}</p>
                                         </div>
                                         <div class="modal-footer text-center">
-                                            <button type="submit" form="form" class="uperc padding-md fbutcenter">نعم
+                                            <button type="submit" form="form" class="uperc padding-md fbutcenter">
+                                                {{trans('app.yes')}}
                                             </button>
                                             <button type="" class="uperc padding-md fbutcenter1"
                                                     data-dismiss="modal">
-                                                لا
+                                                {{trans('app.no')}}
                                             </button>
                                         </div>
                                     </div>
@@ -68,13 +74,13 @@
                         </div>
 
                         <div class="form-group-lg text-center">
-                            <button type="submit" name="save" class="uperc padding-md fbutcenter"> حفظ</button>
+                            <button type="submit" name="save" class="uperc padding-md fbutcenter"> {{trans('app.save')}}</button>
                         </div>
                     </form>
                 </div>
                     @else
                     <div class="text-center">
-                        <p> لا يوجد طلبات اضافة</p>
+                        <p>{{trans('app.no_requests_found')}}</p>
                     </div>
                     @endif
             </div>
@@ -84,7 +90,7 @@
         <script>
             $('[name="save"]').on('click', function (e) {
                 e.preventDefault();
-                if ($('[name="accepted"]').prop('checked'))
+                if ($('[name="accepted"]:checked').length > 0)
                     $("#myModal").modal('show');
 
             })

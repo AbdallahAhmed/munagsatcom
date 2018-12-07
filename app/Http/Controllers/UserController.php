@@ -10,6 +10,7 @@ use Dot\Media\Models\Media;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 use Illuminate\View\View;
@@ -192,29 +193,62 @@ class UserController extends Controller
         if (count(Companies_empolyees::where('employee_id', $id)->get()) > 0)
             $this->data['is_employee'] = true;
 
-        $this->data['requests'] = $requests = User::find($id)->requests()->paginate(4);
+        $this->data['requests'] = $requests = User::find($id)->rrequests()->paginate(5);
 
         return view('users.requests', $this->data);
     }
 
     /**
-     * post {lang}/user/requests/update
+     * POST {lang}/user/requests/update
      * @route user.requests.update
      * @param Request $request
-     * @return View
+     * @return Route
      */
-    public function updateRequests(Request $request){
+    public function updateRequests(Request $request)
+    {
         $company = $request->get('accepted', null);
-        if ($company){
+        if ($company) {
             DB::table('companies_requests')->where([
                 ['receiver_id', fauth()->user()->id],
                 ['sender_id', $company]
             ])->delete();
             Companies_empolyees::where([
-                ['company_id',$company],
+                ['company_id', $company],
                 ['employee_id', fauth()->user()->id]
             ])->update(['accepted' => 1]);
-            return redirect()->route('user.show')->with('status', 'ssss');
+            return redirect()->route('user.requests')->with('status', trans('app.saved_successfully'));
         }
+    }
+
+    /**
+     * GET {lang}/user/search/companies
+     * @route user.company.search
+     * @param Request $request
+     * @return View
+     */
+    public function searchCompanies(Request $request)
+    {
+        $id = fauth()->user()->id;
+        if (count(Companies_empolyees::where([['employee_id', $id], ['accepted', 1], ['status', 1]])->get()) == 0) {
+            $this->data['q'] = $q = $request->get('q', null);
+            $sent_requests = fauth()->user()->requests()->pluck('id')->toArray();
+            $query = Company::query();
+            $query = count($sent_requests) > 0 ? $query->whereNotIn('id', $sent_requests) : $query;
+            $query = $q != null ? $query->where('name', '%'.$q.'%') : $query;
+            $this->data['companies'] = $query->paginate(5);
+
+            return view('users.search', $this->data);
+        }
+    }
+
+    /**
+     * post {lang}/user/requests/send
+     * @route user.requests.send
+     * @param Request $request
+     * @return Route
+     */
+    public function sendRequests(Request $request){
+        fauth()->user()->requests()->syncWithoutDetaching($request->get('companies', []));
+        return redirect()->route('user.company.search')->with('status', trans('app.requests_sent_successfully'));
     }
 }

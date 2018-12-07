@@ -20,7 +20,7 @@
                 <li @if (\Route::current()->getName() == 'company.requests') class="active" @endif><a href="{{route('company.requests', ['id' => $company_id])}}">
                         {{trans('app.requests')}}
                     </a></li>
-                <li @if (\Route::current()->getName() == 'company.employer.search') class="active" @endif><a href="{{route('company.employees.search', ['id' => $company_id])}}">
+                <li @if (\Route::current()->getName() == 'company.employees.search') class="active" @endif><a href="{{route('company.employees.search', ['id' => $company_id])}}">
                         {{trans('app.search_employee')}}
                     </a></li>
                 <li @if (\Route::current()->getName() == 'company.add_delegate') class="active" @endif><a href="{{route('company.add_delegate', ['id' => $company_id])}}">

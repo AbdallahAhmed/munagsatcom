@@ -17,9 +17,9 @@ class Localization
     {
 
         $lang = $request->route()->parameter('lang');
-        if (!($lang == 'ar' && $lang == 'en')) {
+       /* if (!($lang == 'ar' && $lang == 'en')) {
             $lang='ar'; //default
-        }
+        }*/
         // The lang ar only
         /* if ($lang == "en") {
              return redirect()->route('index', ['lang' => 'ar']);

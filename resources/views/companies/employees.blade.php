@@ -1,17 +1,15 @@
 @extends('layouts.master')
 
-@section('title',$company->name)
-
+@section('title')
 @section('content')
     <section class="container">
         <div class="row">
             @include('companies.sidebar', ['company_id' => $company->id])
             <div class="col-xs-12 col-md-9">
-                @if(count($employees)>0)
                 <div class="profile-box">
                     <div class="profile-item">
-                        <form action="{{route('company.employees.search', ['id' => $company->id])}}">
-                            <div class="profile-search">
+                        <div class="profile-search">
+                            <form method="get" action="{{route('company.employees', ['id' => $company->id])}}">
                                 <h3>{{trans('app.search_employee')}}</h3>
                                 <div class="form-group row">
                                     <label class="col-xs-12 col-md-3">{{trans('app.employee_name')}}</label>
@@ -48,18 +46,18 @@
                                     </div>
                                 </div>
                                 <div class="form-group-lg text-center">
-                                    <button type="submit"  class="uperc padding-md fbutcenter"> {{trans('app.search')}}</button>
+                                    <button type="submit" class="uperc padding-md fbutcenter">{{trans('app.search')}}</button>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
 
                     <div class="profile-item">
                         <div class="unit-table">
+
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th scope="col"> {{trans('app.select')}}</th>
                                     <th scope="col"> {{trans('app.active')}}</th>
                                     <th scope="col">{{trans('app.employee_name')}}</th>
                                     <th scope="col">{{trans('app.add_chance')}}</th>
@@ -68,23 +66,27 @@
                                 </thead>
                                 <tbody>
                                 @foreach($employees as $employer)
-                                    <tr id="{{$employer->id}}">
+                                    <tr id="{{$employer->user->id}}">
                                         <td>
-                                            <div class="checkbox"><input type="checkbox" data-id="{{$employer->id}}"
-                                                                         name="selected"></div>
+                                            <div class="checkbox">
+                                                <input type="checkbox" style="opacity: 0;"
+                                                       id="{{$employer->employee_id}}" name="selected">
+                                                <input type="checkbox" name="status{{$employer->employee_id}}"
+                                                       @if($employer->status) checked @endif>
+                                            </div>
+                                        </td>
+                                        <td>{{$employer->user->name}}</td>
+                                        <td>
+                                            <div class="radio">
+                                                <input type="radio" value="1" name="role{{$employer->employee_id}}"
+                                                       @if($employer->role) checked @endif>
+                                            </div>
                                         </td>
                                         <td>
-                                            <div class="checkbox"><input type="checkbox" value="22"
-                                                                         name="status{{$employer->id}}"></div>
-                                        </td>
-                                        <td>{{$employer->name}}</td>
-                                        <td>
-                                            <div class="radio"><input type="radio" value="1"
-                                                                      name="role{{$employer->id}}"></div>
-                                        </td>
-                                        <td>
-                                            <div class="radio"><input type="radio" value="0"
-                                                                      name="role{{$employer->id}}" checked></div>
+                                            <div class="radio">
+                                                <input type="radio" value="0" name="role{{$employer->employee_id}}"
+                                                       @if(!$employer->role) checked @endif>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -93,98 +95,60 @@
                         </div>
                     </div>
 
+                    <div class="text-center" style="display: none;" id="success">
+                        <p class="alert-success">{{trans('app.saved_successfully')}}</p>
+                    </div>
                     <div class="text-center">
-                        @if(count($employees)>0)
-                            {{$employees->appends(Request::all())->render()}}
-                        @endif
+                        {{$employees->appends(Request::all())->render()}}
                     </div>
 
                     <div class="form-group-lg text-center">
-                        <button type="submit" name="add" class="uperc padding-md fbutcenter"> {{trans('app.add')}}</button>
-                        <button type="submit" name="send" class="uperc padding-md fbutcenter"> {{trans('app.send_request')}}</button>
+                        <button type="submit" id="save" class="uperc padding-md fbutcenter"> {{trans('app.save')}}</button>
                     </div>
-
                 </div>
-                    @else
-                    <div class="text-center">
-                        <p>{{trans('app.no_employees_found')}}</p>
-                    </div>
-                @endif
             </div>
         </div>
     </section>
     @push('scripts')
         <script>
             $(function () {
-                $('[name="add"]').on('click', function (e) {
+                $('#save').on('click', function (e) {
                     e.preventDefault();
                     var selected = [];
                     var employees = [];
-                    $("input:checkbox[name=selected]:checked").each(function () {
-                        selected.push($(this).data('id'));
+                    $("input:checkbox[name=selected]").each(function () {
+                        selected.push($(this).attr('id'));
                     });
                     for (i = 0; i < selected.length; i++) {
                         id = selected[i];
-                        role = ($("input:radio[name=role" + id + "]:checked").val());
-                        status = $("[name='status" + id + "']").prop('checked') === true ? 1 : 0;
+
+                        role = $("[name=role" + id + "]:checked").val();
+                        status = $("[name='status" + id + "']").prop('checked') ? 1 : 0;
+                        console.log(status);
                         employees.push({
                             'company_id': "{{$company->id}}",
                             'employee_id': id,
                             'role': role,
                             'status': status,
                             accepted: '1'
-                        })
-                    }
-                    if (selected.length > 0) {
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
-                        });
-                        $.ajax({
-                            type: "post",
-                            url: "{{route('company.employees.add', ['id' => $company->id])}}",
-                            data: {'employees': employees},
-                            success: function () {
-                                location.reload();
-                            }
                         });
                     }
-                })
-                $('[name="send"]').on('click', function (e) {
-                    e.preventDefault();
-                    var selected = [];
-                    var employees = [];
-                    $("input:checkbox[name=selected]:checked").each(function () {
-                        selected.push($(this).data('id'));
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
                     });
-                    for (i = 0; i < selected.length; i++) {
-                        id = selected[i];
-                        role = ($("input:radio[name=role" + id + "]:checked").val());
-                        status = $("[name='status" + id + "']").prop('checked') === true ? 1 : 0;
-                        employees.push({
-                            'company_id': "{{$company->id}}",
-                            'employee_id': id,
-                            'role': role,
-                            'status': status,
-                            accepted: '0'
-                        })
-                    }
-                    if (selected.length > 0) {
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
-                        });
-                        $.ajax({
-                            type: "post",
-                            url: "{{route('company.employees.send', ['id' => $company->id])}}",
-                            data: {'employees': employees},
-                            success: function () {
-                                location.reload();
-                            }
-                        });
-                    }
+                    $.ajax({
+                        type: "post",
+                        url: "{{route('company.employees', ['id' => $company->id])}}",
+                        data: {'employees': employees},
+                        success: function () {
+                            $('#success').show();
+                            setTimeout(function () {
+                                $('#success').hide();
+                            }, 3000)
+                        }
+                    });
                 })
             })
         </script>

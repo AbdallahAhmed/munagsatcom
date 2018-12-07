@@ -29,6 +29,10 @@ class User extends \Dot\Users\Models\User
     ];
 
     public function requests(){
-        return $this->belongsToMany(Company::class, 'companies_requests', 'receiver_id', 'sender_id');
+        return $this->belongsToMany(Company::class, 'users_requests', 'sender_id', 'receiver_id');
+    }
+
+    public function rrequests(){
+        return $this->belongsToMany(Company::class, 'companies_requests','receiver_id', 'sender_id');
     }
 }

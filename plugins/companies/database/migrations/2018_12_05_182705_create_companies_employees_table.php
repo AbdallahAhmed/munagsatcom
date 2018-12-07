@@ -14,6 +14,7 @@ class CreateCompaniesEmployeesTable extends Migration
     public function up()
     {
         Schema::create('companies_employees', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('company_id');
             $table->integer('employee_id');
             $table->integer('status');

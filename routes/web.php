@@ -25,7 +25,11 @@
 Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], function () {
 
 
-    Route::get('/','TenderController@index')->name('index');
+    // tenders
+    Route::get('/', 'TenderController@index')->name('index');
+    Route::get('tenders/{slug}', 'TenderController@details')->name('tenders.details');
+
+
     Route::any('register', 'UserController@register')->name('register');
     Route::any('login', 'UserController@login')->name('login');
     Route::group(['middleware' => ['fauth']], function () {
@@ -42,7 +46,7 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
     Route::post('chances/offers', 'ChanceController@addOffer')->name('chances.offers');
 
 
-    Route::group(['middleware' => ['company']], function ($router){
+    Route::group(['middleware' => ['company']], function ($router) {
         $router->get('company/{id}', 'CompanyController@show')->name('company.show');
         $router->get('company/{id}/chances', 'CompanyController@chances')->name('company.chances');
         $router->get('company/{id}/tenders', 'CompanyController@show')->name('company.tenders');

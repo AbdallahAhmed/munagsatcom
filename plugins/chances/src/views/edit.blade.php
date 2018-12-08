@@ -46,6 +46,13 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="form-group">
+                                <label for="input-name">{{ trans("app.company_name") }}</label>
+                                <input name="company_name" type="text"
+                                       value="{{ @Request::old("company_name", $chance->company->name) }}"
+                                       class="form-control" id="input-name"
+                                       placeholder="{{ trans("app.company_name") }}" disabled>
+                            </div>
+                            <div class="form-group">
                                 <label for="input-name">{{ trans("chances::chances.attributes.name") }}</label>
                                 <input name="name" type="text"
                                        value="{{ @Request::old("name", $chance->name) }}"

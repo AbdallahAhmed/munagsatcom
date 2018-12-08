@@ -2,6 +2,7 @@
 
 namespace Dot\Companies\Models;
 
+use App\Models\Companies_empolyees;
 use DB;
 use Dot\Media\Models\Media;
 use Dot\Platform\Model;
@@ -101,6 +102,18 @@ class Company extends Model
 
     function files(){
         return $this->belongsToMany(Media::class, 'companies_files', 'company_id', 'file_id');
+    }
+
+    function rrequests(){
+        return $this->belongsToMany(User::class, 'users_requests', 'receiver_id', 'sender_id');
+    }
+
+    function srequests(){
+        return $this->belongsToMany(User::class, 'companies_requests', 'sender_id', 'receiver_id');
+    }
+
+    function employees(){
+        return $this->belongsToMany(User::class, 'companies_employees', 'company_id', 'employee_id');
     }
 
 }

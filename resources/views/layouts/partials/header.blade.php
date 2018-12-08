@@ -43,7 +43,18 @@
                         <ul class="dropdown-menu">
                             <li><a href="{{route('user.show')}}">{{trans('app.setting')}}</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="fas fa-sign-out-alt"></i>{{trans('app.logout')}}</a></li>
+                            <li>
+                                <a href="{{ route('flogout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    {{trans('app.logout')}}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('flogout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </li>
                         </ul>
                     </li>
                 @endif

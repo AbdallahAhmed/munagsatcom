@@ -17,4 +17,14 @@ class Company extends \Dot\Companies\Models\Company
         return Chance::where('company_id', $this->id)->get();
 
     }
+
+    /**
+     *  Add chances property
+     * @return Collection
+     */
+    public function getEmailAttribute()
+    {
+        return $this->user->email;
+
+    }
 }

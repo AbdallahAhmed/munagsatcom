@@ -150,7 +150,8 @@ return [
         'rate' => 'Center rate',
         'contact' => 'Message center',
         'not_found' => 'Not found Sector',
-        'created_successfully' => 'Center created successfully'
+        'created_successfully' => 'Center created successfully',
+        'user_added' => 'Centers added'
 
 
     ],

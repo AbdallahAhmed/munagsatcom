@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ResetPasswordMail;
+use App\Models\Center;
 use App\Models\Companies_empolyees;
 use App\User;
 use Dot\Chances\Models\Sector;
 use Dot\Companies\Models\Company;
 use Dot\Media\Models\Media;
+use Dot\Services\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -326,5 +328,45 @@ class UserController extends Controller
     public function sendRequests(Request $request){
         fauth()->user()->requests()->syncWithoutDetaching($request->get('companies', []));
         return redirect()->route('user.company.search')->with('status', trans('app.requests_sent_successfully'));
+    }
+
+    /**
+     * GET {lang}/centers
+     * @route user.centers
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function centers(Request $request){
+
+        $query = Center::where('user_id', fauth()->user()->id);
+        $this->data['sector_id'] = null;
+        $this->data['service_id'] = null;
+        $this->data['q'] = null;
+
+        if($request->get("sector_id")){
+            $query = $query->where('sector_id', $request->get('sector_id'));
+            $this->data['sector_id'] = $request->get("sector_id");
+        }
+        if($request->get('service_id')){
+            $query = $query->whereHas('services', function ($query) use ($request){
+                $query->where('id', $request->get('service_id'));
+            });
+            $this->data['service_id'] = $request->get("service_id");
+        }
+        if($request->get('q')){
+            $q = trim(urldecode($request->get('q')));
+            $query = $query->where('name','like', '%'.$q.'%');
+            $this->data['q'] = $q;
+        }
+        if($request->get('price_to')){
+            $to = $request->get('price_to');
+            $from = $request->get('price_from', 100);
+
+        }
+        $this->data['centers'] = $query->paginate(5);
+        $this->data['services'] = Service::published()->get();
+        $this->data['sectors'] = Sector::published()->get();
+
+        return view('users.centers', $this->data);
     }
 }

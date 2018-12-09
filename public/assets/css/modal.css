@@ -21,3 +21,13 @@
     line-height: 1.4;
     font-size: 16px;
 }
+.numoffer-item{
+    border: 1px solid #e2dede;
+    padding: 5px 0;
+    margin: 0 0 15px;
+    line-height: 1.6;
+}
+.numoffer-item button{
+    top: 40px;
+    position: relative;
+}

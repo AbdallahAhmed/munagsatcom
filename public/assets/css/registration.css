@@ -24,13 +24,14 @@ font-size: 16px !important;
 .icony {
     position: absolute;
     border-right: solid #999 thin;
-    height: 45px;
-    padding: 12px;
+    height: 37px;
+    padding: 7px;
     left: 0;
     line-height: normal;
-    width: 55px;
-    color: #999;
+    width: 40px;
+    color: #fffafa;
     text-align: center;
+    background-color: #68686a;
     }
     .eye-color {
     color: #315d90;

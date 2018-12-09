@@ -52,9 +52,9 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
     Route::group(['middleware' => ['company']], function ($router){
         $router->get('company/{id}', 'CompanyController@show')->name('company.show');
         $router->get('company/{id}/chances', 'CompanyController@chances')->name('company.chances');
+        $router->get('company/{id}/centers', 'CompanyController@centers')->name('company.centers');
         $router->get('company/{id}/tenders', 'CompanyController@show')->name('company.tenders');
         $router->any('company/{id}/employees', 'CompanyController@employees')->name('company.employees');
-        $router->get('company/{id}/centers', 'CompanyController@show')->name('company.centers');
         $router->any('company/{id}/requests', 'CompanyController@requests')->name('company.requests');
         $router->get('company/{id}/search', 'CompanyController@employerSearch')->name('company.employees.search');
         $router->post('company/{id}/addEmployees', 'CompanyController@addEmployees')->name('company.employees.add');
@@ -62,6 +62,7 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
         $router->get('company/{id}/delegate', 'CompanyController@show')->name('company.add_delegate');
         $router->get('company/{id}/messages', 'CompanyController@show')->name('company.messages');
         $router->post('company/{id}/password', 'CompanyController@updatePassword')->name('company.password');
+        $router->any('company/{id}/chance/create', 'ChanceController@store')->name('chances.create');
     });
 
 

@@ -1,254 +1,265 @@
-@extends("admin::layouts.master")
+@extends('layouts.master')
 
-@section("content")
+@section('title')
+@section('content')
+    <section class="container">
+        <div class="res-box">
+            <h2 class="text-center"> اضافة فرصة </h2>
+            <div class="feildcont">
+                @if (!session('status'))
+                    <form method="post" action="{{route('chances.create', ['id' => $company->id])}}"
+                          enctype="multipart/form-data">
+                        {{csrf_field()}}
+                        <div class="reg-part">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li class="alert-danger">{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <div class="form-group-lg row">
+                                <label class="col-xs-12 col-md-3"> اسم الفرصه </label>
+                                <div class="col-xs-12 col-md-9">
+                                    <div class="new-f-group">
+                                        <div class="form-group clearfix">
+                                            <input type="text" value="{{@Request::old("name")}}" name="name"
+                                                   class="effect-9 form-control" placeholder="اسم الفرصه  ">
+                                            <span class="focus-border"><i></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group-lg row">
+                                <label class="col-xs-12 col-md-3"> الرقم المرجعى الداخلى </label>
+                                <div class="col-xs-12 col-md-9">
+                                    <div class="new-f-group">
+                                        <div class="form-group clearfix">
+                                            <input name="number" value="{{@Request::old("number")}}" type="text"
+                                                   class="effect-9 form-control">
+                                            <span class="focus-border"><i></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group-lg row">
+                                <label class="col-xs-12 col-md-3"> قيمة الفرصة </label>
+                                <div class="col-xs-12 col-md-9">
+                                    <div class="new-f-group">
+                                        <div class="form-group clearfix">
+                                            <input name="chance_value" value="{{@Request::old("chance_value")}}"
+                                                   type="text"
+                                                   class="effect-9 form-control">
+                                            <span class="focus-border"><i></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group-lg row">
+                                <label class="col-xs-12 col-md-3"> تاريخ الاغلاق </label>
+                                <div class="col-xs-12 col-md-6 new-f-group">
+                                    <div class="form-group clearfix">
+                                        <div class="input-append date" id="dp3" data-date="12-02-2012"
+                                             data-date-format="dd-mm-yyyy">
+                                            <input name="closing_date" data-date-format="dd-mm-yyyy"
+                                                   class="effect-9 form-control" id="date" placeholder="dd/mm/yyyy"
+                                                   type="text">
+                                            <span class="add-on"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label class="col-xs-12 col-md-3"> صباحا/مساءا </label>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xs-12 col-md-3"> القطاع</label>
+                                <div class="col-xs-12 col-md-9 new-f-group">
+                                    <div class="form-group clearfix">
+                                        <select type="text" name="sector_id" class="effect-9 form-control">
+                                            <option value="{{null}}">اختار القطاع</option>
+                                            @foreach($sectors as $sector)
+                                                <option value="{{$sector->id}}">{{$sector->name}}</option>
+                                            @endforeach
+                                        </select><span class="focus-border"><i></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group-lg row">
+                                <label class="col-xs-12 col-md-3"> اسم الملف </label>
+                                <div class="col-xs-12 col-md-9">
+                                    <div class="new-f-group">
+                                        <div class="form-group clearfix">
+                                            <input name="file_name" value="{{@Request::old("file_name")}}" type="text"
+                                                   class="effect-9 form-control"
+                                                   placeholder="اسم الفرصه  ">
+                                            <span class="focus-border"><i></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group-lg row">
+                                <label class="col-xs-12 col-md-3"> تفاصيل الملف </label>
+                                <div class="col-xs-12 col-md-9">
+                                    <div class="new-f-group">
+                                        <div class="form-group clearfix">
+                                            <input name="file_description" value="{{@Request::old("file_description")}}"
+                                                   type="text" class="effect-9 form-control"
+                                                   placeholder="">
+                                            <span class="focus-border"><i></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group-lg ">
+                                <label for="upload" class="col-xs-12 col-md-3"> اضافة مرفق </label>
+                                <input id="" class="col-xs-12 col-md-9" type="file" name="file">
+                            </div>
+                            {{--
+                            <a class="add_field_button" role="button" data-toggle="collapse" href="#collapseExample"
+                               aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-plus"></i> اضافة المزيد
+                                من الملفات</a>
+                            <div class="clearfix collapse" id="collapseExample" aria-expanded="true" style="">
+                                <div class="form-group-lg row">
+                                    <label class="col-xs-12 col-md-3"> اسم الملف </label>
+                                    <div class="col-xs-12 col-md-9">
+                                        <div class="new-f-group">
+                                            <div class="form-group clearfix">
+                                                <input type="text" class="effect-9 form-control" placeholder="اسم الفرصه  ">
+                                                <span class="focus-border"><i></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group-lg row">
+                                    <label class="col-xs-12 col-md-3"> تفاصيل الملف </label>
+                                    <div class="col-xs-12 col-md-9">
+                                        <div class="new-f-group">
+                                            <div class="form-group clearfix">
+                                                <input type="text" class="effect-9 form-control" placeholder="">
+                                                <span class="focus-border"><i></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group-lg ">
+                                    <label for="upload" class="col-xs-12 col-md-3"> اضافة مرفق </label>
+                                    <input id="" class="col-xs-12 col-md-9" type="file" name="file-upload1">
+                                </div>
+                            </div>--}}
+                        </div>
+                        <div class="reg-part">
+                            <h3> الوحدات </h3>
+                            <div class="form-group-lg row">
 
-    <form action="{{route("chance.store")}}" method="post" class="BlocksForm" enctype="multipart/form-data">
-        <button class="btn btn-primary btn-labeled btn-main">Add New</button>
+                                <div class="col-xs-12 col-md-4 new-f-group">
+                                    <div class="form-group clearfix">
+                                        <select name="units[]" type="text" class="effect-9 form-control">
+                                            <option value="{{null}}">وحدة القياس</option>
 
-        <div class="wrapper wrapper-content fadeInRight">
+                                            @foreach($units as $unit)
+                                                <option value="{{$unit->id}}">{{$unit->name}}</option>
+                                            @endforeach
+                                        </select><span class="focus-border"><i></i></span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                    <div class="new-f-group">
+                                        <div class="form-group clearfix">
+                                            <input type="text" name="units_quantity[]" class="effect-9 form-control"
+                                                   placeholder="الكمية">
+                                            <span class="focus-border"><i></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group-lg row">
+                                <div class="col-xs-12 col-md-4 new-f-group">
+                                    <div class="form-group clearfix">
+                                        <select name="units[]" type="text" class="effect-9 form-control">
+                                            <option value="{{null}}">وحدة القياس</option>
+                                            @foreach($units as $unit)
+                                                <option value="{{$unit->id}}">{{$unit->name}}</option>
+                                            @endforeach
+                                        </select><span class="focus-border"><i></i></span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                    <div class="new-f-group">
+                                        <div class="form-group clearfix">
+                                            <input type="text" name="units_quantity[]" class="effect-9 form-control"
+                                                   placeholder="الكمية">
+                                            <span class="focus-border"><i></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="add_field_button" role="button" data-toggle="collapse" href="#collapseExample2"
+                               aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-plus"></i> اضافة
+                                المزيد
+                                من الوحدات</a>
+                            <div class="clearfix collapse" id="collapseExample2" aria-expanded="true" style="">
+                                <div class="form-group-lg row">
 
-            @include("admin::partials.messages")
-
-            <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <label for="input-name">{{ trans("chances::chances.attributes.name") }}</label>
-                                <input name="name" type="text"
-                                       value=""
-                                       class="form-control" id="input-name"
-                                       placeholder="{{ trans("chances::chances.attributes.name") }}">
+                                    <div class="col-xs-12 col-md-4 new-f-group">
+                                        <div class="form-group clearfix">
+                                            <select type="text" name="units[]" class="effect-9 form-control">
+                                                <option value="{{null}}">وحدة القياس</option>
+                                                @foreach($units as $unit)
+                                                    <option value="{{$unit->id}}">{{$unit->name}}</option>
+                                                @endforeach
+                                            </select><span class="focus-border"><i></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-4">
+                                        <div class="new-f-group">
+                                            <div class="form-group clearfix">
+                                                <input type="text" name="units_quantity[]" class="effect-9 form-control"
+                                                       placeholder="الكمية">
+                                                <span class="focus-border"><i></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group-lg row">
+                                    <div class="col-xs-12 col-md-4 new-f-group">
+                                        <div class="form-group clearfix">
+                                            <select type="text" name="units[]" class="effect-9 form-control">
+                                                <option value="{{null}}">وحدة القياس</option>
+                                                @foreach($units as $unit)
+                                                    <option value="{{$unit->id}}">{{$unit->name}}</option>
+                                                @endforeach
+                                            </select><span class="focus-border"><i></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-4">
+                                        <div class="new-f-group">
+                                            <div class="form-group clearfix">
+                                                <input type="text" name="units_quantity[]" class="effect-9 form-control"
+                                                       placeholder="الكمية">
+                                                <span class="focus-border"><i></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <label for="input-number">{{ trans("chances::chances.attributes.number") }}</label>
-                                <input name="number" type="text"
-                                       value=""
-                                       class="form-control" id="input-name"
-                                       placeholder="{{ trans("chances::chances.attributes.number") }}">
-                            </div>
+                        <div class="form-group-lg text-center">
+                            <button type="submit" class="uperc padding-md fbutcenter"> نشر الفرصه</button>
                         </div>
+                    </form>
+                @else
+                    <div class="alert alert-success">
+                        {{ session('status') }}
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <label
-                                        for="input-number">{{ trans("chances::chances.attributes.closing_date") }}</label>
-                                <input name="closing_date" type="datetime-local"
-                                       value=""
-                                       class="form-control" id="input-name"
-                                       placeholder="{{ trans("chances::chances.attributes.closing_date") }}">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <label
-                                        for="input-number">{{ trans("chances::chances.attributes.value") }}</label>
-                                <input name="value" type="text"
-                                       value=""
-                                       class="form-control" id="input-name"
-                                       placeholder="{{ trans("chances::chances.attributes.value") }}">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-folder"></i>
-                            {{ trans("chances::chances.add_sector") }}
-                        </div>
-                        <div class="panel-body">
-
-                            @if ($sectors)
-                                <ul class='tree-views'>
-
-                                        @foreach ($sectors as $sector)
-                                            <li><div class='tree-row checkbox i-checks'>
-                                            <a class='expand' href='javascript:void(0)'>+</a>
-                                            <input type='checkbox' name='sectors[]' value='{{$sector->id}}'>&nbsp;{{$sector->name}}</div>
-                                       @endforeach
-                                </ul>
-                            @else
-                                {{ trans("chances::chances.no_records") }}
-                            @endif
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <label
-                                        for="input-number">{{ trans("chances::chances.attributes.file") }}</label>
-                                <input name="file" type="file"
-                                       value="{{ @Request::old("value", $chance->file_path)}}"
-                                       class="form-control" id="input-name"
-                                       placeholder="{{ trans("chances::chances.attributes.file") }}">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <label
-                                        for="input-number">{{ trans("chances::chances.attributes.file_description") }}</label>
-                                <input name="file_description" type="text"
-                                       value="{{ @Request::old("value", $chance->value)}}"
-                                       class="form-control" id="input-name"
-                                       placeholder="{{ trans("chances::chances.attributes.file_description") }}">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <label
-                                        for="input-number">{{ trans("chances::chances.attributes.file_name") }}</label>
-                                <input name="file_name" type="text"
-                                       value="{{ @Request::old("value", $chance->value)}}"
-                                       class="form-control" id="input-name"
-                                       placeholder="{{ trans("chances::chances.attributes.file_name") }}">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <label
-                                        for="input-number">{{ trans("chances::chances.attributes.units") }}</label>
-                                <select name="units[]" class="form-control chosen-select chosen-rtl">
-                                    @if($units)
-                                        @foreach($units as $unit)
-                                            <option value="{{$unit->id}}">{{$unit->name}}</option>
-                                        @endforeach
-                                    @else
-                                        <option value="">{{ trans("chances::units.no_records") }}</option>
-                                    @endif
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <label
-                                        for="input-number">{{ trans("chances::chances.attributes.quantity") }}</label>
-                                <input name="units_quantity[]" type="text"
-                                       value=""
-                                       class="form-control" id="input-name"
-                                       placeholder="{{ trans("chances::chances.attributes.quantity") }}">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button id="add-unit" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+                @endif
             </div>
         </div>
 
-    </form>
-
-@stop
-
-@section("head")
-    <link href="{{ assets("admin::tagit") }}/jquery.tagit.css" rel="stylesheet" type="text/css">
-    <link href="{{ assets("admin::tagit") }}/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
-@stop
-
-@section("footer")
-    <script type="text/javascript" src="{{ assets("admin::tagit") }}/tag-it.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            $(document).on('click', '#add-unit', function (e) {
-                e.preventDefault();
-                $(this).hide();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                    url: "{{route("chance.units")}}",
-                    type: "POST",
-                    success: function (data) {
-                        $(data.view).insertAfter($("#add-unit"))
-                        $(this).remove();
-                    }
-                })
-            })
-
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
+    </section>
+    @push('scripts')
+        <script>
+            $('#dp3').datepicker({
+                dateFormat: "dd-mm-yyy"
             });
-            $('.tree-views input[type=checkbox]').on('ifChecked', function () {
-                var checkbox = $(this).closest('ul').parent("li").find("input[type=checkbox]").first();
-                checkbox.iCheck('check');
-                checkbox.change();
-            });
-            $('.tree-views input[type=checkbox]').on('ifUnchecked', function () {
-                var checkbox = $(this).closest('ul').parent("li").find("input[type=checkbox]").first();
-                checkbox.iCheck('uncheck');
-                checkbox.change();
-            });
-            $(".expand").each(function (index, element) {
-                var base = $(this);
-                if (base.parents("li").find("ul").first().length > 0) {
-                    base.text("+");
-                } else {
-                    base.text("-");
-                }
-            });
-
-            $("body").on("click", ".expand", function () {
-                var base = $(this);
-                if (base.text() == "+") {
-                    if (base.closest("li").find("ul").length > 0) {
-                        base.closest("li").find("ul").first().slideDown("fast");
-                        base.text("-");
-                    }
-                    base.closest("li").find(".expand").last().text("-");
-                } else {
-                    if (base.closest("li").find("ul").length > 0) {
-                        base.closest("li").find("ul").first().slideUp("fast");
-                        base.text("+");
-                    }
-                }
-                return false;
-            });
-
-        });
-
-    </script>
-@stop
-
+            $('#date').datepicker({
+                dateFormat: "dd-mm-yyy"
+            });        </script>
+    @endpush
+@endsection

@@ -1,4 +1,5 @@
 @charset "utf-8";
+.collapse, .collapse.in {/* padding-top: 15px; */}
 /* -- effect  -- */
 .effect-9{border: 1px solid #bfbfbf !important;padding: 7px 14px 9px;transition: 0.4s;}
 .effect-9 ~ .focus-border:before,
@@ -14,20 +15,24 @@
 .effect-9:focus ~ .focus-border i:after{height: 100%; transition: 0.2s;}
 .effect-9:focus ~ .focus-border i:after{transition-delay: 0.4s;}
 /* --   -- */
-.feildcont {/* width: 100%; */padding: 30px 30px 20px;font-size: 17px !important;}
-.feildcont form .form-group-lg {position: relative;margin-bottom: .75em;vertical-align: middle;line-height: 2.5em;}
+.feildcont {/* width: 100%; */padding: 20px 15px 15px;font-size: 17px !important;}
+.feildcont form .form-group-lg {position: relative;margin-bottom: .75em;vertical-align: middle;/* line-height: 1.5em; */}
 .feildcont .form-control {
    padding: 2px 7px;
    font-size: 15px !important;
    line-height: 1.3333333;
    border-radius: 0;
    text-align: inherit;
-   height: 3em;
+   height: 37px;
    /* height: 37px; */
    border-color: #d8d2d2;
    box-shadow: none;
 }
-.feildcont form .form-group {position: relative;margin-bottom: .75em;}
+.form-group-lg select.form-control {
+    height: 37px;
+    line-height: normal;
+}
+.feildcont form .form-group {position: relative;margin-bottom: 10px;}
  .feildcont .no-dropdown select {
 
     -moz-appearance: none;
@@ -50,7 +55,7 @@
 	color: #727272;
 	padding: 0 15px;
 	/* margin-bottom: 10px; */
-	/* margin-top: 3px; */
+	/* margin-top: -11px; */
 }
 .feildcont label em {
 	color: #ff7a59;
@@ -89,9 +94,9 @@
 /* input */
 .input-append .add-on:last-child, .input-append .btn:last-child, .input-append .btn-group:last-child > .dropdown-toggle {
     position: absolute;
-    left: 2px;
-    top: 13px;
-    margin-left: 7px;
+    left: 10px;
+    top: 10px;
+    /* margin-left: 22px; */
     font-size: 18px;
     color: #b9b7b7;
 }
@@ -102,7 +107,7 @@
     width: 100%;
 }
 /* radio */
-.radio, .checkbox {position: relative;display: block;margin-top: 0 !important;margin-bottom: 0;/* margin-right: 15px; */}
+.radio, .checkbox {position: relative;display: block;line-height: 2.5em;margin-top: 0 !important;margin-bottom: 0;/* margin-right: 15px; */}
 
 .radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
     margin-left: initial;
@@ -120,16 +125,16 @@
 .search-bar{
     margin-bottom: 15px;
 }
-.search-bar input{height: 42px !important;}
+.search-bar input{height: 39px !important;}
 .searh-icn{
     position: absolute;
     z-index: 2;
-    left: 10px;
+    left: -2px;
     font-size: 14px;
-    width: 20px;
-    margin-left: -2.5px;
+    width: 14px;
+    /* margin-left: 5px; */
     text-align: center;
-    padding: 10px 17px;
+    padding: 4px 14px;
     top: 0;
 }
 
@@ -138,7 +143,7 @@
 .icon-addon label{
     margin: 0;
 }
-.icon-addon {position: relative;color: #555; display: block;}
+.icon-addon {position: relative;color: #555;display: block;}
 .icon-addon input{}
 .icon-addon:after,
 .icon-addon:before {display: table; content: " ";}
@@ -149,12 +154,12 @@
 .icon-addon .fa {
     position: absolute;
     z-index: 2;
-    left: 10px;
+    left: 13px;
     font-size: 14px;
-    width: 20px;
+    width: 15px;
     margin-left: -2.5px;
     text-align: center;
-    padding: 14px 20px;
+    padding: 12px 15px;
     top: 0px;
     border-right: 1px solid #ccc;
 }
@@ -170,7 +175,7 @@
 .icon-addon .form-control {
     padding-left: 30px;
     float: left;
-    height: 2.8em;
+    height: 2.5em;
     border-radius: 3px;
     font-weight: normal;
     font-size: 13px;
@@ -220,3 +225,5 @@ input[type="file"] {border: 1px solid #e6e0e0;padding: 4px 0;margin-bottom: 16px
 }
 .signin-img i{font-size: 7em;}
 .width{	width: 70%;}
+
+/**/

@@ -49,7 +49,10 @@
     border: #ebebeb solid 1px;
     padding: 15px 15px;
     text-align: center;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
+    background-color: #fff;
+    width: 70%;
+    margin: 0 auto;
 }
 .details-item{
     text-align: right;
@@ -110,7 +113,7 @@
     margin: 5px 15px 5px;
     padding: 5px 0 10px;
     font-weight: 500;
-    font-size: 19px;
+    /* font-size: 17px; */
 }
 .details-item ul li:last-child{border-bottom: none;}
 .details-item ul li .title{line-height: unset;margin-bottom: 0;font-size: 16px;/* font-weight: 600; */color: #315d90;}
@@ -122,6 +125,14 @@
 .details-box{border: 1px solid #ddd;padding: 19px 17px 0;margin-bottom: 30px;}
 .unit-table{
     /* margin-bottom: 26px; */
+    overflow: overlay;
+}
+.unit-table .checkbox,.unit-table .radio {
+    position: relative;
+    display: block;
+    line-height: normal;
+    top: -10px;
+    margin: 0 !important;
 }
 .unit-table p{
     font-size: 13pt;

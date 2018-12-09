@@ -14,19 +14,19 @@
                             <div class="col-md-4">
                                 <div class="circle-item">
                                     <p>{{trans('app.chances.posted')}}</p>
-                                    <p> {{count($company->chances->where('status', 0))}} </p>
+                                    <div class="num"> {{count($company->chances->where('status', 0))}} </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="circle-item">
                                     <p>فرص تم المساهمة فيها</p>
-                                    <p> 1 </p>
+                                    <div class="num"> 1 </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="circle-item">
                                     <p> مجمل المبلغ التى تم تجميعها </p>
-                                    <p> 5000 </p>
+                                    <div class="num"> 5000 </div>
                                 </div>
                             </div>
                         </div>

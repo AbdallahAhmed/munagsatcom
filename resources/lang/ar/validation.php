@@ -161,6 +161,12 @@ return array(
         'user_type' => 'نوع المستخدم',
         'logo'=>'شعار',
         'code' => 'الكود',
+        'number' => 'الرقم المرجعي',
+        'closing_date' => 'تاريخ الاغلاق',
+        'file' => 'الملف',
+        'file_name' => 'اسم الملف',
+        'file_description' => 'تفاصيل الملف',
+        'chance_value' => 'قيمة الفرصة',
 
     ),
 );

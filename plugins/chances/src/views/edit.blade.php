@@ -227,7 +227,7 @@
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
-                                <a href="{{route("index")}}/uploads/chances{{$chance->file_path}}"
+                                <a href="{{uploads_url().$chance->media->path}}"
                                    target="_blank">{{$chance->file_name}}</a>
                             </div>
                         </div>

@@ -11,7 +11,7 @@
                         {{ session('status') }}
                     </div>
                 @endif
-                @if($companies->total())
+                @if($companies)
                     <div class="profile-box">
                         <div class="profile-item noborder">
                             <div class="profile-search">

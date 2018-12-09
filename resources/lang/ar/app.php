@@ -132,6 +132,7 @@ return [
     'services' => [
         'services' => 'الخدمات',
         'choose_services' => 'اختار الخدمات',
+        'choose_service' => 'اختار الخدمة',
         'name' => 'اسم الخدمة',
         'service_provided' => 'اسم الخدمة المقدمة',
     ],
@@ -171,7 +172,8 @@ return [
         'my_chances' => 'فرصي',
         'details' => 'تفاصيل',
         'accepted' => ' اعتماد',
-        'posted' => 'فرص تم نشرها'
+        'posted' => 'فرص تم نشرها',
+        'created_successfully' => 'تم إضافة الفرصة بنجاح'
     ],
     'fields' => [
         "password" => "كلمة المرور",

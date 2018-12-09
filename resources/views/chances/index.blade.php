@@ -68,10 +68,11 @@
             @if(count($chances)==0)
                 <p class="col-md-8 not-found">{{trans('app.chances.not_found')}}</p>
             @endif
-            @foreach($chances as $chance)
                 <div class="col-md-8 content">
                     <h2>{{trans('app.chances.chances_est')}}</h2>
                     <!-------------- Begin:Card -------------->
+                    @foreach($chances as $chance)
+
                     <div class="card foras">
                         <div class="card-header">
                             <div class="row">
@@ -134,73 +135,20 @@
                             </div>
                         </div>
                         <div class="card-price clearfix">
-                            <div class="priceshadow one_half">
-                                <button type="button" class="uperc padding-md fbutcenter btn-mas" data-dismiss="modal"
-                                        data-target="#myModal">{{trans('app.chances.apply')}}</button>
-                                <!-- Modal -->
-                                <div class="modal fade" id="myModal" role="dialog">
-                                    <div class="modal-dialog">
-                                        <!-- Modal content-->
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;
-                                                </button>
-                                                <h4 class="modal-title"> {{trans('app.chances.apply')}}</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>{{trans('app.chances.upload_request')}}</p>
-                                                <form id="upload" name="upload" enctype="multipart/form-data">
-                                                    <div class="custom-file form-group pad">
-                                                        <input name="file" type="file"
-                                                               class="form-control-file custom-file-input"
-                                                               id="exampleFormControlFile1">
-                                                        <input type="hidden" name="chance_id" value="{{$chance->id}}">
-                                                    </div>
-                                                    <p class="alert-danger" style="display: none"></p>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer text-center">
-                                                <button type="submit" form="upload"
-                                                        class="uperc padding-md fbutcenter">{{trans('app.chances.apply_done')}}
-                                                </button>
-                                                <button type="submit" class="uperc padding-md fbutcenter1"
-                                                        data-dismiss="modal">
-                                                    {{trans('app.cancel')}}
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="modal fade" id="SuccessModal" role="dialog">
-                                    <div class="modal-dialog">
-                                        <!-- Modal content-->
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;
-                                                </button>
-                                                <h4 class="modal-title"> {{trans('app.chances.apply_chance')}} </h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>{{trans('app.chances.success')}}</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
+                            <div class="light-white one_half padt">{{trans('app.chances.value')}}:
+                                <span class="text-blue"> {{$chance->value}}</span>
                             </div>
-                            <div class="light-white one_half padt">{{trans('app.chances.value')}}: <span
-                                        class="text-blue"> {{$chance->value}}</span></div>
                         </div>
                     </div>
-                    <!-------------- End:Card -------------->
+                @endforeach
+
+                <!-------------- End:Card -------------->
                     <!-------------- Begin:pagination -------------->
                     <div class="text-center">
                         {{$chances->appends(Request::all())->render()}}
                     </div>
                     <!-------------- End:pagination -------------->
                 </div>
-        @endforeach
 
         <!-------------- End:left side -------------->
         </div>

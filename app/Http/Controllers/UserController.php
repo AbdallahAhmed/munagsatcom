@@ -303,6 +303,7 @@ class UserController extends Controller
     public function searchCompanies(Request $request)
     {
         $id = fauth()->user()->id;
+        $this->data['companies'] = null;
         if (count(Companies_empolyees::where([['employee_id', $id], ['accepted', 1], ['status', 1]])->get()) == 0) {
             $this->data['q'] = $q = $request->get('q', null);
             $sent_requests = fauth()->user()->requests()->pluck('id')->toArray();
@@ -313,6 +314,7 @@ class UserController extends Controller
 
             return view('users.search', $this->data);
         }
+        return view('users.search', $this->data);
     }
 
     /**

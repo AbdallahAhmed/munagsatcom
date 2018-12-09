@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chance;
+use App\Models\Company;
+use Carbon\Carbon;
 use Dot\Chances\Models\Sector;
 use Dot\Chances\Models\Unit;
 use Dot\Media\Models\Media;
 use Dot\Platform\Controller;
-use http\Env\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\MessageBag;
 
 class ChanceController extends Controller
 {
@@ -76,7 +79,7 @@ class ChanceController extends Controller
             $query = $query->whereDate('created_at', '=', \Carbon\Carbon::parse($request->get('created_at'))->toDateString());
             $this->data['created_at'] = $request->get('created_at');
         }
-        $this->data['chances'] = $query->paginate(1);
+        $this->data['chances'] = $query->paginate(10);
         $this->data['status'] = [0, 1];//[0,1,2,3,4,5];
         return view('chances.index', $this->data);
     }
@@ -110,7 +113,7 @@ class ChanceController extends Controller
             'file' => 'mimes:jpg,png,jpeg,doc,docx,txt,pdf,zip'
         ]);
 
-        if ($validator->fails()){
+        if ($validator->fails()) {
             return response()->json(['success' => false, 'errors' => $validator->messages()->toArray()['file'][0]], 200);
         }
         $media = new Media();
@@ -120,24 +123,97 @@ class ChanceController extends Controller
         return response()->json(["success" => true], 200);
     }
 
+
+    public function store(Request $request, $id)
+    {
+
+        $chance = new Chance();
+        $errors = new MessageBag();
+        $this->data['company'] = $company = Company::findOrFail($id);
+        if ($request->method() == "POST") {
+
+            $validator = Validator::make($request->all(), [
+                "name" => 'required',
+                'number' => 'required',
+                'closing_date' => 'required',
+                'file_name' => 'required',
+                'file_description' => 'required',
+                'chance_value' => 'required',
+                'file' => 'mimes:jpg,png,jpeg,doc,docx,txt,pdf,zip',
+                'sector_id' => 'required'
+            ]);
+            if ($validator->fails())
+                return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+
+            $chance->name = $request->get("name");
+            $chance->number = $request->get("number");
+            $chance->value = $request->get("chance_value");
+            $chance->sector_id = $request->get("sector_id");
+            $chance->closing_date = $request->get("closing_date") ? Carbon::createFromFormat('m-d-Y', $request->get("closing_date")) : null;
+            $chance->file_name = $request->get("file_name", "");
+            $chance->file_description = $request->get("file_description", "");
+            $media = new Media();
+            $chance->media_id = $media->saveFile($request->file('file'));
+            $chance->status = 3;
+            $chance->approved = 1;
+            $chance->company_id = $id;
+            $chance->user_id = fauth()->user()->id;
+
+            $units = $request->get("units", []);
+            $units_quantity = $request->get("units_quantity", []);
+            $sectors = $request->get("sectors", []);
+
+            $syncUnit = array();
+            foreach ($units as $key => $unit) {
+                if (!$units_quantity[$key] && $unit != null) {
+                    $errors->add("units_names", trans("chances::chances.attributes.reason") . " " . trans("services::centers.required") . ".");
+                    break;
+                }
+                if($unit != "")
+                    $syncUnit[$unit] = ["quantity" => $units_quantity[$key]];
+            }
+
+
+            if ($chance->approved == 0 && $chance->reason == "")
+                $errors->add("reason", trans("chances::chances.attributes.reason") . " " . trans("chances::chances.required") . ".");
+            if (!$units)
+                $errors->add("units", trans("chances::chances.attributes.units") . " " . trans("chances::chances.required") . ".");
+            /*if (!$sectors)
+                $errors->add("sectors", trans("chances::chances.attributes.sectors") . " " . trans("chances::chances.required") . ".");*/
+            if ($errors->messages())
+                return redirect()->back()->withErrors($errors)->withInput($request->all());
+
+            $chance->save();
+            //$chance->sectors()->sync($sectors);
+            $chance->units()->sync($syncUnit);
+
+            return redirect()->route('chances.create', ['id'=>$company->id])->with('status', trans('app.chances.created_successfully'));
+        }
+
+        $this->data["sectors"] = Sector::published()->get();
+        $this->data["units"] = Unit::published()->get();
+
+        return view('chances.create', $this->data);
+    }
+
     /*public function store()
     {
 
         $this->errors = new MessageBag();
         $chance = new Chance();
 
-        $chance->name = Request::get("name");
-        $chance->number = Request::get("number");
-        $chance->file_name = Request::get("file_name");
-        $chance->file_description = Request::get("file_description");
-        $chance->value = Request::get("value");
+        $chance->name = $request->get("name");
+        $chance->number = $request->get("number");
+        $chance->file_name = $request->get("file_name");
+        $chance->file_description = $request->get("file_description");
+        $chance->value = $request->get("value");
         $chance->user_id = Auth::user()->id; //fauth()->user()->id;
-        $chance->closing_date = Request::get("closing_date") ? Carbon::createFromFormat('Y-m-d\TH:i', Request::get("closing_date")) : null;
+        $chance->closing_date = $request->get("closing_date") ? Carbon::createFromFormat('Y-m-d\TH:i', $request->get("closing_date")) : null;
 
-        $units = Request::get("units", []);
-        $units_quantity = Request::get("units_quantity", []);
-        $sectors = Request::get("sectors", []);
-        $file = Request::file("file");
+        $units = $request->get("units", []);
+        $units_quantity = $request->get("units_quantity", []);
+        $sectors = $request->get("sectors", []);
+        $file = $request->file("file");
 
         if ($file && $this->validateFile($file))
             $chance->file_path = $this->saveFile($file);
@@ -160,7 +236,7 @@ class ChanceController extends Controller
 
         if (!$chance->validate()) {
             $this->errors->merge($chance->errors());
-            return Redirect::back()->withErrors($this->errors)->withInput(Request::all());
+            return Redirect::back()->withErrors($this->errors)->withInput($request->all());
         }
         $chance->save();
         $chance->sectors()->sync($sectors);

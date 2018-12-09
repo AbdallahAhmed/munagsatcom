@@ -121,7 +121,17 @@ return [
     'attributes' => [
         'company_name' => 'company name',
         'sector_id' => 'Sector',
-        'Details'=>'Details'
+        'Details'=>'Details',
+        'details'=>'Company details',
+        'user_type' => 'نوع المستخدم',
+        'logo'=>'logo',
+        'code' => 'code',
+        'number' => 'Revised number',
+        'closing_date' => 'Closing date',
+        'file' => 'File',
+        'file_name' => 'File name',
+        'file_description' => 'File description',
+        'chance_value' => 'Chance value',
     ],
 
 ];

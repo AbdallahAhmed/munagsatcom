@@ -3,13 +3,15 @@
 namespace App\Models;
 
 use Dot\Tenders\Models\Tender as Model;
+use Dot\Tenders\Models\TenderActivity;
 use Dot\Tenders\Models\TenderOrg;
+use Dot\Tenders\Models\TenderType;
 
 class Tender extends Model
 {
 
 
-    protected $dates=[
+    protected $dates = [
         'published_at',
         'last_queries_at',
         'last_get_offer_at',
@@ -17,6 +19,7 @@ class Tender extends Model
         'created_at',
         'updated_at',
     ];
+
     /**
      * @param $query
      * @return $query
@@ -35,11 +38,31 @@ class Tender extends Model
         return $this->hasOne(TenderOrg::class, "id", "org_id");
     }
 
+
+    /**
+     * activity relation
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function activity()
+    {
+        return $this->hasOne(TenderActivity::class, "id", "activity_id");
+    }
+
+    /**
+     * type relation
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function type()
+    {
+        return $this->hasOne(TenderType::class, "id", "type_id");
+    }
+
     /**
      *  add path attribute
      */
     public function getPathAttribute()
     {
-        return 'tender.path.test';
+        return route('tenders.details', ['slug' => $this->slug]);
     }
+
 }

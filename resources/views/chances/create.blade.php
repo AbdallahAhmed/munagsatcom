@@ -4,7 +4,7 @@
 @section('content')
     <section class="container">
         <div class="res-box">
-            <h2 class="text-center"> اضافة فرصة </h2>
+            <h2 class="text-center">{{trans('app.add_chance')}}</h2>
             <div class="feildcont">
                 @if (!session('status'))
                     <form method="post" action="{{route('chances.create', ['id' => $company->id])}}"
@@ -17,36 +17,37 @@
                                 @endforeach
                             </ul>
                             <div class="form-group-lg row">
-                                <label class="col-xs-12 col-md-3"> اسم الفرصه </label>
+                                <label class="col-xs-12 col-md-3"> {{trans('app.chances.chance_name')}}</label>
                                 <div class="col-xs-12 col-md-9">
                                     <div class="new-f-group">
                                         <div class="form-group clearfix">
                                             <input type="text" value="{{@Request::old("name")}}" name="name"
-                                                   class="effect-9 form-control" placeholder="اسم الفرصه  ">
+                                                   class="effect-9 form-control" placeholder=" {{trans('app.chances.chance_name')}}">
                                             <span class="focus-border"><i></i></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group-lg row">
-                                <label class="col-xs-12 col-md-3"> الرقم المرجعى الداخلى </label>
+                                <label class="col-xs-12 col-md-3"> {{trans('app.chances.internal_number')}}</label>
                                 <div class="col-xs-12 col-md-9">
                                     <div class="new-f-group">
                                         <div class="form-group clearfix">
                                             <input name="number" value="{{@Request::old("number")}}" type="text"
-                                                   class="effect-9 form-control">
+                                                   placeholder="{{trans('app.chances.internal_number')}}" class="effect-9 form-control">
                                             <span class="focus-border"><i></i></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group-lg row">
-                                <label class="col-xs-12 col-md-3"> قيمة الفرصة </label>
+                                <label class="col-xs-12 col-md-3"> {{trans('app.chances.chance_value')}}</label>
                                 <div class="col-xs-12 col-md-9">
                                     <div class="new-f-group">
                                         <div class="form-group clearfix">
                                             <input name="chance_value" value="{{@Request::old("chance_value")}}"
                                                    type="text"
+                                                   placeholder="{{trans('app.chances.chance_value_example')}}"
                                                    class="effect-9 form-control">
                                             <span class="focus-border"><i></i></span>
                                         </div>
@@ -54,26 +55,25 @@
                                 </div>
                             </div>
                             <div class="form-group-lg row">
-                                <label class="col-xs-12 col-md-3"> تاريخ الاغلاق </label>
+                                <label class="col-xs-12 col-md-3">{{trans('app.chances.closing_date')}}</label>
                                 <div class="col-xs-12 col-md-6 new-f-group">
                                     <div class="form-group clearfix">
                                         <div class="input-append date" id="dp3" data-date="12-02-2012"
                                              data-date-format="dd-mm-yyyy">
                                             <input name="closing_date" data-date-format="dd-mm-yyyy"
-                                                   class="effect-9 form-control" id="date" placeholder="dd/mm/yyyy"
+                                                   class="effect-9 form-control" id="date" placeholder="dd-mm-yyyy"
                                                    type="text">
                                             <span class="add-on"><i class="fa fa-calendar"></i></span>
                                         </div>
                                     </div>
                                 </div>
-                                <label class="col-xs-12 col-md-3"> صباحا/مساءا </label>
                             </div>
                             <div class="form-group row">
-                                <label class="col-xs-12 col-md-3"> القطاع</label>
+                                <label class="col-xs-12 col-md-3"> {{trans('app.sectors.sector')}}</label>
                                 <div class="col-xs-12 col-md-9 new-f-group">
                                     <div class="form-group clearfix">
                                         <select type="text" name="sector_id" class="effect-9 form-control">
-                                            <option value="{{null}}">اختار القطاع</option>
+                                            <option value="{{null}}">{{trans('app.sectors.choose_sector')}}</option>
                                             @foreach($sectors as $sector)
                                                 <option value="{{$sector->id}}">{{$sector->name}}</option>
                                             @endforeach
@@ -82,33 +82,33 @@
                                 </div>
                             </div>
                             <div class="form-group-lg row">
-                                <label class="col-xs-12 col-md-3"> اسم الملف </label>
+                                <label class="col-xs-12 col-md-3"> {{trans('app.file_name')}}</label>
                                 <div class="col-xs-12 col-md-9">
                                     <div class="new-f-group">
                                         <div class="form-group clearfix">
                                             <input name="file_name" value="{{@Request::old("file_name")}}" type="text"
                                                    class="effect-9 form-control"
-                                                   placeholder="اسم الفرصه  ">
+                                                   placeholder="{{trans('app.file_name')}}">
                                             <span class="focus-border"><i></i></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group-lg row">
-                                <label class="col-xs-12 col-md-3"> تفاصيل الملف </label>
+                                <label class="col-xs-12 col-md-3">{{trans('app.file_description')}}</label>
                                 <div class="col-xs-12 col-md-9">
                                     <div class="new-f-group">
                                         <div class="form-group clearfix">
                                             <input name="file_description" value="{{@Request::old("file_description")}}"
                                                    type="text" class="effect-9 form-control"
-                                                   placeholder="">
+                                                   placeholder="{{trans('app.file_description')}}">
                                             <span class="focus-border"><i></i></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group-lg ">
-                                <label for="upload" class="col-xs-12 col-md-3"> اضافة مرفق </label>
+                                <label for="upload" class="col-xs-12 col-md-3">{{trans('app.add_file')}}</label>
                                 <input id="" class="col-xs-12 col-md-9" type="file" name="file">
                             </div>
                             {{--
@@ -151,7 +151,7 @@
                                 <div class="col-xs-12 col-md-4 new-f-group">
                                     <div class="form-group clearfix">
                                         <select name="units[]" type="text" class="effect-9 form-control">
-                                            <option value="{{null}}">وحدة القياس</option>
+                                            <option value="{{null}}">{{trans('app.units.unit')}}</option>
 
                                             @foreach($units as $unit)
                                                 <option value="{{$unit->id}}">{{$unit->name}}</option>
@@ -163,7 +163,7 @@
                                     <div class="new-f-group">
                                         <div class="form-group clearfix">
                                             <input type="text" name="units_quantity[]" class="effect-9 form-control"
-                                                   placeholder="الكمية">
+                                                   placeholder="{{trans('app.quantity')}}">
                                             <span class="focus-border"><i></i></span>
                                         </div>
                                     </div>
@@ -173,7 +173,7 @@
                                 <div class="col-xs-12 col-md-4 new-f-group">
                                     <div class="form-group clearfix">
                                         <select name="units[]" type="text" class="effect-9 form-control">
-                                            <option value="{{null}}">وحدة القياس</option>
+                                            <option value="{{null}}">{{trans('app.units.unit')}}</option>
                                             @foreach($units as $unit)
                                                 <option value="{{$unit->id}}">{{$unit->name}}</option>
                                             @endforeach
@@ -184,7 +184,7 @@
                                     <div class="new-f-group">
                                         <div class="form-group clearfix">
                                             <input type="text" name="units_quantity[]" class="effect-9 form-control"
-                                                   placeholder="الكمية">
+                                                   placeholder="{{trans('app.quantity')}}">
                                             <span class="focus-border"><i></i></span>
                                         </div>
                                     </div>
@@ -200,7 +200,7 @@
                                     <div class="col-xs-12 col-md-4 new-f-group">
                                         <div class="form-group clearfix">
                                             <select type="text" name="units[]" class="effect-9 form-control">
-                                                <option value="{{null}}">وحدة القياس</option>
+                                                <option value="{{null}}">{{trans('app.units.unit')}}</option>
                                                 @foreach($units as $unit)
                                                     <option value="{{$unit->id}}">{{$unit->name}}</option>
                                                 @endforeach
@@ -211,7 +211,7 @@
                                         <div class="new-f-group">
                                             <div class="form-group clearfix">
                                                 <input type="text" name="units_quantity[]" class="effect-9 form-control"
-                                                       placeholder="الكمية">
+                                                       placeholder="{{trans('app.quantity')}}">
                                                 <span class="focus-border"><i></i></span>
                                             </div>
                                         </div>
@@ -221,7 +221,7 @@
                                     <div class="col-xs-12 col-md-4 new-f-group">
                                         <div class="form-group clearfix">
                                             <select type="text" name="units[]" class="effect-9 form-control">
-                                                <option value="{{null}}">وحدة القياس</option>
+                                                <option value="{{null}}">{{trans('app.units.unit')}}</option>
                                                 @foreach($units as $unit)
                                                     <option value="{{$unit->id}}">{{$unit->name}}</option>
                                                 @endforeach
@@ -232,7 +232,7 @@
                                         <div class="new-f-group">
                                             <div class="form-group clearfix">
                                                 <input type="text" name="units_quantity[]" class="effect-9 form-control"
-                                                       placeholder="الكمية">
+                                                       placeholder="{{trans('app.quantity')}}">
                                                 <span class="focus-border"><i></i></span>
                                             </div>
                                         </div>
@@ -241,7 +241,7 @@
                             </div>
                         </div>
                         <div class="form-group-lg text-center">
-                            <button type="submit" class="uperc padding-md fbutcenter"> نشر الفرصه</button>
+                            <button type="submit" class="uperc padding-md fbutcenter">{{trans('app.chances.publish')}}</button>
                         </div>
                     </form>
                 @else

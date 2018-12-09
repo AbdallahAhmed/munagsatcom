@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Mail\CenterContactEmail;
 use App\Models\Center;
+use App\Models\Company;
 use App\User;
 use Dot\Auth\Auth;
 use Dot\Chances\Models\Sector;
+use Dot\Media\Models\Media;
 use Dot\Services\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\MessageBag;
+use Illuminate\Support\Facades\Validator;
+
 
 class CenterController extends Controller
 {
@@ -59,6 +64,52 @@ class CenterController extends Controller
         return view('centers.index', $this->data);
     }
 
+
+    /**
+     * POST {lang}/company/{id}/center/create
+     * @route centers.create
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function store(Request $request, $id){
+        $this->data['company'] = $company = Company::findOrFail($id);
+        if ($request->method() == "POST") {
+            $validator = Validator::make($request->all(), [
+                "name" => 'required',
+                'sector_id' => 'required',
+                'address' => 'required',
+                'logo' => 'mimes:jpg,png,jpeg',
+            ]);
+            if($validator->fails())
+                return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+
+            $center = new Center();
+            $center->name = $request->get("name");
+            $center->sector_id = $request->get("sector_id");
+            $center->address = $request->get("address");
+            $center->mobile_number = $request->get('mobile_number', "");
+            $center->phone_number = $request->get('phone_number', "");
+            $center->email_address = fauth()->user()->email;
+            $center->user_id = fauth()->user()->id;
+            $center->company_id = $company->id;
+            $center->status = $request->get('status', 0);
+            $center->approved = 1;
+            $center->reason = $request->get('reason');
+            $center->image_id = (new Media())->saveFile($request->file('logo'));
+
+
+            $center->save();
+            $center->services()->sync(array_filter($request->get("services", [])));
+
+            return redirect()->route('centers.create', ['id'=>$company->id])->with('status', trans('app.centers.created_successfully'));
+        }
+
+        $this->data['sectors'] = Sector::published()->get();
+        $this->data['services'] = Service::published()->get();
+
+        return view('centers.create', $this->data);
+    }
+
     /**
      * GET {lang}/centers/{id}
      * @route centers.show
@@ -79,4 +130,5 @@ class CenterController extends Controller
     public function contact(Request $request){
         Mail::to($request->get('email'))->send(new CenterContactEmail($request));
     }
+
 }

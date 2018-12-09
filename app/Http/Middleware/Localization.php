@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Carbon;
 
 class Localization
 {
@@ -18,8 +19,15 @@ class Localization
 
         $lang = $request->route()->parameter('lang');
         if (!($lang == 'ar' && $lang == 'en')) {
-            $lang='ar'; //default
+            $lang = 'ar'; //default
         }
+
+        Carbon::setLocale($lang);
+        \Carbon\Carbon::setLocale($lang);
+        // The lang ar only
+        /* if ($lang == "en") {
+             return redirect()->route('index', ['lang' => 'ar']);
+         }*/
 
         app()->setLocale($lang);
 

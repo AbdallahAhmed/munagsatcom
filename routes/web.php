@@ -25,7 +25,11 @@
 Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], function () {
 
 
-    Route::get('/','TenderController@index')->name('index');
+    // tenders
+    Route::get('/', 'TenderController@index')->name('index');
+    Route::get('tenders/{slug}', 'TenderController@details')->name('tenders.details');
+
+
     Route::any('register', 'UserController@register')->name('register');
     Route::any('login', 'UserController@login')->name('login');
     Route::any('logout', 'UserController@logout')->name('flogout');
@@ -49,7 +53,7 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
     Route::post('chances/offers', 'ChanceController@addOffer')->name('chances.offers');
 
 
-    Route::group(['middleware' => ['company']], function ($router){
+    Route::group(['middleware' => ['company']], function ($router) {
         $router->get('company/{id}', 'CompanyController@show')->name('company.show');
         $router->get('company/{id}/chances', 'CompanyController@chances')->name('company.chances');
         $router->get('company/{id}/centers', 'CompanyController@centers')->name('company.centers');
@@ -63,6 +67,7 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
         $router->get('company/{id}/messages', 'CompanyController@show')->name('company.messages');
         $router->post('company/{id}/password', 'CompanyController@updatePassword')->name('company.password');
         $router->any('company/{id}/chance/create', 'ChanceController@store')->name('chances.create');
+        $router->any('company/{id}/center/create', 'CenterController@store')->name('centers.create');
     });
 
 

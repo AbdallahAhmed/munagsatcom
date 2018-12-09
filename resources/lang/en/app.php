@@ -46,6 +46,10 @@ return [
     'add_delegate' => 'Add delegate',
     'messages' => 'Messages',
     'user_profile' => 'User details',
+    '$' => 'SR',
+    'register_now' => 'Register now',
+    'register_purchase_tender' => 'You must register to purchase this tender',
+    'account_register' => 'If you already have an account, please log in using your username and password',
     'employee_name' => 'Employee name',
     'enter_employee_name' => 'Enter employee name',
     'enter_employee_email' => 'Enter employee email',
@@ -73,7 +77,7 @@ return [
     'requests_sent_successfully' => 'Invitations sent successfully',
     'password_updated_successfully' => 'Password updated successfully',
     'accepted_successfully' => 'Saved successfully',
-    '$'=>'SR',
+    '$' => 'SR',
     'email_not_found' => 'Wrong email',
     'reset_code_sent' => 'A code has been sent to the entered email address',
     'send' => 'send',
@@ -84,7 +88,12 @@ return [
     'resend_code' => 'resend code',
     'tenders' => [
         'tenders' => 'Government tenders',
+        "details" => 'Tender \'s details',
+        "name" => 'Tender\'s name',
+        'tender_activity' => 'Activity',
         'search' => "Search for tenders ",
+        'objective' => 'Objective',
+        'type' => 'Type',
         'activity' => 'Activity',
         'places' => 'Places',
         'org' => 'Government Entity',
@@ -103,9 +112,18 @@ return [
         "address_get_offer" => "Place of presentation",
         "address_files_open" => "Place open envelopes",
         "address_execute" => "Place of execution",
-        'id'=>'Tender id',
-        'cb'=>'the booklet price',
-        'remaining_hours'=>'Days remaining / hours if less than 24 hours'
+        'id' => 'Tender id',
+        'cb' => 'the booklet price',
+        'remaining_hours' => 'Days remaining / hours if less than 24 hours',
+        'not_found' => 'Not found government tenders',
+        'choose_activity' => 'Choose activity',
+        'choose_place' => 'Choose place',
+        'choose_org' => 'Choose Government Entity',
+        'choose_category' => 'Choose category',
+        "cb_real_price" => 'The value of the actual booklet',
+        "cb_downloaded_price" => 'The value of a booklet download ',
+        'dates' => 'Date',
+        'upload_files' => 'Upload files',
     ],
     'fields' => [
         "username" => "Username",
@@ -119,17 +137,22 @@ return [
         'status' => 'Status',
         'mobile_number' => 'Mobile number',
         'phone_number' => 'Telephone number',
+        'code' => 'code'
     ],
     'centers' => [
         'centers' => 'Services centers',
         'center_name' => 'Services center \'s name',
         'search_centers' => 'Search services centers',
+        'add_center' => 'Add Center',
         'search_query' => 'Search services centers',
         'details' => 'Service Center details',
         'name' => 'Center name',
         'rate' => 'Center rate',
         'contact' => 'Message center',
-        'not_found' => 'Not found Sector'
+        'not_found' => 'Not found Sector',
+        'created_successfully' => 'Center created successfully'
+
+
     ],
     'events' => [
         'successfully_register' => 'Registered successfully',
@@ -152,7 +175,7 @@ return [
     'chances' => [
         'chances' => 'Chances',
         'chance' => 'Chance',
-        'the_chance' => 'Chances',
+        'the_chance' => 'Chance',
         'the_chances' => 'Chances',
         'chances_est' => 'Investment Chances',
         'search' => 'Search chances  ',
@@ -186,7 +209,11 @@ return [
         'my_chances' => 'chances',
         'details' => 'details',
         'accepted' => 'approved',
-        'posted' => 'Published chances'
+        'posted' => 'Published chances',
+        'publish' => 'Publish chance'
+    ],
+    'units' => [
+        'unit' => 'وحدة القياس'
     ],
     'add_logo' => 'Add Logo',
     'upload_logo' => 'Upload Logo',
@@ -195,6 +222,9 @@ return [
     'choose_file' => 'Choose file',
     'upload_more_files' => 'Upload more files',
     'company_name' => 'Company name',
+    'file_name' => 'اسم الملف',
+    'add_file' => 'اضافة مرفق',
+    'file_description' => 'تفاصيل الملف',
     'status_array' => [
         0 => 'opened',
         1 => 'closed',

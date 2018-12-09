@@ -38,7 +38,7 @@
                                                         <option value="{{$sector->id}}">{{$sector->name}}</option>
                                                     @endif
                                                 @endforeach
-                                            </select><span class="focus-border"><i></i></span>
+                                            </select>
                                         </div>
                                         <div class="col-md-4">
                                             <select type="text" class="effect-9 form-control" name="service_id">
@@ -51,7 +51,7 @@
                                                         <option value="{{$service->id}}">{{$service->name}}</option>
                                                     @endif
                                                 @endforeach
-                                            </select><span class="focus-border"><i></i></span>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">

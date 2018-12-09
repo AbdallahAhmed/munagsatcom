@@ -61,16 +61,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-xs-12 col-md-3"> {{trans('app.price')}} </label>
-                                <div class="col-xs-12 col-md-9">
-                                    <div class="range">
-                                        <input class="example" type="range" min="100" max="10000" value="100"
-                                               name="points" step="10">
-                                    </div>
-                                </div>
-
-                            </div>
                             <div class="form-group text-center">
                                 <button type="submit"
                                         class="uperc padding-md fbutcenter"> {{trans('app.search')}}</button>

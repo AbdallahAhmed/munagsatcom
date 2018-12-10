@@ -71,5 +71,7 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
         $router->any('company/{id}/center/create', 'CenterController@store')->name('centers.create');
     });
 
+    Route::get('page/{slug}', 'PageController@show')->name('page.show');
+    Route::any('contact-us', 'PageController@contactUs')->name('contact-us');
 
 });

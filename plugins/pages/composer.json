@@ -1,0 +1,24 @@
+{
+    "name": "dot/pages",
+    "description": "The pages plugin of dot/platform",
+    "keywords": [
+        "framework",
+        "laravel",
+        "cms",
+        "plugins",
+        "platform",
+        "dot",
+        "pages"
+    ],
+    "license": "MIT",
+    "type": "package",
+    "require": {
+        "dot/platform": "0.4.*",
+        "dot/tags": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dot\\Pages\\": "src"
+        }
+    }
+}

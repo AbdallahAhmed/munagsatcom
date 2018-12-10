@@ -18,7 +18,7 @@
 .card-header .title h2{
     background-color: transparent;
     color: #315d90;
-    text-align: right;
+    text-align: inherit;
     font-size: 20px;
     padding: 0;
     line-height: 1.;

@@ -8,6 +8,7 @@
         "php": ">=7.0.0",
         "dot/categories": "^0.2.2",
         "dot/i18n": "^0.2.1",
+        "dot/pages": "^0.2.8",
         "dot/platform": "^0.4.59",
         "dot/posts": "^0.2.6",
         "fideloper/proxy": "~3.3",
@@ -29,6 +30,7 @@
         "psr-4": {
             "App\\": "app/",
             "Dot\\Posts\\": "plugins/posts/src/",
+            "Dot\\Pages\\": "plugins/pages/src/",
             "Dot\\Blocks\\": "plugins/blocks/src/",
             "Dot\\Categories\\": "plugins/categories/src/",
             "Dot\\Media\\": "plugins/media/src/",

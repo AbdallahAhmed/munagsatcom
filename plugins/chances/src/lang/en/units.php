@@ -1,63 +1,53 @@
 <?php
 return [
 
-    'units' => 'وحدات القياس',
-    'unit' => 'وحدة قياس',
-    'add_new' => 'أضف وحدة قياس جديدة',
-    'edit' => 'تعديل الوحدة قياس',
-    'back_to_units' => 'العودة للوحدات القياس',
-    'no_records' => 'لا توجد وحدات القياس',
-    'save_unit' => 'حفظ وحدة القياس',
-    'search' => 'بحث',
-    'search_units' => 'البحث فى الوحدات القياس',
-    'per_page' => 'لكل صفحة',
-    'bulk_actions' => 'إختر أمر',
-    'delete' => 'حذف',
-    'apply' => 'حفظ',
-    'page' => 'الصفحة',
-    'of' => 'من',
-    'order' => 'ترتيب',
-    'sort_by' => 'ترتيب',
-    'asc' => 'تصاعدى',
-    'desc' => 'تنازلى',
-    'actions' => 'تحكم',
-    'all_categories' => 'كل التصنيفات',
-    "filter" => "عرض",
-    'sure_delete' => 'أنت على وشك حذف الوحدة قياس. إستمرار ؟',
-    "close" => "إلغاء",
-    'add_category' => "أضف إلي قسم",
-    'add_tag' => 'أضف وسوم',
-    'sure_activate' => "هل تريد تفعيل الوحدة؟",
-    'sure_deactivate' => "هل تريد إلغاء تفعيل الوحدة",
-    'activate' => 'تفعيل',
-    'activated' => 'مفعل',
-    'deactivated' => 'غير مفعل',
-    "not_categorized" => "غير محدد",
-
-    "yes" => "نعم",
-    "no" => "لا",
-
-
-    'type_post' => "خبر",
-    'type_category' => "تصنيف",
-    'type_tag' => "وسم",
+    'units' => 'Units',
+    'unit' => 'Unit',
+    'add_new' => 'Add new unit',
+    'edit' => 'Edit unit',
+    'back_to_units' => 'Back to units',
+    'no_records' => 'No units found',
+    'save_unit' => 'Save unit',
+    'search' => 'Search',
+    'search_units' => 'Search units',
+    'per_page' => 'Per page',
+    'bulk_actions' => 'Choose action',
+    'delete' => 'Delete',
+    'apply' => 'Apply',
+    'page' => 'Page',
+    'of' => 'Of',
+    'order' => 'Order',
+    'sort_by' => 'Sort by',
+    'asc' => 'Asc',
+    'desc' => 'Desc',
+    'actions' => 'Actions',
+    'all_categories' => 'All categories',
+    "filter" => "filter",
+    'sure_delete' => 'Are you sure to delete unit',
+    "close" => "cancel",
+    'sure_activate' => "Are you sure to activate unit?",
+    'sure_deactivate' => "Are you sure to deactivate unit?",
+    'activate' => 'activate',
+    'activated' => 'activated',
+    'deactivated' => 'deactivated',
+    "yes" => "yes",
+    "no" => "no",
 
     'attributes' => [
-        'name' => 'إسم وحدة القياس',
-        "type" => "النوع",
-        'limit' => "عدد الأخبار",
-        "status" => "الحالة"
+        'name' => 'Unit name',
+        "type" => "Type",
+        "status" => "Status"
     ],
 
     "events" => [
-        'created' => 'تم إضافة الوحدة قياس بنجاح',
-        'updated' => 'تم تحديث الوحدة قياس بنجاح',
-        'deleted' => 'تم حذف الوحدة قياس بنجاح',
-        'created_at' => 'تاريخ الإضافة'
+        'created' => 'Unit created successfully',
+        'updated' => 'Unit updated successfully',
+        'deleted' => 'Unit deleted successfully',
+        'created_at' => 'Created at'
 
     ],
     "permissions" => [
-        "manage" => "التحكم بالفرص"
+        "manage" => "manage chances"
     ]
 
 ];

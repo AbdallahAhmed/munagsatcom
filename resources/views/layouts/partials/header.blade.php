@@ -16,10 +16,10 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="navbar-form navbar-left nav navbar-nav menu">
-                <li><a href="javascript:void(0)"> {{trans('app.home')}}<span class="sr-only">(current)</span></a></li>
-                <li><a href="javascript:void(0)"> {{trans('app.about_website')}}</a></li>
-                <li><a href="javascript:void(0)">{{trans('app.terms_conditions')}}</a></li>
-                <li><a href="javascript:void(0)">{{trans('app.contact_us')}}</a></li>
+                <li><a href="{{route('index')}}"> {{trans('app.home')}}<span class="sr-only">(current)</span></a></li>
+                <li><a href="{{route('page.show', ['slug' => app()->getLocale() == "ar" ? 'حول البوابة' : 'about-us'])}}"> {{trans('app.about_website')}}</a></li>
+                <li><a href="{{route('page.show', ['slug' => app()->getLocale() == "ar" ? 'الأنظمة و اللوائح' : 'terms'])}}">{{trans('app.terms_conditions')}}</a></li>
+                <li><a href="{{route('contact-us')}}">{{trans('app.contact_us')}}</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if(!fauth()->check())

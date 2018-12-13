@@ -86,6 +86,12 @@ return [
     'forget_password' => 'forget password?',
     'enter' => 'enter',
     'resend_code' => 'resend code',
+    'how_to_help' => 'How can we help',
+    'send_clarification' => 'send',
+    'success_message' => 'We\'ll contact you soon, Thank you ',
+    'tel_min' => 'Mobile number should be at least 10 numbers',
+    'name_min' => 'Name should be at least 3 letters',
+    'message_min' => 'Your message should be at least 10 characters',
     'tenders' => [
         'tenders' => 'Government tenders',
         "details" => 'Tender \'s details',

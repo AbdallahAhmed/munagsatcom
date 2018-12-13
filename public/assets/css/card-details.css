@@ -151,6 +151,10 @@
 .download-box{
     padding: 1px 0 33px;
 }
+.download-box a{
+    font-weight: 600;
+    font-size: 16px;
+}
 .checked{color: #315d90;}
 .tab-marakz{}
 .tab-marakz ul{

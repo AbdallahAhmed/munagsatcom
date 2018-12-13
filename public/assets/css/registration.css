@@ -10,6 +10,11 @@
     /* text-align: center; */
     color: #5e5e5f;
 }
+.res-box h3{
+    font-size: 18px;
+    color: #5e5e5f;
+    margin: 5px 0 10px;
+}
 .reg-part{
     border: 1px solid #ddd;
     padding: 40px 100px;

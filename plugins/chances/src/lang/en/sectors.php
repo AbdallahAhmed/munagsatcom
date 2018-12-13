@@ -8,7 +8,7 @@ return [
     'back_to_sectors' => 'Back to sectors',
     'no_records' => 'No sectors found',
     'save_sector' => 'save sectors',
-    'search' => 'بحث',
+    'search' => 'search',
     'search_sectors' => 'Search sectors',
     'per_page' => 'Per Page',
     'bulk_actions' => 'Bulk Actions',

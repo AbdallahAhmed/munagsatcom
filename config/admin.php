@@ -37,6 +37,7 @@ return [
         "admin" => Dot\Platform\System::class,
         "i18n" => Dot\I18n\I18n::class,
         "posts" => Dot\Posts\Posts::class,
+        "pages" => Dot\Pages\Pages::class,
         "seo" => Dot\Seo\Seo::class,
         "chances" => Dot\Chances\Chances::class,
         "tenders" => Dot\Tenders\Tenders::class,

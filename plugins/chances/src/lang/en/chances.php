@@ -25,7 +25,6 @@ return [
     'filter' => 'filter',
     "related_blocks" => "Related blocks",
     'all_categories' => 'All Categories',
-    "filter" => "Filter",
     'sure_delete' => 'Are you sure to delete ?',
     'add_category' => "Add To Category",
     'add_tag' => 'Add tags',

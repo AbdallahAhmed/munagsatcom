@@ -18,8 +18,8 @@
                                         <div class="card-img"><img
                                                     src="{{thumbnail($chance->image->path, 'single_center')}}" alt="">
                                         </div>
-                                        <div class="padt">{{trans('app.chances.remaining_date')}}</div>
                                     @endif
+                                    <div class="padt">{{trans('app.chances.remaining_date')}}</div>
                                     <div class="progress ">
                                         <div class="progress-bar" role="progressbar"
                                              aria-valuenow="{{100-((\Carbon\Carbon::parse($chance->closing_date)->diffInMinutes(\Carbon\Carbon::now())/\Carbon\Carbon::parse($chance->closing_date)->diffInMinutes($chance->created_at))*100)}}"

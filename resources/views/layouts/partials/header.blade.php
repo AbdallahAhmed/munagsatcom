@@ -37,7 +37,7 @@
                 ?>
                 @if(count($employee) > 0)
                     <li>
-                        <a href="{{route('company.show', ['id' => $employee->company_id])}}">{{trans('app.the_company')}}</a>
+                        <a href="{{route('company.show', ['id' => $employee[0]->company_id])}}">{{trans('app.the_company')}}</a>
                     </li>
                 @endif()
             </ul>

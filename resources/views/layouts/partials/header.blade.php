@@ -26,6 +26,7 @@
                 <li><a href="{{route('contact-us')}}">{{trans('app.contact_us')}}</a></li>
                 <?php
                 use App\Models\Companies_empolyees;
+                $employee = [];
                 if (fauth()->check()) {
                     $employee = Companies_empolyees::where([
                         ['employee_id', fauth()->user()->id],

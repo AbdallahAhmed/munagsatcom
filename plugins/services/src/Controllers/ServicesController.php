@@ -90,7 +90,9 @@ class ServicesController extends Controller
 
             $service->name = Request::get("name");
             $service->status = Request::get("status", 0);
-
+            $service->price_from = Request::get("price_from");
+            $service->price_to = Request::get("price_to");
+            $service->status = Request::get("status", 0);
 
             if (!$service->validate()) {
                 return Redirect::back()->withErrors($service->errors())->withInput(Request::all());

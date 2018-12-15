@@ -22,7 +22,7 @@
                                     <div class="padt">{{trans('app.chances.remaining_date')}}</div>
                                     <div class="progress ">
                                         <div class="progress-bar" role="progressbar"
-                                             aria-valuenow="{{100-((\Carbon\Carbon::parse($chance->closing_date)->diffInMinutes(\Carbon\Carbon::now())/\Carbon\Carbon::parse($chance->closing_date)->diffInMinutes($chance->created_at))*100)}}"
+                                             aria-valuenow="{{((\Carbon\Carbon::parse($chance->closing_date)->diffInMinutes(\Carbon\Carbon::now())/\Carbon\Carbon::parse($chance->closing_date)->diffInMinutes($chance->created_at))*100)}}"
                                              aria-valuemin="0" aria-valuemax="0" style="">
                                             <span class="popOver" data-toggle="tooltip" data-placement="top"
                                                   title="{{\Carbon\Carbon::parse($chance->closing_date)->diffForHumans(\Carbon\Carbon::now())}}"> </span>

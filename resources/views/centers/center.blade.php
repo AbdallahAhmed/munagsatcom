@@ -12,8 +12,13 @@
                     <div class="details">
                         <div class="row">
                             <div class="col-md-3">
+
                                 <div class="">
-                                    <div class="card-img"><img src="{{thumbnail($center->image->path, 'single_center')}}" alt=""></div>
+                                    @if($center->image)
+                                        <div class="card-img"><img
+                                                    src="{{thumbnail($center->image->path, 'single_center')}}" alt="">
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-md-9">
@@ -140,7 +145,8 @@
                                         <div class="col-xs-12 col-md-9">
                                             <div class="new-f-group">
                                                 <div class="form-group clearfix">
-                                                    <textarea id="{{trans('app.fields.your_message')}}" class="effect-9 form-control" rows="5"
+                                                    <textarea id="{{trans('app.fields.your_message')}}"
+                                                              class="effect-9 form-control" rows="5"
                                                               placeholder="{{trans('app.fields.your_message')}}..."></textarea>
                                                     <span class="focus-border"><i></i></span>
                                                 </div>
@@ -148,7 +154,8 @@
                                         </div>
                                     </div>
                                     <div class="form-group-lg text-center">
-                                        <button type="submit"  class="uperc padding-md fbutcenter"> {{trans('app.login')}}
+                                        <button type="submit"
+                                                class="uperc padding-md fbutcenter"> {{trans('app.login')}}
                                         </button>
                                     </div>
                                 </form>
@@ -162,48 +169,48 @@
         </div>
     </section>
     @push('scripts')
-    <script>
-        $(function () {
-            $('#contact').on('submit', function (e) {
-                e.preventDefault();
-                var name = $('#name').val();
-                var email = $('#email').val();
-                var message = $('#message').val();
-                regex = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i;
-                var valid = true;
+        <script>
+            $(function () {
+                $('#contact').on('submit', function (e) {
+                    e.preventDefault();
+                    var name = $('#name').val();
+                    var email = $('#email').val();
+                    var message = $('#message').val();
+                    regex = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i;
+                    var valid = true;
 
-                if(!regex.test(email)){
-                    valid = false;
-                    $("#ee").show();
-                }
-                if(name.length < 3){
-                    valid = false;
-                    $("#en").show();
-                }
-                if(message.length < 5){
-                    valid = false;
-                    $("#em").show();
-                }
-                if(!valid) return
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    if (!regex.test(email)) {
+                        valid = false;
+                        $("#ee").show();
                     }
-                });
-                $.ajax({
-                    type: "post",
-                    url: "{{route('centers.contact')}}",
-                    data: {message: message, email: email, name: name},
-                    success: function () {
-                        $('.form-marakz').hide();
-                        $('.message-2').show(200);
-                    },
-                    error:function () {
-                        alert("Internal server error");
+                    if (name.length < 3) {
+                        valid = false;
+                        $("#en").show();
                     }
+                    if (message.length < 5) {
+                        valid = false;
+                        $("#em").show();
+                    }
+                    if (!valid) return
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        type: "post",
+                        url: "{{route('centers.contact')}}",
+                        data: {message: message, email: email, name: name},
+                        success: function () {
+                            $('.form-marakz').hide();
+                            $('.message-2').show(200);
+                        },
+                        error: function () {
+                            alert("Internal server error");
+                        }
+                    })
                 })
             })
-        })
-    </script>
+        </script>
     @endpush
 @endsection

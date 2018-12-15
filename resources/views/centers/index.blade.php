@@ -106,9 +106,11 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <div class="card-img"><a href="{{$center->path}}"><img
-                                            src="{{thumbnail($center->image->path, 'single_center')}}" alt=""></a>
-                            </div>
+                            @if($center->image)
+                                <div class="card-img"><a href="{{$center->path}}"><img
+                                                src="{{thumbnail($center->image->path, 'single_center')}}" alt=""></a>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 @endforeach

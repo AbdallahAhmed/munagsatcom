@@ -26,14 +26,18 @@
                 <li><a href="{{route('contact-us')}}">{{trans('app.contact_us')}}</a></li>
                 <?php
                 use App\Models\Companies_empolyees;
-                $employee = Companies_empolyees::where([
-                    ['employee_id', fauth()->user()->id],
-                    ['accepted', 1],
-                    ['status', 1]
-                ])->get();
+                if (fauth()->check) {
+                    $employee = Companies_empolyees::where([
+                        ['employee_id', fauth()->user()->id],
+                        ['accepted', 1],
+                        ['status', 1]
+                    ])->get();
+                }
                 ?>
                 @if(count($employee) > 0)
-                    <li><a href="{{route('company.show', ['id' => $employee->company_id])}}">{{trans('app.the_company')}}</a></li>
+                    <li>
+                        <a href="{{route('company.show', ['id' => $employee->company_id])}}">{{trans('app.the_company')}}</a>
+                    </li>
                 @endif()
             </ul>
             <ul class="nav navbar-nav navbar-right">

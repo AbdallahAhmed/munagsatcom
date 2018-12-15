@@ -261,7 +261,7 @@ class UserController extends Controller
         $user = User::where('email', fauth()->user()->email)->first();
         $user->password = $request->get('password');
         $user->save();
-        return redirect()->route('user.show', ['user' => $user])->with('status', trans('app.events.password_changed'));
+        return redirect()->route('user.show')->with('status', trans('app.events.password_changed'));
     }
 
     /**

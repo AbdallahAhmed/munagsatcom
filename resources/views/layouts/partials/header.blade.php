@@ -17,9 +17,24 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="navbar-form navbar-left nav navbar-nav menu">
                 <li><a href="{{route('index')}}"> {{trans('app.home')}}<span class="sr-only">(current)</span></a></li>
-                <li><a href="{{route('page.show', ['slug' => app()->getLocale() == "ar" ? 'حول البوابة' : 'about-us'])}}"> {{trans('app.about_website')}}</a></li>
-                <li><a href="{{route('page.show', ['slug' => app()->getLocale() == "ar" ? 'الأنظمة و اللوائح' : 'terms'])}}">{{trans('app.terms_conditions')}}</a></li>
+                <li>
+                    <a href="{{route('page.show', ['slug' => app()->getLocale() == "ar" ? 'حول البوابة' : 'about-us'])}}"> {{trans('app.about_website')}}</a>
+                </li>
+                <li>
+                    <a href="{{route('page.show', ['slug' => app()->getLocale() == "ar" ? 'الأنظمة و اللوائح' : 'terms'])}}">{{trans('app.terms_conditions')}}</a>
+                </li>
                 <li><a href="{{route('contact-us')}}">{{trans('app.contact_us')}}</a></li>
+                <?php
+                use App\Models\Companies_empolyees;
+                $employee = Companies_empolyees::where([
+                    ['employee_id', fauth()->user()->id],
+                    ['accepted', 1],
+                    ['status', 1]
+                ])->get();
+                ?>
+                @if(count($employee) > 0)
+                    <li><a href="{{route('company.show', ['id' => $employee->company_id])}}">{{trans('app.the_company')}}</a></li>
+                @endif()
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if(!fauth()->check())
@@ -38,7 +53,8 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">
-                            <img src="{{fauth()->user()->photo ? thumbnail(fauth()->user()->photo->path, 'avatar') : asset('assets/images/avatar.jpg')}}" alt="">
+                            <img src="{{fauth()->user()->photo ? thumbnail(fauth()->user()->photo->path, 'avatar') : asset('assets/images/avatar.jpg')}}"
+                                 alt="">
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="{{route('user.show')}}">{{trans('app.setting')}}</a></li>
@@ -51,7 +67,8 @@
                                     {{trans('app.logout')}}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('flogout') }}" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ route('flogout') }}" method="POST"
+                                      style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
                             </li>

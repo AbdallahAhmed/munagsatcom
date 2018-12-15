@@ -14,9 +14,12 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="light-white">
-                                    <div class="card-img"><img
-                                                src="{{thumbnail($chance->image->path, 'single_center')}}" alt=""></div>
-                                    <div class="padt">{{trans('app.chances.remaining_date')}}</div>
+                                    @if($chance->image)
+                                        <div class="card-img"><img
+                                                    src="{{thumbnail($chance->image->path, 'single_center')}}" alt="">
+                                        </div>
+                                        <div class="padt">{{trans('app.chances.remaining_date')}}</div>
+                                    @endif
                                     <div class="progress ">
                                         <div class="progress-bar" role="progressbar"
                                              aria-valuenow="{{100-((\Carbon\Carbon::parse($chance->closing_date)->diffInMinutes(\Carbon\Carbon::now())/\Carbon\Carbon::parse($chance->closing_date)->diffInMinutes($chance->created_at))*100)}}"
@@ -98,7 +101,8 @@
 
                     <div class="text-center">
                         <button type="button" class="padding-lg fbutcenter btn-mas" data-dismiss="modal"
-                                data-target="#myModal"><i class="fa fa-arrow-right"></i>{{trans('app.chances.apply_chance')}}
+                                data-target="#myModal"><i
+                                    class="fa fa-arrow-right"></i>{{trans('app.chances.apply_chance')}}
                         </button>
                         <!-- Modal -->
                         <div class="modal fade" id="myModal" role="dialog">
@@ -122,7 +126,8 @@
                                         </form>
                                     </div>
                                     <div class="modal-footer text-center">
-                                        <button type="submit" form="upload" class="uperc padding-md fbutcenter">{{trans('app.chances.apply_done')}}
+                                        <button type="submit" form="upload"
+                                                class="uperc padding-md fbutcenter">{{trans('app.chances.apply_done')}}
                                         </button>
                                         <button type="submit" class="uperc padding-md fbutcenter1" data-dismiss="modal">
                                             {{trans('app.cancel')}}
@@ -212,7 +217,7 @@
                             if (data.success) {
                                 $("#myModal").modal('hide');
                                 $("#SuccessModal").modal('show');
-                            }else{
+                            } else {
                                 $('.alert-danger').html(data.errors);
                                 $('.alert-danger').show();
                             }

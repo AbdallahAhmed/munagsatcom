@@ -68,7 +68,7 @@ class UserController extends Controller
             $user->password = ($request->get('password'));
             $user->role_id = 2;
             $user->backend = 0;
-            $user->status = 0;
+            $user->status = 1;
             $user->type = $request->get('user_type', 1);
             $user->save();
             if ($request->get('user_type') == 2) {
@@ -97,6 +97,14 @@ class UserController extends Controller
                     'accepted' => 1
                 ]);
                 $company->files()->sync($files);
+            }
+            else{
+                fauth()->attempt([
+                    'email' => $user->email,
+                    'password' => $user->password,
+                    'backend' => 0
+                ]);
+                return redirect()->route('index');
             }
 
             return redirect()->route('login')->with('status', trans('app.events.successfully_register'));
@@ -253,7 +261,7 @@ class UserController extends Controller
         $user = User::where('email', fauth()->user()->email)->first();
         $user->password = $request->get('password');
         $user->save();
-        return redirect()->route('user.show', ['user' => $user])->with('status', trans('app.events.password_changed'));
+        return redirect()->route('user.show')->with('status', trans('app.events.password_changed'));
     }
 
     /**

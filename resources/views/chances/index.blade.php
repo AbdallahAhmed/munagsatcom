@@ -66,80 +66,84 @@
             <!-------------- Begin:left side -------------->
 
             @if(count($chances)==0)
-                <p class="col-md-8 not-found">{{trans('app.chances.not_found')}}</p>
-            @endif
+                <p class="col-md-8 not-found">{{trans('app.chances.not_found')}}</p
+            @else
                 <div class="col-md-8 content">
                     <h2>{{trans('app.chances.chances_est')}}</h2>
                     <!-------------- Begin:Card -------------->
                     @foreach($chances as $chance)
 
-                    <div class="card foras">
-                        <div class="card-header">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="card-img"><a href="{{$chance->path}}"><img
-                                                    src="{{thumbnail($chance->image->path)}}"
-                                                    alt=""></a></div>
+                        <div class="card foras">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        @if($chance->image)
+                                        <div class="card-img"><a href="{{$chance->path}}"><img
+                                                        src="{{thumbnail($chance->image->path)}}"
+                                                        alt=""></a></div>
+                                            @endif
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="title">
+                                            <p> {{trans('app.chances.chance')}}<span><a
+                                                            href="{{$chance->path}}">{{$chance->name}}</a></span></p>
+                                            <p>{{trans('app.the_company')}} <span>{{$chance->company->name}}</span></p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-10">
-                                    <div class="title">
-                                        <p> {{trans('app.chances.chance')}}<span><a
-                                                        href="{{$chance->path}}">{{$chance->name}}</a></span></p>
-                                        <p>{{trans('app.the_company')}} <span>{{$chance->company->name}}</span></p>
+                                <div class="card-share">
+                                    <div class="hideshare-wrap" style="width:40px; height:40px;">
+                                        <a class="share hideshare-btn" href="#">
+                                            <i class="fa fa-share-alt"></i>
+                                        </a>
+                                        <ul class="hideshare-list shown" style="width: 80px; left: 50px; right: -50px;">
+                                            <li>
+                                                <a class="shareBtn" data-title="{{$chance->name}}"
+                                                   data-sharer="facebook" href="{{$chance->path}}">
+                                                    <i class="fa fa-facebook fa-2x"></i>
+                                                    <span>Facebook</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="shareBtn" data-title="{{$chance->name}}" data-sharer="twitter"
+                                                   href="{{$chance->path}}">
+                                                    <i class="fa fa-twitter-square fa-2x"></i>
+                                                    <span>Twitter</span>
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-share">
-                                <div class="hideshare-wrap" style="width:40px; height:40px;">
-                                    <a class="share hideshare-btn" href="#">
-                                        <i class="fa fa-share-alt"></i>
-                                    </a>
-                                    <ul class="hideshare-list shown" style="width: 80px; left: 50px; right: -50px;">
-                                        <li>
-                                            <a class="shareBtn" data-title="{{$chance->name}}" data-sharer="facebook" href="{{$chance->path}}">
-                                                <i class="fa fa-facebook fa-2x"></i>
-                                                <span>Facebook</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="shareBtn" data-title="{{$chance->name}}" data-sharer="twitter" href="{{$chance->path}}">
-                                                <i class="fa fa-twitter-square fa-2x"></i>
-                                                <span>Twitter</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-date clearfix">
-                            <div class="item one_thrd">
-                                <div class="progress ">
-                                    <div class="progress-bar" role="progressbar"
-                                         aria-valuenow="{{100-((\Carbon\Carbon::parse($chance->closing_date)->diffInMinutes(\Carbon\Carbon::now())/\Carbon\Carbon::parse($chance->closing_date)->diffInMinutes($chance->created_at))*100)}}"
-                                         aria-valuemin="0" aria-valuemax="0" style="">
+                            <div class="card-date clearfix">
+                                <div class="item one_thrd">
+                                    <div class="progress ">
+                                        <div class="progress-bar" role="progressbar"
+                                             aria-valuenow="{{((\Carbon\Carbon::parse($chance->closing_date)->diffInMinutes(\Carbon\Carbon::now())/\Carbon\Carbon::parse($chance->closing_date)->diffInMinutes($chance->created_at))*100)}}"
+                                             aria-valuemin="0" aria-valuemax="0" style="">
                                         <span class="popOver" data-toggle="tooltip" data-placement="top"
                                               title="{{\Carbon\Carbon::parse($chance->closing_date)->diffForHumans(\Carbon\Carbon::now())}}"> </span>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="item one_thrd">
+                                    <p>{{trans('app.chances.due_date')}}</p>
+                                    <p><i class="fa fa-calendar"></i> <span
+                                                class="text-grey">{{$chance->closing_date}}</span></p>
+                                </div>
+                                <div class="item one_thrd">
+                                    <p>{{trans('app.chances.created_at')}}</p>
+                                    <p><i class="fa fa-calendar"></i> <span
+                                                class="text-grey">{{\Carbon\Carbon::parse($chance->created_at)->toDateString()}}</span>
+                                    </p>
+                                </div>
                             </div>
-                            <div class="item one_thrd">
-                                <p>{{trans('app.chances.due_date')}}</p>
-                                <p><i class="fa fa-calendar"></i> <span
-                                            class="text-grey">{{$chance->closing_date}}</span></p>
-                            </div>
-                            <div class="item one_thrd">
-                                <p>{{trans('app.chances.created_at')}}</p>
-                                <p><i class="fa fa-calendar"></i> <span
-                                            class="text-grey">{{\Carbon\Carbon::parse($chance->created_at)->toDateString()}}</span>
-                                </p>
+                            <div class="card-price clearfix">
+                                <div class="light-white one_half padt">{{trans('app.chances.value')}}:
+                                    <span class="text-blue"> {{$chance->value}}</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="card-price clearfix">
-                            <div class="light-white one_half padt">{{trans('app.chances.value')}}:
-                                <span class="text-blue"> {{$chance->value}}</span>
-                            </div>
-                        </div>
-                    </div>
                 @endforeach
 
                 <!-------------- End:Card -------------->
@@ -149,6 +153,7 @@
                     </div>
                     <!-------------- End:pagination -------------->
                 </div>
+        @endif
 
         <!-------------- End:left side -------------->
         </div>
@@ -183,20 +188,20 @@
             });
         </script>
         <script>
-           /* $(document).ready(function () {
-                $(".share").hideshare({
-                    link: "",           // Link to URL defaults to document.URL
-                    title: "",          // Title for social post defaults to document.title
-                    media: "",          // Link to image file defaults to null
-                    facebook: true,     // Turns on Facebook sharing
-                    twitter: true,      // Turns on Twitter sharing
-                    pinterest: false,    // Turns on Pinterest sharing
-                    googleplus: false,   // Turns on Google Plus sharing
-                    linkedin: false,     // Turns on LinkedIn sharing
-                    position: "right", // Options: Top, Bottom, Left, Right
-                    speed: 150           // Speed of transition
-                });
-            });*/
+            /* $(document).ready(function () {
+                 $(".share").hideshare({
+                     link: "",           // Link to URL defaults to document.URL
+                     title: "",          // Title for social post defaults to document.title
+                     media: "",          // Link to image file defaults to null
+                     facebook: true,     // Turns on Facebook sharing
+                     twitter: true,      // Turns on Twitter sharing
+                     pinterest: false,    // Turns on Pinterest sharing
+                     googleplus: false,   // Turns on Google Plus sharing
+                     linkedin: false,     // Turns on LinkedIn sharing
+                     position: "right", // Options: Top, Bottom, Left, Right
+                     speed: 150           // Speed of transition
+                 });
+             });*/
         </script>
         <script>
             $(function () {

@@ -11,7 +11,7 @@
                     <div class="profile-item">
                         <div class="row">
                             <div class="col-md-3">
-                                <div class="card-img"><img src="{{thumbnail($user->photo->path, 'single_center')}}" alt=""></div>
+                                <div class="card-img"><img src="{{$user->photo ? thumbnail($user->photo->path, 'single_center') : asset('assets/images/avatar.jpg')}}" alt=""></div>
                             </div>
                             <div class="col-md-9">
                                 <div class="details-item">

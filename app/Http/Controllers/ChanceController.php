@@ -124,6 +124,11 @@ class ChanceController extends Controller
     }
 
 
+    /** POST {lang}/company/{id}/chance/create
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function store(Request $request, $id)
     {
 

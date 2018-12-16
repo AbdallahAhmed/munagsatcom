@@ -144,7 +144,7 @@
 
                     <div class="download-box">
                         <h3 class="text-center"><span>{{trans('app.tenders.upload_files')}}</span></h3>
-                        @if(fauth()->check())
+                        @if(!fauth()->check())
                             <p>{{trans('app.register_purchase_tender')}}<a
                                         href="{{route('register')}}"> {{trans('app.register_now')}} </a></p>
                             <p>{{trans('app.account_register')}}<a

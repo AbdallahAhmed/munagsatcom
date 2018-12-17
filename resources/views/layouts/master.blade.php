@@ -34,7 +34,7 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets')}}/images/fav_icon.jpg">
 
-
+    <script  data-pace-options='{ "ajax": false }' src="/js/pace.js"></script>
     <script type="application/ld+json">
     {
     "@context": "http://schema.org",

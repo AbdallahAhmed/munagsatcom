@@ -145,7 +145,7 @@ return [
     ],
     '$'=>'ريال سعودى',
     'events' => [
-        'successfully_register' => 'تم التسجيل بنجاح',
+        'successfully_register' => 'مرحبا تم التسجيل بنجاح ',
         'password_changed' => 'تم تغير كلمة المرور بنجاح'
     ],
     'sectors' => [

@@ -162,7 +162,7 @@ return [
 
     ],
     'events' => [
-        'successfully_register' => 'Registered successfully',
+        'successfully_register' => 'Welcome  registered successfully',
         'password_change' => 'Password changed successfully',
     ],
     'sectors' => [

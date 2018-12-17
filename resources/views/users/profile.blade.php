@@ -28,10 +28,6 @@
                                             <div class="one_xsmall title">{{trans('app.fields.phone_number')}}</div>
                                             <div class="one_xlarg tel">{{$user->phone_number}}</div>
                                         </li>
-                                        <li class="clearfix">
-                                            <div class="one_xsmall title">{{trans('app.fields.mobile_number')}}</div>
-                                            <div class="one_xlarg tel">{{$user->mobile_number}}</div>
-                                        </li>
 
                                     </ul>
                                 </div>
@@ -64,7 +60,7 @@
                                                                    toggle="#password-field3"></i></span>
                                             <input name="current_password" type="password" class="effect-9 form-control"
                                                    id="password-field3"
-                                                   placeholder="***">
+                                                   placeholder="{{trans('app.current_password')}}">
                                             <span class="focus-border"><i></i></span>
                                         </div>
                                     </div>
@@ -77,7 +73,7 @@
                                                                    toggle="#password-field"></i></span>
                                             <input name="password" type="password" class="effect-9 form-control"
                                                    id="password-field"
-                                                   placeholder="***">
+                                                   placeholder="{{trans('app.new_password')}}">
                                             <span class="focus-border"><i></i></span>
                                         </div>
                                     </div>
@@ -90,7 +86,7 @@
                                                                    toggle="#password-field2"></i></span>
                                             <input name="password_confirmation" type="password"
                                                    class="effect-9 form-control" id="password-field2"
-                                                   placeholder="***">
+                                                   placeholder="{{trans('app.confirm_password')}}">
                                             <span class="focus-border"><i></i></span>
                                         </div>
                                     </div>

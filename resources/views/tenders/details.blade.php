@@ -81,9 +81,9 @@
                             <div class="col-md-6">
                                 <div class="progress ">
                                     <div class="progress-bar" role="progressbar"
-                                         aria-valuenow="{{($tender->published_at->getTimestamp()/$tender->files_opened_at->getTimestamp())*100}}"
+                                         aria-valuenow="{{$tender->progress}}"
                                          aria-valuemin="0"
-                                         aria-valuemax="0" style="">
+                                         aria-valuemax="100" style="">
                                     <span class="popOver" data-toggle="tooltip" data-placement="top"
                                           title=" {{$tender->files_opened_at->diffForHumans(\Carbon\Carbon::now())}}"> </span>
                                     </div>

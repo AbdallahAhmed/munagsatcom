@@ -106,11 +106,11 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            @if($center->image)
-                                <div class="card-img"><a href="{{$center->path}}"><img
-                                                src="{{thumbnail($center->image->path, 'single_center')}}" alt=""></a>
-                                </div>
-                            @endif
+                            <div class="card-img"><a href="{{$center->path}}">
+                                    <img src="{{$center->image?thumbnail($center->image->path, 'single_center'):asset('images/default-image.png')}}"
+                                         alt="{{$center->title}}">
+                                </a>
+                            </div>
                         </div>
                     </div>
                 @endforeach

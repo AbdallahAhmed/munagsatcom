@@ -92,6 +92,7 @@ return [
     'tel_min' => 'Mobile number should be at least 10 numbers',
     'name_min' => 'Name should be at least 3 letters',
     'message_min' => 'Your message should be at least 10 characters',
+    'company_requests'=>'Invitations to join companies',
     'tenders' => [
         'tenders' => 'Government tenders',
         "details" => 'Tender \'s details',

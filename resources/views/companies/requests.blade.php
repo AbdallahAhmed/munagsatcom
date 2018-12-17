@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title')
+@section('title',trans('app.company_requests'))
 @section('content')
     <section class="container">
         <div class="row">

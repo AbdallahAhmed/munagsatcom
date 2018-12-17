@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title')
+@section('title',fauth()->user()->first_name.' '.fauth()->user()->last_name)
 
 @section('content')
     <section class="container">

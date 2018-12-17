@@ -39,6 +39,7 @@ return [
     'confirm_password' => 'تاكيد كلمة المرور',
     'company_files' => 'مرفقات اواراق الشركة',
     'employees' => 'الموظفين',
+    'company_requests'=>'دعوات الانضمام الى الشركات',
     'requests' => 'طلبات الاضافة',
     'search_employee' => 'البحث عن موظف',
     'add_delegate' => 'اضافة مندوب',

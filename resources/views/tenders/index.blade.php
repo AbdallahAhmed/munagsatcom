@@ -20,8 +20,8 @@
                                 <div class="col-xs-12 col-md-9 new-f-group">
                                     <div class="form-group clearfix">
                                         <select name="activity_id" class="effect-9 form-control">
-                                            <option  value>{{trans('app.tenders.choose_activity')}}</option>
-                                        @foreach(\Dot\Tenders\Models\TenderActivity::where('status',1)->get() as $activtiy)
+                                            <option value>{{trans('app.tenders.choose_activity')}}</option>
+                                            @foreach(\Dot\Tenders\Models\TenderActivity::where('status',1)->get() as $activtiy)
                                                 <option value="{{$activtiy->id}}" {{old('activity_id',Request::get('activity_id'))==$activtiy->id?' selected ':''}}>{{$activtiy->name}}</option>
                                             @endforeach
                                         </select><span class="focus-border"><i></i></span>
@@ -34,8 +34,8 @@
                                     <div class="form-group clearfix">
 
                                         <select name="place_id" class="effect-9 form-control">
-                                            <option  value>{{trans('app.tenders.choose_place')}}</option>
-                                        @foreach(Dot\I18n\Models\Place::where('status',1)->get() as $place)
+                                            <option value>{{trans('app.tenders.choose_place')}}</option>
+                                            @foreach(Dot\I18n\Models\Place::where('status',1)->get() as $place)
                                                 <option value="{{$place->id}}" {{old('place_id',Request::get('place_id'))==$place->id?' selected ':''}}>{{($place->t_name)}}</option>
                                             @endforeach
                                         </select><span class="focus-border"><i></i></span>
@@ -47,8 +47,8 @@
                                 <div class="col-xs-12 col-md-9 new-f-group">
                                     <div class="form-group clearfix">
                                         <select name="org_id" class="effect-9 form-control">
-                                            <option  value>{{trans('app.tenders.choose_org')}}</option>
-                                        @foreach(\Dot\Tenders\Models\TenderOrg::where('status',1)->get() as $org)
+                                            <option value>{{trans('app.tenders.choose_org')}}</option>
+                                            @foreach(\Dot\Tenders\Models\TenderOrg::where('status',1)->get() as $org)
                                                 <option value="{{$org->id}}" {{old('org_id',Request::get('org_id'))==$org->id?' selected ':''}}>{{$org->name}}</option>
                                             @endforeach
                                         </select>
@@ -61,8 +61,8 @@
                                 <div class="col-xs-12 col-md-9 new-f-group">
                                     <div class="form-group clearfix">
                                         <select name="catgory_id" class="effect-9 form-control">
-                                            <option  value>{{trans('app.tenders.choose_category')}}</option>
-                                        @foreach(\Dot\Categories\Models\Category::all() as $catgory)
+                                            <option value>{{trans('app.tenders.choose_category')}}</option>
+                                            @foreach(\Dot\Categories\Models\Category::all() as $catgory)
                                                 <option value="{{$catgory->id}}" {{old('catgory_id',Request::get('catgory_id'))==$org->id?' selected ':''}}>{{$catgory->name}}</option>
                                             @endforeach
                                         </select><span class="focus-border"><i></i></span>
@@ -163,8 +163,8 @@
                                 <div class="col-md-6">
                                     <div class="progress ">
                                         <div class="progress-bar" role="progressbar"
-                                             aria-valuenow="{{($tender->published_at->getTimestamp()/$tender->files_opened_at->getTimestamp())*100}}"
-                                             aria-valuemin="0" aria-valuemax="0" style="">
+                                             aria-valuenow="{{($tender->progress}}"
+                                             aria-valuemin="0" aria-valuemax="100" style="">
                                             <span class="popOver" data-toggle="tooltip" data-placement="top"
                                                   title="{{$tender->files_opened_at->diffForHumans(\Carbon\Carbon::now())}}"> </span>
                                         </div>

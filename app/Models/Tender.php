@@ -65,4 +65,12 @@ class Tender extends Model
         return route('tenders.details', ['slug' => $this->slug]);
     }
 
+    /**
+     *  add path attribute
+     */
+    public function getProgressAttribute()
+    {
+        return ($this->published_at->diffInHours())/$this->files_opened_at->diffInHours()*100;
+    }
+
 }

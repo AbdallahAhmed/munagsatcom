@@ -26,7 +26,7 @@
                                         </li>
                                         <li class="clearfix">
                                             <div class="one_xsmall title">{{trans('app.fields.phone_number')}}</div>
-                                            <div class="one_xlarg tel">{{$user->phone_number}}</div>
+                                            <div class="one_xlarg tel">{{$user->phone_number or '--'}}</div>
                                         </li>
 
                                     </ul>

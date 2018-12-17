@@ -70,7 +70,7 @@ class Tender extends Model
      */
     public function getProgressAttribute()
     {
-        return ($this->published_at->diffInHours())/$this->files_opened_at->diffInHours()*100;
+        return abs($this->published_at->diffInHours()/$this->files_opened_at->diffInHours()*100);
     }
 
 }

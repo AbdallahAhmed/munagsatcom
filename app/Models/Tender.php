@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Dot\Tenders\Models\Tender as Model;
 use Dot\Tenders\Models\TenderActivity;
 use Dot\Tenders\Models\TenderOrg;
@@ -70,7 +71,8 @@ class Tender extends Model
      */
     public function getProgressAttribute()
     {
-        return abs($this->published_at->diffInHours()/$this->files_opened_at->diffInHours()*100);
+        $now=Carbon::now();
+        return abs($this->published_at->diffInHours($now)/$this->files_opened_at->diffInHours($now)*100);
     }
 
 }

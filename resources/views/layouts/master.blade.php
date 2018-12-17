@@ -11,7 +11,7 @@
     <title>{{trans('app.name')}} | @yield("title")</title>
     <link href="{{asset('/assets')}}/css/maincss.css" rel="stylesheet">
     <link href="{{asset('/')}}/css/developer.css" rel="stylesheet">
-    <script  data-pace-options='{ "ajax": false }' src="/js/pace.js"></script>
+    <script src="{{asset('/')}}/js/pace.js"></script>
 
 
     <meta name="copyright" content="munagasatcom">

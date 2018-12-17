@@ -6,3 +6,6 @@ alert>p, .alert>ul {
     text-align: center;
     margin-top: 120px;
 }
+.profile-side a:disabled {
+    opacity: .5;
+}

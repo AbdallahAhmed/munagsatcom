@@ -11,6 +11,7 @@
     <title>{{trans('app.name')}} | @yield("title")</title>
     <link href="{{asset('/assets')}}/css/maincss.css" rel="stylesheet">
     <link href="{{asset('/')}}/css/developer.css" rel="stylesheet">
+    <script  data-pace-options='{ "ajax": false }' src="/js/pace.js"></script>
 
 
     <meta name="copyright" content="munagasatcom">
@@ -34,7 +35,6 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets')}}/images/fav_icon.jpg">
 
-    <script  data-pace-options='{ "ajax": false }' src="/js/pace.js"></script>
     <script type="application/ld+json">
     {
     "@context": "http://schema.org",

@@ -10,7 +10,9 @@ alert > p, .alert > ul {
  .not-active {
     opacity: .5;
 }
-
+.center{
+    text-align: center;
+}
 .pace-done .navbar-default {
     border-top: 3px solid #315d90;
 }

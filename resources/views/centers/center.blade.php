@@ -11,7 +11,7 @@
                     <!-- part 1-->
                     <div class="details">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-3 center">
 
                                 <div class="">
                                         <img src="{{$center->image?thumbnail($center->image->path, 'single_center'):asset('images/default-image.png')}}"

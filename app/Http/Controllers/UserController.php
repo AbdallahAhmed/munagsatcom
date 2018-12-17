@@ -98,14 +98,6 @@ class UserController extends Controller
                 ]);
                 $company->files()->sync($files);
             }
-            else{
-                fauth()->attempt([
-                    'email' => $user->email,
-                    'password' => $user->password,
-                    'backend' => 0
-                ]);
-                return redirect()->route('index');
-            }
 
             return redirect()->route('login')->with('status', trans('app.events.successfully_register'));
             //return success or redirect

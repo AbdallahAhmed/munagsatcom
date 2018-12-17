@@ -12,45 +12,62 @@
                     <!-- part 1-->
                     <div class="details-border">
                         <div class="row">
-                            <div class="col-md-4"><div class="light-white">
-                                    <div class="card-img"><img src="{{asset('/assets')}}/images/monqs-img.png" alt=""></div>
-                                    <div class="padt"> الايام الباقية / الساعات اذا كان اقل من 24 ساعه </div>
+                            <div class="col-md-4">
+                                <div class="light-white">
+                                    @if($chance->image)
+                                        <div class="card-img"><img
+                                                    src="{{thumbnail($chance->image->path, 'single_center')}}" alt="">
+                                        </div>
+                                    @endif
+                                    <div class="padt">{{trans('app.chances.remaining_date')}}</div>
                                     <div class="progress ">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="0" style="">
-                                            <span class="popOver" data-toggle="tooltip" data-placement="top" title=" 5 ايام و 10 ساعات"> </span>
+                                        <div class="progress-bar" role="progressbar"
+                                             aria-valuenow="{{((\Carbon\Carbon::parse($chance->closing_date)->diffInMinutes(\Carbon\Carbon::now())/\Carbon\Carbon::parse($chance->closing_date)->diffInMinutes($chance->created_at))*100)}}"
+                                             aria-valuemin="0" aria-valuemax="0" style="">
+                                            <span class="popOver" data-toggle="tooltip" data-placement="top"
+                                                  title="{{\Carbon\Carbon::parse($chance->closing_date)->diffForHumans(\Carbon\Carbon::now())}}"> </span>
                                         </div>
                                     </div>
-                                </div></div>
+                                </div>
+                            </div>
                             <div class="col-md-8">
                                 <div class="details-item">
                                     <ul>
                                         <li class="clearfix">
-                                            <div class="one_xsmall title"> أسم الشركة   </div>
-                                            <div class="one_xlarg">شركة حمومة المحدوده  </div>
+                                            <div class="one_xsmall title">{{trans('app.chances.company_name')}}</div>
+                                            <div class="one_xlarg">{{$chance->company->name}}</div>
                                         </li>
                                         <li class="clearfix">
-                                            <div class="one_xsmall title"> اسم الفرصه </div>
-                                            <div class="one_xlarg"> نظام IP  لمشروع فندقى</div>
+                                            <div class="one_xsmall title">{{trans('app.chances.chance_name')}}</div>
+                                            <div class="one_xlarg">{{$chance->name}}</div>
                                         </li>
                                         <li class="clearfix">
-                                            <div class="one_xsmall title">الرقم المرجعى الداخلى </div>
-                                            <div class="one_xlarg"> TAR18090404 </div>
+                                            <div class="one_xsmall title">{{trans('app.chances.internal_number')}}</div>
+                                            <div class="one_xlarg"> {{$chance->number}}</div>
                                         </li>
                                         <li class="clearfix">
-                                            <div class="one_xsmall title">تاريخ الاغلاق</div>
-                                            <div class="one_xlarg">1440/01/21 - 14:00</div>
+                                            <div class="one_xsmall title">{{trans('app.chances.closing_date')}}</div>
+                                            <div class="one_xlarg">{{$chance->closing_date}}</div>
                                         </li>
                                         <li class="clearfix">
-                                            <div class="one_xsmall title">القطاعات</div>
-                                            <div class="one_xlarg">البناء و التشيد</div>
+                                            <div class="one_xsmall title">{{trans('app.chances.sectors')}}</div>
+                                            <div class="one_xlarg">
+                                                <?php $x = 0;?>
+                                                @foreach($chance->sectors as $sector)
+                                                    {{$x != 0 ? " | " : "" }}{{$sector->name}}
+                                                    <?php $x++?>
+                                                @endforeach
+                                            </div>
                                         </li>
                                         <li class="clearfix">
-                                            <div class="one_xsmall title">قيمة الفرصه</div>
-                                            <div class="one_xlarg">من 10.000 الى 50.000 ريال سعودى</div>
+                                            <div class="one_xsmall title">{{trans('app.chances.chance_value')}}</div>
+                                            <div class="one_xlarg">{{$chance->value}}</div>
                                         </li>
                                         <li class="clearfix">
-                                            <div class="one_xsmall title">كراسة الشروط</div>
-                                            <div class="one_xlarg"><a class="btn btn-default" href="#"> تحميل كراسه الشروط</a> </div>
+                                            <div class="one_xsmall title">{{trans('app.chances.rules_book')}}</div>
+                                            <div class="one_xlarg"><a class="btn btn-default" target="_blank"
+                                                                      href="{{uploads_url().$chance->media->path}}"> {{trans('app.chances.rules_book_download')}}</a>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
@@ -63,46 +80,30 @@
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th scope="col">اسم الوحدة</th>
-                                    <th scope="col"> الكمية</th>
+                                    <th scope="col">{{trans('app.sectors.sector_name')}}</th>
+                                    <th scope="col"> {{trans('app.quantity')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>
-                                        <h3> اسم الوحدة المقدمة</h3>
-                                        <p>تفاصيل الوحدة المقدمةتفاصيل الوحدة المقدمةتفاصيل الوحدة المقدمةتفاصيل الوحدة المقدمة</p>
-                                    </td>
-                                    <td>50</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h3> اسم الوحدة المقدمة</h3>
-                                        <p>تفاصيل الوحدة المقدمةتفاصيل الوحدة المقدمةتفاصيل الوحدة المقدمةتفاصيل الوحدة المقدمة</p>
-                                    </td>
-                                    <td>50</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h3> اسم الوحدة المقدمة</h3>
-                                        <p>تفاصيل الوحدة المقدمةتفاصيل الوحدة المقدمةتفاصيل الوحدة المقدمةتفاصيل الوحدة المقدمة</p>
-                                    </td>
-                                    <td>50</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h3> اسم الوحدة المقدمة</h3>
-                                        <p>تفاصيل الوحدة المقدمةتفاصيل الوحدة المقدمةتفاصيل الوحدة المقدمةتفاصيل الوحدة المقدمة</p>
-                                    </td>
-                                    <td>50</td>
-                                </tr>
+                                @foreach($chance->units as $unit)
+                                    <tr>
+                                        <td>
+                                            <h3>{{$unit->name}}</h3>
+                                            <p>{{$unit->details}}</p>
+                                        </td>
+                                        <td>{{$unit->pivot->quantity}}</td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
 
                     <div class="text-center">
-                        <button type="button" class="padding-lg fbutcenter btn-mas" data-dismiss="modal" data-target="#myModal"><i class="fa fa-arrow-right"></i> قدم على الفرصه</button>
+                        <button type="button" class="padding-lg fbutcenter btn-mas" data-dismiss="modal"
+                                data-target="#myModal"><i
+                                    class="fa fa-arrow-right"></i>{{trans('app.chances.apply_chance')}}
+                        </button>
                         <!-- Modal -->
                         <div class="modal fade" id="myModal" role="dialog">
                             <div class="modal-dialog">
@@ -110,19 +111,42 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title"> تقديم على الفرصة </h4>
+                                        <h4 class="modal-title"> {{trans('app.chances.apply')}}</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <p>قم بتحميل العرض التفصيلى و ستقوم الشركة بالاطلاع عليه</p>
-                                        <form>
+                                        <p>{{trans('app.chances.upload_request')}}</p>
+                                        <form id="upload" name="upload" enctype="multipart/form-data">
                                             <div class="custom-file form-group pad">
-                                                <input type="file" class="form-control-file custom-file-input" id="exampleFormControlFile1">
+                                                <input name="file" type="file"
+                                                       class="form-control-file custom-file-input"
+                                                       id="exampleFormControlFile1">
+                                                <input type="hidden" name="chance_id" value="{{$chance->id}}">
                                             </div>
+                                            <p class="alert-danger" style="display: none"></p>
                                         </form>
                                     </div>
                                     <div class="modal-footer text-center">
-                                        <button type="submit" form="" class="uperc padding-md fbutcenter">تقديم</button>
-                                        <button type="submit" class="uperc padding-md fbutcenter1" data-dismiss="modal">الغاء</button>
+                                        <button type="submit" form="upload"
+                                                class="uperc padding-md fbutcenter">{{trans('app.chances.apply_done')}}
+                                        </button>
+                                        <button type="submit" class="uperc padding-md fbutcenter1" data-dismiss="modal">
+                                            {{trans('app.cancel')}}
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal fade" id="SuccessModal" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title"> {{trans('app.chances.apply_chance')}} </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>{{trans('app.chances.success')}}</p>
                                     </div>
                                 </div>
 
@@ -177,7 +201,7 @@
                     var file = $('[name="file"]');
                     var formData = new FormData();
                     formData.append('file', file[0].files[0]);
-                    //formData.append('chance_id', "{{$chance->id}}")
+                    formData.append('chance_id', "{{$chance->id}}")
                     $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

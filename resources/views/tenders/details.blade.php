@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 
-@section('title',""/*$tender->name*/)
+@section('title',$tender->name)
 
 @section('content')
     <section class="container">
@@ -9,121 +9,8 @@
             <!-------------- Begin:content -------------->
             <div class="col-md-12 content-details">
                 <h2><span>{{trans('app.tenders.details')}} </span></h2>
+
                 <div class="card-details">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="card-img"><img src="{{asset('/assets')}}/images/monqs-img.png" alt=""></div>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="details-item ">
-                                    <ul>
-                                        <li class="clearfix">
-                                            <div class="one_xsmall title">رقم المناقصه  </div>
-                                            <div class="one_xlarg"> 2018/217/33    </div>
-                                        </li>
-                                        <li class="clearfix">
-                                            <div class="one_xsmall title"> إسم المناقصه   </div>
-                                            <div class="one_xlarg"> مناقصة نظام مكافحة الحريق بمركز اورام جدة بمدينة الملك عبدالله الطبية
-                                                بالعاصمة المقدسه </div>
-                                        </li>
-                                        <li class="clearfix">
-                                            <div class="one_xsmall title">  نشاط المناقصه   </div>
-                                            <div class="one_xlarg">صناعة</div>
-                                        </li>
-                                        <li class="clearfix">
-                                            <div class="one_xsmall title">الغايه من المناقصه  </div>
-                                            <div class="one_xlarg">تطوير للبينية التحتية للسلامه بالمدينة الطيبيه</div>
-                                        </li>
-                                        <li class="clearfix">
-                                            <div class="one_xsmall title">مجال التصنيف</div>
-                                            <div class="one_xlarg">انظمة نكافحة الحرق- صيانة المبانى</div>
-                                        </li>
-                                        <li class="clearfix">
-                                            <div class="one_xsmall title">النوع</div>
-                                            <div class="one_xlarg">عام</div>
-                                        </li>
-                                        <li class="clearfix">
-                                            <div class="one_xsmall title">الجهة الحكومية   </div>
-                                            <div class="one_xlarg"> مكة المكرمة - إدارة العقود و المشتريات </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card-price clearfix">
-                        <div class="one_half"><em>*</em>  قيمة الكراسة الفعلى  <span> 10.000  ريال سعودى  </span></div>
-                        <div class="one_half"><em>*</em>  قيمة تحميل الكراسة  <span> 10.000  ريال سعودى  </span></div>
-                    </div>
-
-                    <div class="card-cont"><div class="row">
-                            <div class="col-md-5 padt"> الايام الباقية / الساعات اذا كان اقل من 24 ساعه </div>
-                            <div class="col-md-6"><div class="progress ">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="0" style="">
-                                        <span class="popOver" data-toggle="tooltip" data-placement="top" title=" 5 ايام و 10 ساعات"> </span>
-                                    </div>
-                                </div></div>
-                        </div></div>
-
-                    <div class="card-date clearfix">
-                        <h3 class="text-center"><span> تواريخ المناقصه </span></h3>
-                        <div class="item one_thrd">
-                            <p>تاريخ و وقت فتح المظاريف</p>
-                            <p><i class="fa fa-calendar"></i> <span class="text-grey">1440/01/22</span>-<span class="text-grey">14:00</span></p>
-                        </div>
-                        <div class="item one_thrd">
-                            <p>اخر موعد إاستلام العروض</p>
-                            <p><i class="fa fa-calendar"></i> <span class="text-grey">1440/01/21</span>-<span class="text-grey">14:00</span></p>
-                        </div>
-                        <div class="item one_thrd">
-                            <p>تاريخ نشر المنافسة إلكترونيا</p>
-                            <p><i class="fa fa-calendar"></i> <span class="text-grey">1439/12/04 </span></p>
-                        </div>
-                    </div>
-
-                    <div class="details-box">
-                        <div class="details-item ">
-                            <ul>
-                                <li class="clearfix">
-                                    <div class="one_xsmall title">  مكان فتح المظاريف </div>
-                                    <div class="one_xlarg">تقدم العروض لدى إدارة العقود المشتريات بمدينة الملك عبدالله الطيبية بالعاصمة المقدسه- مبنى المستودعات </div>
-                                </li>
-                                <li class="clearfix">
-                                    <div class="one_xsmall title"> مكان التنفيذ    </div>
-                                    <div class="one_xlarg"> إدارة العقود المشتريات بمدينة الملك عبدالله الطيبية بالعاصمة المقدسه- مبنى المستودعات </div>
-                                </li>
-                                <li class="clearfix">
-                                    <div class="one_xsmall title"> مكان تقديم العروض </div>
-                                    <div class="one_xlarg">داخل المملكة</div>
-                                </li>
-                                <li class="clearfix">
-                                    <div class="one_xsmall title">المناطق</div>
-                                    <div class="one_xlarg area">
-                                        <ul>
-                                            <li> منطقة مكة المكرمة  </li>
-                                            <li>   جده </li>
-                                            <li> الرياض  </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="download-box">
-                        <h3 class="text-center"><span>تحميل الملفات</span></h3>
-                        @if(!fauth()->check())
-                            <p>{{trans('app.register_purchase_tender')}}<a
-                                        href="{{route('register')}}"> {{trans('app.register_now')}} </a></p>
-                            <p>{{trans('app.account_register')}}<a
-                                        href="{{route('login',['lang'=>app()->getLocale()])}}"> {{trans('app.login')}} </a>
-                            </p>
-                        @endif
-                    </div>
-                </div>
-                {{--<div class="card-details">
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-3">
@@ -265,7 +152,7 @@
                             </p>
                         @endif
                     </div>
-                </div>--}}
+                </div>
 
             </div>
             <!-------------- End::content -------------->

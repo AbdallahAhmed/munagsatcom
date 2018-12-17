@@ -7,7 +7,7 @@ alert > p, .alert > ul {
     margin-top: 120px;
 }
 
-.profile-side a:disabled {
+ .not-active {
     opacity: .5;
 }
 

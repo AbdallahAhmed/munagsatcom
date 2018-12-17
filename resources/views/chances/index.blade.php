@@ -78,10 +78,10 @@
                                 <div class="row">
                                     <div class="col-md-2">
                                         @if($chance->image)
-                                        <div class="card-img"><a href="{{$chance->path}}"><img
-                                                        src="{{thumbnail($chance->image->path)}}"
-                                                        alt=""></a></div>
-                                            @endif
+                                            <div class="card-img"><a href="{{$chance->path}}"><img
+                                                            src="{{thumbnail($chance->image->path)}}"
+                                                            alt="{{$chance->name}}"></a></div>
+                                        @endif
                                     </div>
                                     <div class="col-md-10">
                                         <div class="title">

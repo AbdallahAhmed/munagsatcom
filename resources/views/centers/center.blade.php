@@ -14,11 +14,8 @@
                             <div class="col-md-3">
 
                                 <div class="">
-                                    @if($center->image)
-                                        <div class="card-img"><img
-                                                    src="{{thumbnail($center->image->path, 'single_center')}}" alt="">
-                                        </div>
-                                    @endif
+                                        <img src="{{$center->image?thumbnail($center->image->path, 'single_center'):asset('images/default-image.png')}}"
+                                             alt="{{$center->title}}">
                                 </div>
                             </div>
                             <div class="col-md-9">

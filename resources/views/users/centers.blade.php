@@ -67,33 +67,37 @@
                     </div>
                     <div class="profile-item">
                         <div class="unit-table">
-                            <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th scope="col">{{trans('app.services.name')}}</th>
-                                    <th scope="col">{{trans('app.sectors.sector')}}</th>
-                                    <th scope="col"> {{trans('app.services.services')}}</th>
-
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($centers as $center)
+                            @if(count($centers)>0)
+                                <table class="table table-striped">
+                                    <thead>
                                     <tr>
-                                        <td>{{$center->name}}</td>
-                                        <td> {{$center->sector->name}}</td>
-                                        <td>
-                                            <div class=" title-larg">
-                                                <ul>
-                                                    @foreach($center->services as $service)
-                                                        <li>{{$service->name}}</li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        </td>
+                                        <th scope="col">{{trans('app.services.name')}}</th>
+                                        <th scope="col">{{trans('app.sectors.sector')}}</th>
+                                        <th scope="col"> {{trans('app.services.services')}}</th>
+
                                     </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($centers as $center)
+                                        <tr>
+                                            <td>{{$center->name}}</td>
+                                            <td> {{$center->sector->name}}</td>
+                                            <td>
+                                                <div class=" title-larg">
+                                                    <ul>
+                                                        @foreach($center->services as $service)
+                                                            <li>{{$service->name}}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            @else
+                                <p class="not-found">{{trans('app.centers.not_found')}}</p>
+                            @endif
                         </div>
                     </div>
                     <!---->

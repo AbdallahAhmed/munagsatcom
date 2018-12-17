@@ -108,7 +108,7 @@
                         <div class="col-md-3">
                             <div class="card-img"><a href="{{$center->path}}">
                                     <img src="{{$center->image?thumbnail($center->image->path, 'single_center'):asset('images/default-image.png')}}"
-                                         alt="{{$center->title}}">
+                                         alt="{{$center->name}}">
                                 </a>
                             </div>
                         </div>

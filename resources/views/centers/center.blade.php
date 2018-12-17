@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title',trans('app.centers.centers'))
+@section('title',trans('app.centers.centers').' | '.$center->name)
 @section('content')
     <section class="container">
         <div class="row">
@@ -15,7 +15,7 @@
 
                                 <div class="">
                                         <img src="{{$center->image?thumbnail($center->image->path, 'single_center'):asset('images/default-image.png')}}"
-                                             alt="{{$center->title}}">
+                                             alt="{{$center->name}}">
                                 </div>
                             </div>
                             <div class="col-md-9">

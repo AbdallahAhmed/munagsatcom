@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title',$company->name)
+@section('title',$company->name." | ".trans('app.centers.centers'))
 
 @section('content')
     <section class="container">

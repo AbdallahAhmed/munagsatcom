@@ -29,9 +29,9 @@ class CompanyController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, $slug)
     {
-        $company = Company::findOrFail($id);
+        $company = Company::where('slug', $slug)->firstOrfail;
         $this->data['company'] = $company;
 
         return view('companies.company', $this->data);

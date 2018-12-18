@@ -151,15 +151,15 @@
                             <div class="form-group-lg row">
                                 <label class="col-xs-12 col-md-3">{{trans('app.add_logo')}} </label>
                                 <div class="col-xs-12 col-md-4">
-                                    <div class="file-upload" data-input-name="input1"></div>
+                                    <div class="file-upload" data-input-name="logo"></div>
                                 </div>
-                                <div class="col-xs-12 col-md-5">
+                           {{--     <div class="col-xs-12 col-md-5">
                                     <div class="file-upload1">
                                         <label for="upload"
                                                class="file-upload__label">{{trans('app.upload_logo')}}</label>
                                         <input id="upload" class="file-upload__input" type="file" name="logo">
                                     </div>
-                                </div>
+                                </div>--}}
                             </div>
                         </div>
                         <div class="reg-part">

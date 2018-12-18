@@ -3,6 +3,8 @@
 namespace App\Models;
 
 
+use Carbon\Carbon;
+
 class Chance extends \Dot\Chances\Models\Chance
 {
     /**
@@ -12,6 +14,15 @@ class Chance extends \Dot\Chances\Models\Chance
     public function getPathAttribute()
     {
         return route('chances.show', ['id' => $this->id]);
+    }
+
+    /**
+     *  add path attribute
+     */
+    public function getProgressAttribute()
+    {
+        $now = Carbon::now();
+        return max(abs(($this->created_at->diffInHours($now) / Carbon::parse($this->closing_date)->diffInHours($now)) * 100), 1);
     }
 
 }

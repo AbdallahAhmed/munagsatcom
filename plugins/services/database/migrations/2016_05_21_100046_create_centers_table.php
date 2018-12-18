@@ -15,6 +15,7 @@ class CreateCentersTable extends Migration
 
             $table->increments('id');
             $table->string("name")->index();
+            $table->string("slug")->unique();
             $table->string("sector_id")->index();
             $table->string("user_id")->index();
             $table->string("address")->nullable()->index();

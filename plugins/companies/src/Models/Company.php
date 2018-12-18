@@ -62,6 +62,12 @@ class Company extends Model
      */
     protected $perPage = 20;
 
+    /**
+     * @var array
+     */
+    protected $sluggable = [
+        'slug' => 'name',
+    ];
 
     /*
      * @var array

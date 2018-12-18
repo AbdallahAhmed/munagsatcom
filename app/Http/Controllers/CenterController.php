@@ -117,7 +117,7 @@ class CenterController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(Request $request, $slug){
-        $center = Center::published()->where('slug', $slug)->firstOrFail();
+        $center = Center::published()->where('slug','=', $slug)->firstOrFail();
         $this->data['center'] = $center;
         return view('centers.center', $this->data);
     }

@@ -31,7 +31,7 @@ class CompanyController extends Controller
      */
     public function show(Request $request, $slug)
     {
-        $company = Company::where('slug', $slug)->firstOrfail;
+        $company = Company::where('slug','=', $slug)->firstOrFail();
         $this->data['company'] = $company;
 
         return view('companies.company', $this->data);

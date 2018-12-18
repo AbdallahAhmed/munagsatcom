@@ -93,7 +93,7 @@ class ChanceController extends Controller
     public function show(Request $request, $slug)
     {
 
-        $chance = \App\Models\Chance::where('slug', $slug)->firstOrFail;
+        $chance = \App\Models\Chance::where('slug','=', $slug)->firstOrFail();
 
         $this->data['chance'] = $chance;
         return view('chances.chance', $this->data);

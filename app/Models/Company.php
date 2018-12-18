@@ -27,4 +27,12 @@ class Company extends \Dot\Companies\Models\Company
         return $this->user->email;
 
     }
+
+    /**
+     *  Add path property
+     * @return string
+     */
+    public function getPathAttribute(){
+        return route('company.show', ['slug' => $this->slug]);
+    }
 }

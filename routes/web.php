@@ -46,16 +46,16 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
     });
 
     Route::get('centers', 'CenterController@index')->name('centers');
-    Route::get('centers/{id}', 'CenterController@show')->name('centers.show');
+    Route::get('centers/{slug}', 'CenterController@show')->name('centers.show');
     Route::post('centers/contact', 'CenterController@contact')->name('centers.contact');
 
     Route::get('chances', 'ChanceController@index')->name('chances');
-    Route::get('chances/{id}', 'ChanceController@show')->name('chances.show');
+    Route::get('chances/{slug}', 'ChanceController@show')->name('chances.show');
     Route::post('chances/offers', 'ChanceController@addOffer')->name('chances.offers');
 
 
     Route::group(['middleware' => ['company']], function ($router) {
-        $router->get('company/{id}', 'CompanyController@show')->name('company.show');
+        $router->get('company/{slug}', 'CompanyController@show')->name('company.show');
         $router->get('company/{id}/chances', 'CompanyController@chances')->name('company.chances');
         $router->get('company/{id}/centers', 'CompanyController@centers')->name('company.centers');
         $router->get('company/{id}/tenders', 'CompanyController@show')->name('company.tenders');

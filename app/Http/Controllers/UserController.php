@@ -41,13 +41,13 @@ class UserController extends Controller
         if ($request->method() == 'POST') {
             $rules = [
                 'email' => 'required|email|unique:users',
-                'password' => 'required|min:6',
-                'first_name' => 'required',
-                'last_name' => 'required',
+                'password' => 'required|confirmed|min:6',
+                'first_name' => 'required|regex:/^(?=.*[a-zA-Z]).+$/',
+                'last_name' => 'required|regex:/^(?=.*[a-zA-Z]).+$/',
             ];
             if ($request->get('user_type') == 2) {
                 $rules += [
-                    'company_name' => 'required|max:255|min:8',
+                    'company_name' => 'required|max:255|min:8|regex:/^(?=.*[a-zA-Z]).+$/',
                     'sector_id' => 'required|exists:sectors,id',
                     'details' => 'required|max:255',
                     'logo' => 'required|mimes:jpg,png,jpeg',

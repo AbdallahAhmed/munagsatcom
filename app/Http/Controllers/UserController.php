@@ -42,10 +42,10 @@ class UserController extends Controller
 
         if ($request->method() == 'POST') {
             $rules = [
-                'email' => 'required|email|unique:users',
-                'password' => 'required|confirmed|min:6',
                 'first_name' => 'required|regex:/^(?=.*[a-zA-Z]).+$/',
                 'last_name' => 'required|regex:/^(?=.*[a-zA-Z]).+$/',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|confirmed|min:6',
             ];
             if ($request->get('user_type') == 2) {
                 $rules += [
@@ -73,7 +73,7 @@ class UserController extends Controller
             $user->code = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
             $user->type = $request->get('user_type', 1);
 
-            if($request->file('logo')){
+            if ($request->file('logo')) {
                 $media = new Media();
                 $user->photo_id = $media->saveFile($request->file('logo'));
             }
@@ -104,10 +104,8 @@ class UserController extends Controller
                     'accepted' => 1
                 ]);
                 $company->files()->sync($files);
-            }else{
+            } else {
                 Mail::to($user->email)->send(new VerificationMail($user));
-                session()->put('email', $user->email);
-                session()->put('password', $request->get('password'));
                 return redirect()->route('user.confirm')->with('status', trans('app.check_email'));
             }
 
@@ -144,7 +142,8 @@ class UserController extends Controller
                     'email' => $request->get('email'),
                     'password' => $request->get('password'),
                     'backend' => 0,
-                    'type' => $request->get('user_type')
+                    'type' => $request->get('user_type'),
+                    'status' => 1
                 ]);
 
                 if (!$isAuthed) {
@@ -169,7 +168,8 @@ class UserController extends Controller
      * @param Request $request
      * @return string
      */
-    public function logout(){
+    public function logout()
+    {
         Auth::guard('frontend')->logout();
         return redirect()->route('index');
     }
@@ -180,41 +180,39 @@ class UserController extends Controller
      * @param Request $request
      * @return string
      */
-    public function verify(Request $request){
-        $user = User::where('email', $request->get('email'))->first();
-        if($user){
-            if($user->code == $request->get('code')){
-                $user->code = null;
-                $user->status = 1;
-                $user->save();
-                fauth()->attempt([
-                    'email' => $request->get('email'),
-                    'password' => $request->get('password'),
-                    'backend' => 0
-                ]);
-                session()->remove('email');
-                session()->remove('password');
+    public function verify(Request $request)
+    {
+        $user = User::where('code', $request->get('code'))->first();
+        if ($user) {
+            $user->code = null;
+            $user->status = 1;
+            $user->save();
+            if ($user->type == 1) {
+                fauth()->login($user);
                 return redirect()->route('index');
             }
+            return redirect()->back()->with('waiting', trans('app.company_waiting'));
+        } else {
             return redirect()->back()->withErrors(['wrong_code' => trans('app.wrong_code')]);
-        }else{
-            return redirect()->back()->withErrors(['wrong_email' => trans('app.email_not_found')]);
         }
     }
 
 
-    public function confirm(Request $request){
+    public function confirm(Request $request)
+    {
 
-        return view('confirm', ['email' => session()->get('email'), 'password'=>session()->get('password')]);
+        return view('confirm', ['email' => session()->get('email'), 'password' => session()->get('password')]);
     }
+
     /**
      * POST/GET {lang}/forgetPassword
      * @route forget-password
      * @param Request $request
      * @return string
      */
-    public function forgetPassword(Request $request){
-        if($request->method() == 'POST') {
+    public function forgetPassword(Request $request)
+    {
+        if ($request->method() == 'POST') {
             $user = User::where([
                 ['email', $request->get('email')],
                 ['backend', 0]
@@ -235,8 +233,9 @@ class UserController extends Controller
      * @param Request $request
      * @return string
      */
-    public function reset(Request $request){
-        if($request->method() == 'POST') {
+    public function reset(Request $request)
+    {
+        if ($request->method() == 'POST') {
             $user = User::where('email', $request->get('email', ""))->first();
             if (!$user)
                 return redirect()->back()->withErrors(new MessageBag(['wrong_email' => trans('app.email_not_found')]));
@@ -357,7 +356,7 @@ class UserController extends Controller
             $sent_requests = fauth()->user()->requests()->pluck('id')->toArray();
             $query = Company::query();
             $query = count($sent_requests) > 0 ? $query->whereNotIn('id', $sent_requests) : $query;
-            $query = $q != null ? $query->where('name', '%'.$q.'%') : $query;
+            $query = $q != null ? $query->where('name', '%' . $q . '%') : $query;
             $this->data['companies'] = $query->paginate(5);
 
             return view('users.search', $this->data);
@@ -371,7 +370,8 @@ class UserController extends Controller
      * @param Request $request
      * @return Route
      */
-    public function sendRequests(Request $request){
+    public function sendRequests(Request $request)
+    {
         fauth()->user()->requests()->syncWithoutDetaching($request->get('companies', []));
         return redirect()->route('user.company.search')->with('status', trans('app.requests_sent_successfully'));
     }
@@ -382,29 +382,30 @@ class UserController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function centers(Request $request){
+    public function centers(Request $request)
+    {
 
         $query = Center::where('user_id', fauth()->user()->id);
         $this->data['sector_id'] = null;
         $this->data['service_id'] = null;
         $this->data['q'] = null;
 
-        if($request->get("sector_id")){
+        if ($request->get("sector_id")) {
             $query = $query->where('sector_id', $request->get('sector_id'));
             $this->data['sector_id'] = $request->get("sector_id");
         }
-        if($request->get('service_id')){
-            $query = $query->whereHas('services', function ($query) use ($request){
+        if ($request->get('service_id')) {
+            $query = $query->whereHas('services', function ($query) use ($request) {
                 $query->where('id', $request->get('service_id'));
             });
             $this->data['service_id'] = $request->get("service_id");
         }
-        if($request->get('q')){
+        if ($request->get('q')) {
             $q = trim(urldecode($request->get('q')));
-            $query = $query->where('name','like', '%'.$q.'%');
+            $query = $query->where('name', 'like', '%' . $q . '%');
             $this->data['q'] = $q;
         }
-        if($request->get('price_to')){
+        if ($request->get('price_to')) {
             $to = $request->get('price_to');
             $from = $request->get('price_from', 100);
 

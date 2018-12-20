@@ -12,6 +12,7 @@
                         {{ session('status') }}
                     </div>
                 @endif
+                @if(!session('waiting'))
                 <form method="post" action="{{route('user.verify')}}">
                     {{csrf_field()}}
                                     <input name="email" type="hidden" class="effect-9 form-control"
@@ -52,6 +53,11 @@
                         </a>
                     </div>
                 </form>
+                    @else
+                    <div class="alert alert-success">
+                        {{ session('waiting') }}
+                    </div>
+                @endif
             </div>
         </div>
     </section>

@@ -188,23 +188,12 @@
                                     <input id="" class="col-xs-12 col-md-11" type="file" name="files[]"
                                            placeholder="{{trans('app.choose_file')}}">
                                 </div>
+                                <div class="append"></div>
 
-                                <a class="add_field_button" role="button" data-toggle="collapse" href="#collapseExample"
+                                <a class="add_field_button" id="addmore" role="button"
                                    aria-expanded="false" aria-controls="collapseExample"><i
                                             class="fa fa-plus"></i>{{trans('app.upload_more_files')}}</a>
 
-                                <div class="clearfix collapse" id="collapseExample" aria-expanded="true" style="">
-                                    <div class="row">
-                                        <label for="upload" class="col-xs-12 col-md-1">{{trans('app.file')}} </label>
-                                        <input id="" class="col-xs-12 col-md-11" type="file" name="files[]"
-                                               placeholder="{{trans('app.choose_file')}}">
-                                    </div>
-                                    <div class="row">
-                                        <label for="upload" class="col-xs-12 col-md-1">{{trans('app.file')}} </label>
-                                        <input id="" class="col-xs-12 col-md-11" type="file" name="files[]"
-                                               placeholder="{{trans('app.choose_file')}}">
-                                    </div>
-                                </div>
 
                             </div>
                         </div>
@@ -227,6 +216,13 @@
     </script>
 
     <script>
+        $('#addmore').on('click', function () {
+            $("<div class=\"row\">\n" +
+                "                                        <label for=\"upload\" class=\"col-xs-12 col-md-1\">{{trans('app.file')}} </label>\n" +
+                "                                        <input id=\"\" class=\"col-xs-12 col-md-11\" type=\"file\" name=\"files[]\"\n" +
+                "                                               placeholder=\"{{trans('app.choose_file')}}\">\n" +
+                "                                    </div>").insertBefore('.append');
+        })
         $(".toggle-password").click(function () {
             $(this).toggleClass("fa-eye fa-eye-slash");
             var input = $($(this).attr("toggle"));

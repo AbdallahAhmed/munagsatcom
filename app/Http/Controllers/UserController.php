@@ -91,9 +91,11 @@ class UserController extends Controller
                 $company->photo_id = $media->saveFile($request->file('logo'));
 
                 $files = array();
-                foreach ($request->file('files') as $file) {
-                    $media = new Media();
-                    $files[] = $media->saveFile($file);
+                if($request->file('files')) {
+                    foreach ($request->file('files') as $file) {
+                        $media = new Media();
+                        $files[] = $media->saveFile($file);
+                    }
                 }
                 $company->save();
                 Companies_empolyees::create([

@@ -91,6 +91,17 @@
                         </div>
 
                         <div class="form-group-lg row">
+                            <label class="col-xs-12 col-md-3">{{trans('app.add_logo')}} </label>
+                            <div class="new-f-group col-xs-12 col-md-4">
+                                <div class="form-group">
+                                    <div class=" file-upload" data-input-name="logo" data-unodz-callback="callback()">
+                                    </div>
+                                    <p id="logo_error" style="display: none" class="text-danger">{{trans('app.logo_error')}}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group-lg row">
                             <label class="col-xs-12 col-md-3"></label>
                             <div class="col-xs-12 col-md-9">
                                 <label class="radio-inline" for="for_personal"> {{trans('app.personal')}}</label>
@@ -99,7 +110,8 @@
                                        onclick="show1();">
 
                                 <label class="radio-inline" for="for_company"> {{trans('app.company')}}</label>
-                                <input type="radio" name="user_type"  id="for_company" {{old('user_type')==2?'checked':''}} value="2"
+                                <input type="radio" name="user_type" id="for_company"
+                                       {{old('user_type')==2?'checked':''}} value="2"
                                        onclick="show2();">
                             </div>
                         </div>
@@ -147,21 +159,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="reg-part">
+                       {{-- <div class="reg-part">
                             <div class="form-group-lg row">
                                 <label class="col-xs-12 col-md-3">{{trans('app.add_logo')}} </label>
                                 <div class="col-xs-12 col-md-4">
                                     <div class="file-upload" data-input-name="logo"></div>
                                 </div>
-                           {{--     <div class="col-xs-12 col-md-5">
-                                    <div class="file-upload1">
-                                        <label for="upload"
-                                               class="file-upload__label">{{trans('app.upload_logo')}}</label>
-                                        <input id="upload" class="file-upload__input" type="file" name="logo">
-                                    </div>
-                                </div>--}}
+                                --}}{{--     <div class="col-xs-12 col-md-5">
+                                         <div class="file-upload1">
+                                             <label for="upload"
+                                                    class="file-upload__label">{{trans('app.upload_logo')}}</label>
+                                             <input id="upload" class="file-upload__input" type="file" name="logo">
+                                         </div>
+                                     </div>--}}{{--
                             </div>
-                        </div>
+                        </div>--}}
                         <div class="reg-part">
                             <div class="form-group-lg">
                                 <label>{{trans('app.attachments_company')}}</label>

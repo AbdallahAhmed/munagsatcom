@@ -55,11 +55,11 @@ class UserController extends Controller
                 ];
             }
 
+dd($request->file('logo'));
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput($request->all());
             }
-
             $user = new User();
             $user->username = $request->get('email');
             $user->first_name = $request->get('first_name');
@@ -70,6 +70,11 @@ class UserController extends Controller
             $user->backend = 0;
             $user->status = 1;
             $user->type = $request->get('user_type', 1);
+
+            if($request->file('logo')){
+                $media = new Media();
+                $user->image_id = $media->saveFile($request->file('logo'));
+            }
             $user->save();
             if ($request->get('user_type') == 2) {
                 $company = new Company();
@@ -81,7 +86,7 @@ class UserController extends Controller
                 $company->sector_id = $request->get('sector_id');
 
                 $media = new Media();
-                $company->image_id = $media->saveFile($request->file('logo'));
+                $company->photo_id = $media->saveFile($request->file('logo'));
 
                 $files = array();
                 foreach ($request->file('files') as $file) {

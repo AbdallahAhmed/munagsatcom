@@ -42,8 +42,8 @@ class UserController extends Controller
 
         if ($request->method() == 'POST') {
             $rules = [
-                'first_name' => 'required|regex:/^(?=.*[a-zA-Z]).+$/',
-                'last_name' => 'required|regex:/^(?=.*[a-zA-Z]).+$/',
+                'first_name' => 'required|regex:/^(?=.*[a-zA-Z]).+$/|min:3',
+                'last_name' => 'required|regex:/^(?=.*[a-zA-Z]).+$/|min:3',
                 'email' => 'required|email|unique:users',
                 'password' => 'required|confirmed|min:6',
             ];

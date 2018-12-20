@@ -55,7 +55,6 @@ class UserController extends Controller
                 ];
             }
 
-dd($request->file('logo'));
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput($request->all());
@@ -73,7 +72,7 @@ dd($request->file('logo'));
 
             if($request->file('logo')){
                 $media = new Media();
-                $user->image_id = $media->saveFile($request->file('logo'));
+                $user->photo_id = $media->saveFile($request->file('logo'));
             }
             $user->save();
             if ($request->get('user_type') == 2) {
@@ -104,7 +103,7 @@ dd($request->file('logo'));
                 $company->files()->sync($files);
             }
 
-            return redirect()->route('login')->with('status', trans('app.events.successfully_register'));
+            return redirect()->route('index')->with('status', trans('app.events.successfully_register'));
             //return success or redirect
         }
 

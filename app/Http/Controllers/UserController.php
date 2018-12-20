@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ResetPasswordMail;
+use App\Mail\VerificationMail;
+use App\Mail\WelcomeMail;
 use App\Models\Center;
 use App\Models\Companies_empolyees;
 use App\User;
@@ -67,7 +69,8 @@ class UserController extends Controller
             $user->password = ($request->get('password'));
             $user->role_id = 2;
             $user->backend = 0;
-            $user->status = 1;
+            $user->status = 0;
+            $user->code = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
             $user->type = $request->get('user_type', 1);
 
             if($request->file('logo')){
@@ -101,6 +104,11 @@ class UserController extends Controller
                     'accepted' => 1
                 ]);
                 $company->files()->sync($files);
+            }else{
+                Mail::to($user->email)->send(new VerificationMail($user));
+                session()->put('email', $user->email);
+                session()->put('password', $request->get('password'));
+                return redirect()->route('user.confirm')->with('status', trans('app.check_email'));
             }
 
             return redirect()->route('index')->with('status', trans('app.events.successfully_register'));
@@ -165,6 +173,39 @@ class UserController extends Controller
         return redirect()->route('index');
     }
 
+    /**
+     * POST {lang}/verify
+     * @route verify
+     * @param Request $request
+     * @return string
+     */
+    public function verify(Request $request){
+        $user = User::where('email', $request->get('email'))->first();
+        if($user){
+            if($user->code == $request->get('code')){
+                $user->code = null;
+                $user->status = 1;
+                $user->save();
+                fauth()->attempt([
+                    'email' => $request->get('email'),
+                    'password' => $request->get('password'),
+                    'backend' => 0
+                ]);
+                session()->remove('email');
+                session()->remove('password');
+                return redirect()->route('index');
+            }
+            return redirect()->back()->withErrors(['wrong_code' => trans('app.wrong_code')]);
+        }else{
+            return redirect()->back()->withErrors(['wrong_email' => trans('app.email_not_found')]);
+        }
+    }
+
+
+    public function confirm(Request $request){
+
+        return view('confirm', ['email' => session()->get('email'), 'password'=>session()->get('password')]);
+    }
     /**
      * POST/GET {lang}/forgetPassword
      * @route forget-password

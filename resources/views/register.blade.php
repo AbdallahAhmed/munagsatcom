@@ -83,7 +83,7 @@
                                 <div class="form-group">
                                     <span class="icony"><i class="fa fa-fw field-icon toggle-password fa-eye"
                                                            toggle="#password-field2"></i></span>
-                                    <input type="password" class="effect-9 form-control" id="password-field2"
+                                    <input name="password_confirmation" type="password" class="effect-9 form-control" id="password-field2"
                                            placeholder="{{trans('app.fields.repassword')}}">
                                     <span class="focus-border"><i></i></span>
                                 </div>

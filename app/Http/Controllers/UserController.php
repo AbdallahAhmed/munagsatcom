@@ -143,7 +143,8 @@ class UserController extends Controller
                 $isAuthed = fauth()->attempt([
                     'email' => $request->get('email'),
                     'password' => $request->get('password'),
-                    'backend' => 0
+                    'backend' => 0,
+                    'type' => $request->get('user_type')
                 ]);
 
                 if (!$isAuthed) {

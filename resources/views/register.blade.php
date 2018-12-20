@@ -28,7 +28,7 @@
                                 <div class="new-f-group">
                                     <div class="form-group clearfix">
                                         <span class="icony"><i class="fa fa-user"></i></span>
-                                        <input name="first_name" type="text" class="effect-9 form-control"
+                                        <input name="first_name" value="{{Request::old('first_name')}}" type="text" class="effect-9 form-control"
                                                placeholder="{{trans('app.fields.first_name')}}">
                                         <span class="focus-border"><i></i></span>
                                     </div>
@@ -41,7 +41,7 @@
                                 <div class="new-f-group">
                                     <div class="form-group clearfix">
                                         <span class="icony"><i class="fa fa-user"></i></span>
-                                        <input name="last_name" type="text" class="effect-9 form-control"
+                                        <input name="last_name" value="{{Request::old('last_name')}}" type="text" class="effect-9 form-control"
                                                placeholder="{{trans('app.fields.last_name')}}">
                                         <span class="focus-border"><i></i></span>
                                     </div>
@@ -55,7 +55,7 @@
                                 <div class="new-f-group">
                                     <div class="form-group clearfix">
                                         <span class="icony"><i class="fa fa-envelope"></i></span>
-                                        <input name="email" type="email" class="effect-9 form-control"
+                                        <input name="email" type="email" value="{{Request::old('email')}}" class="effect-9 form-control"
                                                placeholder="{{trans('app.fields.email')}}">
                                         <span class="focus-border"><i></i></span>
                                     </div>
@@ -126,7 +126,7 @@
                                 <div class="col-xs-12 col-md-9">
                                     <div class="new-f-group">
                                         <div class="form-group clearfix">
-                                            <input name="company_name" type="text" class="effect-9 form-control"
+                                            <input name="company_name" value="{{old('company_name')}}" type="text" class="effect-9 form-control"
                                                    placeholder="{{trans('app.company_name')}}">
                                             <span class="focus-border"><i></i></span>
                                         </div>
@@ -140,7 +140,7 @@
                                         <select type="text" class="effect-9 form-control" name="sector_id">
                                             <option value="0">{{trans('app.sectors.select')}}</option>
                                             @foreach($sectors as $sector)
-                                                <option value="{{$sector->id}}">{{$sector->name}}</option>
+                                                <option value="{{$sector->id}}" {{old('sector_id') == $sector->id ? 'selected' : ""}}>{{$sector->name}}</option>
                                             @endforeach
                                         </select><span class="focus-border"><i></i></span>
                                     </div>
@@ -151,8 +151,8 @@
                                 <div class="col-xs-12 col-md-9">
                                     <div class="new-f-group">
                                         <div class="form-group clearfix">
-                                            <textarea name="details" class="effect-9 form-control" rows="8"
-                                                      placeholder="{{trans('app.company_more')}} ..."></textarea>
+                                            <textarea  name="details" class="effect-9 form-control" rows="8"
+                                                      placeholder="{{trans('app.company_more')}} ...">{{old('details')}}</textarea>
                                             <span class="focus-border"><i></i></span>
                                         </div>
                                     </div>

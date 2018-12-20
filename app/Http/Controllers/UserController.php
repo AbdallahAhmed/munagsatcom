@@ -45,7 +45,7 @@ class UserController extends Controller
                 'first_name' => 'required|regex:/^(?=.*[a-zA-Z]).+$/|min:3',
                 'last_name' => 'required|regex:/^(?=.*[a-zA-Z]).+$/|min:3',
                 'email' => 'required|email|unique:users',
-                'password' => 'required|confirmed|min:6',
+                'password' => 'required|confirmed|min:6|max:255',
             ];
             if ($request->get('user_type') == 2) {
                 $rules += [

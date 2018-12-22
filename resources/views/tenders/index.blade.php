@@ -80,9 +80,9 @@
                                 <label class="col-xs-12 col-md-3">{{trans('app.tenders.cb_real_price')}} </label>
                                 <div class="col-xs-12 col-md-9">
                                     <div class="range">
-                                        <input class="range-example" type="text" min="1" max="100000"
+                                        <input class="range-example" type="text" min="1" max="{{(int)$cb_real_price_max}}"
                                                value="{{Request::get('cb_real_price')}}"
-                                               name="cb_real_price" step="10">
+                                               name="cb_real_price" step="{{(int)($cb_real_price_max/100)+1}}">
                                     </div>
                                 </div>
                             </div>
@@ -91,9 +91,9 @@
                                 <label class="col-xs-12 col-md-3">{{trans('app.tenders.cb_downloaded_price')}} </label>
                                 <div class="col-xs-12 col-md-9">
                                     <div class="range">
-                                        <input class="range-example" type="text" min="1" max="100000"
+                                        <input class="range-example" type="text" min="1" max="{{(int)$cb_downloaded_price_max}}"
                                                value="{{Request::get('cb_downloaded_price')}}"
-                                               name="cb_downloaded_price" step="10">
+                                               name="cb_downloaded_price" step="{{(int)($cb_downloaded_price_max/100)+1}}">
                                     </div>
                                 </div>
                             </div>

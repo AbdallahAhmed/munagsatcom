@@ -11,7 +11,8 @@ class Chance extends \Dot\Chances\Models\Chance
      *  Add path property
      * @return string
      */
-    public function getPathAttribute(){
+    public function getPathAttribute()
+    {
         return route('chances.show', ['slug' => $this->slug]);
     }
 
@@ -21,7 +22,9 @@ class Chance extends \Dot\Chances\Models\Chance
     public function getProgressAttribute()
     {
         $now = Carbon::now();
-        return max(abs(($this->created_at->diffInHours($now) / Carbon::parse($this->closing_date)->diffInHours($now)) * 100), 1);
+        $diff = abs(Carbon::parse($this->closing_date)->diffInHours($this->created_at));
+        return min(((($diff - max(Carbon::parse($this->closing_date)->diffInHours($now), 0)) / $diff) * 100), 100);
     }
+
 
 }

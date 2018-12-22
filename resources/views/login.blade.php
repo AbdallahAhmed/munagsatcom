@@ -14,7 +14,7 @@
                         {{ session('status') }}
                     </div>
                 @endif
-                <form method="post" action="{{route('login')}}">
+                <form method="post" action="{{route('login')}}" autocomplete="off">
                     {{csrf_field()}}
                     <div class="form-group-lg row">
                         <label class="col-xs-12 col-md-3">{{trans('app.fields.email')}} </label>
@@ -23,7 +23,7 @@
                                 <div class="form-group clearfix">
                                     <span class="icony"><i class="fa fa-user"></i></span>
                                     <input name="email" type="email" class="effect-9 form-control"
-                                           placeholder="{{trans('app.fields.email')}}">
+                                           placeholder="{{trans('app.fields.email')}}" autocomplete="off">
                                     <span class="focus-border"><i></i></span>
                                 </div>
                             </div>
@@ -36,7 +36,7 @@
                                 <span class="icony"><i class="fa fa-fw field-icon toggle-password fa-eye"
                                                        toggle="#password-field"></i></span>
                                 <input name="password" type="password" class="effect-9 form-control" id="password-field"
-                                       placeholder="{{trans('app.fields.repassword')}}">
+                                       placeholder="{{trans('app.fields.repassword')}}" autocomplete="off">
                                 <span class="focus-border"><i></i></span>
                             </div>
                         </div>

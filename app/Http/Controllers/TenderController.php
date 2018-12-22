@@ -44,10 +44,16 @@ class TenderController extends Controller
             });
         }
 
-        if ($request->filled('price')) {
-            $price = explode(',', $request->get('price'));
-            $query->where('price', '>=', $price[0]);
-            $query->where('price', '<=', $price[1]);
+        if ($request->filled('cb_downloaded_price')) {
+            $price = explode(',', $request->get('cb_downloaded_price'));
+            $query->where('cb_downloaded_price', '>=', $price[0]);
+            $query->where('cb_downloaded_price', '<=', $price[1]);
+        }
+
+        if ($request->filled('cb_real_price')) {
+            $price = explode(',', $request->get('cb_real_price'));
+            $query->where('cb_real_price', '>=', $price[0]);
+            $query->where('cb_real_price', '<=', $price[1]);
         }
 
         if ($request->filled('catgory_id')) {

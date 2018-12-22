@@ -77,12 +77,23 @@
                                 </label>
                             </div>
                             <div class="form-group-lg clearfix">
-                                <label class="col-xs-12 col-md-3">{{trans('app.tenders.price')}} </label>
+                                <label class="col-xs-12 col-md-3">{{trans('app.tenders.cb_real_price')}} </label>
                                 <div class="col-xs-12 col-md-9">
                                     <div class="range">
-                                        <input class="range-example" type="text" min="100" max="10000"
-                                               value="{{Request::get('price')}}"
-                                               name="price" step="10">
+                                        <input class="range-example" type="text" min="1" max="100000"
+                                               value="{{Request::get('cb_real_price')}}"
+                                               name="cb_real_price" step="10">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group-lg clearfix">
+                                <label class="col-xs-12 col-md-3">{{trans('app.tenders.cb_downloaded_price')}} </label>
+                                <div class="col-xs-12 col-md-9">
+                                    <div class="range">
+                                        <input class="range-example" type="text" min="1" max="100000"
+                                               value="{{Request::get('cb_downloaded_price')}}"
+                                               name="cb_downloaded_price" step="10">
                                     </div>
                                 </div>
                             </div>

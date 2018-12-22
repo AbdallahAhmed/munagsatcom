@@ -73,7 +73,7 @@ class Tender extends Model
     {
         $now = Carbon::now();
         $diff = abs($this->files_opened_at->diffInHours($this->published_at));
-        return min(((($diff - max($this->files_opened_at->diffInHours($now),0)) / $diff) * 100), 100);
+        return max(min(((($diff - max($this->files_opened_at->diffInHours($now),0)) / $diff) * 100), 100),1);
     }
 
 }

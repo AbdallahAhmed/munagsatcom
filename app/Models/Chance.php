@@ -23,7 +23,7 @@ class Chance extends \Dot\Chances\Models\Chance
     {
         $now = Carbon::now();
         $diff = abs(Carbon::parse($this->closing_date)->diffInHours($this->created_at));
-        return min(((($diff - max(Carbon::parse($this->closing_date)->diffInHours($now), 0)) / $diff) * 100), 100);
+        return max(min(((($diff - max(Carbon::parse($this->closing_date)->diffInHours($now), 0)) / $diff) * 100), 100),1);
     }
 
 

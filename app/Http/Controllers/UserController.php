@@ -45,6 +45,7 @@ class UserController extends Controller
                 'first_name' => 'required|regex:/^(?=.*[a-zA-Z]).+$/|min:3',
                 'last_name' => 'required|regex:/^(?=.*[a-zA-Z]).+$/|min:3',
                 'email' => 'required|email|unique:users',
+                'phone_number' => 'min:10',
                 'password' => 'required|confirmed|min:6|max:255',
             ];
             if ($request->get('user_type') == 2) {
@@ -66,6 +67,7 @@ class UserController extends Controller
             $user->first_name = $request->get('first_name');
             $user->last_name = $request->get('last_name');
             $user->email = $request->get('email');
+            $user->phone_number = $request->get('phone_number');
             $user->password = ($request->get('password'));
             $user->role_id = 2;
             $user->backend = 0;
@@ -178,8 +180,8 @@ class UserController extends Controller
     }
 
     /**
-     * POST/GET {lang}/verify
-     * @route verify
+     * POST {lang}/verify
+     * @route user.verify
      * @param Request $request
      * @return string
      */
@@ -204,7 +206,12 @@ class UserController extends Controller
         }
     }
 
-
+    /**
+     * GET {lang}/verify
+     * @route user.confirm
+     * @param Request $request
+     * @return string
+     */
     public function confirm(Request $request)
     {
         if (session()->get('email'))
@@ -212,10 +219,15 @@ class UserController extends Controller
         return redirect()->route('index');
 
     }
-
+    /**
+     * POST/GET {lang}/verify/resend
+     * @route user.confirm-resend
+     * @param Request $request
+     * @return string
+     */
     public function confirmResend(Request $request)
     {
-
+        session()->remove('status');
         if ($request->method() == 'GET') {
             return view('confirm-resend');
         } else
@@ -227,7 +239,7 @@ class UserController extends Controller
             Mail::to($user->email)->send(new VerificationMail($user));
             return redirect()->route('user.confirm')->with('status', trans('app.check_email'));
         } else
-            return redirect()->back()->withErrors(new MessageBag(['wrong_email' => trans('app.email_not_found')]));
+            return redirect()->route('user.confirm-resend')->withErrors(new MessageBag(['wrong_email' => trans('app.email_not_found')]));
     }
 
     /**

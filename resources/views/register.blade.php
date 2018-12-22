@@ -64,6 +64,20 @@
                         </div>
 
                         <div class="form-group-lg row">
+                            <label class="col-xs-12 col-md-3">{{trans('app.phone_number')}}</label>
+                            <div class="col-xs-12 col-md-9">
+                                <div class="new-f-group">
+                                    <div class="form-group clearfix">
+                                        <span class="icony"><i class="fa fa-mobile"></i></span>
+                                        <input name="phone_number" type="text" value="{{Request::old('phone_number')}}" class="effect-9 form-control"
+                                               placeholder="{{trans('app.phone_number')}}">
+                                        <span class="focus-border"><i></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group-lg row">
                             <label class="col-xs-12 col-md-3">{{trans('app.fields.password')}} </label>
                             <div class="new-f-group col-xs-12 col-md-9">
                                 <div class="form-group">

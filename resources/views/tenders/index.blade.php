@@ -72,7 +72,8 @@
                             <div class="form-group-lg clearfix">
                                 <label>
                                     {{trans('app.tenders.expired_at')}}
-                                    <input type="checkbox" value="1" name="show_expired">
+                                    <input type="checkbox" value="1"
+                                           {{Request::get('show_expired')==1?'checked':''}} name="show_expired">
                                 </label>
                             </div>
                             <div class="form-group-lg clearfix">
@@ -89,7 +90,8 @@
                                 <label class="col-xs-12 col-md-5"> {{trans('app.tenders.offers_expired')}} </label>
                                 <div class="col-xs-12 col-md-7">
                                     <div class="form-group clearfix">
-                                        <div class="input-append date" id="dp3" data-date="{{date('m-d-Y')}}" autocomplete="false"
+                                        <div class="input-append date" id="dp3" data-date="{{date('m-d-Y')}}"
+                                             autocomplete="false"
                                              data-date-format="dd-mm-yyyy">
                                             <input class="effect-9 form-control" placeholder="mm/dd/yyyy"
                                                    type="text" name="offer_expired"
@@ -119,7 +121,7 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <div class="card-img"><a href="monaasat-details.html">
+                                        <div class="card-img"><a href="{{$tender->path}}">
                                                 <img src="{{thumbnail($tender->org->logo->path)}}"
                                                      alt="{{$tender->org->name}}"></a>
                                         </div>
@@ -216,10 +218,10 @@
         // date.setDate(date.getDate());
 
         $('#dp3',).datepicker({
-            minDate:date,
+            minDate: date,
         });
         $('#date',).datepicker({
-            minDate:date,
+            minDate: date,
         });
     </script>
     <script>

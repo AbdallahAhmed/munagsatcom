@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tender;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TenderController extends Controller
@@ -31,6 +32,10 @@ class TenderController extends Controller
 
         if ($request->filled('offer_expired')) {
             $query->where('last_get_offer_at', '<=', $request->get('offer_expired'));
+        }
+
+        if ($request->filled('show_expired') && $request->get('show_expired') == 1) {
+            $query->where('last_get_offer_at', '<=', Carbon::now());
         }
 
         if ($request->filled('place_id')) {
@@ -63,7 +68,7 @@ class TenderController extends Controller
      */
     public function details(Request $request, $slug)
     {
-        $this->data['tender'] = Tender::with(['org', 'org.logo', 'activity', 'categories','type'])->published()->where('slug', $slug)->first();
+        $this->data['tender'] = Tender::with(['org', 'org.logo', 'activity', 'categories', 'type'])->published()->where('slug', $slug)->first();
         return view('tenders.details', $this->data);
     }
 }

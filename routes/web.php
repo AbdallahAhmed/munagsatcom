@@ -35,6 +35,9 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
     Route::any('logout', 'UserController@logout')->name('flogout');
     Route::any('forgetpassword', 'UserController@forgetPassword')->name('forget-password');
     Route::any('reset', 'UserController@reset')->name('reset-password');
+    Route::post('verify', 'UserController@verify')->name('user.verify');
+    Route::get('verify', 'UserController@confirm')->name('user.confirm');
+    Route::any('verify/resend', 'UserController@confirmResend')->name('user.confirm-resend');
     Route::group(['middleware' => ['fauth']], function () {
         Route::get('user/update', 'UserController@show')->name('user.show');
         Route::post('user/update', 'UserController@update')->name('user.update');
@@ -46,16 +49,16 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
     });
 
     Route::get('centers', 'CenterController@index')->name('centers');
-    Route::get('centers/{id}', 'CenterController@show')->name('centers.show');
+    Route::get('centers/{slug}', 'CenterController@show')->name('centers.show');
     Route::post('centers/contact', 'CenterController@contact')->name('centers.contact');
 
     Route::get('chances', 'ChanceController@index')->name('chances');
-    Route::get('chances/{id}', 'ChanceController@show')->name('chances.show');
+    Route::get('chances/{slug}', 'ChanceController@show')->name('chances.show');
     Route::post('chances/offers', 'ChanceController@addOffer')->name('chances.offers');
 
 
     Route::group(['middleware' => ['company']], function ($router) {
-        $router->get('company/{id}', 'CompanyController@show')->name('company.show');
+        $router->get('company/{slug}', 'CompanyController@show')->name('company.show');
         $router->get('company/{id}/chances', 'CompanyController@chances')->name('company.chances');
         $router->get('company/{id}/centers', 'CompanyController@centers')->name('company.centers');
         $router->get('company/{id}/tenders', 'CompanyController@show')->name('company.tenders');

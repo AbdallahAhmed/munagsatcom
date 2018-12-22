@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ResetPasswordMail;
+use App\Mail\VerificationMail;
+use App\Mail\WelcomeMail;
 use App\Models\Center;
 use App\Models\Companies_empolyees;
 use App\User;
@@ -40,14 +42,15 @@ class UserController extends Controller
 
         if ($request->method() == 'POST') {
             $rules = [
+                'first_name' => 'required|regex:/^(?=.*[a-zA-Z]).+$/|min:3',
+                'last_name' => 'required|regex:/^(?=.*[a-zA-Z]).+$/|min:3',
                 'email' => 'required|email|unique:users',
-                'password' => 'required|min:6',
-                'first_name' => 'required',
-                'last_name' => 'required',
+                'phone_number' => 'min:10',
+                'password' => 'required|confirmed|min:6|max:255',
             ];
             if ($request->get('user_type') == 2) {
                 $rules += [
-                    'company_name' => 'required|max:255|min:8',
+                    'company_name' => 'required|max:255|min:8|regex:/^(?=.*[a-zA-Z]).+$/',
                     'sector_id' => 'required|exists:sectors,id',
                     'details' => 'required|max:255',
                     'logo' => 'required|mimes:jpg,png,jpeg',
@@ -59,17 +62,23 @@ class UserController extends Controller
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput($request->all());
             }
-
             $user = new User();
             $user->username = $request->get('email');
             $user->first_name = $request->get('first_name');
             $user->last_name = $request->get('last_name');
             $user->email = $request->get('email');
+            $user->phone_number = $request->get('phone_number');
             $user->password = ($request->get('password'));
             $user->role_id = 2;
             $user->backend = 0;
-            $user->status = 1;
+            $user->status = 0;
+            $user->code = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
             $user->type = $request->get('user_type', 1);
+
+            if ($request->file('logo')) {
+                $media = new Media();
+                $user->photo_id = $media->saveFile($request->file('logo'));
+            }
             $user->save();
             if ($request->get('user_type') == 2) {
                 $company = new Company();
@@ -81,12 +90,14 @@ class UserController extends Controller
                 $company->sector_id = $request->get('sector_id');
 
                 $media = new Media();
-                $company->image_id = $media->saveFile($request->file('logo'));
+                $company->photo_id = $media->saveFile($request->file('logo'));
 
                 $files = array();
-                foreach ($request->file('files') as $file) {
-                    $media = new Media();
-                    $files[] = $media->saveFile($file);
+                if ($request->file('files')) {
+                    foreach ($request->file('files') as $file) {
+                        $media = new Media();
+                        $files[] = $media->saveFile($file);
+                    }
                 }
                 $company->save();
                 Companies_empolyees::create([
@@ -97,9 +108,13 @@ class UserController extends Controller
                     'accepted' => 1
                 ]);
                 $company->files()->sync($files);
+            } else {
+                session()->put('email', $user->email);
+                Mail::to($user->email)->send(new VerificationMail($user));
+                return redirect()->route('user.confirm')->with('status', trans('app.check_email'));
             }
 
-            return redirect()->route('login')->with('status', trans('app.events.successfully_register'));
+            return redirect()->route('index')->with('status', trans('app.events.successfully_register'));
             //return success or redirect
         }
 
@@ -131,7 +146,9 @@ class UserController extends Controller
                 $isAuthed = fauth()->attempt([
                     'email' => $request->get('email'),
                     'password' => $request->get('password'),
-                    'backend' => 0
+                    'backend' => 0,
+                    'type' => $request->get('user_type'),
+                    'status' => 1
                 ]);
 
                 if (!$isAuthed) {
@@ -156,9 +173,73 @@ class UserController extends Controller
      * @param Request $request
      * @return string
      */
-    public function logout(){
+    public function logout()
+    {
         Auth::guard('frontend')->logout();
         return redirect()->route('index');
+    }
+
+    /**
+     * POST {lang}/verify
+     * @route user.verify
+     * @param Request $request
+     * @return string
+     */
+    public function verify(Request $request)
+    {
+        $user = User::where('email', $request->get('email'))->first();
+        if ($user) {
+            if ($user->code == $request->get('code')) {
+                $user->code = null;
+                $user->status = 1;
+                $user->save();
+                if ($user->type == 1) {
+                    fauth()->login($user);
+                    return redirect()->route('index');
+                }
+                return redirect()->back()->with('waiting', trans('app.company_waiting'));
+            } else
+                return redirect()->back()->withErrors(['wrong_code' => trans('app.wrong_code')]);
+        } else {
+            return redirect()->back()->withErrors(['wrong_email' => trans('app.email_not_found')]);
+
+        }
+    }
+
+    /**
+     * GET {lang}/verify
+     * @route user.confirm
+     * @param Request $request
+     * @return string
+     */
+    public function confirm(Request $request)
+    {
+        if (session()->get('email'))
+            return view('confirm', ['email' => session()->get('email')]);
+        return redirect()->route('index');
+
+    }
+    /**
+     * POST/GET {lang}/verify/resend
+     * @route user.confirm-resend
+     * @param Request $request
+     * @return string
+     */
+    public function confirmResend(Request $request)
+    {
+        session()->remove('status');
+        if ($request->method() == 'GET') {
+            return view('confirm-resend');
+        } else
+            $user = User::where('email', $request->get('email'))->first();
+        if ($user) {
+            $user->code = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
+            $user->save();
+            session()->put('email', $request->get('email'));
+            Mail::to($user->email)->send(new VerificationMail($user));
+            return redirect()->route('user.confirm')->with('status', trans('app.check_email'));
+        } else
+            return redirect()->route('user.confirm-resend')->withErrors(new MessageBag(['wrong_email' => trans('app.email_not_found')]));
     }
 
     /**
@@ -167,8 +248,9 @@ class UserController extends Controller
      * @param Request $request
      * @return string
      */
-    public function forgetPassword(Request $request){
-        if($request->method() == 'POST') {
+    public function forgetPassword(Request $request)
+    {
+        if ($request->method() == 'POST') {
             $user = User::where([
                 ['email', $request->get('email')],
                 ['backend', 0]
@@ -189,8 +271,9 @@ class UserController extends Controller
      * @param Request $request
      * @return string
      */
-    public function reset(Request $request){
-        if($request->method() == 'POST') {
+    public function reset(Request $request)
+    {
+        if ($request->method() == 'POST') {
             $user = User::where('email', $request->get('email', ""))->first();
             if (!$user)
                 return redirect()->back()->withErrors(new MessageBag(['wrong_email' => trans('app.email_not_found')]));
@@ -311,7 +394,7 @@ class UserController extends Controller
             $sent_requests = fauth()->user()->requests()->pluck('id')->toArray();
             $query = Company::query();
             $query = count($sent_requests) > 0 ? $query->whereNotIn('id', $sent_requests) : $query;
-            $query = $q != null ? $query->where('name', '%'.$q.'%') : $query;
+            $query = $q != null ? $query->where('name', '%' . $q . '%') : $query;
             $this->data['companies'] = $query->paginate(5);
 
             return view('users.search', $this->data);
@@ -325,7 +408,8 @@ class UserController extends Controller
      * @param Request $request
      * @return Route
      */
-    public function sendRequests(Request $request){
+    public function sendRequests(Request $request)
+    {
         fauth()->user()->requests()->syncWithoutDetaching($request->get('companies', []));
         return redirect()->route('user.company.search')->with('status', trans('app.requests_sent_successfully'));
     }
@@ -336,29 +420,30 @@ class UserController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function centers(Request $request){
+    public function centers(Request $request)
+    {
 
         $query = Center::where('user_id', fauth()->user()->id);
         $this->data['sector_id'] = null;
         $this->data['service_id'] = null;
         $this->data['q'] = null;
 
-        if($request->get("sector_id")){
+        if ($request->get("sector_id")) {
             $query = $query->where('sector_id', $request->get('sector_id'));
             $this->data['sector_id'] = $request->get("sector_id");
         }
-        if($request->get('service_id')){
-            $query = $query->whereHas('services', function ($query) use ($request){
+        if ($request->get('service_id')) {
+            $query = $query->whereHas('services', function ($query) use ($request) {
                 $query->where('id', $request->get('service_id'));
             });
             $this->data['service_id'] = $request->get("service_id");
         }
-        if($request->get('q')){
+        if ($request->get('q')) {
             $q = trim(urldecode($request->get('q')));
-            $query = $query->where('name','like', '%'.$q.'%');
+            $query = $query->where('name', 'like', '%' . $q . '%');
             $this->data['q'] = $q;
         }
-        if($request->get('price_to')){
+        if ($request->get('price_to')) {
             $to = $request->get('price_to');
             $from = $request->get('price_from', 100);
 

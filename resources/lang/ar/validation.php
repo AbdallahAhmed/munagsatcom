@@ -167,6 +167,6 @@ return array(
         'file_name' => 'اسم الملف',
         'file_description' => 'تفاصيل الملف',
         'chance_value' => 'قيمة الفرصة',
-
+        'phone_number' => 'رقم الهاتف'
     ),
 );

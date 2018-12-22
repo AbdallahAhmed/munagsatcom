@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Companies_empolyees;
+use App\Models\Company;
 use Closure;
 
 class RedirectIfCompany
@@ -17,7 +18,9 @@ class RedirectIfCompany
     public function handle($request, Closure $next)
     {
         $id = $request->route()->parameter('id');
+        $slug = $id ? null : $request->route()->parameter('slug');
         if (fauth()->check()) {
+            $id = $id ? $id : Company::where('slug', '=', $slug)->firstOrFail()->id;
             $employees = Companies_empolyees::where([
                 ['company_id', $id],
                 ['employee_id', fauth()->user()->id],

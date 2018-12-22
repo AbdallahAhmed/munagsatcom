@@ -93,6 +93,9 @@ return [
     'name_min' => 'Name should be at least 3 letters',
     'message_min' => 'Your message should be at least 10 characters',
     'company_requests'=>'Invitations to join companies',
+    'logo_error' => 'Logo should be of type jpg, jpeg, png',
+    'check_email' => 'Please check your email address and enter the code sent',
+    'company_waiting' => 'Company verified successfully, please wait till the administrators check your company and follow your email',
     'tenders' => [
         'tenders' => 'Government tenders',
         "details" => 'Tender \'s details',

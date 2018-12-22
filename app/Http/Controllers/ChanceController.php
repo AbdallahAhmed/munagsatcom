@@ -90,10 +90,10 @@ class ChanceController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, $slug)
     {
 
-        $chance = \App\Models\Chance::findOrFail($id);
+        $chance = \App\Models\Chance::where('slug','=', $slug)->firstOrFail();
 
         $this->data['chance'] = $chance;
         return view('chances.chance', $this->data);

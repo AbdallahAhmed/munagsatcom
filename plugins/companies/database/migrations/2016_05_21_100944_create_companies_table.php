@@ -14,6 +14,7 @@ class CreateCompaniesTable extends Migration
         Schema::create('companies', function ($table) {
             $table->increments('id');
             $table->string("name")->index();
+            $table->string("slug")->unique();
             $table->string("first_name")->index();
             $table->string("last_name")->index();
             $table->string("details")->index();

@@ -49,12 +49,12 @@ var UnoDropZone = {
         //create input area 
         var inputDiv = document.createElement('div');
         inputDiv.classList.add('file-input');
-
         var inputFiled = document.createElement('input');
         var inputName = e.getAttribute('data-input-name');
         inputFiled.setAttribute('name', inputName);
         inputFiled.setAttribute('type', 'file');
         inputFiled.setAttribute('accept', 'image/*');
+        inputFiled.setAttribute('id', 'newImage');
         var onChnageCallback = e.getAttribute('data-callback');
         if (onChnageCallback) {
             inputFiled.setAttribute('data-callback', onChnageCallback);
@@ -109,8 +109,9 @@ var UnoDropZone = {
         UnoDropZone.handleFiles(this.files, this);
     },
     handleFiles: function (fileList, inputElemnt) {
-        
-         var uplaodContSelector = UnoDropZone.settings.uploadContSelector;
+        $('#logo_error').css('display','none')
+
+        var uplaodContSelector = UnoDropZone.settings.uploadContSelector;
 
         //read file
         console.log('handleInputFiles ...');
@@ -126,6 +127,8 @@ var UnoDropZone = {
         if (!imageType.test(file.type)) {
             console.log('is not an image. we will not proccess ');
             $(this).val('');
+            $('#newImage').val('');
+            $('#logo_error').css('display','block')
             return;
         }
 

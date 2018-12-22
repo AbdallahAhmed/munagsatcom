@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title',trans('app.chances.chances'))
+@section('title',trans('app.chances.chances')." | ".$chance->slug)
 @section('content')
     <section class="container">
         <div class="row">
@@ -22,7 +22,7 @@
                                     <div class="padt">{{trans('app.chances.remaining_date')}}</div>
                                     <div class="progress ">
                                         <div class="progress-bar" role="progressbar"
-                                             aria-valuenow="{{((\Carbon\Carbon::parse($chance->closing_date)->diffInMinutes(\Carbon\Carbon::now())/\Carbon\Carbon::parse($chance->closing_date)->diffInMinutes($chance->created_at))*100)}}"
+                                             aria-valuenow="{{$chance->progress}}"
                                              aria-valuemin="0" aria-valuemax="0" style="">
                                             <span class="popOver" data-toggle="tooltip" data-placement="top"
                                                   title="{{\Carbon\Carbon::parse($chance->closing_date)->diffForHumans(\Carbon\Carbon::now())}}"> </span>

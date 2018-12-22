@@ -10,6 +10,6 @@ class Center extends \Dot\Services\Models\Center
      * @return string
      */
     public function getPathAttribute(){
-        return route('centers.show', ['center_id' => $this->id]);
+        return route('centers.show', ['slug' => $this->slug]);
     }
 }

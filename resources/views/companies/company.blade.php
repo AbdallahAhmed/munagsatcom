@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title',$company->name)
+@section('title',$company->slug)
 
 @section('content')
     <section class="container">

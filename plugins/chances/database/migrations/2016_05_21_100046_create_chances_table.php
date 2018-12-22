@@ -15,6 +15,7 @@ class CreateChancesTable extends Migration
 
             $table->increments('id');
             $table->string("name")->index();
+            $table->string("slug")->unique();
             $table->string("number")->index();
             $table->timestamp("closing_date")->index();
             $table->string("file_name")->nullable()->default("")->index();

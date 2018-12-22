@@ -89,9 +89,9 @@
                                 <label class="col-xs-12 col-md-5"> {{trans('app.tenders.offers_expired')}} </label>
                                 <div class="col-xs-12 col-md-7">
                                     <div class="form-group clearfix">
-                                        <div class="input-append date" id="dp3" data-date="12-02-2012"
+                                        <div class="input-append date" id="dp3" data-date="{{date('m-d-Y')}}" autocomplete="false"
                                              data-date-format="dd-mm-yyyy">
-                                            <input class="effect-9 form-control" id="date" placeholder="mm/dd/yyyy"
+                                            <input class="effect-9 form-control" placeholder="mm/dd/yyyy"
                                                    type="text" name="offer_expired"
                                                    value="{{old('offer_expired',Request::get('offer_expired'))}}">
                                             <span class="add-on"><i class="fa  fa-calendar"></i></span>
@@ -211,8 +211,16 @@
         // });
     </script>
     <script>
-        $('#dp3',).datepicker();
-        $('#date',).datepicker();
+
+        var date = new Date();
+        // date.setDate(date.getDate());
+
+        $('#dp3',).datepicker({
+            minDate:date,
+        });
+        $('#date',).datepicker({
+            minDate:date,
+        });
     </script>
     <script>
         $(".range-example").asRange({

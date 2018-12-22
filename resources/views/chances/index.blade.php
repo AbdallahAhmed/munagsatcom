@@ -43,7 +43,7 @@
                                 <label class="col-xs-12 col-md-4">{{trans('app.chances.posted_at')}}</label>
                                 <div class="col-xs-12 col-md-8 new-f-group">
                                     <div class="form-group clearfix">
-                                        <div class="input-append date" id="dp3" data-date="12-02-2012"
+                                        <div class="input-append date" id="dp3" data-date="{{date('m-d-Y')}}"
                                              data-date-format="dd-mm-yyyy">
                                             <input name="created_date" value="{{$created_at? $created_at : ""}}"
                                                    data-date-format="dd-mm-yyyy" class="effect-9 form-control" id="date"

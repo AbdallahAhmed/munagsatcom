@@ -418,3 +418,7 @@ img.mfp-img {
     .mfp-container {
         padding-left: 6px;
         padding-right: 6px; } }
+
+.tooltip {
+    z-index: 500;
+}

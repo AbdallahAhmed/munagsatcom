@@ -22,8 +22,8 @@ class Chance extends \Dot\Chances\Models\Chance
     public function getProgressAttribute()
     {
         $now = Carbon::now();
-        $diff = abs(Carbon::parse($this->closing_date)->diffInHours($this->created_at));
-        return max(min(((($diff - max(Carbon::parse($this->closing_date)->diffInHours($now), 0)) / $diff) * 100), 100),1);
+        $diff = (Carbon::parse($this->closing_date)->diffInHours($this->created_at));
+        return max(min(((($diff - max($now->diffInHours(Carbon::parse($this->closing_date,false)), 0)) / $diff) * 100), 100),1);
     }
 
 

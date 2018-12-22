@@ -263,7 +263,7 @@
                 media: "",          // Link to image file defaults to null
                 facebook: true,     // Turns on Facebook sharing
                 twitter: true,      // Turns on Twitter sharing
-                pinterest: true,    // Turns on Pinterest sharing
+                pinterest: false,    // Turns on Pinterest sharing
                 googleplus: false,   // Turns on Google Plus sharing
                 linkedin: false,     // Turns on LinkedIn sharing
                 position: "right", // Options: Top, Bottom, Left, Right

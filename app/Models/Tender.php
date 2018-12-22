@@ -12,6 +12,10 @@ class Tender extends Model
 {
 
 
+    /**
+     * Parse this dates
+     * @var array
+     */
     protected $dates = [
         'published_at',
         'last_queries_at',

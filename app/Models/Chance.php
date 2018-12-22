@@ -7,6 +7,13 @@ use Carbon\Carbon;
 
 class Chance extends \Dot\Chances\Models\Chance
 {
+
+    /**
+     * Auto cast dates
+     * @var array
+     */
+    protected $dates = ['closing_date', 'created_at', 'updated_at'];
+
     /**
      *  Add path property
      * @return string
@@ -22,8 +29,8 @@ class Chance extends \Dot\Chances\Models\Chance
     public function getProgressAttribute()
     {
         $now = Carbon::now();
-        $diff = (Carbon::parse($this->closing_date)->diffInHours($this->created_at));
-        return max(min(((($diff - max($now->diffInHours(Carbon::parse($this->closing_date,false)), 0)) / $diff) * 100), 100),1);
+        $diff = ($this->closing_date->diffInHours($this->created_at));
+        return max(min(((($diff - max($now->diffInHours($this->closing_date, false), 0)) / $diff) * 100), 100), 1);
     }
 
 

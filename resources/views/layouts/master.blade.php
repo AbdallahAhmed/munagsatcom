@@ -72,6 +72,7 @@
 <script src="{{asset('/assets')}}/js/hideshare.js"></script>
 <script src="{{asset('/assets')}}/js/function.js"></script>
 <script src="{{asset('/assets')}}/js/UnoDropZone.js"></script>
+<script src="{{asset('/')}}js/popup.js"></script>
 
 @stack('scripts')
 </body>

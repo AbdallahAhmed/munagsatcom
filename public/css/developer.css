@@ -1,6 +1,10 @@
 alert > p, .alert > ul {
     list-style: circle;
+    margin-bottom: 0;
+    padding-right: 40px;
+
 }
+
 
 .not-found {
     text-align: center !important;

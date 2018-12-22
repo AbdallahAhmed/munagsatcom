@@ -72,7 +72,8 @@ class Tender extends Model
     public function getProgressAttribute()
     {
         $now = Carbon::now();
-        return max(abs(($this->published_at->diffInHours($now) / $this->files_opened_at->diffInHours($now)) * 100), 1);
+        $diff = abs($this->files_opened_at->diffInHours($this->published_at));
+        return min(((($diff - max($this->files_opened_at->diffInHours($now),0)) / $diff) * 100), 100);
     }
 
 }

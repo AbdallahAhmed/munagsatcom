@@ -91,7 +91,7 @@ class UserController extends Controller
                 $company->photo_id = $media->saveFile($request->file('logo'));
 
                 $files = array();
-                if($request->file('files')) {
+                if ($request->file('files')) {
                     foreach ($request->file('files') as $file) {
                         $media = new Media();
                         $files[] = $media->saveFile($file);
@@ -107,6 +107,7 @@ class UserController extends Controller
                 ]);
                 $company->files()->sync($files);
             } else {
+                session()->put('email', $user->email);
                 Mail::to($user->email)->send(new VerificationMail($user));
                 return redirect()->route('user.confirm')->with('status', trans('app.check_email'));
             }
@@ -177,33 +178,56 @@ class UserController extends Controller
     }
 
     /**
-     * POST {lang}/verify
+     * POST/GET {lang}/verify
      * @route verify
      * @param Request $request
      * @return string
      */
     public function verify(Request $request)
     {
-        $user = User::where('code', $request->get('code'))->first();
+        $user = User::where('email', $request->get('email'))->first();
         if ($user) {
-            $user->code = null;
-            $user->status = 1;
-            $user->save();
-            if ($user->type == 1) {
-                fauth()->login($user);
-                return redirect()->route('index');
-            }
-            return redirect()->back()->with('waiting', trans('app.company_waiting'));
+            if ($user->code == $request->get('code')) {
+                $user->code = null;
+                $user->status = 1;
+                $user->save();
+                if ($user->type == 1) {
+                    fauth()->login($user);
+                    return redirect()->route('index');
+                }
+                return redirect()->back()->with('waiting', trans('app.company_waiting'));
+            } else
+                return redirect()->back()->withErrors(['wrong_code' => trans('app.wrong_code')]);
         } else {
-            return redirect()->back()->withErrors(['wrong_code' => trans('app.wrong_code')]);
+            return redirect()->back()->withErrors(['wrong_email' => trans('app.email_not_found')]);
+
         }
     }
 
 
     public function confirm(Request $request)
     {
+        if (session()->get('email'))
+            return view('confirm', ['email' => session()->get('email')]);
+        return redirect()->route('index');
 
-        return view('confirm', ['email' => session()->get('email'), 'password' => session()->get('password')]);
+    }
+
+    public function confirmResend(Request $request)
+    {
+
+        if ($request->method() == 'GET') {
+            return view('confirm-resend');
+        } else
+            $user = User::where('email', $request->get('email'))->first();
+        if ($user) {
+            $user->code = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
+            $user->save();
+            session()->put('email', $request->get('email'));
+            Mail::to($user->email)->send(new VerificationMail($user));
+            return redirect()->route('user.confirm')->with('status', trans('app.check_email'));
+        } else
+            return redirect()->back()->withErrors(new MessageBag(['wrong_email' => trans('app.email_not_found')]));
     }
 
     /**

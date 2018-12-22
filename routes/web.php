@@ -37,6 +37,7 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
     Route::any('reset', 'UserController@reset')->name('reset-password');
     Route::post('verify', 'UserController@verify')->name('user.verify');
     Route::get('verify', 'UserController@confirm')->name('user.confirm');
+    Route::any('verify/resend', 'UserController@confirmResend')->name('user.confirm-resend');
     Route::group(['middleware' => ['fauth']], function () {
         Route::get('user/update', 'UserController@show')->name('user.show');
         Route::post('user/update', 'UserController@update')->name('user.update');

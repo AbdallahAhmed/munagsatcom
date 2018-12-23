@@ -15,8 +15,9 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="card-img">
-                                    <img src="{{thumbnail($tender->org->logo->path)}}"
-                                         alt="{{$tender->org->name}}" title="{{$tender->org->name}}">
+                                    <a href="{{uploads_url($tender->org->logo->path)}}" class="open-image"> <img
+                                                src="{{thumbnail($tender->org->logo->path)}}"
+                                                alt="{{$tender->org->name}}" title="{{$tender->org->name}}"></a>
                                 </div>
                             </div>
                             <div class="col-md-9">

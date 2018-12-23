@@ -12,6 +12,10 @@ class Tender extends Model
 {
 
 
+    /**
+     * Parse this dates
+     * @var array
+     */
     protected $dates = [
         'published_at',
         'last_queries_at',
@@ -72,7 +76,8 @@ class Tender extends Model
     public function getProgressAttribute()
     {
         $now = Carbon::now();
-        return max(abs(($this->published_at->diffInHours($now) / $this->files_opened_at->diffInHours($now)) * 100), 1);
+        $diff = max(($this->files_opened_at->diffInHours($this->published_at)), 1);
+        return max(min(((($diff - max($now->diffInHours($this->files_opened_at, false), 0)) / $diff) * 100), 100), 1);
     }
 
 }

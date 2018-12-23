@@ -72,16 +72,28 @@
                             <div class="form-group-lg clearfix">
                                 <label>
                                     {{trans('app.tenders.expired_at')}}
-                                    <input type="checkbox" value="1" name="show_expired">
+                                    <input type="checkbox" value="1"
+                                           {{Request::get('show_expired')==1?'checked':''}} name="show_expired">
                                 </label>
                             </div>
                             <div class="form-group-lg clearfix">
-                                <label class="col-xs-12 col-md-3">{{trans('app.tenders.price')}} </label>
+                                <label class="col-xs-12 col-md-3">{{trans('app.tenders.cb_real_price')}} </label>
                                 <div class="col-xs-12 col-md-9">
                                     <div class="range">
-                                        <input class="range-example" type="text" min="100" max="10000"
-                                               value="{{Request::get('price')}}"
-                                               name="price" step="10">
+                                        <input class="range-example" type="text" min="1" max="{{(int)$cb_real_price_max}}"
+                                               value="{{Request::get('cb_real_price')}}"
+                                               name="cb_real_price" step="{{(int)($cb_real_price_max/100)+1}}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group-lg clearfix">
+                                <label class="col-xs-12 col-md-3">{{trans('app.tenders.cb_downloaded_price')}} </label>
+                                <div class="col-xs-12 col-md-9">
+                                    <div class="range">
+                                        <input class="range-example" type="text" min="1" max="{{(int)$cb_downloaded_price_max}}"
+                                               value="{{Request::get('cb_downloaded_price')}}"
+                                               name="cb_downloaded_price" step="{{(int)($cb_downloaded_price_max/100)+1}}">
                                     </div>
                                 </div>
                             </div>
@@ -89,9 +101,10 @@
                                 <label class="col-xs-12 col-md-5"> {{trans('app.tenders.offers_expired')}} </label>
                                 <div class="col-xs-12 col-md-7">
                                     <div class="form-group clearfix">
-                                        <div class="input-append date" id="dp3" data-date="12-02-2012"
+                                        <div class="input-append date" id="dp3" data-date="{{date('m-d-Y')}}"
+                                             autocomplete="false"
                                              data-date-format="dd-mm-yyyy">
-                                            <input class="effect-9 form-control" id="date" placeholder="mm/dd/yyyy"
+                                            <input class="effect-9 form-control" placeholder="mm/dd/yyyy"
                                                    type="text" name="offer_expired"
                                                    value="{{old('offer_expired',Request::get('offer_expired'))}}">
                                             <span class="add-on"><i class="fa  fa-calendar"></i></span>
@@ -119,7 +132,7 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <div class="card-img"><a href="monaasat-details.html">
+                                        <div class="card-img"><a href="{{uploads_url($tender->org->logo->path)}}" class="open-image">
                                                 <img src="{{thumbnail($tender->org->logo->path)}}"
                                                      alt="{{$tender->org->name}}"></a>
                                         </div>
@@ -173,7 +186,7 @@
                             </div>
                             <div class="card-price clearfix">
                                 <div class="priceshadow one_half"> {{trans('app.tenders.cb')}} <span
-                                            class="text-blue">{{$tender->cb_real_price}} {{trans('app.$')}} </span>
+                                            class="text-blue">{{$tender->cb_downloaded_price}} {{trans('app.$')}} </span>
                                 </div>
                                 <div class="light-white one_half">{{trans('app.tenders.id')}} <span
                                             class="text-blue">{{$tender->id}}</span>
@@ -211,8 +224,16 @@
         // });
     </script>
     <script>
-        $('#dp3',).datepicker();
-        $('#date',).datepicker();
+
+        var date = new Date();
+        // date.setDate(date.getDate());
+
+        $('#dp3',).datepicker({
+            minDate: date,
+        });
+        $('#date',).datepicker({
+            minDate: date,
+        });
     </script>
     <script>
         $(".range-example").asRange({
@@ -242,7 +263,7 @@
                 media: "",          // Link to image file defaults to null
                 facebook: true,     // Turns on Facebook sharing
                 twitter: true,      // Turns on Twitter sharing
-                pinterest: true,    // Turns on Pinterest sharing
+                pinterest: false,    // Turns on Pinterest sharing
                 googleplus: false,   // Turns on Google Plus sharing
                 linkedin: false,     // Turns on LinkedIn sharing
                 position: "right", // Options: Top, Bottom, Left, Right

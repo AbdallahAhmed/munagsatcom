@@ -16,7 +16,8 @@
                                         <input id="name" type="text" class="effect-9 form-control"
                                                placeholder="{{trans('app.fields.name')}}...">
                                         <span class="focus-border"><i></i></span>
-                                        <p class="text-danger" id="ename" style="display: none">{{trans('app.name_min')}}</p>
+                                        <p class="text-danger" id="ename"
+                                           style="display: none">{{trans('app.name_min')}}</p>
                                     </div>
                                 </div>
                                 <div class="new-f-group">
@@ -25,7 +26,8 @@
                                         <input id="tel" type="tel" class="effect-9 form-control"
                                                placeholder="{{trans('app.mobile_number')}}...">
                                         <span class="focus-border"><i></i></span>
-                                        <p class="text-danger" id="enum" style="display: none">{{trans('app.tel_min')}}</p>
+                                        <p class="text-danger" id="enum"
+                                           style="display: none">{{trans('app.tel_min')}}</p>
                                     </div>
                                 </div>
                                 <div class="new-f-group">
@@ -34,7 +36,8 @@
                                                   placeholder="{{trans('app.how_to_help')}}"
                                                   style="height:150px;"></textarea>
                                         <span class="focus-border"><i></i></span>
-                                        <p class="text-danger" id="emess" style="display: none">{{trans('app.message_min')}}</p>
+                                        <p class="text-danger" id="emess"
+                                           style="display: none">{{trans('app.message_min')}}</p>
                                     </div>
                                 </div>
                                 <div class="form-group-lg text-center">
@@ -56,18 +59,14 @@
 
                             </div>
                         </div>
-                        <div class="contact-map">
-                            <iframe width="100%" height="400" frameborder="0" style="border:0"
-                                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDBb9ccsaixjZiG0wH0LxWbaVlt-BAvhKg&#10;    &amp;q=record+stores+in+Seattle"
-                                    allowfullscreen="">
-                            </iframe>
-                        </div>
                     </form>
                     <h1 style="display:none;" id="success">{{trans('app.success_message')}}</h1>
                 </div>
             </div>
         </div>
     </section>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+
     @push('scripts')
         <script>
             $(function () {
@@ -78,20 +77,20 @@
                     $('#emess').hide();
                     var valid = true;
 
-                    if($('#name').val().length < 3) {
+                    if ($('#name').val().length < 3) {
                         $('#ename').show();
                         valid = false;
 
                     }
-                    if($('#tel').val().length < 10){
+                    if ($('#tel').val().length < 10) {
                         $('#enum').show();
                         valid = false;
                     }
-                    if($('#message').val().length < 10){
+                    if ($('#message').val().length < 10) {
                         $('#emess').show();
                         valid = false;
                     }
-                    if(valid){
+                    if (valid) {
                         $.ajaxSetup({
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -101,15 +100,15 @@
                             type: "post",
                             url: "{{route('contact-us')}}",
                             data: {
-                                'name' : $('#name').val(),
+                                'name': $('#name').val(),
                                 'number': $('#tel').val(),
-                                'message':$('#message').val()
+                                'message': $('#message').val()
                             },
                             success: function () {
                                 $('#form').hide(400);
                                 $('#succes').show()
                             },
-                            error:function () {
+                            error: function () {
                                 alert("Internal server error")
                             }
                         })

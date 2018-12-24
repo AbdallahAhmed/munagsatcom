@@ -277,7 +277,7 @@
                 $("input[name='lat']").val(latlng.lat);
                 $("input[name='lng']").val(latlng.lng)
                 map.setView(latlng);
-                $.get('https://nominatim.openstreetmap.org/reverse?accept-language=ar&format=jsonv2&lat=' + latlng.lat + '&lon=' + latlng.lng, function (data) {
+                $.get('https://nominatim.openstreetmap.org/reverse?accept-language={{app()->getLocale()}}&format=jsonv2&lat=' + latlng.lat + '&lon=' + latlng.lng, function (data) {
                     var address = '';
                     if (data.address.road) {
                         address = data.address.road + ', ';
@@ -290,7 +290,7 @@
                 function (e) {
                     $("input[name='lat']").val(e.latlng.lat);
                     $("input[name='lng']").val(e.latlng.lng);
-                    $.get('https://nominatim.openstreetmap.org/reverse?accept-language=ar&format=jsonv2&lat=' + e.latlng.lat + '&lon=' + e.latlng.lng, function (data) {
+                    $.get('https://nominatim.openstreetmap.org/reverse?accept-language={{app()->getLocale()}}&format=jsonv2&lat=' + e.latlng.lat + '&lon=' + e.latlng.lng, function (data) {
                         var address = '';
                         if (data.address.road) {
                             address = data.address.road + ', ';

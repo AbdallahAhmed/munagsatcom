@@ -1,5 +1,7 @@
 @extends('layouts.master')
-
+@push('head')
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"/>
+@endpush
 @section('title',trans('app.centers.centers').' | '.$center->name)
 @section('content')
     <section class="container">
@@ -94,16 +96,10 @@
                                     <div class="one_xlarg">{{$center->address}}</div>
                                 </li>
                             </ul>
-                            <div class="map">
-                                <iframe
-                                        width="100%"
-                                        height="400"
-                                        frameborder="0" style="border:0"
-                                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDBb9ccsaixjZiG0wH0LxWbaVlt-BAvhKg
-    &q=record+stores+in+Seattle" allowfullscreen>
-                                </iframe>
-                            </div>
                         </div>
+                    </div>
+                    <div class="map_container">
+                        <div id="map" style="height: 500px"></div>
                     </div>
                     <!-- part 4-->
                     <div class="details-border">
@@ -166,6 +162,8 @@
         </div>
     </section>
     @push('scripts')
+        <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+
         <script>
             $(function () {
                 $('#contact').on('submit', function (e) {
@@ -208,6 +206,48 @@
                     })
                 })
             })
+            var lat = "30";
+            var lng = "31";
+            var map = L.map('map').setView([lng, lat], 10);
+            var marker;
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            navigator.geolocation.getCurrentPosition(function (location) {
+                var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+                if (marker) {
+                    map.removeLayer(marker);
+                }
+                marker = L.marker(latlng).addTo(map);
+                $("input[name='lat']").val(latlng.lat);
+                $("input[name='lng']").val(latlng.lng)
+                map.setView(latlng);
+                $.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + latlng.lat + '&lon=' + latlng.lng, function (data) {
+                    var address = '';
+                    if (data.address.road) {
+                        address = data.address.road + ', ';
+                    }
+                    address += data.address.city + ', ' + data.address.country;
+                    $("input[name='location']").val(address);
+                });
+            });
+            map.on('click',
+                function (e) {
+                    $("input[name='lat']").val(e.latlng.lat);
+                    $("input[name='lng']").val(e.latlng.lng);
+                    $.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + e.latlng.lat + '&lon=' + e.latlng.lng, function (data) {
+                        var address = '';
+                        if (data.address.road) {
+                            address = data.address.road + ', ';
+                        }
+                        address += data.address.city + ', ' + data.address.country;
+                        $("input[name='location']").val(address);
+                    });
+                    if (marker) {
+                        map.removeLayer(marker);
+                    }
+                    marker = L.marker(e.latlng).addTo(map);
+                });
         </script>
     @endpush
 @endsection

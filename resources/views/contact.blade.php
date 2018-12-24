@@ -1,7 +1,9 @@
 @extends('layouts.master')
 
 @section('title',trans('app.contact_us'))
-
+@push('head')
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"/>
+@endpush
 @section('content')
     <section class="container">
         <div class="res-box">
@@ -67,6 +69,9 @@
 
                             </div>
                         </div>
+                        <div class="map_container" >
+                            <div id="map" style="height: 500px"></div>
+                        </div>
                     </form>
                     <h1 style="display:none;" id="success">{{trans('app.success_message')}}</h1>
                 </div>
@@ -111,7 +116,7 @@
                                 'name': $('#name').val(),
                                 'number': $('#tel').val(),
                                 'message': $('#message').val(),
-                                'email' : $('#email').val()
+                                'email': $('#email').val()
                             },
                             success: function () {
                                 $('#form').hide(400);
@@ -124,6 +129,49 @@
                     }
                 })
             })
+            var lat = "30";
+            var lng = "31";
+            var map = L.map('map').setView([lng, lat], 10);
+            var marker;
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            navigator.geolocation.getCurrentPosition(function (location) {
+                var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+                if (marker) {
+                    map.removeLayer(marker);
+                }
+                marker = L.marker(latlng).addTo(map);
+                $("input[name='lat']").val(latlng.lat);
+                $("input[name='lng']").val(latlng.lng)
+                map.setView(latlng);
+                $.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + latlng.lat + '&lon=' + latlng.lng, function (data) {
+                    var address = '';
+                    if (data.address.road) {
+                        address = data.address.road + ', ';
+                    }
+                    address += data.address.city + ', ' + data.address.country;
+                    $("input[name='location']").val(address);
+                });
+            });
+            map.on('click',
+                function (e) {
+                    $("input[name='lat']").val(e.latlng.lat);
+                    $("input[name='lng']").val(e.latlng.lng);
+                    $.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + e.latlng.lat + '&lon=' + e.latlng.lng, function (data) {
+                        var address = '';
+                        if (data.address.road) {
+                            address = data.address.road + ', ';
+                        }
+                        address += data.address.city + ', ' + data.address.country;
+                        $("input[name='location']").val(address);
+                    });
+                    if (marker) {
+                        map.removeLayer(marker);
+                    }
+                    marker = L.marker(e.latlng).addTo(map);
+                });
+
         </script>
     @endpush
 @endsection

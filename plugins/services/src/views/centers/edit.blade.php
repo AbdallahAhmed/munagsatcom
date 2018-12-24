@@ -283,7 +283,7 @@
                         address = data.address.road + ', ';
                     }
                     address += data.address.city + ', ' + data.address.country;
-                    $("input[name='location']").val(address);
+                    $("input[name='address']").val(address);
                 });
             });
             map.on('click',

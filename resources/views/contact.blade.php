@@ -32,6 +32,14 @@
                                 </div>
                                 <div class="new-f-group">
                                     <div class="form-group clearfix">
+                                        <span class="icony"><i class="fa fa-envelope"></i></span>
+                                        <input id="email" type="email" class="effect-9 form-control"
+                                               placeholder="{{trans('app.fields.email')}}...">
+                                        <span class="focus-border"><i></i></span>
+                                    </div>
+                                </div>
+                                <div class="new-f-group">
+                                    <div class="form-group clearfix">
                                         <textarea id="message" class="effect-9 form-control" rows="5"
                                                   placeholder="{{trans('app.how_to_help')}}"
                                                   style="height:150px;"></textarea>
@@ -102,7 +110,8 @@
                             data: {
                                 'name': $('#name').val(),
                                 'number': $('#tel').val(),
-                                'message': $('#message').val()
+                                'message': $('#message').val(),
+                                'email' : $('#email').val()
                             },
                             success: function () {
                                 $('#form').hide(400);

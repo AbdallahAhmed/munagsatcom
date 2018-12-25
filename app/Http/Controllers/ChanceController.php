@@ -79,7 +79,7 @@ class ChanceController extends Controller
             $query = $query->whereDate('created_at', '=', \Carbon\Carbon::parse($request->get('created_at'))->toDateString());
             $this->data['created_at'] = $request->get('created_at');
         }
-        $this->data['chances'] = $query->paginate(10);
+        $this->data['chances'] = $query->paginate(5);
         $this->data['status'] = [0, 1];//[0,1,2,3,4,5];
         return view('chances.index', $this->data);
     }

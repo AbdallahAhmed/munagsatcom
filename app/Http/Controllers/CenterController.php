@@ -57,7 +57,7 @@ class CenterController extends Controller
             $from = $request->get('price_from', 100);
 
         }
-        $this->data['centers'] = $query->paginate(2);
+        $this->data['centers'] = $query->paginate(5);
         $this->data['services'] = Service::published()->get();
         $this->data['sectors'] = Sector::published()->get();
 

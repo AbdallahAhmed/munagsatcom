@@ -117,7 +117,12 @@
                                 @foreach($units_quantity as $uq)
                                     <div class="meta-row">
 
-                                        <select name="units[]"  class="form-control chosen-rtl pull-left custom-field-name">
+                                        <input style="width: 30%" name="units_names[]"
+                                               class="form-control input-md pull-left custom-field-value"
+                                               placeholder="{{ trans("chances::units.attributes.name") }}"
+                                               value="{{$uq->pivot->name}}">
+
+                                        <select style="width: 40%" name="units[]"  class="form-control chosen-rtl pull-left custom-field-name">
                                             @foreach($units as $unit)
                                                 @if($unit->id == $uq->id)
                                                     <option value="{{$unit->id}}"
@@ -128,7 +133,7 @@
                                             @endforeach
                                         </select>
 
-                                        <input name="units_quantity[]"
+                                        <input style="width: 20%" name="units_quantity[]"
                                                   class="form-control input-md pull-left custom-field-value"
                                                   placeholder="{{ trans("chances::chances.attributes.quantity") }}"
                                                   value="{{$uq->pivot->quantity}}">
@@ -282,14 +287,17 @@
             $(".add-custom-field").click(function () {
 
                 var html = '    <div class="meta-row">\n' +
+                    '<input style="width: 30%" name="units_names[]"\n' +
+                    '                                               class="form-control input-md pull-left custom-field-value"\n' +
+                    '                                               placeholder="{{ trans("chances::units.attributes.name") }}"\n >' +
                     '\n' +
-                    '                                        <select name="units[]"  class="form-control chosen-rtl pull-left custom-field-name">\n' +
+                    '                                        <select style="width: 40%" name="units[]"  class="form-control chosen-rtl pull-left custom-field-name">\n' +
                     '                                            @foreach($units as $unit)\n' +
                     '                                                    <option value="{{$unit->id}}">{{$unit->name}}</option>\n' +
                     '                                            @endforeach\n' +
                     '                                        </select>\n' +
                     '\n' +
-                    '                                        <input name="units_quantity[]"\n' +
+                    '                                        <input style="width: 20%" name="units_quantity[]"\n' +
                     '                                                  class="form-control input-md pull-left custom-field-value"\n' +
                     '                                                  placeholder="{{ trans("chances::chances.attributes.quantity") }}"\n' +
                     '                                                  value="">\n' +

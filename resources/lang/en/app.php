@@ -96,6 +96,9 @@ return [
     'logo_error' => 'Logo should be of type jpg, jpeg, png',
     'check_email' => 'Please check your email address and enter the code sent',
     'company_waiting' => 'Company verified successfully, please wait till the administrators check your company and follow your email',
+    'unit_name' => 'unit name',
+    'add_new_units' => 'Add more units',
+    'add_other_units' => 'Add new units',
     'tenders' => [
         'tenders' => 'Government tenders',
         "details" => 'Tender \'s details',

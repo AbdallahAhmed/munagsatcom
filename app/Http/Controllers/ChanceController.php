@@ -9,6 +9,7 @@ use Dot\Chances\Models\Sector;
 use Dot\Chances\Models\Unit;
 use Dot\Media\Models\Media;
 use Dot\Platform\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
@@ -93,7 +94,7 @@ class ChanceController extends Controller
     public function show(Request $request, $slug)
     {
 
-        $chance = \App\Models\Chance::where('slug','=', $slug)->firstOrFail();
+        $chance = \App\Models\Chance::where('slug', '=', $slug)->firstOrFail();
 
         $this->data['chance'] = $chance;
         return view('chances.chance', $this->data);
@@ -166,21 +167,43 @@ class ChanceController extends Controller
 
             $units = $request->get("units", []);
             $units_quantity = $request->get("units_quantity", []);
+            $units_name = $request->get("units_name", []);
             $sectors = $request->get("sectors", []);
 
             $syncUnit = array();
             foreach ($units as $key => $unit) {
                 if (!$units_quantity[$key] && $unit != null) {
-                    $errors->add("units_names", trans("chances::chances.attributes.reason") . " " . trans("services::centers.required") . ".");
+                    $errors->add("units_names", trans("chances::chances.attributes.quantity") . " " . trans("services::centers.required") . ".");
                     break;
                 }
-                if($unit != "")
-                    $syncUnit[$unit] = ["quantity" => $units_quantity[$key]];
+                if (!$units_name[$key] && $unit != null) {
+                    $errors->add("units_names", trans("chances::chances.attributes.name") . " " . trans("services::centers.required") . ".");
+                    break;
+                }
+                if ($unit != "")
+                    $syncUnit[$unit] = ["quantity" => $units_quantity[$key], "name" => $units_name[$key]];
             }
 
+            $others_units = $request->get("others_units", []);
+            if (count($others_units)) {
+                $others_quantity = $request->get("others_quantity", []);
+                $others_names = $request->get("others_name", []);
+                foreach ($others_units as $key => $unit) {
+                    if(!$unit){
+                        $errors->add("units", trans("chances::units.attributes.name") . " " . trans("services::centers.required") . ".");
+                        break;
+                    }
+                    if (!$others_names[$key] && ($unit != null || !$others_quantity[$key] )) {
+                        $errors->add("units_names", trans("chances::units.attributes.name") . " " . trans("services::centers.required") . ".");
+                        break;
+                    }
+                    if (!$others_quantity[$key] && ($unit != null || !$others_names[$key] )) {
+                        $errors->add("units_quantity", trans("chances::units.attributes.quantity") . " " . trans("services::centers.required") . ".");
+                        break;
+                    }
+                }
+            }
 
-            if ($chance->approved == 0 && $chance->reason == "")
-                $errors->add("reason", trans("chances::chances.attributes.reason") . " " . trans("chances::chances.required") . ".");
             if (!$units)
                 $errors->add("units", trans("chances::chances.attributes.units") . " " . trans("chances::chances.required") . ".");
             /*if (!$sectors)
@@ -189,10 +212,18 @@ class ChanceController extends Controller
                 return redirect()->back()->withErrors($errors)->withInput($request->all());
 
             $chance->save();
+            foreach ($others_units as $key => $unit) {
+                DB::table('other_units')->insert([
+                    'chance_id' => $chance->id,
+                    'name' => $others_names[$key],
+                    'unit' => $unit,
+                    'quantity' => $others_quantity[$key]
+                ]);
+            }
             //$chance->sectors()->sync($sectors);
             $chance->units()->sync($syncUnit);
 
-            return redirect()->route('chances.create', ['id'=>$company->id])->with('status', trans('app.chances.created_successfully'));
+            return redirect()->route('chances.create', ['id' => $company->id])->with('status', trans('app.chances.created_successfully'));
         }
 
         $this->data["sectors"] = Sector::published()->get();

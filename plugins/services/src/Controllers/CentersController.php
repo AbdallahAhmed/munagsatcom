@@ -107,6 +107,7 @@ class CentersController extends Controller
             $center->phone_number = Request::get('phone_number');
             $center->email_address = Request::get('email');
             $center->address = Request::get('address');
+            $center->image_id = Request::get('logo_id');
             $center->lat = Request::get('lat');
             $center->lng = Request::get('lng');
             $center->user_id = Auth::user()->id;
@@ -159,6 +160,7 @@ class CentersController extends Controller
             $center->phone_number = Request::get('phone_number');
             $center->email_address = Request::get('email');
             $center->address = Request::get('address');
+            $center->image_id = Request::get('logo_id');
             $center->lat = Request::get('lat');
             $center->lng = Request::get('lng');
             $center->user_id = Auth::user()->id;

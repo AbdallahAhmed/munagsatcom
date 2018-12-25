@@ -89,7 +89,8 @@
                             </div>
                             <input type="hidden" name="lat" value="{{ @Request::old("lat", $center->lat) }}">
                             <input type="hidden" name="lng" value="{{ @Request::old("lng", $center->lng) }}">
-                            <input type="hidden" name="address" value="{{ @Request::old("address", $center->address) }}">
+                            <input type="hidden" name="address"
+                                   value="{{ @Request::old("address", $center->address) }}">
                             <div class="form-group">
                                 <label for="input-email">{{ trans("app.address") }}</label>
                                 <div class="map_container">
@@ -204,14 +205,40 @@
                             @endif
                         </div>
                     </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-camera"></i>
+                            {{ trans("app.centers.logo") }}
+                            <a class="remove-post-image pull-right" href="javascript:void(0)">
+                                <i class="fa fa-times text-navy"></i>
+                            </a>
+                        </div>
+                        <div class="panel-body form-group">
+                            <div class="row post-image-block">
+                                <input type="hidden" name="logo_id" class="post-image-id"
+                                       value="{{ ($center->image) ? $center->image->id : 0 }}">
 
+                                <a class="change-post-image label" href="javascript:void(0)">
+                                    <i class="fa fa-pencil text-navy"></i>
+                                    {{ trans("posts::posts.change_image") }}
+                                </a>
+
+                                <a class="post-media-preview" href="javascript:void(0)">
+                                    <img width="100%" height="130px" class="post-image"
+                                         src="{{ ($center and @$center->image) ? thumbnail($center->image->path) : assets("admin::default/image.png") }}">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                @foreach(Action::fire("service.form.featured") as $output)
-                    {!! $output !!}
-                @endforeach
-
             </div>
+
+            @foreach(Action::fire("service.form.featured") as $output)
+                {!! $output !!}
+            @endforeach
+
+        </div>
         </div>
 
         </div>

@@ -61,9 +61,8 @@
                             <div class="form-group">
                                 <label for="input-name">{{ trans("app.details") }}</label>
                                 <textarea name="details" rows="4"
-                                       value="{{ @Request::old("details", $service->details) }}"
-                                       class="form-control" id="input-name"
-                                          placeholder="{{ trans("app.details") }}"></textarea>
+                                          class="form-control" id="input-name"
+                                          placeholder="{{ trans("app.details") }}">{{ @Request::old("details", $service->details) }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="input-name">{{ trans("services::services.attributes.price_from") }}</label>

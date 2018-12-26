@@ -75,7 +75,7 @@
                             <div class="form-group">
                                 <label
                                         for="input-phone-number">{{ trans("services::centers.attributes.phone_number") }}</label>
-                                <input name="phone-number" type="text"
+                                <input name="phone_number" type="text"
                                        value="{{ @Request::old("phone_number", $center->phone_number) }}"
                                        class="form-control" id="input-name"
                                        placeholder="{{ trans("services::centers.attributes.phone_number") }}">
@@ -128,7 +128,7 @@
                         <div class="panel-body">
                             <div class="form-group">
                                 <select name="approved" class="form-control chosen-select chosen-rtl">
-                                    @if(!($center && $center->approved == 0))
+                                    @if((!$center && $center->approved == 0))
                                         <option value="0"
                                                 selected="selected">{{trans("services::centers.reject")}}</option>
                                         <option value="1">{{trans("services::centers.approve")}}</option>

@@ -59,7 +59,7 @@
                                        placeholder="{{ trans("categories::categories.attributes.name") }}">
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group hidden">
                                 <label
                                     for="input-slug">{{ trans("categories::categories.attributes.slug") }}</label>
                                 <input name="slug" type="text"
@@ -69,7 +69,7 @@
                             </div>
 
 
-                            <div class="form-group">
+                            <div class="form-group ">
                                 <label
                                     for="input-name">{{ trans("categories::categories.attributes.parent") }}</label>
                                 <select name="parent" class="form-control chosen-select chosen-rtl">
@@ -98,7 +98,7 @@
                 </div>
                 <div class="col-md-4">
 
-                    <div class="panel panel-default">
+                    <div class="panel panel-default hidden">
                         <div class="panel-heading">
                             <i class="fa fa-picture-o"></i>
                             {{ trans("categories::categories.add_image") }}
@@ -126,6 +126,11 @@
         </div>
 
     </form>
+    <style>
+        .hidden{
+            display: none;
+        }
+    </style>
 
 @stop
 

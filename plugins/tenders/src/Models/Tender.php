@@ -24,6 +24,11 @@ class Tender extends Model
     /**
      * @var string
      */
+
+    public $module = 'tenders';
+    /**
+     * @var string
+     */
     protected $table = 'tenders';
     /**
      * @var string
@@ -53,14 +58,26 @@ class Tender extends Model
      * @var array
      */
     protected $creatingRules = [
-        'name' => 'required'
+        'name' => 'required',
+        'cb_downloaded_price' => 'required',
+        'org_id' => 'required',
+        'activity_id' => 'required',
+        'cb_id' => 'required|not_in:0',
+        "type_id" => 'required',
+        'cb_real_price' => 'required'
     ];
 
     /**
      * @var array
      */
     protected $updatingRules = [
-        'name' => 'required'
+        'name' => 'required',
+        'cb_downloaded_price' => 'required',
+        'org_id' => 'required',
+        'activity_id' => 'required',
+        'cb_id' => 'required|not_in:0',
+        "type_id" => 'required',
+        'cb_real_price' => 'required'
     ];
 
     /**
@@ -117,6 +134,7 @@ class Tender extends Model
     {
         return $this->belongsToMany(Media::class, "tenders_places", "tender_id", "file_id");
     }
+
     /**
      * User relation
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

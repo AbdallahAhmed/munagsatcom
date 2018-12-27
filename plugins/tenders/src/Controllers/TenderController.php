@@ -172,7 +172,7 @@ class TenderController extends Controller
             if (!$tender->is_cb_ratio_active) {
                 $tender->cb_downloaded_price = Request::get('cb_downloaded_price');
             } else {
-                $tender->cb_downloaded_price = .01 * $tender->cb_real_price;
+                $tender->cb_downloaded_price = ((int)option("rules_book_percentage", .01)) * $tender->cb_real_price;
             }
 
             $tender->org_id = Request::get('org_id', 0);

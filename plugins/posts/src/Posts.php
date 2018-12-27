@@ -40,15 +40,15 @@ class Posts extends \Dot\Platform\Plugin
 
         parent::boot();
 
-        Navigation::menu("sidebar", function ($menu) {
-
-            if (Auth::user()->can("posts.manage")) {
-
-                $menu->item('posts', trans("posts::posts.posts"), route("admin.posts.show"))
-                    ->order(0)
-                    ->icon("fa-newspaper-o");
-            }
-        });
+//        Navigation::menu("sidebar", function ($menu) {
+//
+//            if (Auth::user()->can("posts.manage")) {
+//
+//                $menu->item('posts', trans("posts::posts.posts"), route("admin.posts.show"))
+//                    ->order(0)
+//                    ->icon("fa-newspaper-o");
+//            }
+//        });
 
         Action::listen("dashboard.featured", function () {
 

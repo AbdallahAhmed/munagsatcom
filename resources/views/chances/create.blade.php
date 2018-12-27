@@ -285,7 +285,7 @@
                     '                                <div class="col-xs-12 col-md-4 new-f-group">\n' +
                     '                                    <div class="form-group clearfix">\n' +
                     '                                        <input type="text" name="others_units[]" class="effect-9 form-control"\n' +
-                    '                                               placeholder="{{trans('app.quantity')}}">\n' +
+                    '                                               placeholder="{{trans('app.the_unit')}}">\n' +
                     '                                    </div>\n' +
                     '                                </div>\n' +
                     '                                <div class="col-xs-12 col-md-4">\n' +

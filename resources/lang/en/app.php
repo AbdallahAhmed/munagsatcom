@@ -99,6 +99,8 @@ return [
     'unit_name' => 'unit name',
     'add_new_units' => 'Add more units',
     'add_other_units' => 'Add new units',
+    'add_center' => 'Add Center',
+    'the_unit' => 'Unit',
     'tenders' => [
         'tenders' => 'Government tenders',
         "details" => 'Tender \'s details',

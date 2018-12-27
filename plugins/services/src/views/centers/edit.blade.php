@@ -1,5 +1,4 @@
 @extends("admin::layouts.master")
-
 @section("content")
 
     <form action="" method="post" class="BlocksForm">
@@ -30,7 +29,7 @@
                 @if ($center)
                     <a href="{{ route("admin.centers.create") }}"
                        class="btn btn-primary btn-labeled btn-main"> <span
-                            class="btn-label icon fa fa-plus"></span>
+                                class="btn-label icon fa fa-plus"></span>
                         {{ trans("services::centers.add_new") }}</a>
                 @endif
 
@@ -67,7 +66,7 @@
                             </div>
                             <div class="form-group">
                                 <label
-                                    for="input-mobile-number">{{ trans("services::centers.attributes.mobile_number") }}</label>
+                                        for="input-mobile-number">{{ trans("services::centers.attributes.mobile_number") }}</label>
                                 <input name="mobile_number" type="text"
                                        value="{{ @Request::old("mobile_number", $center->mobile_number) }}"
                                        class="form-control" id="input-name"
@@ -75,8 +74,8 @@
                             </div>
                             <div class="form-group">
                                 <label
-                                    for="input-phone-number">{{ trans("services::centers.attributes.phone_number") }}</label>
-                                <input name="phone-number" type="text"
+                                        for="input-phone-number">{{ trans("services::centers.attributes.phone_number") }}</label>
+                                <input name="phone_number" type="text"
                                        value="{{ @Request::old("phone_number", $center->phone_number) }}"
                                        class="form-control" id="input-name"
                                        placeholder="{{ trans("services::centers.attributes.phone_number") }}">
@@ -87,6 +86,16 @@
                                        value="{{ @Request::old("email", $center->email_address) }}"
                                        class="form-control" id="input-name"
                                        placeholder="{{ trans("services::centers.attributes.email") }}">
+                            </div>
+                            <input type="hidden" name="lat" value="{{ @Request::old("lat", $center->lat) }}">
+                            <input type="hidden" name="lng" value="{{ @Request::old("lng", $center->lng) }}">
+                            <input type="hidden" name="address"
+                                   value="{{ @Request::old("address", $center->address) }}">
+                            <div class="form-group">
+                                <label for="input-email">{{ trans("app.address") }}</label>
+                                <div class="map_container">
+                                    <div id="map" style="height: 200px"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -119,7 +128,7 @@
                         <div class="panel-body">
                             <div class="form-group">
                                 <select name="approved" class="form-control chosen-select chosen-rtl">
-                                    @if(!($center && $center->approved == 0))
+                                    @if((!$center && $center->approved == 0))
                                         <option value="0"
                                                 selected="selected">{{trans("services::centers.reject")}}</option>
                                         <option value="1">{{trans("services::centers.approve")}}</option>
@@ -132,7 +141,7 @@
                                 <div id="reason"
                                      style="display: @if(($center && $center->approved == 1) || !$center) none @else block @endif; margin-top: 20px">
                                     <label
-                                        for="input-number">{{ trans("services::centers.attributes.reason") }}</label>
+                                            for="input-number">{{ trans("services::centers.attributes.reason") }}</label>
                                     <input name="reason" type="text"
                                            value="{{ $center ? $center->reason : ''}}"
                                            class="form-control" id="input-name"
@@ -196,14 +205,40 @@
                             @endif
                         </div>
                     </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-camera"></i>
+                            {{ trans("app.centers.logo") }}
+                            <a class="remove-post-image pull-right" href="javascript:void(0)">
+                                <i class="fa fa-times text-navy"></i>
+                            </a>
+                        </div>
+                        <div class="panel-body form-group">
+                            <div class="row post-image-block">
+                                <input type="hidden" name="logo_id" class="post-image-id"
+                                       value="{{ ($center->image) ? $center->image->id : 0 }}">
 
+                                <a class="change-post-image label" href="javascript:void(0)">
+                                    <i class="fa fa-pencil text-navy"></i>
+                                    {{ trans("posts::posts.change_image") }}
+                                </a>
+
+                                <a class="post-media-preview" href="javascript:void(0)">
+                                    <img width="100%" height="130px" class="post-image"
+                                         src="{{ ($center and @$center->image) ? thumbnail($center->image->path) : assets("admin::default/image.png") }}">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                @foreach(Action::fire("service.form.featured") as $output)
-                    {!! $output !!}
-                @endforeach
-
             </div>
+
+            @foreach(Action::fire("service.form.featured") as $output)
+                {!! $output !!}
+            @endforeach
+
+        </div>
         </div>
 
         </div>
@@ -215,10 +250,14 @@
 @section("head")
     <link href="{{ assets("admin::tagit") }}/jquery.tagit.css" rel="stylesheet" type="text/css">
     <link href="{{ assets("admin::tagit") }}/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"/>
+
 @stop
 
 @section("footer")
     <script type="text/javascript" src="{{ assets("admin::tagit") }}/tag-it.js"></script>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+
 
     <script>
         $(document).ready(function () {
@@ -249,7 +288,48 @@
                 checkbox.iCheck('uncheck');
                 checkbox.change();
             });
-
+            var lat = "{{ @Request::old('lat', $center->lat) }}" || 30;
+            var lng = "{{ @Request::old('lng', $center->lat) }}" || 31;
+            var map = L.map('map').setView([lng, lat], 10);
+            var marker;
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            navigator.geolocation.getCurrentPosition(function (location) {
+                var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+                if (marker) {
+                    map.removeLayer(marker);
+                }
+                marker = L.marker(latlng).addTo(map);
+                $("input[name='lat']").val(latlng.lat);
+                $("input[name='lng']").val(latlng.lng)
+                map.setView(latlng);
+                $.get('https://nominatim.openstreetmap.org/reverse?accept-language={{app()->getLocale()}}&format=jsonv2&lat=' + latlng.lat + '&lon=' + latlng.lng, function (data) {
+                    var address = '';
+                    if (data.address.road) {
+                        address = data.address.road + ', ';
+                    }
+                    address += data.address.city + ', ' + data.address.country;
+                    $("input[name='address']").val(address);
+                });
+            });
+            map.on('click',
+                function (e) {
+                    $("input[name='lat']").val(e.latlng.lat);
+                    $("input[name='lng']").val(e.latlng.lng);
+                    $.get('https://nominatim.openstreetmap.org/reverse?accept-language={{app()->getLocale()}}&format=jsonv2&lat=' + e.latlng.lat + '&lon=' + e.latlng.lng, function (data) {
+                        var address = '';
+                        if (data.address.road) {
+                            address = data.address.road + ', ';
+                        }
+                        address += data.address.city + ', ' + data.address.country;
+                        $("input[name='address']").val(address);
+                    });
+                    if (marker) {
+                        map.removeLayer(marker);
+                    }
+                    marker = L.marker(e.latlng).addTo(map);
+                });
         });
 
     </script>

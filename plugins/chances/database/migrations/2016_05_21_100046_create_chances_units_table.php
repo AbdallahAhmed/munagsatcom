@@ -16,6 +16,7 @@ class CreateChancesUnitsTable extends Migration
             $table->integer('chance_id');
             $table->integer('unit_id');
             $table->string('quantity');
+            $table->string('name')->nullable();
         });
     }
 

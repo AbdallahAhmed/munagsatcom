@@ -126,7 +126,7 @@
                                         </form>
                                     </div>
                                     <div class="modal-footer text-center">
-                                        <button type="submit" form="upload"
+                                        <button type="submit" id="formApply" form="upload"
                                                 class="uperc padding-md fbutcenter">{{trans('app.chances.apply_done')}}
                                         </button>
                                         <button type="submit" class="uperc padding-md fbutcenter1" data-dismiss="modal">
@@ -197,6 +197,7 @@
             $(function () {
                 $('#upload').on('submit', function (e) {
                     e.preventDefault();
+                    $('#formApply').hide();
                     var form = $(this);
                     var file = $('[name="file"]');
                     var formData = new FormData();
@@ -216,13 +217,16 @@
                         success: function (data) {
                             if (data.success) {
                                 $("#myModal").modal('hide');
+                                $('#formApply').show();
                                 $("#SuccessModal").modal('show');
                             } else {
                                 $('.alert-danger').html(data.errors);
                                 $('.alert-danger').show();
+                                $('#formApply').show();
                             }
                         },
                         error: function () {
+                            $('#formApply').show();
                             alert("Internal Server Error")
                         }
                     })

@@ -57,7 +57,7 @@ class CenterController extends Controller
             $from = $request->get('price_from', 100);
 
         }
-        $this->data['centers'] = $query->paginate(2);
+        $this->data['centers'] = $query->paginate(5);
         $this->data['services'] = Service::published()->get();
         $this->data['sectors'] = Sector::published()->get();
 
@@ -90,6 +90,8 @@ class CenterController extends Controller
             $center->mobile_number = $request->get('mobile_number', "");
             $center->phone_number = $request->get('phone_number', "");
             $center->email_address = fauth()->user()->email;
+            $center->lat = $request->get('lat');
+            $center->lng = $request->get('lng');
             $center->user_id = fauth()->user()->id;
             $center->company_id = $company->id;
             $center->status = $request->get('status', 0);

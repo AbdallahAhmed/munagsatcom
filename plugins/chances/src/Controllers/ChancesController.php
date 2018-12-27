@@ -118,15 +118,20 @@ class ChancesController extends Controller
 
             $units = Request::get("units", []);
             $units_quantity = Request::get("units_quantity", []);
+            $units_name = Request::get("units_names", []);
             $sectors = Request::get("sectors", []);
 
             $syncUnit = array();
             foreach ($units as $key => $unit) {
                 if (!$units_quantity[$key]) {
-                    $this->errors->add("units_names", trans("chances::chances.attributes.reason") . " " . trans("services::centers.required") . ".");
+                    $this->errors->add("units_names", trans("chances::chances.attributes.quantity") . " " . trans("services::centers.required") . ".");
                     break;
                 }
-                $syncUnit[$unit] = ["quantity" => $units_quantity[$key]];
+                if (!$units_name[$key]) {
+                    $this->errors->add("units_names", trans("chances::units.attributes.name") . " " . trans("services::centers.required") . ".");
+                    break;
+                }
+                $syncUnit[$unit] = ["quantity" => $units_quantity[$key], 'name' => $units_name[$key]];
             }
 
             if ($chance->approved == 0 && $chance->reason == "")

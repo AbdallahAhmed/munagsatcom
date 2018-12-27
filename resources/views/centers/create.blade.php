@@ -1,5 +1,7 @@
 @extends('layouts.master')
-
+@push("head")
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"/>
+@endpush
 @section('title',trans('app.centers.centers'))
 @section('content')
     <section class="container">
@@ -28,7 +30,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group-lg row">
+                           {{-- <div class="form-group-lg row">
                                 <label class="col-xs-12 col-md-2">{{trans('app.address')}} </label>
                                 <div class="col-xs-12 col-md-10">
                                     <div class="new-f-group">
@@ -39,7 +41,23 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>--}}
+                            <input type="hidden" name="lat" value="{{ @Request::old("lat") }}">
+                            <input type="hidden" name="lng" value="{{ @Request::old("lng") }}">
+                            <input type="hidden" name="address" value="{{ @Request::old("address") }}">
+                            <div class="form-group-lg row">
+                                <label class="col-xs-12 col-md-2">{{trans('app.address')}} </label>
+                                <div class="col-xs-12 col-md-10">
+                                    <div class="new-f-group">
+                                        <div class="form-group clearfix">
+                                            <div class="map_container">
+                                                <div id="map" style="height: 200px"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
                             <div class="form-group-lg row">
                                 <label class="col-xs-12 col-md-2">{{trans('app.add_logo')}}</label>
                                 <div class="col-xs-12 col-md-4">
@@ -168,10 +186,54 @@
 
     </section>
     @push('scripts')
+        <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
         <script>
+
             $(document).ready(function () {
                 UnoDropZone.init();
             });
+            var lat = "{{ @Request::old('lat') }}" || 30;
+            var lng = "{{ @Request::old('lng') }}" || 31;
+            var map = L.map('map').setView([lng, lat], 10);
+            var marker;
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            navigator.geolocation.getCurrentPosition(function (location) {
+                var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+                if (marker) {
+                    map.removeLayer(marker);
+                }
+                marker = L.marker(latlng).addTo(map);
+                $("input[name='lat']").val(latlng.lat);
+                $("input[name='lng']").val(latlng.lng)
+                map.setView(latlng);
+                $.get('https://nominatim.openstreetmap.org/reverse?accept-language={{app()->getLocale()}}&format=jsonv2&lat=' + latlng.lat + '&lon=' + latlng.lng, function (data) {
+                    var address = '';
+                    if (data.address.road) {
+                        address = data.address.road + ', ';
+                    }
+                    address += data.address.city + ', ' + data.address.country;
+                    $("input[name='address']").val(address);
+                });
+            });
+            map.on('click',
+                function (e) {
+                    $("input[name='lat']").val(e.latlng.lat);
+                    $("input[name='lng']").val(e.latlng.lng);
+                    $.get('https://nominatim.openstreetmap.org/reverse?accept-language={{app()->getLocale()}}&format=jsonv2&lat=' + e.latlng.lat + '&lon=' + e.latlng.lng, function (data) {
+                        var address = '';
+                        if (data.address.road) {
+                            address = data.address.road + ', ';
+                        }
+                        address += data.address.city + ', ' + data.address.country;
+                        $("input[name='address']").val(address);
+                    });
+                    if (marker) {
+                        map.removeLayer(marker);
+                    }
+                    marker = L.marker(e.latlng).addTo(map);
+                });
         </script>
     @endpush
 @endsection

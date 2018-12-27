@@ -22,6 +22,8 @@ class CreateCentersTable extends Migration
             $table->string("mobile_number")->nullable()->index();
             $table->string("phone_number")->nullable()->index();
             $table->string("email_address")->index();
+            $table->string("lng")->nullabe();
+            $table->string("lat")->nullable();
             $table->integer("image_id")->nullable();
             $table->string('status')->default(0)->index();
             $table->string('approved')->default(0)->index();

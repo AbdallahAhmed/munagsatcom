@@ -106,6 +106,10 @@ class CentersController extends Controller
             $center->mobile_number = Request::get('mobile_number');
             $center->phone_number = Request::get('phone_number');
             $center->email_address = Request::get('email');
+            $center->address = Request::get('address');
+            $center->image_id = Request::get('logo_id');
+            $center->lat = Request::get('lat');
+            $center->lng = Request::get('lng');
             $center->user_id = Auth::user()->id;
             $center->status = Request::get('status', 0);
             $center->approved = Request::get('approved');
@@ -155,6 +159,10 @@ class CentersController extends Controller
             $center->mobile_number = Request::get('mobile_number');
             $center->phone_number = Request::get('phone_number');
             $center->email_address = Request::get('email');
+            $center->address = Request::get('address');
+            $center->image_id = Request::get('logo_id');
+            $center->lat = Request::get('lat');
+            $center->lng = Request::get('lng');
             $center->user_id = Auth::user()->id;
             $center->status = Request::get('status', 0);
             $center->approved = Request::get('approved');

@@ -36,7 +36,8 @@ return [
     'attributes' => [
         'name' => 'Unit name',
         "type" => "Type",
-        "status" => "Status"
+        "status" => "Status",
+        'unit' => 'unit'
     ],
 
     "events" => [

@@ -12,6 +12,7 @@ use Dot\Chances\Models\Unit;
 use Dot\Platform\Controller;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\MessageBag;
 use Redirect;
 use Request;
@@ -102,9 +103,42 @@ class ChancesController extends Controller
      */
     public function edit($id)
     {
-
-        $chance = Chance::findOrFail($id);
         $this->errors = new MessageBag();
+        $chance = Chance::findOrFail($id);
+        if(Request::ajax()){
+            $unit = new Unit();
+
+            $unit->name = Request::get("unit_name");
+            $unit->status = 1;
+            $unit->user_id = Auth::user()->id;
+            $name = Request::get('name', "");
+            $quantity = Request::get('quantity', "");
+
+            if($quantity == "")
+                $this->errors->add('quantity',trans("chances::chances.attributes.quantity") . " " . trans("services::centers.required") . ".");
+            if($name == "")
+                $this->errors->add("units_names", trans("chances::units.attributes.unit") . " " . trans("services::centers.required") . ".");
+            if (!$unit->validate() && $unit->errors() != null)
+                $this->errors->merge($unit->errors());
+            if ($this->errors->messages())
+                return response()->json(['success' => false, 'errors' => $this->errors]);
+
+            $unit->save();
+            DB::table('chances_units')->insert([
+                'chance_id' => $id,
+                'unit_id' => $unit->id,
+                'quantity' => $quantity,
+                'name' => $name
+            ]);
+            DB::table('other_units')->where([
+                ['chance_id', $id],
+                ['name', $name],
+                ['quantity', $quantity]
+            ])->delete();
+
+            return response()->json(['success' => true]);
+        }
+        $chance = Chance::findOrFail($id);
         if (Request::isMethod("post")) {
             $chance->name = Request::get("name");
             $chance->number = Request::get("number");
@@ -147,9 +181,19 @@ class ChancesController extends Controller
             if ($this->errors->messages())
                 return Redirect::back()->withErrors($this->errors)->withInput(Request::all());
 
+
             $chance->save();
+            DB::table('chances_units')->where('chance_id', $chance->id)->delete();
+            foreach ($units as $key => $unit) {
+                DB::table('chances_units')->insert([
+                    'chance_id' => $id,
+                    'unit_id' => $unit,
+                    'quantity' => $units_quantity[$key],
+                    'name' => $units_name[$key]
+                ]);
+            }
             $chance->sectors()->sync($sectors);
-            $chance->units()->sync($syncUnit);
+            //$chance->units()->sync($syncUnit);
 
             return Redirect::route("admin.chances.edit", array("id" => $chance->id))
                 ->with("message", trans("chances::chances.events.created"));
@@ -161,6 +205,7 @@ class ChancesController extends Controller
         $this->data["sectors"] = Sector::published()->get();
         $this->data["units"] = Unit::published()->get();
         $this->data['status'] = [0, 1, 2, 3, 4, 5];
+        $this->data['other_units'] = DB::table('other_units')->where('chance_id', $chance->id)->get();
 
         return View::make("chances::edit", $this->data);
     }

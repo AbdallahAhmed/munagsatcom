@@ -113,7 +113,7 @@
 
                         <div class="panel-body">
 
-                            <div class="form-group meta-rows">
+                            <div class="form-group meta-rows xx">
                                 @foreach($units_quantity as $uq)
                                     <div class="meta-row">
 
@@ -122,7 +122,8 @@
                                                placeholder="{{ trans("chances::units.attributes.name") }}"
                                                value="{{$uq->pivot->name}}">
 
-                                        <select style="width: 40%" name="units[]"  class="form-control chosen-rtl pull-left custom-field-name">
+                                        <select style="width: 40%" name="units[]"
+                                                class="form-control chosen-rtl pull-left custom-field-name">
                                             @foreach($units as $unit)
                                                 @if($unit->id == $uq->id)
                                                     <option value="{{$unit->id}}"
@@ -134,20 +135,62 @@
                                         </select>
 
                                         <input style="width: 20%" name="units_quantity[]"
-                                                  class="form-control input-md pull-left custom-field-value"
-                                                  placeholder="{{ trans("chances::chances.attributes.quantity") }}"
-                                                  value="{{$uq->pivot->quantity}}">
+                                               class="form-control input-md pull-left custom-field-value"
+                                               placeholder="{{ trans("chances::chances.attributes.quantity") }}"
+                                               value="{{$uq->pivot->quantity}}">
 
                                         <a class="remove-custom-field pull-right" href="javascript:void(0)">
                                             <i class="fa fa-times text-navy"></i>
                                         </a>
 
                                     </div>
-                                    @endforeach
+                                @endforeach
                             </div>
                         </div>
 
                     </div>
+                    @if(count($other_units) > 0)
+                        <div class="panel panel-default">
+
+                            <div class="panel-heading">
+                                <i class="fa fa-balance-scale"></i>
+                                {{ trans("app.other_units") }}
+                            </div>
+
+                            <div class="panel-body">
+
+                                <div class="form-group meta-rows">
+                                    @foreach($other_units as $unit)
+                                        <div class="meta-row">
+
+                                            <input style="width: 30%" name="[]"
+                                                   class="form-control input-md pull-left custom-field-value"
+                                                   placeholder="{{ trans("chances::units.attributes.name") }}"
+                                                   value="{{$unit->name}}">
+                                            <input style="width: 30%" name="[]"
+                                                   class="form-control input-md pull-left custom-field-value"
+                                                   placeholder="{{ trans("chances::units.attributes.name") }}"
+                                                   value="{{$unit->unit}}">
+
+                                            <input style="width: 20%" name="[]"
+                                                   class="form-control input-md pull-left custom-field-value"
+                                                   placeholder="{{ trans("chances::chances.attributes.quantity") }}"
+                                                   value="{{$unit->quantity}}">
+
+                                            <a class="custom-field pull-right" data-title="{{$unit->unit}}"
+                                               data-name="{{$unit->name}}"
+                                               data-quantity="{{$unit->quantity}}"
+                                               href="javascript:void(0)">
+                                                {{trans('app.create_new')}}<i class="fa fa-plus text-navy"></i>
+                                            </a>
+
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                        </div>
+                    @endif
                 </div>
                 <div class="col-md-4">
                     <div class="panel panel-default">
@@ -265,6 +308,10 @@
             margin: 10px;
         }
 
+        .custom-field {
+            margin: 10px;
+        }
+
         .meta-rows {
 
         }
@@ -308,7 +355,7 @@
                     '\n' +
                     '                                    </div>';
 
-                $(".meta-rows").append(html);
+                $(".xx").append(html);
 
 
             });
@@ -318,6 +365,61 @@
                 var item = $(this);
                 confirm_box("{{ trans("posts::posts.sure_delete_field") }}", function () {
                     item.parents(".meta-row").remove();
+                });
+
+            });
+
+            $("body").on("click", ".custom-field", function () {
+                $('.dd').remove();
+                var item = $(this);
+                var text = "{{ trans("chances::chances.sure_create_unit") }}".replace(':unit', item.data('title'));
+                confirm_box(text, function () {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{route('admin.chances.edit',['chance_id' => $chance->id])}}",
+                        data: {
+                            'chance_id': "{{$chance->id}}",
+                            'quantity': item.data('quantity'),
+                            'name': item.data('name'),
+                            'unit_name': item.data('title')
+                        },
+                        success: function (data) {
+                            if (data.success) {
+                                item.remove();
+                                var html = '    <div class="meta-row">\n' +
+                                    '<input style="width: 30%" name="units_names[]"\n' +
+                                    '                                               class="form-control input-md pull-left custom-field-value" value="' + item.data('name') + '" \n' +
+                                    '                                               placeholder="{{ trans("chances::units.attributes.name") }}"\n >' +
+                                    '\n' +
+                                    '                                       <input style="width: 20%" name="[]" ' +
+                                    '                                       class="form-control input-md pull-left custom-field-value" ' +
+                                    '                                       placeholder="{{ trans("chances::units.attributes.unit") }}" ' +
+                                    '                                       value="' + item.data('title') + '">' +
+                                    '\n' +
+                                    '                                        <input style="width: 20%" name="units_quantity[]" value="' + item.data('quantity') + '" \n' +
+                                    '                                                  class="form-control input-md pull-left custom-field-value"\n' +
+                                    '                                                  placeholder="{{ trans("chances::chances.attributes.quantity") }}"\n' +
+                                    '                                                  value="">\n' +
+                                    '\n' +
+                                    '                                        <a class="remove-custom-field pull-right" href="javascript:void(0)">\n' +
+                                    '                                            <i class="fa fa-times text-navy"></i>\n' +
+                                    '                                        </a>\n' +
+                                    '\n' +
+                                    '                                    </div>';
+
+                                $(".xx").append(html);
+                            } else {
+                                for (var k in data.errors) {
+                                    $("<p class='text-danger dd'>" + data.errors["" + k + ""][0] + "</p>").insertAfter(item.parents(".meta-row"))
+                                }
+                            }
+                        }
+                    })
                 });
 
             });

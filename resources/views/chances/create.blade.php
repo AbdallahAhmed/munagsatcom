@@ -151,7 +151,7 @@
                                 <div class="col-xs-12 col-md-4">
                                     <div class="new-f-group">
                                         <div class="form-group clearfix">
-                                            <input type="text" name="units_names[]" class="effect-9 form-control"
+                                            <input type="text" name="units_name[]" class="effect-9 form-control"
                                                    placeholder="{{trans('app.unit_name')}}">
                                             <span class="focus-border"><i></i></span>
                                         </div>
@@ -186,69 +186,6 @@
                                aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-plus"></i>
                                 {{trans('app.add_other_units')}}
                             </a>
-                            <div class="clearfix collapse" id="collapseExample2" aria-expanded="true" style="">
-                                <div class="form-group-lg row">
-                                    <div class="col-xs-12 col-md-4">
-                                        <div class="new-f-group">
-                                            <div class="form-group clearfix">
-                                                <input type="text" name="units_name[]" class="effect-9 form-control"
-                                                       placeholder="{{trans('app.unit_name')}}">
-                                                <span class="focus-border"><i></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-md-4 new-f-group">
-                                        <div class="form-group clearfix">
-                                            <select type="text" name="units[]" class="effect-9 form-control">
-                                                <option value="{{null}}">{{trans('app.units.unit')}}</option>
-                                                @foreach($units as $unit)
-                                                    <option value="{{$unit->id}}">{{$unit->name}}</option>
-                                                @endforeach
-                                            </select><span class="focus-border"><i></i></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-md-4">
-                                        <div class="new-f-group">
-                                            <div class="form-group clearfix">
-                                                <input type="text" name="units_quantity[]" class="effect-9 form-control"
-                                                       placeholder="{{trans('app.quantity')}}">
-                                                <span class="focus-border"><i></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group-lg row">
-                                    <div class="col-xs-12 col-md-4">
-                                        <div class="new-f-group">
-                                            <div class="form-group clearfix">
-                                                <input type="text" name="units_name[]" class="effect-9 form-control"
-                                                       placeholder="{{trans('app.unit_name')}}">
-                                                <span class="focus-border"><i></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-md-4 new-f-group">
-                                        <div class="form-group clearfix">
-                                            <select type="text" name="units[]" class="effect-9 form-control">
-                                                <option value="{{null}}">{{trans('app.units.unit')}}</option>
-                                                @foreach($units as $unit)
-                                                    <option value="{{$unit->id}}">{{$unit->name}}</option>
-                                                @endforeach
-                                            </select><span class="focus-border"><i></i></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-md-4">
-                                        <div class="new-f-group">
-                                            <div class="form-group clearfix">
-                                                <input type="text" name="units_quantity[]" class="effect-9 form-control"
-                                                       placeholder="{{trans('app.quantity')}}">
-                                                <span class="focus-border"><i></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                         <div class="form-group-lg text-center">
                             <button type="submit" class="uperc padding-md fbutcenter">{{trans('app.chances.publish')}}</button>
@@ -304,7 +241,7 @@
                     '                                <div class="col-xs-12 col-md-4">\n' +
                     '                                    <div class="new-f-group">\n' +
                     '                                        <div class="form-group clearfix">\n' +
-                    '                                            <input type="text" name="units_names[]" class="effect-9 form-control"\n' +
+                    '                                            <input type="text" name="units_name[]" class="effect-9 form-control"\n' +
                     '                                                   placeholder="{{trans('app.unit_name')}}">\n' +
                     '                                            <span class="focus-border"><i></i></span>\n' +
                     '                                        </div>\n' +

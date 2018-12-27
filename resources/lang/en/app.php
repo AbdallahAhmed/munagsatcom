@@ -101,6 +101,8 @@ return [
     'add_other_units' => 'Add new units',
     'add_center' => 'Add Center',
     'the_unit' => 'Unit',
+    'register_chance_apply' => 'You have to register to apply on this chance',
+    'login_chance_apply' => 'If you have an account, please sign in first using your email an password!',
     'tenders' => [
         'tenders' => 'Government tenders',
         "details" => 'Tender \'s details',

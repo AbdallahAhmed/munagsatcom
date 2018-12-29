@@ -50,7 +50,7 @@ class UserController extends Controller
             ];
             if ($request->get('user_type') == 2) {
                 $rules += [
-                    'company_name' => 'required|max:255|min:5|alpha_num',
+                    'company_name' => 'required|max:255|min:2|alpha_num',
                     'sector_id' => 'required|exists:sectors,id',
                     'details' => 'required|max:255',
                     'logo' => 'required|mimes:jpg,png,jpeg',

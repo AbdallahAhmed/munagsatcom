@@ -97,11 +97,11 @@ class UserController extends Controller
                 $company->sector_id = $request->get('sector_id');
 
                 $media = new Media();
-                $company->photo_id = $media->saveFile($request->file('logo'));
+                $company->image_id = $media->saveFile($request->file('logo'));
 
                 $files = array();
                 if ($request->file('files')) {
-                    foreach ($request->file('files') as $file) {
+                    foreach (array_filter($request->file('files')) as $file) {
                         $media = new Media();
                         $files[] = $media->saveFile($file);
                     }

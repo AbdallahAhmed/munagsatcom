@@ -89,7 +89,7 @@ return [
     'unique' => 'The :attribute has already been taken.',
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute format is invalid.',
-
+    'email.unique' => 'A code has been sent to this email, please activate and notice that the duration to activate is only one day',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

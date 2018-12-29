@@ -60,6 +60,13 @@ class UserController extends Controller
 
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
+                $failed = $validator->failed();
+                if(isset($failed['email']['Unique'])){
+                    $user = User::where('email', $request->get('email'))->first();
+                    if($user->status == 1 && $user->code != null){
+                        $validator = Validator::make($request->all(), $rules, ['email.unique' => trans('validation.email.unique')]);
+                    }
+                }
                 return redirect()->back()->withErrors($validator)->withInput($request->all());
             }
             $user = new User();

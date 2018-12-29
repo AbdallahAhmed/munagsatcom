@@ -84,6 +84,7 @@ return array(
     "timezone" => "The :attribute must be a valid zone.",
     "unique" => "قيمة :attribute تم استخدامها مسبقاً.",
     "url" => ":attribute صيغته غير صحيحة.",
+    'email.unique' => 'لقد تم ارسال كود التفعيل الخاص بهذا البريد الالكترونى يرجى التفعيل مع العلم ان مدة سريان كود التفعيل لمدة يوم واحد',
     /*
       |--------------------------------------------------------------------------
       | Custom Validation Language Lines

@@ -29,7 +29,24 @@ a {color: #474748;}
 ul{
     padding-right: 0;
 }
+.fa-2x {
+    font-size: 1.5em;
+}
 /* ---------------- */
+.lang{
+    margin: 15px 0;
+    padding: 9px 0 0px;
+    border-left: 1px solid #c9c9c9;
+    /* padding: 5px; */
+}
+.lang a{
+    padding-top: 0px !important;
+    font-weight: 600;
+    padding: 5px 10px 10px !important;
+    /* font-size: 18px; */
+    color: #868688 !important;
+}
+
 .text-grey{color: #474748;}
 .text-blue{color: #315d90;}
 .light-white{background-color:#f9f9f9;/* height: 353px; */padding: 30px 11px;}

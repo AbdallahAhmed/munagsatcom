@@ -99,6 +99,13 @@
                                     @endforeach
                                 </select>
                             </div>
+
+                            <div class="form-group">
+                                <label>{{ trans("tenders::tenders.attributes.number") }} </label>
+                                <input name="number" type="text"   class="form-control"
+                                       id="tender-goal"
+                                       placeholder="{{ trans("tenders::tenders.attributes.number") }}" value="{{ @Request::old("number", $tender->number) }}">
+                            </div>
                         </div>
                     </div>
 

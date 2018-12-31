@@ -77,6 +77,7 @@ return [
         'files_opened_at' => ' Date and time of opening envelopes',
         'is_cb_ratio_active' => 'Activation of the general ratio to download the booklet of conditions',
         'cb_id'=>'booklet of conditions',
+        'number' => 'Number'
     ],
 
     "events" => [

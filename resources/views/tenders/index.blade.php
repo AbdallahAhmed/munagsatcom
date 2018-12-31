@@ -189,7 +189,7 @@
                                             class="text-blue">{{$tender->cb_downloaded_price}} {{trans('app.$')}} </span>
                                 </div>
                                 <div class="light-white one_half">{{trans('app.tenders.id')}} <span
-                                            class="text-blue">{{$tender->id}}</span>
+                                            class="text-blue">{{$tender->number}}</span>
                                 </div>
                             </div>
                         </div>

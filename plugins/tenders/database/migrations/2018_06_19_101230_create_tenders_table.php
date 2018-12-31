@@ -17,6 +17,7 @@ class CreateTendersTable extends Migration
             $table->string('name')->index();
             $table->text('objective');
             $table->string('slug')->unique();
+            $table->text('number')->default(0);
 
             $table->string('address_get_offer')->nullable();
             $table->string('address_files_open')->nullable();

@@ -6,6 +6,7 @@ use Action;
 use Dot\Chances\Models\Unit;
 use Illuminate\Support\Facades\Auth;
 use Dot\Platform\Controller;
+use Illuminate\Support\MessageBag;
 use Redirect;
 use Request;
 use View;
@@ -14,6 +15,7 @@ use View;
  * Class UnitsController
  * @package Dot\Chances\Controllers
  */
+
 class UnitsController extends Controller
 {
 
@@ -65,15 +67,21 @@ class UnitsController extends Controller
         $ids = Request::get("id");
 
         $ids = is_array($ids) ? $ids : [$ids];
-
+        $error = new MessageBag();
         foreach ($ids as $id) {
 
             $unit = Unit::findOrFail($id);
-
+            if ($unit->chances()->count() > 0) {
+                $error_id [] = $id;
+                $error->add('cat', $unit->name . " لا يمكن حذفه لان يوجد به فرص ");
+                continue;
+            }
             $unit->delete();
             $unit->chances()->detach();
 
         }
+        if ($error->count() > 0)
+            return Redirect::back()->withErrors($error);
 
         return Redirect::back()->with("message", trans("chances::units.events.deleted"));
     }
@@ -138,7 +146,6 @@ class UnitsController extends Controller
 
         return View::make("chances::units.edit", $this->data);
     }
-
 
 
     /**

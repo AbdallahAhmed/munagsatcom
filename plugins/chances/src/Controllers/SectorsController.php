@@ -6,6 +6,7 @@ use Action;
 use Dot\Chances\Models\Sector;
 use Dot\Platform\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\MessageBag;
 use Redirect;
 use Request;
 use View;
@@ -14,6 +15,7 @@ use View;
  * Class SectorsController
  * @package Dot\Chances\Controllers
  */
+
 class SectorsController extends Controller
 {
 
@@ -65,16 +67,21 @@ class SectorsController extends Controller
         $ids = Request::get("id");
 
         $ids = is_array($ids) ? $ids : [$ids];
-
+        $error = new MessageBag();
         foreach ($ids as $id) {
 
             $sector = Sector::findOrFail($id);
-
+            if ($sector->chances()->count() > 0) {
+                $error_id [] = $id;
+                $error->add('cat', $sector->name . " لا يمكن حذفه لان يوجد به فرص ");
+                continue;
+            }
             $sector->delete();
             $sector->chances()->detach();
 
         }
-
+        if ($error->count() > 0)
+            return Redirect::back()->withErrors($error);
         return Redirect::back()->with("message", trans("chances::sectors.events.deleted"));
     }
 

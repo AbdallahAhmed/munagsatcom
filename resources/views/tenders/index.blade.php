@@ -63,7 +63,7 @@
                                         <select name="catgory_id" class="effect-9 form-control">
                                             <option value>{{trans('app.tenders.choose_category')}}</option>
                                             @foreach(\Dot\Categories\Models\Category::all() as $catgory)
-                                                <option value="{{$catgory->id}}" {{old('catgory_id',Request::get('catgory_id'))==$org->id?' selected ':''}}>{{$catgory->name}}</option>
+                                                <option value="{{$catgory->id}}" {{old('catgory_id',Request::get('catgory_id'))==$catgory->id?' selected ':''}}>{{$catgory->name}}</option>
                                             @endforeach
                                         </select><span class="focus-border"><i></i></span>
                                     </div>

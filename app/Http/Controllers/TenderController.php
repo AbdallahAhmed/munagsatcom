@@ -35,7 +35,7 @@ class TenderController extends Controller
         }
 
         if ($request->filled('show_expired') && $request->get('show_expired') == 1) {
-            $query->orWwhere('last_get_offer_at', '<=', Carbon::now());
+            $query->orWhere('last_get_offer_at', '<=', Carbon::now());
         }elseif(!$request->filled('show_expired') || $request->get('show_expired') == 0){
             $query->where('last_get_offer_at', '>=', Carbon::now());
         }

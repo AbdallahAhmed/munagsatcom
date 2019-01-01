@@ -144,7 +144,7 @@ return [
         "address_files_open" => "مكان فتح المظاريف",
         "address_execute" => "مكان  التنفيذ",
         'id'=>' رقم المناقصة',
-        'cb'=>'قيمة الكراسة',
+        'cb'=>' قيمة الكراسة',
         'remaining_hours'=>'الايام الباقية / الساعات اذا كان اقل من 24 ساعة ',
         'not_found'=>'لا يوجد مناقصات حكومية',
         'choose_activity'=>'اختر نشاط',
@@ -152,7 +152,7 @@ return [
         'choose_org'=>'اختر جهة حكومية ',
         'choose_category'=>'اختر تصنيف',
         "cb_real_price" => 'قيمة الكراسة  الفعلى',
-        "cb_downloaded_price" => 'قيمة تحميل كراسة ',
+        "cb_downloaded_price" => 'قيمة تحميل الكراسة ',
         'dates'=>' تواريخ المناقصة',
         'upload_files'=>'تحميل الملفات',
 

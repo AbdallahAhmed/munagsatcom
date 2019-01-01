@@ -67,7 +67,7 @@ class Tender extends Model
      */
     public function getPathAttribute()
     {
-        return route('tenders.details', ['slug' => $this->slug]);
+        return route('tenders.details', ['lang' => app()->getLocale() ?  app()->getLocale() : 'ar','slug' => $this->slug]);
     }
 
     /**

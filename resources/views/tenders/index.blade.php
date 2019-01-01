@@ -191,10 +191,13 @@
                                 </div>
                             </div>
                             <div class="card-price clearfix">
-                                <div class="priceshadow one_half"> {{trans('app.tenders.cb')}} <span
+                                <div class="priceshadow one_thrd"> {{trans('app.tenders.cb')}}<br> <span
+                                            class="text-blue">{{$tender->cb_real_price}} {{trans('app.$')}} </span>
+                                </div>
+                                <div class="priceshadow one_thrd"> {{trans('app.tenders.cb_downloaded_price')}} <br><span
                                             class="text-blue">{{$tender->cb_downloaded_price}} {{trans('app.$')}} </span>
                                 </div>
-                                <div class="light-white one_half">{{trans('app.tenders.id')}} <span
+                                <div class="light-white one_thrd">{{trans('app.tenders.id')}} <br><span
                                             class="text-blue">{{$tender->number}}</span>
                                 </div>
                             </div>

@@ -59,12 +59,13 @@ class Tender extends Model
      */
     protected $creatingRules = [
         'name' => 'required',
-        'cb_downloaded_price' => 'required',
+        'cb_downloaded_price' => 'required|numeric|min:0',
         'org_id' => 'required',
         'activity_id' => 'required',
         'cb_id' => 'required|not_in:0',
         "type_id" => 'required',
-        'cb_real_price' => 'required'
+        'cb_real_price' => 'required|numeric|min:0',
+        'price' => 'required|numeric|min:0'
     ];
 
     /**
@@ -72,12 +73,13 @@ class Tender extends Model
      */
     protected $updatingRules = [
         'name' => 'required',
-        'cb_downloaded_price' => 'required',
+        'cb_downloaded_price' => 'required|numeric|min:0',
         'org_id' => 'required',
         'activity_id' => 'required',
         'cb_id' => 'required|not_in:0',
         "type_id" => 'required',
-        'cb_real_price' => 'required'
+        'cb_real_price' => 'required|numeric|min:0',
+        'price' => 'required|numeric|min:1'
     ];
 
     /**

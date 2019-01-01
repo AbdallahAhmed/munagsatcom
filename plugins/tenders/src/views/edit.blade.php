@@ -68,7 +68,7 @@
 
                             <div class="form-group">
                                 <label>$ {{ trans("tenders::tenders.attributes.price") }} </label>
-                                <input name="price" type="number"  step="0.01" class="form-control" rows="1"
+                                <input name="price" type="number" min="1"  step="0.01" class="form-control" rows="1"
                                           id="tender-goal"
                                           placeholder="{{ trans("tenders::tenders.attributes.price") }}" value="{{ @Request::old("price", $tender->price) }}">
                             </div>

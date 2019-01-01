@@ -80,7 +80,8 @@
                                 <label class="col-xs-12 col-md-3">{{trans('app.tenders.cb_real_price')}} </label>
                                 <div class="col-xs-12 col-md-9">
                                     <div class="range">
-                                        <input class="range-example" type="text" min="1" max="{{(int)$cb_real_price_max}}"
+                                        <input class="range-example" type="text" min="1"
+                                               max="{{(int)$cb_real_price_max}}"
                                                value="{{Request::get('cb_real_price')}}"
                                                name="cb_real_price" step="{{(int)($cb_real_price_max/100)+1}}">
                                     </div>
@@ -91,9 +92,11 @@
                                 <label class="col-xs-12 col-md-3">{{trans('app.tenders.cb_downloaded_price')}} </label>
                                 <div class="col-xs-12 col-md-9">
                                     <div class="range">
-                                        <input class="range-example" type="text" min="1" max="{{(int)$cb_downloaded_price_max}}"
+                                        <input class="range-example" type="text" min="1"
+                                               max="{{(int)$cb_downloaded_price_max}}"
                                                value="{{Request::get('cb_downloaded_price')}}"
-                                               name="cb_downloaded_price" step="{{(int)($cb_downloaded_price_max/100)+1}}">
+                                               name="cb_downloaded_price"
+                                               step="{{(int)($cb_downloaded_price_max/100)+1}}">
                                     </div>
                                 </div>
                             </div>
@@ -132,7 +135,8 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <div class="card-img"><a href="{{uploads_url($tender->org->logo->path)}}" class="open-image">
+                                        <div class="card-img"><a href="{{uploads_url($tender->org->logo->path)}}"
+                                                                 class="open-image">
                                                 <img src="{{thumbnail($tender->org->logo->path)}}"
                                                      alt="{{$tender->org->name}}"></a>
                                         </div>
@@ -142,7 +146,9 @@
                                             <a href="{{$tender->path}}" title="{{$tender->name}}">
                                                 <h2>{{$tender->name}}</h2>
                                             </a>
-                                            <p>{{$tender->objective}}</p>
+                                            <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 500px;">
+                                                {{$tender->objective}}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

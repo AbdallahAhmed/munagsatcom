@@ -36,7 +36,7 @@ class TenderController extends Controller
 
         if ($request->filled('show_expired') && $request->get('show_expired') == 1) {
             $query->orWhere('last_get_offer_at', '<=', Carbon::now());
-        }elseif(!$request->filled('show_expired') || $request->get('show_expired') == 0){
+        } elseif (!$request->filled('show_expired') || $request->get('show_expired') == 0) {
             $query->where('last_get_offer_at', '>=', Carbon::now());
         }
 
@@ -48,14 +48,14 @@ class TenderController extends Controller
 
         if ($request->filled('cb_downloaded_price')) {
             $price = explode(',', $request->get('cb_downloaded_price'));
-            $query->where('cb_downloaded_price', '>=', $price[0]);
-            $query->where('cb_downloaded_price', '<=', $price[1]);
+            $query->where('cb_downloaded_price', '>=', min($price));
+            $query->where('cb_downloaded_price', '<=', max($price));
         }
 
         if ($request->filled('cb_real_price')) {
             $price = explode(',', $request->get('cb_real_price'));
-            $query->where('cb_real_price', '>=', $price[0]);
-            $query->where('cb_real_price', '<=', $price[1]);
+            $query->where('cb_real_price', '>=', min($price));
+            $query->where('cb_real_price', '<=', max($price));
         }
 
         if ($request->filled('catgory_id')) {
@@ -64,8 +64,8 @@ class TenderController extends Controller
             });
         }
         $this->data['tenders'] = $query->orderBy('created_at', 'DESC')->paginate(5);
-        $this->data['cb_downloaded_price_max']=Tender::max('cb_downloaded_price');
-        $this->data['cb_real_price_max']=Tender::max('cb_real_price');
+        $this->data['cb_downloaded_price_max'] = Tender::max('cb_downloaded_price');
+        $this->data['cb_real_price_max'] = Tender::max('cb_real_price');
         return view('tenders.index', $this->data);
     }
 

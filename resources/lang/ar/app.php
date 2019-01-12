@@ -164,6 +164,7 @@ return [
     'close'=>'إغلاق',
     'cb_price'=>'سعر كراسة الشروط ',
     'current_points'=>'نقاطك الحالية ',
+    'spent_points'=>'النقاط التي أنفقت ',
     'points_after_buy'=>'نقاطك بعد الشراء ',
     'please_recharge'=>'رجاء شحن نقاطك ',
     'events' => [

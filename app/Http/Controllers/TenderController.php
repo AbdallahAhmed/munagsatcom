@@ -86,6 +86,7 @@ class TenderController extends Controller
 
     /**
      * POST {lang?}/tenders/{id}/buycb
+     * @route  tenders.buy
      * @param Request $request
      * @param $id
      * @return string
@@ -112,6 +113,7 @@ class TenderController extends Controller
         $points = $user->points;
 
         $user->points = $after_points;
+        $user->spent_points = $user->spent_points - $tender->points;
         $user->save();
 
 
@@ -133,6 +135,7 @@ class TenderController extends Controller
 
     /**
      * GET {lang?}/tenders/{id}/download
+     * @route tenders.download
      * @param Request $request
      * @param $id
      * @return string

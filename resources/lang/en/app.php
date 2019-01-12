@@ -149,6 +149,8 @@ return [
     'cb_price'=>'Price of conditions booklet',
     'current_points'=>'Your current points',
     'points_after_buy'=>'Your points after purchase ',
+    'spent_points'=>'Spent points',
+    'please_recharge'=>'Please charge your points',
     'fields' => [
         "username" => "Username",
         "password" => "Password",

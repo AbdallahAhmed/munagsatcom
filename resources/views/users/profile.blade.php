@@ -8,10 +8,30 @@
             @include('users.sidebar')
             <div class="col-xs-12 col-md-9">
                 <div class="profile-box">
+
+                    <div class="profile-circle">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="circle-item">
+                                    <p>{{trans('app.current_points')}}</p>
+                                    <div class="num">{{$user->points}}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="circle-item">
+                                    <p>{{trans('app.spent_points')}}</p>
+                                    <div class="num"> {{$user->spent_points}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="profile-item">
                         <div class="row">
                             <div class="col-md-3">
-                                <div class="card-img"><img src="{{$user->photo ? thumbnail($user->photo->path, 'single_center') : asset('assets/images/default-avater.jpeg')}}" alt=""></div>
+                                <div class="card-img"><img
+                                            src="{{$user->photo ? thumbnail($user->photo->path, 'single_center') : asset('assets/images/default-avater.jpeg')}}"
+                                            alt=""></div>
                             </div>
                             <div class="col-md-9">
                                 <div class="details-item">

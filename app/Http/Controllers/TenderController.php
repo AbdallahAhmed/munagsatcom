@@ -80,6 +80,8 @@ class TenderController extends Controller
     public function details(Request $request, $slug)
     {
         $this->data['tender'] = Tender::with(['org', 'org.logo', 'activity', 'categories', 'type'])->published()->where('slug', $slug)->first();
+        $this->data['tender']->views++;
+        $this->data['tender']->save();
         return view('tenders.details', $this->data);
     }
 
@@ -128,6 +130,8 @@ class TenderController extends Controller
 
         $tender->buyers()->attach(fauth()->id(), ['points' => $tender->points]);
 
+        $tender->downloaded++;
+        $tender->save();
 
         return redirect()->route('tenders.download', ['id' => $tender->id, 'lang' => app()->getLocale()]);
     }

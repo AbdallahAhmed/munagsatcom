@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{trans('app.name')}} | @yield("title")</title>
-    @if(app()->getLocale() == 'ar')
+    @if(app()->getLocale() != 'en')
     <link href="{{asset('/assets')}}/css/maincss.css" rel="stylesheet">
     @else
     <link href="{{asset('/assets')}}/css/maincss-en.css" rel="stylesheet">

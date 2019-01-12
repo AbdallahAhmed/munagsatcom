@@ -16,8 +16,8 @@
                             <div class="col-md-3 center">
 
                                 <div class="">
-                                        <img src="{{$center->image?thumbnail($center->image->path, 'single_center'):asset('images/default-image.png')}}"
-                                             alt="{{$center->name}}">
+                                    <img src="{{$center->image?thumbnail($center->image->path, 'single_center'):asset('images/default-image.png')}}"
+                                         alt="{{$center->name}}">
                                 </div>
                             </div>
                             <div class="col-md-9">
@@ -62,7 +62,7 @@
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th scope="col">{{trans('app.services.name')}}</th>
+                                    <th scope="col" style="min-width: 100px;">{{trans('app.services.name')}}</th>
                                     <th scope="col">{{trans('app.details')}}</th>
                                     <th scope="col"> {{trans('app.price')}}</th>
                                 </tr>
@@ -70,8 +70,8 @@
                                 <tbody>
                                 @foreach($center->services as $service)
                                     <tr>
-                                        <td><h3>{{$service->name}}</h3></td>
-                                        <td><p>{{$service->details}}</p></td>
+                                        <td style="    min-width: 100px;"><h3>{{$service->name}}</h3></td>
+                                        <td><p class="break">{{strlen(trim($service->details))!=0?$service->details:'---'}}</p></td>
                                         <td>{{$service->price_to." ".trans('app.reyal')." ".trans('app.saudi')}}</td>
                                     </tr>
                                 @endforeach
@@ -85,11 +85,11 @@
                             <ul>
                                 <li class="clearfix">
                                     <div class="one_xsmall title">{{trans('app.phone_number')}}</div>
-                                    <div class="one_xlarg tel"> {{$center->phone_number}}</div>
+                                    <div class="one_xlarg tel"> {{$center->phone_number or '---'}}</div>
                                 </li>
                                 <li class="clearfix">
                                     <div class="one_xsmall title">{{trans('app.mobile_number')}}</div>
-                                    <div class="one_xlarg tel"> {{$center->mobile_number}}</div>
+                                    <div class="one_xlarg tel"> {{$center->mobile_number or '---'}}</div>
                                 </li>
                                 <li class="clearfix">
                                     <div class="one_xsmall title"> {{trans('app.address')}}</div>
@@ -162,6 +162,13 @@
         </div>
     </section>
     @push('scripts')
+        <style>
+            .break{
+
+                word-break: break-all;
+
+            }
+        </style>
         <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
 
         <script>

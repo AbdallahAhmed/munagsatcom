@@ -88,7 +88,7 @@
                                 @foreach($chance->units as $unit)
                                     <tr>
                                         <td>
-                                            <h3>{{$unit->name}}</h3>
+                                            <h3 style="text-align: center;">{{$unit->name }}</h3>
                                             <p>{{$unit->details}}</p>
                                         </td>
                                         <td>{{$unit->pivot->quantity}}</td>

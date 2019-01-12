@@ -80,7 +80,7 @@
                         <div class="row">
                             <div class="col-md-5 padt">{{trans('app.tenders.remaining_hours')}}</div>
                             <div class="col-md-6">
-                                <div class="progress ">
+                                <div class="progress">
                                     <div class="progress-bar" role="progressbar"
                                          aria-valuenow="{{$tender->progress}}"
                                          aria-valuemin="0"
@@ -144,13 +144,31 @@
                     </div>
 
                     <div class="download-box">
-                        <h3 class="text-center"><span>{{trans('app.tenders.upload_files')}}</span></h3>
+                        {{--<h3 class="text-center"><span>{{trans('app.tenders.upload_files')}}</span></h3>--}}
                         @if(!fauth()->check())
                             <p>{{trans('app.register_purchase_tender')}}<a
                                         href="{{route('register')}}"> {{trans('app.register_now')}} </a></p>
                             <p>{{trans('app.account_register')}}<a
                                         href="{{route('login',['lang'=>app()->getLocale()])}}"> {{trans('app.login')}} </a>
                             </p>
+                        @else
+
+                            <div class="row">
+                                <div class="col" style="text-align: center">
+                                    @if($tender->is_bought)
+                                        <a type="button"
+                                           href="{{route('tenders.download', ['id' => $tender->id, 'lang' => app()->getLocale()])}}"
+                                           class="btn btn-default">
+                                            {{trans('app.tenders.download')}}
+                                        </a>
+                                    @else
+                                        <a type="button" class="btn btn-default" data-toggle="modal"
+                                           data-target="#buycb">
+                                            {{trans('app.tenders.buy')}}
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
                         @endif
                     </div>
                 </div>
@@ -158,8 +176,50 @@
             </div>
             <!-------------- End::content -------------->
         </div>
+
     </section>
+    @if(fauth()->check()&&!$tender->is_bought)
+        <style>
+            .modal-header .close {
+                margin-top: -24px;
+            }
+        </style>
+        <div class="modal fade" id="buycb" tabindex="-1" role="dialog" aria-labelledby="buycb" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle"> {{trans('app.tenders.buy')}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p> {{trans('app.cb_price')}} : {{ $tender->points }} {{trans('app.point')}}</p>
+                        <hr>
+                        <p> {{ trans('app.current_points') }} : {{ fauth()->user()->points }} {{trans('app.point')}}</p>
+                        <hr>
+                        <p class="{{fauth()->user()->points - $tender->points<0?'text-danger':''}}"> {{ trans('app.points_after_buy') }}
+                            : {{ fauth()->user()->points - $tender->points }} {{trans('app.point')}}</p>
+                        <p class="text-danger">{{fauth()->user()->points - $tender->points<0?trans('app.please_recharge'):''}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <form action="{{route('tenders.buy',['id'=>$tender->id,'lang'=>app()->getLocale()])}}"
+                              method="post">
+                            {{csrf_field()}}
+                            <button type="submit"
+                                    class="btn btn-primary" {{fauth()->user()->points - $tender->points<0?'disabled':''}}>{{trans('app.tenders.buy')}}</button>
+                            <button type="button" class="btn btn-secondary"
+                                    data-dismiss="modal">{{trans('app.close')}}</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 @endsection
+
+
 
 @push('scripts')
     <script>
@@ -171,32 +231,6 @@
             each_bar_width = $(this).attr('aria-valuenow');
             $(this).width(each_bar_width + '%');
         });
-    </script>
-    <script>
-        $('#dp3',).datepicker();
-        $('#date',).datepicker();
-    </script>
-    <script>
-        $(".range-example").asRange({
-            range: true,
-            limit: false,
-            //tip: {
-//    active: 'onMove'
-//    },
-            tip: true,
-            max: 10000,
-            min: 100,
-            value: true,
-            step: 10,
-            keyboard: true,
-            replaceFirst: true, // false, 'inherit', {'inherit': 'default'}
-            scale: true,
-            format(value) {
-                return value;
-            }
-        });
-    </script>
-    <script>
         $(document).ready(function () {
             $(".share").hideshare({
                 link: "",           // Link to URL defaults to document.URL
@@ -212,5 +246,6 @@
             });
         });
     </script>
+
 
 @endpush

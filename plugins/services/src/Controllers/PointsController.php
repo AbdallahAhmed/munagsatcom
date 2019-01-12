@@ -15,6 +15,7 @@ use View;
  * Class ServicesController
  * @package Dot\Services\Controllers
  */
+
 class PointsController extends Controller
 {
 
@@ -24,15 +25,16 @@ class PointsController extends Controller
      */
     protected $data = [];
     protected $errors;
+
     public function index()
     {
 
-        if(Request::isMethod("post")){
+        if (Request::isMethod("post")) {
             $this->errors = new MessageBag();
-            if(Request::get("option")["rules_book_percentage"] > 100 or Request::get("option")["rules_book_percentage"] < 0){
+            if (Request::get("option")["rules_book_percentage"] > 100 or Request::get("option")["rules_book_percentage"] < 0) {
                 $this->errors->add("percentage", trans("rules_book_percentage_error"));
             }
-            if($this->errors->isNotEmpty())
+            if ($this->errors->isNotEmpty())
                 return Redirect::back()->withErrors($this->errors)->withInput(Request::all());
 
             foreach (Request::get("option") as $name => $value) {
@@ -44,6 +46,7 @@ class PointsController extends Controller
         $this->data['rules_book_add'] = option("rules_book_add");
         $this->data['service_center_add'] = option("service_center_add");
         $this->data['point_per_reyal'] = option("point_per_reyal");
+        $this->data['new_user_points'] = option("new_user_points", 0);
         return view("services::points", $this->data);
     }
 

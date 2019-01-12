@@ -18,10 +18,12 @@ class Localization
     {
 
         $lang = $request->route()->parameter('lang');
+        if ($lang != null && !($lang == "ar" || $lang == "en")) {
+            abort(404);
+        }
         Carbon::setLocale($lang);
         \Carbon\Carbon::setLocale($lang);
         app()->setLocale($lang);
-
         $request->route()->forgetParameter('lang');
         app('url')->defaults(['lang' => $lang]);
 

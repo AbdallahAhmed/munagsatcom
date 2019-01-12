@@ -141,7 +141,14 @@ return [
         "cb_downloaded_price" => 'The value of a booklet download ',
         'dates' => 'Date',
         'upload_files' => 'Upload files',
+        'download'=>'Download booklet',
+        'buy'=>'Buy booklet'
     ],
+    'point'=>'Point',
+    'close'=>'Close',
+    'cb_price'=>'Price of conditions booklet',
+    'current_points'=>'Your current points',
+    'points_after_buy'=>'Your points after purchase ',
     'fields' => [
         "username" => "Username",
         "password" => "Password",

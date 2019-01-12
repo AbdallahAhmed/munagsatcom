@@ -39,6 +39,10 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
     Route::get('verify', 'UserController@confirm')->name('user.confirm');
     Route::any('verify/resend', 'UserController@confirmResend')->name('user.confirm-resend');
     Route::group(['middleware' => ['fauth']], function () {
+
+
+        Route::post('tenders/{id}/buycb', 'TenderController@buyCB')->name('tenders.buy');
+        Route::get('tenders/{id}/download', 'TenderController@download')->name('tenders.download');
         Route::get('user/update', 'UserController@show')->name('user.show');
         Route::post('user/update', 'UserController@update')->name('user.update');
         Route::get('user/search/companies', 'UserController@searchCompanies')->name('user.company.search');

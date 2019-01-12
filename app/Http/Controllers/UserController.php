@@ -79,6 +79,7 @@ class UserController extends Controller
             $user->role_id = 2;
             $user->backend = 0;
             $user->status = 0;
+            $user->points = option('new_user_points',0);
             $user->code = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
             $user->type = $request->get('user_type', 1);
 

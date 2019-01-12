@@ -50,6 +50,10 @@
                                         <label for="site_name">{{trans("services::points.point_per_reyal")}}</label>
                                         <input name="option[point_per_reyal]" type="text" required="required" value="{{$point_per_reyal}}" class="form-control" id="point_per_reyal" placeholder="{{trans("services::points.point_per_reyal")}}">
                                     </div>
+                                    <div class="form-group">
+                                        <label for="new_user_points">{{trans("services::points.new_user_points")}}</label>
+                                        <input name="option[new_user_points]" type="number" required="required" value="{{$new_user_points}}" class="form-control" id="new_user_points" placeholder="{{trans("services::points.new_user_points")}}">
+                                    </div>
                                 </div>
                             </div>
                         </div>

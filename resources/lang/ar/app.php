@@ -155,9 +155,17 @@ return [
         "cb_downloaded_price" => 'قيمة تحميل الكراسة ',
         'dates'=>' تواريخ المناقصة',
         'upload_files'=>'تحميل الملفات',
+        'download'=>'تحميل كراسة الشروط',
+        'buy'=>'شراء كراسة الشروط'
 
     ],
+    'point'=>'نقطة',
     '$'=>'ريال سعودى',
+    'close'=>'إغلاق',
+    'cb_price'=>'سعر كراسة الشروط ',
+    'current_points'=>'نقاطك الحالية ',
+    'points_after_buy'=>'نقاطك بعد الشراء ',
+    'please_recharge'=>'رجاء شحن نقاطك ',
     'events' => [
         'successfully_register' => 'مرحبا تم التسجيل بنجاح ',
         'password_changed' => 'تم تغير كلمة المرور بنجاح'

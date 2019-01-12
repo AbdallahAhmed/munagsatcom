@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tender;
+use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -80,5 +81,77 @@ class TenderController extends Controller
     {
         $this->data['tender'] = Tender::with(['org', 'org.logo', 'activity', 'categories', 'type'])->published()->where('slug', $slug)->first();
         return view('tenders.details', $this->data);
+    }
+
+
+    /**
+     * POST {lang?}/tenders/{id}/buycb
+     * @param Request $request
+     * @param $id
+     * @return string
+     */
+    public function buyCB(Request $request, $id)
+    {
+        $tender = Tender::findOrFail($id);
+        if (!$tender) {
+            abort(404);
+        }
+
+        $user = fauth()->user();
+
+        if ($tender->is_bought) {
+            return 'Can\'t buy this twice.';
+        }
+
+        if ($tender->points > $user->points) {
+            return 'Can\'t buy this you have\'nt points enough.';
+        }
+
+        $after_points = $user->points - $tender->points;
+
+        $points = $user->points;
+
+        $user->points = $after_points;
+        $user->save();
+
+
+        Transaction::create([
+            'before_points' => $points,
+            'after_points' => $after_points,
+            'points' => $tender->points,
+            'object_id' => $tender->id,
+            'user_id' => fauth()->id(),
+            'action' => 'tenders.buy'
+        ]);
+
+        $tender->buyers()->attach(fauth()->id(), ['points' => $tender->points]);
+
+
+        return redirect()->route('tenders.download', ['id' => $tender->id, 'lang' => app()->getLocale()]);
+    }
+
+
+    /**
+     * GET {lang?}/tenders/{id}/download
+     * @param Request $request
+     * @param $id
+     * @return string
+     */
+    public function download(Request $request, $id)
+    {
+        $tender = Tender::findOrFail($id);
+        if (!$tender) {
+            abort(404);
+        }
+
+        if (!$tender->is_bought) {
+            abort(404);
+        }
+
+        if (!file_exists(uploads_url($tender->cb->path))) {
+            return 'كراسة الشروط تم مسحها';
+        }
+
+        return response()->download(uploads_url($tender->cb->path), $tender->name, ['Content-Type: application/pdf']);
     }
 }

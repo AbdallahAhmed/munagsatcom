@@ -115,7 +115,7 @@ class TenderController extends Controller
         $points = $user->points;
 
         $user->points = $after_points;
-        $user->spent_points = $user->spent_points - $tender->points;
+        $user->spent_points = $user->spent_points + $tender->points;
         $user->save();
 
 

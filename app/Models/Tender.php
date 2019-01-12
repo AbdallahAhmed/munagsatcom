@@ -116,10 +116,10 @@ class Tender extends Model
      */
     public function getIsBoughtAttribute()
     {
-        if ($this->IsBought_cache) {
-            return $this->IsBought_cache;
+        if (isset($this->original['IsBought_cache'])) {
+            return $this->original['IsBought_cache'];
         }
-        return $this->IsBought_cache = $this->buyers()->where('user_id', fauth()->id())->count() > 0;
+        return $this->original['IsBought_cache'] = $this->buyers()->where('user_id', fauth()->id())->count() > 0;
     }
 
 }

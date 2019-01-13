@@ -133,6 +133,39 @@ class UserController extends Controller
     }
 
     /**
+     * POST {lang?}/user/profile-update
+     * @route user.profile.update
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function profileUpdate(Request $request)
+    {
+        $rules = [
+            'first_name' => 'required|alpha|min:3',
+            'last_name' => 'required|alpha|min:3',
+            'phone_number' => 'min:10',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
+
+        $user = fauth()->user();
+        if ($request->file('logo')) {
+            $media = new Media();
+            $user->photo_id = $media->saveFile($request->file('logo'));
+        }
+        $user->first_name = $request->get('first_name');
+        $user->last_name = $request->get('last_name');
+        $user->phone_number = $request->get('phone_number');
+
+        $user->save();
+        return redirect()->back()->with('message', trans('app.profile_updated'));
+    }
+
+    /**
      * GET/POST {lang}/login
      * @route login
      * @param Request $request

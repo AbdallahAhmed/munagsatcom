@@ -422,3 +422,11 @@ img.mfp-img {
 .tooltip {
     z-index: 500;
 }
+
+html[dir="rtl"] div.text-left {
+     text-align: left;
+}
+
+html[dir="ltr"] div.text-left {
+    text-align: right;
+}

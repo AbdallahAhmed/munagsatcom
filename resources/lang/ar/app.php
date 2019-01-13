@@ -174,9 +174,11 @@ return [
     'please_recharge'=>'رجاء شحن نقاطك ',
     'date_transactions'=>'تاريخ العملية',
     'no_transactions'=>'لا يوجد عملية فى هذا الشهر',
+    'profile_update'=>'تحديت بياناتك ',
+    'profile_updated'=>'تم تحديث بياناتك',
     'events' => [
         'successfully_register' => 'مرحبا تم التسجيل بنجاح ',
-        'password_changed' => 'تم تغير كلمة المرور بنجاح'
+        'password_changed' => 'تم تغير كلمة المرور بنجاح',
     ],
     'sectors' => [
         'sector' => 'القطاع',
@@ -260,6 +262,7 @@ return [
         5 => 'مرفوضة من الإدارة'
     ],
     'add_logo' => 'اضافة صورة',
+    'add_logo_new' => ' اضافة صورة  جديدة',
     'upload_logo' => 'تحميل صورة',
     'file' => 'مرفق',
     'file_name' => 'اسم الملف',

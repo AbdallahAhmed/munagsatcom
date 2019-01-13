@@ -27,6 +27,11 @@
                     </div>
 
                     <div class="profile-item">
+                        @if (session('message'))
+                            <div class="alert alert-success">
+                                {{ session('message') }}
+                            </div>
+                        @endif
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="card-img"><img
@@ -51,13 +56,14 @@
 
                                     </ul>
                                 </div>
-                                {{--<div class="text-left">
+                                <div class="text-left">
                                     <div class="form-group-lg">
-                                        <button type="submit" form="" class="uperc padding-md fbutcenter"> تحديث
-                                            بيانات
+                                        <button type="button" data-toggle="modal"
+                                                data-target="#profile_updates" class="uperc padding-md fbutcenter">
+                                            {{trans('app.profile_update')}}
                                         </button>
                                     </div>
-                                </div>--}}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -111,7 +117,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                @if ($errors->any())
+                                @if ($errors->any() && !Request::old('first_name'))
                                     <div class="alert alert-danger">
                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                                             &times;
@@ -137,41 +143,168 @@
             </div>
         </div>
     </section>
-    @push('scripts')
-        <script>
-            $(document).ready(function () {
-                UnoDropZone.init();
-            });
-        </script>
+    <div class="modal fade" id="profile_updates" tabindex="-1" role="dialog" aria-labelledby="profile_updates"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle"> {{trans('app.profile_update')}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{route('user.profile.update')}}" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        {{csrf_field()}}
 
-        <script>
-            $(".toggle-password").click(function () {
-                $(this).toggleClass("fa-eye fa-eye-slash");
-                var input = $($(this).attr("toggle"));
-                if (input.attr("type") == "password") {
-                    input.attr("type", "text");
-                } else {
-                    input.attr("type", "password");
-                }
-            });
-            $(".toggle-password2").click(function () {
-                $(this).toggleClass("fa-eye fa-eye  fa-eye-slash");
-                var input = $($(this).attr("toggle"));
-                if (input.attr("type") == "password") {
-                    input.attr("type", "text");
-                } else {
-                    input.attr("type", "password");
-                }
-            });
-            $(".toggle-password3").click(function () {
-                $(this).toggleClass("fa-eye fa-eye fa-eye-slash");
-                var input = $($(this).attr("toggle"));
-                if (input.attr("type") == "password") {
-                    input.attr("type", "text");
-                } else {
-                    input.attr("type", "password");
-                }
-            });
-        </script>
-    @endpush
+                        <div class="">
+
+                            <div class="feildcont">
+                                <div class="form-group-lg row">
+                                    @if ($errors->any()&&Request::old('first_name',null))
+                                        <div class="alert alert-danger">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                    <label class="col-xs-12 col-md-3">{{trans('app.fields.first_name')}}</label>
+                                    <div class="col-xs-12 col-md-9">
+                                        <div class="new-f-group">
+                                            <div class="form-group clearfix">
+                                                <span class="icony"><i class="fa fa-user"></i></span>
+                                                <input name="first_name"
+                                                       value="{{Request::old('first_name',$user->first_name)}}"
+                                                       type="text"
+                                                       class="effect-9 form-control"
+                                                       placeholder="{{trans('app.fields.first_name')}}">
+                                                <span class="focus-border"><i></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group-lg row">
+                                    <label class="col-xs-12 col-md-3">{{trans('app.fields.last_name')}}</label>
+                                    <div class="col-xs-12 col-md-9">
+                                        <div class="new-f-group">
+                                            <div class="form-group clearfix">
+                                                <span class="icony"><i class="fa fa-user"></i></span>
+                                                <input name="last_name"
+                                                       value="{{Request::old('last_name',$user->last_name)}}"
+                                                       type="text"
+                                                       class="effect-9 form-control"
+                                                       placeholder="{{trans('app.fields.last_name')}}">
+                                                <span class="focus-border"><i></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group-lg row">
+                                    <label class="col-xs-12 col-md-3">{{trans('app.phone_number')}}</label>
+                                    <div class="col-xs-12 col-md-9">
+                                        <div class="new-f-group">
+                                            <div class="form-group clearfix">
+                                                <span class="icony"><i class="fa fa-mobile"></i></span>
+                                                <input name="phone_number" type="text"
+                                                       value="{{Request::old('phone_number',$user->phone_number)}}"
+                                                       class="effect-9 form-control"
+                                                       placeholder="{{trans('app.phone_number')}}">
+                                                <span class="focus-border"><i></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group-lg row">
+                                    <label class="col-xs-12 col-md-3">{{trans('app.add_logo_new')}} </label>
+                                    <div class="new-f-group col-xs-12 col-md-5">
+                                        <div class="form-group" style="background: url({{thumbnail($user->photo->path, 'single_center')}})  no-repeat  center">
+                                            <div class=" file-upload" data-input-name="logo"
+                                                 data-unodz-callback="callback()">
+                                            </div>
+                                            <p id="logo_error" style="display: none"
+                                               class="text-danger">{{trans('app.logo_error')}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit"
+                                class="btn btn-primary">{{trans('app.profile_update')}}</button>
+                        <button type="button" class="btn btn-secondary"
+                                data-dismiss="modal">{{trans('app.close')}}</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .form-group {
+            position: relative;
+        }
+
+        .file-upload:hover .message {
+            color: whitesmoke;
+            display: none;
+        }
+
+        .file-upload .drop-click-zone {
+            width: 98%;
+            height: 165px;
+            position: absolute;
+            z-index: 90;
+        }
+    </style>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function () {
+            UnoDropZone.init();
+
+
+            @if ($errors->any()&&Request::old('first_name',null))
+            $('#profile_updates').modal('toggle')
+            @endif
+        });
+    </script>
+
+    <script>
+        $(".toggle-password").click(function () {
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $($(this).attr("toggle"));
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+        });
+        $(".toggle-password2").click(function () {
+            $(this).toggleClass("fa-eye fa-eye  fa-eye-slash");
+            var input = $($(this).attr("toggle"));
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+        });
+        $(".toggle-password3").click(function () {
+            $(this).toggleClass("fa-eye fa-eye fa-eye-slash");
+            var input = $($(this).attr("toggle"));
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+        });
+    </script>
+@endpush

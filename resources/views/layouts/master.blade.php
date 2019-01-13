@@ -1,6 +1,6 @@
 <!doctype html>
 <!--[if IE 8 ]>
-<html dir="ltr" lang="en-US" class="no-js ie9 oldie ie"> <![endif]-->
+<html dir="{{app()->getLocale()=="en"?"ltr":"rtl"}}" lang="en-US" class="no-js ie9 oldie ie"> <![endif]-->
 <html lang="{{app()->getLocale()}}" dir="{{app()->getLocale() == 'ar' ? 'rtl' : 'ltr'}}">
 <head>
     <meta charset="utf-8">

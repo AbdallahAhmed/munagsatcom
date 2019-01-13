@@ -158,6 +158,9 @@ return [
     'after_transactions'=>'Points after transaction',
     'date_transactions'=>'transaction date',
     'no_transactions'=>'not found transactions this month',
+    'profile_update'=>'Profile update',
+    'profile_updated'=>'Profile updated',
+
     'fields' => [
         "username" => "Username",
         "password" => "Password",
@@ -250,6 +253,7 @@ return [
         'unit' => 'Unit'
     ],
     'add_logo' => 'Add Logo',
+    'add_logo_new' => 'Add new photo',
     'upload_logo' => 'Upload Logo',
     'file' => 'File',
     'attachments_company' => 'Attachments of company papers',

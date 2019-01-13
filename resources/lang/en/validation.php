@@ -123,7 +123,7 @@ return [
         'sector_id' => 'Sector',
         'Details'=>'Details',
         'details'=>'Company details',
-        'user_type' => 'نوع المستخدم',
+        'user_type' => 'User type',
         'logo'=>'logo',
         'code' => 'code',
         'number' => 'Revised number',
@@ -132,6 +132,7 @@ return [
         'file_name' => 'File name',
         'file_description' => 'File description',
         'chance_value' => 'Chance value',
+        'current_password'=>'Current Password'
     ],
 
 ];

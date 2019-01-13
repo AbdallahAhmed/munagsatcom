@@ -45,6 +45,7 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
         Route::get('tenders/{id}/download', 'TenderController@download')->name('tenders.download');
         Route::get('user/update', 'UserController@show')->name('user.show');
         Route::post('user/update', 'UserController@update')->name('user.update');
+        Route::post('user/profile-update', 'UserController@profileUpdate')->name('user.profile.update');
         Route::get('user/search/companies', 'UserController@searchCompanies')->name('user.company.search');
         Route::get('user/points', 'UserController@points')->name('user.points');
         Route::get('user/requests', 'UserController@requests')->name('user.requests');

@@ -46,6 +46,7 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
         Route::get('user/update', 'UserController@show')->name('user.show');
         Route::post('user/update', 'UserController@update')->name('user.update');
         Route::get('user/search/companies', 'UserController@searchCompanies')->name('user.company.search');
+        Route::get('user/points', 'UserController@points')->name('user.points');
         Route::get('user/requests', 'UserController@requests')->name('user.requests');
         Route::post('user/requests/update', 'UserController@updateRequests')->name('user.requests.update');
         Route::post('user/requests/send', 'UserController@sendRequests')->name('user.requests.send');

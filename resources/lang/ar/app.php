@@ -165,8 +165,15 @@ return [
     'cb_price'=>'سعر كراسة الشروط ',
     'current_points'=>'نقاطك الحالية ',
     'spent_points'=>'النقاط التي أنفقت ',
+    'choose_month'=>'اختار الشهر',
+    'transaction_type'=>'نوع العملية',
+    'before_transaction'=>' النقاط قبل العملية',
+    'used_points' =>'النقاط المستخدمة ',
+    'after_transactions'=>'النقاط بعد العملية',
     'points_after_buy'=>'نقاطك بعد الشراء ',
     'please_recharge'=>'رجاء شحن نقاطك ',
+    'date_transactions'=>'تاريخ العملية',
+    'no_transactions'=>'لا يوجد عملية فى هذا الشهر',
     'events' => [
         'successfully_register' => 'مرحبا تم التسجيل بنجاح ',
         'password_changed' => 'تم تغير كلمة المرور بنجاح'
@@ -262,7 +269,9 @@ return [
     'choose_file' => 'أختر ملف',
     'upload_more_files' => 'تحميل المزيد من المرفقات',
     'company_name' => ' اسم الشركة',
-    '' => '',
-    '' => '',
+    'types' => [
+        'tenders_buy'=>'شراء مناقضة',
+        'not_register'=>'لم يتك تسجيل العملية '
+    ],
 
 ];

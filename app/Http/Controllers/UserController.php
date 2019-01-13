@@ -7,7 +7,9 @@ use App\Mail\VerificationMail;
 use App\Mail\WelcomeMail;
 use App\Models\Center;
 use App\Models\Companies_empolyees;
+use App\Models\Transaction;
 use App\User;
+use Carbon\Carbon;
 use Dot\Chances\Models\Sector;
 use Dot\Companies\Models\Company;
 use Dot\Media\Models\Media;
@@ -61,9 +63,9 @@ class UserController extends Controller
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
                 $failed = $validator->failed();
-                if(isset($failed['email']['Unique'])){
+                if (isset($failed['email']['Unique'])) {
                     $user = User::where('email', $request->get('email'))->first();
-                    if($user->status == 1 && $user->code != null){
+                    if ($user->status == 1 && $user->code != null) {
                         $validator = Validator::make($request->all(), $rules, ['email.unique' => trans('validation.email.unique')]);
                     }
                 }
@@ -79,7 +81,7 @@ class UserController extends Controller
             $user->role_id = 2;
             $user->backend = 0;
             $user->status = 0;
-            $user->points = option('new_user_points',0);
+            $user->points = option('new_user_points', 0);
             $user->code = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
             $user->type = $request->get('user_type', 1);
 
@@ -227,6 +229,7 @@ class UserController extends Controller
         return redirect()->route('index');
 
     }
+
     /**
      * POST/GET {lang}/verify/resend
      * @route user.confirm-resend
@@ -461,5 +464,20 @@ class UserController extends Controller
         $this->data['sectors'] = Sector::published()->get();
 
         return view('users.centers', $this->data);
+    }
+
+    /**
+     * GET {lang?}/user/points
+     * @route user.points
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|View
+     */
+    public function points(Request $request)
+    {
+        $this->data['user'] = fauth()->user();
+        $this->data['transactions'] = Transaction::where('user_id', $this->data['user']->id)
+            ->whereMonth('created_at', $request->get('month', Carbon::now()->month - 1) + 1)
+            ->paginate(8);
+        return view('users.points', $this->data);
     }
 }

@@ -7,7 +7,7 @@
                 <li @if (\Route::current()->getName() == 'user.company.search') class="active" @endif><a href="{{route('user.company.search')}}">{{trans('app.company_search')}}</a></li>
                 {{--<li class="not-active"><a href="javascript:void(0)" disabled>الرسائل</a></li>--}}
                 <li  @if (\Route::current()->getName() == 'user.centers') class="active" @endif><a href="{{route('user.centers')}}">{{trans('app.centers.user_added')}}</a></li>
-                <li class="not-active"><a href="javascript:void(0)" disabled>النقاط المستخدمة </a></li>
+                <li @if (\Route::current()->getName() == 'user.points') class="active" @endif><a href="{{route('user.points')}}">{{trans('app.used_points')}}</a></li>
             </ul>
         </div>
     </div>

@@ -151,6 +151,13 @@ return [
     'points_after_buy'=>'Your points after purchase ',
     'spent_points'=>'Spent points',
     'please_recharge'=>'Please charge your points',
+    'choose_month'=>'Choose Month',
+    'transaction_type'=>'Transaction type',
+    'before_transaction'=>'points before transaction',
+    'used_points' =>'Spent points',
+    'after_transactions'=>'Points after transaction',
+    'date_transactions'=>'transaction date',
+    'no_transactions'=>'not found transactions this month',
     'fields' => [
         "username" => "Username",
         "password" => "Password",
@@ -240,7 +247,7 @@ return [
         'publish' => 'Publish chance'
     ],
     'units' => [
-        'unit' => 'وحدة القياس'
+        'unit' => 'Unit'
     ],
     'add_logo' => 'Add Logo',
     'upload_logo' => 'Upload Logo',
@@ -249,9 +256,9 @@ return [
     'choose_file' => 'Choose file',
     'upload_more_files' => 'Upload more files',
     'company_name' => 'Company name',
-    'file_name' => 'اسم الملف',
-    'add_file' => 'اضافة مرفق',
-    'file_description' => 'تفاصيل الملف',
+    'file_name' => 'File name',
+    'add_file' => 'Add File',
+    'file_description' => 'File description',
     'status_array' => [
         0 => 'opened',
         1 => 'closed',
@@ -260,7 +267,10 @@ return [
         4 => 'approved',
         5 => 'rejected'
     ],
-    '' => '',
+    'types' => [
+        'tenders_buy'=>'Tender Buy',
+        'not_register'=>' Unknown'
+    ],
 
 
 ];

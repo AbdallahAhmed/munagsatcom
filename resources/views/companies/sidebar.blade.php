@@ -2,8 +2,7 @@
     <div class="side-box">
         <div class="profile-side">
             <ul>
-                <li @if (\Route::current()->getName() == 'company.show') class="active" @endif><a class=""
-                                                                                                  href="{{route('company.show', ['id' => $company_id])}}">
+                <li @if (\Route::current()->getName() == 'company.show') class="active" @endif><a  href="{{route('company.show', ['id' => $company_id])}}">
                         {{trans('app.company_details')}}
                     </a></li>
                 <li @if (\Route::current()->getName() == 'company.chances') class="active" @endif><a

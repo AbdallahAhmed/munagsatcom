@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'name' => 'مناقصاتكم الحكومية',
+    'name' => 'مناقصاتكم المحدودة',
     'register' => 'تسجيل جديد',
     'government_tenders' => 'مناقصات حكومية',
     'service_centers' => 'مراكز خدمية',

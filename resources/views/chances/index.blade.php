@@ -29,14 +29,14 @@
                             <div class="form-group-lg clearfix">
                                 <p>{{trans('app.fields.status')}}:</p>
                                 <div class="checkbox">
-                                    <input name="status" value="0" type="checkbox"
+                                    <input name="status" id="first_status" value="0" type="checkbox"
                                            @if(in_array(0, $chosen_status)) checked @endif>
-                                    <label>{{trans('app.status_array.0')}}</label>
+                                    <label for="first_status">{{trans('app.status_array.0')}}</label>
                                 </div>
                                 <div class="checkbox">
-                                    <input name="status" value="1" type="checkbox"
+                                    <input name="status" id="sec_status" value="1" type="checkbox"
                                            @if(in_array(1, $chosen_status)) checked @endif>
-                                    <label>  {{trans('app.status_array.1')}} </label>
+                                    <label for="sec_status">  {{trans('app.status_array.1')}} </label>
                                 </div>
                             </div>
                             <div class="form-group clearfix">

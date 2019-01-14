@@ -170,80 +170,87 @@
             <!-------------- End::content -------------->
         </div>
     </section>
-    @push('scripts')
-        <script>
-            $(function () {
-                $('[data-toggle="tooltip"]').tooltip({trigger: 'manual'}).tooltip('show');
+    <style>
+        .progress {
+            overflow: visible;
+            height: 5px;
+            margin: 40px 5px 6px;
+        }
+    </style>
+@endsection
+@push('scripts')
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip({trigger: 'manual'}).tooltip('show');
+        });
+        $(document).ready(function () {
+            $(".btn-mas").click(function () {
+                $("#myModal").modal('show');
             });
-            $(document).ready(function () {
-                $(".btn-mas").click(function () {
-                    $("#myModal").modal('show');
-                });
-            });
-            // $( window ).scroll(function() {
-            // if($( window ).scrollTop() > 10){  // scroll down abit and get the action
-            $(".progress-bar").each(function () {
-                each_bar_width = $(this).attr('aria-valuenow');
-                $(this).width(each_bar_width + '%');
-            });
-            $(".range-example").asRange({
-                range: true,
-                limit: false,
-                //tip: {
+        });
+        // $( window ).scroll(function() {
+        // if($( window ).scrollTop() > 10){  // scroll down abit and get the action
+        $(".progress-bar").each(function () {
+            each_bar_width = $(this).attr('aria-valuenow');
+            $(this).width(each_bar_width + '%');
+        });
+        $(".range-example").asRange({
+            range: true,
+            limit: false,
+            //tip: {
 //    active: 'onMove'
 //    },
-                tip: true,
-                max: 10000,
-                min: 100,
-                value: true,
-                step: 10,
-                keyboard: true,
-                replaceFirst: true, // false, 'inherit', {'inherit': 'default'}
-                scale: true,
-                format(value) {
-                    return value;
-                }
-            });
+            tip: true,
+            max: 10000,
+            min: 100,
+            value: true,
+            step: 10,
+            keyboard: true,
+            replaceFirst: true, // false, 'inherit', {'inherit': 'default'}
+            scale: true,
+            format(value) {
+                return value;
+            }
+        });
 
-            $(function () {
-                $('#upload').on('submit', function (e) {
-                    e.preventDefault();
-                    $('#formApply').hide();
-                    var form = $(this);
-                    var file = $('[name="file"]');
-                    var formData = new FormData();
-                    formData.append('file', file[0].files[0]);
-                    formData.append('chance_id', "{{$chance->id}}")
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-                    $.ajax({
-                        type: "post",
-                        url: "{{route('chances.offers')}}",
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        success: function (data) {
-                            if (data.success) {
-                                $("#myModal").modal('hide');
-                                $('#formApply').show();
-                                $("#SuccessModal").modal('show');
-                            } else {
-                                $('.alert-danger').html(data.errors);
-                                $('.alert-danger').show();
-                                $('#formApply').show();
-                            }
-                        },
-                        error: function () {
+        $(function () {
+            $('#upload').on('submit', function (e) {
+                e.preventDefault();
+                $('#formApply').hide();
+                var form = $(this);
+                var file = $('[name="file"]');
+                var formData = new FormData();
+                formData.append('file', file[0].files[0]);
+                formData.append('chance_id', "{{$chance->id}}")
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "post",
+                    url: "{{route('chances.offers')}}",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        if (data.success) {
+                            $("#myModal").modal('hide');
                             $('#formApply').show();
-                            alert("Internal Server Error")
+                            $("#SuccessModal").modal('show');
+                        } else {
+                            $('.alert-danger').html(data.errors);
+                            $('.alert-danger').show();
+                            $('#formApply').show();
                         }
-                    })
+                    },
+                    error: function () {
+                        $('#formApply').show();
+                        alert("Internal Server Error")
+                    }
                 })
             })
-        </script>
+        })
+    </script>
 
-    @endpush
-@endsection
+@endpush

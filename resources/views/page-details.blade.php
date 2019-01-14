@@ -7,7 +7,7 @@
         <div class="res-box">
             <div class="about">
                 <h2>{{$page->title}}</h2>
-                {{$page->content}}
+                {!! $page->content !!}
             </div>
         </div>
     </section>

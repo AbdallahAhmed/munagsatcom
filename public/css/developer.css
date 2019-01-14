@@ -430,3 +430,8 @@ html[dir="rtl"] div.text-left {
 html[dir="ltr"] div.text-left {
     text-align: right;
 }
+.title-larg ul li {
+    margin: 3px 3px;
+    display: block;
+    width: max-content;
+}

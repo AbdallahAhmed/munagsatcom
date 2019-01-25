@@ -186,22 +186,6 @@
             });
         </script>
         <script>
-            /* $(document).ready(function () {
-                 $(".share").hideshare({
-                     link: "",           // Link to URL defaults to document.URL
-                     title: "",          // Title for social post defaults to document.title
-                     media: "",          // Link to image file defaults to null
-                     facebook: true,     // Turns on Facebook sharing
-                     twitter: true,      // Turns on Twitter sharing
-                     pinterest: false,    // Turns on Pinterest sharing
-                     googleplus: false,   // Turns on Google Plus sharing
-                     linkedin: false,     // Turns on LinkedIn sharing
-                     position: "right", // Options: Top, Bottom, Left, Right
-                     speed: 150           // Speed of transition
-                 });
-             });*/
-        </script>
-        <script>
             $(function () {
                 $('#search').on('submit', function (e) {
                     e.preventDefault();

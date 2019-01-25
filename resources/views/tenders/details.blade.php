@@ -25,7 +25,7 @@
                                     <ul>
                                         <li class="clearfix">
                                             <div class="one_xsmall title">{{trans('app.tenders.id')}}</div>
-                                            <div class="one_xlarg"> {{$tender->id}}</div>
+                                            <div class="one_xlarg"> {{$tender->number}}</div>
                                         </li>
                                         <li class="clearfix">
                                             <div class="one_xsmall title">{{trans('app.tenders.name')}}</div>

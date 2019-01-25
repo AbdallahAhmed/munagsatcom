@@ -66,12 +66,12 @@
                             </div>
 
 
-                            <div class="form-group">
-                                <label>$ {{ trans("tenders::tenders.attributes.price") }} </label>
-                                <input name="price" type="number" min="1"  step="0.01" class="form-control" rows="1"
-                                          id="tender-goal"
-                                          placeholder="{{ trans("tenders::tenders.attributes.price") }}" value="{{ @Request::old("price", $tender->price) }}">
-                            </div>
+                            {{--<div class="form-group">--}}
+                                {{--<label>$ {{ trans("tenders::tenders.attributes.price") }} </label>--}}
+                                {{--<input name="price" type="number" min="1"  step="0.01" class="form-control" rows="1"--}}
+                                          {{--id="tender-goal"--}}
+                                          {{--placeholder="{{ trans("tenders::tenders.attributes.price") }}" value="{{ @Request::old("price", $tender->price) }}">--}}
+                            {{--</div>--}}
 
                             <div class="form-group">
                                 <label>{{ trans("tenders::tenders.attributes.org_id") }}</label>
@@ -100,12 +100,12 @@
                                 </select>
                             </div>
 
-                            {{--<div class="form-group">--}}
-                                {{--<label>{{ trans("tenders::tenders.attributes.number") }} </label>--}}
-                                {{--<input name="number" type="text"   class="form-control"--}}
-                                       {{--id="tender-goal"--}}
-                                       {{--placeholder="{{ trans("tenders::tenders.attributes.number") }}" value="{{ @Request::old("number", $tender->number) }}">--}}
-                            {{--</div>--}}
+                            <div class="form-group">
+                                <label>{{ trans("tenders::tenders.attributes.number") }} </label>
+                                <input name="number" type="text"   class="form-control"
+                                       id="tender-goal"
+                                       placeholder="{{ trans("tenders::tenders.attributes.number") }}" value="{{ @Request::old("number", $tender->number) }}">
+                            </div>
                         </div>
                     </div>
 
@@ -132,6 +132,7 @@
                                     <label>{{ trans("tenders::tenders.attributes.cb_real_price") }}</label>
                                     <input type="text" name="cb_real_price" class="form-control input-lg"
                                            placeholder="{{ trans("tenders::tenders.attributes.cb_real_price") }}"
+                                           maxlength="10"
                                            value="{{ @Request::old("cb_real_price", $tender->cb_real_price) }}"/>
                                 </div>
 

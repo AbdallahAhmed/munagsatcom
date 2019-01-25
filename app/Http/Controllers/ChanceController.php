@@ -30,7 +30,7 @@ class ChanceController extends Controller
      */
     public function index(Request $request)
     {
-        $query = \App\Models\Chance::query()->whereDate('closing_date', '>=', Carbon::today()->toDateString());
+        $query = \App\Models\Chance::query()->whereNotIn('status',[3,5])->whereDate('closing_date', '>=', Carbon::today()->toDateString());
         $this->data['q'] = null;
         $this->data['created_at'] = null;
         $status = $request->get('status');
@@ -54,19 +54,9 @@ class ChanceController extends Controller
                         $q->cancelled();
                     });
                     break;
-                case 3:
-                    $query = $query->orWhere(function ($q) {
-                        $q->pending();
-                    });
-                    break;
                 case 4:
                     $query = $query->orWhere(function ($q) {
                         $q->approved();
-                    });
-                    break;
-                case 5:
-                    $query = $query->orWhere(function ($q) {
-                        $q->rejected();
                     });
                     break;
             }

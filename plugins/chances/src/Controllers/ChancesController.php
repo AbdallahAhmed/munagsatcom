@@ -20,7 +20,7 @@ use View;
 use File;
 
 
-/*
+/**
  * Class ChancesController
  * @package Dot\Chances\Controllers
  */
@@ -28,7 +28,7 @@ use File;
 class ChancesController extends Controller
 {
 
-    /*
+    /**
      * View payload
      * @var array
      */
@@ -36,7 +36,7 @@ class ChancesController extends Controller
 
     public $errors = array();
 
-    /*
+    /**
      * Show all chances
      * @return mixed
      */
@@ -96,7 +96,7 @@ class ChancesController extends Controller
         return Redirect::back()->with("message", trans("chances::chances.events.deleted"));
     }
 
-    /*
+    /**
      * Edit chance by id
      * @param $id
      * @return mixed

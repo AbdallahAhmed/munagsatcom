@@ -31,7 +31,7 @@ return [
     'sure_deactivate' => 'هل تريد إلغاء تفعيل المكام ؟',
     'geo_settings' => 'الموقع علي الخريطة',
     'show_cities' => 'عرض الأماكن',
-
+    'name_required'=>'الاسم مطلوب',
     'attributes' => [
         'name' => 'الإسم',
         'code' => 'الكود',

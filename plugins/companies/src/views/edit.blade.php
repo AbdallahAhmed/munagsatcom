@@ -81,9 +81,7 @@
                                             for="input-slug">{{ trans("app.details") }}</label>
                                     <textarea name="details"
                                            value="{{ @Request::old("details", $company->details) }}"
-                                           class="form-control" id="input-slug"
-                                              rows="4"
-                                              placeholder="{{ trans("app.details") }}"></textarea>
+                                           class="form-control" id="input-slug" rows="4" placeholder="{{ trans("app.details") }}"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label

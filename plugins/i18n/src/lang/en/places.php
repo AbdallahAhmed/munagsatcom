@@ -35,6 +35,7 @@ return [
     'sure_deactivate' => 'Are you sure to deactivate place?',
     'geo_settings' => 'Geo settings',
     'show_cities' => 'Show cities',
+    'name_required'=>'name is required',
 
     'attributes' => [
         'name' => 'Name',

@@ -54,7 +54,7 @@ class PlacesController extends Controller
 
         $places = $query->paginate($this->data['per_page']);
 
-        if(Request::ajax()){
+        if (Request::ajax()) {
             return response()->json($places);
         }
         $this->data["places"] = $places;
@@ -122,6 +122,7 @@ class PlacesController extends Controller
      */
     public function edit($id, $parent = 0)
     {
+
         $place = Place::findOrFail($id);
 
         if (Request::isMethod("post")) {
@@ -146,6 +147,10 @@ class PlacesController extends Controller
             // fire saving action
 
             Action::fire("place.saving", $place);
+
+            if (empty(Request::get('name')['ar']) || empty(Request::get('name')['en'])) {
+                return Redirect::back()->withErrors([trans('i18n::places.name_required')])->withInput(Request::all());
+            }
 
             if (!$place->validate()) {
                 return Redirect::back()->withErrors($place->errors())->withInput(Request::all());

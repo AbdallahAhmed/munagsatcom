@@ -13,7 +13,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="circle-item">
-                                    <p>{{trans('app.current_points')}}</p>
+                                    <p>{{fauth()->user()->in_company?trans('app.available_points'):trans('app.current_points')}}</p>
                                     <div class="num">{{$user->points}}</div>
                                 </div>
                             </div>

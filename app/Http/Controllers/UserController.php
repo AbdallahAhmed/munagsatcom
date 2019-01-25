@@ -52,7 +52,7 @@ class UserController extends Controller
             ];
             if ($request->get('user_type') == 2) {
                 $rules += [
-                    'company_name' => 'required|max:255|min:2|alpha_num',
+                    'company_name' => 'required|max:255|min:2',
                     'sector_id' => 'required|exists:sectors,id',
                     'details' => 'required|max:255',
                     'logo' => 'required|mimes:jpg,png,jpeg',
@@ -98,6 +98,8 @@ class UserController extends Controller
                 $company->last_name = $user->last_name;
                 $company->user_id = $user->id;
                 $company->sector_id = $request->get('sector_id');
+                $company->phone_number = $request->get('phone_number');
+                $company->mobile_number = $request->get('phone_number');
 
                 $media = new Media();
                 $company->image_id = $media->saveFile($request->file('logo'));

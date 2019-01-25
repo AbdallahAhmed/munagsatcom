@@ -9,23 +9,24 @@
             <div class="col-xs-12 col-md-9">
                 <div class="profile-box">
 
-                    <div class="profile-circle">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="circle-item">
-                                    <p>{{trans('app.current_points')}}</p>
-                                    <div class="num">{{$user->points}}</div>
+                    @if(!fauth()->user()->in_company)
+                        <div class="profile-circle">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="circle-item">
+                                        <p>{{trans('app.current_points')}}</p>
+                                        <div class="num">{{$user->points}}</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="circle-item">
-                                    <p>{{trans('app.spent_points')}}</p>
-                                    <div class="num"> {{$user->spent_points}}</div>
+                                <div class="col-md-6">
+                                    <div class="circle-item">
+                                        <p>{{trans('app.spent_points')}}</p>
+                                        <div class="num"> {{$user->spent_points}}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
+                    @endif
                     <div class="profile-item">
                         @if (session('message'))
                             <div class="alert alert-success">
@@ -223,7 +224,8 @@
                                 <div class="form-group-lg row">
                                     <label class="col-xs-12 col-md-3">{{trans('app.add_logo_new')}} </label>
                                     <div class="new-f-group col-xs-12 col-md-5">
-                                        <div class="form-group" style="background: url({{thumbnail($user->photo->path, 'single_center')}})  no-repeat  center">
+                                        <div class="form-group"
+                                             style="background: url({{thumbnail($user->photo->path, 'single_center')}})  no-repeat  center">
                                             <div class=" file-upload" data-input-name="logo"
                                                  data-unodz-callback="callback()">
                                             </div>

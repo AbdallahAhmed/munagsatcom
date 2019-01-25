@@ -160,7 +160,7 @@ return [
     'no_transactions'=>'not found transactions this month',
     'profile_update'=>'Profile update',
     'profile_updated'=>'Profile updated',
-
+    'available_points' => 'available  Points',
     'fields' => [
         "username" => "Username",
         "password" => "Password",

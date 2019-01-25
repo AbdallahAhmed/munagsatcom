@@ -76,7 +76,7 @@
                                         </div>
                                         <div class="col-md-6 text-right">
                                             <button type="submit"
-                                                    class="uperc padding-md fbutcenter">{{trans('filter')}}
+                                                    class="uperc padding-md fbutcenter">{{trans('app.filter')}}
                                             </button>
                                         </div>
                                     </div>

@@ -2,7 +2,8 @@
     <div class="side-box">
         <div class="profile-side">
             <ul>
-                <li @if (\Route::current()->getName() == 'company.show') class="active" @endif><a  href="{{route('company.show', ['id' => $company_id])}}">
+                <li @if (\Route::current()->getName() == 'company.show') class="active" @endif><a
+                            href="{{route('company.show', ['slug' => $company->slug])}}">
                         {{trans('app.company_details')}}
                     </a></li>
                 <li @if (\Route::current()->getName() == 'company.chances') class="active" @endif><a
@@ -20,22 +21,6 @@
                 <li @if (\Route::current()->getName() == 'company.centers') class="active" @endif><a
                             href="{{route('company.centers', ['id' => $company_id])}}">
                         {{trans('app.centers.centers')}}
-                    </a></li>
-                <li @if (\Route::current()->getName() == 'company.requests') class="active" @endif><a
-                            href="{{route('company.requests', ['id' => $company_id])}}">
-                        {{trans('app.requests')}}
-                    </a></li>
-                <li @if (\Route::current()->getName() == 'company.employees.search') class="active" @endif><a
-                            href="{{route('company.employees.search', ['id' => $company_id])}}">
-                        {{trans('app.search_employee')}}
-                    </a></li>
-                <li @if (\Route::current()->getName() == 'company.add_delegate') class="active" @endif><a
-                            href="{{route('company.add_delegate', ['id' => $company_id])}}">
-                        {{trans('app.add_delegate')}}
-                    </a></li>
-                <li @if (\Route::current()->getName() == 'company.messages') class="active" @endif><a
-                            href="{{route('company.messages', ['id' => $company_id])}}">
-                        {{trans('app.messages')}}
                     </a></li>
                 <?php
                 use App\Models\Companies_empolyees;

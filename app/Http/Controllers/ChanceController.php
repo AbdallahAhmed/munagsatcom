@@ -159,7 +159,7 @@ class ChanceController extends Controller
             $chance->file_name = $request->get("file_name", "");
             $chance->file_description = $request->get("file_description", "");
             $chance->status = 3;
-            $chance->approved = 1;
+            $chance->approved = 0;
             $chance->company_id = $id;
             $chance->user_id = fauth()->user()->id;
 

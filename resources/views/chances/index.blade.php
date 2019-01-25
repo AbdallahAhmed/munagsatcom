@@ -62,8 +62,6 @@
                     </div>
                 </div>
             </div>
-            <!-------------- End:right side -------------->
-            <!-------------- Begin:left side -------------->
 
             @if(count($chances)==0)
                 <p class="col-md-8 not-found">{{trans('app.chances.not_found')}}</p

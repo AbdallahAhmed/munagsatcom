@@ -1,18 +1,16 @@
 <?php
 return [
 
-    'module' => 'Types',
-
-    'types' => 'Types',
+    'activities' => 'Activities',
     'videos' => 'Videos',
-    'type' => 'type',
-    'add_new' => 'Add New Type',
-    'edit' => 'Edit type',
-    'back_to_types' => 'Back To Types',
-    'no_records' => 'No Types Found',
-    'save_type' => 'Save Type',
+    'activity' => 'activity',
+    'add_new' => 'Add New Activity',
+    'edit' => 'Edit activity',
+    'back_to_activities' => 'Back To Activitys',
+    'no_records' => 'No Activitys Found',
+    'save_activity' => 'Save Activity',
     'search' => 'search',
-    'search_types' => 'Search Types',
+    'search_activities' => 'Search Activitys',
     'per_page' => 'Per Page',
     'bulk_actions' => 'Bulk Actions',
     'delete' => 'delete',
@@ -29,14 +27,14 @@ return [
     'from' => "From",
     'to' => "To",
 
-    'type_status' => 'Type status',
+    'activity_status' => 'Activity status',
     'activate' => 'activate',
     'activated' => 'activated',
     'all' => 'All',
     'deactivate' => 'deactivate',
     'deactivated' => 'deactivated',
-    'sure_activate' => "Are you sure to activate type ?",
-    'sure_deactivate' => "Are you sure to deactivate type ?",
+    'sure_activate' => "Are you sure to activate activity ?",
+    'sure_deactivate' => "Are you sure to deactivate activity ?",
     'sure_delete' => 'Are you sure to delete ?',
 
     'add_image' => 'Add image',
@@ -52,7 +50,7 @@ return [
 
 
     'attributes' => [
-        'title' => 'Title',
+        'name' => 'Name',
         'excerpt' => 'Excerpt',
         'content' => 'Content',
         'created_at' => 'Created date',
@@ -61,19 +59,19 @@ return [
         'status' => 'Status',
         'template' => 'Template',
         'default' => 'Default',
-        "format" => "Type format"
+        "format" => "Activity format"
     ],
 
     "events" => [
-        'created' => 'Type created successfully',
-        'updated' => 'Type updated successfully',
-        'deleted' => 'Type deleted successfully',
-        'activated' => 'Type activated successfully',
-        'deactivated' => 'Type deactivated successfully'
+        'created' => 'Activity created successfully',
+        'updated' => 'Activity updated successfully',
+        'deleted' => 'Activity deleted successfully',
+        'activated' => 'Activity activated successfully',
+        'deactivated' => 'Activity deactivated successfully'
     ],
 
     "permissions" => [
-        "manage" => "Manage types"
+        "manage" => "Manage activities"
     ]
 
 ];

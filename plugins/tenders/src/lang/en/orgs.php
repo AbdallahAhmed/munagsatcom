@@ -1,18 +1,16 @@
 <?php
 return [
 
-    'module' => 'Types',
+    'orgs' => 'Government agencies',
 
-    'types' => 'Types',
-    'videos' => 'Videos',
     'type' => 'type',
-    'add_new' => 'Add New Type',
+    'add_new' => 'Add New Government agency',
     'edit' => 'Edit type',
-    'back_to_types' => 'Back To Types',
-    'no_records' => 'No Types Found',
-    'save_type' => 'Save Type',
+    'back_to_types' => 'Back To Government agencies',
+    'no_records' => 'No Government agencies Found',
+    'save_org' => 'Save Government agency',
     'search' => 'search',
-    'search_types' => 'Search Types',
+    'search_orgs' => 'Search Government agencies',
     'per_page' => 'Per Page',
     'bulk_actions' => 'Bulk Actions',
     'delete' => 'delete',
@@ -29,7 +27,7 @@ return [
     'from' => "From",
     'to' => "To",
 
-    'type_status' => 'Type status',
+    'org_status' => 'Government agencies status',
     'activate' => 'activate',
     'activated' => 'activated',
     'all' => 'All',
@@ -53,23 +51,25 @@ return [
 
     'attributes' => [
         'title' => 'Title',
+        'name' => 'Name',
         'excerpt' => 'Excerpt',
         'content' => 'Content',
         'created_at' => 'Created date',
         'updated_at' => 'Updated date',
+        'logo_id'=>'Logo',
         'published_at' => 'Event date',
         'status' => 'Status',
         'template' => 'Template',
         'default' => 'Default',
-        "format" => "Type format"
+        "format" => "Government agency format"
     ],
 
     "events" => [
-        'created' => 'Type created successfully',
-        'updated' => 'Type updated successfully',
-        'deleted' => 'Type deleted successfully',
-        'activated' => 'Type activated successfully',
-        'deactivated' => 'Type deactivated successfully'
+        'created' => 'Government agency created successfully',
+        'updated' => 'Government agency updated successfully',
+        'deleted' => 'Government agency deleted successfully',
+        'activated' => 'Government agency activated successfully',
+        'deactivated' => 'Government agency deactivated successfully'
     ],
 
     "permissions" => [

@@ -106,7 +106,7 @@
                                 @foreach($chances as $chance)
                                     <tr>
                                         <td>{{$chance->name}}</td>
-                                        <td></td>
+                                        <td>{{$chance->downloads}}</td>
                                         <td>{{count($chance->offers)}}</td>
                                         <td>{{$chance->approved ? trans('app.chances.approved') : trans('app.chances.not_approved')}}</td>
                                         <td>{{$chance->file_description}}</td>

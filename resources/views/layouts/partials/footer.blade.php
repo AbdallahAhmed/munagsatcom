@@ -2,8 +2,15 @@
 <footer>
     <div class="container"><div class="row">
             <div class="col-md-4">
-                <div class="mail-text">{{trans('app.phone')}} : <span>154515454545</span><br>
-                    <span class="mail"><a href="#">info@monaasat.com</a></span>
+                <div class="mail-text">{{trans('app.phone')}} : <span>920008769</span><br>
+                    <span class="mail"><a href="mailto:info@monaasat.com">info@monaasat.com</a></span>
+                </div>
+                <div>
+                    <ul class="footer-link">
+                        <li><a href="https://twitter.com/munagasatcom"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="https://www.youtube.com/channel/UCRDuD-lLU3KaS1FehTqkxNg"><i class="fa fa-youtube"></i></a></li>
+                        <li><a href="https://www.linkedin.com/company/munagasatcom"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
                 </div>
             </div>
 

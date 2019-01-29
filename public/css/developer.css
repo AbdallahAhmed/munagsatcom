@@ -435,3 +435,11 @@ html[dir="ltr"] div.text-left {
     display: block;
     width: max-content;
 }
+
+.footer-link li{
+    display: inline;
+    padding: 3px;
+}
+.footer-link li i{
+     font-size: 21px;
+ }

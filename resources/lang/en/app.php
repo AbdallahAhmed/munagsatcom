@@ -161,6 +161,7 @@ return [
     'profile_update'=>'Profile update',
     'profile_updated'=>'Profile updated',
     'available_points' => 'available  Points',
+    'coming_soon'=>'Coming  soon',
     'fields' => [
         "username" => "Username",
         "password" => "Password",

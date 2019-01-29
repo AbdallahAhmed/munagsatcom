@@ -32,36 +32,36 @@ class CenterController extends Controller
      */
     public function index(Request $request){
 
-        $query = Center::published();
-        $this->data['sector_id'] = null;
-        $this->data['service_id'] = null;
-        $this->data['q'] = null;
+//        $query = Center::published();
+//        $this->data['sector_id'] = null;
+//        $this->data['service_id'] = null;
+//        $this->data['q'] = null;
+//
+//        if($request->get("sector_id")){
+//            $query = $query->where('sector_id', $request->get('sector_id'));
+//            $this->data['sector_id'] = $request->get("sector_id");
+//        }
+//        if($request->get('service_id')){
+//            $query = $query->whereHas('services', function ($query) use ($request){
+//               $query->where('id', $request->get('service_id'));
+//            });
+//            $this->data['service_id'] = $request->get("service_id");
+//        }
+//        if($request->get('q')){
+//            $q = trim(urldecode($request->get('q')));
+//            $query = $query->where('name','like', '%'.$q.'%');
+//            $this->data['q'] = $q;
+//        }
+//        if($request->get('price_to')){
+//            $to = $request->get('price_to');
+//            $from = $request->get('price_from', 100);
+//
+//        }
+//        $this->data['centers'] = $query->paginate(5);
+//        $this->data['services'] = Service::published()->get();
+//        $this->data['sectors'] = Sector::published()->get();
 
-        if($request->get("sector_id")){
-            $query = $query->where('sector_id', $request->get('sector_id'));
-            $this->data['sector_id'] = $request->get("sector_id");
-        }
-        if($request->get('service_id')){
-            $query = $query->whereHas('services', function ($query) use ($request){
-               $query->where('id', $request->get('service_id'));
-            });
-            $this->data['service_id'] = $request->get("service_id");
-        }
-        if($request->get('q')){
-            $q = trim(urldecode($request->get('q')));
-            $query = $query->where('name','like', '%'.$q.'%');
-            $this->data['q'] = $q;
-        }
-        if($request->get('price_to')){
-            $to = $request->get('price_to');
-            $from = $request->get('price_from', 100);
-
-        }
-        $this->data['centers'] = $query->paginate(5);
-        $this->data['services'] = Service::published()->get();
-        $this->data['sectors'] = Sector::published()->get();
-
-        return view('centers.index', $this->data);
+        return view('centers.coming-soon', $this->data);
     }
 
 

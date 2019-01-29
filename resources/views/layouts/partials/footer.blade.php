@@ -3,7 +3,7 @@
     <div class="container"><div class="row">
             <div class="col-md-4">
                 <div class="mail-text">{{trans('app.phone')}} : <span>920008769</span><br>
-                    <span class="mail"><a href="mailto:info@monaasat.com">info@monaasat.com</a></span>
+                    <span class="mail"><a href="mailto:info@munagasatcom.com">info@munagasatcom.com</a></span>
                 </div>
                 <div>
                     <ul class="footer-link">

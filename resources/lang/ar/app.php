@@ -102,6 +102,7 @@ return [
     'create_new' => 'اضافة',
     'other_units' => 'وحدات قياس اخرى',
     'available_points' => 'النقاط المتاحة',
+    'coming_soon'=>'قريبا',
     'centers' => [
         'centers' => 'مراكز خدمية',
         'center_name' => 'اسم المركز الخدمى',

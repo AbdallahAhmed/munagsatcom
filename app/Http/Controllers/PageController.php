@@ -28,7 +28,7 @@ class PageController extends Controller
      */
     public function contactUs(Request $request){
         if($request->method() == "POST")
-            Mail::to(option('site_email'))->send(new ContactMail($request));
+            Mail::to('info@munagasatcom.com')->send(new ContactMail($request));
         else{
             return view('contact');
         }

@@ -62,7 +62,7 @@
                                 الرياض<br/>
                                 المملكة العربية السعودية<br/><br/>
                                 <i class="fa fa-mobile"></i> 920008769<br/>
-                                <i class="fa fa-envelope"></i> <a href="mailto:info@monaasat.com">info@monaasat.com</a><br/>
+                                <i class="fa fa-envelope"></i> <a href="mailto:info@munagasatcom.com">info@munagasatcom.com</a><br/>
                             </div>
                         </div>
                         <div class="map_container" >

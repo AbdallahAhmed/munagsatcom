@@ -58,9 +58,12 @@
                             <div class="col-md-5 contact-text">
 
                                 <b> مناقصاتكم المحدوده:</b><br/><br/>
-                                <i class="fa fa-map-marker"></i> شارع الملك عبد العزيز, <br/>
-                                الرياض<br/>
-                                المملكة العربية السعودية<br/><br/>
+                                <i class="fa fa-map-marker"></i> طريق الامير محمد بن عبدالرحمن
+                                <br>
+                                الرياض 12665 ص.ب 6597
+                                <br>
+                                المملكة العربية السعودية <br/>
+
                                 <i class="fa fa-mobile"></i> 920008769<br/>
                                 <i class="fa fa-envelope"></i> <a href="mailto:info@munagasatcom.com">info@munagasatcom.com</a><br/>
                             </div>

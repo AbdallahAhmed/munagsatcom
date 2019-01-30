@@ -41,20 +41,7 @@
                             </div>
                         </div>
                         <div class="text-center" style="cursor: pointer">
-                            <a href="{{route('forget-password')}}"><p>{{trans('app.forget_password')}}</p></a>
-                        </div>
-                    </div>
-                    <div class="form-group-lg row">
-                        <label class="col-xs-12 col-md-3"></label>
-                        <div class="col-xs-12 col-md-9">
-                            <label class="radio-inline" id="input-user_type-personal"> {{trans('app.personal')}}</label>
-                            <input type="radio"
-                                   {{old('user_type')==1||!old('user_type')?'checked':''}} id="input-user_type-personal"
-                                   name="user_type" value="1" onclick="show1();">
-
-                            <label class="radio-inline" id="input-user_type-company">{{trans('app.company')}}</label>
-                            <input type="radio" {{old('user_type')==2?'checked':''}} name="user_type" value="2"
-                                   id="input-user_type-company" onclick="show2();">
+                            <a href="{{route('forget-password')}}">{{trans('app.forget_password')}}</a>
                         </div>
                     </div>
                     @if($errors->any())
@@ -70,6 +57,9 @@
 
                     <div class="form-group-lg text-center">
                         <button type="submit" class="padding-md fbutcenter width"> {{trans('app.enter')}}</button>
+                        <br>
+                        <br>
+                        <button type="button" onclick="window.location.href='{{route('register')}}'" class="padding-md fbutcenter width"> {{trans('app.register')}}</button>
                     </div>
                 </form>
             </div>

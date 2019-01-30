@@ -70,6 +70,7 @@ return [
     'sure_accept_ask' => 'Are you sure you want to join this company and to be removed from your current company (if you have a current one) ?',
     'yes' => 'Yes',
     'no' => 'No',
+    'notifications'=>'Notifications',
     'company_search' => 'Company search',
     'company_search_enter' => 'Enter company name',
     'no_company_found' => 'No available companies',
@@ -77,7 +78,6 @@ return [
     'requests_sent_successfully' => 'Invitations sent successfully',
     'password_updated_successfully' => 'Password updated successfully',
     'accepted_successfully' => 'Saved successfully',
-    '$' => 'SR',
     'email_not_found' => 'Wrong email',
     'reset_code_sent' => 'A code has been sent to the entered email address',
     'send' => 'send',
@@ -162,6 +162,7 @@ return [
     'profile_updated'=>'Profile updated',
     'available_points' => 'available  Points',
     'coming_soon'=>'Coming  soon',
+    'points'=>'points',
     'fields' => [
         "username" => "Username",
         "password" => "Password",

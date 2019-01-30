@@ -58,10 +58,17 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">
-                            <img src="{{fauth()->user()->photo ? thumbnail(fauth()->user()->photo->path, 'avatar') : asset('assets/images/avatar.jpg')}}"
-                                 alt="">
+                            <img src="{{fauth()->user()->photo ? thumbnail(fauth()->user()->photo->path, 'avatar') : asset('assets/images/avatar.jpg')}}" alt="{{fauth()->user()->first_name. ' '.fauth()->user()->last_name}}">
                         </a>
                         <ul class="dropdown-menu">
+                            <li><a>{{fauth()->user()->first_name. ' '.fauth()->user()->last_name}}</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{route('user.points')}}">{{trans('app.points')}}</a></li>
+                            <li role="separator" class="divider"></li>
+
+                            <li><a href="#">{{trans('app.notifications')}}</a></li>
+                            <li role="separator" class="divider"></li>
+
                             <li><a href="{{route('user.show')}}">{{trans('app.setting')}}</a></li>
                             <li role="separator" class="divider"></li>
                             <li>

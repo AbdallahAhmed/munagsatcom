@@ -181,9 +181,7 @@ class UserController extends Controller
                 $error = new MessageBag();
                 $validator = Validator::make($request->all(), [
                     'email' => 'required|email',
-                    'password' => 'required',
-                    'user_type' => 'required'
-                ]);
+                    'password' => 'required']);
                 if ($validator->fails()) {
                     return redirect()->back()->withErrors($validator)->withInput($request->all());
                 }
@@ -192,7 +190,6 @@ class UserController extends Controller
                     'email' => $request->get('email'),
                     'password' => $request->get('password'),
                     'backend' => 0,
-                    'type' => $request->get('user_type'),
                     'status' => 1
                 ]);
 

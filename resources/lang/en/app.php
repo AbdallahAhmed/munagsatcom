@@ -195,6 +195,7 @@ return [
     ],
     'events' => [
         'successfully_register' => 'Welcome  registered successfully',
+        'successfully_register_company' => 'Registered successfully , your request is under review',
         'password_change' => 'Password changed successfully',
     ],
     'sectors' => [

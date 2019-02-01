@@ -155,7 +155,7 @@ class TenderController extends Controller
             abort(404);
         }
 
-        if (!file_exists(uploads_url($tender->cb->path))) {
+        if (!file_exists(uploads_path($tender->cb->path))) {
             return 'كراسة الشروط تم مسحها';
         }
 

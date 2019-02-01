@@ -1,6 +1,6 @@
 <!doctype html>
 <!--[if IE 8 ]>
-<html dir="{{app()->getLocale()=="en"?"ltr":"rtl"}}" lang="en-US" class="no-js ie9 oldie ie"> <![endif]-->
+<html dir="{{app()->getLocale()==" en"?"ltr":"rtl"}}" lang="en-US" class="no-js ie9 oldie ie"> <![endif]-->
 <html lang="{{app()->getLocale()}}" dir="{{app()->getLocale() == 'ar' ? 'rtl' : 'ltr'}}">
 <head>
     <meta charset="utf-8">
@@ -8,9 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{trans('app.name')}} | @yield("title")</title>
     @if(app()->getLocale() != 'en')
-    <link href="{{asset('/assets')}}/css/maincss.css" rel="stylesheet">
+        <link href="{{asset('/assets')}}/css/maincss.css" rel="stylesheet">
     @else
-    <link href="{{asset('/assets')}}/css/maincss-en.css" rel="stylesheet">
+        <link href="{{asset('/assets')}}/css/maincss-en.css" rel="stylesheet">
     @endif
     <link href="{{asset('/')}}/css/developer.css" rel="stylesheet">
     <script src="{{asset('/')}}/js/pace.js"></script>
@@ -44,6 +44,7 @@
     "url": "{{asset('/')}}",
     "logo": "{{asset('assets')}}/images/logo.jpg"
     }
+
     </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
@@ -53,10 +54,11 @@
 
         window.dataLayer = window.dataLayer || [];
 
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() {
+            dataLayer.push(arguments);
+        }
 
         gtag('js', new Date());
-
 
 
         gtag('config', 'UA-133172600-1');
@@ -73,8 +75,11 @@
 </head>
 <body class="{{app()->getLocale()}}">
 
-<!--End:navbar-->
+
 @include('layouts.partials.header')
+<section class="container">
+    @include('layouts.partials.messages')
+</section>
 
 @yield('content')
 
@@ -91,7 +96,7 @@
 <script src="{{asset('/assets')}}/js/UnoDropZone.js"></script>
 <script src="{{asset('/')}}js/popup.js"></script>
 <script>
-    $('.open-image').magnificPopup({type:'image'});
+    $('.open-image').magnificPopup({type: 'image'});
 </script>
 @stack('scripts')
 </body>

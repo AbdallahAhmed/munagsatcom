@@ -126,7 +126,7 @@ class UserController extends Controller
                 return redirect()->route('user.confirm')->with('status', trans('app.check_email'));
             }
 
-            return redirect()->route('index')->with('status', trans('app.events.successfully_register'));
+            return redirect()->route('index')->with(['messages' => [trans('app.events.successfully_register_company')], 'status' => 'success']);
             //return success or redirect
         }
 

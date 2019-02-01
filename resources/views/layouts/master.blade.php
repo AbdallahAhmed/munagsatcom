@@ -45,6 +45,7 @@
     "logo": "{{asset('assets')}}/images/logo.jpg"
     }
 
+
     </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
@@ -95,9 +96,11 @@
 <script src="{{asset('/assets')}}/js/function.js"></script>
 <script src="{{asset('/assets')}}/js/UnoDropZone.js"></script>
 <script src="{{asset('/')}}js/popup.js"></script>
-<script>
-    $('.open-image').magnificPopup({type: 'image'});
-</script>
+@if(!is_mobile())
+    <script>
+        $('.open-image').magnificPopup({type: 'image'});
+    </script>
+@endif
 @stack('scripts')
 </body>
 </html>

@@ -80,7 +80,6 @@
 
                         </div>
                         <div class="map_container">
-                            {{--<div id="map" style="height: 500px"></div>--}}
                             <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d71786.46836101105!2d46.7017797!3d24.6162998!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f05decb123a23%3A0x56c42d94306d67c1!2z2LTYsdmD2Kkg2YXZhtin2YLYtdin2KrZg9mF!5e1!3m2!1sen!2seg!4v1549028626732" width="900" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
                         </div>
                     </form>
@@ -144,50 +143,6 @@
                     }
                 })
             })
-            // var lat = "24.6162998";
-            // var lng = "46.7017797";
-            //
-            // var map = L.map('map').setView([lng, lat], 10);
-            // var marker;
-            // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            //     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            // }).addTo(map);
-            // navigator.geolocation.getCurrentPosition(function (location) {
-            //     var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
-            //     if (marker) {
-            //         map.removeLayer(marker);
-            //     }
-            //     marker = L.marker(latlng).addTo(map);
-            //     $("input[name='lat']").val(latlng.lat);
-            //     $("input[name='lng']").val(latlng.lng)
-            //     map.setView(latlng);
-            //     $.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + latlng.lat + '&lon=' + latlng.lng, function (data) {
-            //         var address = '';
-            //         if (data.address.road) {
-            //             address = data.address.road + ', ';
-            //         }
-            //         address += data.address.city + ', ' + data.address.country;
-            //         $("input[name='location']").val(address);
-            //     });
-            // });
-            // map.on('click',
-            //     function (e) {
-            //         $("input[name='lat']").val(e.latlng.lat);
-            //         $("input[name='lng']").val(e.latlng.lng);
-            //         $.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + e.latlng.lat + '&lon=' + e.latlng.lng, function (data) {
-            //             var address = '';
-            //             if (data.address.road) {
-            //                 address = data.address.road + ', ';
-            //             }
-            //             address += data.address.city + ', ' + data.address.country;
-            //             $("input[name='location']").val(address);
-            //         });
-            //         if (marker) {
-            //             map.removeLayer(marker);
-            //         }
-            //         marker = L.marker(e.latlng).addTo(map);
-            //     });
-
         </script>
     @endpush
 @endsection

@@ -38,7 +38,7 @@ class CompaniesController extends Controller
         }
 
         $this->data["sort"] = (Request::filled("sort")) ? Request::get("sort") : "name";
-        $this->data["order"] = (Request::filled("order")) ? Request::get("order") : "ASC";
+        $this->data["order"] = (Request::filled("order")) ? Request::get("order") : "DESC";
         $this->data['per_page'] = (Request::filled("per_page")) ? Request::get("per_page") : NULL;
 
         $query = Company::orderBy($this->data["sort"], $this->data["order"]);

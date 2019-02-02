@@ -31,7 +31,7 @@ class CompanyController extends Controller
      */
     public function show(Request $request, $slug)
     {
-        $company = Company::where('slug','=', $slug)->firstOrFail();
+        $company = Company::where('slug', '=', $slug)->firstOrFail();
         $this->data['company'] = $company;
 
         return view('companies.company', $this->data);
@@ -99,6 +99,8 @@ class CompanyController extends Controller
         }
         $chances = count($status) > 0 || $q || $request->get('created_at') ? $chances->get() : $company->chances;
         $this->data['chances'] = $chances;
+        $this->data['chances_offer_count'] = $company->chances()->sum('offers');
+        $this->data['chances_downloads_count'] = $company->chances()->sum('downloads');
         $this->data['status'] = [0, 1, 2, 3, 4, 5];
 
         return view('companies.chances', $this->data);
@@ -110,7 +112,8 @@ class CompanyController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function centers(Request $request, $id){
+    public function centers(Request $request, $id)
+    {
 
         $query = Center::published()->where('company_id', (int)$id);
         $this->data['selected_sector'] = null;
@@ -118,22 +121,22 @@ class CompanyController extends Controller
         $this->data['q'] = null;
         $this->data['company'] = Company::findOrFail($id);
 
-        if($request->get("selected_sector")){
+        if ($request->get("selected_sector")) {
             $query = $query->where('sector_id', $request->get('selected_sector'));
             $this->data['selected_sector'] = $request->get("selected_sector");
         }
-        if($request->get('selected_service')){
-            $query = $query->whereHas('services', function ($query) use ($request){
+        if ($request->get('selected_service')) {
+            $query = $query->whereHas('services', function ($query) use ($request) {
                 $query->where('id', $request->get('selected_service'));
             });
             $this->data['selected_service'] = $request->get("selected_service");
         }
-        if($request->get('q')){
+        if ($request->get('q')) {
             $q = trim(urldecode($request->get('q')));
-            $query = $query->where('name','like', '%'.$q.'%');
+            $query = $query->where('name', 'like', '%' . $q . '%');
             $this->data['q'] = $q;
         }
-        if($request->get('price_to')){
+        if ($request->get('price_to')) {
             $to = $request->get('price_to');
             $from = $request->get('price_from', 100);
 
@@ -280,7 +283,7 @@ class CompanyController extends Controller
                     'company_id' => $id,
                     'employee_id' => $user_id,
                     'role' => 0,
-                    'status'=> 0,
+                    'status' => 0,
                     'accepted' => 1
                 ]);
                 DB::table('users_requests')->where('sender_id', $user_id)->delete();

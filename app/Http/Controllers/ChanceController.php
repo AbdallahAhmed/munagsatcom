@@ -110,7 +110,7 @@ class ChanceController extends Controller
         $media = new Media();
         $file_id = $media->saveFile($file);
         $chance->offers()->syncWithoutDetaching($file_id);
-
+        $chance->increment('offers');
         return response()->json(["success" => true], 200);
     }
 

@@ -14,19 +14,19 @@
                             <div class="col-md-4">
                                 <div class="circle-item">
                                     <p>{{trans('app.chances.posted')}}</p>
-                                    <div class="num"> {{count($company->chances->where('status', 0))}} </div>
+                                    <div class="num"> {{($company->chances()->whereNotIn('status', [3,5])->count())}} </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="circle-item">
-                                    <p>فرص تم المساهمة فيها</p>
-                                    <div class="num"> 1 </div>
+                                    <p>{{trans('app.chances.provided_offers')}}</p>
+                                    <div class="num"> {{$chances_offer_count}}</div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="circle-item">
-                                    <p> مجمل المبلغ التى تم تجميعها </p>
-                                    <div class="num"> 5000 </div>
+                                    <p> {{trans('app.chances.downloads')}} </p>
+                                    <div class="num"> {{$chances_downloads_count}}</div>
                                 </div>
                             </div>
                         </div>
@@ -55,10 +55,11 @@
                                 <form id="search">
                                     <div class="form-group-lg clearfix">
                                         @foreach($status as $st)
-                                        <div class=" col-md-4">
-                                            <input name="status" value="{{$st}}" type="checkbox" @if(in_array($st, $chosen_status)) checked @endif>
-                                            <label> {{trans('app.status_array.'.$st)}} </label>
-                                        </div>
+                                            <div class=" col-md-4">
+                                                <input name="status" value="{{$st}}" type="checkbox"
+                                                       @if(in_array($st, $chosen_status)) checked @endif>
+                                                <label> {{trans('app.status_array.'.$st)}} </label>
+                                            </div>
                                         @endforeach
                                         <div class=" col-md-6">
                                             <div class="form-group clearfix">
@@ -67,8 +68,10 @@
                                                     <div class="form-group clearfix">
                                                         <div class="input-append date" id="dp3" data-date="12-02-2012"
                                                              data-date-format="dd-mm-yyyy">
-                                                            <input name="created_date" value="{{$created_at? $created_at : ""}}"
-                                                                   data-date-format="dd-mm-yyyy" class="effect-9 form-control" id="date"
+                                                            <input name="created_date"
+                                                                   value="{{$created_at? $created_at : ""}}"
+                                                                   data-date-format="dd-mm-yyyy"
+                                                                   class="effect-9 form-control" id="date"
                                                                    placeholder="dd-mm-yyyy"
                                                                    type="text">
                                                             <span class="add-on"><i class="fa fa-calendar"></i></span>
@@ -80,7 +83,8 @@
                                     </div>
 
                                     <div class="form-group-lg text-center">
-                                        <button type="submit" class="uperc padding-md fbutcenter">{{trans('app.filter')}}</button>
+                                        <button type="submit"
+                                                class="uperc padding-md fbutcenter">{{trans('app.filter')}}</button>
                                     </div>
                                 </form>
                             </div>
@@ -105,9 +109,14 @@
                                 <tbody>
                                 @foreach($chances as $chance)
                                     <tr>
-                                        <td>{{$chance->name}}</td>
+                                        @if($chance->status!=3&&$chance->status!=5)
+                                            <td><a href="{{$chance->path}}" title="{{$chance->name}}">{{$chance->name}}</a></td>
+
+                                        @else
+                                            <td>{{$chance->name}}</td>
+                                        @endif
                                         <td>{{$chance->downloads}}</td>
-                                        <td>{{count($chance->offers)}}</td>
+                                        <td>{{($chance->offers()->count())}}</td>
                                         <td>{{$chance->approved ? trans('app.chances.approved') : trans('app.chances.not_approved')}}</td>
                                         <td>{{$chance->file_description}}</td>
                                         <td>{{$chance->approved ? trans('app.chances.not_approved') : trans('app.chances.declined')}}</td>

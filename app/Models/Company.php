@@ -3,19 +3,17 @@
 namespace App\Models;
 
 
-
 use Illuminate\Database\Eloquent\Collection;
 
 class Company extends \Dot\Companies\Models\Company
 {
     /**
-     *  Add chances property
-     * @return Collection
+     * Changes relations
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function getChancesAttribute()
+    public function chances()
     {
-        return Chance::where('company_id', $this->id)->get();
-
+        return $this->hasMany(Chance::class, 'company_id', 'id');
     }
 
     /**
@@ -32,7 +30,8 @@ class Company extends \Dot\Companies\Models\Company
      *  Add path property
      * @return string
      */
-    public function getPathAttribute(){
+    public function getPathAttribute()
+    {
         return route('company.show', ['slug' => $this->slug]);
     }
 }

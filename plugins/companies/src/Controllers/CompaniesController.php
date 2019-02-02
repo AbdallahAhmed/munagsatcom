@@ -37,7 +37,7 @@ class CompaniesController extends Controller
             }
         }
 
-        $this->data["sort"] = (Request::filled("sort")) ? Request::get("sort") : "name";
+        $this->data["sort"] = (Request::filled("sort")) ? Request::get("sort") : "created_at";
         $this->data["order"] = (Request::filled("order")) ? Request::get("order") : "DESC";
         $this->data['per_page'] = (Request::filled("per_page")) ? Request::get("per_page") : NULL;
 
@@ -52,7 +52,7 @@ class CompaniesController extends Controller
         return view("companies::show", $this->data);
     }
 
-    /*
+    /**
      * Delete company by id
      * @return mixed
      */

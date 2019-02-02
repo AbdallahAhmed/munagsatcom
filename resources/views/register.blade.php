@@ -147,6 +147,34 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="form-group-lg row">
+                                <label class="col-xs-12 col-md-3">{{trans('app.address')}}</label>
+                                <div class="col-xs-12 col-md-9">
+                                    <div class="new-f-group">
+                                        <div class="form-group clearfix">
+                                            <input name="address" value="{{old('address')}}" type="text" class="effect-9 form-control"
+                                                   placeholder="{{trans('app.address')}}">
+                                            <span class="focus-border"><i></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group-lg row">
+                                <label class="col-xs-12 col-md-3">{{trans('app.fields.mobile_number')}}</label>
+                                <div class="col-xs-12 col-md-9">
+                                    <div class="new-f-group">
+                                        <div class="form-group clearfix">
+                                            <input name="mobile_number" value="{{old('mobile_number')}}" type="text" class="effect-9 form-control"
+                                                   placeholder="{{trans('app.fields.mobile_number')}}">
+                                            <span class="focus-border"><i></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <div class="form-group row">
                                 <label class="col-xs-12 col-md-3"> {{trans('app.sectors.sector')}}</label>
                                 <div class="col-xs-12 col-md-9 new-f-group">

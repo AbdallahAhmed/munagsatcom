@@ -97,9 +97,10 @@ class UserController extends Controller
                 $company->first_name = $user->first_name;
                 $company->last_name = $user->last_name;
                 $company->user_id = $user->id;
+                $company->address = $request->get('address');
                 $company->sector_id = $request->get('sector_id');
                 $company->phone_number = $request->get('phone_number');
-                $company->mobile_number = $request->get('phone_number');
+                $company->mobile_number = $request->get('mobile_number');
 
                 $media = new Media();
                 $company->image_id = $media->saveFile($request->file('logo'));

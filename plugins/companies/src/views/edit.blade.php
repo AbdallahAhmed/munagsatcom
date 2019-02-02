@@ -29,7 +29,7 @@
                 @if ($company)
                     <a href="{{ route("admin.companies.create") }}"
                        class="btn btn-primary btn-labeled btn-main"> <span
-                                class="btn-label icon fa fa-plus"></span>
+                            class="btn-label icon fa fa-plus"></span>
                         &nbsp; {{ trans("companies::companies.add_new") }}</a>
                 @endif
 
@@ -53,7 +53,7 @@
                             <div class="panel-body">
                                 <div class="form-group">
                                     <label
-                                            for="input-name">{{ trans("companies::companies.attributes.name") }}</label>
+                                        for="input-name">{{ trans("companies::companies.attributes.name") }}</label>
                                     <input name="name" type="text"
                                            value="{{ @Request::old("name", $company->name) }}"
                                            class="form-control" id="input-name"
@@ -62,7 +62,7 @@
 
                                 <div class="form-group">
                                     <label
-                                            for="input-slug">{{ trans("companies::companies.attributes.first_name") }}</label>
+                                        for="input-slug">{{ trans("companies::companies.attributes.first_name") }}</label>
                                     <input name="first_name" type="text"
                                            value="{{ @Request::old("first_name", $company->first_name) }}"
                                            class="form-control" id="input-slug"
@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label
-                                            for="input-slug">{{ trans("companies::companies.attributes.last_name") }}</label>
+                                        for="input-slug">{{ trans("companies::companies.attributes.last_name") }}</label>
                                     <input name="last_name" type="text"
                                            value="{{ @Request::old("last_name", $company->last_name) }}"
                                            class="form-control" id="input-slug"
@@ -78,14 +78,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label
-                                            for="input-slug">{{ trans("app.details") }}</label>
-                                    <textarea name="details"
-                                           value="{{ @Request::old("details", $company->details) }}"
-                                           class="form-control" id="input-slug" rows="4" placeholder="{{ trans("app.details") }}"></textarea>
+                                        for="input-slug">{{ trans("app.details") }}</label>
+                                    <textarea name="details" class="form-control" id="input-slug" rows="4"
+                                              placeholder="{{ trans("app.details") }}">{{ @Request::old("details", $company->details) }}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label
-                                            for="input-slug">{{ trans("app.fields.phone_number") }}</label>
+                                        for="input-slug">{{ trans("app.fields.phone_number") }}</label>
                                     <input name="phone_number" type="text"
                                            value="{{ @Request::old("phone_number", $company->phone_number) }}"
                                            class="form-control" id="input-slug"
@@ -93,16 +92,16 @@
                                 </div>
                                 <div class="form-group">
                                     <label
-                                            for="input-slug">{{ trans("app.fields.mobile_number") }}</label>
-                                    <input name="phone_number" type="text"
+                                        for="input-slug">{{ trans("app.fields.mobile_number") }}</label>
+                                    <input name="mobile_number" type="text"
                                            value="{{ @Request::old("mobile_number", $company->mobile_number) }}"
                                            class="form-control" id="input-slug"
                                            placeholder="{{ trans("app.fields.mobile_number") }}">
                                 </div>
                                 <div class="form-group">
                                     <label
-                                            for="input-slug">{{ trans("app.address") }}</label>
-                                    <input name="phone_number" type="text"
+                                        for="input-slug">{{ trans("app.address") }}</label>
+                                    <input name="address" type="text"
                                            value="{{ @Request::old("address", $company->address) }}"
                                            class="form-control" id="input-slug"
                                            placeholder="{{ trans("app.address") }}">
@@ -139,7 +138,8 @@
                             <div class="panel-body">
                                 <div class="form-group">
                                     @foreach($files as $file)
-                                        <span><i class="fa fa-file-{{$file->type == "application" ? "word" : "image"}}-o"></i></span>
+                                        <span><i
+                                                class="fa fa-file-{{$file->type == "application" ? "word" : "image"}}-o"></i></span>
                                         <a href="{{uploads_url().$file->path}}"
                                            target="_blank">{{$file->title}}</a>
                                         <br>
@@ -164,7 +164,8 @@
                                             <option value="{{$st}}"
                                                     selected="selected">{{trans("companies::companies.status.$st")}}</option>
                                         @else
-                                            <option value="{{$st}}">{{trans("companies::companies.status.$st")}}</option>
+                                            <option
+                                                value="{{$st}}">{{trans("companies::companies.status.$st")}}</option>
                                         @endif
                                     @endforeach
                                 </select>
@@ -193,7 +194,7 @@
                                 <div id="reason"
                                      style="display: @if($company->blocked == 1) block @else none @endif; margin-top: 20px">
                                     <label
-                                            for="input-number">{{ trans("companies::companies.attributes.block_reason") }}</label>
+                                        for="input-number">{{ trans("companies::companies.attributes.block_reason") }}</label>
                                     <input name="block_reason" type="text"
                                            value="{{$company->block_reason}}"
                                            class="form-control" id="input-name"
@@ -218,7 +219,7 @@
                                 <div id="reason"
                                      style="display: @if($company->blocked == 1) block @else none @endif; margin-top: 20px">
                                     <label
-                                            for="input-number">{{ trans("companies::companies.attributes.block_reason") }}</label>
+                                        for="input-number">{{ trans("companies::companies.attributes.block_reason") }}</label>
                                     <input name="block_reason" type="text"
                                            value="{{$company->block_reason}}"
                                            class="form-control" id="input-name"

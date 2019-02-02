@@ -229,11 +229,12 @@
 
                                             <td>
 
-                                                {{$tender->downloaded}}
+                                                {{$tender->views}}
                                             </td>
+
                                             <td>
 
-                                                {{$tender->views}}
+                                                {{$tender->downloaded}}
                                             </td>
                                             <td class="center">
                                                 <a data-toggle="tooltip" data-placement="bottom"

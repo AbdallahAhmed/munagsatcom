@@ -49,7 +49,8 @@ return [
         'user' => 'الكاتب',
         'status' => 'الحالة',
         'block' => 'حذر',
-        'block_reason' => 'سبب الحذر'
+        'block_reason' => 'سبب الحذر',
+        'blocked'=>'الحذر'
     ],
     "events" => [
         'created' => 'تم إنشاء شركة بنجاح',

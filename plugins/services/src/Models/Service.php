@@ -38,6 +38,8 @@ class Service extends Model
      */
     protected $creatingRules = [
         "name" => "required",
+        'price_from'=>'required',
+        'price_to'=>'required',
     ];
 
     /*
@@ -45,6 +47,8 @@ class Service extends Model
      */
     protected $updatingRules = [
         "name" => "required",
+        'price_from'=>'required',
+        'price_to'=>'required',
     ];
 
     /*

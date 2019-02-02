@@ -31,6 +31,15 @@ return [
 
     'attributes' => [
         'name' => 'Company name',
+        'first_name' => 'first name',
+        'last_name' => 'last name',
+        'parent' => 'Parent',
+        'created_at' => 'Created at',
+        'user' => 'User',
+        'status' => 'status',
+        'block' => 'block',
+        'block_reason' => 'block reason',
+        'blocked'=>'blocked'
     ],
     "events" => [
         'created' => 'Company created successfully',

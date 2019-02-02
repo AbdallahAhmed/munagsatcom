@@ -191,8 +191,7 @@
                                         <option value="0">{{trans("companies::companies.blocked")}}</option>
                                     @endif
                                 </select>
-                                <div id="reason"
-                                     style="display: @if($company->blocked == 1) block @else none @endif; margin-top: 20px">
+                                <div id="reason" style="display: @if($company->blocked == 1) block @else none @endif; margin-top: 20px">
                                     <label
                                         for="input-number">{{ trans("companies::companies.attributes.block_reason") }}</label>
                                     <input name="block_reason" type="text"
@@ -216,15 +215,6 @@
                                                 @if($company->sector_id == $sector->id)selected="selected"@endif>{{$sector->name}}</option>
                                     @endforeach
                                 </select>
-                                <div id="reason"
-                                     style="display: @if($company->blocked == 1) block @else none @endif; margin-top: 20px">
-                                    <label
-                                        for="input-number">{{ trans("companies::companies.attributes.block_reason") }}</label>
-                                    <input name="block_reason" type="text"
-                                           value="{{$company->block_reason}}"
-                                           class="form-control" id="input-name"
-                                           placeholder="{{ trans("companies::companies.attributes.block_reason") }}">
-                                </div>
                             </div>
                         </div>
                     </div>

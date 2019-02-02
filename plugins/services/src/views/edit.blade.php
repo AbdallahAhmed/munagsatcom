@@ -66,14 +66,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="input-name">{{ trans("services::services.attributes.price_from") }}</label>
-                                <input name="price_from" type="text" min="1"
+                                <input name="price_from" type="number" min="1"
                                        value="{{ @Request::old("price_from", $service->price_from) }}"
                                        class="form-control" id="input-name"
                                        placeholder="{{ trans("services::services.attributes.price_from") }}">
                             </div>
                             <div class="form-group">
                                 <label for="input-name">{{ trans("services::services.attributes.price_to") }}</label>
-                                <input name="price_to" type="number" min="1"
+                                <input name="price_to" type="number" min="1" max="2147483647"
                                        value="{{ @Request::old("price_to", $service->price_to) }}"
                                        class="form-control" id="input-name"
                                        placeholder="{{ trans("services::services.attributes.price_to") }}">

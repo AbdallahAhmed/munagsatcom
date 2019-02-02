@@ -113,9 +113,11 @@ class CompaniesController extends Controller
             }
             if ($company->status == 1) {
                 $company->user()->update(['status' => 1]);
+                $company->employees()->update(['users.status' => 1]);
             }
             if ($company->status == 2) {
                 $company->user()->update(['status' => 0, 'remember_token' => null]);
+                $company->employees()->update(['users.status' => 0, 'remember_token' => null]);
             }
             $company->save();
 

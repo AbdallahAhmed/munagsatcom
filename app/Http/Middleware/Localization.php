@@ -31,7 +31,6 @@ class Localization
         $request->route()->forgetParameter('lang');
         app('url')->defaults(['lang' => $lang]);
 
-
         return $next($request);
     }
 }

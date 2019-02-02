@@ -66,7 +66,7 @@
                                         <li class="clearfix">
                                             <div class="one_xsmall title">{{trans('app.chances.rules_book')}}</div>
                                             <div class="one_xlarg"><a class="btn btn-default" target="_blank"
-                                                                      href="{{uploads_url().$chance->media->path}}"> {{trans('app.chances.rules_book_download')}}</a>
+                                                                      href="{{route('chances.download',['id'=>$chance->id])}}"> {{trans('app.chances.rules_book_download')}}</a>
                                             </div>
                                         </li>
                                     </ul>

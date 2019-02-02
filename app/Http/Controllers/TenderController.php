@@ -15,6 +15,11 @@ class TenderController extends Controller
      */
     public $data = [];
 
+    public function __construct()
+    {
+        $this->middleware('auth:frontend')->except(['index','details']);
+    }
+
     /** GET /{lang?}
      * @route index
      * @param Request $request
@@ -159,6 +164,6 @@ class TenderController extends Controller
             return 'كراسة الشروط تم مسحها';
         }
 
-        return response()->download(uploads_url($tender->cb->path), $tender->name, ['Content-Type: application/pdf']);
+        return response()->download(uploads_path($tender->cb->path), $tender->name, ['Content-Type: application/pdf']);
     }
 }

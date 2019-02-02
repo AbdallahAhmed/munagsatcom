@@ -61,6 +61,7 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
     Route::get('chances', 'ChanceController@index')->name('chances');
     Route::get('chances/{slug}', 'ChanceController@show')->name('chances.show');
     Route::post('chances/offers', 'ChanceController@addOffer')->name('chances.offers');
+    Route::get('chances/{id}/download', 'ChanceController@download')->name('chances.download');
 
 
     Route::group(['middleware' => ['company']], function ($router) {

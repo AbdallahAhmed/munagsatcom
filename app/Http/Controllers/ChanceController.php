@@ -229,4 +229,26 @@ class ChanceController extends Controller
         return view('chances.create', $this->data);
     }
 
+
+    /**
+     * GET {lang?}/changes/{id}/download
+     * @route changes.download
+     * @param Request $request
+     * @param $id
+     * @return string
+     */
+    public function download(Request $request, $id)
+    {
+        $chance = Chance::whereNotIn('status', [3, 5])->where('id', $id)->firstOrFail();
+        if (!$chance) {
+            abort(404);
+        }
+        $chance->increment('downloads');
+
+        if (!file_exists(uploads_path($chance->media->path))) {
+            return 'تم مسحها المرفق';
+        }
+        return response()->download(uploads_path($chance->media->path), $chance->name, ['Content-Type: application/pdf']);
+    }
+
 }

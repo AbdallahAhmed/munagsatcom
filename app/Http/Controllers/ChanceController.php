@@ -30,7 +30,7 @@ class ChanceController extends Controller
      */
     public function index(Request $request)
     {
-        $query = \App\Models\Chance::query()->whereNotIn('status',[3,5])->whereDate('closing_date', '>=', Carbon::today()->toDateString());
+        $query = \App\Models\Chance::query()->whereNotIn('status', [3, 5])->whereDate('closing_date', '>=', Carbon::today()->toDateString());
         $this->data['q'] = null;
         $this->data['created_at'] = null;
         $status = $request->get('status');
@@ -138,9 +138,9 @@ class ChanceController extends Controller
                 'file' => 'required|mimes:jpg,png,jpeg,doc,docx,txt,pdf,zip',
                 'sector_id' => 'required'
             ]);
-            if ($validator->fails())
+            if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
-
+            }
             $chance->name = $request->get("name");
             $chance->number = $request->get("number");
             $chance->value = $request->get("chance_value");

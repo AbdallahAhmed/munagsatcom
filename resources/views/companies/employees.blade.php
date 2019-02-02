@@ -70,21 +70,21 @@
                                         <td>
                                             <div class="checkbox">
                                                 <input type="checkbox" style="opacity: 0;"
-                                                       id="{{$employer->employee_id}}" name="selected">
-                                                <input type="checkbox" name="status{{$employer->employee_id}}"
+                                                       id="{{$employer->employee_id}}"   {{$employer->user->id==fauth()->id()?'disabled="true"':''}}  name="selected">
+                                                <input type="checkbox"     {{$employer->user->id==fauth()->id()?'disabled="true"':''}} {{$employer->id==fauth()->id()?'disabled':''}}  name="status{{$employer->employee_id}}"
                                                        @if($employer->status) checked @endif>
                                             </div>
                                         </td>
                                         <td>{{$employer->user->name}}</td>
                                         <td>
                                             <div class="radio">
-                                                <input type="radio" value="1" name="role{{$employer->employee_id}}"
+                                                <input type="radio"  {{$employer->user->id==fauth()->id()?'disabled':''}} value="1" name="role{{$employer->employee_id}}"
                                                        @if($employer->role) checked @endif>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="radio">
-                                                <input type="radio" value="0" name="role{{$employer->employee_id}}"
+                                                <input type="radio"   {{$employer->user->id==fauth()->id()?'disabled':''}}  value="0" name="role{{$employer->employee_id}}"
                                                        @if(!$employer->role) checked @endif>
                                             </div>
                                         </td>

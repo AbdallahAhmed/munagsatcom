@@ -85,7 +85,8 @@
                                         <div class="title">
                                             <p> {{trans('app.chances.chance')}}<span><a
                                                             href="{{$chance->path}}">{{$chance->name}}</a></span></p>
-                                            <p>{{trans('app.the_company')}} <span>{{$chance->company->name}}</span></p>
+                                            <p>{{trans('app.the_company')}}
+                                                <span>{{$chance->company?$chance->company->name:'--'}}</span></p>
                                         </div>
                                     </div>
                                 </div>

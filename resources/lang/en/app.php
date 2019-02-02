@@ -253,7 +253,8 @@ return [
         'publish' => 'Publish chance'
     ],
     'units' => [
-        'unit' => 'Unit'
+        'unit' => 'Unit',
+        'units'=>'Units'
     ],
     'add_logo' => 'Add Logo',
     'add_logo_new' => 'Add new photo',

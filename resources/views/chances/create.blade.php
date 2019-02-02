@@ -7,7 +7,7 @@
             <h2 class="text-center">{{trans('app.add_chance')}}</h2>
             <div class="feildcont">
                 @if (!session('status'))
-                    <form method="post" action="{{route('chances.create', ['id' => $company->id])}}"
+                    <form method="post" id="form-submit" action="{{route('chances.create', ['id' => $company->id])}}"
                           enctype="multipart/form-data">
                         {{csrf_field()}}
                         <div class="reg-part">
@@ -22,7 +22,8 @@
                                     <div class="new-f-group">
                                         <div class="form-group clearfix">
                                             <input type="text" value="{{@Request::old("name")}}" name="name"
-                                                   class="effect-9 form-control" placeholder=" {{trans('app.chances.chance_name')}}">
+                                                   class="effect-9 form-control"
+                                                   placeholder=" {{trans('app.chances.chance_name')}}">
                                             <span class="focus-border"><i></i></span>
                                         </div>
                                     </div>
@@ -34,7 +35,8 @@
                                     <div class="new-f-group">
                                         <div class="form-group clearfix">
                                             <input name="number" value="{{@Request::old("number")}}" type="text"
-                                                   placeholder="{{trans('app.chances.internal_number')}}" class="effect-9 form-control">
+                                                   placeholder="{{trans('app.chances.internal_number')}}"
+                                                   class="effect-9 form-control">
                                             <span class="focus-border"><i></i></span>
                                         </div>
                                     </div>
@@ -145,7 +147,7 @@
                             </div>--}}
                         </div>
                         <div class="reg-part">
-                            <h3> الوحدات </h3>
+                            <h3>    {{trans('app.units.units')}}</h3>
 
                             <div class="form-group-lg row">
                                 <div class="col-xs-12 col-md-4">
@@ -182,13 +184,15 @@
                                aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-plus"></i>
                                 {{trans('app.add_new_units')}}
                             </a>
-                            <a id="others" class="add_field_button" style="margin-right: 20px" role="button" data-toggle="collapse"
+                            <a id="others" class="add_field_button" style="margin-right: 20px" role="button"
+                               data-toggle="collapse"
                                aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-plus"></i>
                                 {{trans('app.add_other_units')}}
                             </a>
                         </div>
                         <div class="form-group-lg text-center">
-                            <button type="submit" class="uperc padding-md fbutcenter">{{trans('app.chances.publish')}}</button>
+                            <button type="submit"
+                                    class="uperc padding-md  fbutcenter submit-changes">{{trans('app.chances.publish')}}</button>
                         </div>
                     </form>
                 @else
@@ -207,6 +211,11 @@
             });
             $('#date').datepicker({
                 dateFormat: "dd-mm-yyy"
+            });
+            $('.submit-changes').click(function () {
+                $(this).attr('disabled', true)
+                $('#form-submit').submit();
+                return true;
             });
             $('#others').on('click', function () {
                 $('                            <div class="form-group-lg row">\n' +
@@ -236,7 +245,7 @@
                     '                                </div>\n' +
                     '                            </div>\n').insertBefore('#units')
             })
-            $('#units').on('click',function () {
+            $('#units').on('click', function () {
                 $(' <div class="form-group-lg row">\n' +
                     '                                <div class="col-xs-12 col-md-4">\n' +
                     '                                    <div class="new-f-group">\n' +

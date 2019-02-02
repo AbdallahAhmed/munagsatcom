@@ -30,7 +30,7 @@ class ChanceController extends Controller
      */
     public function index(Request $request)
     {
-        $query = \App\Models\Chance::query()->whereNotIn('status', [3, 5])->whereDate('closing_date', '>=', Carbon::today()->toDateString());
+        $query = \App\Models\Chance::query()->has('company')->whereNotIn('status', [3, 5])->whereDate('closing_date', '>=', Carbon::today()->toDateString());
         $this->data['q'] = null;
         $this->data['created_at'] = null;
         $status = $request->get('status');

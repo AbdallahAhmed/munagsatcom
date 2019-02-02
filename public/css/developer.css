@@ -443,3 +443,8 @@ html[dir="ltr"] div.text-left {
 .footer-link li i{
      font-size: 21px;
  }
+.one_four {
+    width: 25%;
+    float: left;
+    margin-right: 0;
+}

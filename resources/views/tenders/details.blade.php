@@ -95,22 +95,27 @@
 
                     <div class="card-date clearfix">
                         <h3 class="text-center"><span>{{trans('app.tenders.dates')}}</span></h3>
-                        <div class="item one_thrd">
+                        <div class="item one_four">
                             <p>{{trans('app.tenders.files_opened_at')}}</p>
                             <p><i class="fa fa-calendar"></i> <span
                                         class="text-grey">{{$tender->files_opened_at->format('Y/m/d')}}</span>-<span
                                         class="text-grey">{{$tender->files_opened_at->format('H:s')}}</span></p>
                         </div>
-                        <div class="item one_thrd">
+                        <div class="item one_four">
                             <p>{{trans('app.tenders.last_get_offer_at')}}</p>
                             <p><i class="fa fa-calendar"></i> <span
                                         class="text-grey">{{$tender->last_get_offer_at->format('Y/m/d')}}</span>-<span
                                         class="text-grey">{{$tender->last_get_offer_at->format('H:s')}}</span></p>
                         </div>
-                        <div class="item one_thrd">
+
+                        <div class="item one_four">
                             <p>{{trans('app.tenders.created')}}</p>
                             <p><i class="fa fa-calendar"></i> <span
                                         class="text-grey">{{$tender->published_at->format('Y/m/d')}} </span></p>
+                        </div>
+                        <div class="item one_four">
+                            <p>{{trans('app.tenders.last_queries_at')}}</p>
+                            <p><i class="fa fa-calendar"></i> <span class="text-grey">{{$tender->last_queries_at->format('Y/m/d')}}</span></p>
                         </div>
                     </div>
 

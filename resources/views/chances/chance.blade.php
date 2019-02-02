@@ -47,7 +47,7 @@
                                         </li>
                                         <li class="clearfix">
                                             <div class="one_xsmall title">{{trans('app.chances.closing_date')}}</div>
-                                            <div class="one_xlarg">{{$chance->closing_date}}</div>
+                                            <div class="one_xlarg">{{$chance->closing_date->format('d-m-Y')}}</div>
                                         </li>
                                         <li class="clearfix">
                                             <div class="one_xsmall title">{{trans('app.chances.sectors')}}</div>
@@ -81,6 +81,7 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">{{trans('app.sectors.sector_name')}}</th>
+                                    <th scope="col">{{trans('app.units.unit')}}</th>
                                     <th scope="col"> {{trans('app.quantity')}}</th>
                                 </tr>
                                 </thead>
@@ -90,6 +91,9 @@
                                         <td>
                                             <h3 style="text-align: center;">{{$unit->name }}</h3>
                                             <p>{{$unit->details}}</p>
+                                        </td>
+                                        <td>
+                                            {{$unit->pivot->name}}
                                         </td>
                                         <td>{{$unit->pivot->quantity}}</td>
                                     </tr>

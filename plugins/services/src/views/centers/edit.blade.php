@@ -128,7 +128,7 @@
                         <div class="panel-body">
                             <div class="form-group">
                                 <select name="approved" class="form-control chosen-select chosen-rtl">
-                                    @if((!$center && $center->approved == 0))
+                                    @if(($center && $center->approved == 0))
                                         <option value="0"
                                                 selected="selected">{{trans("services::centers.reject")}}</option>
                                         <option value="1">{{trans("services::centers.approve")}}</option>

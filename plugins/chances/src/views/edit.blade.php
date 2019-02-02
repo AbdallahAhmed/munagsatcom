@@ -68,15 +68,15 @@
                             </div>
                             <div class="form-group">
                                 <label
-                                        for="input-number">{{ trans("chances::chances.attributes.closing_date") }}</label>
-                                <input name="closing_date" type="datetime-local"
-                                       value="{{ DateTime::createFromFormat('Y-m-d H:i:s', $chance->closing_date)->format("Y-m-d\TH:i") }}"
+                                    for="input-number">{{ trans("chances::chances.attributes.closing_date") }}</label>
+                                <input name="closing_date" type="date" data-format="YYYY-mm-dd"
+                                       value="{{ DateTime::createFromFormat('Y-m-d H:i:s', $chance->closing_date)->format("Y-m-d") }}"
                                        class="chosen-rtl form-control" id="input-name"
                                        placeholder="{{ trans("chances::chances.attributes.closing_date") }}">
                             </div>
                             <div class="form-group">
                                 <label
-                                        for="input-number">{{ trans("chances::chances.attributes.value") }}</label>
+                                    for="input-number">{{ trans("chances::chances.attributes.value") }}</label>
                                 <input name="value" type="text"
                                        value="{{ @Request::old("value", $chance->value)}}"
                                        class="form-control" id="input-name"
@@ -84,7 +84,7 @@
                             </div>
                             <div class="form-group">
                                 <label
-                                        for="input-number">{{ trans("chances::chances.attributes.file_description") }}</label>
+                                    for="input-number">{{ trans("chances::chances.attributes.file_description") }}</label>
                                 <input name="file_description" type="text"
                                        value="{{ @Request::old("file_description", $chance->file_description)}}"
                                        class="form-control" id="input-name"
@@ -92,7 +92,7 @@
                             </div>
                             <div class="form-group">
                                 <label
-                                        for="input-number">{{ trans("chances::chances.attributes.file_name") }}</label>
+                                    for="input-number">{{ trans("chances::chances.attributes.file_name") }}</label>
                                 <input name="file_name" type="text"
                                        value="{{ @Request::old("file_name", $chance->file_name)}}"
                                        class="form-control" id="input-name"
@@ -214,7 +214,7 @@
                                 <div id="reason"
                                      style="display: @if($chance->approved == 1) none @else block @endif; margin-top: 20px">
                                     <label
-                                            for="input-number">{{ trans("chances::chances.attributes.reason") }}</label>
+                                        for="input-number">{{ trans("chances::chances.attributes.reason") }}</label>
                                     <input name="reason" type="text"
                                            value="{{$chance->reason}}"
                                            class="form-control" id="input-name"
@@ -249,39 +249,31 @@
                             {{ trans("chances::chances.add_sector") }}
                         </div>
                         <div class="panel-body">
-
-                            @if ($sectors)
-                                <ul class='tree-views'>
-                                    <?php
-                                    foreach ($sectors as $sector) {
-                                        echo "<li><div class='tree-row checkbox i-checks'>";
-                                        echo "<a class='expand' href='javascript:void(0)'>+</a>";
-                                        echo "<input type='checkbox' name='sectors[]' value='$sector->id' ";
-                                        if (in_array($sector->id, $chances_sectors))
-                                            echo "checked=''checked";
-                                        echo ">&nbsp;" . $sector->name . " </label></div>";
-                                    }
-                                    ?>
-                                </ul>
-                            @else
-                                {{ trans("chances::chances.no_records") }}
-                            @endif
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-folder"></i>
-                            {{ trans("chances::chances.file_download") }}
-                        </div>
-                        <div class="panel-body">
                             <div class="form-group">
-                                <a href="{{uploads_url().$chance->media->path}}"
-                                   target="_blank">{{$chance->file_name}}</a>
+                                <select name="status" class="form-control chosen-select chosen-rtl">
+                                    @foreach(\Dot\Chances\Models\Sector::all() as $sector)
+                                        <option
+                                            value="{{$sector->id}}" {{ old('sector_id',$sector->id)==$chance->sector_id?'selected':'' }}> {{$sector->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
+                        </div>
+
+                    </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-folder"></i>
+                        {{ trans("chances::chances.file_download") }}
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <a href="{{uploads_url().$chance->media->path}}"
+                               target="_blank">{{$chance->file_name}}</a>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
 

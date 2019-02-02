@@ -110,7 +110,7 @@ class ChancesController extends Controller
 
             $unit->name = Request::get("unit_name");
             $unit->status = 1;
-            $unit->user_id = Auth::user()->id;
+            $unit->user_id = Auth::id();
             $name = Request::get('name', "");
             $quantity = Request::get('quantity', "");
 
@@ -142,7 +142,7 @@ class ChancesController extends Controller
         if (Request::isMethod("post")) {
             $chance->name = Request::get("name");
             $chance->number = Request::get("number");
-            $chance->closing_date = Request::get("closing_date") ? Carbon::createFromFormat('Y-m-d\TH:i', Request::get("closing_date")) : null;
+            $chance->closing_date = Request::get("closing_date") ? Carbon::createFromFormat('Y-m-d', Request::get("closing_date")) : null;
             $chance->file_name = Request::get("file_name", "");
             $chance->file_description = Request::get("file_description", "");
             $chance->status = Request::get("status", 3);
@@ -194,6 +194,7 @@ class ChancesController extends Controller
             }
             $chance->sectors()->sync($sectors);
             //$chance->units()->sync($syncUnit);
+
 
             return Redirect::route("admin.chances.edit", array("id" => $chance->id))
                 ->with("message", trans("chances::chances.events.created"));

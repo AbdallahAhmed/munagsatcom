@@ -191,7 +191,7 @@ class ChanceController extends Controller
                 }
             }
 
-            if (!$units)
+            if (!$units||empty($units[0]))
                 $errors->add("units", trans("chances::chances.attributes.units") . " " . trans("chances::chances.required") . ".");
             /*if (!$sectors)
                 $errors->add("sectors", trans("chances::chances.attributes.sectors") . " " . trans("chances::chances.required") . ".");*/

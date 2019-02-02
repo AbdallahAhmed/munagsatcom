@@ -36,23 +36,23 @@
                                 <div id="options_main" class="tab-pane active">
                                     <div class="form-group">
                                         <label for="site_name">{{trans("services::points.rules_book_percentage")}}</label>
-                                        <input name="option[rules_book_percentage]" type="number" required="required" min="0" max="100" value="{{$rules_book_percentage}}" class="form-control" id="rules_book_percentage" placeholder="{{trans("services::points.rules_book_percentage")}}">
+                                        <input name="option[rules_book_percentage]"  type="number" required="required" min="0" max="100" value="{{$rules_book_percentage}}" class="form-control" id="rules_book_percentage" placeholder="{{trans("services::points.rules_book_percentage")}}">
                                     </div>
                                     <div class="form-group">
                                         <label for="site_name">{{trans("services::points.rules_book_add")}}</label>
-                                        <input name="option[rules_book_add]" type="text" required="required" value="{{$rules_book_add}}" class="form-control" id="rules_book_add" placeholder="{{trans("services::points.rules_book_add")}}">
+                                        <input name="option[rules_book_add]"  min="0" type="text" required="required" value="{{$rules_book_add}}" class="form-control" id="rules_book_add" placeholder="{{trans("services::points.rules_book_add")}}">
                                     </div>
                                     <div class="form-group">
                                         <label for="site_name">{{trans("services::points.service_center_add")}}</label>
-                                        <input name="option[service_center_add]" type="text" required="required" value="{{$service_center_add}}" class="form-control" id="service_center_add" placeholder="{{trans("services::points.service_center_add")}}">
+                                        <input name="option[service_center_add]" min="0" type="text" required="required" value="{{$service_center_add}}" class="form-control" id="service_center_add" placeholder="{{trans("services::points.service_center_add")}}">
                                     </div>
                                     <div class="form-group">
                                         <label for="site_name">{{trans("services::points.point_per_reyal")}}</label>
-                                        <input name="option[point_per_reyal]" type="text" required="required" value="{{$point_per_reyal}}" class="form-control" id="point_per_reyal" placeholder="{{trans("services::points.point_per_reyal")}}">
+                                        <input name="option[point_per_reyal]" min="0" type="text" required="required" value="{{$point_per_reyal}}" class="form-control" id="point_per_reyal" placeholder="{{trans("services::points.point_per_reyal")}}">
                                     </div>
                                     <div class="form-group">
                                         <label for="new_user_points">{{trans("services::points.new_user_points")}}</label>
-                                        <input name="option[new_user_points]" type="number" required="required" value="{{$new_user_points}}" class="form-control" id="new_user_points" placeholder="{{trans("services::points.new_user_points")}}">
+                                        <input name="option[new_user_points]" min="0" type="number" required="required" value="{{$new_user_points}}" class="form-control" id="new_user_points" placeholder="{{trans("services::points.new_user_points")}}">
                                     </div>
                                 </div>
                             </div>

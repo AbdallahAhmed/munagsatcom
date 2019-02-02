@@ -67,10 +67,10 @@
 
 
                             {{--<div class="form-group">--}}
-                                {{--<label>$ {{ trans("tenders::tenders.attributes.price") }} </label>--}}
-                                {{--<input name="price" type="number" min="1"  step="0.01" class="form-control" rows="1"--}}
-                                          {{--id="tender-goal"--}}
-                                          {{--placeholder="{{ trans("tenders::tenders.attributes.price") }}" value="{{ @Request::old("price", $tender->price) }}">--}}
+                            {{--<label>$ {{ trans("tenders::tenders.attributes.price") }} </label>--}}
+                            {{--<input name="price" type="number" min="1"  step="0.01" class="form-control" rows="1"--}}
+                            {{--id="tender-goal"--}}
+                            {{--placeholder="{{ trans("tenders::tenders.attributes.price") }}" value="{{ @Request::old("price", $tender->price) }}">--}}
                             {{--</div>--}}
 
                             <div class="form-group">
@@ -102,9 +102,10 @@
 
                             <div class="form-group">
                                 <label>{{ trans("tenders::tenders.attributes.number") }} </label>
-                                <input name="number" type="text"   class="form-control"
+                                <input name="number" type="text" class="form-control"
                                        id="tender-goal"
-                                       placeholder="{{ trans("tenders::tenders.attributes.number") }}" value="{{ @Request::old("number", $tender->number) }}">
+                                       placeholder="{{ trans("tenders::tenders.attributes.number") }}"
+                                       value="{{ @Request::old("number", $tender->number) }}">
                             </div>
                         </div>
                     </div>
@@ -133,6 +134,7 @@
                                     <input type="text" name="cb_real_price" class="form-control input-lg"
                                            placeholder="{{ trans("tenders::tenders.attributes.cb_real_price") }}"
                                            maxlength="10"
+                                           min="0"
                                            value="{{ @Request::old("cb_real_price", $tender->cb_real_price) }}"/>
                                 </div>
 
@@ -151,11 +153,12 @@
 
                                 <div class="form-group">
                                     <label id="cb_downloaded_price"
-                                            @if (@Request::old("is_cb_ratio_active", $tender->is_cb_ratio_active)) style="display: none"
+                                           @if (@Request::old("is_cb_ratio_active", $tender->is_cb_ratio_active)) style="display: none"
                                             @endif
 
                                     >{{ trans("tenders::tenders.attributes.cb_downloaded_price") }}</label>
-                                    <input type="text" name="cb_downloaded_price" class="form-control input-lg"
+                                    <input type="text" min="0"
+                                           name="cb_downloaded_price" class="form-control input-lg"
 
                                            @if (@Request::old("is_cb_ratio_active", $tender->is_cb_ratio_active)) style="display: none"
                                            @endif
@@ -203,7 +206,8 @@
                             <div class="form-group" style="position:relative">
                                 <label>{{ trans("tenders::tenders.attributes.places") }}</label>
 
-                                <select name="tender_places[]" class="form-control" multiple="multiple" id="tender_places">
+                                <select name="tender_places[]" class="form-control" multiple="multiple"
+                                        id="tender_places">
                                     @foreach($tender->places as $place)
                                         <option value="{{$place->id}}" selected>{{$place->name}}</option>
                                     @endforeach

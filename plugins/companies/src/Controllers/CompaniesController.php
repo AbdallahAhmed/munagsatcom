@@ -73,7 +73,7 @@ class CompaniesController extends Controller
         return Redirect::back()->with("message", trans("companies::companies.events.deleted"));
     }
 
-    /*
+    /**
      * Create a new company
      * @return mixed
      */
@@ -111,9 +111,12 @@ class CompaniesController extends Controller
             if (!$company->validate()) {
                 return Redirect::back()->withErrors($company->errors())->withInput(Request::all());
             }
-            if($company->status == 1)
+            if ($company->status == 1) {
                 $company->user()->update(['status' => 1]);
-
+            }
+            if ($company->status == 2) {
+                $company->user()->update(['status' => 0, 'remember_token' => null]);
+            }
             $company->save();
 
             return Redirect::route("admin.companies.edit", array("id" => $id))->with("message", trans("companies::companies.events.updated"));
@@ -121,7 +124,7 @@ class CompaniesController extends Controller
 
         $this->data["company"] = $company;
         $this->data["files"] = $company->files;
-        $this->data['status'] = [0,1,2];
+        $this->data['status'] = [0, 1, 2];
         $this->data['sectors'] = Sector::published()->get();
 
         return view("companies::edit", $this->data);

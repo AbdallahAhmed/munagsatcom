@@ -28,7 +28,15 @@ return [
     'add_image' => 'Add image',
     'not_allowed_file' => 'Not allowed file',
     'add_sector' => "Add sectors",
-
+    'blocked' => 'Blocked',
+    'logo' => 'Logo',
+    'files' => 'Files',
+    'unblocked' => 'Unblocked',
+    'status' => [
+        0 => 'Under review',
+        1 => 'Accepted',
+        2 => 'Rejected'
+    ],
     'attributes' => [
         'name' => 'Company name',
         'first_name' => 'first name',

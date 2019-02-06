@@ -449,11 +449,25 @@ html[dir="ltr"] div.text-left {
     margin-right: 0;
 }
 
-
 .card-details .card-img {
     border: #ebebeb solid 1px;
     background-color: #fff;
     width: 70%;
     margin: 0 auto;
     padding-top: 15px;
+}
+
+.partner ul li {
+    margin: 0 10px 5px;
+    border: 1px solid #b7b7b7;
+    border-radius: 5px;
+    padding: 3px;
+    background: #fff;
+}
+
+footer a {
+    color: #ffffff !important;
+}
+.mail-text{
+    color: #ffffff !important;
 }

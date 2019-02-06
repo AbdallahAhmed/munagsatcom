@@ -232,55 +232,14 @@
                                 <label class="col-sm-9 control-label"
                                        for="input-status">{{ trans("tenders::tenders.attributes.status") }}</label>
                                 <div class="col-sm-3">
-                                    <input @if (@Request::old("type_id", $tender->status)) checked="checked" @endif
+                                    <input @if (@Request::old("status", $tender->status)) checked="checked" @endif
                                     type="checkbox" id="input-status" name="status" value="1"
                                            class="status-switcher switcher-sm">
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label"
-                                           for="input-type_id">{{ trans("tenders::tenders.attributes.type") }}</label>
-                                    <div class="col-md-9">
-                                        <select name="type_id" class="form-control chosen-select chosen-rtl"
-                                                id="input-type_id">
-                                            @foreach(Dot\Tenders\Models\TenderType::all() as $type)
-                                                <option value="{{$type->id}}" {{old('type_id',$tender->type_id)==$type->id?'selected':""}}>{{$type->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-folder"></i>
-                            {{ trans("tenders::tenders.add_category") }}
-                        </div>
-                        <div class="panel-body">
-
-                            @if (Dot\Categories\Models\Category::count())
-                                <ul class='tree-views'>
-                                    <?php
-                                    echo Dot\Categories\Models\Category::tree(array(
-                                        "row" => function ($row, $depth) use ($tender, $tender_categories) {
-                                            $html = "<li><div class='tree-row checkbox i-checks'><a class='expand' href='javascript:void(0)'>+</a> <label><input type='checkbox' ";
-                                            if ($tender and in_array($row->id, $tender_categories->pluck("id")->toArray())) {
-                                                $html .= 'checked="checked"';
-                                            }
-                                            $html .= "name='categories[]' value='" . $row->id . "'> &nbsp;" . $row->name . "</label></div>";
-                                            return $html;
-                                        }
-                                    ));
-                                    ?>
-                                </ul>
-                            @else
-                                {{ trans("categories::categories.no_records") }}
-                            @endif
-                        </div>
                     </div>
 
                     @foreach(Action::fire("tender.form.sidebar") as $output)

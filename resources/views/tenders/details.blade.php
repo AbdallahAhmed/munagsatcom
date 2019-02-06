@@ -39,24 +39,6 @@
                                             <div class="one_xlarg">{{$tender->objective}}</div>
                                         </li>
                                         <li class="clearfix">
-                                            <div class="one_xsmall title">{{trans('app.tenders.category')}}</div>
-                                            <div class="one_xlarg">
-                                                @foreach($tender->categories as $category)
-                                                    {{$category->name}}
-                                                    @if(!$loop->last)
-                                                        -
-                                                    @endif
-                                                @endforeach
-                                                @if(count($tender->categories)==0)
-                                                    --
-                                                @endif
-                                            </div>
-                                        </li>
-                                        <li class="clearfix">
-                                            <div class="one_xsmall title">{{trans('app.tenders.type')}}</div>
-                                            <div class="one_xlarg">{{$tender->type->name}}</div>
-                                        </li>
-                                        <li class="clearfix">
                                             <div class="one_xsmall title">{{trans('app.tenders.org')}}</div>
                                             <div class="one_xlarg">{{$tender->org->name}}</div>
                                         </li>

@@ -228,8 +228,8 @@ class TenderController extends Controller
     {
 
         $tender = Tender::findOrFail($id);
-
         if (Request::isMethod("post")) {
+
 
             $tender->name = Request::get('name');
             $tender->objective = Request::get('objective');

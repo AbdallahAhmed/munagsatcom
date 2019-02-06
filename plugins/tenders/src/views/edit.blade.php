@@ -95,7 +95,7 @@
                                         <option> {{trans('tenders::tenders.no_activity')}}</option>
                                     @endif
                                     @foreach($activities as $activity)
-                                        <option value="{{$activity->id}}" {{old('activity_id',$activity->activity_id)==$activity->id?'selected':""}}>{{$activity->name}}</option>
+                                        <option value="{{$activity->id}}" {{old('activity_id',$tender->activity_id)==$activity->id?'selected':""}} >{{$activity->name}}</option>
                                     @endforeach
                                 </select>
                             </div>

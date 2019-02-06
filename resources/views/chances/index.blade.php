@@ -87,7 +87,7 @@
                                                             href="{{$chance->path}}">{{$chance->name}}</a></span></p>
                                             <p>{{trans('app.the_company')}}
                                                 <span>{{$chance->company?$chance->company->name:'--'}}</span></p>
-                                        </div>
+                en                        </div>
                                     </div>
                                 </div>
                                 <div class="card-share">

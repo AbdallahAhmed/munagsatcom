@@ -182,7 +182,7 @@ return [
     'profile_updated'=>'تم تحديث بياناتك',
     'events' => [
         'successfully_register' => 'مرحبا تم التسجيل بنجاح ',
-        'successfully_register_company' => 'تم التسجيل بنجاح ، طلبك قيد المراجعة',
+        'successfully_register_company' => 'تم التسجيل بنجاح ،  حسابك في انتظار التفعيل من قبل الإدارة',
         'password_changed' => 'تم تغير كلمة المرور بنجاح',
     ],
     'sectors' => [

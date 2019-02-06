@@ -135,8 +135,7 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <div class="card-img"><a href="{{uploads_url($tender->org->logo->path)}}"
-                                                                 class="open-image">
+                                        <div class="card-img"><a href="{{$tender->path}}">
                                                 <img src="{{thumbnail($tender->org->logo->path)}}"
                                                      alt="{{$tender->org->name}}"></a>
                                         </div>

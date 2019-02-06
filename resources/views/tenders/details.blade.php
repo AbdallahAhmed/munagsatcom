@@ -6,7 +6,6 @@
 @section('content')
     <section class="container">
         <div class="row">
-            <!-------------- Begin:content -------------->
             <div class="col-md-12 content-details">
                 <h2><span>{{trans('app.tenders.details')}} </span></h2>
 
@@ -16,7 +15,7 @@
                             <div class="col-md-3">
                                 <div class="card-img">
                                     <a href="{{uploads_url($tender->org->logo->path)}}" class="open-image"> <img
-                                                src="{{thumbnail($tender->org->logo->path)}}"
+                                                src="{{uploads_url($tender->org->logo->path)}}"
                                                 alt="{{$tender->org->name}}" title="{{$tender->org->name}}"></a>
                                 </div>
                             </div>

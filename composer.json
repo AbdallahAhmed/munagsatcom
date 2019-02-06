@@ -37,7 +37,7 @@
             "Dot\\Options\\": "plugins/options/src/",
             "Dot\\Seo\\": "plugins/seo/src/",
             "Dot\\Tags\\": "plugins/tags/src/",
-            "Dot\\Users\\": "plugins/Users/src/",
+            "Dot\\Users\\": "plugins/users/src/",
             "Dot\\I18n\\": "plugins/i18n/src/",
             "Dot\\Chances\\": "plugins/chances/src/",
             "Dot\\Tenders\\": "plugins/tenders/src/",

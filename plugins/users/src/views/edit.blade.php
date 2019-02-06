@@ -151,15 +151,13 @@
                         <div class="panel-body">
 
                             @if(Auth::user()->can("roles.manage", $user))
-
                                 <div class="row form-group">
                                     <label class="col-sm-3 control-label">{{ trans("users::users.role") }}</label>
                                     <div class="col-sm-9">
                                         <select class="form-control select2 chosen-rtl" name="role_id">
 
                                             @foreach ($roles as $role)
-                                                <option
-                                                    {{ $user && $user->role_id == $role->id ? 'selected="selected"' : '' }}
+                                                <option {{ $user && $user->role_id == $role->id ? 'selected="selected"' : '' }}
                                                     value="{{ $role->id }}">{{ $role->name }}</option>
                                             @endforeach
 

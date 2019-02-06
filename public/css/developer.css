@@ -448,3 +448,12 @@ html[dir="ltr"] div.text-left {
     float: left;
     margin-right: 0;
 }
+
+
+.card-details .card-img {
+    border: #ebebeb solid 1px;
+    background-color: #fff;
+    width: 70%;
+    margin: 0 auto;
+    padding-top: 15px;
+}

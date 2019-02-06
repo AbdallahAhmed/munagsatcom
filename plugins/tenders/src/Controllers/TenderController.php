@@ -178,7 +178,7 @@ class TenderController extends Controller
             $tender->org_id = Request::get('org_id', 0);
             $tender->cb_id = Request::get('cb_id', 0);
             $tender->type_id = Request::get('type_id', 0);
-            $tender->activity_id = Request::get('type_id', 0);
+            $tender->activity_id = Request::get('activity_id', 0);
 
 
             $tender->user_id = Auth::user()->id;
@@ -252,7 +252,7 @@ class TenderController extends Controller
             $tender->org_id = Request::get('org_id', 0);
             $tender->cb_id = Request::get('cb_id', 0);
             $tender->type_id = Request::get('type_id', 0);
-            $tender->activity_id = Request::get('type_id', 0);
+            $tender->activity_id = Request::get('activity_id', 0);
             $tender->number = Request::get("number", 0);
 
             $tender->status = Request::get("status", 0);

@@ -64,7 +64,7 @@ class Tender extends Model
         'activity_id' => 'required',
         'cb_id' => 'required|not_in:0',
         'cb_real_price' => 'required|numeric|min:0',
-//        'price' => 'required|numeric|min:0'
+        'number' => 'required'
     ];
 
     /**
@@ -77,7 +77,7 @@ class Tender extends Model
         'activity_id' => 'required',
         'cb_id' => 'required|not_in:0',
         'cb_real_price' => 'required|numeric|min:0',
-//        'price' => 'required|numeric|min:1'
+        'number' => 'required'
     ];
 
     /**

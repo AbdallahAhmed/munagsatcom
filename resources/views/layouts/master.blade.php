@@ -12,7 +12,7 @@
     @else
         <link href="{{asset('/assets')}}/css/maincss-en.css" rel="stylesheet">
     @endif
-    <link href="{{asset('/')}}/css/developer.css" rel="stylesheet">
+    <link href="{{asset('/')}}/css/developer.css?dasd4654564" rel="stylesheet">
     <script src="{{asset('/')}}/js/pace.js"></script>
 
 

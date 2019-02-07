@@ -152,7 +152,8 @@
                                     </div>
                                 </div>
                                 <div class="card-share">
-                                    <a class="share" href="javascript:void(0)"><i class="fa fa-share-alt"></i></a>
+                                    <a class="share" data-title="{{$tender->title}}" data-desc="{{$tender->excerpt}}" data-link="{{$tender->path}}" href="javascript:void(0)"><i
+                                                class="fa fa-share-alt"></i></a>
                                 </div>
                             </div>
                             <div class="card-date clearfix">
@@ -193,7 +194,8 @@
                                 <div class="priceshadow one_thrd"> {{trans('app.tenders.cb')}}<br> <span
                                             class="text-blue">{{$tender->cb_real_price}} {{trans('app.$')}} </span>
                                 </div>
-                                <div class="priceshadow one_thrd"> {{trans('app.tenders.cb_downloaded_price')}} <br><span
+                                <div class="priceshadow one_thrd"> {{trans('app.tenders.cb_downloaded_price')}}
+                                    <br><span
                                             class="text-blue">{{$tender->cb_downloaded_price}} {{trans('app.$')}} </span>
                                 </div>
                                 <div class="light-white one_thrd">{{trans('app.tenders.id')}} <br><span

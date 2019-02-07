@@ -13,9 +13,7 @@
                         <div class="form-group-lg row">
                             @if ($errors->any())
                                 <div class="alert alert-danger">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-                                        &times;
-                                    </button>
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                     <ul>
                                         @foreach ($errors->all() as $error)
                                             <li>{{ $error }}</li>
@@ -23,26 +21,26 @@
                                     </ul>
                                 </div>
                             @endif
-                            <label class="col-xs-12 col-md-3">{{trans('app.fields.first_name')}}</label>
-                            <div class="col-xs-12 col-md-9">
-                                <div class="new-f-group">
-                                    <div class="form-group clearfix">
-                                        <span class="icony"><i class="fa fa-user"></i></span>
-                                        <input name="first_name" value="{{Request::old('first_name')}}" type="text" class="effect-9 form-control"
-                                               placeholder="{{trans('app.fields.first_name')}}">
-                                        <span class="focus-border"><i></i></span>
-                                    </div>
-                                </div>
-                            </div>
+                            {{--<label class="col-xs-12 col-md-3">{{trans('app.fields.first_name')}}</label>--}}
+                            {{--<div class="col-xs-12 col-md-9">--}}
+                                {{--<div class="new-f-group">--}}
+                                    {{--<div class="form-group clearfix">--}}
+                                        {{--<span class="icony"><i class="fa fa-user"></i></span>--}}
+                                        {{--<input name="first_name" value="{{Request::old('first_name')}}" type="text" class="effect-9 form-control"--}}
+                                               {{--placeholder="{{trans('app.fields.first_name')}}">--}}
+                                        {{--<span class="focus-border"><i></i></span>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
                         </div>
                         <div class="form-group-lg row">
-                            <label class="col-xs-12 col-md-3">{{trans('app.fields.last_name')}}</label>
+                            <label class="col-xs-12 col-md-3">{{trans('app.fields.name')}}</label>
                             <div class="col-xs-12 col-md-9">
                                 <div class="new-f-group">
                                     <div class="form-group clearfix">
                                         <span class="icony"><i class="fa fa-user"></i></span>
-                                        <input name="last_name" value="{{Request::old('last_name')}}" type="text" class="effect-9 form-control"
-                                               placeholder="{{trans('app.fields.last_name')}}">
+                                        <input name="name" value="{{Request::old('name')}}" type="text" class="effect-9 form-control"
+                                               placeholder="{{trans('app.fields.name')}}">
                                         <span class="focus-border"><i></i></span>
                                     </div>
                                 </div>
@@ -63,19 +61,19 @@
                             </div>
                         </div>
 
-                        <div class="form-group-lg row">
-                            <label class="col-xs-12 col-md-3">{{trans('app.phone_number')}}</label>
-                            <div class="col-xs-12 col-md-9">
-                                <div class="new-f-group">
-                                    <div class="form-group clearfix">
-                                        <span class="icony"><i class="fa fa-mobile"></i></span>
-                                        <input name="phone_number" type="text" value="{{Request::old('phone_number')}}" class="effect-9 form-control"
-                                               placeholder="{{trans('app.phone_number')}}">
-                                        <span class="focus-border"><i></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {{--<div class="form-group-lg row">--}}
+                            {{--<label class="col-xs-12 col-md-3">{{trans('app.phone_number')}}</label>--}}
+                            {{--<div class="col-xs-12 col-md-9">--}}
+                                {{--<div class="new-f-group">--}}
+                                    {{--<div class="form-group clearfix">--}}
+                                        {{--<span class="icony"><i class="fa fa-mobile"></i></span>--}}
+                                        {{--<input name="phone_number" type="text" value="{{Request::old('phone_number')}}" class="effect-9 form-control"--}}
+                                               {{--placeholder="{{trans('app.phone_number')}}">--}}
+                                        {{--<span class="focus-border"><i></i></span>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
                         <div class="form-group-lg row">
                             <label class="col-xs-12 col-md-3">{{trans('app.fields.password')}} </label>
@@ -105,17 +103,6 @@
                         </div>
 
                         <div class="form-group-lg row">
-                            <label class="col-xs-12 col-md-3">{{trans('app.add_logo')}} </label>
-                            <div class="new-f-group col-xs-12 col-md-4">
-                                <div class="form-group">
-                                    <div class=" file-upload" data-input-name="logo" data-unodz-callback="callback()">
-                                    </div>
-                                    <p id="logo_error" style="display: none" class="text-danger">{{trans('app.logo_error')}}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group-lg row">
                             <label class="col-xs-12 col-md-3"></label>
                             <div class="col-xs-12 col-md-9">
                                 <label class="radio-inline" for="for_personal"> {{trans('app.personal')}}</label>
@@ -134,6 +121,17 @@
 
 
                         <div class="reg-part">
+
+                            <div class="form-group-lg row">
+                                <label class="col-xs-12 col-md-3">{{trans('app.add_logo')}} </label>
+                                <div class="new-f-group col-xs-12 col-md-4">
+                                    <div class="form-group">
+                                        <div class=" file-upload" data-input-name="logo" data-unodz-callback="callback()">
+                                        </div>
+                                        <p id="logo_error" style="display: none" class="text-danger">{{trans('app.logo_error')}}</p>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="form-group-lg row">
                                 <label class="col-xs-12 col-md-3">{{trans('app.company_name')}}</label>

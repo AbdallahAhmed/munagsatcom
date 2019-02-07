@@ -44,10 +44,10 @@ class UserController extends Controller
 
         if ($request->method() == 'POST') {
             $rules = [
-                'first_name' => 'required|alpha|min:3',
-                'last_name' => 'required|alpha|min:3',
+                'name' => 'required|min:8',
+//                'last_name' => 'required|alpha|min:3',
                 'email' => 'required|email|unique:users',
-                'phone_number' => 'min:10',
+//                'phone_number' => 'min:10',
                 'password' => 'required|confirmed|min:6|max:255',
             ];
             if ($request->get('user_type') == 2) {
@@ -73,10 +73,11 @@ class UserController extends Controller
             }
             $user = new User();
             $user->username = $request->get('email');
-            $user->first_name = $request->get('first_name');
-            $user->last_name = $request->get('last_name');
+            $names = explode(',', $request->get('name'));
+            $user->first_name = isset($names[0]) ? $names[0] : '';
+            $user->last_name = isset($names[1]) ? $names[1] : '';
             $user->email = $request->get('email');
-            $user->phone_number = $request->get('phone_number');
+            $user->phone_number = $request->get('phone_number','');
             $user->password = ($request->get('password'));
             $user->role_id = 2;
             $user->backend = 0;
@@ -123,7 +124,11 @@ class UserController extends Controller
                 $company->files()->sync($files);
             } else {
                 session()->put('email', $user->email);
-                Mail::to($user->email)->send(new VerificationMail($user));
+                try {
+                    Mail::to($user->email)->send(new VerificationMail($user));
+                } catch (\Exception $e) {
+
+                }
                 return redirect()->route('user.confirm')->with('status', trans('app.check_email'));
             }
 

@@ -30,49 +30,49 @@ class ChanceController extends Controller
      */
     public function index(Request $request)
     {
-        $query = \App\Models\Chance::query()->has('company')->whereNotIn('status', [3, 5])->whereDate('closing_date', '>=', Carbon::today()->toDateString());
-        $this->data['q'] = null;
-        $this->data['created_at'] = null;
-        $status = $request->get('status');
-        $status = $status ? $status : [];
-        $this->data['chosen_status'] = $status;
-
-        foreach ($status as $st) {
-            switch ($st) {
-                case 0:
-                    $query = $query->orWhere(function ($q) {
-                        $q->opened();
-                    });
-                    break;
-                case 1:
-                    $query = $query->orWhere(function ($q) {
-                        $q->closed();
-                    });
-                    break;
-                case 2:
-                    $query = $query->orWhere(function ($q) {
-                        $q->cancelled();
-                    });
-                    break;
-                case 4:
-                    $query = $query->orWhere(function ($q) {
-                        $q->approved();
-                    });
-                    break;
-            }
-        }
-        if ($request->get('q')) {
-            $q = trim(urldecode($request->get('q')));
-            $query = $query->where('name', 'like', '%' . $q . '%');
-            $this->data['q'] = $q;
-        }
-        if ($request->get('created_at')) {
-            $query = $query->whereDate('created_at', '=', \Carbon\Carbon::parse($request->get('created_at'))->toDateString());
-            $this->data['created_at'] = $request->get('created_at');
-        }
-        $this->data['chances'] = $query->paginate(5);
-        $this->data['status'] = [0, 1];//[0,1,2,3,4,5];
-        return view('chances.index', $this->data);
+//        $query = \App\Models\Chance::query()->has('company')->whereNotIn('status', [3, 5])->whereDate('closing_date', '>=', Carbon::today()->toDateString());
+//        $this->data['q'] = null;
+//        $this->data['created_at'] = null;
+//        $status = $request->get('status');
+//        $status = $status ? $status : [];
+//        $this->data['chosen_status'] = $status;
+//
+//        foreach ($status as $st) {
+//            switch ($st) {
+//                case 0:
+//                    $query = $query->orWhere(function ($q) {
+//                        $q->opened();
+//                    });
+//                    break;
+//                case 1:
+//                    $query = $query->orWhere(function ($q) {
+//                        $q->closed();
+//                    });
+//                    break;
+//                case 2:
+//                    $query = $query->orWhere(function ($q) {
+//                        $q->cancelled();
+//                    });
+//                    break;
+//                case 4:
+//                    $query = $query->orWhere(function ($q) {
+//                        $q->approved();
+//                    });
+//                    break;
+//            }
+//        }
+//        if ($request->get('q')) {
+//            $q = trim(urldecode($request->get('q')));
+//            $query = $query->where('name', 'like', '%' . $q . '%');
+//            $this->data['q'] = $q;
+//        }
+//        if ($request->get('created_at')) {
+//            $query = $query->whereDate('created_at', '=', \Carbon\Carbon::parse($request->get('created_at'))->toDateString());
+//            $this->data['created_at'] = $request->get('created_at');
+//        }
+//        $this->data['chances'] = $query->paginate(5);
+//        $this->data['status'] = [0, 1];//[0,1,2,3,4,5];
+        return view('centers.coming-soon', $this->data);
     }
 
     /**

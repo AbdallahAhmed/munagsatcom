@@ -150,7 +150,7 @@
                                         <option value="" selected="selected">-- {{ trans("tenders::tenders.per_page") }}
                                             --
                                         </option>
-                                        @foreach (array(10, 20, 30, 40) as $num)
+                                        @foreach (array(10, 50, 100, 150) as $num)
                                             <option
                                                     value="{{ $num }}"
                                                     @if ($num == $per_page) selected="selected" @endif>{{ $num }}</option>

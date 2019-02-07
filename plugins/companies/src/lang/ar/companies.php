@@ -2,15 +2,15 @@
 
 return [
 
-    'companies' => 'الشركات',
-    'company' => 'شركة',
-    'add_new' => 'أضف شركة جديد',
-    'edit' => 'تحرير الشركة',
-    'back_to_companies' => 'العودة إلى الشركات',
+    'companies' => 'منشأت',
+    'company' => 'منشأة',
+    'add_new' => 'أضف منشأة جديد',
+    'edit' => 'تحرير المنشأة',
+    'back_to_companies' => 'العودة إلى منشأت',
     'no_records' => 'لا يوجد شركات',
-    'save_company' => 'حفظ الشركة',
+    'save_company' => 'حفظ المنشأة',
     'search' => 'البحث',
-    'search_companies' => 'البحث فى الشركات',
+    'search_companies' => 'البحث فى منشأت',
     'per_page' => 'لكل صفحة',
     'bulk_actions' => 'اختر أمر',
     'delete' => 'حذف',
@@ -41,7 +41,7 @@ return [
     ],
 
     'attributes' => [
-        'name' => 'إسم الشركة',
+        'name' => 'إسم المنشأة',
         'first_name' => 'الإسم الأول',
         'last_name' => 'الإسم الثاني',
         'parent' => 'القسم الرئيسى',
@@ -53,13 +53,13 @@ return [
         'blocked'=>'الحذر'
     ],
     "events" => [
-        'created' => 'تم إنشاء شركة بنجاح',
-        'updated' => 'تم حفظ الشركة بنجاح',
+        'created' => 'تم إنشاء منشأة بنجاح',
+        'updated' => 'تم حفظ المنشأة بنجاح',
         'deleted' => 'تم الحذف بنجاح',
 
     ],
     "permissions" => [
-        "manage" => "التحكم بالشركات"
+        "manage" => "التحكم بمنشأت"
     ]
 
 ];

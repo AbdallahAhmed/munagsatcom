@@ -24,22 +24,6 @@
                     <a href="{{route('page.show', ['slug' => app()->getLocale() == "ar" ? 'الأنظمة و اللوائح' : 'terms'])}}">{{trans('app.terms_conditions')}}</a>
                 </li>
                 <li><a href="{{route('contact-us')}}">{{trans('app.contact_us')}}</a></li>
-                <?php
-                use App\Models\Companies_empolyees;
-                $employee = [];
-                if (fauth()->check()) {
-                    $employee = Companies_empolyees::where([
-                        ['employee_id', fauth()->user()->id],
-                        ['accepted', 1],
-                        ['status', 1]
-                    ])->get();
-                }
-                ?>
-                @if(count($employee) > 0)
-                    <li>
-                        <a href="{{route('company.show', ['slug' => \App\Models\Company::find($employee[0]->company_id)->slug])}}">{{trans('app.the_company')}}</a>
-                    </li>
-                @endif()
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if(!fauth()->check())
@@ -63,6 +47,23 @@
                         <ul class="dropdown-menu">
                             <li><a>{{fauth()->user()->first_name. ' '.fauth()->user()->last_name}}</a></li>
                             <li role="separator" class="divider"></li>
+
+                            <?php
+                            $employee = [];
+                            if (fauth()->check()) {
+                                $employee = App\Models\Companies_empolyees::where([
+                                    ['employee_id', fauth()->user()->id],
+                                    ['accepted', 1],
+                                    ['status', 1]
+                                ])->get();
+                            }
+                            ?>
+                            @if(count($employee) > 0)
+                                <li>
+                                    <a href="{{route('company.show', ['slug' => \App\Models\Company::find($employee[0]->company_id)->slug])}}">{{trans('app.the_company')}}</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                            @endif
                             <li><a href="{{route('user.points')}}">{{trans('app.points')}}</a></li>
                             <li role="separator" class="divider"></li>
 
@@ -92,7 +93,6 @@
     </div><!-- /.container-fluid -->
 </nav>
 
-<!--Begin:header-->
 <header>
     <div class="header">
         <div class="container">
@@ -108,4 +108,3 @@
         </div>
     </div>
 </header>
-<!--End:header-->

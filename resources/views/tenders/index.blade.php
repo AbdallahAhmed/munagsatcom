@@ -16,6 +16,15 @@
                     <div class="feildcont">
                         <form>
                             <div class="form-group clearfix">
+                                <label class="col-xs-12 col-md-3">{{trans('app._search')}}</label>
+                                <div class="col-xs-12 col-md-9 new-f-group">
+                                    <div class="form-group  clearfix">
+                                        <input type="search" class="form-control" placeholder="{{trans('app._search')}}" name="q" value="{{\Request::get('q')}}">
+                                        <span class="focus-border"><i></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group clearfix">
                                 <label class="col-xs-12 col-md-3">{{trans('app.tenders.activity')}}</label>
                                 <div class="col-xs-12 col-md-9 new-f-group">
                                     <div class="form-group clearfix">
@@ -152,7 +161,8 @@
                                     </div>
                                 </div>
                                 <div class="card-share">
-                                    <a class="share" data-title="{{$tender->title}}" data-desc="{{$tender->excerpt}}" data-link="{{$tender->path}}" href="javascript:void(0)"><i
+                                    <a class="share" data-title="{{$tender->title}}" data-desc="{{$tender->excerpt}}"
+                                       data-link="{{$tender->path}}" href="javascript:void(0)"><i
                                                 class="fa fa-share-alt"></i></a>
                                 </div>
                             </div>

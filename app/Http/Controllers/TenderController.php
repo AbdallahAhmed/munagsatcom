@@ -17,7 +17,7 @@ class TenderController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:frontend')->except(['index','details']);
+        $this->middleware('auth:frontend')->except(['index', 'details']);
     }
 
     /** GET /{lang?}
@@ -32,6 +32,11 @@ class TenderController extends Controller
         if ($request->filled('activity_id')) {
             $query->where('activity_id', $request->get('activity_id'));
         }
+
+        if ($request->filled('q')) {
+            $query->where('name', 'LIKE','%' . trim($request->get('q')) . '%');
+        }
+
         if ($request->filled('org_id')) {
             $query->where('org_id', $request->get('org_id'));
         }

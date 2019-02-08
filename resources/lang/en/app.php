@@ -47,6 +47,7 @@ return [
     'messages' => 'Messages',
     'user_profile' => 'User details',
     '$' => 'SR',
+    '_search'=>'Search',
     'register_now' => 'Register now',
     'register_purchase_tender' => 'You must register to purchase this tender',
     'account_register' => 'If you already have an account, please log in using your username and password',

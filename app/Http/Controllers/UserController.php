@@ -77,7 +77,7 @@ class UserController extends Controller
             $user->first_name = isset($names[0]) ? $names[0] : '';
             $user->last_name = isset($names[1]) ? $names[1] : '';
             $user->email = $request->get('email');
-            $user->phone_number = $request->get('phone_number','');
+            $user->phone_number = $request->get('phone_number', '');
             $user->password = ($request->get('password'));
             $user->role_id = 2;
             $user->backend = 0;
@@ -235,6 +235,7 @@ class UserController extends Controller
      */
     public function verify(Request $request)
     {
+
         $user = User::where('email', $request->get('email'))->first();
         if ($user) {
             if ($user->code == $request->get('code')) {
@@ -250,7 +251,35 @@ class UserController extends Controller
                 return redirect()->back()->withErrors(['wrong_code' => trans('app.wrong_code')]);
         } else {
             return redirect()->back()->withErrors(['wrong_email' => trans('app.email_not_found')]);
+        }
+    }
 
+
+    /**
+     * GET {lang}/verify/link
+     * @route user.verify.link
+     * @param Request $request
+     * @return string
+     */
+    public function verifyLink(Request $request)
+    {
+
+
+        $user = User::where('email', \Crypt::decryptString(urldecode($request->get('key'))))->first();
+        if ($user) {
+            if ($user->code == $request->get('code')) {
+                $user->code = null;
+                $user->status = 1;
+                $user->save();
+                if ($user->type == 1) {
+                    fauth()->login($user);
+                    return redirect()->route('index')->with(['messages' => [trans('app.account_activated')]]);
+                }
+                return redirect()->back()->with('waiting', trans('app.company_waiting'));
+            } else
+                return redirect()->back()->withErrors(['wrong_code' => trans('app.wrong_code')]);
+        } else {
+            return redirect()->back()->withErrors(['wrong_email' => trans('app.email_not_found')]);
         }
     }
 
@@ -262,8 +291,9 @@ class UserController extends Controller
      */
     public function confirm(Request $request)
     {
-        if (session()->get('email'))
+        if (session()->get('email')) {
             return view('confirm', ['email' => session()->get('email')]);
+        }
         return redirect()->route('index');
 
     }

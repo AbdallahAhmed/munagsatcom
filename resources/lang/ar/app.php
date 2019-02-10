@@ -283,5 +283,6 @@ return [
         'tenders_buy'=>'شراء مناقضة',
         'not_register'=>'لم يتك تسجيل العملية '
     ],
+    'account_activated'=>'تم تفعيل الحساب',
 
 ];

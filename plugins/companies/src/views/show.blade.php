@@ -40,7 +40,9 @@
                             <select name="sort" class="form-control chosen-select chosen-rtl">
 
                                 <option value="name"
-                                        @if($sort == "name") selected='selected' @endif>{{ trans("companies::companies.attributes.name") }}</option>
+                                        @if($sort == "name") @endif>{{ trans("companies::companies.attributes.name") }}</option>
+                                <option value="created_at"
+                                        @if($sort == "created_at") selected='selected' @endif>{{ trans("companies::companies.attributes.created_at") }}</option>
                             </select>
                             <select name="order" class="form-control chosen-select chosen-rtl">
                                 <option value="DESC"

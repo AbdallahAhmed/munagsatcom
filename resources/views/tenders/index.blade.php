@@ -193,8 +193,12 @@
                                             class="text-blue">{{$tender->cb_real_price}} {{trans('app.$')}} </span>
                                 </div>
                                 <div class="priceshadow one_thrd"> {{trans('app.tenders.cb_downloaded_price')}}
-                                    <br><span
-                                            class="text-blue">{{$tender->cb_downloaded_price}} {{trans('app.$')}} </span>
+                                    <br>
+                                    @if($tender->cb_downloaded_price!=0)
+                                        <span class="text-blue">{{$tender->cb_downloaded_price}} {{trans('app.$')}} </span>
+                                    @else
+                                        <span class="text-blue">{{trans('app.free')}}</span>
+                                    @endif
                                 </div>
                                 <div class="light-white one_thrd">{{trans('app.tenders.id')}} <br><span
                                             class="text-blue">{{$tender->number}}</span>

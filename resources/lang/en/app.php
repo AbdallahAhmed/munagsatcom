@@ -281,6 +281,7 @@ return [
         'not_register'=>' Unknown'
     ],
     'account_activated'=>'Account activated',
+    'free'=>'Free',
 
 
 ];

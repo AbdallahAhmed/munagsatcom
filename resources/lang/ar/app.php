@@ -284,5 +284,6 @@ return [
         'not_register'=>'لم يتك تسجيل العملية '
     ],
     'account_activated'=>'تم تفعيل الحساب',
+    'free'=>'مجانا',
 
 ];

@@ -19,7 +19,8 @@
                                 <label class="col-xs-12 col-md-3">{{trans('app._search')}}</label>
                                 <div class="col-xs-12 col-md-9 new-f-group">
                                     <div class="form-group  clearfix">
-                                        <input type="search" class="form-control" placeholder="{{trans('app._search')}}" name="q" value="{{\Request::get('q')}}">
+                                        <input type="search" class="form-control" placeholder="{{trans('app._search')}}"
+                                               name="q" value="{{\Request::get('q')}}">
                                         <span class="focus-border"><i></i></span>
                                     </div>
                                 </div>
@@ -170,20 +171,20 @@
                                 <div class="item one_thrd">
                                     <p>{{trans('app.tenders.files_opened_at')}}</p>
                                     <p><i class="fa  fa-calendar"></i> <span
-                                                class="text-grey">{{$tender->files_opened_at->format('Y/m/d')}}</span>-<span
+                                                class="text-grey">{{hijri_date($tender->files_opened_at)}}</span>-<span
                                                 class="text-grey">{{$tender->files_opened_at->format('H:s')}}</span></p>
                                 </div>
                                 <div class="item one_thrd">
                                     <p>{{trans('app.tenders.last_get_offer_at')}}</p>
                                     <p><i class="fa  fa-calendar"></i> <span
-                                                class="text-grey">{{$tender->last_get_offer_at->format('Y/m/d')}}</span>-<span
+                                                class="text-grey">{{hijri_date($tender->last_get_offer_at)}}</span>-<span
                                                 class="text-grey">{{$tender->last_get_offer_at->format('H:s')}}</span>
                                     </p>
                                 </div>
                                 <div class="item one_thrd">
                                     <p>{{trans('app.tenders.created')}}</p>
                                     <p><i class="fa  fa-calendar"></i> <span
-                                                class="text-grey">{{$tender->published_at->format('Y/m/d')}}</span></p>
+                                                class="text-grey">{{hijri_date($tender->published_at)}}</span></p>
                                 </div>
 
                             </div>

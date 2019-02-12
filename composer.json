@@ -12,6 +12,7 @@
         "dot/platform": "^0.4.59",
         "dot/posts": "^0.2.6",
         "fideloper/proxy": "~3.3",
+        "geniusts/hijri-dates": "^1.1",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0"
     },

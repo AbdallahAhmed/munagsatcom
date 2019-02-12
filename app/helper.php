@@ -28,3 +28,19 @@ if (!function_exists('is_mobile')) {
         return false;
     }
 }
+
+
+if (!function_exists('hijri_date')) {
+    /**
+     *
+     * @return bool true if agent is mobile else otherwise
+     */
+    function hijri_date($date)
+    {
+
+        $date = \GeniusTS\HijriDate\Hijri::convertToHijri($date);
+
+        $string = $date->format('Y/m/d');
+        return $string;
+    }
+}

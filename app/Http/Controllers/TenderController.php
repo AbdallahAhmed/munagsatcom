@@ -42,7 +42,10 @@ class TenderController extends Controller
         }
 
         if ($request->filled('offer_expired')) {
-            $query->where('last_get_offer_at', '<=', $request->get('offer_expired'));
+            $carbon=new Carbon($request->get('offer_expired'));
+            $query->whereDay('last_get_offer_at', '<=', $carbon->day);
+            $query->whereMonth('last_get_offer_at', '<=',  $carbon->month);
+            $query->whereYear('last_get_offer_at', '<=',  $carbon->year);
         }
 
         if ($request->filled('show_expired') && $request->get('show_expired') == 1) {

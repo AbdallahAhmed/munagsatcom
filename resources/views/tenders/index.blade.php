@@ -66,19 +66,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group clearfix">
-                                <label class="col-xs-12 col-md-3">{{trans('app.tenders.category')}}</label>
-                                <div class="col-xs-12 col-md-9 new-f-group">
-                                    <div class="form-group clearfix">
-                                        <select name="catgory_id" class="effect-9 form-control">
-                                            <option value>{{trans('app.tenders.choose_category')}}</option>
-                                            @foreach(\Dot\Categories\Models\Category::all() as $catgory)
-                                                <option value="{{$catgory->id}}" {{old('catgory_id',Request::get('catgory_id'))==$catgory->id?' selected ':''}}>{{$catgory->name}}</option>
-                                            @endforeach
-                                        </select><span class="focus-border"><i></i></span>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="form-group-lg clearfix">
                                 <label>
                                     {{trans('app.tenders.expired_at')}}

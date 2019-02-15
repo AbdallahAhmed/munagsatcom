@@ -3,6 +3,20 @@
 
 @section('title',$tender->name)
 
+@section('meta')
+    <meta name="title" content="{{$tender->name}}">
+    <meta name="description" content="<?= str_limit($tender->excerpt, 150)?>">
+    <meta property="og:locale" content="{{app()->getLocale()}}"/>
+    <meta property="og:title" content="{{$tender->name}}"/>
+    <meta property="og:site_name" content="{{$tender->name}}"/>
+    <meta property="og:description" content="<?= str_limit($tender->excerpt, 150)?>">
+    <meta property="og:image" content="{{asset('assets')}}/images/logo.png">
+    <meta name="twitter:title" content="<?= option('site_title')?>">
+    <meta name="twitter:description" content="<?= str_limit($tender->excerpt, 150)?>">
+    <meta name="twitter:image" content="{{asset('assets')}}/images/logo.png">
+    <meta name="twitter:url" content="{{asset('/')}}">
+@endsection
+
 @section('content')
     <section class="container">
         <div class="row">
@@ -149,7 +163,8 @@
                         <div class="download-box">
                             <h3 class="text-center"><span>{{trans('app.tenders.upload_files')}}</span></h3>
                             @foreach($tender->files  as $file)
-                                <a href="{{uploads_url($file->path)}}" target="_blank" class="btn btn-default">{{$file->title}}.pdf</a>
+                                <a href="{{uploads_url($file->path)}}" target="_blank"
+                                   class="btn btn-default">{{$file->title}}.pdf</a>
                             @endforeach
                         </div>
                     @endif

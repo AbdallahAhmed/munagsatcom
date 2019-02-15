@@ -56,6 +56,7 @@
             });
             this.$wrap.find(".hideshare-facebook").click(function () {
                 // connsole.
+                console.log(h);
                 return e.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(h), "Facebook", "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600"), !1
             }), this.$wrap.find(".hideshare-twitter").click(function () {
                 return e.open("https://twitter.com/intent/tweet?original_referer=" + encodeURIComponent(h) + "&text=" + encodeURIComponent(l) + "%20" + encodeURIComponent(h), "Twitter", "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600"), !1

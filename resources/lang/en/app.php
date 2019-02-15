@@ -132,7 +132,7 @@ return [
         "address_execute" => "Place of execution",
         'id' => 'Tender id',
         'cb' => 'the booklet price',
-        'remaining_hours' => 'Days remaining / hours if less than 24 hours',
+        'remaining_hours' => 'Days remaining',
         'not_found' => 'Not found government tenders',
         'choose_activity' => 'Choose activity',
         'choose_place' => 'Choose place',

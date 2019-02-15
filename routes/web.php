@@ -73,7 +73,7 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
         $router->get('company/{slug}', 'CompanyController@show')->name('company.show');
         $router->get('company/{id}/chances', 'CompanyController@chances')->name('company.chances');
         $router->get('company/{id}/centers', 'CompanyController@centers')->name('company.centers');
-        $router->get('company/{id}/tenders', 'CompanyController@show')->name('company.tenders');
+        $router->get('company/{id}/tenders', 'CompanyController@tenders')->name('company.tenders');
         $router->any('company/{id}/employees', 'CompanyController@employees')->name('company.employees');
         $router->any('company/{id}/requests', 'CompanyController@requests')->name('company.requests');
         $router->get('company/{id}/search', 'CompanyController@employerSearch')->name('company.employees.search');

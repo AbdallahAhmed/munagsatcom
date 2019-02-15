@@ -34,7 +34,8 @@
                                             @foreach(\Dot\Tenders\Models\TenderActivity::where('status',1)->get() as $activtiy)
                                                 <option value="{{$activtiy->id}}" {{old('activity_id',Request::get('activity_id'))==$activtiy->id?' selected ':''}}>{{$activtiy->name}}</option>
                                             @endforeach
-                                        </select><span class="focus-border"><i></i></span>
+                                        </select>
+                                        <span class="focus-border"><i></i></span>
                                     </div>
                                 </div>
                             </div>

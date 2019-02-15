@@ -41,8 +41,7 @@
                         </a></li>
                     <li @if (\Route::current()->getName() == 'centers.create') class="active" @endif><a
                                 href="{{route('centers.create', ['id' => $company_id])}}">
-                            {{trans('app.add_center')}}
-                        </a></li>
+                            {{trans('app.add_center')}}</a></li>
                 @endif
             </ul>
         </div>

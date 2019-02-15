@@ -37,14 +37,17 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="text-left">
-                                    <div class="form-group-lg">
-                                        <button type="button" data-toggle="modal"
-                                                data-target="#profile_updates" class="uperc padding-md fbutcenter">
-                                            {{trans('app.profile_update')}}
-                                        </button>
+
+                                @if(fauth()->user()->is_owner)
+                                    <div class="text-left">
+                                        <div class="form-group-lg">
+                                            <button type="button" data-toggle="modal"
+                                                    data-target="#profile_updates" class="uperc padding-md fbutcenter">
+                                                {{trans('app.profile_update')}}
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
 
                             </div>
                         </div>
@@ -77,7 +80,8 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{route('company.updates',['id'=>$company->id])}}" method="post" enctype="multipart/form-data"  >
+                <form action="{{route('company.updates',['id'=>$company->id])}}" method="post"
+                      enctype="multipart/form-data">
                     <div class="modal-body">
                         {{csrf_field()}}
 
@@ -119,7 +123,8 @@
                                     <div class="col-xs-12 col-md-9">
                                         <div class="new-f-group">
                                             <div class="form-group clearfix">
-                                                <input name="address" value="{{old('address',$company->address)}}" type="text"
+                                                <input name="address" value="{{old('address',$company->address)}}"
+                                                       type="text"
                                                        class="effect-9 form-control"
                                                        placeholder="{{trans('app.address')}}">
                                                 <span class="focus-border"><i></i></span>

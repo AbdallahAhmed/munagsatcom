@@ -6,6 +6,7 @@ use App\Models\Center;
 use App\Models\Chance;
 use App\Models\Companies_empolyees;
 use App\Models\Company;
+use App\Models\Tender;
 use App\User;
 use Dot\Chances\Models\Sector;
 use Dot\Media\Models\Media;
@@ -358,9 +359,14 @@ class CompanyController extends Controller
      */
     public function companyUpdate(Request $request)
     {
+        if (!fauth()->user()->is_owner) {
+            return redirect()->back()->with(['messages' => [trans('app.cannot_update_company')]]);
+
+        }
+
         $company = fauth()->user()->company[0];
         if (!$company) {
-            return redirect()->back()->with(['messages' => [trans('app.can_update_company')]]);
+            return redirect()->back()->with(['messages' => [trans('app.cannot_update_company')]]);
         }
 
         $rules = [
@@ -400,5 +406,53 @@ class CompanyController extends Controller
         $company->files()->attach($files);
 
         return redirect()->back()->with('message', trans('app.profile_updated'));
+    }
+
+    /**
+     * GET /{lang?}/company/{id}/tenders
+     * @route company.tenders
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function tenders(Request $request, $id)
+    {
+        $query = Tender::with(['org', 'org.logo'])->whereHas('transactions', function ($query) use ($id){
+            $query->where('company_id', $id);
+        })->published();
+
+        if ($request->filled('activity_id')) {
+            $query->where('activity_id', $request->get('activity_id'));
+        }
+
+        if ($request->filled('q')) {
+            $query->where('name', 'LIKE', '%' . trim($request->get('q')) . '%');
+        }
+
+        if ($request->filled('org_id')) {
+            $query->where('org_id', $request->get('org_id'));
+        }
+
+        if ($request->filled('number')) {
+            $query->where('number', $request->get('number'));
+        }
+        if ($request->filled('offer_expired')) {
+            $carbon = new Carbon($request->get('offer_expired'));
+            $query->whereDay('last_get_offer_at', '<=', $carbon->day);
+            $query->whereMonth('last_get_offer_at', '<=', $carbon->month);
+            $query->whereYear('last_get_offer_at', '<=', $carbon->year);
+        }
+
+
+        if ($request->filled('place_id')) {
+            $query->whereHas('places', function ($query) use ($request) {
+                return $query->where('id', $request->get('place_id'));
+            });
+        }
+
+
+        $this->data['tenders'] = $query->orderBy('created_at', 'DESC')->paginate(5);
+        $this->data['company'] = Company::find($id);
+
+        return view('companies.tenders', $this->data);
     }
 }

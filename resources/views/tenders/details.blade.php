@@ -149,7 +149,7 @@
                         <div class="download-box">
                             <h3 class="text-center"><span>{{trans('app.tenders.upload_files')}}</span></h3>
                             @foreach($tender->files  as $file)
-                                <a href="{{uploads_url($file->path)}}" class="btn btn-default">{{$file->title}}.pdf</a>
+                                <a href="{{uploads_url($file->path)}}" target="_blank" class="btn btn-default">{{$file->title}}.pdf</a>
                             @endforeach
                         </div>
                     @endif

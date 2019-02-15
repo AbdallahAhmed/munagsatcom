@@ -163,6 +163,7 @@ return [
     'profile_updated' => 'Profile updated',
     'available_points' => 'available  Points',
     'coming_soon' => 'Coming  soon',
+    'no_attachments_company' => 'No  attachments company',
     'points' => 'points',
     'fields' => [
         "username" => "Username",

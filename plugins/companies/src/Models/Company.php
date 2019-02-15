@@ -74,8 +74,8 @@ class Company extends Model
      */
     protected $creatingRules = [
         "name" => "required",
-        "first_name" => "required",
-        "last_name" => "required"
+//        "first_name" => "required",
+//        "last_name" => "required"
     ];
 
     /*
@@ -83,8 +83,8 @@ class Company extends Model
      */
     protected $updatingRules = [
         "name" => "required",
-        "first_name" => "required",
-        "last_name" => "required",
+//        "first_name" => "required",
+//        "last_name" => "required",
         'block_reason' => "required_if:blocked,==,1"
     ];
 

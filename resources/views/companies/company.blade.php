@@ -49,6 +49,7 @@
                                     </div>
                                 @endif
 
+
                             </div>
                         </div>
                     </div>
@@ -60,7 +61,7 @@
                                 <li><a target="_blank" href="{{uploads_url('').$file->path}}">{{$file->title}}</a></li>
                             @endforeach
                         </ul>
-                        @if(empty($company->files))
+                        @if(count($company->files)==0)
                             <p>{{trans('app.not_attachments')}}</p>
                         @endif
                     </div>

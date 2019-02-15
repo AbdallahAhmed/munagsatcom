@@ -225,7 +225,10 @@
                                     <label class="col-xs-12 col-md-3">{{trans('app.add_logo_new')}} </label>
                                     <div class="new-f-group col-xs-12 col-md-5">
                                         <div class="form-group"
-                                             style="background: url({{thumbnail($user->photo->path, 'single_center')}})  no-repeat  center">
+                                             @if($user->photo)
+                                             style="background: url({{thumbnail($user->photo->path, 'single_center')}})  no-repeat  center"
+                                                @endif
+                                        >
                                             <div class=" file-upload" data-input-name="logo"
                                                  data-unodz-callback="callback()">
                                             </div>

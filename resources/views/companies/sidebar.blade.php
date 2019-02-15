@@ -36,12 +36,15 @@
                 }
                 ?>
                 @if($role && $role[0]->role == 1)
-                    <li @if (\Route::current()->getName() == 'chances.create') class="active" @endif><a
-                                href="{{route('chances.create', ['id' => $company_id])}}">
+                    <li class="disabled" @if (\Route::current()->getName() == 'chances.create') class="active " @endif>
+                        <a disabled
+                           href="javascript:void(0)"
+                        >
                             {{trans('app.add_chance')}}
                         </a></li>
-                    <li @if (\Route::current()->getName() == 'centers.create') class="active" @endif><a
-                                href="{{route('centers.create', ['id' => $company_id])}}">
+                    <li class="disabled" @if (\Route::current()->getName() == 'centers.create') class="active" @endif><a
+                                disabled
+                                href="javascript:void(0)">
                             {{trans('app.add_center')}}</a></li>
                 @endif
             </ul>

@@ -39,7 +39,7 @@ return [
     'update_password' => 'تغير كلمة المرور',
     'new_password' => 'كلمة المرور الجديدة ',
     'confirm_password' => 'تاكيد كلمة المرور',
-    'company_files' => 'مرفقات اواراق المنشأة',
+    'company_files' => 'مرفقات  المنشأة',
     'employees' => 'الموظفين',
     'company_requests'=>'دعوات الانضمام الى منشأت',
     'requests' => 'طلبات الاضافة',

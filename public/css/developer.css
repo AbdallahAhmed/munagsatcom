@@ -481,3 +481,6 @@ footer a {
     width: 98%;
     height: 100%;
 }
+.disabled{
+    opacity: .7;
+}

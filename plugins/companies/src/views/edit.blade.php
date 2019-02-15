@@ -62,19 +62,11 @@
 
                                 <div class="form-group">
                                     <label
-                                        for="input-slug">{{ trans("companies::companies.attributes.first_name") }}</label>
+                                        for="input-slug">{{ trans("companies::companies.attributes.name") }}</label>
                                     <input name="first_name" type="text"
-                                           value="{{ @Request::old("first_name", $company->first_name) }}"
+                                           value="{{ @Request::old("first_name", $company->user->first_name) }}"
                                            class="form-control" id="input-slug"
-                                           placeholder="{{ trans("companies::companies.attributes.first_name") }}">
-                                </div>
-                                <div class="form-group">
-                                    <label
-                                        for="input-slug">{{ trans("companies::companies.attributes.last_name") }}</label>
-                                    <input name="last_name" type="text"
-                                           value="{{ @Request::old("last_name", $company->last_name) }}"
-                                           class="form-control" id="input-slug"
-                                           placeholder="{{ trans("companies::companies.attributes.last_name") }}">
+                                           placeholder="{{ trans("companies::companies.attributes.name") }}">
                                 </div>
                                 <div class="form-group">
                                     <label

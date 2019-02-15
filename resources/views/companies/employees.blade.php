@@ -7,6 +7,10 @@
             @include('companies.sidebar', ['company_id' => $company->id])
             <div class="col-xs-12 col-md-9">
                 <div class="profile-box">
+                    <div class="alert alert-info">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {{trans('app.only_admin_can_edit')}}
+                    </div>
 
                     <div class="profile-item">
 
@@ -51,11 +55,13 @@
                                 </div>
                                 <div class="form-group-lg text-center">
 
-                                    <button type="submit" class="uperc padding-md fbutcenter">{{trans('app.search')}}</button>
+                                    <button type="submit"
+                                            class="uperc padding-md fbutcenter">{{trans('app.search')}}</button>
 
                                 </div>
                                 <div class="form-group-lg text-left">
-                                    <a href="{{route('company.employees.add',['id'=>$company->id])}}" class=" btn btn-primary uperc padding-md fbutcenter">{{trans('app.add_employee')}}</a>
+                                    <a href="{{route('company.employees.add',['id'=>$company->id])}}"
+                                       class=" btn btn-primary uperc padding-md fbutcenter">{{trans('app.add_employee')}}</a>
                                 </div>
                             </form>
                         </div>
@@ -65,8 +71,6 @@
 
                     <div class="profile-item">
                         <div class="unit-table">
-
-
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
@@ -77,31 +81,71 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($employees as $employer)
-                                    <tr id="{{$employer->user->id}}">
-                                        <td>
-                                            <div class="checkbox">
-                                                <input type="checkbox" style="opacity: 0;"
-                                                       id="{{$employer->employee_id}}"   {{$employer->user->id==fauth()->id()?'disabled="true"':''}}  name="selected">
-                                                <input type="checkbox"     {{$employer->user->id==fauth()->id()?'disabled="true"':''}} {{$employer->id==fauth()->id()?'disabled':''}}  name="status{{$employer->employee_id}}"
-                                                       @if($employer->status) checked @endif>
-                                            </div>
-                                        </td>
-                                        <td>{{$employer->user->name}}</td>
-                                        <td>
-                                            <div class="radio">
-                                                <input type="radio"  {{$employer->user->id==fauth()->id()?'disabled':''}} value="1" name="role{{$employer->employee_id}}"
-                                                       @if($employer->role) checked @endif>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="radio">
-                                                <input type="radio"   {{$employer->user->id==fauth()->id()?'disabled':''}}  value="0" name="role{{$employer->employee_id}}"
-                                                       @if(!$employer->role) checked @endif>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                @if(fauth()->user()->is_owner)
+                                    @foreach($employees as $employer)
+                                        <tr id="{{$employer->user->id}}">
+                                            <td>
+                                                <div class="checkbox">
+                                                    <input type="checkbox" style="opacity: 0;"
+                                                           id="{{$employer->employee_id}}"
+                                                           {{$employer->user->id==fauth()->id()?'disabled="true"':''}}  name="selected">
+                                                    <input type="checkbox"
+                                                           {{$employer->user->id==fauth()->id()?'disabled="true"':''}} {{$employer->id==fauth()->id()?'disabled':''}}  name="status{{$employer->employee_id}}"
+                                                           @if($employer->status) checked @endif>
+                                                </div>
+                                            </td>
+                                            <td>{{$employer->user->name}}</td>
+                                            <td>
+                                                <div class="radio">
+                                                    <input type="radio"
+                                                           {{$employer->user->id==fauth()->id()?'disabled':''}} value="1"
+                                                           name="role{{$employer->employee_id}}"
+                                                           @if($employer->role) checked @endif>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="radio">
+                                                    <input type="radio"
+                                                           {{$employer->user->id==fauth()->id()?'disabled':''}}  value="0"
+                                                           name="role{{$employer->employee_id}}"
+                                                           @if(!$employer->role) checked @endif>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    @foreach($employees as $employer)
+                                        <tr id="{{$employer->user->id}}">
+                                            <td>
+                                                <div class="checkbox">
+                                                    <input type="checkbox" style="opacity: 0;"
+                                                           id="{{$employer->employee_id}}" disabled="true"
+                                                           name="selected">
+                                                    <input type="checkbox" disabled="true"
+                                                           name="status{{$employer->employee_id}}"
+                                                           @if($employer->status) checked @endif>
+                                                </div>
+                                            </td>
+                                            <td>{{$employer->user->name}}</td>
+                                            <td>
+                                                <div class="radio">
+                                                    <input type="radio"
+                                                           disabled="true" value="1"
+                                                           name="role{{$employer->employee_id}}"
+                                                           @if($employer->role) checked @endif>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="radio">
+                                                    <input type="radio"
+                                                           disabled value="0"
+                                                           name="role{{$employer->employee_id}}"
+                                                           @if(!$employer->role) checked @endif>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                                 </tbody>
                             </table>
                         </div>
@@ -115,7 +159,8 @@
                     </div>
 
                     <div class="form-group-lg text-center">
-                        <button type="submit" id="save" class="uperc padding-md fbutcenter"> {{trans('app.save')}}</button>
+                        <button type="submit" id="save"
+                                class="uperc padding-md fbutcenter"> {{trans('app.save')}}</button>
                     </div>
 
                 </div>

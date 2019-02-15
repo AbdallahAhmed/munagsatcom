@@ -8,12 +8,15 @@
     <meta name="description" content="<?= str_limit($tender->excerpt, 150)?>">
     <meta property="og:locale" content="{{app()->getLocale()}}"/>
     <meta property="og:title" content="{{$tender->name}}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="{{$tender->path}}"/>
     <meta property="og:site_name" content="{{$tender->name}}"/>
     <meta property="og:description" content="<?= str_limit($tender->excerpt, 150)?>">
     <meta property="og:image" content="{{uploads_url($tender->org->logo->path)}}">
     <meta name="twitter:title" content="<?= option('site_title')?>">
     <meta name="twitter:description" content="<?= str_limit($tender->excerpt, 150)?>">
     <meta name="twitter:image" content="{{uploads_url($tender->org->logo->path)}}">
+
     <meta name="twitter:url" content="{{$tender->path}}">
 @endsection
 

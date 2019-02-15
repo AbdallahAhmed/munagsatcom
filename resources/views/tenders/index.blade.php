@@ -183,14 +183,14 @@
                             </div>
                             @if($tender->progress<100)
                                 <div class="card-cont row">
-                                    <div class="col-md-6 padt">{{trans('app.tenders.remaining_hours')}}</div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4 padt">{{trans('app.tenders.remaining_hours')}}</div>
+                                    <div class="col-md-8">
                                         <div class="progress ">
                                             <div class="progress-bar" role="progressbar"
                                                  aria-valuenow="{{$tender->progress}}"
                                                  aria-valuemin="0" aria-valuemax="100" style="">
                                             <span class="popOver" data-toggle="tooltip" data-placement="top"
-                                                  title="{{$tender->files_opened_at->diffForHumans(\Carbon\Carbon::now())}}"> </span>
+                                                  title="{{$tender->last_get_offer_at->diffInDays(\Carbon\Carbon::now())}}"> </span>
                                             </div>
                                         </div>
                                     </div>

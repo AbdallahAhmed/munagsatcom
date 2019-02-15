@@ -74,17 +74,6 @@
                                            {{Request::get('show_expired')==1?'checked':''}} name="show_expired">
                                 </label>
                             </div>
-                            <div class="form-group-lg clearfix">
-                                <label class="col-xs-12 col-md-3">{{trans('app.tenders.cb_real_price')}} </label>
-                                <div class="col-xs-12 col-md-9">
-                                    <div class="range">
-                                        <input class="range-example" type="text" min="1"
-                                               max="{{(int)$cb_real_price_max}}"
-                                               value="{{Request::get('cb_real_price')}}"
-                                               name="cb_real_price" step="{{(int)($cb_real_price_max/100)+1}}">
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="form-group-lg clearfix">
                                 <label class="col-xs-12 col-md-3">{{trans('app.tenders.cb_downloaded_price')}} </label>

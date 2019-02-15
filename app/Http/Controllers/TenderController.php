@@ -79,7 +79,6 @@ class TenderController extends Controller
         $this->data['tenders'] = $query->orderBy('created_at', 'DESC')->paginate(5);
 
         $this->data['cb_downloaded_price_max'] = Tender::max('cb_downloaded_price');
-        $this->data['cb_real_price_max'] = Tender::max('cb_real_price');
         return view('tenders.index', $this->data);
     }
 

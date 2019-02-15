@@ -61,6 +61,7 @@
 
                             </select>
 
+                            <input type="hidden" value="{{Request::get('backend')}}" name="backend">
                             <select name="order" class="form-control chosen-select chosen-rtl">
 
                                 @foreach(['asc', 'desc'] as $direction)

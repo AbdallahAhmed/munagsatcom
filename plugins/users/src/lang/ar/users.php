@@ -51,6 +51,7 @@ return [
     'all_roles' => "كل الصلاحيات",
     'filter' => 'عرض',
 
+    'users_system'=>'مستخدمى الادارة',
     'deactivated' => 'غير مفعل',
     'activated' => 'مفعل',
 

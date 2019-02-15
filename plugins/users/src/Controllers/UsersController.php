@@ -76,6 +76,10 @@ class UsersController extends Controller
             $query->where("role_id", Request::get("role_id"));
         }
 
+        if (Request::filled('backend')) {
+            $query->where('backend',Request::get('backend'));
+        }
+
         $this->data["users"] = $users = $query->paginate($per_page);
         $this->data["roles"] = Role::all();
 

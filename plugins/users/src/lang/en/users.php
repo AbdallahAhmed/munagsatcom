@@ -65,6 +65,8 @@ return [
 
     "no_role" => "No role",
 
+    'users_system'=>'Management users',
+
     "permissions" => [
         "show" => "Show users",
         "create" => "Create users",

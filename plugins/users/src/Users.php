@@ -31,9 +31,14 @@ class Users extends \Dot\Platform\Plugin
         Navigation::menu("sidebar", function ($menu) {
 
             if (Auth::user()->can('users')) {
+
+                $menu->item('users2', trans("users::users.users_system"), route("admin.users.show", ['backend' => 1]))
+                    ->order(16)
+                    ->icon("fa-users");
                 $menu->item('users', trans("admin::common.users"), route("admin.users.show"))
                     ->order(16)
                     ->icon("fa-users");
+
             }
 
         });

@@ -68,12 +68,13 @@
                                 <i class="fa fa-envelope"></i> <a href="mailto:info@munagasatcom.com">info@munagasatcom.com</a><br/>
                                 <div class="social">
                                     <ul class="footer-link">
-                                        <li><a href="https://twitter.com/munagasatcom"><i class="fa fa-twitter"></i></a>
-                                        </li>
+                                        <li><a href=" https://www.facebook.com/munagasatcom"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="https://www.instagram.com/munagasatcom/"><i class="fa fa-instagram"></i></a></li>
+                                        <li><a href="https://twitter.com/munagasatcom"><i class="fa fa-twitter"></i></a></li>
                                         <li><a href="https://www.youtube.com/channel/UCRDuD-lLU3KaS1FehTqkxNg"><i
                                                         class="fa fa-youtube"></i></a></li>
-                                        <li><a href="https://www.linkedin.com/company/munagasatcom"><i
-                                                        class="fa fa-linkedin"></i></a></li>
+                                        <li><a href="https://www.linkedin.com/company/munagasatcom"><i class="fa fa-linkedin"></i></a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

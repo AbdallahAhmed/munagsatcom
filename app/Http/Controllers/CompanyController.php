@@ -251,7 +251,7 @@ class CompanyController extends Controller
 
             $user = new User();
             $user->username = $request->get('email');
-            $names = explode(',', $request->get('name'));
+            $names = explode(' ', $request->get('name'));
             $user->first_name = isset($names[0]) ? $names[0] : '';
             $user->last_name = isset($names[1]) ? $names[1] : '';
             $user->email = $request->get('email');
@@ -263,7 +263,7 @@ class CompanyController extends Controller
             $user->points = option('new_user_points', 0);
             $user->code = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
             $user->type = $request->get('user_type', 1);
-            $user->user_id = fauth()->id();
+//            $user->user_id = fauth()->id();
             $user->save();
 
             Companies_empolyees::create([

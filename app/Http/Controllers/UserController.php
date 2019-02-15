@@ -73,7 +73,7 @@ class UserController extends Controller
             }
             $user = new User();
             $user->username = $request->get('email');
-            $names = explode(',', $request->get('name'));
+            $names = explode(' ', $request->get('name'));
             $user->first_name = isset($names[0]) ? $names[0] : '';
             $user->last_name = isset($names[1]) ? $names[1] : '';
             $user->email = $request->get('email');

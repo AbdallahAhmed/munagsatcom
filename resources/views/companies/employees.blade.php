@@ -7,10 +7,14 @@
             @include('companies.sidebar', ['company_id' => $company->id])
             <div class="col-xs-12 col-md-9">
                 <div class="profile-box">
+
                     <div class="profile-item">
+
                         <div class="profile-search">
+
                             <form method="get" action="{{route('company.employees', ['id' => $company->id])}}">
                                 <h3>{{trans('app.search_employee')}}</h3>
+
                                 <div class="form-group row">
                                     <label class="col-xs-12 col-md-3">{{trans('app.employee_name')}}</label>
                                     <div class="col-xs-12 col-md-7">
@@ -46,16 +50,22 @@
                                     </div>
                                 </div>
                                 <div class="form-group-lg text-center">
-                                    <button type="submit" class="uperc padding-md fbutcenter">{{trans('app.search')}}</button>
-                                    <a href="{{route('company.employees.search',['id'=>$company->id])}}" class=" btn btn-primary uperc padding-md fbutcenter">{{trans('app.send_request')}}</a>
 
+                                    <button type="submit" class="uperc padding-md fbutcenter">{{trans('app.search')}}</button>
+
+                                </div>
+                                <div class="form-group-lg text-left">
+                                    <a href="{{route('company.employees.add',['id'=>$company->id])}}" class=" btn btn-primary uperc padding-md fbutcenter">{{trans('app.add_employee')}}</a>
                                 </div>
                             </form>
                         </div>
+
+
                     </div>
 
                     <div class="profile-item">
                         <div class="unit-table">
+
 
                             <table class="table table-striped">
                                 <thead>
@@ -107,6 +117,7 @@
                     <div class="form-group-lg text-center">
                         <button type="submit" id="save" class="uperc padding-md fbutcenter"> {{trans('app.save')}}</button>
                     </div>
+
                 </div>
             </div>
         </div>

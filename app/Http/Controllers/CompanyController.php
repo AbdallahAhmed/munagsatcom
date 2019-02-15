@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\VerificationMail;
 use App\Models\Center;
 use App\Models\Chance;
 use App\Models\Companies_empolyees;
@@ -14,6 +15,7 @@ use Dot\Services\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class CompanyController extends Controller
@@ -224,22 +226,63 @@ class CompanyController extends Controller
     }
 
     /**
-     * POST {lang}/company/{id}/addEmployees
+     * GET\POST {lang}/company/{id}/addEmployees
      * @route company.employees.add
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function addEmployees(Request $request, $id)
     {
-        $employees = $request->get('employees');
-        foreach ($employees as $employee) {
-            Companies_empolyees::where([
-                ['company_id', $employee['company_id']],
-                ['employee_id', $employee['employee_id']],
-            ])->delete();
-            Companies_empolyees::create($employee);
+        $this->data['company'] = $company = fauth()->user()->company[0];
+
+        if ($request->isMethod('post')) {
+
+            $rules = [
+                'name' => 'required|min:8',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|confirmed|min:6|max:255',
+            ];
+            $validator = Validator::make($request->all(), $rules);
+
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput($request->all());
+            }
+
+            $user = new User();
+            $user->username = $request->get('email');
+            $names = explode(',', $request->get('name'));
+            $user->first_name = isset($names[0]) ? $names[0] : '';
+            $user->last_name = isset($names[1]) ? $names[1] : '';
+            $user->email = $request->get('email');
+            $user->phone_number = $request->get('phone_number', '');
+            $user->password = ($request->get('password'));
+            $user->role_id = 2;
+            $user->backend = 0;
+            $user->status = 1;
+            $user->points = option('new_user_points', 0);
+            $user->code = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
+            $user->type = $request->get('user_type', 1);
+            $user->user_id = fauth()->id();
+            $user->save();
+
+            Companies_empolyees::create([
+                'company_id' => $company->id,
+                'employee_id' => $user->id,
+                'status' => 1,
+                'role' => $request->get('can_pay', 0),
+                'accepted' => 1
+            ]);
+
+            try {
+                Mail::to($user->email)->send(new VerificationMail($user));
+            } catch (\Exception $e) {
+
+            }
+            return redirect()->route('company.employees', ['id' => $company->id])->with(['messages' => [trans('app.employee_created')], 'status' => 'success']);
         }
-        return response()->json(['success' => true]);
+
+        return view('companies.add_employee', $this->data);
     }
 
     /**
@@ -275,7 +318,6 @@ class CompanyController extends Controller
         if ($request->method() == 'POST') {
             $users = $request->get('accepted', []);
             foreach ($users as $user_id) {
-                var_dump($id);
                 $is_employeed = Companies_empolyees::where([
                     ['employee_id', $user_id],
                     ['accepted', 1]
@@ -416,7 +458,7 @@ class CompanyController extends Controller
      */
     public function tenders(Request $request, $id)
     {
-        $query = Tender::with(['org', 'org.logo'])->whereHas('transactions', function ($query) use ($id){
+        $query = Tender::with(['org', 'org.logo'])->whereHas('transactions', function ($query) use ($id) {
             $query->where('company_id', $id);
         })->published();
 

@@ -271,7 +271,7 @@ class UserController extends Controller
                 $user->save();
                 if ($user->type == 1) {
                     fauth()->login($user);
-                    return redirect()->route('index')->with(['messages' => [trans('app.account_activated')]]);
+                    return redirect()->route('index')->with(['messages' => [trans('app.account_activated')],'status'=>'success']);
                 }
                 return redirect()->back()->with('waiting', trans('app.company_waiting'));
             } else

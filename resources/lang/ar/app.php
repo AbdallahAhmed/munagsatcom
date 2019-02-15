@@ -290,6 +290,9 @@ return [
     'q_a'=>'الأسئلة الشائعة',
     'accept_with'=>'أنا أوافق على',
     'attachments_company_add' => '  أضف مرفقات اخرى  ',
-    'not_attachments'=>'لا يوجد مرفقات'
+    'not_attachments'=>'لا يوجد مرفقات',
+    'add_employee'=>'اضافة موظف',
+    'can_pay'=>'أمكانية الشراء',
+    'employee_created'=>'تم اضافة الموظف '
 
 ];

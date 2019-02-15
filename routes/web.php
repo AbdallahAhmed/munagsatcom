@@ -77,6 +77,7 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
         $router->any('company/{id}/employees', 'CompanyController@employees')->name('company.employees');
         $router->any('company/{id}/requests', 'CompanyController@requests')->name('company.requests');
         $router->get('company/{id}/search', 'CompanyController@employerSearch')->name('company.employees.search');
+        $router->get('company/{id}/addEmployees', 'CompanyController@addEmployees')->name('company.employees.add');
         $router->post('company/{id}/addEmployees', 'CompanyController@addEmployees')->name('company.employees.add');
         $router->post('company/{id}/send', 'CompanyController@send')->name('company.employees.send');
         $router->get('company/{id}/delegate', 'CompanyController@show')->name('company.add_delegate');

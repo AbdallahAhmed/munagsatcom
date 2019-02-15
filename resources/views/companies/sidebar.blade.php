@@ -14,7 +14,8 @@
                             href="{{route('company.tenders', ['id' => $company_id])}}">
                         {{trans('app.name')}}
                     </a></li>
-                <li @if (\Route::current()->getName() == 'company.employees') class="active" @endif><a
+                <li @if (\Route::current()->getName() == 'company.employees' ||  \Route::current()->getName()=='company.employees.add') class="active" @endif>
+                    <a
                             href="{{route('company.employees', ['id' => $company_id])}}">
                         {{trans('app.employees')}}
                     </a></li>

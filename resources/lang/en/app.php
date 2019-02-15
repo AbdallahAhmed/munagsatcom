@@ -291,7 +291,6 @@ return [
     'add_employee' => 'Add employee',
     'can_pay' => 'Can pay',
     'employee_created' => 'Employee created successfully, check e-mail inbox',
-    'only_admin_can_edit'=>' Only the company\'s consumer manager modify employees '
-
+    'only_admin_can_edit'=>' Only the company\'s consumer manager modify employees.',
 
 ];

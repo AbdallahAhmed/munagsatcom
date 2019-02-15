@@ -145,8 +145,18 @@
                         </div>
                     </div>
 
+                    @if(count($tender->files)>0)
+                        <div class="download-box">
+                            <h3 class="text-center"><span>{{trans('app.tenders.upload_files')}}</span></h3>
+                            @foreach($tender->files  as $file)
+                                <a href="{{uploads_url($file->path)}}" class="btn btn-default">{{$file->title}}.pdf</a>
+                            @endforeach
+                        </div>
+                    @endif
+
+
                     <div class="download-box">
-                        {{--<h3 class="text-center"><span>{{trans('app.tenders.upload_files')}}</span></h3>--}}
+                        <h3 class="text-center"><span>{{trans('app.tenders.download')}}</span></h3>
                         @if(!fauth()->check())
                             <p>{{trans('app.register_purchase_tender')}}<a
                                         href="{{route('register')}}"> {{trans('app.register_now')}} </a></p>
@@ -176,7 +186,6 @@
                 </div>
 
             </div>
-            <!-------------- End::content -------------->
         </div>
 
     </section>

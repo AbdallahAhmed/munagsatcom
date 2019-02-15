@@ -178,6 +178,7 @@ return [
         'phone_number' => 'Telephone number',
         'code' => 'code'
     ],
+    'day'=>'يوم',
     'centers' => [
         'centers' => 'Services centers',
         'center_name' => 'Services center \'s name',

@@ -16,7 +16,8 @@ class PageController extends Controller
      * @param $slug
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Request $request, $slug){
+    public function show(Request $request, $slug)
+    {
         $this->data['page'] = $page = Page::where('slug', $slug)->firstOrFail();
 
         return view('page-details', $this->data);
@@ -26,10 +27,12 @@ class PageController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function contactUs(Request $request){
-        if($request->method() == "POST")
+    public function contactUs(Request $request)
+    {
+        if ($request->method() == "POST") {
             Mail::to('info@munagasatcom.com')->send(new ContactMail($request));
-        else{
+            return response()->back()->with(['messages' => [trans('app.messages_send')], 'status' => 'success']);
+        } else {
             return view('contact');
         }
     }

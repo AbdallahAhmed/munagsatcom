@@ -62,14 +62,6 @@
 
                                 <div class="form-group">
                                     <label
-                                        for="input-slug">{{ trans("companies::companies.attributes.name") }}</label>
-                                    <input name="first_name" type="text"
-                                           value="{{ @Request::old("first_name", $company->user->first_name) }}"
-                                           class="form-control" id="input-slug"
-                                           placeholder="{{ trans("companies::companies.attributes.name") }}">
-                                </div>
-                                <div class="form-group">
-                                    <label
                                         for="input-slug">{{ trans("app.details") }}</label>
                                     <textarea name="details" class="form-control" id="input-slug" rows="4"
                                               placeholder="{{ trans("app.details") }}">{{ @Request::old("details", $company->details) }}</textarea>

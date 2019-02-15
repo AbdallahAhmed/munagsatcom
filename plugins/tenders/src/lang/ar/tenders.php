@@ -32,7 +32,7 @@ return [
     'sure_deactivate' => "هل تريد إلغاء تفعيل الخبر",
     'sure_delete' => 'هل تريد حذف الخبر؟',
     'add_category' => "أضف إلي قسم",
-
+    'information'=>'تعليمات عامة',
     'add_image' => 'أضف صورة',
     'change_image' => 'تغيير الصورة',
 
@@ -44,10 +44,10 @@ return [
     'all_blocks' => "كل أماكن المناقصات ",
     'not_image_file' => 'ملف غير مسموح به',
     'not_media_file' => 'ملف غير مسموح به',
-
+    'add_files'=>'أضف ملفات',
     'from' => "من",
     'to' => "إلي",
-
+    'not_files'=>'لا يوجد ملفات',
     'user' => 'الكاتب',
     'tags' => 'الوسوم',
     'add_tag' => 'أضف وسوم',

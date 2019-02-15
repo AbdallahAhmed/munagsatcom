@@ -57,22 +57,24 @@
                         </div>
                     </div>
 
-                    <div class="card-cont">
-                        <div class="row">
-                            <div class="col-md-5 padt">{{trans('app.tenders.remaining_hours')}}</div>
-                            <div class="col-md-6">
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar"
-                                         aria-valuenow="{{$tender->progress}}"
-                                         aria-valuemin="0"
-                                         aria-valuemax="100" style="">
+                    @if($tender->progress<100)
+                        <div class="card-cont">
+                            <div class="row">
+                                <div class="col-md-5 padt">{{trans('app.tenders.remaining_hours')}}</div>
+                                <div class="col-md-6">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar"
+                                             aria-valuenow="{{$tender->progress}}"
+                                             aria-valuemin="0"
+                                             aria-valuemax="100" style="">
                                     <span class="popOver" data-toggle="tooltip" data-placement="top"
                                           title=" {{$tender->files_opened_at->diffForHumans(\Carbon\Carbon::now())}}"> </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
 
                     <div class="card-date clearfix">
                         <h3 class="text-center"><span>{{trans('app.tenders.dates')}}</span></h3>
@@ -80,24 +82,37 @@
                             <p>{{trans('app.tenders.files_opened_at')}}</p>
                             <p><i class="fa fa-calendar"></i> <span
                                         class="text-grey">{{hijri_date($tender->files_opened_at)}}</span>-<span
-                                        class="text-grey">{{$tender->files_opened_at->format('H:s')}}</span></p>
+                                        class="text-grey">{{$tender->files_opened_at->format('H:s')}}</span>
+
+                                <small class="text-grey">{{($tender->files_opened_at)->format('Y/m/d')}}</small>
+                            </p>
                         </div>
                         <div class="item one_four">
                             <p>{{trans('app.tenders.last_get_offer_at')}}</p>
                             <p><i class="fa fa-calendar"></i> <span
                                         class="text-grey">{{hijri_date($tender->last_get_offer_at)}}</span>-<span
-                                        class="text-grey">{{$tender->last_get_offer_at->format('H:s')}}</span></p>
+                                        class="text-grey">{{$tender->last_get_offer_at->format('H:s')}}</span>
+                                <small class="text-grey">{{($tender->last_get_offer_at)->format('Y/m/d')}}</small>
+
+                            </p>
                         </div>
 
                         <div class="item one_four">
                             <p>{{trans('app.tenders.created')}}</p>
                             <p><i class="fa fa-calendar"></i> <span
-                                        class="text-grey">{{hijri_date($tender->published_at)}} </span></p>
+                                        class="text-grey">{{hijri_date($tender->published_at)}} </span>
+
+                                <br>
+                                <small class="text-grey">{{($tender->published_at)->format('Y/m/d')}}</small>
+                            </p>
                         </div>
                         <div class="item one_four">
                             <p>{{trans('app.tenders.last_queries_at')}}</p>
                             <p><i class="fa fa-calendar"></i> <span
-                                        class="text-grey">{{hijri_date($tender->last_queries_at)}}</span></p>
+                                        class="text-grey">{{hijri_date($tender->last_queries_at)}}</span>
+                                <br>
+                                <small class="text-grey">{{($tender->published_at)->format('Y/m/d')}}</small>
+                            </p>
                         </div>
                     </div>
 

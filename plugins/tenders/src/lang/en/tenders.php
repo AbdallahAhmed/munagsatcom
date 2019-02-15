@@ -34,14 +34,15 @@ return [
     'sure_delete' => 'Are you sure to delete ?',
 
     'change_media' => 'Change ',
-
+    'information' => 'Information',
     'all_categories' => "All Categories",
     'not_image_file' => 'File not allowed',
     'not_media_file' => 'File not allowed',
 
     'from' => "form",
     'to' => "to",
-
+    'add_files'=>'Add Files',
+    'not_files'=>'No file here',
     "no_activity" => "There no activities",
     "dates" => "Dates",
     'addresses' => 'Addresses',
@@ -76,7 +77,7 @@ return [
         'last_get_offer_at' => ' Last time to receive offers',
         'files_opened_at' => ' Date and time of opening envelopes',
         'is_cb_ratio_active' => 'Activation of the general ratio to download the booklet of conditions',
-        'cb_id'=>'booklet of conditions',
+        'cb_id' => 'booklet of conditions',
         'number' => 'Number'
     ],
 

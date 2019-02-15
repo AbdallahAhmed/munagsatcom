@@ -463,6 +463,8 @@ html[dir="ltr"] div.text-left {
     border-radius: 5px;
     padding: 3px;
     background: #fff;
+    width: 90px;
+    height: 86px;
 }
 
 footer a {
@@ -470,4 +472,12 @@ footer a {
 }
 .mail-text{
     color: #ffffff !important;
+}
+.copyright-ul li {
+    display: inline;
+    padding: 5px;
+}
+.partner ul li img {
+    width: 98%;
+    height: 100%;
 }

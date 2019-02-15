@@ -132,7 +132,7 @@ class Tender extends Model
      */
     public function files()
     {
-        return $this->belongsToMany(Media::class, "tenders_places", "tender_id", "file_id");
+        return $this->belongsToMany(Media::class, "tenders_files", "tender_id", "file_id");
     }
 
     /**

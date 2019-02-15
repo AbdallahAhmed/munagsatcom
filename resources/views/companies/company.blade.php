@@ -12,8 +12,9 @@
                     <div class="profile-item">
                         <div class="row">
                             <div class="col-md-3">
-                                <div class="card-img"><img src="{{thumbnail($company->image->path, 'single_center')}}"
-                                                           alt=""></div>
+                                <div class="card-img">
+                                    <img src="{{$company->image ? thumbnail($company->image->path, 'single_center') : asset('assets/images/default-avater.jpeg')}}"
+                                         alt="{{$company->name}}"></div>
                             </div>
                             <div class="col-md-9">
                                 <div class="details-item">
@@ -48,6 +49,9 @@
                                 <li><a target="_blank" href="{{uploads_url('').$file->path}}">{{$file->title}}</a></li>
                             @endforeach
                         </ul>
+                        @if(empty($company->files))
+                            <p>{{trans('app')}}</p>
+                        @endif
                     </div>
 
 

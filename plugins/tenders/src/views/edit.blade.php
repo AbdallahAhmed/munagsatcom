@@ -174,6 +174,34 @@
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
+                            <i class="fa fa-book" aria-hidden="true"></i>
+                            {{trans('tenders::tenders.information')}}
+
+                            <a href="javascript:void(0)" class="btn btn-primary change-info-pdf">
+                                {{trans('tenders::tenders.add_files')}}
+                            </a>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group" id="file-list">
+                                @foreach($files as $file)
+                                    <li class="list-group-item">
+                                        <a href="">{{$file->title}}.pdf</a>
+                                        <button type="button" class="close" data-dismiss="list-group-item"
+                                                aria-hidden="true">
+                                            &times;
+                                        </button>
+                                        <input type="hidden" name="files[]" value="{{$file->id}}"/>
+                                    </li>
+                                @endforeach
+
+                            </ul>
+                            @if(count($files)==0)
+                                <p id="list-no-files" class="text-center">{{trans('tenders::tenders.not_files')}}</p>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
                             <i class="fa fa-map-marker" aria-hidden="true"></i>
                             {{trans('tenders::tenders.addresses')}}
                         </div>
@@ -449,13 +477,13 @@
 
 
             $(".change-pdf").filemanager({
-                types: "pdf",
+                types: null,
                 panel: "media",
                 done: function (result, base) {
                     if (result.length) {
                         var file = result[0];
                         base.closest(".cb-wrapper").find("#cb-id").first().val(file.id);
-                        base.closest(".cb-wrapper").find('#cp-title').html(file.title + '.pdf')
+                        base.closest(".cb-wrapper").find('#cp-title').html(file.title)
                         $('#cb-price').fadeIn(1000);
                     }
                 },
@@ -464,98 +492,32 @@
                 }
             });
 
-            $(".remove-post-image").click(function () {
-                var base = $(this);
-                $(".post-image-id").first().val(0);
-                $(".post-image").attr("src", "{{ assets("admin::default/post.png") }}");
-            });
-
-
-            $("#mytags").tagit({
-                singleField: true,
-                singleFieldNode: $('#tags_names'),
-                allowSpaces: true,
-                minLength: 2,
-                placeholderText: "",
-                removeConfirmation: true,
-                tagSource: function (request, response) {
-                    $.ajax({
-                        url: "{{ route("admin.tags.search") }}",
-                        data: {q: request.term},
-                        dataType: "json",
-                        success: function (data) {
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.name,
-                                    value: item.name
-                                }
-                            }));
-                        }
-                    });
-                },
-                beforeTagAdded: function (event, ui) {
-                    $("#metakeywords").tagit("createTag", ui.tagLabel);
-                }
-            });
-
-
-            $(".add_gallery").filemanager({
-                types: "image|video|audio|pdf",
-                panel: "galleries",
-                gallery_id: function () {
-                    return 0;
-                },
-                galleries: function (result) {
-                    result.forEach(function (row) {
-                        if ($(".post_galleries [data-gallery-id=" + row.id + "]").length == 0) {
-                            var html = '<div class="iwell post_gallery" data-gallery-id="' + row.id + '">' + row.name
-                                + '<input type="hidden" name="galleries[]" value="' + row.id + '" />'
-                                + '<a href="javascript:void(0)" class="remove_gallery pull-right text-navy"><i class="fa fa-times"></i></a></div>';
-                            $(".post_galleries").html(html);
-                        }
-                    });
-                    if ($(".post_galleries [data-gallery-id]").length != 0) {
-                        $(".iwell.add_gallery").slideUp();
-                    } else {
-                        $(".iwell.add_gallery").slideDown();
+            $(".change-info-pdf").filemanager({
+                // types: "pdf",
+                panel: "media",
+                done: function (result) {
+                    $('#list-no-files').fadeOut(100);
+                    if (result.length) {
+                        let listHtml = result.map(function (file) {
+                            return '<li class="list-group-item">' +
+                                '                                    <a href="javascript:void(0)">' + file.title + '.pdf</a>' +
+                                '                                    <button type="button" class="close" data-dismiss="list-group-item" aria-hidden="true">' +
+                                '                                        &times;</button>' +
+                                '                                    <input type="hidden" name="files[]" value="' + file.id + '"/></li>';
+                        });
+                        $(listHtml.join('')).hide().appendTo('#file-list').fadeIn(500);
                     }
-
                 },
                 error: function (media_path) {
-                    alert(media_path + " is not an image");
+                    alert_box("{{ trans("tenders::tenders.not_media_file") }}");
                 }
             });
-            $("body").on("click", ".remove_gallery", function () {
-                var base = $(this);
-                var data_gallery = base.parents(".post_gallery");
-                var data_gallery_id = data_gallery.attr("data-gallery-id");
-                bootbox.dialog({
-                    message: "هل أنت متأكد من الحذف ؟",
-                    buttons: {
-                        success: {
-                            label: "موافق",
-                            className: "btn-success",
-                            callback: function () {
-                                data_gallery.remove();
-                                if ($(".post_galleries [data-gallery-id]").length != 0) {
-                                    $(".iwell.add_gallery").slideUp();
-                                } else {
-                                    $(".iwell.add_gallery").slideDown();
-                                }
 
-                            }
-                        },
-                        danger: {
-                            label: "إلغاء",
-                            className: "btn-primary",
-                            callback: function () {
-                            }
-                        },
-                    },
-                    className: "bootbox-sm"
+            $('.list-group').on('click', '.list-group-item button', function (e) {
+                $(this).parent().fadeOut(300, function () {
+                    $(e.target).parent().remove()
                 });
             });
-
         });
 
 

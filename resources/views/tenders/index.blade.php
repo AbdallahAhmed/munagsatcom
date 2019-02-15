@@ -157,37 +157,44 @@
                             <div class="card-date clearfix">
                                 <div class="item one_thrd">
                                     <p>{{trans('app.tenders.files_opened_at')}}</p>
-                                    <p><i class="fa  fa-calendar"></i> <span
-                                                class="text-grey">{{hijri_date($tender->files_opened_at)}}</span>-<span
-                                                class="text-grey">{{$tender->files_opened_at->format('H:s')}}</span></p>
+                                    <p><i class="fa  fa-calendar"></i>
+                                        <span class="text-grey">{{hijri_date($tender->files_opened_at)}}</span>-<span class="text-grey">{{$tender->files_opened_at->format('H:s')}}</span>
+                                        <small class="text-grey">{{($tender->files_opened_at)->format('Y/m/d')}}</small>
+                                    </p>
                                 </div>
                                 <div class="item one_thrd">
                                     <p>{{trans('app.tenders.last_get_offer_at')}}</p>
                                     <p><i class="fa  fa-calendar"></i> <span
                                                 class="text-grey">{{hijri_date($tender->last_get_offer_at)}}</span>-<span
                                                 class="text-grey">{{$tender->last_get_offer_at->format('H:s')}}</span>
+                                        <small class="text-grey">{{($tender->last_get_offer_at)->format('Y/m/d')}}</small>
                                     </p>
                                 </div>
                                 <div class="item one_thrd">
                                     <p>{{trans('app.tenders.created')}}</p>
                                     <p><i class="fa  fa-calendar"></i> <span
-                                                class="text-grey">{{hijri_date($tender->published_at)}}</span></p>
+                                                class="text-grey">{{hijri_date($tender->published_at)}}</span>
+                                        <br><small class="text-grey">{{($tender->published_at)->format('Y/m/d')}}</small>
+
+                                    </p>
                                 </div>
 
                             </div>
-                            <div class="card-cont row">
-                                <div class="col-md-6 padt">{{trans('app.tenders.remaining_hours')}}</div>
-                                <div class="col-md-6">
-                                    <div class="progress ">
-                                        <div class="progress-bar" role="progressbar"
-                                             aria-valuenow="{{$tender->progress}}"
-                                             aria-valuemin="0" aria-valuemax="100" style="">
+                            @if($tender->progress<100)
+                                <div class="card-cont row">
+                                    <div class="col-md-6 padt">{{trans('app.tenders.remaining_hours')}}</div>
+                                    <div class="col-md-6">
+                                        <div class="progress ">
+                                            <div class="progress-bar" role="progressbar"
+                                                 aria-valuenow="{{$tender->progress}}"
+                                                 aria-valuemin="0" aria-valuemax="100" style="">
                                             <span class="popOver" data-toggle="tooltip" data-placement="top"
                                                   title="{{$tender->files_opened_at->diffForHumans(\Carbon\Carbon::now())}}"> </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
                             <div class="card-price clearfix">
                                 <div class="priceshadow one_thrd"> {{trans('app.tenders.cb')}}<br> <span
                                             class="text-blue">{{$tender->cb_real_price}} {{trans('app.$')}} </span>
@@ -205,19 +212,14 @@
                                 </div>
                             </div>
                         </div>
-                @endforeach
-            @endif
-
-            <!-------------- Begin:pagination -------------->
+                    @endforeach
+                @endif
                 <div class="text-center">
                     {{$tenders->appends(Request::all())->render()}}
                 </div>
-                <!---------------- End:pagination ---------------->
             </div>
-            <!-------------- End::left side -------------->
         </div>
     </section>
-    <!--End:content-->
 
 @endsection
 

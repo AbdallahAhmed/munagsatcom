@@ -54,8 +54,8 @@ class UserController extends Controller
                 $rules += [
                     'company_name' => 'required|max:255|min:2',
                     'sector_id' => 'required|exists:sectors,id',
-                    'details' => 'required|max:255',
-                    'logo' => 'required|mimes:jpg,png,jpeg',
+//                    'details' => 'required|max:255',
+//                    'logo' => 'required|mimes:jpg,png,jpeg',
                     'files.*.mimes' => 'jpg,png,jpeg,doc,docx,txt,pdf,zip'
                 ];
             }
@@ -86,10 +86,10 @@ class UserController extends Controller
             $user->code = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
             $user->type = $request->get('user_type', 1);
 
-            if ($request->file('logo')) {
-                $media = new Media();
-                $user->photo_id = $media->saveFile($request->file('logo'));
-            }
+//            if ($request->file('logo')) {
+//                $media = new Media();
+//                $user->photo_id = $media->saveFile($request->file('logo'));
+//            }
             $user->save();
             if ($request->get('user_type') == 2) {
                 $company = new Company();
@@ -103,16 +103,16 @@ class UserController extends Controller
                 $company->phone_number = $request->get('phone_number');
                 $company->mobile_number = $request->get('mobile_number');
 
-                $media = new Media();
-                $company->image_id = $media->saveFile($request->file('logo'));
+//                $media = new Media();
+//                $company->image_id = $media->saveFile($request->file('logo'));
 
-                $files = array();
-                if ($request->file('files')) {
-                    foreach (array_filter($request->file('files')) as $file) {
-                        $media = new Media();
-                        $files[] = $media->saveFile($file);
-                    }
-                }
+//                $files = array();
+//                if ($request->file('files')) {
+//                    foreach (($request->file('files')) as $file) {
+//                        $media = new Media();
+//                        $files[] = $media->saveFile($file);
+//                    }
+//                }
                 $company->save();
                 Companies_empolyees::create([
                     'company_id' => $company->id,
@@ -121,18 +121,16 @@ class UserController extends Controller
                     'status' => 1,
                     'accepted' => 1
                 ]);
-                $company->files()->sync($files);
-            } else {
-                session()->put('email', $user->email);
-                try {
-                    Mail::to($user->email)->send(new VerificationMail($user));
-                } catch (\Exception $e) {
-
-                }
-                return redirect()->route('user.confirm')->with('status', trans('app.check_email'));
+//                $company->files()->sync($files);
             }
+            session()->put('email', $user->email);
+            try {
+                Mail::to($user->email)->send(new VerificationMail($user));
+            } catch (\Exception $e) {
 
-            return redirect()->route('index')->with(['messages' => [trans('app.events.successfully_register_company')], 'status' => 'success']);
+            }
+            return redirect()->route('user.confirm')->with('status', trans('app.check_email'));
+//            return redirect()->route('index')->with(['messages' => [trans('app.events.successfully_register_company')], 'status' => 'success']);
             //return success or redirect
         }
 

@@ -204,6 +204,8 @@ class TenderController extends Controller
 
             $tender->categories()->sync(Request::get("categories", []));
             $tender->places()->sync(Request::get("tender_places", []));
+            $tender->files()->sync(Request::get("files", []));
+
 
             // Fire saved action
 
@@ -214,6 +216,7 @@ class TenderController extends Controller
         }
 
         $this->data["tender_categories"] = collect([]);
+        $this->data["files"] = $tender->files;
         $this->data["tender"] = $tender;
 
         return View::make("tenders::edit", $this->data);
@@ -272,6 +275,7 @@ class TenderController extends Controller
 
             $tender->save();
             $tender->categories()->sync(Request::get("categories", []));
+            $tender->files()->sync(Request::get("files", []));
             $tender->places()->sync(Request::get("tender_places", []));
 
 
@@ -283,6 +287,7 @@ class TenderController extends Controller
         }
 
         $this->data["tender_categories"] = $tender->categories;
+        $this->data["files"] = $tender->files;
         $this->data["tender"] = $tender;
 
         return View::make("tenders::edit", $this->data);

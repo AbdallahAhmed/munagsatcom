@@ -21,20 +21,9 @@
                                     </ul>
                                 </div>
                             @endif
-                            {{--<label class="col-xs-12 col-md-3">{{trans('app.fields.first_name')}}</label>--}}
-                            {{--<div class="col-xs-12 col-md-9">--}}
-                                {{--<div class="new-f-group">--}}
-                                    {{--<div class="form-group clearfix">--}}
-                                        {{--<span class="icony"><i class="fa fa-user"></i></span>--}}
-                                        {{--<input name="first_name" value="{{Request::old('first_name')}}" type="text" class="effect-9 form-control"--}}
-                                               {{--placeholder="{{trans('app.fields.first_name')}}">--}}
-                                        {{--<span class="focus-border"><i></i></span>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
                         </div>
                         <div class="form-group-lg row">
-                            <label class="col-xs-12 col-md-3">{{trans('app.fields.name')}}</label>
+                            <label class="col-xs-12 col-md-3">{{trans('app.fields.name')}} *</label>
                             <div class="col-xs-12 col-md-9">
                                 <div class="new-f-group">
                                     <div class="form-group clearfix">
@@ -48,7 +37,7 @@
                         </div>
 
                         <div class="form-group-lg row">
-                            <label class="col-xs-12 col-md-3">{{trans('app.fields.email')}}</label>
+                            <label class="col-xs-12 col-md-3">{{trans('app.fields.email')}} *</label>
                             <div class="col-xs-12 col-md-9">
                                 <div class="new-f-group">
                                     <div class="form-group clearfix">
@@ -61,26 +50,11 @@
                             </div>
                         </div>
 
-                        {{--<div class="form-group-lg row">--}}
-                            {{--<label class="col-xs-12 col-md-3">{{trans('app.phone_number')}}</label>--}}
-                            {{--<div class="col-xs-12 col-md-9">--}}
-                                {{--<div class="new-f-group">--}}
-                                    {{--<div class="form-group clearfix">--}}
-                                        {{--<span class="icony"><i class="fa fa-mobile"></i></span>--}}
-                                        {{--<input name="phone_number" type="text" value="{{Request::old('phone_number')}}" class="effect-9 form-control"--}}
-                                               {{--placeholder="{{trans('app.phone_number')}}">--}}
-                                        {{--<span class="focus-border"><i></i></span>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-
                         <div class="form-group-lg row">
-                            <label class="col-xs-12 col-md-3">{{trans('app.fields.password')}} </label>
+                            <label class="col-xs-12 col-md-3">{{trans('app.fields.password')}} *</label>
                             <div class="new-f-group col-xs-12 col-md-9">
                                 <div class="form-group">
-                                    <span class="icony"><i class="fa fa-fw field-icon toggle-password fa-eye"
-                                                           toggle="#password-field"></i></span>
+                                    <span class="icony"><i class="fa fa-fw field-icon toggle-password fa-eye" toggle="#password-field"></i></span>
                                     <input name="password" type="password" class="effect-9 form-control"
                                            id="password-field"
                                            placeholder="{{trans('app.fields.password')}} ">
@@ -90,7 +64,7 @@
                         </div>
 
                         <div class="form-group-lg row">
-                            <label class="col-xs-12 col-md-3">{{trans('app.fields.repassword')}}</label>
+                            <label class="col-xs-12 col-md-3">{{trans('app.fields.repassword')}} *</label>
                             <div class="new-f-group col-xs-12 col-md-9">
                                 <div class="form-group">
                                     <span class="icony"><i class="fa fa-fw field-icon toggle-password fa-eye"
@@ -122,19 +96,19 @@
 
                         <div class="reg-part">
 
-                            <div class="form-group-lg row">
-                                <label class="col-xs-12 col-md-3">{{trans('app.add_logo')}} </label>
-                                <div class="new-f-group col-xs-12 col-md-4">
-                                    <div class="form-group">
-                                        <div class=" file-upload" data-input-name="logo" data-unodz-callback="callback()">
-                                        </div>
-                                        <p id="logo_error" style="display: none" class="text-danger">{{trans('app.logo_error')}}</p>
-                                    </div>
-                                </div>
-                            </div>
+                            {{--<div class="form-group-lg row">--}}
+                                {{--<label class="col-xs-12 col-md-3">{{trans('app.add_logo')}} </label>--}}
+                                {{--<div class="new-f-group col-xs-12 col-md-4">--}}
+                                    {{--<div class="form-group">--}}
+                                        {{--<div class=" file-upload" data-input-name="logo" data-unodz-callback="callback()">--}}
+                                        {{--</div>--}}
+                                        {{--<p id="logo_error" style="display: none" class="text-danger">{{trans('app.logo_error')}}</p>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
 
                             <div class="form-group-lg row">
-                                <label class="col-xs-12 col-md-3">{{trans('app.company_name')}}</label>
+                                <label class="col-xs-12 col-md-3">{{trans('app.company_name')}} *</label>
                                 <div class="col-xs-12 col-md-9">
                                     <div class="new-f-group">
                                         <div class="form-group clearfix">
@@ -146,21 +120,21 @@
                                 </div>
                             </div>
 
-                            <div class="form-group-lg row">
-                                <label class="col-xs-12 col-md-3">{{trans('app.address')}}</label>
-                                <div class="col-xs-12 col-md-9">
-                                    <div class="new-f-group">
-                                        <div class="form-group clearfix">
-                                            <input name="address" value="{{old('address')}}" type="text" class="effect-9 form-control"
-                                                   placeholder="{{trans('app.address')}}">
-                                            <span class="focus-border"><i></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            {{--<div class="form-group-lg row">--}}
+                                {{--<label class="col-xs-12 col-md-3">{{trans('app.address')}}</label>--}}
+                                {{--<div class="col-xs-12 col-md-9">--}}
+                                    {{--<div class="new-f-group">--}}
+                                        {{--<div class="form-group clearfix">--}}
+                                            {{--<input name="address" value="{{old('address')}}" type="text" class="effect-9 form-control"--}}
+                                                   {{--placeholder="{{trans('app.address')}}">--}}
+                                            {{--<span class="focus-border"><i></i></span>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
 
                             <div class="form-group-lg row">
-                                <label class="col-xs-12 col-md-3">{{trans('app.fields.mobile_number')}}</label>
+                                <label class="col-xs-12 col-md-3">{{trans('app.fields.mobile_number')}} *</label>
                                 <div class="col-xs-12 col-md-9">
                                     <div class="new-f-group">
                                         <div class="form-group clearfix">
@@ -186,18 +160,18 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group-lg row">
-                                <label class="col-xs-12 col-md-3">{{trans('app.company_details')}}</label>
-                                <div class="col-xs-12 col-md-9">
-                                    <div class="new-f-group">
-                                        <div class="form-group clearfix">
-                                            <textarea  name="details" class="effect-9 form-control" rows="8"
-                                                      placeholder="{{trans('app.company_more')}} ...">{{old('details')}}</textarea>
-                                            <span class="focus-border"><i></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            {{--<div class="form-group-lg row">--}}
+                                {{--<label class="col-xs-12 col-md-3">{{trans('app.company_details')}}</label>--}}
+                                {{--<div class="col-xs-12 col-md-9">--}}
+                                    {{--<div class="new-f-group">--}}
+                                        {{--<div class="form-group clearfix">--}}
+                                            {{--<textarea  name="details" class="effect-9 form-control" rows="8"--}}
+                                                      {{--placeholder="{{trans('app.company_more')}} ...">{{old('details')}}</textarea>--}}
+                                            {{--<span class="focus-border"><i></i></span>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
                         </div>
                        {{-- <div class="reg-part">
                             <div class="form-group-lg row">
@@ -214,29 +188,29 @@
                                      </div>--}}{{--
                             </div>
                         </div>--}}
-                        <div class="reg-part">
-                            <div class="form-group-lg">
-                                <label>{{trans('app.attachments_company')}}</label>
-                                <div class="row">
-                                    <label for="upload" class="col-xs-12 col-md-1">{{trans('app.file')}} </label>
-                                    <input id="" class="col-xs-12 col-md-11" type="file" name="files[]"
-                                           placeholder="{{trans('app.choose_file')}}">
-                                </div>
+                        {{--<div class="reg-part">--}}
+                            {{--<div class="form-group-lg">--}}
+                                {{--<label>{{trans('app.attachments_company')}}</label>--}}
+                                {{--<div class="row">--}}
+                                    {{--<label for="upload" class="col-xs-12 col-md-1">{{trans('app.file')}} </label>--}}
+                                    {{--<input id="" class="col-xs-12 col-md-11" type="file" name="files[]"--}}
+                                           {{--placeholder="{{trans('app.choose_file')}}">--}}
+                                {{--</div>--}}
 
-                                <div class="row">
-                                    <label for="upload" class="col-xs-12 col-md-1"> {{trans('app.file')}} </label>
-                                    <input id="" class="col-xs-12 col-md-11" type="file" name="files[]"
-                                           placeholder="{{trans('app.choose_file')}}">
-                                </div>
-                                <div class="append"></div>
+                                {{--<div class="row">--}}
+                                    {{--<label for="upload" class="col-xs-12 col-md-1"> {{trans('app.file')}} </label>--}}
+                                    {{--<input id="" class="col-xs-12 col-md-11" type="file" name="files[]"--}}
+                                           {{--placeholder="{{trans('app.choose_file')}}">--}}
+                                {{--</div>--}}
+                                {{--<div class="append"></div>--}}
 
-                                <a class="add_field_button" id="addmore" role="button"
-                                   aria-expanded="false" aria-controls="collapseExample"><i
-                                            class="fa fa-plus"></i>{{trans('app.upload_more_files')}}</a>
+                                {{--<a class="add_field_button" id="addmore" role="button"--}}
+                                   {{--aria-expanded="false" aria-controls="collapseExample"><i--}}
+                                            {{--class="fa fa-plus"></i>{{trans('app.upload_more_files')}}</a>--}}
 
 
-                            </div>
-                        </div>
+                            {{--</div>--}}
+                        {{--</div>--}}
                     </div>
                     <div class="form-group-lg text-center">
                         <button type="submit" class="uperc padding-md fbutcenter">{{trans('app.register')}}</button>

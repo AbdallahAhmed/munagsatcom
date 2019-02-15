@@ -282,6 +282,9 @@ return [
     ],
     'account_activated'=>'Account activated',
     'free'=>'Free',
-
+    'terms'=>'Terms and conditions',
+    'policy'=>'Privacy policy',
+    'q_a'=>'F&Q',
+    'accept_with'=>'I accept'
 
 ];

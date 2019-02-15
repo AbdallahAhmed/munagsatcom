@@ -27,14 +27,14 @@ class TenderController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Tender::with(['org', 'org.logo','files'])->published();
+        $query = Tender::with(['org', 'org.logo', 'files'])->published();
 
         if ($request->filled('activity_id')) {
             $query->where('activity_id', $request->get('activity_id'));
         }
 
         if ($request->filled('q')) {
-            $query->where('name', 'LIKE','%' . trim($request->get('q')) . '%');
+            $query->where('name', 'LIKE', '%' . trim($request->get('q')) . '%');
         }
 
         if ($request->filled('org_id')) {
@@ -42,10 +42,10 @@ class TenderController extends Controller
         }
 
         if ($request->filled('offer_expired')) {
-            $carbon=new Carbon($request->get('offer_expired'));
+            $carbon = new Carbon($request->get('offer_expired'));
             $query->whereDay('last_get_offer_at', '<=', $carbon->day);
-            $query->whereMonth('last_get_offer_at', '<=',  $carbon->month);
-            $query->whereYear('last_get_offer_at', '<=',  $carbon->year);
+            $query->whereMonth('last_get_offer_at', '<=', $carbon->month);
+            $query->whereYear('last_get_offer_at', '<=', $carbon->year);
         }
 
         if ($request->filled('show_expired') && $request->get('show_expired') == 1) {
@@ -138,7 +138,8 @@ class TenderController extends Controller
             'points' => $tender->points,
             'object_id' => $tender->id,
             'user_id' => fauth()->id(),
-            'action' => 'tenders.buy'
+            'action' => 'tenders.buy',
+            'company_id' => $user->in_company ? $user->company[0]->id : 0
         ]);
 
         $tender->buyers()->attach(fauth()->id(), ['points' => $tender->points]);
@@ -146,7 +147,7 @@ class TenderController extends Controller
         $tender->downloaded++;
         $tender->save();
 
-        return redirect()->route('tenders.download', ['id' => $tender->id, 'lang' => app()->getLocale()]);
+        return redirect()->back()->with('download', route('tenders.download', ['id' => $tender->id, 'lang' => app()->getLocale()]));
     }
 
 
@@ -172,6 +173,6 @@ class TenderController extends Controller
             return 'كراسة الشروط تم مسحها';
         }
 
-        return response()->download(uploads_path($tender->cb->path), $tender->name, ['Content-Type: application/pdf']);
+        return response()->download(uploads_path($tender->cb->path), $tender->name . '.' . pathinfo($tender->cb->path, PATHINFO_EXTENSION), ['Content-Type: application/pdf']);
     }
 }

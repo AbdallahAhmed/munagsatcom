@@ -211,6 +211,15 @@
                         <hr>
                         <p class="{{fauth()->user()->points - $tender->points<0?'text-danger':''}}"> {{ trans('app.points_after_buy') }}
                             : {{ fauth()->user()->points - $tender->points }} {{trans('app.point')}}</p>
+                        <hr>
+                        @if(fauth()->user()->points - $tender->points>0)
+                            <p class="fieldset" style="margin: 0;">
+                                <input type="checkbox" name="terms" id="accept-terms">
+                                <label for="accept-terms">{{trans('app.accept_with')}} <a target="_blank"
+                                                                                          href="{{route('page.show', ['slug' => 'سياسة-الخصوصية'])}}"
+                                                                                          class="text-primary">{{trans('app.terms')}}</a></label>
+                            </p>
+                        @endif
                         <p class="text-danger">{{fauth()->user()->points - $tender->points<0?trans('app.please_recharge'):''}}</p>
                     </div>
                     <div class="modal-footer">
@@ -218,7 +227,9 @@
                               method="post">
                             {{csrf_field()}}
                             <button type="submit"
-                                    class="btn btn-primary" {{fauth()->user()->points - $tender->points<0?'disabled':''}}>{{trans('app.tenders.buy')}}</button>
+                                    class="btn btn-primary"
+                                    id="{{fauth()->user()->points - $tender->points<0?'':'can-buy'}}"
+                                    disabled>{{trans('app.tenders.buy')}}</button>
                             <button type="button" class="btn btn-secondary"
                                     data-dismiss="modal">{{trans('app.close')}}</button>
                         </form>
@@ -235,9 +246,22 @@
 @push('scripts')
     <script>
         $(function () {
+            @if(session('download'))
+            setTimeout(function () {
+                window.location.href = "{{session('download')}}";
+            })
+            @endif
             $('[data-toggle="tooltip"]').tooltip({trigger: 'manual'}).tooltip('show');
         });
 
+        $('#accept-terms').change(function (e) {
+            var $base = $('#can-buy');
+            if ($base.length && e.target.checked) {
+                $base.removeAttr('disabled')
+            } else {
+                $base.attr('disabled', true)
+            }
+        });
         $(".progress-bar").each(function () {
             each_bar_width = $(this).attr('aria-valuenow');
             $(this).width(each_bar_width + '%');

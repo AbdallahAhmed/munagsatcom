@@ -57,32 +57,32 @@
                     <div class="profile-item noborder">
                         <div class="unit-table">
                             @if($transactions->count()!=0)
-                            <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th scope="col">{{trans('app.transaction_type')}} </th>
-                                    <th scope="col">{{trans('app.before_transaction')}}</th>
-                                    <th scope="col"> {{trans('app.used_points')}}</th>
-                                    <th scope="col"> {{trans('app.after_transactions')}}</th>
-                                    <th scope="col"> {{trans('app.date_transactions')}}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($transactions as $transaction)
+                                <table class="table table-striped">
+                                    <thead>
                                     <tr>
-                                        <td>{{$transaction->type}}</td>
-                                        <td>{{$transaction->before_points}}</td>
-                                        <td>{{$transaction->points}}</td>
-                                        <td>{{$transaction->after_points}}</td>
-                                        <td>{{$transaction->created_at->diffForHumans()}}</td>
+                                        <th scope="col">{{trans('app.transaction_type')}} </th>
+                                        <th scope="col">{{trans('app.before_transaction')}}</th>
+                                        <th scope="col"> {{trans('app.used_points')}}</th>
+                                        <th scope="col"> {{trans('app.after_transactions')}}</th>
+                                        <th scope="col"> {{trans('app.date_transactions')}}</th>
                                     </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($transactions as $transaction)
+                                        <tr>
+                                            <td><a href="{{$transaction->path}}" class="text-primary">{{$transaction->type}}</a></td>
+                                            <td>{{$transaction->before_points}}</td>
+                                            <td>{{$transaction->points}}</td>
+                                            <td>{{$transaction->after_points}}</td>
+                                            <td>{{$transaction->created_at->diffForHumans()}}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
                             @endif
                             <div class="text-center">
                                 @if($transactions->count()==0)
-                                    <p  style="text-align: center">{{trans('app.no_transactions')}}</p>
+                                    <p style="text-align: center">{{trans('app.no_transactions')}}</p>
                                 @endif
                             </div>
                             <div class="text-center">

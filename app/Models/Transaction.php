@@ -21,7 +21,7 @@ class Transaction extends Model
      *
      * @var array
      */
-    protected $fillable = ['before_points', 'after_points', 'points', 'user_id', 'action', 'object_id'];
+    protected $fillable = ['before_points', 'after_points', 'points', 'user_id', 'action', 'object_id','company_id'];
 
     /**
      * Add Type
@@ -36,5 +36,31 @@ class Transaction extends Model
             default:
                 return trans('app.types.not_register');
         }
+    }
+
+
+    /**
+     * Path Attribute
+     * @return string
+     */
+    public function getPathAttribute()
+    {
+
+        switch ($this->attributes['action']) {
+            case 'tenders.buy':
+                return $this->tender ? $this->tender->path : 'javascript:void(0)';
+
+            default:
+                return 'javascript:void(0)';
+        }
+    }
+
+    /**
+     * Tender Relation with transaction
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tender()
+    {
+        return $this->belongsTo(Tender::class, 'object_id');
     }
 }

@@ -285,6 +285,8 @@ return [
     'terms'=>'Terms and conditions',
     'policy'=>'Privacy policy',
     'q_a'=>'F&Q',
-    'accept_with'=>'I accept'
+    'accept_with'=>'I accept',
+    'attachments_company_add'=>'Add attachments of company papers',
+    'not_attachments'=>'No attachments'
 
 ];

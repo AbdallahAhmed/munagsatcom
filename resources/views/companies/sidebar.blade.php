@@ -22,6 +22,7 @@
                             href="{{route('company.centers', ['id' => $company_id])}}">
                         {{trans('app.centers.centers')}}
                     </a></li>
+
                 <?php
                 use App\Models\Companies_empolyees;
                 $role = [];

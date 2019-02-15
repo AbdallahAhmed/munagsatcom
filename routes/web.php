@@ -66,6 +66,10 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
 
 
     Route::group(['middleware' => ['company']], function ($router) {
+
+        $router->post('mycompany/{id}/update', 'CompanyController@companyUpdate')->name('company.updates');
+
+
         $router->get('company/{slug}', 'CompanyController@show')->name('company.show');
         $router->get('company/{id}/chances', 'CompanyController@chances')->name('company.chances');
         $router->get('company/{id}/centers', 'CompanyController@centers')->name('company.centers');

@@ -288,6 +288,8 @@ return [
     'terms'=>'شروط الاستخدام',
     'policy'=>'سياسة الخصوصية',
     'q_a'=>'الأسئلة الشائعة',
-    'accept_with'=>'أنا أوافق على'
+    'accept_with'=>'أنا أوافق على',
+    'attachments_company_add' => '  أضف مرفقات اخرى  ',
+    'not_attachments'=>'لا يوجد مرفقات'
 
 ];

@@ -47,6 +47,8 @@
                                 </div>
                                 <div class="form-group-lg text-center">
                                     <button type="submit" class="uperc padding-md fbutcenter">{{trans('app.search')}}</button>
+                                    <a href="{{route('company.employees.search',['id'=>$company->id])}}" class=" btn btn-primary uperc padding-md fbutcenter">{{trans('app.send_request')}}</a>
+
                                 </div>
                             </form>
                         </div>
@@ -109,6 +111,7 @@
             </div>
         </div>
     </section>
+
     @push('scripts')
         <script>
             $(function () {

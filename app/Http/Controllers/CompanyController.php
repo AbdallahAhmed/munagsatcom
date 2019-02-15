@@ -8,6 +8,7 @@ use App\Models\Companies_empolyees;
 use App\Models\Company;
 use App\User;
 use Dot\Chances\Models\Sector;
+use Dot\Media\Models\Media;
 use Dot\Services\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -32,6 +33,8 @@ class CompanyController extends Controller
     public function show(Request $request, $slug)
     {
         $company = Company::where('slug', '=', $slug)->firstOrFail();
+        $this->data['sectors'] = Sector::published()->get();
+
         $this->data['company'] = $company;
 
         return view('companies.company', $this->data);
@@ -347,4 +350,55 @@ class CompanyController extends Controller
     }
 
 
+    /**
+     * POST {lang?}/mycompany/update
+     * @route company.updates
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function companyUpdate(Request $request)
+    {
+        $company = fauth()->user()->company[0];
+        if (!$company) {
+            return redirect()->back()->with(['messages' => [trans('app.can_update_company')]]);
+        }
+
+        $rules = [
+            'name' => 'required|max:255|min:2',
+            'sector_id' => 'required|exists:sectors,id',
+            'details' => 'required|max:255',
+            'address' => 'required|max:255',
+            'logo' => 'required|mimes:jpg,png,jpeg',
+            'files.*.mimes' => 'jpg,png,jpeg,doc,docx,txt,pdf,zip'
+        ];
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
+
+        $company->name = $request->get('name');
+        $company->details = $request->get('details');
+        $company->address = $request->get('address');
+        $company->sector_id = $request->get('sector_id');
+        $company->phone_number = $request->get('phone_number');
+        $company->mobile_number = $request->get('mobile_number');
+
+        if ($request->hasFile('logo')) {
+            $media = new Media();
+            $company->image_id = $media->saveFile($request->file('logo'));
+        }
+
+        $company->save();
+        $files = array();
+        if ($request->file('files')) {
+            foreach (($request->file('files')) as $file) {
+                $media = new Media();
+                $files[] = $media->saveFile($file);
+            }
+        }
+        $company->files()->attach($files);
+
+        return redirect()->back()->with('message', trans('app.profile_updated'));
+    }
 }

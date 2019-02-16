@@ -87,7 +87,7 @@
                                              aria-valuemin="0"
                                              aria-valuemax="100" style="">
                                     <span class="popOver" data-toggle="tooltip" data-placement="top"
-                                          title=" {{$tender->files_opened_at->diffForHumans(\Carbon\Carbon::now())}}"> </span>
+                                          title=" {{$tender->last_get_offer_at->diffInDays(\Carbon\Carbon::now())}} {{trans('app.day')}}"> </span>
                                         </div>
                                     </div>
                                 </div>

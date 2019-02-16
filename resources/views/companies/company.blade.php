@@ -9,6 +9,23 @@
             <div class="col-xs-12 col-md-9">
                 <div class="profile-box">
 
+                    <div class="profile-circle">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="circle-item">
+                                    <p>{{trans('app.current_points')}}</p>
+                                    <div class="num">{{$company->points}}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="circle-item">
+                                    <p>{{trans('app.spent_points')}}</p>
+                                    <div class="num"> {{$company->spent_points}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
                     <div class="profile-item">
                         <div class="row">
                             <div class="col-md-3">

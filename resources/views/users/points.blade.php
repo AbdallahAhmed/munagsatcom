@@ -14,13 +14,15 @@
                             <div class="col-md-6">
                                 <div class="circle-item">
                                     <p>{{fauth()->user()->in_company?trans('app.available_points'):trans('app.current_points')}}</p>
-                                    <div class="num">{{$user->points}}</div>
+                                    <div class="num">{{fauth()->user()->in_company?fauth()->user()->company[0]->points:$user->points}}</div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="circle-item">
                                     <p>{{trans('app.spent_points')}}</p>
-                                    <div class="num"> {{$user->spent_points}}</div>
+                                    <div class="num">
+                                        {{fauth()->user()->in_company?fauth()->user()->company[0]->spent_points:$user->spent_points}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +72,8 @@
                                     <tbody>
                                     @foreach($transactions as $transaction)
                                         <tr>
-                                            <td><a href="{{$transaction->path}}" class="text-primary">{{$transaction->type}}</a></td>
+                                            <td><a href="{{$transaction->path}}"
+                                                   class="text-primary">{{$transaction->type}}</a></td>
                                             <td>{{$transaction->before_points}}</td>
                                             <td>{{$transaction->points}}</td>
                                             <td>{{$transaction->after_points}}</td>

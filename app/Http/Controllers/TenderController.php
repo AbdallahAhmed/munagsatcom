@@ -115,9 +115,14 @@ class TenderController extends Controller
 
         $user = fauth()->user();
 
+        if ($user->in_company) {
+            $user = $user->company[0];
+        }
+
         if ($tender->is_bought) {
             return 'Can\'t buy this twice.';
         }
+
 
         if ($tender->points > $user->points) {
             return 'Can\'t buy this you have\'nt points enough.';
@@ -169,7 +174,7 @@ class TenderController extends Controller
             abort(404);
         }
 
-        if (!($tender->cb&&file_exists(uploads_path($tender->cb->path)))) {
+        if (!($tender->cb && file_exists(uploads_path($tender->cb->path)))) {
             return 'كراسة الشروط تم مسحها';
         }
 

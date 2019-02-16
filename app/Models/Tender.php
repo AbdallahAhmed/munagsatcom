@@ -119,15 +119,17 @@ class Tender extends Model
         if (isset($this->original['IsBought_cache'])) {
             return $this->original['IsBought_cache'];
         }
-        return $this->original['IsBought_cache'] = $this->buyers()->where('user_id', fauth()->id())->count() > 0;
+        return $this->original['IsBought_cache'] = ($this->buyers()->where('user_id', fauth()->id())->count() > 0) ||
+            (fauth()->user()->in_company && Transaction::where(['object_id' => $this->id, 'action' => 'tenders.buy', 'company_id' => fauth()->user()->company[0]->id])->count() > 0);
     }
 
 
     /**
      *  get all transactions for tenders
      */
-    public function transactions(){
-        return $this->hasMany(Transaction::class,'object_id')->where('action','tenders.buy');
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'object_id')->where('action', 'tenders.buy');
     }
 
 }

@@ -11,10 +11,12 @@
     <meta property="og:type" content="article"/>
     <meta property="og:url" content="{{$tender->path}}"/>
     <meta property="og:site_name" content="{{$tender->name}}"/>
-    <meta property="og:description" content="تفخر مناقصاتكم بكونها الموقع الاول في السعودية الذي يقدم خدمة فريدة من نوعها من خلال طرح  كراسات الشروط والمناقصات للمشاريع الحكومية وفق اعلى معايير الشفافية">
+    <meta property="og:description"
+          content="تفخر مناقصاتكم بكونها الموقع الاول في السعودية الذي يقدم خدمة فريدة من نوعها من خلال طرح  كراسات الشروط والمناقصات للمشاريع الحكومية وفق اعلى معايير الشفافية">
     <meta property="og:image" content="{{uploads_url($tender->org->logo->path)}}">
     <meta name="twitter:title" content="{{$tender->name}}">
-    <meta name="twitter:description" content="تفخر مناقصاتكم بكونها الموقع الاول في السعودية الذي يقدم خدمة فريدة من نوعها من خلال طرح  كراسات الشروط والمناقصات للمشاريع الحكومية وفق اعلى معايير الشفافية">
+    <meta name="twitter:description"
+          content="تفخر مناقصاتكم بكونها الموقع الاول في السعودية الذي يقدم خدمة فريدة من نوعها من خلال طرح  كراسات الشروط والمناقصات للمشاريع الحكومية وفق اعلى معايير الشفافية">
     <meta name="twitter:image" content="{{uploads_url($tender->org->logo->path)}}">
 
     <meta name="twitter:url" content="{{$tender->path}}">
@@ -222,15 +224,18 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    @php
+                        $user=fauth()->user()->in_company?fauth()->user()->company[0]:fauth()->user();
+                    @endphp
                     <div class="modal-body">
                         <p> {{trans('app.cb_price')}} : {{ $tender->points }} {{trans('app.point')}}</p>
                         <hr>
-                        <p> {{ trans('app.current_points') }} : {{ fauth()->user()->points }} {{trans('app.point')}}</p>
+                        <p> {{ trans('app.current_points') }} : {{ $user->points }} {{trans('app.point')}}</p>
                         <hr>
-                        <p class="{{fauth()->user()->points - $tender->points<0?'text-danger':''}}"> {{ trans('app.points_after_buy') }}
-                            : {{ fauth()->user()->points - $tender->points }} {{trans('app.point')}}</p>
+                        <p class="{{$user->points - $tender->points<0?'text-danger':''}}"> {{ trans('app.points_after_buy') }}
+                            : {{ $user->points - $tender->points }} {{trans('app.point')}}</p>
                         <hr>
-                        @if(fauth()->user()->points - $tender->points>0)
+                        @if($user->points - $tender->points>0)
                             <p class="fieldset" style="margin: 0;">
                                 <input type="checkbox" name="terms" id="accept-terms">
                                 <label for="accept-terms">{{trans('app.accept_with')}} <a target="_blank"
@@ -238,7 +243,7 @@
                                                                                           class="text-primary">{{trans('app.terms')}}</a></label>
                             </p>
                         @endif
-                        <p class="text-danger">{{fauth()->user()->points - $tender->points<0?trans('app.please_recharge'):''}}</p>
+                        <p class="text-danger">{{$user->points - $tender->points<0?trans('app.please_recharge'):''}}</p>
                     </div>
                     <div class="modal-footer">
                         <form action="{{route('tenders.buy',['id'=>$tender->id,'lang'=>app()->getLocale()])}}"
@@ -246,7 +251,7 @@
                             {{csrf_field()}}
                             <button type="submit"
                                     class="btn btn-primary"
-                                    id="{{fauth()->user()->points - $tender->points<0?'':'can-buy'}}"
+                                    id="{{$user->points - $tender->points<0?'':'can-buy'}}"
                                     disabled>{{trans('app.tenders.buy')}}</button>
                             <button type="button" class="btn btn-secondary"
                                     data-dismiss="modal">{{trans('app.close')}}</button>

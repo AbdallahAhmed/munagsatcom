@@ -102,6 +102,7 @@ class UserController extends Controller
                 $company->sector_id = $request->get('sector_id');
                 $company->phone_number = $request->get('phone_number');
                 $company->mobile_number = $request->get('mobile_number');
+                $company->points= option('new_user_points', 0);
 
 //                $media = new Media();
 //                $company->image_id = $media->saveFile($request->file('logo'));

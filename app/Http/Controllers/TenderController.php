@@ -144,7 +144,7 @@ class TenderController extends Controller
             'object_id' => $tender->id,
             'user_id' => fauth()->id(),
             'action' => 'tenders.buy',
-            'company_id' => $user->in_company ? $user->company[0]->id : 0
+            'company_id' => fauth()->user()->in_company ? $user->id : 0
         ]);
 
         $tender->buyers()->attach(fauth()->id(), ['points' => $tender->points]);

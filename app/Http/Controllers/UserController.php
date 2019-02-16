@@ -544,6 +544,7 @@ class UserController extends Controller
         $this->data['user'] = fauth()->user();
         $this->data['transactions'] = Transaction::with('tender')->where('user_id', $this->data['user']->id)
             ->whereMonth('created_at', $request->get('month', Carbon::now()->month - 1) + 1)
+            ->orderBy('created_at','DESC')
             ->paginate(8);
         return view('users.points', $this->data);
     }

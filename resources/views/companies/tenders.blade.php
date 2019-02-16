@@ -67,8 +67,6 @@
                                         <th scope="col">{{trans('app.tenders.id')}}</th>
                                         <th scope="col">{{trans('app.tenders.name')}}</th>
                                         <th scope="col"> {{trans('app.tenders.org')}}</th>
-                                        <th scope="col"> {{trans('tenders::tenders.views')}}</th>
-                                        <th scope="col"> {{trans('tenders::tenders.downloads')}}</th>
                                         <th scope="col">{{trans('app.tenders.last_get_offer_at')}}</th>
                                         <th scope="col"> {{trans('app.tenders.created')}}</th>
                                     </tr>
@@ -80,8 +78,6 @@
                                             </td>
                                             <td>{{$tender->name}}</td>
                                             <td>{{$tender->org->name}}</td>
-                                            <td> {{$tender->views}}</td>
-                                            <td> {{$tender->downloaded}}</td>
                                             <td>{{hijri_date($tender->last_get_offer_at)}}</td>
                                             <td>{{hijri_date($tender->published_at)}}</td>
                                         </tr>

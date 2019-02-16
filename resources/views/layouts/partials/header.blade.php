@@ -21,7 +21,7 @@
                     <a href="{{route('page.show', ['slug' => app()->getLocale() == "ar" ? 'حول البوابة' : 'about-us'])}}"> {{trans('app.about_website')}}</a>
                 </li>
                 <li>
-                    <a href="{{route('page.show', ['slug' => app()->getLocale() == "ar" ? 'الأنظمة و اللوائح' : 'terms'])}}">{{trans('app.terms_conditions')}}</a>
+                    <a href="{{route('page.show', ['slug' => app()->getLocale() == "ar" ? 'الشروط والأحكام' : 'terms'])}}">{{trans('app.terms_conditions')}}</a>
                 </li>
                 <li><a href="{{route('contact-us')}}">{{trans('app.contact_us')}}</a></li>
             </ul>

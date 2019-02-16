@@ -21,7 +21,7 @@ class Tags extends \Dot\Platform\Plugin
         Navigation::menu("sidebar", function ($menu) {
 
             if (Auth::user()->can("tags.manage")) {
-                $menu->item('tags', trans("tags::tags.tags"), route("admin.tags.show"))->icon("fa-tags")->order(3);
+//                $menu->item('tags', trans("tags::tags.tags"), route("admin.tags.show"))->icon("fa-tags")->order(3);
             }
         });
     }

@@ -31,7 +31,7 @@ class PageController extends Controller
     {
         if ($request->method() == "POST") {
             Mail::to('info@munagasatcom.com')->send(new ContactMail($request));
-            return response()->back()->with(['messages' => [trans('app.messages_send')], 'status' => 'success']);
+            return redirect()->back()->with(['messages' => [trans('app.messages_send')], 'status' => 'success']);
         } else {
             return view('contact');
         }

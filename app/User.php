@@ -71,4 +71,17 @@ class User extends \Dot\Users\Models\User
         }
         return $this->original['IsCompany_cache'] = Companies_empolyees::where(['employee_id' => $this->id, 'accepted' => 1, 'status' => 1])->count() > 0;
     }
+
+    /**
+     *  Can Buy for Tender
+     * @return bool
+     */
+    public function getCanBuyAttribute()
+    {
+        if (isset($this->original['CanBuy_cache'])) {
+            return $this->original['CanBuy_cache'];
+        }
+
+        return ((!$this->in_company) || ($this->is_owner) || ($this->in_company && $this->company[0]->pivot->role == 1));
+    }
 }

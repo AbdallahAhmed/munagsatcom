@@ -123,6 +123,9 @@ class TenderController extends Controller
             return 'Can\'t buy this twice.';
         }
 
+        if(fauth()->user()->can_buy){
+            return 'Can\'t you can buy tenders.';
+        }
 
         if ($tender->points > $user->points) {
             return 'Can\'t buy this you have\'nt points enough.';

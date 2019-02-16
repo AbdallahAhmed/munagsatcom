@@ -103,7 +103,7 @@
                                         class="text-grey">{{hijri_date($tender->files_opened_at)}}</span>-<span
                                         class="text-grey">{{$tender->files_opened_at->format('H:s')}}</span>
 
-                                <small class="text-grey">{{($tender->files_opened_at)->format('Y/m/d')}}</small>
+                                <small class="text-grey block">{{($tender->files_opened_at)->format('Y/m/d')}}</small>
                             </p>
                         </div>
                         <div class="item one_four">
@@ -111,7 +111,7 @@
                             <p><i class="fa fa-calendar"></i> <span
                                         class="text-grey">{{hijri_date($tender->last_get_offer_at)}}</span>-<span
                                         class="text-grey">{{$tender->last_get_offer_at->format('H:s')}}</span>
-                                <small class="text-grey">{{($tender->last_get_offer_at)->format('Y/m/d')}}</small>
+                                <small class="text-grey block">{{($tender->last_get_offer_at)->format('Y/m/d')}}</small>
 
                             </p>
                         </div>
@@ -122,7 +122,7 @@
                                         class="text-grey">{{hijri_date($tender->published_at)}} </span>
 
                                 <br>
-                                <small class="text-grey">{{($tender->published_at)->format('Y/m/d')}}</small>
+                                <small class="text-grey block">{{($tender->published_at)->format('Y/m/d')}}</small>
                             </p>
                         </div>
                         <div class="item one_four">
@@ -130,7 +130,7 @@
                             <p><i class="fa fa-calendar"></i> <span
                                         class="text-grey">{{hijri_date($tender->last_queries_at)}}</span>
                                 <br>
-                                <small class="text-grey">{{($tender->published_at)->format('Y/m/d')}}</small>
+                                <small class="text-grey block">{{($tender->published_at)->format('Y/m/d')}}</small>
                             </p>
                         </div>
                     </div>
@@ -194,10 +194,16 @@
                                             {{trans('app.tenders.download')}}
                                         </a>
                                     @else
-                                        <a type="button" class="btn btn-default" data-toggle="modal"
-                                           data-target="#buycb">
-                                            {{trans('app.tenders.buy')}}
-                                        </a>
+                                        @if(fauth()->user()->can_buy)
+                                            <a type="button" class="btn btn-default" data-toggle="modal"
+                                               data-target="#buycb">
+                                                {{trans('app.tenders.buy')}}
+                                            </a>
+                                        @else
+                                            <div class="alert alert-warning">
+                                                {{trans('app.you_cannot_buy')}}
+                                            </div>
+                                        @endif
                                     @endif
                                 </div>
                             </div>

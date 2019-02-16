@@ -294,6 +294,7 @@ return [
     'can_pay' => 'Can pay',
     'employee_created' => 'Employee created successfully, check e-mail inbox',
     'only_admin_can_edit'=>' Only the company\'s consumer manager modify employees.',
-    'messages_send'=>'Message Sent'
+    'messages_send'=>'Message Sent',
+    'you_cannot_buy'=>'You can not purchase'
 
 ];

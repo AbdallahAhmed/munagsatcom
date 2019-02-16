@@ -484,3 +484,7 @@ footer a {
 .disabled{
     opacity: .7;
 }
+
+.block{
+    display: block;
+}

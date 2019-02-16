@@ -34,6 +34,6 @@ class VerificationMail extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.verification', ['user' => $this->user]);
+        return $this->$this->from('noreply@munagasatcom.com','مناقصاتكم')->view('mail.verification', ['user' => $this->user]);
     }
 }

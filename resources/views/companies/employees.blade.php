@@ -7,10 +7,12 @@
             @include('companies.sidebar', ['company_id' => $company->id])
             <div class="col-xs-12 col-md-9">
                 <div class="profile-box">
+                    @if(!fauth()->user()->is_owner)
                     <div class="alert alert-info">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         {{trans('app.only_admin_can_edit')}}
                     </div>
+                    @endif
 
                     <div class="profile-item">
 

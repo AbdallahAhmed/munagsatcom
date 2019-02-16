@@ -14,11 +14,13 @@
                             href="{{route('company.tenders', ['id' => $company_id])}}">
                         {{trans('app.name')}}
                     </a></li>
-                <li @if (\Route::current()->getName() == 'company.employees' ||  \Route::current()->getName()=='company.employees.add') class="active" @endif>
-                    <a
-                            href="{{route('company.employees', ['id' => $company_id])}}">
-                        {{trans('app.employees')}}
-                    </a></li>
+                @if(fauth()->user()->is_owner)
+                    <li @if (\Route::current()->getName() == 'company.employees' ||  \Route::current()->getName()=='company.employees.add') class="active" @endif>
+                        <a
+                                href="{{route('company.employees', ['id' => $company_id])}}">
+                            {{trans('app.employees')}}
+                        </a></li>
+                @endif
                 <li @if (\Route::current()->getName() == 'company.centers') class="active" @endif><a
                             href="{{route('company.centers', ['id' => $company_id])}}">
                         {{trans('app.centers.centers')}}

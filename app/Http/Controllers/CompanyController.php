@@ -233,6 +233,10 @@ class CompanyController extends Controller
      */
     public function addEmployees(Request $request, $id)
     {
+
+        if (!fauth()->user()->is_owner) {
+            return redirect()->back()->with(['messages'=>'You nvver be here']);
+        }
         $this->data['company'] = $company = fauth()->user()->company[0];
 
         if ($request->isMethod('post')) {

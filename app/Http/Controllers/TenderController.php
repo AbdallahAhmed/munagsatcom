@@ -27,6 +27,7 @@ class TenderController extends Controller
      */
     public function index(Request $request)
     {
+
         $query = Tender::with(['org', 'org.logo', 'files'])->published();
 
         if ($request->filled('activity_id')) {

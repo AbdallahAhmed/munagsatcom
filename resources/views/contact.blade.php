@@ -9,14 +9,15 @@
         <div class="res-box">
             <div class="contacts">
                 <div class="feildcont">
-                    <form id="form">
+                    <form id="form" method="post" action="{{route('contact-us')}}">
+                        {{csrf_field()}}
                         <div class="row">
                             <div class="col-md-7 contact-form">
                                 <div class="new-f-group">
                                     <div class="form-group clearfix">
                                         <span class="icony"><i class="fa fa-user"></i></span>
                                         <input id="name" type="text" class="effect-9 form-control"
-                                               placeholder="{{trans('app.fields.name')}}...">
+                                               placeholder="{{trans('app.fields.name')}}..." name="name">
                                         <span class="focus-border"><i></i></span>
                                         <p class="text-danger" id="ename"
                                            style="display: none">{{trans('app.name_min')}}</p>
@@ -26,7 +27,7 @@
                                     <div class="form-group clearfix">
                                         <span class="icony"><i class="fa fa-mobile"></i></span>
                                         <input id="tel" type="tel" class="effect-9 form-control"
-                                               placeholder="{{trans('app.mobile_number')}}...">
+                                               placeholder="{{trans('app.mobile_number')}}..." name="number">
                                         <span class="focus-border"><i></i></span>
                                         <p class="text-danger" id="enum"
                                            style="display: none">{{trans('app.tel_min')}}</p>
@@ -36,13 +37,13 @@
                                     <div class="form-group clearfix">
                                         <span class="icony"><i class="fa fa-envelope"></i></span>
                                         <input id="email" type="email" class="effect-9 form-control"
-                                               placeholder="{{trans('app.fields.email')}}...">
+                                               placeholder="{{trans('app.fields.email')}}..." name="email">
                                         <span class="focus-border"><i></i></span>
                                     </div>
                                 </div>
                                 <div class="new-f-group">
                                     <div class="form-group clearfix">
-                                        <textarea id="message" class="effect-9 form-control" rows="5"
+                                        <textarea id="message" class="effect-9 form-control"  name="message" rows="5"
                                                   placeholder="{{trans('app.how_to_help')}}"
                                                   style="height:150px;"></textarea>
                                         <span class="focus-border"><i></i></span>
@@ -99,49 +100,54 @@
         <script>
             $(function () {
                 $('#form').on('submit', function (e) {
-                    e.preventDefault();
                     $('#ename').hide();
                     $('#enum').hide();
                     $('#emess').hide();
                     var valid = true;
 
                     if ($('#name').val().length < 3) {
+                        e.preventDefault();
+
                         $('#ename').show();
                         valid = false;
 
                     }
                     if ($('#tel').val().length < 10) {
+                        e.preventDefault();
+
                         $('#enum').show();
                         valid = false;
                     }
                     if ($('#message').val().length < 10) {
+                        e.preventDefault();
                         $('#emess').show();
                         valid = false;
                     }
-                    if (valid) {
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
-                        });
-                        $.ajax({
-                            type: "post",
-                            url: "{{route('contact-us')}}",
-                            data: {
-                                'name': $('#name').val(),
-                                'number': $('#tel').val(),
-                                'message': $('#message').val(),
-                                'email': $('#email').val()
-                            },
-                            success: function () {
-                                $('#form').hide(400);
-                                $('#succes').show()
-                            },
-                            error: function () {
-                                alert("Internal server error")
-                            }
-                        })
-                    }
+                    {{--if (valid) {--}}
+                        {{--$.ajaxSetup({--}}
+                            {{--headers: {--}}
+                                {{--'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
+                            {{--}--}}
+                        {{--});--}}
+                        {{--$.ajax({--}}
+                            {{--type: "post",--}}
+                            {{--url: "{{route('contact-us')}}",--}}
+                            {{--data: {--}}
+                                {{--'name': $('#name').val(),--}}
+                                {{--'number': $('#tel').val(),--}}
+                                {{--'message': $('#message').val(),--}}
+                                {{--'email': $('#email').val()--}}
+                            {{--},--}}
+                            {{--success: function () {--}}
+                                {{--$('#form').hide(400);--}}
+                                {{--$('#succes').show()--}}
+                            {{--},--}}
+                            {{--error: function () {--}}
+                                {{--alert("Internal server error")--}}
+                            {{--}--}}
+                        {{--})--}}
+                    {{--}--}}
+                    return true;
                 })
             })
         </script>

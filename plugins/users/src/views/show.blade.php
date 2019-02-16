@@ -7,7 +7,7 @@
 
             <h2>
                 <i class="fa fa-users"></i>
-                {{ trans("users::users.users") }}
+                {{ Request::get('backend',0)==1?trans('users::users.users_system'):trans("users::users.users") }}
             </h2>
 
             <ol class="breadcrumb">
@@ -16,7 +16,7 @@
                 </li>
                 <li>
                     <a href="{{ route("admin.users.show") }}">
-                        {{ trans("users::users.users") }}
+                        {{ Request::get('backend',0)==1?trans('users::users.users_system'):trans("users::users.users") }}
                         ({{ $users->total() }})</a>
                 </li>
             </ol>

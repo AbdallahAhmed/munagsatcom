@@ -185,7 +185,7 @@
                             <ul class="list-group" id="file-list">
                                 @foreach($files as $file)
                                     <li class="list-group-item">
-                                        <a href="">{{$file->title}}.pdf</a>
+                                        <a href="{{uploads_url($file->path)}}">{{$file->title}}.pdf</a>
                                         <button type="button" class="close" data-dismiss="list-group-item"
                                                 aria-hidden="true">
                                             &times;

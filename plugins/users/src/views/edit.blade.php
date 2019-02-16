@@ -18,7 +18,7 @@
                         <a href="{{ route("admin") }}">{{ trans("admin::common.admin") }}</a>
                     </li>
                     <li>
-                        <a href="{{ route("admin.users.show") }}">{{ trans("users::users.users") }}</a>
+                        <a href="{{ route("admin.users.show") }}">{{ Request::get('backend',0)==1?trans('users::users.users_system'):trans("users::users.users") }}</a>
                     </li>
                     <li class="active">
                         <strong>{{ trans("users::users.edit") }}</strong>

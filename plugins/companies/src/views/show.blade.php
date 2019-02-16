@@ -18,11 +18,6 @@
                 </li>
             </ol>
         </div>
-        <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12 text-right">
-            <a href="{{ route("admin.companies.create") }}" class="btn btn-primary btn-labeled btn-main">
-                <span class="btn-label icon fa fa-plus"></span>
-                {{ trans("companies::companies.add_new") }}</a>
-        </div>
     </div>
 
     <div class="wrapper wrapper-content fadeInRight">

@@ -130,7 +130,7 @@
                             <p><i class="fa fa-calendar"></i> <span
                                         class="text-grey">{{hijri_date($tender->last_queries_at)}}</span>
                                 <br>
-                                <small class="text-grey block">{{($tender->published_at)->format('Y/m/d')}}</small>
+                                <small class="text-grey block">{{($tender->last_queries_at)->format('Y/m/d')}}</small>
                             </p>
                         </div>
                     </div>

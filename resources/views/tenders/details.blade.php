@@ -238,10 +238,10 @@
                         <hr>
                         <p> {{ trans('app.current_points') }} : {{ $user->points }} {{trans('app.point')}}</p>
                         <hr>
-                        <p class="{{$user->points - $tender->points<0?'text-danger':''}}"> {{ trans('app.points_after_buy') }}
+                        <p class="{{$user->points - $tender->points<=0?'text-danger':''}}"> {{ trans('app.points_after_buy') }}
                             : {{ $user->points - $tender->points }} {{trans('app.point')}}</p>
                         <hr>
-                        @if($user->points - $tender->points>0)
+                        @if($user->points - $tender->points>=0)
                             <p class="fieldset" style="margin: 0;">
                                 <input type="checkbox" name="terms" id="accept-terms">
                                 <label for="accept-terms">{{trans('app.accept_with')}} <a target="_blank"

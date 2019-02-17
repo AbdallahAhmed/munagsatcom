@@ -261,7 +261,7 @@
                                     disabled>{{trans('app.tenders.buy')}}</button>
                             <button type="button" class="btn btn-secondary"
                                     data-dismiss="modal">{{trans('app.close')}}</button>
-                        </form>الشروط والأحكام
+                        </form>
 
                     </div>
                 </div>

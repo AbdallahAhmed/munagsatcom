@@ -9,13 +9,16 @@
 }
 .modal-header {
     padding: 9px !important;
-    background-color: #f5f5f5;
+    background-color: #ece9e9;
     border-bottom: 1px solid #e5e5e5;
 }
 .modal-body {
     position: relative;
     padding: 15px !important;
 }
+.modal-body h3{font-size: 17px;margin-bottom: 30px;}
+.modal-body small{font-size: 95%;/*! margin: 0 111px; *//*! color: #1089d7; */}
+
 .modal-title {
     margin: 0;
     line-height: 1.4;

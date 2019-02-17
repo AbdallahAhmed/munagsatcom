@@ -53,6 +53,7 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
         Route::post('user/requests/update', 'UserController@updateRequests')->name('user.requests.update');
         Route::post('user/requests/send', 'UserController@sendRequests')->name('user.requests.send');
         Route::get('user/centers', 'UserController@centers')->name('user.centers');
+        Route::get('user/recharge', 'PaymentsController@index')->name('user.recharge');
     });
 
     Route::get('centers', 'CenterController@index')->name('centers');

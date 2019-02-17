@@ -195,7 +195,7 @@
                                         </a>
                                     @else
                                         @if(fauth()->user()->can_buy)
-                                            <a type="button" class="btn btn-default" data-toggle="modal"
+                                            <a type="button" class="btn btn-primary" data-toggle="modal"
                                                data-target="#buycb">
                                                 {{trans('app.tenders.buy')}}
                                             </a>

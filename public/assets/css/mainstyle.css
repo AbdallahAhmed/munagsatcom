@@ -13,10 +13,10 @@
 @import "card-details.css";
 @import "tables.css";
 @import "registration.css";
-@import "buttons.css";
 @import "UnoDropZone.css";
 @import "profile.css";
 @import "credit-card.css";
+@import "buttons.css";
 /* main */
 *{box-sizing: border-box;}
 .hidd {  display: none;}
@@ -138,3 +138,6 @@ ul{
 .about ul li:before{
     content: " - ";
 }
+.dblock{display: block;}
+.dnone{display: none;}
+.red{color: red;}

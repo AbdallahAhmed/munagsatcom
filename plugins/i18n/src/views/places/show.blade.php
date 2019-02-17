@@ -148,7 +148,7 @@
                                             <td>
                                                 <a data-toggle="tooltip" data-placement="bottom"
                                                    title="{{trans("i18n::places.edit")}}" class="text-navy"
-                                                   href="{{route("admin.places.edit", array("id" => $place->id))}}">
+                                                   href="{{ @route("admin.places.edit", array("id" => $place->id, "parent" => $country->id))}}">
                                                     <strong>{{$place->code }}</strong>
                                                 </a>
                                             </td>

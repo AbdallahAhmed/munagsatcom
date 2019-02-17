@@ -7,7 +7,7 @@ return [
     'edit' => 'تعديل مناقصة ',
     'back_to_tenders' => 'العودة للمناقصات ',
     'no_records' => 'لا توجد مناقصات ',
-    'save_post' => 'حفظ الخبر',
+    'save_post' => 'حفظ المناقصة',
     'search' => 'بحث',
     'search_tenders' => 'بحث عن مناقصة',
     'per_page' => 'لكل صفحة',

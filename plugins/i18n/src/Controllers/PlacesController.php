@@ -52,6 +52,12 @@ class PlacesController extends Controller
             $query->search(Request::get("q"));
         }
 
+
+        if (Request::filled("status")) {
+            $query->where('status', Request::get("status"));
+        }
+
+
         $places = $query->paginate($this->data['per_page']);
 
         if (Request::ajax()) {
@@ -244,7 +250,7 @@ class PlacesController extends Controller
 
         $q = trim(urldecode(Request::get("q")));
 
-        $places = Place::search($q)->get()->toArray();
+        $places = Place::search($q)->where('status', 1)->get()->toArray();
 
         return json_encode($places);
     }

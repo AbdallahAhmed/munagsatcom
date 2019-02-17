@@ -77,7 +77,7 @@
                                 <label>{{ trans("tenders::tenders.attributes.org_id") }}</label>
                                 <select name="org_id" class="form-control chosen-select chosen-rtl"
                                         id="input-orgid">
-                                    @foreach(Dot\Tenders\Models\TenderOrg::all() as $org)
+                                    @foreach(Dot\Tenders\Models\TenderOrg::where('status',1)->get() as $org)
                                         <option value="{{$org->id}}" {{old('org_id',$tender->org_id)==$org->id?'selected':""}}>{{$org->name}}</option>
                                     @endforeach
                                 </select>
@@ -89,7 +89,7 @@
                                 <select name="activity_id" class="form-control chosen-select chosen-rtl"
                                         id="input-activity_id">
                                     @php
-                                        $activities= Dot\Tenders\Models\TenderActivity::all()
+                                        $activities= Dot\Tenders\Models\TenderActivity::where('status',1)->get()
                                     @endphp
                                     @if(count($activities)<=0)
                                         <option> {{trans('tenders::tenders.no_activity')}}</option>
@@ -406,7 +406,8 @@
                     delay: 250,
                     data: function (params) {
                         var query = {
-                            q: params.term
+                            q: params.term,
+                            status:1
                         };
 
                         // Query parameters will be ?search=[term]&type=public

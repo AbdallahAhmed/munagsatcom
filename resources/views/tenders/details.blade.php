@@ -245,7 +245,7 @@
                             <p class="fieldset" style="margin: 0;">
                                 <input type="checkbox" name="terms" id="accept-terms">
                                 <label for="accept-terms">{{trans('app.accept_with')}} <a target="_blank"
-                                                                                          href="{{route('page.show', ['slug' => 'سياسة-الخصوصية'])}}"
+                                                                                          href="{{route('page.show', ['slug' => 'الشروط والأحكام'])}}"
                                                                                           class="text-primary">{{trans('app.terms')}}</a></label>
                             </p>
                         @endif
@@ -261,7 +261,7 @@
                                     disabled>{{trans('app.tenders.buy')}}</button>
                             <button type="button" class="btn btn-secondary"
                                     data-dismiss="modal">{{trans('app.close')}}</button>
-                        </form>
+                        </form>الشروط والأحكام
 
                     </div>
                 </div>

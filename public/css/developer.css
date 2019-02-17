@@ -488,8 +488,8 @@ footer a {
 .block{
     display: block;
 }
-.asRange .asRange-pointer .asRange-tip {
+/*.asRange .asRange-pointer .asRange-tip {*/
 
-    width: 70px !important;
-    height: 20px;
-}
+    /*width: 70px !important;*/
+    /*height: 20px;*/
+/*}*/

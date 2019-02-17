@@ -247,10 +247,8 @@
 //    active: 'onMove'
 //    },
             tip: true,
-            max: 10000,
             min: 100,
             value: true,
-            step: 10,
             keyboard: true,
             replaceFirst: true, // false, 'inherit', {'inherit': 'default'}
             scale: true,

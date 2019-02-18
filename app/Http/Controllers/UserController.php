@@ -102,7 +102,7 @@ class UserController extends Controller
                 $company->sector_id = $request->get('sector_id');
                 $company->phone_number = $request->get('phone_number');
                 $company->mobile_number = $request->get('mobile_number');
-                $company->points= option('new_user_points', 0);
+                $company->points = option('new_user_points', 0);
 
 //                $media = new Media();
 //                $company->image_id = $media->saveFile($request->file('logo'));
@@ -191,20 +191,26 @@ class UserController extends Controller
                     return redirect()->back()->withErrors($validator)->withInput($request->all());
                 }
 
-                $isAuthed = fauth()->attempt([
+                if (!fauth()->attempt([
                     'email' => $request->get('email'),
                     'password' => $request->get('password'),
                     'backend' => 0,
                     'status' => 1
-                ]);
+                ])) {
 
-                if (!$isAuthed) {
                     $error->add('invalid', trans('validation.invalid_login'));
                     return redirect()->back()->withErrors($error->messages())->withInput($request->all());
                 }
+
                 if (fauth()->user()->type == 2 && fauth()->user()->status == 0) {
                     fauth()->logout();
                     return redirect()->back()->withErrors(new MessageBag(['not_verified' => trans('app.company_not_verified')]));
+                }
+
+                if (fauth()->user()->in_company &&
+                    fauth()->user()->company[0]->pivot->status == 0) {
+                    fauth()->logout();
+                    return redirect()->back()->withErrors(new MessageBag(['not_verified' => trans('app.your_account_deactivate')]));
                 }
                 fauth()->login(fauth()->user());
                 return redirect()->route('index');
@@ -272,7 +278,7 @@ class UserController extends Controller
                 $user->save();
                 if ($user->type == 1) {
                     fauth()->login($user);
-                    return redirect()->route('index')->with(['messages' => [trans('app.account_activated')],'status'=>'success']);
+                    return redirect()->route('index')->with(['messages' => [trans('app.account_activated')], 'status' => 'success']);
                 }
                 return redirect()->back()->with('waiting', trans('app.company_waiting'));
             } else
@@ -544,7 +550,7 @@ class UserController extends Controller
         $this->data['user'] = fauth()->user();
         $this->data['transactions'] = Transaction::with('tender')->where('user_id', $this->data['user']->id)
             ->whereMonth('created_at', $request->get('month', Carbon::now()->month - 1) + 1)
-            ->orderBy('created_at','DESC')
+            ->orderBy('created_at', 'DESC')
             ->paginate(8);
         return view('users.points', $this->data);
     }

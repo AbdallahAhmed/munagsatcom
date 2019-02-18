@@ -302,6 +302,7 @@ return [
     'only_admin_can_edit'=>' فقط مدير الشركة يمكنه تعديل الموظفين ',
     'messages_send'=>'تم  أرسال الرسالة',
     'you_cannot_buy'=>'ليس لك امكانية الشراء',
-    'payments'=>'أضف إلى  نقاطك'
+    'payments'=>'أضف إلى  نقاطك',
+    'your_account_deactivate'=>'تم إلغاء تفعيل حسابك من قبل الشركة'
 
 ];

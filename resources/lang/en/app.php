@@ -300,6 +300,7 @@ return [
     'only_admin_can_edit'=>' Only the company\'s consumer manager modify employees.',
     'messages_send'=>'Message Sent',
     'you_cannot_buy'=>'You can not purchase',
-    'payments'=>'Payments'
+    'payments'=>'Payments',
+    'your_account_deactivate'=>'Your account deactivated by company '
 
 ];

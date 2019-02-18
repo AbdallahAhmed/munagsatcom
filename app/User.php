@@ -69,7 +69,7 @@ class User extends \Dot\Users\Models\User
         if (isset($this->original['IsCompany_cache'])) {
             return $this->original['IsCompany_cache'];
         }
-        return $this->original['IsCompany_cache'] = Companies_empolyees::where(['employee_id' => $this->id, 'accepted' => 1])->count() > 0;
+        return $this->original['IsCompany_cache'] = Companies_empolyees::where(['employee_id' => $this->id, 'accepted' => 1, 'status' => 1])->count() > 0;
     }
 
     /**

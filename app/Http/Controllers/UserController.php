@@ -207,7 +207,7 @@ class UserController extends Controller
                     return redirect()->back()->withErrors(new MessageBag(['not_verified' => trans('app.company_not_verified')]));
                 }
 
-                if (fauth()->user()->in_company &&
+                if (!empty(fauth()->user()->company[0]) &&
                     fauth()->user()->company[0]->pivot->status == 0) {
                     fauth()->logout();
                     return redirect()->back()->withErrors(new MessageBag(['not_verified' => trans('app.your_account_deactivate')]));

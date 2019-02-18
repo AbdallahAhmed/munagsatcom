@@ -8,11 +8,11 @@
                     </a></li>
                 <li @if (\Route::current()->getName() == 'company.chances') class="active" @endif><a
                             href="{{route('company.chances', ['id' => $company_id])}}">
-                        {{trans('app.chances.the_chances')}}
+                        {{trans('app.chances.my_chances')}}
                     </a></li>
                 <li @if (\Route::current()->getName() == 'company.tenders') class="active" @endif><a
                             href="{{route('company.tenders', ['id' => $company_id])}}">
-                        {{trans('app.name')}}
+                        {{trans('app.my_tender')}}
                     </a></li>
                 @if(fauth()->user()->is_owner)
                     <li @if (\Route::current()->getName() == 'company.employees' ||  \Route::current()->getName()=='company.employees.add') class="active" @endif>
@@ -23,7 +23,7 @@
                 @endif
                 <li @if (\Route::current()->getName() == 'company.centers') class="active" @endif><a
                             href="{{route('company.centers', ['id' => $company_id])}}">
-                        {{trans('app.centers.centers')}}
+                        {{trans('app.mycenters')}}
                     </a></li>
 
                 <?php

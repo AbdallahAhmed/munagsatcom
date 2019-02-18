@@ -3,6 +3,9 @@
 return [
     'name' => 'Tenders',
     'register' => 'Register',
+    'my_tender'=>'Tenders were purchased ',
+    'mycenters'=>'My service',
+
     'government_tenders' => 'Government tenders',
     'service_centers' => 'Service center',
     'investment_chances' => 'Investment chances',
@@ -219,6 +222,7 @@ return [
         'chances' => 'Chances',
         'chance' => 'Chance',
         'the_chance' => 'Chance',
+        'my_chances'=>'My changes',
         'the_chances' => 'Chances',
         'chances_est' => 'Investment Chances',
         'search' => 'Search chances  ',

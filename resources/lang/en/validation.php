@@ -132,7 +132,14 @@ return [
         'file_name' => 'File name',
         'file_description' => 'File description',
         'chance_value' => 'Chance value',
-        'current_password'=>'Current Password'
+        'current_password'=>'Current Password',
+        'name_on_card' => 'Name on Card',
+        'card_number' => 'Card number',
+        'expiration'=>'Expiration',
+        'pay'=>'Pay',
+        'the_price' => 'Price'.'<small>SAR</small>',
+        'point_per_sar' => ' points for every ',
+        'card'=>'Card'
     ],
 
 ];

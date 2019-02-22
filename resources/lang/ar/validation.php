@@ -169,6 +169,16 @@ return array(
         'file_description' => 'تفاصيل الملف',
         'chance_value' => 'قيمة الفرصة',
         'phone_number' => 'رقم الهاتف',
-        'current_password'=>'كلمة السر الحالية'
+        'current_password'=>'كلمة السر الحالية',
+        'name_on_card' => 'إلاسم على البطاقة',
+        'card_number' => 'رقم البطاقة',
+        'expiration' => 'تاريخ الإنتهاء',
+        'pay' => 'أدفع',
+        'points_wanted' => ' شحن النقاط ',
+        'the_price' => 'السعر '.'<small>بالريار السعودى</small>',
+        'point_per_sar' => 'نقطة للى كل ريال سعودى',
+        'card'=>'الكارت ',
+        'price'=>'السعر'
+
     ),
 );

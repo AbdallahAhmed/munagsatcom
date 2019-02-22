@@ -3,8 +3,8 @@
 return [
     'name' => 'Tenders',
     'register' => 'Register',
-    'my_tender'=>'Tenders were purchased ',
-    'mycenters'=>'My service',
+    'my_tender' => 'Tenders were purchased ',
+    'mycenters' => 'My service',
 
     'government_tenders' => 'Government tenders',
     'service_centers' => 'Service center',
@@ -182,7 +182,7 @@ return [
         'phone_number' => 'Telephone number',
         'code' => 'code'
     ],
-    'day'=>'Day',
+    'day' => 'Day',
     'centers' => [
         'centers' => 'Services centers',
         'center_name' => 'Services center \'s name',
@@ -222,7 +222,7 @@ return [
         'chances' => 'Chances',
         'chance' => 'Chance',
         'the_chance' => 'Chance',
-        'my_chances'=>'My changes',
+        'my_chances' => 'My changes',
         'the_chances' => 'Chances',
         'chances_est' => 'Investment Chances',
         'search' => 'Search chances  ',
@@ -297,10 +297,18 @@ return [
     'add_employee' => 'Add employee',
     'can_pay' => 'Can pay',
     'employee_created' => 'Employee created successfully, check e-mail inbox',
-    'only_admin_can_edit'=>' Only the company\'s consumer manager modify employees.',
-    'messages_send'=>'Message Sent',
-    'you_cannot_buy'=>'You can not purchase',
-    'payments'=>'Payments',
-    'your_account_deactivate'=>'Your account deactivated by company '
+    'only_admin_can_edit' => ' Only the company\'s consumer manager modify employees.',
+    'messages_send' => 'Message Sent',
+    'you_cannot_buy' => 'You can not purchase',
+    'payments' => 'Payments',
+    'your_account_deactivate' => 'Your account deactivated by company ',
+    'name_on_card' => 'Name on Card',
+    'card_number' => 'Card number',
+    'expiration'=>'Expiration',
+    'pay'=>'Pay',
+    'the_price' => 'Price'.'<small>SAR</small>',
+    'point_per_sar' => ' points for every ',
+    'card'=>'Card'
+
 
 ];

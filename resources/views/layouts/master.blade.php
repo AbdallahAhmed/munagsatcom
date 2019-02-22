@@ -15,7 +15,7 @@
     <link href="{{asset('/')}}/css/developer.css?dasd4654564" rel="stylesheet">
     <script src="{{asset('/')}}/js/pace.js"></script>
 
-
+    <meta name="google-site-verification" content="hplfhLZkgG1T6CxTh29XyFyZU-Wp6hn1jcDt___zIdA" />
     <meta name="copyright" content="munagasatcom">
     <meta name="language" content="{{app()->getLocale()}}">
     @section('meta')

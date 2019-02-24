@@ -55,6 +55,7 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
         Route::get('user/centers', 'UserController@centers')->name('user.centers');
         Route::get('user/recharge', 'PaymentsController@index')->name('user.recharge');
         Route::post('user/recharge', 'PaymentsController@recharge')->name('user.recharge');
+        Route::get('user/checkout', 'PaymentsController@checkout')->name('user.checkout');
     });
 
     Route::get('centers', 'CenterController@index')->name('centers');

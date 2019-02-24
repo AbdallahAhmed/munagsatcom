@@ -286,7 +286,8 @@ return [
     'company_name' => ' اسم المنشأة',
     'types' => [
         'tenders_buy' => 'شراء مناقضة',
-        'not_register' => 'لم يتك تسجيل العملية '
+        'not_register' => 'لم يتك تسجيل العملية ',
+        'points_buy'=>'شراء نقاط'
     ],
     'account_activated' => 'تم تفعيل الحساب',
     'free' => 'مجانا',
@@ -311,7 +312,7 @@ return [
     'points_wanted' => ' شحن النقاط ',
     'the_price' => 'السعر '.'<small>بالريار السعودى</small>',
     'point_per_sar' => 'نقطة للى كل ريال سعودى',
-    'card'=>'الكارت '
-
+    'card'=>'الكارت ',
+    'done_recharge_points'=>'تم شحن نقاطك ',
 
 ];

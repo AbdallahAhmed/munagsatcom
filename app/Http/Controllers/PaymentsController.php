@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class PaymentsController extends Controller
@@ -14,7 +15,7 @@ class PaymentsController extends Controller
      */
     public function index(Request $request)
     {
-        return view('payments');
+        return view('payments-cppy');
     }
 
 
@@ -24,6 +25,84 @@ class PaymentsController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function recharge(Request $request)
+    {
+
+        $points = option('point_per_reyal') * $request->get('price');
+
+
+        $url = "https://test.oppwa.com/v1/checkouts";
+        $data = "authentication.userId=8ac7a4ca68ccb1470169008d5a4f484e" .
+            "&authentication.password=kGSpEA3QJd" .
+            "&authentication.entityId=8ac7a4ca68ccb1470169008ebbdb4853" .
+            "&amount=" . $request->get('price') .
+            "&currency=SAR" .
+            "&paymentType=DB";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// this should be set to true in production
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $responseData = curl_exec($ch);
+        if (curl_errno($ch)) {
+            return curl_error($ch);
+        }
+        curl_close($ch);
+        return view('payments-cppy-step-2', ['result' => json_decode($responseData)]);
+    }
+
+
+    /**
+     * GET {lang?}/user/checkout/
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function checkout(Request $request)
+    {
+        $url = "https://test.oppwa.com/v1/checkouts/" . $request->get('id') . "/payment";
+        $url .= "?authentication.userId=8ac7a4ca68ccb1470169008d5a4f484e" .
+            "&authentication.password=kGSpEA3QJd" .
+            "&authentication.entityId=8ac7a4ca68ccb1470169008ebbdb4853";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// this should be set to true in production
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $responseData = curl_exec($ch);
+        if (curl_errno($ch)) {
+            return curl_error($ch);
+        }
+        curl_close($ch);
+        $result = json_decode($responseData);
+
+        if (!empty($result->amount)) {
+            $user = fauth()->user();
+
+            if ($user->in_company) {
+                $user = $user->company[0];
+            }
+            $before_points = $user->points;
+            $points = (int)($result->amount * (int)option('point_per_reyal'));
+
+            $user->points = $user->points + $points;
+            $user->save();
+            Transaction::create([
+                'before_points' => $before_points,
+                'after_points' => $before_points + $points,
+                'points' => $points,
+                'object_id' => 0,
+                'user_id' => fauth()->id(),
+                'action' => 'points.buy',
+                'company_id' => fauth()->user()->in_company ? $user->id : 0
+            ]);
+        }
+        return redirect()->route('user.points')->with(['messages' => [trans('app.done_recharge_points') . ' ' . ($points ?? '0') . ' ' . trans('app.point')], 'status' => 'success']);
+    }
+
+
+    private function request(Request $request)
     {
         $validator = \Validator::make($request->all(), [
             'price' => 'required|numeric',
@@ -38,14 +117,6 @@ class PaymentsController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
-        $points = option('point_per_reyal') * $request->get('price');
-        $response = $this->request($request);
-        dd($response);
-
-    }
-
-    private function request(Request $request)
-    {
         $url = "https://test.oppwa.com/v1/payments";
         $data = "authentication.userId=8ac7a4ca68ccb1470169008d5a4f484e" .
             "&authentication.password=kGSpEA3QJd" .

@@ -32,7 +32,8 @@ class Transaction extends Model
         switch ($this->attributes['action']) {
             case 'tenders.buy':
                 return trans('app.types.tenders_buy');
-
+            case 'points.buy':
+                return trans('app.types.points_buy');
             default:
                 return trans('app.types.not_register');
         }

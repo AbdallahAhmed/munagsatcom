@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 
 class PaymentsController extends Controller
 {
+
+    public $baseUrl = 'https://oppwa.com/v1';
     //
+
     /**
      * GET {lang?}/user/recharge/
      * @param Request $request
@@ -27,10 +30,7 @@ class PaymentsController extends Controller
     public function recharge(Request $request)
     {
 
-        $points = option('point_per_reyal') * $request->get('price');
-
-
-        $url = "https://test.oppwa.com/v1/checkouts";
+        $url = "$this->baseUrl/checkouts";
         $data = "authentication.userId=8ac7a4ca68ccb1470169008d5a4f484e" .
             "&authentication.password=kGSpEA3QJd" .
             "&authentication.entityId=8ac7a4ca68ccb1470169008ebbdb4853" .
@@ -42,14 +42,15 @@ class PaymentsController extends Controller
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// this should be set to true in production
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);// this should be set to true in production
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $responseData = curl_exec($ch);
         if (curl_errno($ch)) {
             return curl_error($ch);
         }
         curl_close($ch);
-        return view('payments-cppy-step-2', ['result' => json_decode($responseData)]);
+//        dd($responseData);
+        return view('payments-cppy-step-2', ['result' => json_decode($responseData),'base_url'=>$this->baseUrl]);
     }
 
 
@@ -60,7 +61,7 @@ class PaymentsController extends Controller
      */
     public function checkout(Request $request)
     {
-        $url = "https://test.oppwa.com/v1/checkouts/" . $request->get('id') . "/payment";
+        $url = "$this->baseUrl/checkouts/" . $request->get('id') . "/payment";
         $url .= "?authentication.userId=8ac7a4ca68ccb1470169008d5a4f484e" .
             "&authentication.password=kGSpEA3QJd" .
             "&authentication.entityId=8ac7a4ca68ccb1470169008ebbdb4853";
@@ -68,7 +69,7 @@ class PaymentsController extends Controller
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// this should be set to true in production
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);// this should be set to true in production
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $responseData = curl_exec($ch);
         if (curl_errno($ch)) {
@@ -77,6 +78,7 @@ class PaymentsController extends Controller
         curl_close($ch);
         $result = json_decode($responseData);
 
+        dd($result);
         if (!empty($result->amount)) {
             $user = fauth()->user();
 
@@ -117,7 +119,7 @@ class PaymentsController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
-        $url = "https://test.oppwa.com/v1/payments";
+        $url = "$this->baseUrl/payments";
         $data = "authentication.userId=8ac7a4ca68ccb1470169008d5a4f484e" .
             "&authentication.password=kGSpEA3QJd" .
             "&authentication.entityId=8ac7a4ca68ccb1470169008ebbdb4853" .
@@ -135,7 +137,7 @@ class PaymentsController extends Controller
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// this should be set to true in production
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);// this should be set to true in production
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $responseData = curl_exec($ch);
         if (curl_errno($ch)) {

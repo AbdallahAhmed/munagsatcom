@@ -7,9 +7,9 @@
         <div class='row'>
             <div class='col-md-4'></div>
             <div class='col-md-4' style="background: #FFF;padding: 18px;">
-                <form accept-charset="UTF-8"  class="paymentWidgets" data-brands="VISA MASTER"
+                <form accept-charset="UTF-8" class="paymentWidgets" data-brands="VISA MASTER"
                       action="{{route('user.checkout')}}">
-                {{csrf_field()}}
+                    {{csrf_field()}}
                 </form>
             </div>
             <div class='col-md-4'></div>
@@ -18,7 +18,7 @@
 @endsection
 
 @push('scripts')
-    <script src="https://test.oppwa.com/v1/paymentWidgets.js?checkoutId={{$result->id}}"></script>
+    <script src="{{$base_url}}/paymentWidgets.js?checkoutId={{$result->id}}"></script>
     <script>
         $(function () {
             $('#input-points').keyup(function (e) {

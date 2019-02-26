@@ -13,11 +13,11 @@
     <meta property="og:site_name" content="{{$tender->name}}"/>
     <meta property="og:description"
           content="تفخر مناقصاتكم بكونها الموقع الاول في السعودية الذي يقدم خدمة فريدة من نوعها من خلال طرح  كراسات الشروط والمناقصات للمشاريع الحكومية وفق اعلى معايير الشفافية">
-    <meta property="og:image" content="{{uploads_url($tender->org->logo->path)}}">
+    <meta property="og:image" content="{{@uploads_url($tender->org->logo->path)}}">
     <meta name="twitter:title" content="{{$tender->name}}">
     <meta name="twitter:description"
           content="تفخر مناقصاتكم بكونها الموقع الاول في السعودية الذي يقدم خدمة فريدة من نوعها من خلال طرح  كراسات الشروط والمناقصات للمشاريع الحكومية وفق اعلى معايير الشفافية">
-    <meta name="twitter:image" content="{{uploads_url($tender->org->logo->path)}}">
+    <meta name="twitter:image" content="{{@uploads_url($tender->org->logo->path)}}">
 
     <meta name="twitter:url" content="{{$tender->path}}">
 @endsection
@@ -33,7 +33,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="card-img">
-                                    <a href="{{uploads_url($tender->org->logo->path)}}" class="open-image"> <img
+                                    <a href="{{@uploads_url($tender->org->logo->path)}}" class="open-image"> <img
                                                 src="{{uploads_url($tender->org->logo->path)}}"
                                                 alt="{{$tender->org->name}}" title="{{$tender->org->name}}"></a>
                                 </div>

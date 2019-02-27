@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 class PaymentsController extends Controller
 {
 
-    public $baseUrl = 'https://oppwa.com/v1';
+    public $baseUrl = 'https://test.oppwa.com/v1';
+
+    public $params = '';
     //
 
     /**
@@ -36,13 +38,13 @@ class PaymentsController extends Controller
             "&authentication.entityId=8ac7a4ca68ccb1470169008ebbdb4853" .
             "&amount=" . $request->get('price') .
             "&currency=SAR" .
-            "&paymentType=DB";
+            "&paymentType=DB&$this->params";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);// this should be set to true in production
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, !env('APP_DEBUG'));// this should be set to true in production
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $responseData = curl_exec($ch);
         if (curl_errno($ch)) {
@@ -50,7 +52,7 @@ class PaymentsController extends Controller
         }
         curl_close($ch);
 //        dd($responseData);
-        return view('payments-cppy-step-2', ['result' => json_decode($responseData),'base_url'=>$this->baseUrl]);
+        return view('payments-cppy-step-2', ['result' => json_decode($responseData), 'base_url' => $this->baseUrl]);
     }
 
 
@@ -69,7 +71,7 @@ class PaymentsController extends Controller
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);// this should be set to true in production
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, !env('APP_DEBUG'));// this should be set to true in production
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $responseData = curl_exec($ch);
         if (curl_errno($ch)) {
@@ -78,7 +80,6 @@ class PaymentsController extends Controller
         curl_close($ch);
         $result = json_decode($responseData);
 
-        dd($result);
         if (!empty($result->amount)) {
             $user = fauth()->user();
 
@@ -137,7 +138,7 @@ class PaymentsController extends Controller
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);// this should be set to true in production
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, !env('APP_DEBUG'));// this should be set to true in production
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $responseData = curl_exec($ch);
         if (curl_errno($ch)) {

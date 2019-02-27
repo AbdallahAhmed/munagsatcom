@@ -6,7 +6,7 @@
     <section class="container">
         <div class='row'>
             <div class='col-md-4'></div>
-            <div class='col-md-4' style="background: #FFF;padding: 18px;">
+            <div class='col-md-4' style="background: #FFF;padding: 18px;direction: ltr;">
                 <form accept-charset="UTF-8" class="paymentWidgets" data-brands="VISA MASTER"
                       action="{{route('user.checkout')}}">
                     {{csrf_field()}}

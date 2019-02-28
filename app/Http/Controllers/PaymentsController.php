@@ -11,7 +11,15 @@ class PaymentsController extends Controller
     public $baseUrl = 'https://test.oppwa.com/v1';
 
     public $params = '';
+
+    protected $ssl=false;
     //
+
+    public function __construct()
+    {
+
+//       $this->ssl !env('APP_DEBUG')
+    }
 
     /**
      * GET {lang?}/user/recharge/
@@ -44,7 +52,7 @@ class PaymentsController extends Controller
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, !env('APP_DEBUG'));// this should be set to true in production
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $this->ssl);// this should be set to true in production
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $responseData = curl_exec($ch);
         if (curl_errno($ch)) {
@@ -71,7 +79,7 @@ class PaymentsController extends Controller
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, !env('APP_DEBUG'));// this should be set to true in production
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,  $this->ssl);// this should be set to true in production
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $responseData = curl_exec($ch);
         if (curl_errno($ch)) {
@@ -138,7 +146,7 @@ class PaymentsController extends Controller
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, !env('APP_DEBUG'));// this should be set to true in production
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,  $this->ssl);// this should be set to true in production
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $responseData = curl_exec($ch);
         if (curl_errno($ch)) {

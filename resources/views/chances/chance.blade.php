@@ -4,33 +4,35 @@
 @section('content')
     <section class="container">
         <div class="row">
-            <!-------------- Begin:content -------------->
             <div class="col-md-12 content-details">
                 <h2><span>{{trans('app.chances.chance_details')}}</span></h2>
-
                 <div class="card-details">
-                    <!-- part 1-->
                     <div class="details-border">
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="light-white">
-                                    @if($chance->image)
-                                        <div class="card-img"><img
-                                                    src="{{thumbnail($chance->image->path, 'single_center')}}" alt="">
-                                        </div>
-                                    @endif
-                                    <div class="padt">{{trans('app.chances.remaining_date')}}</div>
-                                    <div class="progress ">
-                                        <div class="progress-bar" role="progressbar"
-                                             aria-valuenow="{{$chance->progress}}"
-                                             aria-valuemin="0" aria-valuemax="0" style="">
+                            @if(($chance->image || $chance->progress<100))
+                                <div class="col-md-4">
+                                    <div class="light-white">
+                                        @if($chance->image)
+                                            <div class="card-img">
+                                                <img src="{{thumbnail($chance->image->path, 'single_center')}}"
+                                                     alt="{{$chance->name}}">
+                                            </div>
+                                        @endif
+                                        @if($chance->progress<100)
+                                            <div class="padt">{{trans('app.chances.remaining_date')}}</div>
+                                            <div class="progress ">
+                                                <div class="progress-bar" role="progressbar"
+                                                     aria-valuenow="{{$chance->progress}}"
+                                                     aria-valuemin="0" aria-valuemax="0" style="">
                                             <span class="popOver" data-toggle="tooltip" data-placement="top"
                                                   title="{{\Carbon\Carbon::parse($chance->closing_date)->diffForHumans(\Carbon\Carbon::now())}}"> </span>
-                                        </div>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-8">
+                            @endif
+                            <div class="{{($chance->image || $chance->progress<100)?'col-md-8':'col-md-12'}} ">
                                 <div class="details-item">
                                     <ul>
                                         <li class="clearfix">
@@ -117,10 +119,8 @@
                                     data-target="#myModal"><i
                                         class="fa fa-arrow-right"></i>{{trans('app.chances.apply_chance')}}
                             </button>
-                            <!-- Modal -->
                             <div class="modal fade" id="myModal" role="dialog">
                                 <div class="modal-dialog">
-                                    <!-- Modal content-->
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -171,7 +171,6 @@
                 </div>
 
             </div>
-            <!-------------- End::content -------------->
         </div>
     </section>
     <style>
@@ -192,8 +191,6 @@
                 $("#myModal").modal('show');
             });
         });
-        // $( window ).scroll(function() {
-        // if($( window ).scrollTop() > 10){  // scroll down abit and get the action
         $(".progress-bar").each(function () {
             each_bar_width = $(this).attr('aria-valuenow');
             $(this).width(each_bar_width + '%');
@@ -201,16 +198,13 @@
         $(".range-example").asRange({
             range: true,
             limit: false,
-            //tip: {
-//    active: 'onMove'
-//    },
             tip: true,
             max: 10000,
             min: 100,
             value: true,
             step: 10,
             keyboard: true,
-            replaceFirst: true, // false, 'inherit', {'inherit': 'default'}
+            replaceFirst: true,
             scale: true,
             format(value) {
                 return value;

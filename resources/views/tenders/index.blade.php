@@ -162,8 +162,8 @@
                                 </div>
                                 <div class="item one_thrd">
                                     <p>{{trans('app.tenders.created')}}</p>
-                                    <p><i class="fa  fa-calendar"></i> <span
-                                                class="text-grey">{{hijri_date($tender->published_at)}}</span>
+                                    <p><i class="fa  fa-calendar"></i>
+                                        <span class="text-grey">{{hijri_date($tender->published_at)}}</span>
                                         <br><small class="text-grey">{{($tender->published_at)->format('Y/m/d')}}</small>
 
                                     </p>

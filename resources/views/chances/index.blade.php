@@ -4,7 +4,6 @@
 @section('content')
     <section class="container">
         <div class="row">
-            <!-------------- Begin:right side -------------->
             <div class="col-md-4">
                 <div class="side-box">
                     <h2>{{trans('app.chances.search_chances')}}</h2>
@@ -64,11 +63,10 @@
             </div>
 
             @if(count($chances)==0)
-                <p class="col-md-8 not-found">{{trans('app.chances.not_found')}}</p
+                <p class="col-md-8 not-found">{{trans('app.chances.not_found')}}</p>
             @else
                 <div class="col-md-8 content">
                     <h2>{{trans('app.chances.chances_est')}}</h2>
-                    <!-------------- Begin:Card -------------->
                     @foreach($chances as $chance)
 
                         <div class="card foras">
@@ -87,15 +85,16 @@
                                                             href="{{$chance->path}}">{{$chance->name}}</a></span></p>
                                             <p>{{trans('app.the_company')}}
                                                 <span>{{$chance->company?$chance->company->name:'--'}}</span></p>
-                en                        </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="card-share">
                                     <div class="hideshare-wrap" style="width:40px; height:40px;">
-                                        <a class="share hideshare-btn" href="#">
+                                        <a class="share hideshare-btn" href="javascript:void(0)">
                                             <i class="fa fa-share-alt"></i>
                                         </a>
-                                        <ul class="hideshare-list shown" style="width: 80px; left: 50px; right: -50px;">
+                                        <ul class="hideshare-list shown"
+                                            style="width: 80px; left: 50px; right: -50px;display: none">
                                             <li>
                                                 <a class="shareBtn" data-title="{{$chance->name}}"
                                                    data-sharer="facebook" href="{{$chance->path}}">
@@ -116,24 +115,37 @@
                             </div>
                             <div class="card-date clearfix">
                                 <div class="item one_thrd">
-                                    <div class="progress ">
-                                        <div class="progress-bar" role="progressbar"
-                                             aria-valuenow="{{$chance->progress}}"
-                                             aria-valuemin="0" aria-valuemax="0" style="">
+                                    @if($chance->progress<100)
+                                        <div class="progress ">
+                                            <div class="progress-bar" role="progressbar"
+                                                 aria-valuenow="{{$chance->progress}}"
+                                                 aria-valuemin="0" aria-valuemax="0" style="">
                                         <span class="popOver" data-toggle="tooltip" data-placement="top"
-                                              title="{{\Carbon\Carbon::parse($chance->closing_date)->diffForHumans(\Carbon\Carbon::now())}}"> </span>
+                                              title="{{$chance->closing_date->diffInDays(\Carbon\Carbon::now())}}
+                                              {{trans('app.day')}}">
+                                        </span>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @else
+                                        <p>{{trans('app.chances.closing_date')}}</p>
+                                        <p><i class="fa fa-calendar"></i>
+                                            <span class="text-grey">{{hijri_date($chance->closing_date)}}</span>
+                                            <small class="center" style="display: block">{{($chance->closing_date->format('Y/m/d'))}}</small>
+
+                                        </p>
+                                    @endif
                                 </div>
                                 <div class="item one_thrd">
                                     <p>{{trans('app.chances.due_date')}}</p>
-                                    <p><i class="fa fa-calendar"></i> <span
-                                                class="text-grey">{{$chance->closing_date}}</span></p>
+                                    <p><i class="fa fa-calendar"></i> <span class="text-grey">{{hijri_date($chance->closing_date)}} {{$chance->closing_date->format('H:i')}}</span>
+                                        <small class="center" style="display: block">{{($chance->closing_date->format('Y/m/d'))}}</small>
+                                    </p>
                                 </div>
                                 <div class="item one_thrd">
                                     <p>{{trans('app.chances.created_at')}}</p>
-                                    <p><i class="fa fa-calendar"></i> <span
-                                                class="text-grey">{{\Carbon\Carbon::parse($chance->created_at)->toDateString()}}</span>
+                                    <p><i class="fa fa-calendar"></i>
+                                        <span class="text-grey">{{hijri_date($chance->created_at)}}</span>
+                                        <small class="center" style="display: block">{{($chance->created_at->format('Y/m/d'))}}</small>
                                     </p>
                                 </div>
                             </div>
@@ -143,19 +155,12 @@
                                 </div>
                             </div>
                         </div>
-                @endforeach
-
-                <!-------------- End:Card -------------->
-                    <!-------------- Begin:pagination -------------->
+                    @endforeach
                     <div class="text-center">
                         {{$chances->appends(Request::all())->render()}}
                     </div>
-                    <!-------------- End:pagination -------------->
                 </div>
-        @endif
-
-        <!-------------- End:left side -------------->
-        </div>
+            @endif</div>
     </section>
     @push('scripts')
         <script>
@@ -170,14 +175,10 @@
             $(function () {
                 $('[data-toggle="tooltip"]').tooltip({trigger: 'manual'}).tooltip('show');
             });
-            // $( window ).scroll(function() {
-            // if($( window ).scrollTop() > 10){  // scroll down abit and get the action
             $(".progress-bar").each(function () {
                 each_bar_width = $(this).attr('aria-valuenow');
                 $(this).width(each_bar_width + '%');
             });
-            //  }
-            // });
         </script>
         <script type="text/javascript">
             $(document).ready(function () {
@@ -188,6 +189,10 @@
         </script>
         <script>
             $(function () {
+
+                $('.share.hideshare-btn').click(function (e) {
+                    $(this).parent().find('.hideshare-list').toggleClass('show', 'hide');
+                });
                 $('#search').on('submit', function (e) {
                     e.preventDefault();
                     var status = [];
@@ -210,42 +215,8 @@
                     if (url != "{{route('chances')}}" + "?")
                         window.location.href = url;
 
-                })
-                /*  $(function () {
-                      $('#upload').on('submit', function (e) {
-                          e.preventDefault();
-                          var form = $(this);
-                          var chance_id =
-                          var file = $('[name="file"]');
-                          var formData = new FormData();
-                          formData.append('file', file[0].files[0]);
-                          formData.append('chance_id', chance_id)
-                          $.ajaxSetup({
-                              headers: {
-                                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                              }
-                          });
-                          $.ajax({
-                              type: "post",
-                              url: "{{route('chances.offers')}}",
-                            data: formData,
-                            processData: false,
-                            contentType: false,
-                            success: function (data) {
-                                if (data.success) {
-                                    $("#myModal").modal('hide');
-                                    $("#SuccessModal").modal('show');
-                                }else{
-                                    $('.alert-danger').html(data.errors);
-                                    $('.alert-danger').show();
-                                }
-                            },
-                            error: function () {
-                                alert("Internal Server Error")
-                            }
-                        })
-                    })
-                })*/
+                });
+
                 $("body").on("click", ".shareBtn", function (e) {
                     e.preventDefault
                     var base = $(this);

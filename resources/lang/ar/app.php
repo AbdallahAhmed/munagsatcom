@@ -317,7 +317,8 @@ return [
     'done_recharge_points'=>'تم شحن نقاطك ',
     'you_cannot_add_chance'=>'ليس لديك الحق فى طرح فرصة',
     'bankrupt'=>'ليس لديك رصيد كافى',
-    'recharge'=>'اشحن نقاطك'
+    'recharge'=>'اشحن نقاطك',
+    'about_company'=>'عن المنشأه'
 
 
 ];

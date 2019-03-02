@@ -313,7 +313,8 @@ return [
     'card'=>'Card',
     'you_cannot_add_chance'=>'You can\'t add chance , permission denied',
     'bankrupt'=>'You have\'nt points enough ',
-    'recharge'=>'Recharge your points'
+    'recharge'=>'Recharge your points',
+    'about_company'=>'About Company'
 
 
 

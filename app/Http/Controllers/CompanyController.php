@@ -57,43 +57,47 @@ class CompanyController extends Controller
         $this->data['created_at'] = null;
         $status = $request->get('status');
         $status = $status ? $status : [];
-        $chances = Chance::query();
+        $chances = Chance::query()->where('company_id',$id);
         $this->data['chosen_status'] = $status;
 
-        foreach ($status as $st) {
-            switch ($st) {
-                case 0:
-                    $chances = $chances->orWhere(function ($q) {
-                        $q->opened();
-                    });
-                    break;
-                case 1:
-                    $chances = $chances->orWhere(function ($q) {
-                        $q->closed();
-                    });
-                    break;
-                case 2:
-                    $chances = $chances->orWhere(function ($q) {
-                        $q->cancelled();
-                    });
-                    break;
-                case 3:
-                    $chances = $chances->orWhere(function ($q) {
-                        $q->pending();
-                    });
-                    break;
-                case 4:
-                    $chances = $chances->orWhere(function ($q) {
-                        $q->approved();
-                    });
-                    break;
-                case 5:
-                    $chances = $chances->orWhere(function ($q) {
-                        $q->rejected();
-                    });
-                    break;
+        $chances->where(function ($query) use ($status) {
+
+            foreach ($status as $st) {
+                switch ($st) {
+                    case 0:
+                        $query->orWhere(function ($q) {
+                            $q->opened();
+                        });
+                        break;
+                    case 1:
+                        $query->orWhere(function ($q) {
+                            $q->closed();
+                        });
+                        break;
+                    case 2:
+                        $query->orWhere(function ($q) {
+                            $q->cancelled();
+                        });
+                        break;
+                    case 3:
+                        $query->orWhere(function ($q) {
+                            $q->pending();
+                        });
+                        break;
+                    case 4:
+                        $query->orWhere(function ($q) {
+                            $q->approved();
+                        });
+                        break;
+                    case 5:
+                        $query->orWhere(function ($q) {
+                            $q->rejected();
+                        });
+                        break;
+                }
             }
-        }
+        });
+
         if ($request->get('q')) {
             $q = trim(urldecode($request->get('q')));
             $chances = $chances->where('name', 'like', '%' . $q . '%');
@@ -103,7 +107,7 @@ class CompanyController extends Controller
             $chances = $chances->whereDate('created_at', '=', \Carbon\Carbon::parse($request->get('created_at'))->toDateString());
             $this->data['created_at'] = $request->get('created_at');
         }
-        $chances = count($status) > 0 || $q || $request->get('created_at') ? $chances->get() : $company->chances;
+        $chances = count($status) > 0 || $q || $request->get('created_at') ? $chances->get() : $company->chances()->orderBy('created_at', 'desc')->get();
         $this->data['chances'] = $chances;
         $this->data['chances_offer_count'] = $company->chances()->sum('offers');
         $this->data['chances_downloads_count'] = $company->chances()->sum('downloads');
@@ -235,7 +239,7 @@ class CompanyController extends Controller
     {
 
         if (!fauth()->user()->is_owner) {
-            return redirect()->back()->with(['messages'=>'You nvver be here']);
+            return redirect()->back()->with(['messages' => 'You nvver be here']);
         }
         $this->data['company'] = $company = fauth()->user()->company[0];
 

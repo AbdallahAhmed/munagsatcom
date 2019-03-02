@@ -110,13 +110,18 @@
                                 @foreach($chances as $chance)
                                     <tr>
                                         @if($chance->status!=3&&$chance->status!=5)
-                                            <td><a href="{{$chance->path}}" title="{{$chance->name}}">{{$chance->name}}</a></td>
+                                            <td><a href="{{$chance->path}}"
+                                                   title="{{$chance->name}}">{{$chance->name}}</a></td>
 
                                         @else
                                             <td>{{$chance->name}}</td>
                                         @endif
                                         <td>{{$chance->downloads}}</td>
-                                        <td>{{($chance->offers()->count())}}</td>
+                                        @if(($count=($chance->offers()->count()))>0)
+                                            <td><a href="javascript:void(0)">{{$count}}</a></td>
+                                        @else
+                                            <td>{{$count}}</td>
+                                        @endif
                                         <td>{{$chance->approved ? trans('app.chances.approved') : trans('app.chances.not_approved')}}</td>
                                         <td>{{$chance->file_description}}</td>
                                         <td>{{$chance->approved ? trans('app.chances.not_approved') : trans('app.chances.declined')}}</td>
@@ -130,42 +135,58 @@
             </div>
         </div>
     </section>
-    @push('scripts')
-        <script>
+    <a class="btn btn-primary" data-toggle="modal" href="#offers">Trigger modal</a>
+    <div class="modal fade" id="offers">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">{{trans('app.save')}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+@push('scripts')
+    <script>
+        $(function () {
             $('#dp3').datepicker({
                 dateFormat: "yyyy-mm-dd"
             });
             $('#date').datepicker({
                 dateFormat: "yyyy-mm-dd"
             });
-        </script>
-        <script>
-            $(function () {
-                $('#search').on('submit', function (e) {
-                    e.preventDefault();
-                    var status = [];
-                    var search_q = $('[name="search_q"]').val();
-                    var created_date = $('#date').datepicker().val();
-                    $("input:checkbox[name=status]:checked").each(function () {
-                        status.push($(this).val());
-                    });
-                    var url = "{{route('company.chances', ['id' => $company->id])}}" + "?";
-                    url += search_q == !search_q || search_q.length === 0 ||
-                    search_q === "" || !/[^\s]/.test(search_q) ||
-                    /^\s*$/.test(search_q) || search_q.replace(/\s/g, "") === "" ? "" : "q=" + search_q + "&";
-                    url = created_date.length > 0 ? url + "created_at=" + created_date + "&" : url;
-                    for (var i = 0; i < status.length; i++) {
-                        url += "status[]=" + status[i];
-                        url = i != status.length - 1 ? url + "&" : url;
-                    }
-                    url = url[url.length - 1] == "&" ? url.slice(0, -1) : url;
+            $('#search').on('submit', function (e) {
+                e.preventDefault();
+                var status = [];
+                var search_q = $('[name="search_q"]').val();
+                var created_date = $('#date').datepicker().val();
+                $("input:checkbox[name=status]:checked").each(function () {
+                    status.push($(this).val());
+                });
+                var url = "{{route('company.chances', ['id' => $company->id])}}" + "?";
+                url += search_q == !search_q || search_q.length === 0 ||
+                search_q === "" || !/[^\s]/.test(search_q) ||
+                /^\s*$/.test(search_q) || search_q.replace(/\s/g, "") === "" ? "" : "q=" + search_q + "&";
+                url = created_date.length > 0 ? url + "created_at=" + created_date + "&" : url;
+                for (var i = 0; i < status.length; i++) {
+                    url += "status[]=" + status[i];
+                    url = i != status.length - 1 ? url + "&" : url;
+                }
+                url = url[url.length - 1] == "&" ? url.slice(0, -1) : url;
 
-                    if (url != "{{route('company.chances', ['id' => $company->id])}}" + "?")
-                        window.location.href = url;
-
-                })
+                if (url != "{{route('company.chances', ['id' => $company->id])}}" + "?")
+                    window.location.href = url;
 
             })
-        </script>
-    @endpush
-@endsection
+
+        })
+    </script>
+@endpush

@@ -70,6 +70,12 @@
                             </div>
                         </div>
                     </div>
+                    <div class="profile-item">
+                        <div class="feildcont">
+                                <h3>{{trans('app.about_company')}}</h3>
+                                <div class="form-group-lg"><p>{{$company->details or '--'}}</p></div>
+                        </div>
+                    </div>
                     <div class="profile-item profile-attch">
                         <h3>{{trans('app.company_files')}}</h3>
 

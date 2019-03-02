@@ -43,7 +43,7 @@ class PointsController extends Controller
 
         }
         $this->data['rules_book_percentage'] = option("rules_book_percentage");
-        $this->data['rules_book_add'] = option("rules_book_add");
+        $this->data['rules_add_chances'] = option("rules_add_chances",0);
         $this->data['service_center_add'] = option("service_center_add");
         $this->data['point_per_reyal'] = option("point_per_reyal");
         $this->data['new_user_points'] = option("new_user_points", 0);

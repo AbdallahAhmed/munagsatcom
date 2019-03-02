@@ -44,3 +44,22 @@ if (!function_exists('hijri_date')) {
         return $string;
     }
 }
+
+if (!function_exists('mypoints')) {
+    /**
+     *
+     * @return number of points
+     */
+    function mypoints()
+    {
+
+        if (fauth()->check()) {
+            $user = fauth()->user();
+            if ($user->in_company) {
+                $user = $user->company[0];
+            }
+            return $user->points;
+        }
+        return 0;
+    }
+}

@@ -309,7 +309,11 @@ return [
     'pay'=>'Pay',
     'the_price' => 'Price'.'<small>SAR</small>',
     'point_per_sar' => ' points for every ',
-    'card'=>'Card'
+    'card'=>'Card',
+    'you_cannot_add_chance'=>'You can\'t add chance , permission denied',
+    'bankrupt'=>'You have\'nt points enough ',
+    'recharge'=>'Recharge your points'
+
 
 
 ];

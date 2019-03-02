@@ -39,30 +39,33 @@ class ChanceController extends Controller
         $status = $status ? $status : [];
         $this->data['chosen_status'] = $status;
 
-        foreach ($status as $st) {
-            switch ($st) {
-                case 0:
-                    $query = $query->orWhere(function ($q) {
-                        $q->opened();
-                    });
-                    break;
-                case 1:
-                    $query = $query->orWhere(function ($q) {
-                        $q->closed();
-                    });
-                    break;
-                case 2:
-                    $query = $query->orWhere(function ($q) {
-                        $q->cancelled();
-                    });
-                    break;
-                case 4:
-                    $query = $query->orWhere(function ($q) {
-                        $q->approved();
-                    });
-                    break;
+        $query->where(function ($query) use ($status) {
+            foreach ($status as $st) {
+
+                switch ($st) {
+                    case 0:
+                        $query = $query->orWhere(function ($q) {
+                            $q->opened();
+                        });
+                        break;
+                    case 1:
+                        $query = $query->orWhere(function ($q) {
+                            $q->closed();
+                        });
+                        break;
+                    case 2:
+                        $query = $query->orWhere(function ($q) {
+                            $q->cancelled();
+                        });
+                        break;
+                    case 4:
+                        $query = $query->orWhere(function ($q) {
+                            $q->approved();
+                        });
+                        break;
+                }
             }
-        }
+        });
         if ($request->get('q')) {
             $q = trim(urldecode($request->get('q')));
             $query = $query->where('name', 'like', '%' . $q . '%');

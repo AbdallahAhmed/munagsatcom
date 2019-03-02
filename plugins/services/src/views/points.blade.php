@@ -39,8 +39,8 @@
                                         <input name="option[rules_book_percentage]"  type="number" required="required" min="0" max="100" value="{{$rules_book_percentage}}" class="form-control" id="rules_book_percentage" placeholder="{{trans("services::points.rules_book_percentage")}}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="site_name">{{trans("services::points.rules_book_add")}}</label>
-                                        <input name="option[rules_book_add]"  min="0" type="text" required="required" value="{{$rules_book_add}}" class="form-control" id="rules_book_add" placeholder="{{trans("services::points.rules_book_add")}}">
+                                        <label for="site_name">{{trans("services::points.rules_add_chances")}}</label>
+                                        <input name="option[rules_add_chances]"  min="0" type="text" required="required" value="{{$rules_add_chances}}" class="form-control" id="rules_book_add" placeholder="{{trans("services::points.rules_book_add")}}">
                                     </div>
                                     <div class="form-group">
                                         <label for="site_name">{{trans("services::points.service_center_add")}}</label>

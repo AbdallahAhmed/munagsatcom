@@ -314,5 +314,9 @@ return [
     'point_per_sar' => 'نقطة للى كل ريال سعودى',
     'card'=>'الكارت ',
     'done_recharge_points'=>'تم شحن نقاطك ',
+    'you_cannot_add_chance'=>'ليس لديك الحق فى طرح فرصة',
+    'bankrupt'=>'ليس لديك رصيد كافى',
+    'recharge'=>'اشحن نقاطك'
+
 
 ];

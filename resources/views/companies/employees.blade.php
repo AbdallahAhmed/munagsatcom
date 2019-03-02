@@ -78,7 +78,7 @@
                                 <tr>
                                     <th scope="col"> {{trans('app.active')}}</th>
                                     <th scope="col">{{trans('app.employee_name')}}</th>
-                                    <th scope="col">{{trans('app.add_chance')}}</th>
+                                    <th scope="col">{{trans('app.can_pay')}}</th>
                                     <th scope="col">{{trans('app.view_only')}}</th>
                                 </tr>
                                 </thead>

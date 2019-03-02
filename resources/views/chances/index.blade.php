@@ -115,8 +115,8 @@
                             </div>
                             <div class="card-date clearfix">
                                 <div class="item one_thrd">
-                                    @if($chance->progress<100)
-                                        <div class="progress ">
+                                    @if($chance->progress<99)
+                                        <div class="progress">
                                             <div class="progress-bar" role="progressbar"
                                                  aria-valuenow="{{$chance->progress}}"
                                                  aria-valuemin="0" aria-valuemax="0" style="">

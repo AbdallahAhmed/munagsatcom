@@ -225,6 +225,9 @@ class ChanceController extends Controller
                 ]);
             }
 
+            pay(option('rules_add_chances', 0), 'add.chance', $chance->id);
+
+
             return redirect()->route('chances.create', ['id' => $company->id])->with('status', trans('app.chances.created_successfully'));
         }
 

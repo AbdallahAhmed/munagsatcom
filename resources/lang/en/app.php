@@ -285,7 +285,8 @@ return [
     'types' => [
         'tenders_buy' => 'Tender Buy',
         'not_register' => ' Unknown',
-        'points_buy'=>'Buy Points'
+        'points_buy'=>'Buy Points',
+        'add_chance'=>'Add chance'
     ],
     'account_activated' => 'Account activated',
     'free' => 'Free',

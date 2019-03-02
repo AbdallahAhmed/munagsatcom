@@ -287,7 +287,8 @@ return [
     'types' => [
         'tenders_buy' => 'شراء مناقضة',
         'not_register' => 'لم يتك تسجيل العملية ',
-        'points_buy'=>'شراء نقاط'
+        'points_buy'=>'شراء نقاط',
+        'add_chance'=>'طرح فرصة'
     ],
     'account_activated' => 'تم تفعيل الحساب',
     'free' => 'مجانا',

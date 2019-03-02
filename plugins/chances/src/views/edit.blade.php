@@ -250,7 +250,7 @@
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
-                                <select name="status" class="form-control chosen-select chosen-rtl">
+                                <select name="sector_id" class="form-control chosen-select chosen-rtl">
                                     @foreach(\Dot\Chances\Models\Sector::all() as $sector)
                                         <option
                                             value="{{$sector->id}}" {{ old('sector_id',$sector->id)==$chance->sector_id?'selected':'' }}> {{$sector->name}}</option>

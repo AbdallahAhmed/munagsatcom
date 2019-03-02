@@ -18,7 +18,7 @@
                 </li>
             </ol>
         </div>
-       
+
     </div>
 
     <div class="wrapper wrapper-content fadeInRight">
@@ -124,8 +124,11 @@
                                                                       name="ids[]"/>
                                         </th>
                                         <th>{{ trans("chances::chances.attributes.name") }}</th>
+                                        <th>{{  trans("app.company_name") }}</th>
                                         <th>{{ trans("chances::chances.attributes.status_name") }}</th>
                                         <th>{{ trans("chances::chances.attributes.author") }}</th>
+                                        <th>{{trans('app.chances.downloads')}}</th>
+                                        <th>{{trans('app.chances.provided_offers')}}</th>
                                         <th>{{ trans("chances::chances.attributes.created_at") }}</th>
                                         <th>{{ trans("chances::chances.actions") }}</th>
                                     </tr>
@@ -145,15 +148,20 @@
                                                     <strong>{{ $chance->name }}</strong>
                                                 </a>
                                             </td>
-
                                             <td>
-                                                {{trans("chances::chances.status.$chance->status")}}
+                                                {{@$chance->company->name}}
                                             </td>
                                             <td>
                                                 <a href="?user_id={{ @$chance->user->id }}" class="text-navy">
                                                     <small> {{ @$chance->user->first_name }}</small>
                                                 </a>
                                             </td>
+                                            <td>
+                                                {{trans("chances::chances.status.$chance->status")}}
+                                            </td>
+                                            <td>{{$chance->downloads}}</td>
+                                            <td>{{($chance->offers()->count())}}</td>
+
 
                                             <td>
                                                 <small>{{ $chance->created_at->render() }}</small>

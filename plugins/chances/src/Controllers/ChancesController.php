@@ -24,7 +24,6 @@ use File;
  * Class ChancesController
  * @package Dot\Chances\Controllers
  */
-
 class ChancesController extends Controller
 {
 
@@ -105,7 +104,7 @@ class ChancesController extends Controller
     {
         $this->errors = new MessageBag();
         $chance = Chance::findOrFail($id);
-        if(Request::ajax()){
+        if (Request::ajax()) {
             $unit = new Unit();
 
             $unit->name = Request::get("unit_name");
@@ -114,9 +113,9 @@ class ChancesController extends Controller
             $name = Request::get('name', "");
             $quantity = Request::get('quantity', "");
 
-            if($quantity == "")
-                $this->errors->add('quantity',trans("chances::chances.attributes.quantity") . " " . trans("services::centers.required") . ".");
-            if($name == "")
+            if ($quantity == "")
+                $this->errors->add('quantity', trans("chances::chances.attributes.quantity") . " " . trans("services::centers.required") . ".");
+            if ($name == "")
                 $this->errors->add("units_names", trans("chances::units.attributes.unit") . " " . trans("services::centers.required") . ".");
             if (!$unit->validate() && $unit->errors() != null)
                 $this->errors->merge($unit->errors());
@@ -148,6 +147,7 @@ class ChancesController extends Controller
             $chance->status = Request::get("status", 3);
             $chance->approved = Request::get('approved', 1);
             $chance->reason = Request::get("reason", "");
+            $chance->sector_id = Request::get("sector_id");
             $chance->value = Request::get("value", "");
 
             $units = Request::get("units", []);
@@ -168,12 +168,12 @@ class ChancesController extends Controller
                 $syncUnit[$unit] = ["quantity" => $units_quantity[$key], 'name' => $units_name[$key]];
             }
 
-            if ($chance->approved == 0 && $chance->reason == "")
+            if ($chance->approved == 0 && $chance->reason == "") {
                 $this->errors->add("reason", trans("chances::chances.attributes.reason") . " " . trans("chances::chances.required") . ".");
-            if (!$units)
+            }
+            if (!$units) {
                 $this->errors->add("units", trans("chances::chances.attributes.units") . " " . trans("chances::chances.required") . ".");
-            if (!$sectors)
-                $this->errors->add("sectors", trans("chances::chances.attributes.sectors") . " " . trans("chances::chances.required") . ".");
+            }
 
             $chance->validate();
             if ($chance->errors() != null)
@@ -192,7 +192,6 @@ class ChancesController extends Controller
                     'name' => $units_name[$key]
                 ]);
             }
-            $chance->sectors()->sync($sectors);
             //$chance->units()->sync($syncUnit);
 
 

@@ -92,7 +92,7 @@ class TenderController extends Controller
      */
     public function details(Request $request, $slug)
     {
-        $this->data['tender'] = Tender::with(['org', 'org.logo', 'activity', 'files'])->published()->where('slug', $slug)->first();
+        $this->data['tender'] = Tender::with(['org', 'org.logo', 'activity', 'files'])->has('org')->published()->where('slug', $slug)->first();
         $this->data['tender']->views++;
         $this->data['tender']->save();
         return view('tenders.details', $this->data);

@@ -122,7 +122,7 @@
                                     {{trans('tenders::tenders.cb_upload_or_choice')}}
                                 </a>
                                 <input type="hidden" name="cb_id" id="cb-id" value="{{old('cb_id',@$tender->cb_id)}}">
-                                <span id="cp-title"> {{$tender->id&&$tender->cb_id!=0?\Dot\Media\Models\Media::find($tender->cb_id)->title.'.pdf':trans('tenders::tenders.no_cb_uploaded')}}</span>
+                                <span id="cp-title"> {{$tender->id&&$tender->cb_id!=0?@(\Dot\Media\Models\Media::find($tender->cb_id)->title).'.pdf':trans('tenders::tenders.no_cb_uploaded')}}</span>
                             </div>
 
                             <div id="cb-price" style="display: {{$tender->cb_id==0?'none':'block'}}">

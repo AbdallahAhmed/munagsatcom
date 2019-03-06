@@ -34,8 +34,8 @@
                             <div class="col-md-3">
                                 <div class="card-img">
                                     <a href="{{@uploads_url($tender->org->logo->path)}}" class="open-image"> <img
-                                                src="{{uploads_url($tender->org->logo->path)}}"
-                                                alt="{{$tender->org->name}}" title="{{$tender->org->name}}"></a>
+                                                src="{{@uploads_url($tender->org->logo->path)}}"
+                                                alt="{{@$tender->org->name}}" title="{{@$tender->org->name}}"></a>
                                 </div>
                             </div>
                             <div class="col-md-9">
@@ -59,7 +59,7 @@
                                         </li>
                                         <li class="clearfix">
                                             <div class="one_xsmall title">{{trans('app.tenders.org')}}</div>
-                                            <div class="one_xlarg">{{$tender->org->name}}</div>
+                                            <div class="one_xlarg">{{@$tender->org->name}}</div>
                                         </li>
                                     </ul>
                                 </div>

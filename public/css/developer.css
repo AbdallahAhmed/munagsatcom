@@ -459,17 +459,13 @@ html[dir="ltr"] div.text-left {
 
 .partner ul li {
     margin: 0 10px 5px;
-    border: 1px solid #b7b7b7;
     border-radius: 5px;
     padding: 3px;
-    background: #fff;
+    border: 0;
     width: 90px;
     height: 86px;
 }
 
-footer a {
-    color: #ffffff !important;
-}
 .mail-text{
     color: #ffffff !important;
 }
@@ -493,3 +489,83 @@ footer a {
     /*width: 70px !important;*/
     /*height: 20px;*/
 /*}*/
+footer {
+    background-color: #142436;
+    padding: 55px 0 42px;
+    color: #c2c0c0;
+    /*! text-align: center; */
+    margin-top: 50px;
+    font-size: 13px;
+}
+
+footer a {
+    color: #c2c0c0;
+}
+
+footer a:hover {
+    color: #ffffff;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.partner ul {
+    display: inline-flex;
+    padding-right: 0;
+}
+
+.partner ul li {
+    margin: 0 10px 5px;
+    padding: 3px;
+}
+
+.partner ul li img {
+    width: 98%;
+}
+
+.copyright {
+    /*! line-height: 2em; */
+    text-align: center;
+    border-top: 1px solid #aca8ad;
+    padding-top: 30px;
+    margin-top: 17px;
+}
+
+.mail-text {
+    line-height: 1.6em;
+    margin-top: 15px;
+}
+
+.mail-text span {
+    letter-spacing: 2px;
+    font-size: 16px;
+}
+
+.mail {
+    letter-spacing: 0;
+}
+
+.copyright-ul li {
+    display: inline;
+    padding: 5px;
+}
+
+.footer-socail li {display: inline;
+
+    padding: 11px 7px 1px;
+
+
+    background: #fff;
+
+    border-radius: 3px;
+
+    color: #142436;
+
+    margin: 0 7px;}
+
+.footer-socail a{color: #142436;}
+.footer-socail a:hover{color: #a4a7ab;}
+.footer-socail li i{font-size: 18px;}
+.mtop{margin-top: 17px}
+.text-left{text-align: left;}
+
+@media (max-width:767px) {.text-left{text-align: center;}}

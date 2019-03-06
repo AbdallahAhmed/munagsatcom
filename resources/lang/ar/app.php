@@ -318,7 +318,11 @@ return [
     'you_cannot_add_chance'=>'ليس لديك الحق فى طرح فرصة',
     'bankrupt'=>'ليس لديك رصيد كافى',
     'recharge'=>'اشحن نقاطك',
-    'about_company'=>'عن المنشأه'
+    'about_company'=>'عن المنشأه',
+    'company_personal'=>'فرد/شركة',
+    'approved'=>'اعتماد',
+    'offers'=>'العروض المقدمة',
+    'faq'=>'الاسئلة الشائعة'
 
 
 ];

@@ -118,7 +118,9 @@
                                         @endif
                                         <td>{{$chance->downloads}}</td>
                                         @if(($count=($chance->offers()->count()))>0)
-                                            <td><a href="javascript:void(0)">{{$count}}</a></td>
+                                            <td><a href="javascript:void(0)" class="show-offers"
+                                                   data-path="{{route('chances.offers.show',['id'=>$company->id,'chance_id'=>$chance->id])}}">{{$count}}</a>
+                                            </td>
                                         @else
                                             <td>{{$count}}</td>
                                         @endif
@@ -135,16 +137,14 @@
             </div>
         </div>
     </section>
-    <a class="btn btn-primary" data-toggle="modal" href="#offers">Trigger modal</a>
     <div class="modal fade" id="offers">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title"></h4>
+                    <h4 class="modal-title">{{trans('app.offers')}}</h4>
                 </div>
                 <div class="modal-body">
-
 
                 </div>
                 <div class="modal-footer">
@@ -185,7 +185,17 @@
                 if (url != "{{route('company.chances', ['id' => $company->id])}}" + "?")
                     window.location.href = url;
 
-            })
+            });
+            $loading = $('<p class="text-center"><i class="fa fa-spinner fa-spin" style="font-size:30px"></i></p>');
+            $('.show-offers').click(function () {
+                $modal = $('#offers');
+                $modal.find('.modal-body').html($loading);
+                $modal.modal('show');
+                var path = $(this).data('path');
+                $.ajax(path).done(function (res) {
+                    $modal.find('.modal-body').html(res);
+                });
+            });
 
         })
     </script>

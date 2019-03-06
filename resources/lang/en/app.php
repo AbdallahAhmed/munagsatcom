@@ -314,8 +314,9 @@ return [
     'you_cannot_add_chance'=>'You can\'t add chance , permission denied',
     'bankrupt'=>'You have\'nt points enough ',
     'recharge'=>'Recharge your points',
-    'about_company'=>'About Company'
-
-
+    'about_company'=>'About Company',
+    'company_personal'=>'User/Company',
+    'offers'=>'Offers',
+    'faq'=>'F&Q'
 
 ];

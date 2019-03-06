@@ -259,4 +259,19 @@ class ChanceController extends Controller
         return response()->download(uploads_path($chance->media->path), $chance->name, ['Content-Type: application/pdf']);
     }
 
+    /**
+     * GET company/{id}/chances/{id}/offers
+     * @route chances.offers.show
+     * @param Request $request
+     * @return string
+     * @throws \Throwable
+     */
+    public function showOffer(Request $request, $id, $chance_id)
+    {
+        $chance = Chance::whereNotIn('status', [3, 5])->where('id', $chance_id)->firstOrFail();
+        $offers = DB::table('chances_offers_files')->where('chance_id', $chance->id)->where('user_id', '<>', 0)->get()->groupBy('user_id');
+
+        $view = view('companies.partials.offers', ['offers' => $offers])->render();
+        return $view;
+    }
 }

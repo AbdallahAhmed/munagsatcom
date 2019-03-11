@@ -10,9 +10,10 @@ class PaymentsController extends Controller
 
     public $baseUrl = 'https://test.oppwa.com/v1';
 
-    public $params = '';
+    public $params = 'testMode=EXTERNAL';
 
-    protected $ssl=false;
+    protected $ssl = false;
+
     //
 
     public function __construct()
@@ -79,7 +80,7 @@ class PaymentsController extends Controller
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,  $this->ssl);// this should be set to true in production
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $this->ssl);// this should be set to true in production
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $responseData = curl_exec($ch);
         if (curl_errno($ch)) {
@@ -87,8 +88,7 @@ class PaymentsController extends Controller
         }
         curl_close($ch);
         $result = json_decode($responseData);
-
-        if (!empty($result->amount)) {
+        if ($result->result->code == '000.100.112' && !empty($result->amount)) {
             $user = fauth()->user();
 
             if ($user->in_company) {
@@ -108,8 +108,10 @@ class PaymentsController extends Controller
                 'action' => 'points.buy',
                 'company_id' => fauth()->user()->in_company ? $user->id : 0
             ]);
+            return redirect()->route('user.points')->with(['messages' => [trans('app.done_recharge_points') . ' ' . ($points ?? '0') . ' ' . trans('app.point')], 'status' => 'success']);
+        } else {
+            return redirect()->route('user.recharge')->withErrors([$result->result->description]);
         }
-        return redirect()->route('user.points')->with(['messages' => [trans('app.done_recharge_points') . ' ' . ($points ?? '0') . ' ' . trans('app.point')], 'status' => 'success']);
     }
 
 
@@ -146,7 +148,7 @@ class PaymentsController extends Controller
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,  $this->ssl);// this should be set to true in production
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $this->ssl);// this should be set to true in production
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $responseData = curl_exec($ch);
         if (curl_errno($ch)) {

@@ -18,6 +18,11 @@
 @endsection
 
 @push('scripts')
+    <script>
+        var wpwlOptions = {
+            paymentTarget: '_top',
+        }
+    </script>
     <script src="{{$base_url}}/paymentWidgets.js?checkoutId={{$result->id}}"></script>
     <script>
         $(function () {

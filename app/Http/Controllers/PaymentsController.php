@@ -8,9 +8,10 @@ use Illuminate\Http\Request;
 class PaymentsController extends Controller
 {
 
-    public $baseUrl = 'https://test.oppwa.com/v1';
+    public $baseUrl = 'https://oppwa.com/v1';
 
-    public $params = 'testMode=EXTERNAL';
+//    public $params = 'testMode=EXTERNAL';
+    public $params = '';
 
     protected $ssl = false;
 
@@ -42,12 +43,21 @@ class PaymentsController extends Controller
     {
 
         $url = "$this->baseUrl/checkouts";
-        $data = "authentication.userId=8ac7a4ca68ccb1470169008d5a4f484e" .
-            "&authentication.password=kGSpEA3QJd" .
-            "&authentication.entityId=8ac7a4ca68ccb1470169008ebbdb4853" .
+        $data = "authentication.userId=8ac9a4c9692f24680169923afbd75995" .
+            "&authentication.password=k2gnqDYNJF" .
+            "&authentication.entityId=8ac9a4c9692f24680169923bd601599b" .
             "&amount=" . $request->get('price') .
             "&currency=SAR" .
-            "&paymentType=DB&$this->params";
+            "&paymentType=DB" .
+            "&merchantTransactionId=" . fauth()->id() .
+            "&customer.email=" . fauth()->user()->email .
+            "&customer.givenName =" . fauth()->user()->first_name .
+            "&customer.surname =" . fauth()->user()->last_name .
+            "&billing.street1=" . 'none' .
+            "&billing.city=" . 'reiad' .
+            "&billing.state=" . 'maka' .
+            "&billing.country=" . 'Saudi' .
+            $this->params;
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -73,9 +83,9 @@ class PaymentsController extends Controller
     public function checkout(Request $request)
     {
         $url = "$this->baseUrl/checkouts/" . $request->get('id') . "/payment";
-        $url .= "?authentication.userId=8ac7a4ca68ccb1470169008d5a4f484e" .
-            "&authentication.password=kGSpEA3QJd" .
-            "&authentication.entityId=8ac7a4ca68ccb1470169008ebbdb4853";
+        $url .= "?authentication.userId=8ac9a4c9692f24680169923afbd75995" .
+            "&authentication.password=k2gnqDYNJF" .
+            "&authentication.entityId=8ac9a4c9692f24680169923bd601599b";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -131,9 +141,9 @@ class PaymentsController extends Controller
             return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
         $url = "$this->baseUrl/payments";
-        $data = "authentication.userId=8ac7a4ca68ccb1470169008d5a4f484e" .
-            "&authentication.password=kGSpEA3QJd" .
-            "&authentication.entityId=8ac7a4ca68ccb1470169008ebbdb4853" .
+        $data = "authentication.userId=8ac9a4c9692f24680169923afbd75995" .
+            "&authentication.password=k2gnqDYNJF" .
+            "&authentication.entityId=8ac9a4c9692f24680169923bd601599b" .
             "&amount=" . $request->get('price') .
             "&currency=SAR" .
             "&paymentBrand=" . $request->get('brand') .

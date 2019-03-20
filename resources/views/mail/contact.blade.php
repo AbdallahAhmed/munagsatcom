@@ -1,6 +1,1 @@
-Hello  {{option('site_email')}} ,<br>
-
-New feedback from {{$request->get('name')}}<br>
-Email: {{$request->get('email')}}<br>
-Number: {{$request->get('number')}}<br>
-Message: {{$request->get('message')}}
+Hello  {{option('site_email')}} ,<br>New feedback from {{$request->get('name')}}<br>Email: {{$request->get('email')}}<br>Number: {{$request->get('number')}}<br>Message: {{$request->get('message')}}

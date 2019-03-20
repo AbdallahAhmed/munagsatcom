@@ -1,0 +1,1 @@
+Hi  {{@$company->user->first_name}} ,<br> Your company\'s  {{$company->name}} now {{$status==1?'Accepted':'not accepted'}}<b>{{$user->code}}</b><br>BR ,<br>Monaasat

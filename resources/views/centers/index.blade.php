@@ -84,7 +84,7 @@
                             </div>
                             <div class="item clearfix">
                                 <div class="one_small title-small"> {{trans('app.sectors.sector')}} </div>
-                                <div class="one_larg">{{$center->sector->name}}</div>
+                                <div class="one_larg">{{@$center->sector->name}}</div>
                             </div>
                             <div class="item clearfix">
                                 <div class="one_small title-small"> {{trans('app.services.services')}} </div>
@@ -107,7 +107,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="card-img"><a href="{{$center->path}}">
-                                    <img src="{{$center->image?thumbnail($center->image->path, 'single_center'):asset('images/default-image.png')}}"
+                                    <img src="{{$center->image?@thumbnail($center->image->path, 'single_center'):asset('images/default-image.png')}}"
                                          alt="{{$center->name}}">
                                 </a>
                             </div>

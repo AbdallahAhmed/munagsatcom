@@ -3,12 +3,14 @@
 namespace Dot\Companies\Controllers;
 
 use Action;
+use App\Mail\CompanyStatusChange;
 use App\Models\Transaction;
 use Dot\Chances\Models\Sector;
 use Dot\Companies\Models\Company;
 use Dot\Platform\Controller;
 use Dot\Users\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Redirect;
 use Request;
 
@@ -96,8 +98,8 @@ class CompaniesController extends Controller
         if (Request::isMethod("post")) {
 
             $company->name = Request::get('name');
-            $company->first_name = Request::get('first_name');
-            $company->last_name = Request::get('last_name');
+            $company->first_name = Request::get('first_name', $company->first_name);
+            $company->last_name = Request::get('last_name', $company->last_name);
             $company->details = Request::get('details', "");
             $company->phone_number = Request::get('phone_number', "");
             $company->mobile_number = Request::get('mobile_number', "");
@@ -107,6 +109,14 @@ class CompaniesController extends Controller
                 $company->block_reason = Request::get('block_reason');
             } else {
                 $company->block_reason = null;
+            }
+
+            if ($company->status != Request::get('status')) {
+                try {
+                    Mail::to($company->user->email)->send(new CompanyStatusChange($company, Request::get('status')));
+                } catch (\Exception $e) {
+
+                }
             }
             $company->status = Request::get('status');
             $company->sector_id = Request::get('sector_id');
@@ -146,7 +156,7 @@ class CompaniesController extends Controller
     function transactions()
     {
 
-        if(!Auth::user()->can("companies.transactions")){
+        if (!Auth::user()->can("companies.transactions")) {
             abort(404);
         }
         $this->data["sort"] = (Request::filled("sort")) ? Request::get("sort") : "created_at";
@@ -173,8 +183,8 @@ class CompaniesController extends Controller
                 $query->orWhere('last_name', 'LIKE', '%' . Request::get('q') . '%');
             });
 
-            $query->orWhereHas('user.company',function ($query){
-                $query->where('name','LIKE','%'.request('q').'%');
+            $query->orWhereHas('user.company', function ($query) {
+                $query->where('name', 'LIKE', '%' . request('q') . '%');
             });
         }
 

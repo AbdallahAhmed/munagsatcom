@@ -30,33 +30,37 @@ class CenterController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Request $request){
+    public function index(Request $request)
+    {
 
         $query = Center::published();
         $this->data['sector_id'] = null;
         $this->data['service_id'] = null;
         $this->data['q'] = null;
 
-        if($request->get("sector_id")){
+        if ($request->get("sector_id")) {
             $query = $query->where('sector_id', $request->get('sector_id'));
             $this->data['sector_id'] = $request->get("sector_id");
         }
-        if($request->get('service_id')){
-            $query = $query->whereHas('services', function ($query) use ($request){
-               $query->where('id', $request->get('service_id'));
+        if ($request->get('service_id')) {
+            $query = $query->whereHas('services', function ($query) use ($request) {
+                $query->where('id', $request->get('service_id'));
             });
             $this->data['service_id'] = $request->get("service_id");
         }
-        if($request->get('q')){
+        if ($request->get('q')) {
             $q = trim(urldecode($request->get('q')));
-            $query = $query->where('name','like', '%'.$q.'%');
+            $query = $query->where('name', 'like', '%' . $q . '%');
             $this->data['q'] = $q;
         }
-        if($request->get('price_to')){
+        if ($request->get('price_to')) {
             $to = $request->get('price_to');
             $from = $request->get('price_from', 100);
 
         }
+        $query->whereHas('sector', function ($query) {
+            $query->where('status', 1);
+        });
         $this->data['centers'] = $query->paginate(5);
         $this->data['services'] = Service::published()->get();
         $this->data['sectors'] = Sector::published()->get();
@@ -72,7 +76,8 @@ class CenterController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function store(Request $request, $id){
+    public function store(Request $request, $id)
+    {
         $this->data['company'] = $company = Company::findOrFail($id);
         if ($request->method() == "POST") {
             $validator = Validator::make($request->all(), [
@@ -81,7 +86,7 @@ class CenterController extends Controller
                 'address' => 'required',
                 'logo' => 'mimes:jpg,png,jpeg',
             ]);
-            if($validator->fails())
+            if ($validator->fails())
                 return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
 
             $center = new Center();
@@ -104,7 +109,7 @@ class CenterController extends Controller
             $center->save();
             $center->services()->sync(array_filter($request->get("services", [])));
 
-            return redirect()->route('centers.create', ['id'=>$company->id])->with('status', trans('app.centers.created_successfully'));
+            return redirect()->route('centers.create', ['id' => $company->id])->with('status', trans('app.centers.created_successfully'));
         }
 
         $this->data['sectors'] = Sector::published()->get();
@@ -119,8 +124,9 @@ class CenterController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Request $request, $slug){
-        $center = Center::published()->where('slug','=', $slug)->firstOrFail();
+    public function show(Request $request, $slug)
+    {
+        $center = Center::published()->where('slug', '=', $slug)->firstOrFail();
         $this->data['center'] = $center;
         return view('centers.center', $this->data);
     }
@@ -130,7 +136,8 @@ class CenterController extends Controller
      * @route centers.contact
      * @param Request $request
      */
-    public function contact(Request $request){
+    public function contact(Request $request)
+    {
         Mail::to($request->get('email'))->send(new CenterContactEmail($request));
     }
 

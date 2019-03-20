@@ -30,7 +30,7 @@
                                 <div class="col-xs-12 col-md-9 new-f-group">
                                     <div class="form-group clearfix">
                                         <select type="text" class="effect-9 form-control" name="sector_id">
-                                            <option value="0">{{trans('app.sectors.choose_sector')}}</option>
+                                            <option value="">{{trans('app.sectors.choose_sector')}}</option>
                                             @foreach($sectors as $sector)
                                                 @if($sector_id == $sector->id)
                                                     <option value="{{$sector->id}}"
@@ -125,22 +125,22 @@
     @push('scripts')
         <script>
             $(function () {
-                $('#search').on('submit', function (e) {
-                    e.preventDefault();
-                    var search_q = $('[name="search_q"]').val();
-                    var service_id = $('[name="service_id"]').val();
-                    var sector_id = $('[name="sector_id"]').val();
-                    var url = "{{route("centers")}}" + "?";
-                    url += search_q == !search_q || search_q.length === 0 ||
-                    search_q === "" || !/[^\s]/.test(search_q) ||
-                    /^\s*$/.test(search_q) || search_q.replace(/\s/g, "") === "" ? "" : "q=" + search_q + "&";
-                    url += sector_id == 0 ? "" : "sector_id=" + sector_id + "&";
-                    url += service_id == 0 ? "" : "service_id=" + service_id;
+                {{--$('#search').on('submit', function (e) {--}}
+                    {{--e.preventDefault();--}}
+                    {{--var search_q = $('[name="search_q"]').val();--}}
+                    {{--var service_id = $('[name="service_id"]').val();--}}
+                    {{--var sector_id = $('[name="sector_id"]').val();--}}
+                    {{--var url = "{{route("centers")}}" + "?";--}}
+                    {{--url += search_q == !search_q || search_q.length === 0 ||--}}
+                    {{--search_q === "" || !/[^\s]/.test(search_q) ||--}}
+                    {{--/^\s*$/.test(search_q) || search_q.replace(/\s/g, "") === "" ? "" : "q=" + search_q + "&";--}}
+                    {{--url += sector_id == 0 ? "" : "sector_id=" + sector_id + "&";--}}
+                    {{--url += service_id == 0 ? "" : "service_id=" + service_id;--}}
 
-                    if (url != "{{route('centers')}}" + "?")
-                        window.location.href = url;
+                    {{--if (url != "{{route('centers')}}" + "?")--}}
+                        {{--window.location.href = url;--}}
 
-                })
+                {{--})--}}
             });
             $(".example").asRange({
                 range: true,

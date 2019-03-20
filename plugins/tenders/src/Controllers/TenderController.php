@@ -258,7 +258,7 @@ class TenderController extends Controller
             $tender->activity_id = Request::get('activity_id', 0);
             $tender->number = Request::get("number", 0);
 
-            $tender->status = Request::get("status", 0);
+            $tender->status = Request::get("status",  $tender->status);
 
             //dates
             $tender->published_at = Request::get('published_at', date("Y-m-d H:i:s"));

@@ -32,6 +32,7 @@ return [
     'logo' => 'Logo',
     'files' => 'Files',
     'unblocked' => 'Unblocked',
+    'transactions' => 'Transactions',
     'status' => [
         0 => 'Under review',
         1 => 'Accepted',
@@ -47,7 +48,10 @@ return [
         'status' => 'status',
         'block' => 'block',
         'block_reason' => 'block reason',
-        'blocked'=>'blocked'
+        'blocked' => 'blocked',
+        'transaction_id'=>'Transaction id',
+        'user_trans'=>'User',
+        'points'=>'Points'
     ],
     "events" => [
         'created' => 'Company created successfully',
@@ -56,7 +60,8 @@ return [
 
     ],
     "permissions" => [
-        "manage" => "manage companies"
+        "manage" => "manage companies",
+        "transactions"=>'view transactions'
     ]
 
 ];

@@ -250,6 +250,7 @@
 
                 </div>
                 <div class="col-md-4">
+                    @if(Auth::user()->can('tenders.publish'))
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-check-square"></i>
@@ -269,6 +270,8 @@
                         </div>
 
                     </div>
+
+                    @endif
 
                     @foreach(Action::fire("tender.form.sidebar") as $output)
                         {!! $output !!}

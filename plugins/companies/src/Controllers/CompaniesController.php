@@ -3,6 +3,7 @@
 namespace Dot\Companies\Controllers;
 
 use Action;
+use App\Models\Transaction;
 use Dot\Chances\Models\Sector;
 use Dot\Companies\Models\Company;
 use Dot\Platform\Controller;
@@ -20,8 +21,8 @@ class CompaniesController extends Controller
      */
     protected $data = [];
 
-    /*
-     * Show all categories
+    /**
+     * Show all companies
      * @param int $parent
      * @return mixed
      */
@@ -134,6 +135,52 @@ class CompaniesController extends Controller
         $this->data['sectors'] = Sector::published()->get();
 
         return view("companies::edit", $this->data);
+    }
+
+
+    /**
+     * Show all transactions
+     * @param int $parent
+     * @return mixed
+     */
+    function transactions()
+    {
+
+        if(!Auth::user()->can("companies.transactions")){
+            abort(404);
+        }
+        $this->data["sort"] = (Request::filled("sort")) ? Request::get("sort") : "created_at";
+        $this->data["order"] = (Request::filled("order")) ? Request::get("order") : "DESC";
+        $this->data['per_page'] = (Request::filled("per_page")) ? Request::get("per_page") : NULL;
+
+        $query = Transaction::orderBy($this->data["sort"], $this->data["order"]);
+
+        if (Request::filled('action')) {
+            $query->where('action', Request::get('action'));
+        }
+
+        if (Request::filled('user_id')) {
+            $query->where('user_id', request('user_id'));
+        }
+
+        if (Request::filled('company_id')) {
+            $query->where('company_id', request('company_id'));
+        }
+
+        if (Request::filled('q')) {
+            $query->whereHas('user', function ($query) {
+                $query->where('first_name', 'LIKE', '%' . Request::get('q') . '%');
+                $query->orWhere('last_name', 'LIKE', '%' . Request::get('q') . '%');
+            });
+
+            $query->orWhereHas('user.company',function ($query){
+                $query->where('name','LIKE','%'.request('q').'%');
+            });
+        }
+
+        $this->data["transactions"] = $query->paginate($this->data['per_page']);
+
+        return view("companies::transactions", $this->data);
     }
 
 }

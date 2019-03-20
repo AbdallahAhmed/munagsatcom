@@ -20,7 +20,8 @@ class Tenders extends \Dot\Platform\Plugin
      * @var array
      */
     protected $permissions = [
-        "manage"
+        "manage",
+        "publish"
     ];
 
     /**

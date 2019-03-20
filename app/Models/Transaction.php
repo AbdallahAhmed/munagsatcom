@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
@@ -37,7 +38,7 @@ class Transaction extends Model
             case 'add.chance':
                 return trans('app.types.add_chance');
             default:
-                return trans('app.types.not_register');
+                return trans('app.not_register');
         }
     }
 
@@ -65,5 +66,14 @@ class Transaction extends Model
     public function tender()
     {
         return $this->belongsTo(Tender::class, 'object_id');
+    }
+
+    /**
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    function user()
+    {
+        return $this->hasOne(User::class, "id", "user_id");
     }
 }

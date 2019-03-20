@@ -22,6 +22,7 @@ return [
     'asc' => 'تضاعدى',
     'desc' => 'تنازلى',
     'actions' => 'الأمر',
+    'transactions'=>'العمليات المالية',
     'filter' => 'عرض',
     'parent_company' => 'قسم رئيسى',
     'language' => 'اللغة',
@@ -42,15 +43,18 @@ return [
 
     'attributes' => [
         'name' => 'إسم المنشأة',
+        'transaction_id'=>'رقم العملية',
         'first_name' => 'الإسم الأول',
         'last_name' => 'الإسم الثاني',
+        'user_trans'=>'المستخدم',
         'parent' => 'القسم الرئيسى',
         'created_at' => 'تاريخ الإضافة',
         'user' => 'الكاتب',
         'status' => 'الحالة',
         'block' => 'حذر',
         'block_reason' => 'سبب الحذر',
-        'blocked'=>'الحذر'
+        'blocked'=>'الحذر',
+        'points'=>'النقاط'
     ],
     "events" => [
         'created' => 'تم إنشاء منشأة بنجاح',
@@ -59,7 +63,8 @@ return [
 
     ],
     "permissions" => [
-        "manage" => "التحكم بمنشأت"
+        "manage" => "التحكم بمنشأت",
+        "transactions"=>'مشاهدة العمليات الحسابية'
     ]
 
 ];

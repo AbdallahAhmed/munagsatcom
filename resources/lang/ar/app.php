@@ -286,10 +286,11 @@ return [
     'company_name' => ' اسم المنشأة',
     'types' => [
         'tenders_buy' => 'شراء مناقضة',
-        'not_register' => 'لم يتك تسجيل العملية ',
         'points_buy'=>'شراء نقاط',
         'add_chance'=>'طرح فرصة'
     ],
+    'not_register' => 'لم يتم تسجيل العملية ',
+    'all_actions'=>'الجميع انواع العمليات ',
     'account_activated' => 'تم تفعيل الحساب',
     'free' => 'مجانا',
     'terms' => 'الشروط والأحكام',

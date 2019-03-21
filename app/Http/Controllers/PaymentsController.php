@@ -51,12 +51,12 @@ class PaymentsController extends Controller
             "&paymentType=DB" .
             "&merchantTransactionId=" . fauth()->id() .
             "&customer.email=" . fauth()->user()->email .
-            "&customer.givenName =" . fauth()->user()->first_name .
-            "&customer.surname =" . fauth()->user()->last_name .
+            "&customer.givenName=" . fauth()->user()->first_name .
+            "&customer.surname=" . fauth()->user()->last_name .
             "&billing.street1=" . 'none' .
             "&billing.city=" . 'reiad' .
             "&billing.state=" . 'maka' .
-            "&billing.country=" . 'Saudi' .
+            "&billing.country=" . 'SA' .
             $this->params;
 
         $ch = curl_init();
@@ -70,6 +70,7 @@ class PaymentsController extends Controller
             return curl_error($ch);
         }
         curl_close($ch);
+        dd(json_decode($responseData));
 //        dd($responseData);
         return view('payments-cppy-step-2', ['result' => json_decode($responseData), 'base_url' => $this->baseUrl]);
     }

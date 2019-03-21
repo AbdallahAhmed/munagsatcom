@@ -206,7 +206,7 @@ class PlacesController extends Controller
         return Redirect::back()->with("message", trans("i18n::places.events.deleted"));
     }
 
-    /*
+    /**
     * Activating / Deactivating post by id
     * @param $status
     * @return mixed
@@ -241,7 +241,7 @@ class PlacesController extends Controller
         return Redirect::back()->with("message", $message);
     }
 
-    /*
+    /**
      * Rest service to search places
      * @return string
      */

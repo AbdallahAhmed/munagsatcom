@@ -11,31 +11,7 @@
                 <span class="label label-primary pull-right">
                     <?php echo $articles_count; ?>
                 </span>
-                <?php echo trans("posts::widget.articles"); ?>
-            </li>
-            <li class="list-group-item fist-item">
-                <span class="label label-primary pull-right">
-                    <?php echo $videos_count; ?>
-                </span>
-                <?php echo trans("posts::widget.videos"); ?>
-            </li>
-            <li class="list-group-item">
-                <span class="label label-primary pull-right">
-                    <?php echo $users_count; ?>
-                </span>
-                <?php echo trans("posts::widget.users"); ?>
-            </li>
-            <li class="list-group-item">
-                <span class="label label-primary pull-right">
-                    <?php echo $categories_count; ?>
-                </span>
-                <?php echo trans("posts::widget.categories"); ?>
-            </li>
-            <li class="list-group-item">
-                <span class="label label-primary pull-right">
-                    <?php echo $tags_count; ?>
-                </span>
-                <?php echo trans("posts::widget.tags"); ?>
+                <?php echo trans("tenders::tenders.tenders"); ?>
             </li>
         </ul>
     </div>

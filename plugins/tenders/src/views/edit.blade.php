@@ -404,7 +404,7 @@
 
             $("#tender_places").select2({
                 ajax: {
-                    url: "<?php echo route("admin.places.search"); ?>",
+                    url: "<?php echo route("admin.tenders.places.search"); ?>",
                     dataType: 'json',
                     delay: 250,
                     data: function (params) {

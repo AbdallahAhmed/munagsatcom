@@ -23,19 +23,10 @@ Route::group([
         $route->any('/{place_id}/edit/{parent?}', ["as" => "admin.places.edit", "uses" => "PlacesController@edit"]);
         $route->any('/delete', ["as" => "admin.places.delete", "uses" => "PlacesController@delete"]);
         $route->any('/{status}/status', ["as" => "admin.places.status", "uses" => "PlacesController@status"]);
+        $route->any('/search', ["as" => "admin.places.search", "uses" => "PlacesController@search"]);
         $route->any('/{parent?}', ["as" => "admin.places.show", "uses" => "PlacesController@index"]);
     });
 });
 
-
-Route::group([
-    "prefix" => ADMIN,
-    "middleware" => ["web", "auth:backend"],
-    "namespace" => "Dot\\I18n\\Controllers"
-], function ($route) {
-    $route->group(["prefix" => "places"], function ($route) {
-        $route->any('/search', ["as" => "admin.places.search", "uses" => "TenderController@search"]);
-    });
-});
 
 

@@ -18,6 +18,7 @@ Route::group([
         $route->any('/{id}/edit', ["as" => "admin.tenders.edit", "uses" => "TenderController@edit"]);
         $route->any('/delete', ["as" => "admin.tenders.delete", "uses" => "TenderController@delete"]);
         $route->any('/{status}/status', ["as" => "admin.tenders.status", "uses" => "TenderController@status"]);
+        $route->any('/places/search', ["as" => "admin.tenders.places.search", "uses" => "TenderController@search"]);
 
         // tenders >> types
         $route->group(["prefix" => "types"], function ($route) {

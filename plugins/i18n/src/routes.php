@@ -34,7 +34,7 @@ Route::group([
     "namespace" => "Dot\\I18n\\Controllers"
 ], function ($route) {
     $route->group(["prefix" => "places"], function ($route) {
-        $route->any('/search', ["as" => "admin.places.search", "uses" => "PlacesController@search"]);
+        $route->any('/search', ["as" => "admin.places.search", "uses" => "TenderController@search"]);
     });
 });
 

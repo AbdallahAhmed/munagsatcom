@@ -156,13 +156,13 @@
                                                    href="{{ route("admin.companies.edit", array("id" => $company->id)) }}">
                                                     <i class="fa fa-pencil text-navy"></i>
                                                 </a>
-                                                <a data-toggle="tooltip" data-placement="bottom"
-                                                   title="{{ trans("companies::companies.delete") }}"
-                                                   class="delete_user ask"
-                                                   message="{{ trans("companies::companies.sure_delete") }}"
-                                                   href="{{ URL::route("admin.companies.delete", array("id" => $company->id)) }}">
-                                                    <i class="fa fa-times text-navy"></i>
-                                                </a>
+                                                {{--<a data-toggle="tooltip" data-placement="bottom"--}}
+                                                   {{--title="{{ trans("companies::companies.delete") }}"--}}
+                                                   {{--class="delete_user ask"--}}
+                                                   {{--message="{{ trans("companies::companies.sure_delete") }}"--}}
+                                                   {{--href="{{ URL::route("admin.companies.delete", array("id" => $company->id)) }}">--}}
+                                                    {{--<i class="fa fa-times text-navy"></i>--}}
+                                                {{--</a>--}}
                                             </td>
                                         </tr>
                                     @endforeach

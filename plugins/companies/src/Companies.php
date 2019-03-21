@@ -29,7 +29,7 @@ class Companies extends \Dot\Platform\Plugin
         Navigation::menu("sidebar", function ($menu) {
 
             if (Auth::user()->can("companies.transactions")) {
-                $menu->item('companies', trans("companies::companies.transactions"), route("admin.companies.transactions"))->icon("fa-money")->order(2);
+                $menu->item('transactions', trans("companies::companies.transactions"), route("admin.companies.transactions"))->icon("fa-money")->order(2);
             }
         });
     }

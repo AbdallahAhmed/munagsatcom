@@ -235,8 +235,8 @@ class ChanceController extends Controller
         $this->data["sectors"] = Sector::published()->get();
         $this->data["units"] = Unit::published()->get();
 
-//        return view('chances.create', $this->data);
-        return view('chances.coming-soon');
+        return view('chances.create', $this->data);
+//        return view('chances.coming-soon');
 
     }
 

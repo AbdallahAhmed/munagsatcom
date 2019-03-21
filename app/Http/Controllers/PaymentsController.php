@@ -70,7 +70,6 @@ class PaymentsController extends Controller
             return curl_error($ch);
         }
         curl_close($ch);
-        dd(json_decode($responseData));
 //        dd($responseData);
         return view('payments-cppy-step-2', ['result' => json_decode($responseData), 'base_url' => $this->baseUrl]);
     }

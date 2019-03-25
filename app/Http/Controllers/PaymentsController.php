@@ -46,10 +46,10 @@ class PaymentsController extends Controller
         $data = "authentication.userId=8ac9a4c9692f24680169923afbd75995" .
             "&authentication.password=k2gnqDYNJF" .
             "&authentication.entityId=8ac9a4c9692f24680169923bd601599b" .
-            "&amount=" . $request->get('price') .'.00'.
+            "&amount=" . $request->get('price') . '.00' .
             "&currency=SAR" .
             "&paymentType=DB" .
-            "&merchantTransactionId=" . fauth()->id() .
+            "&merchantTransactionId=" . fauth()->id() . time() .
             "&customer.email=" . fauth()->user()->email .
             "&customer.givenName=" . fauth()->user()->first_name .
             "&customer.surname=" . fauth()->user()->last_name .

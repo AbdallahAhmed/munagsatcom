@@ -49,6 +49,7 @@ return [
     'add_delegate' => 'Add delegate',
     'messages' => 'Messages',
     'user_profile' => 'User details',
+    'add_points'=>'Add points',
     '$' => 'SR',
     '_search' => 'Search',
     'register_now' => 'Register now',

@@ -289,6 +289,7 @@ return [
         'points_buy'=>'شراء نقاط',
         'add_chance'=>'طرح فرصة'
     ],
+    'add_points'=>'النقاط المضاقة ',
     'not_register' => 'لم يتم تسجيل العملية ',
     'all_actions'=>'الجميع انواع العمليات ',
     'account_activated' => 'تم تفعيل الحساب',

@@ -98,6 +98,7 @@ class PaymentsController extends Controller
         }
         curl_close($ch);
         $result = json_decode($responseData);
+        \Log::debug($responseData);
         if ($result->result->code == '000.100.112' && !empty($result->amount)) {
             $user = fauth()->user();
 

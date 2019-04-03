@@ -16,7 +16,7 @@ class PaymentsController extends Controller
     /**
      * @var array
      */
-    public $successfully=[
+    public $successfully = [
         '000.000.000',
         '000.000.100',
         '000.300.000',
@@ -71,12 +71,13 @@ class PaymentsController extends Controller
             "&merchantTransactionId=" . fauth()->id() . time() .
             "&customer.email=" . fauth()->user()->email .
             "&customer.givenName=" . fauth()->user()->first_name .
-            "&customer.surname=" . fauth()->user()->last_name .
+            "&customer.surname=" . (empty(fauth()->user()->last_name) ? fauth()->user()->first_name : fauth()->user()->last_name) .
             "&billing.street1=" . 'none' .
             "&billing.city=" . 'reiad' .
             "&billing.state=" . 'maka' .
             "&billing.country=" . 'SA' .
             $this->params;
+        \Log::debug($data);
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);

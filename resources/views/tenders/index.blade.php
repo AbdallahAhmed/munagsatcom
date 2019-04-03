@@ -76,8 +76,8 @@
                             </div>
 
                             <div class="form-group-lg clearfix">
-                                <label class="col-xs-12 col-md-3">{{trans('app.tenders.cb_downloaded_price')}} </label>
-                                <div class="col-xs-12 col-md-9">
+                                <label class="col-xs-12 col-md-12">{{trans('app.tenders.cb_downloaded_price')}} </label>
+                                <div class="col-xs-12 col-md-12">
                                     <div class="range">
                                         <input class="range-example" type="text" min="1"
                                                max="{{(int)$cb_downloaded_price_max}}"
@@ -88,8 +88,8 @@
                                 </div>
                             </div>
                             <div class="form-group clearfix">
-                                <label class="col-xs-12 col-md-5"> {{trans('app.tenders.offers_expired')}} </label>
-                                <div class="col-xs-12 col-md-7">
+                                <label class="col-xs-12 col-md-12"> {{trans('app.tenders.offers_expired')}} </label>
+                                <div class="col-xs-12 col-md-12">
                                     <div class="form-group clearfix">
                                         <div class="input-append date" id="dp3" data-date="{{date('m-d-Y')}}"
                                              autocomplete="false"

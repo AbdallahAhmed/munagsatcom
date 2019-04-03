@@ -13,6 +13,25 @@ class PaymentsController extends Controller
 //    public $params = 'testMode=EXTERNAL';
     public $params = '';
 
+    /**
+     * @var array
+     */
+    public $successfully=[
+        '000.000.000',
+        '000.000.100',
+        '000.300.000',
+        '000.300.100',
+        '000.300.101',
+        '000.300.102',
+        '000.310.100',
+        '000.100.110',
+        '000.100.111',
+        '000.100.112',
+        '000.310.101',
+        '000.310.110',
+        '000.600.000',
+    ];
+
     protected $ssl = false;
 
     //
@@ -99,7 +118,8 @@ class PaymentsController extends Controller
         curl_close($ch);
         $result = json_decode($responseData);
         \Log::debug($responseData);
-        if ($result->result->code == '000.100.112' && !empty($result->amount)) {
+        $code = $result->result->code;
+        if (collect($this->successfully)->contains($code) && !empty($result->amount)) {
             $user = fauth()->user();
 
             if ($user->in_company) {

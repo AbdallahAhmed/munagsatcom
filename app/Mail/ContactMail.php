@@ -30,6 +30,6 @@ class ContactMail extends Mailable
      */
     public function build()
     {
-        return $this->from('noreply@munagasatcom.com', 'Contact us')->view('mail.contact', ['request' => $this->request]);
+        return $this->from('info@munagasatcom.com', 'Contact us')->view('mail.contact', ['request' => $this->request]);
     }
 }

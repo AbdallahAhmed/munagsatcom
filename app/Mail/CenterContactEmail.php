@@ -30,6 +30,6 @@ class CenterContactEmail extends Mailable
      */
     public function build()
     {
-        return $this->from('noreply@munagasatcom.com', 'Feedback')->view('mail.centers_contact', ['request' => $this->request]);
+        return $this->from('info@munagasatcom.com', 'Feedback')->view('mail.centers_contact', ['request' => $this->request]);
     }
 }

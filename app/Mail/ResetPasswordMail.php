@@ -32,6 +32,6 @@ class ResetPasswordMail extends Mailable
      */
     public function build()
     {
-        return $this->from('noreply@munagasatcom.com', 'Monaasat')->subject('Monaasat| Password reset')->view('mail.reset', ['user' => $this->user]);
+        return $this->from('info@munagasatcom.com', 'Munagasat')->subject('Monaasat| Password reset')->view('mail.reset', ['user' => $this->user]);
     }
 }

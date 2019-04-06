@@ -77,7 +77,7 @@ class PaymentsController extends Controller
             "&billing.state=" . 'maka' .
             "&billing.country=" . 'SA' .
             $this->params;
-        \Log::debug($data);
+//        \Log::debug($data);
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -118,7 +118,7 @@ class PaymentsController extends Controller
         }
         curl_close($ch);
         $result = json_decode($responseData);
-        \Log::debug($responseData);
+//        \Log::debug($responseData);
         $code = $result->result->code;
         if (collect($this->successfully)->contains($code) && !empty($result->amount)) {
             $user = fauth()->user();

@@ -34,7 +34,7 @@ class CompanyStatusChange extends Mailable
      */
     public function build()
     {
-        return $this->from('noreply@munagasatcom.com', 'مناقصاتكم |' . $this->company->name)
+        return $this->from('info@munagasatcom.com', 'مناقصاتكم |' . $this->company->name)
             ->view('mail.verification', ['company' => $this->company, 'status' => $this->status]);
     }
 }

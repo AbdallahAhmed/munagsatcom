@@ -64,6 +64,7 @@
                                     <tr>
                                         <th scope="col">{{trans('app.transaction_type')}} </th>
                                         <th scope="col">{{trans('app.before_transaction')}}</th>
+                                        <th scope="col"> {{trans('app.add_points')}}</th>
                                         <th scope="col"> {{trans('app.used_points')}}</th>
                                         <th scope="col"> {{trans('app.after_transactions')}}</th>
                                         <th scope="col"> {{trans('app.date_transactions')}}</th>
@@ -75,7 +76,8 @@
                                             <td><a href="{{$transaction->path}}"
                                                    class="text-primary">{{$transaction->type}}</a></td>
                                             <td>{{$transaction->before_points}}</td>
-                                            <td>{{$transaction->points}}</td>
+                                            <td>{{$transaction->action=='points.buy'?$transaction->points:0}}</td>
+                                            <td>{{$transaction->action!='points.buy'?$transaction->points:0}}</td>
                                             <td>{{$transaction->after_points}}</td>
                                             <td>{{$transaction->created_at->diffForHumans()}}</td>
                                         </tr>

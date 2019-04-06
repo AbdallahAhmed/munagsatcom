@@ -76,4 +76,13 @@ class Transaction extends Model
     {
         return $this->hasOne(User::class, "id", "user_id");
     }
+
+    /**
+     *
+     */
+    public function getCreatedAtAttribute()
+    {
+        return Carbon::parse($this->original['created_at'])->setTimezone('GMT+3');
+    }
+
 }

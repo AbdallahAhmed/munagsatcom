@@ -3,6 +3,7 @@
 namespace Dot\Tenders\Controllers;
 
 use Action;
+use Dot\I18n\Models\Place;
 use Illuminate\Support\Facades\Auth;
 use Dot\Platform\Controller;
 use Dot\Tenders\Models\Tender;
@@ -291,6 +292,20 @@ class TenderController extends Controller
         $this->data["tender"] = $tender;
 
         return View::make("tenders::edit", $this->data);
+    }
+
+    /**
+     * Rest service to search places
+     * @return string
+     */
+    function search()
+    {
+
+        $q = trim(urldecode(Request::get("q")));
+
+        $places = Place::search($q)->where('status', 1)->get()->toArray();
+
+        return json_encode($places);
     }
 
 }

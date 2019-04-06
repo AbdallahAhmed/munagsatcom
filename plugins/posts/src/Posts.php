@@ -6,6 +6,7 @@ use Dot\Categories\Models\Category;
 use Dot\Galleries\Models\Gallery;
 use Dot\Posts\Models\Post;
 use Dot\Tags\Models\Tag;
+use Dot\Tenders\Models\Tender;
 use Dot\Users\Models\User;
 use Dot\Platform\Facades\Action;
 use Illuminate\Support\Facades\Auth;
@@ -54,7 +55,7 @@ class Posts extends \Dot\Platform\Plugin
 
             $data = [];
 
-            $data["articles_count"] = Post::status("published")->format("article")->count();
+            $data["articles_count"] = Tender::count();
             $data["videos_count"] = Post::status("published")->format("video")->count();
             $data["users_count"] = User::where("status", 1)->count();
             $data["categories_count"] = Category::where("parent", 0)->count();
@@ -74,8 +75,7 @@ class Posts extends \Dot\Platform\Plugin
                 $start_of_day = date("Y-m-d H:i:s", $current_day);
                 $end_of_day = date("Y-m-d H:i:s", $end_current_day);
 
-                $posts_charts[date("Y-m-d", $current_day)] = Post::status("published")->format("post")
-                    ->where("created_at", '>', $start_of_day)
+                $posts_charts[date("Y-m-d", $current_day)] =  Tender::where("created_at", '>', $start_of_day)
                     ->where("created_at", '<', $end_of_day)
                     ->count();
             }

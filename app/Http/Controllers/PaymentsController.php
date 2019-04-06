@@ -13,6 +13,25 @@ class PaymentsController extends Controller
 //    public $params = 'testMode=EXTERNAL';
     public $params = '';
 
+    /**
+     * @var array
+     */
+    public $successfully = [
+        '000.000.000',
+        '000.000.100',
+        '000.300.000',
+        '000.300.100',
+        '000.300.101',
+        '000.300.102',
+        '000.310.100',
+        '000.100.110',
+        '000.100.111',
+        '000.100.112',
+        '000.310.101',
+        '000.310.110',
+        '000.600.000',
+    ];
+
     protected $ssl = false;
 
     //
@@ -46,18 +65,19 @@ class PaymentsController extends Controller
         $data = "authentication.userId=8ac9a4c9692f24680169923afbd75995" .
             "&authentication.password=k2gnqDYNJF" .
             "&authentication.entityId=8ac9a4c9692f24680169923bd601599b" .
-            "&amount=" . $request->get('price') .
+            "&amount=" . $request->get('price') . '.00' .
             "&currency=SAR" .
             "&paymentType=DB" .
-            "&merchantTransactionId=" . fauth()->id() .
+            "&merchantTransactionId=" . fauth()->id() . time() .
             "&customer.email=" . fauth()->user()->email .
-            "&customer.givenName =" . fauth()->user()->first_name .
-            "&customer.surname =" . fauth()->user()->last_name .
+            "&customer.givenName=" . fauth()->user()->first_name .
+            "&customer.surname=" . (empty(fauth()->user()->last_name) ? fauth()->user()->first_name : fauth()->user()->last_name) .
             "&billing.street1=" . 'none' .
             "&billing.city=" . 'reiad' .
             "&billing.state=" . 'maka' .
-            "&billing.country=" . 'Saudi' .
+            "&billing.country=" . 'SA' .
             $this->params;
+//        \Log::debug($data);
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -98,7 +118,9 @@ class PaymentsController extends Controller
         }
         curl_close($ch);
         $result = json_decode($responseData);
-        if ($result->result->code == '000.100.112' && !empty($result->amount)) {
+//        \Log::debug($responseData);
+        $code = $result->result->code;
+        if (collect($this->successfully)->contains($code) && !empty($result->amount)) {
             $user = fauth()->user();
 
             if ($user->in_company) {

@@ -132,37 +132,37 @@ class Tender extends Model
         return $this->hasMany(Transaction::class, 'object_id')->where('action', 'tenders.buy');
     }
 
-    /**
-     *
-     */
-    public function getCreatedAtAttribute()
-    {
-        return Carbon::parse($this->original['created_at'])->setTimezone('GMT+3');
-    }
-
-    /**
-     * @return Carbon
-     */
-    public function getPublishedAtAttribute()
-    {
-        return Carbon::parse($this->original['published_at'])->setTimezone('GMT+3');
-    }
-    /**
-     * @return Carbon
-     */
-    public function getLastGetOfferAtAttribute()
-    {
-        return Carbon::parse($this->original['last_get_offer_at'])->setTimezone('GMT+3');
-    }
-
-
-    /**
-     * @return Carbon
-     */
-    public function getFilesOpenedAtAttribute()
-    {
-        return Carbon::parse($this->original['files_opened_at'])->setTimezone('GMT+3');
-    }
+//    /**
+//     *
+//     */
+//    public function getCreatedAtAttribute()
+//    {
+//        return Carbon::parse($this->original['created_at'])->setTimezone('GMT+3');
+//    }
+//
+//    /**
+//     * @return Carbon
+//     */
+//    public function getPublishedAtAttribute()
+//    {
+//        return Carbon::parse($this->original['published_at'])->setTimezone('GMT+3');
+//    }
+//    /**
+//     * @return Carbon
+//     */
+//    public function getLastGetOfferAtAttribute()
+//    {
+//        return Carbon::parse($this->original['last_get_offer_at'])->setTimezone('GMT+3');
+//    }
+//
+//
+//    /**
+//     * @return Carbon
+//     */
+//    public function getFilesOpenedAtAttribute()
+//    {
+//        return Carbon::parse($this->original['files_opened_at'])->setTimezone('GMT+3');
+//    }
 
 
 }

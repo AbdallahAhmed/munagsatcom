@@ -256,7 +256,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td align="right" class="align-center" width="244">
-                                                                        <a href=""><img alt="logo" class="" height="50"
+                                                                        <a href="{{asset('/')}}"><img alt="logo" class="" height="50"
                                                                                         src="https://munagasatcom.com/ImagesEmail/logo.png"
                                                                                         style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
                                                                                         width="160"></a></td>

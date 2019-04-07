@@ -37,7 +37,7 @@
                                     <div class="form-group clearfix">
                                         <span class="icony"><i class="fa fa-envelope"></i></span>
                                         <input id="email" type="email" class="effect-9 form-control"
-                                               placeholder="{{trans('app.fields.email')}}..." name="email">
+                                               placeholder="{{trans('app.fields.email')}}..." name="email" required>
                                         <span class="focus-border"><i></i></span>
                                     </div>
                                 </div>

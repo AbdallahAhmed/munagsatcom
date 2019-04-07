@@ -178,7 +178,7 @@
                                             </td>
 
                                             <td>
-                                                <small>{{ $transaction->created_at->format('Y-m-d h:i a') }}</small>
+                                                <small>{{ $transaction->created_at->format('Y/m/d'}}</small>
                                             </td>
 
                                         </tr>

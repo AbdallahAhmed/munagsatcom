@@ -79,7 +79,7 @@
                                             <td>{{$transaction->action=='points.buy'?$transaction->points:0}}</td>
                                             <td>{{$transaction->action!='points.buy'?$transaction->points:0}}</td>
                                             <td>{{$transaction->after_points}}</td>
-                                            <td>{{$transaction->created_at->diffForHumans()}}</td>
+                                            <td>{{ $transaction->created_at->format('Y/m/d')}}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>

@@ -77,8 +77,8 @@ class ChanceController extends Controller
         }
         $this->data['chances'] = $query->paginate(5);
         $this->data['status'] = [0, 1];//[0,1,2,3,4,5];
-        return view('chances.index', $this->data);
-//        return view('centers.coming-soon');
+//        return view('chances.index', $this->data);
+        return view('centers.coming-soon');
     }
 
     /**
@@ -235,8 +235,8 @@ class ChanceController extends Controller
         $this->data["sectors"] = Sector::published()->get();
         $this->data["units"] = Unit::published()->get();
 
-//        return view('chances.create', $this->data);
-        return view('chances.coming-soon');
+        return view('chances.create', $this->data);
+//        return view('chances.coming-soon');
 
     }
 

@@ -100,7 +100,7 @@ return [
     'company_requests' => 'Invitations to join companies',
     'logo_error' => 'Logo should be of type jpg, jpeg, png',
     'check_email' => 'Please check your email address and enter the code sent',
-    'company_waiting' => 'Company verified successfully, please wait till the administrators check your company and follow your email',
+    'company_waiting' => 'Company verified successfully.',
     'unit_name' => 'unit name',
     'add_new_units' => 'Add more units',
     'add_other_units' => 'Add new units',

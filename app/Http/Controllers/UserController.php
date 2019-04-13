@@ -369,8 +369,10 @@ class UserController extends Controller
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator->errors());
             }
-            if ($user->code != $request->get('code'))
+            if ($user->code != $request->get('code')){
                 return redirect()->back()->withErrors(new MessageBag(['wrong_conde' => trans('app.wrong_code')]));
+
+            }
             $user->code = null;
             $user->password = $request->get('password');
             $user->save();

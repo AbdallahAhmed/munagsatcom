@@ -569,3 +569,9 @@ footer a:hover {
 .text-left{text-align: left;}
 
 @media (max-width:767px) {.text-left{text-align: center;}}
+@media (max-width: 480px) {
+    .card-details .card-date .item {
+        border-right: none;
+        width: 100%;
+    }
+}

@@ -82,7 +82,7 @@
 
                         </div>
                         <div class="map_container">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d71786.46836101105!2d46.7017797!3d24.6162998!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f05decb123a23%3A0x56c42d94306d67c1!2z2LTYsdmD2Kkg2YXZhtin2YLYtdin2KrZg9mF!5e1!3m2!1sen!2seg!4v1549028626732" width="900" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d71786.46836101105!2d46.7017797!3d24.6162998!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f05decb123a23%3A0x56c42d94306d67c1!2z2LTYsdmD2Kkg2YXZhtin2YLYtdin2KrZg9mF!5e1!3m2!1sen!2seg!4v1549028626732" width="100%" height="300px" frameborder="0" style="border:0" allowfullscreen></iframe>
                         </div>
                     </form>
                     <h1 style="display:none;" id="success">{{trans('app.success_message')}}</h1>

@@ -109,7 +109,7 @@ return [
     'coming_soon' => 'قريبا',
     'centers' => [
         'centers' => 'مراكز خدمية',
-        'center_name' => 'اسم المركز الخدمى',
+        'center_name' => 'اسم  المنشاه',
         'search_centers' => 'ابحث فى المراكز الخدمية',
         'add_center' => 'اضافة مركز خدمى',
         'search_query' => 'بحث فى مراكز الخدمة',
@@ -120,7 +120,8 @@ return [
         'not_found' => 'لا يوجد مراكز خدمة',
         'created_successfully' => 'تم إضافة المركز بنجاح',
         'user_added' => 'المراكز الخدمية التى تم اضافتها',
-        'logo' => 'شعار المركز'
+        'logo' => 'شعار المركز',
+        'add_logo'=>'أضافة شعار المنشاه'
     ],
     'tenders' => [
         'tenders' => 'مناقصات حكومية ',

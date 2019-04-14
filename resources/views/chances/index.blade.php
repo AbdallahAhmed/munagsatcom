@@ -66,7 +66,7 @@
                 <p class="col-md-8 not-found">{{trans('app.chances.not_found')}}</p>
             @else
                 <div class="col-md-8 content">
-                    <h2>{{trans('app.chances.chances_est')}}</h2>
+                    <h2>{{trans('app.investment_opportunities')}}</h2>
                     @foreach($chances as $chance)
 
                         <div class="card foras">

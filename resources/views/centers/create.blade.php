@@ -17,6 +17,11 @@
                                 @foreach ($errors->all() as $error)
                                     <li class="alert-danger">{{ $error }}</li>
                                 @endforeach
+                                    <li class="alert-info">
+                                        {{trans("services::points.service_center_add")}}
+                                        ({{option('service_center_add',0)}})
+                                        {{trans('app.point')}}
+                                    </li>
                             </ul>
                             <div class="form-group-lg row">
                                 <label class="col-xs-12 col-md-2"> {{trans('app.centers.center_name')}}<span
@@ -32,18 +37,6 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="form-group-lg row">
-                                 <label class="col-xs-12 col-md-2">{{trans('app.address')}} </label>
-                                 <div class="col-xs-12 col-md-10">
-                                     <div class="new-f-group">
-                                         <div class="form-group clearfix">
-                                         <textarea  name="address" class="effect-9 form-control" rows="5"
-                                                   placeholder=" {{trans('app.address')}}">{{@Request::old('address')}}</textarea>
-                                             <span class="focus-border"><i></i></span>
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>--}}
                             <input type="hidden" name="lat" value="{{ @Request::old("lat") }}">
                             <input type="hidden" name="lng" value="{{ @Request::old("lng") }}">
                             <input type="hidden" name="address" value="{{ @Request::old("address") }}">
@@ -145,11 +138,9 @@
                                 </div>
                             </div>
 
-
                         </div>
                         <div class="form-group-lg text-center">
-                            <button type="submit"
-                                    class="uperc padding-md fbutcenter">{{trans('app.centers.add_center')}} </button>
+                            <button type="submit" class="uperc padding-md fbutcenter">{{trans('app.centers.add_center')}}</button>
                         </div>
                     </form>
                 @else

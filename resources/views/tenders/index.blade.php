@@ -217,48 +217,35 @@
     <script>
         $(function () {
             $('[data-toggle="tooltip"]').tooltip({trigger: 'manual'}).tooltip('show');
-        });
-        // $( window ).scroll(function() {
-        // if($( window ).scrollTop() > 10){  // scroll down abit and get the action
-        $(".progress-bar").each(function () {
-            each_bar_width = $(this).attr('aria-valuenow');
-            $(this).width(each_bar_width + '%');
-        });
-        //  }
-        // });
-    </script>
-    <script>
+            $(".progress-bar").each(function () {
+                each_bar_width = $(this).attr('aria-valuenow');
+                $(this).width(each_bar_width + '%');
+            });
+            var date = new Date();
+            // date.setDate(date.getDate());
 
-        var date = new Date();
-        // date.setDate(date.getDate());
-
-        $('#dp3',).datepicker({
-            minDate: date,
-        });
-        $('#date',).datepicker({
-            minDate: date,
-        });
-    </script>
-    <script>
-        $(".range-example").asRange({
-            range: true,
-            limit: false,
-            //tip: {
+            $('#dp3',).datepicker({
+                minDate: date,
+            });
+            $('#date',).datepicker({
+                minDate: date,
+            });
+            $(".range-example").asRange({
+                range: true,
+                limit: false,
+                //tip: {
 //    active: 'onMove'
 //    },
-            tip: true,
-            min: 100,
-            value: true,
-            keyboard: true,
-            replaceFirst: true, // false, 'inherit', {'inherit': 'default'}
-            scale: true,
-            format(value) {
-                return value;
-            }
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
+                tip: true,
+                min: 100,
+                value: true,
+                keyboard: true,
+                replaceFirst: true, // false, 'inherit', {'inherit': 'default'}
+                scale: true,
+                format(value) {
+                    return value;
+                }
+            });
             $(".share").hideshare({
                 link: "",           // Link to URL defaults to document.URL
                 title: "",          // Title for social post defaults to document.title
@@ -271,6 +258,11 @@
                 position: "right", // Options: Top, Bottom, Left, Right
                 speed: 150           // Speed of transition
             });
+
+
+            $(function () {
+
+            })
         });
     </script>
 @endpush

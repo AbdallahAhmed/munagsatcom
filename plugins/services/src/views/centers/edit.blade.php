@@ -288,10 +288,10 @@
                 checkbox.iCheck('uncheck');
                 checkbox.change();
             });
-            var lat = "{{ @Request::old('lat', $center->lat) }}" || 30;
-            var lng = "{{ @Request::old('lng', $center->lat) }}" || 31;
-            var map = L.map('map').setView([lng, lat], 10);
-            var marker;
+            var lat = "{{$center->lat}}";
+            var lng = "{{$center->lng}}";
+            var map = L.map('map').setView(L.latLng(lat, lng), 13);
+            var marker = L.marker(L.latLng(lat, lng)).addTo(map);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
@@ -305,12 +305,7 @@
                 $("input[name='lng']").val(latlng.lng)
                 map.setView(latlng);
                 $.get('https://nominatim.openstreetmap.org/reverse?accept-language={{app()->getLocale()}}&format=jsonv2&lat=' + latlng.lat + '&lon=' + latlng.lng, function (data) {
-                    var address = '';
-                    if (data.address.road) {
-                        address = data.address.road + ', ';
-                    }
-                    address += data.address.city + ', ' + data.address.country;
-                    $("input[name='address']").val(address);
+                    $("input[name='address']").val(data.display_name);
                 });
             });
             map.on('click',
@@ -318,12 +313,7 @@
                     $("input[name='lat']").val(e.latlng.lat);
                     $("input[name='lng']").val(e.latlng.lng);
                     $.get('https://nominatim.openstreetmap.org/reverse?accept-language={{app()->getLocale()}}&format=jsonv2&lat=' + e.latlng.lat + '&lon=' + e.latlng.lng, function (data) {
-                        var address = '';
-                        if (data.address.road) {
-                            address = data.address.road + ', ';
-                        }
-                        address += data.address.city + ', ' + data.address.country;
-                        $("input[name='address']").val(address);
+                        $("input[name='address']").val(data.display_name);
                     });
                     if (marker) {
                         map.removeLayer(marker);

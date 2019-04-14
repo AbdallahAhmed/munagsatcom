@@ -202,8 +202,7 @@
             $("input[name='lng']").val(latlng.lng)
             map.setView(latlng);
             $.get('https://nominatim.openstreetmap.org/reverse?accept-language={{app()->getLocale()}}&format=jsonv2&lat=' + latlng.lat + '&lon=' + latlng.lng, function (data) {
-                var address = '';
-                $("input[name='address']").val(data.address.display_name);
+                $("input[name='address']").val(data.display_name);
             });
         });
         map.on('click',
@@ -211,7 +210,7 @@
                 $("input[name='lat']").val(e.latlng.lat);
                 $("input[name='lng']").val(e.latlng.lng);
                 $.get('https://nominatim.openstreetmap.org/reverse?accept-language={{app()->getLocale()}}&format=jsonv2&lat=' + e.latlng.lat + '&lon=' + e.latlng.lng, function (data) {
-                    $("input[name='address']").val(data.address.display_name);
+                    $("input[name='address']").val(data.display_name);
                 });
                 if (marker) {
                     map.removeLayer(marker);

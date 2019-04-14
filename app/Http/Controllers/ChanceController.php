@@ -77,8 +77,8 @@ class ChanceController extends Controller
         }
         $this->data['chances'] = $query->paginate(5);
         $this->data['status'] = [0, 1];//[0,1,2,3,4,5];
-//        return view('chances.index', $this->data);
-        return view('centers.coming-soon');
+        return view('chances.index', $this->data);
+//        return view('centers.coming-soon');
     }
 
     /**
@@ -133,7 +133,6 @@ class ChanceController extends Controller
         $errors = new MessageBag();
         $this->data['company'] = $company = Company::findOrFail($id);
         if ($request->method() == "POST") {
-
             $validator = Validator::make($request->all(), [
                 "name" => 'required',
                 'number' => 'required',

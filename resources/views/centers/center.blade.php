@@ -71,7 +71,9 @@
                                 @foreach($center->services as $service)
                                     <tr>
                                         <td style="    min-width: 100px;"><h3>{{$service->name}}</h3></td>
-                                        <td><p class="break">{{strlen(trim($service->details))!=0?$service->details:'---'}}</p></td>
+                                        <td>
+                                            <p class="break">{{strlen(trim($service->details))!=0?$service->details:'---'}}</p>
+                                        </td>
                                         <td>{{$service->price_to." ".trans('app.reyal')." ".trans('app.saudi')}}</td>
                                     </tr>
                                 @endforeach
@@ -163,7 +165,7 @@
     </section>
     @push('scripts')
         <style>
-            .break{
+            .break {
 
                 word-break: break-all;
 
@@ -213,10 +215,10 @@
                     })
                 })
             })
-            var lat = "30";
-            var lng = "31";
-            var map = L.map('map').setView([lng, lat], 10);
-            var marker;
+            var lat = "{{$center->lat}}";
+            var lng = "{{$center->lng}}";
+            var map = L.map('map').setView(L.latLng(lat, lng), 10);
+            var marker = L.marker(L.latLng(lat, lng)).addTo(map);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
@@ -238,23 +240,6 @@
                     $("input[name='location']").val(address);
                 });
             });
-            map.on('click',
-                function (e) {
-                    $("input[name='lat']").val(e.latlng.lat);
-                    $("input[name='lng']").val(e.latlng.lng);
-                    $.get('https://nominatim.openstreetmap.org/reverse?accept-language={{app()->getLocale()}}&format=jsonv2&lat=' + e.latlng.lat + '&lon=' + e.latlng.lng, function (data) {
-                        var address = '';
-                        if (data.address.road) {
-                            address = data.address.road + ', ';
-                        }
-                        address += data.address.city + ', ' + data.address.country;
-                        $("input[name='location']").val(address);
-                    });
-                    if (marker) {
-                        map.removeLayer(marker);
-                    }
-                    marker = L.marker(e.latlng).addTo(map);
-                });
         </script>
     @endpush
 @endsection

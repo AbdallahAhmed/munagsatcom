@@ -65,8 +65,8 @@ class CenterController extends Controller
         $this->data['services'] = Service::published()->get();
         $this->data['sectors'] = Sector::published()->get();
 
-//        return view('centers.index', $this->data);
-        return view('centers.coming-soon');
+        return view('centers.index', $this->data);
+//        return view('centers.coming-soon');
     }
 
 
@@ -86,9 +86,10 @@ class CenterController extends Controller
                 'address' => 'required',
                 'logo' => 'mimes:jpg,png,jpeg',
             ]);
-            if ($validator->fails())
-                return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
 
+            if ($validator->fails()){
+                return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+            }
             $center = new Center();
             $center->name = $request->get("name");
             $center->sector_id = $request->get("sector_id");
@@ -103,11 +104,12 @@ class CenterController extends Controller
             $center->status = $request->get('status', 0);
             $center->approved = 1;
             $center->reason = $request->get('reason');
-            $center->image_id = (new Media())->saveFile($request->file('logo'));
-
+            if($request->hasFile('logo')){
+                $center->image_id = (new Media())->saveFile($request->file('logo'));
+            }
 
             $center->save();
-            $center->services()->sync(array_filter($request->get("services", [])));
+            $center->services()->sync(($request->get("services", [])));
 
             return redirect()->route('centers.create', ['id' => $company->id])->with('status', trans('app.centers.created_successfully'));
         }

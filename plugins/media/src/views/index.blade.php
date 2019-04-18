@@ -1,7 +1,14 @@
 @if (count($files))
     @foreach ($files as $row)
         <div class="dz-preview dz-image-preview" media-id="{{ $row->id }}">
+            @if(!config('media.s3.status'))
+                @php
+                    $isExist=file_exists(uploads_path($row->path)) || !empty($row->provider);
+                @endphp
+                <span class="badge top-left {{$isExist?'badge-success':'badge-danger'}}" style="{{$isExist?'background: green;':''}}"><i
+                        class="fa  {{$isExist?'fa-check-circle ':'fa-times-circle-o'}}"></i></span>
 
+            @endif
             <input type="hidden" name="media_url" value="{{ $row->url }}"/>
             <input type="hidden" name="media_thumbnail" value="{{ $row->thumbnail }}"/>
             <input type="hidden" name="media_path" value="{{ $row->path }}"/>
@@ -38,3 +45,9 @@
         <i class="fa fa-file"></i>
     </div>
 @endif
+<style>
+    .top-left{
+        position: absolute;
+        left: 1px;
+    }
+</style>

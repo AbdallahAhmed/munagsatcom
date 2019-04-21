@@ -134,54 +134,55 @@
                                     </thead>
                                     <tbody>
                                     @foreach ($transactions as $transaction)
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" class="i-checks" name="id[]"
-                                                       value="{{ $transaction->id }}"/>
-                                            </td>
+                                        @if($transaction->user)
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" class="i-checks" name="id[]"
+                                                           value="{{ $transaction->id }}"/>
+                                                </td>
 
-                                            <td>
-                                                <a data-toggle="tooltip" data-placement="bottom"
-                                                   class="text-navy" href="javascript:void(0)">
-                                                    <strong>{{$transaction->id }}</strong>
-                                                </a>
-                                            </td>
+                                                <td>
+                                                    <a data-toggle="tooltip" data-placement="bottom"
+                                                       class="text-navy" href="javascript:void(0)">
+                                                        <strong>{{$transaction->id }}</strong>
+                                                    </a>
+                                                </td>
 
-                                            <td>
-                                                {{$transaction->type}}
-                                            </td>
-                                            <td>
-                                                <a href="?user_id={{ @$transaction->user->id }}" class="text-navy">
-                                                    <small> {{ @$transaction->user->first_name.' '.@$transaction->user->last_name }}</small>
-                                                </a>
-                                                @if($transaction->user&&$transaction->user->in_company&&count($transaction->user->company)!=0)
-                                                    ( <a
-                                                        href="?company_id={{$transaction->user->company[0]->id}}">{{$transaction->user->company[0]->name}}</a>
-                                                    )
-                                                @endif
+                                                <td>
+                                                    {{$transaction->type}}
+                                                </td>
+                                                <td>
+                                                    <a href="?user_id={{ @$transaction->user->id }}" class="text-navy">
+                                                        <small> {{ @$transaction->user->first_name.' '.@$transaction->user->last_name }}</small>
+                                                    </a>
+                                                    @if($transaction->user&&$transaction->user->in_company&&count($transaction->user->company)!=0)
+                                                        ( <a
+                                                            href="?company_id={{$transaction->user->company[0]->id}}">{{$transaction->user->company[0]->name}}</a>
+                                                        )
+                                                    @endif
 
-                                            </td>
-                                            <td>
-                                                {{$transaction->before_points}}
-                                            </td>
-                                            <td>
-                                                @if($transaction->before_points < $transaction->after_points)
-                                                    <i class="fa fa-arrow-up text-success"></i>
-                                                @else
-                                                    <i class="fa fa-arrow-down text-danger"></i>
+                                                </td>
+                                                <td>
+                                                    {{$transaction->before_points}}
+                                                </td>
+                                                <td>
+                                                    @if($transaction->before_points < $transaction->after_points)
+                                                        <i class="fa fa-arrow-up text-success"></i>
+                                                    @else
+                                                        <i class="fa fa-arrow-down text-danger"></i>
 
-                                                @endif
-                                                {{$transaction->points}}
-                                            </td>
-                                            <td>
-                                                {{$transaction->after_points}}
-                                            </td>
+                                                    @endif
+                                                    {{$transaction->points}}
+                                                </td>
+                                                <td>
+                                                    {{$transaction->after_points}}
+                                                </td>
 
-                                            <td>
-                                                <small>{{ $transaction->created_at->format('Y-m-d h:i a'}}</small>
-                                            </td>
-
-                                        </tr>
+                                                <td>
+                                                    <small>{{ $transaction->created_at->format('Y-m-d h:i a')}}</small>
+                                                </td>
+                                            </tr>
+                                        @endif
                                     @endforeach
                                     </tbody>
                                 </table>

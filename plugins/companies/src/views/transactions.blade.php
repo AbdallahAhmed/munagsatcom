@@ -155,7 +155,7 @@
                                                     <a href="?user_id={{ @$transaction->user->id }}" class="text-navy">
                                                         <small> {{ @$transaction->user->first_name.' '.@$transaction->user->last_name }}</small>
                                                     </a>
-                                                    @if($transaction->user&&$transaction->user->in_company&&count(@$transaction->user->company)!=0)
+                                                    @if($transaction->user&&$transaction->user->in_company&&count($transaction->user->company)!=0)
                                                         ( <a
                                                             href="?company_id={{$transaction->user->company[0]->id}}">{{$transaction->user->company[0]->name}}</a>
                                                         )

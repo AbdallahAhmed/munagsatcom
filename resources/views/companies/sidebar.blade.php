@@ -37,11 +37,12 @@
                     ])->get();
                 }
                 ?>
-                @if($role && $role[0]->role == 1)
+                @if($role && $role[0]->role == 1&&fauth()->user()->can_buy)
                     <li @if (\Route::current()->getName() == 'chances.create') class="active " @endif>
                         <a href="{{route('chances.create',['id'=>$company_id])}}">
                             {{trans('app.add_chance')}}
                         </a></li>
+
                     <li @if (\Route::current()->getName() == 'centers.create') class="active" @endif><a
                                 href="{{route('centers.create',['id'=>$company_id])}}">
                             {{trans('app.add_center')}}</a></li>

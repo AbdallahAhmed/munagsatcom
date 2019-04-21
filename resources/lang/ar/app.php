@@ -288,7 +288,8 @@ return [
     'types' => [
         'tenders_buy' => 'شراء مناقضة',
         'points_buy'=>'شراء نقاط',
-        'add_chance'=>'طرح فرصة'
+        'add_chance'=>'طرح فرصة',
+        'add_center'=>'اضافة مركز خدمى'
     ],
     'add_points'=>'النقاط المضاقة ',
     'not_register' => 'لم يتم تسجيل العملية ',

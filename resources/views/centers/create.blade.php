@@ -84,7 +84,7 @@
                                 </div>
                             </div>
                             <div class="form-group-lg row">
-                                <label class="col-xs-12 col-md-2">{{trans('app.add_logo')}}</label>
+                                <label class="col-xs-12 col-md-2">{{trans('app.centers.add_logo')}}</label>
                                 <div class="col-xs-12 col-md-4">
                                     <div class="file-upload" data-input-name="logo">
                                         <div class="file-input"><input name="logo" type="file" accept="image/*"></div>

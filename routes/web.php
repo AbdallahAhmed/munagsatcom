@@ -22,9 +22,14 @@
 //});
 
 
+use App\Models\Notifications;
+
 Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], function () {
 
+Route::get('/sss',function (){
+   $not = Notifications::find(1);
 
+});
     // tenders
     Route::get('/', 'TenderController@index')->name('index');
     Route::get('tenders/{slug}', 'TenderController@details')->name('tenders.details');
@@ -41,7 +46,8 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
     Route::any('verify/resend', 'UserController@confirmResend')->name('user.confirm-resend');
     Route::group(['middleware' => ['fauth']], function () {
 
-
+        //Notifications
+        Route::post('notifications/live', 'NotificationController@getUnreadNotifications')->name('notifications.check');
         Route::post('tenders/{id}/buycb', 'TenderController@buyCB')->name('tenders.buy');
         Route::get('tenders/{id}/download', 'TenderController@download')->name('tenders.download');
         Route::get('user/update', 'UserController@show')->name('user.show');

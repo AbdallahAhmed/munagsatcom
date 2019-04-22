@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notifications;
 use App\Models\Tender;
 use App\Models\Transaction;
 use Carbon\Carbon;
@@ -149,6 +150,25 @@ class TenderController extends Controller
             'action' => 'tenders.buy',
             'company_id' => fauth()->user()->in_company ? $user->id : 0
         ]);
+
+        // notification for user
+        $notif_data = array();
+        $notif_data['tender_id'] = $tender->id;
+        $notification = new Notifications();
+        $notification->user_id = $user->id;
+        $notification->key = "tender.bought";
+        $notification->data = json_encode($notif_data);
+        $notification->save();
+
+        //notification for owner
+        $notif_data = array();
+        $notif_data['buyer_id'] = $user->id;
+        $notif_data['tender_id'] = $tender->id;
+        $notification = new Notifications();
+        $notification->user_id = $tender->user_id;
+        $notification->key = "to.company.tender.bought";
+        $notification->data = json_encode($notif_data);
+        $notification->save();
 
         $tender->buyers()->attach(fauth()->id(), ['points' => $tender->points]);
 

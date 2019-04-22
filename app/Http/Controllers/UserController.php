@@ -7,6 +7,7 @@ use App\Mail\VerificationMail;
 use App\Mail\WelcomeMail;
 use App\Models\Center;
 use App\Models\Companies_empolyees;
+use App\Models\Notifications;
 use App\Models\Transaction;
 use App\User;
 use Carbon\Carbon;
@@ -91,6 +92,13 @@ class UserController extends Controller
 //                $user->photo_id = $media->saveFile($request->file('logo'));
 //            }
             $user->save();
+
+            // notification
+            $notification = new Notifications();
+            $notification->user_id = $user->id;
+            $notification->key = "user.register";
+            $notification->save();
+
             if ($request->get('user_type') == 2) {
                 $company = new Company();
                 $company->name = $request->get('company_name');
@@ -376,6 +384,12 @@ class UserController extends Controller
             $user->code = null;
             $user->password = $request->get('password');
             $user->save();
+
+            // notification
+            $notification = new Notifications();
+            $notification->user_id = $user->id;
+            $notification->key = "password.reset";
+            $notification->save();
 
             $isAuthed = fauth()->attempt([
                 'email' => $request->get('email'),

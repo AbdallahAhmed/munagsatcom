@@ -99,7 +99,6 @@ if (!function_exists('pay')) {
         $user->spent_points = $user->spent_points + $points;
         $user->save();
 
-
         return 1;
     }
 

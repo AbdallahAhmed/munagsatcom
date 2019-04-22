@@ -17,11 +17,11 @@
                                 @foreach ($errors->all() as $error)
                                     <li class="alert-danger">{{ $error }}</li>
                                 @endforeach
-                                    <li class="alert-info">
-                                        {{trans("services::points.service_center_add")}}
-                                        ({{option('service_center_add',0)}})
-                                        {{trans('app.point')}}
-                                    </li>
+                                <li class="alert-info">
+                                    {{trans("services::points.service_center_add")}}
+                                    ({{option('service_center_add',0)}})
+                                    {{trans('app.point')}}
+                                </li>
                             </ul>
                             <div class="form-group-lg row">
                                 <label class="col-xs-12 col-md-2"> {{trans('app.centers.center_name')}}<span
@@ -84,7 +84,7 @@
                                 </div>
                             </div>
                             <div class="form-group-lg row">
-                                <label class="col-xs-12 col-md-2">{{trans('app.add_logo')}}</label>
+                                <label class="col-xs-12 col-md-2">{{trans('app.centers.add_logo')}}</label>
                                 <div class="col-xs-12 col-md-4">
                                     <div class="file-upload" data-input-name="logo">
                                         <div class="file-input"><input name="logo" type="file" accept="image/*"></div>
@@ -137,10 +137,63 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+                        <style>
+                            .modal-header .close {
+                                margin-top: -24px;
+                            }
+                        </style>
+                        <div class="modal fade" id="add_center" tabindex="-1" role="dialog" aria-labelledby="add_center"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title"
+                                            id="exampleModalCenterTitle"> {{trans('app.centers.add_center')}}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    @php
+                                        $user=fauth()->user()->in_company?fauth()->user()->company[0]:fauth()->user();
+                                        $points=option('service_center_add',0);
+                                    @endphp
+                                    <div class="modal-body">
+                                        <p> {{trans('app.cb_price')}} : {{$points }} {{trans('app.point')}}</p>
+                                        <hr>
+                                        <p> {{ trans('app.current_points') }}
+                                            : {{ $user->points }} {{trans('app.point')}}</p>
+                                        <hr>
+                                        <p class="{{$user->points -$points<=0?'text-danger':''}}"> {{ trans('app.points_after_buy') }}
+                                            : {{ $user->points - $points }} {{trans('app.point')}}</p>
+                                        <hr>
+                                        @if($user->points -$points>=0)
+                                            <p class="fieldset" style="margin: 0;">
+                                                <input type="checkbox" name="terms" id="accept-terms">
+                                                <label for="accept-terms">{{trans('app.accept_with')}} <a
+                                                            target="_blank"
+                                                            href="{{route('page.show', ['slug' => 'الشروط والأحكام'])}}"
+                                                            class="text-primary">{{trans('app.terms')}}</a></label>
+                                            </p>
+                                        @endif
+                                        <p class="text-danger">{{$user->points - $points<0?trans('app.please_recharge'):''}}</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit"
+                                                class="btn btn-primary"
+                                                id="{{$user->points - $points<0?'':'can-buy'}}"
+                                                disabled>{{trans('app.tenders.buy')}}</button>
+                                        <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">{{trans('app.close')}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group-lg text-center">
-                            <button type="submit" class="uperc padding-md fbutcenter">{{trans('app.centers.add_center')}}</button>
+                            <a type="button" data-toggle="modal"
+                               data-target="#add_center"
+                               class="uperc padding-md fbutcenter">{{trans('app.centers.add_center')}}</a>
                         </div>
                     </form>
                 @else
@@ -163,10 +216,19 @@
             width: 100%;
         }
     </style>
+
     <script>
         $(function () {
             $('.select2').select2({
                 placeholder: "{{trans('app.services.choose_services')}}",
+            });
+            $('#accept-terms').change(function (e) {
+                var $base = $('#can-buy');
+                if ($base.length && e.target.checked) {
+                    $base.removeAttr('disabled')
+                } else {
+                    $base.attr('disabled', true)
+                }
             });
         });</script>
     <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
@@ -179,7 +241,7 @@
         var lng = "{{ @Request::old('lng',31)   }}";
         var map = L.map('map').setView(L.latLng(lat, lng), 13);
 
-        var marker=L.marker(L.latLng(lat, lng)).addTo(map);
+        var marker = L.marker(L.latLng(lat, lng)).addTo(map);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);

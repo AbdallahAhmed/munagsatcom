@@ -78,6 +78,13 @@ class CenterController extends Controller
      */
     public function store(Request $request, $id)
     {
+        if (!fauth()->user()->can_buy) {
+            return abort(403);
+        }
+
+        if (mypoints() < option('service_center_add', 0)) {
+            return 'Can\'nt add this center';
+        }
         $this->data['company'] = $company = Company::findOrFail($id);
         if ($request->method() == "POST") {
             $validator = Validator::make($request->all(), [
@@ -87,7 +94,7 @@ class CenterController extends Controller
                 'logo' => 'mimes:jpg,png,jpeg',
             ]);
 
-            if ($validator->fails()){
+            if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
             }
             $center = new Center();
@@ -104,12 +111,14 @@ class CenterController extends Controller
             $center->status = $request->get('status', 0);
             $center->approved = 1;
             $center->reason = $request->get('reason');
-            if($request->hasFile('logo')){
+            if ($request->hasFile('logo')) {
                 $center->image_id = (new Media())->saveFile($request->file('logo'));
             }
 
             $center->save();
             $center->services()->sync(($request->get("services", [])));
+
+            pay(option('service_center_add', 0), 'center.add', $center->id);
 
             return redirect()->route('centers.create', ['id' => $company->id])->with('status', trans('app.centers.created_successfully'));
         }

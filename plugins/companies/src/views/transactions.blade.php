@@ -178,11 +178,11 @@
                                                     {{$transaction->after_points}}
                                                 </td>
 
-                                                <td>
-                                                    <small>{{ $transaction->created_at->format('Y-m-d h:i a')}}</small>
-                                                </td>
-                                            </tr>
-                                        @endif
+                                            <td>
+                                                <small>{{ $transaction->created_at->format('Y-m-d h:i a')}}</small>
+                                            </td>
+
+                                        </tr>@endif
                                     @endforeach
                                     </tbody>
                                 </table>

@@ -38,6 +38,8 @@ class Transaction extends Model
                 return trans('app.types.points_buy');
             case 'add.chance':
                 return trans('app.types.add_chance');
+            case 'center.add':
+                return trans('app.types.add_center');
             default:
                 return trans('app.not_register');
         }

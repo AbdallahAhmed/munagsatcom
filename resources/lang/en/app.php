@@ -49,7 +49,7 @@ return [
     'add_delegate' => 'Add delegate',
     'messages' => 'Messages',
     'user_profile' => 'User details',
-    'add_points'=>'Add points',
+    'add_points' => 'Add points',
     '$' => 'SR',
     '_search' => 'Search',
     'register_now' => 'Register now',
@@ -286,8 +286,9 @@ return [
     'types' => [
         'tenders_buy' => 'Tender Buy',
         'not_register' => ' Unknown',
-        'points_buy'=>'Buy Points',
-        'add_chance'=>'Add chance'
+        'points_buy' => 'Buy Points',
+        'add_chance' => 'Add chance',
+        'add_center' => 'Add center'
     ],
     'account_activated' => 'Account activated',
     'free' => 'Free',
@@ -307,17 +308,17 @@ return [
     'your_account_deactivate' => 'Your account deactivated by company ',
     'name_on_card' => 'Name on Card',
     'card_number' => 'Card number',
-    'expiration'=>'Expiration',
-    'pay'=>'Pay',
-    'the_price' => 'Price'.'<small>SAR</small>',
+    'expiration' => 'Expiration',
+    'pay' => 'Pay',
+    'the_price' => 'Price' . '<small>SAR</small>',
     'point_per_sar' => ' points for every ',
-    'card'=>'Card',
-    'you_cannot_add_chance'=>'You can\'t add chance , permission denied',
-    'bankrupt'=>'You have\'nt points enough ',
-    'recharge'=>'Recharge your points',
-    'about_company'=>'About Company',
-    'company_personal'=>'User/Company',
-    'offers'=>'Offers',
-    'faq'=>'F&Q'
+    'card' => 'Card',
+    'you_cannot_add_chance' => 'You can\'t add chance , permission denied',
+    'bankrupt' => 'You have\'nt points enough ',
+    'recharge' => 'Recharge your points',
+    'about_company' => 'About Company',
+    'company_personal' => 'User/Company',
+    'offers' => 'Offers',
+    'faq' => 'F&Q'
 
 ];

@@ -33,6 +33,7 @@ return [
     'approve' => 'approve',
     'reject' => 'reject',
     'required' => 'required',
+    'rate' => 'rate',
 
     "yes" => "yes",
     "no" => "no",
@@ -47,7 +48,9 @@ return [
         'address' => 'Address',
         'reason' => 'Reason',
         'created_at' => 'Created at',
-        'sector_id' => 'Sector'
+        'sector_id' => 'Sector',
+        'rate' => 'rate',
+
     ],
 
     "events" => [

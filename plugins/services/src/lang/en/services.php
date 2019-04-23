@@ -35,6 +35,7 @@ return [
     'required' => 'required',
     "yes" => "yes",
     "no" => "no",
+    'rate' => 'rate',
 
     'attributes' => [
         'name' => 'Service name',

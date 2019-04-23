@@ -33,6 +33,8 @@ return [
     "close" => "إلغاء",
     'add_category' => "أضف إلي قسم",
     'add_tag' => 'أضف وسوم',
+    'rate' => 'التقيم',
+
 
     "not_categorized" => "غير محدد",
 

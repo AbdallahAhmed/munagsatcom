@@ -87,6 +87,13 @@
                                        class="form-control" id="input-name"
                                        placeholder="{{ trans("services::centers.attributes.email") }}">
                             </div>
+                            <div class="form-group">
+                                <label for="input-rate">{{ trans("services::centers.attributes.rate") }}</label>
+                                <input name="rate" type="number"
+                                       value="{{ @Request::old("rate", $center->rate) }}"
+                                       class="form-control" id="input-name"
+                                       placeholder="{{ trans("services::centers.attributes.rate") }}">
+                            </div>
                             <input type="hidden" name="lat" value="{{ @Request::old("lat", $center->lat) }}">
                             <input type="hidden" name="lng" value="{{ @Request::old("lng", $center->lng) }}">
                             <input type="hidden" name="address"

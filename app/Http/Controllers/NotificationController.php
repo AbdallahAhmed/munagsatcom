@@ -27,7 +27,7 @@ class NotificationController extends Controller
 
         $notification = Notifications::where([
             ['user_id', fauth()->user()->id],
-            ['read', 0],
+            ['isRead', 0],
             ['created_at', '>', \Carbon\Carbon::now()->subSeconds(40)->toDateTimeString()]
         ])->first();
         if ($notification) {

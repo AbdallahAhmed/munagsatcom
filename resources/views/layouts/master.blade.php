@@ -96,27 +96,7 @@
 <script src="{{asset('/assets')}}/js/function.js"></script>
 <script src="{{asset('/assets')}}/js/UnoDropZone.js"></script>
 <script src="{{asset('/')}}js/popup.js"></script>
-<script>
-    setInterval(function () {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            type: "post",
-            url: "{{route('notifications.check')}}",
-            success: function (data) {
-                if (data) {
-                  console.log(data)
-                }
-            },
-            error: function () {
-                alert("Internal Server Error")
-            }
-        })
-    }, 5000)
-</script>
+
 @if(!is_mobile())
     <script>
         $('.open-image').magnificPopup({type: 'image'});

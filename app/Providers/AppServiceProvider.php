@@ -17,13 +17,6 @@ class AppServiceProvider extends ServiceProvider
     {
         require_once app_path('helper.php');
         Schema::defaultStringLength(250);
-
-        if (fauth()->check()) {
-            view()->composer('layouts.partials.header', function ($view) {
-                ($notifications = Notifications::where('user_id', fauth()->id)->get());
-                $view->with('notifications', $notifications);
-            });
-        }
     }
 
     /**

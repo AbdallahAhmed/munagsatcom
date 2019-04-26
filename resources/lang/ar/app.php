@@ -107,6 +107,7 @@ return [
     'other_units' => 'وحدات قياس اخرى',
     'available_points' => 'النقاط المتاحة',
     'coming_soon' => 'قريبا',
+    'no_notifications' => 'لا يوجد تنبيهات',
     'centers' => [
         'centers' => 'مراكز خدمية',
         'center_name' => 'اسم  المنشاه',

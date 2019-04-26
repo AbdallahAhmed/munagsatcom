@@ -48,6 +48,7 @@ Route::get('/sss',function (){
 
         //Notifications
         Route::post('notifications/live', 'NotificationController@getUnreadNotifications')->name('notifications.check');
+        Route::get('/user/notifications', 'NotificationController@getUserNotifications')->name('user.notifications');
         Route::post('tenders/{id}/buycb', 'TenderController@buyCB')->name('tenders.buy');
         Route::get('tenders/{id}/download', 'TenderController@download')->name('tenders.download');
         Route::get('user/update', 'UserController@show')->name('user.show');

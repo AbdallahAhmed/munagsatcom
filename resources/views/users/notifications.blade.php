@@ -9,10 +9,9 @@
             <script>
 
             </script>
-            <div class='col-md-4' style="background: #FFF;padding: 18px;direction: ltr;">
+            <div class='col-md-4' style="background: #FFF;padding: 18px;direction: ltr; text-align: center">
                 @if(count($notifications))
                     @foreach($notifications as $notification)
-
                         @switch($notification->key)
                             @case('user.register')
                             <p>{{$notification->body['message']}}</p>

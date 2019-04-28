@@ -575,3 +575,8 @@ footer a:hover {
         width: 100%;
     }
 }
+
+.dropdown-toggle .notify{
+    position: absolute;
+    top: 15px;
+}

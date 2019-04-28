@@ -16,6 +16,7 @@ class NotificationController extends Controller
         $notifications = Notifications::where('user_id',fauth()->user()->id)
             ->limit($limit)
             ->offset($offset)
+            ->orderBy('updated_at','DESC')
             ->paginate(10);
         foreach ($notifications as $notification){
             $notification->isRead = 1;

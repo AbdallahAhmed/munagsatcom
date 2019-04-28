@@ -44,11 +44,12 @@
                                         <li class="clearfix">
                                             <div class="one_xsmall title">{{trans('app.centers.rate')}}</div>
                                             <div class="one_xlarg">
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
+                                                @for($i = $center->rate; $i > 0; $i--)
+                                                    <span class="fa fa-star checked"></span>
+                                                @endfor
+                                                @for($i = (5 - $center->rate); $i > 0; $i--)
+                                                    <span class="fa fa-star"></span>
+                                                @endfor
                                             </div>
                                         </li>
                                     </ul>

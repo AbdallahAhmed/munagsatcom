@@ -39,10 +39,42 @@
                         </li>
                     @endif
                 @else
+                    <?php
+                    $notifications = App\Models\Notifications::where(
+                        [
+                            ['user_id', fauth()->id()],
+                            ['isRead', 0]
+                        ])->get();
+                    ?>
+                    <script>
+                        notif_count = "{{count($notifications)}}"
+                        setInterval(function () {
+                            $.ajaxSetup({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
+                            });
+                            $.ajax({
+                                type: "post",
+                                url: "{{route('notifications.check')}}",
+                                success: function (data) {
+                                    if (data.notifications) {
+                                        notif_count++;
+                                        $('.notify').html(notif_count);
+                                    }
+                                },
+                                error: function () {
+                                    alert("Internal Server Error")
+                                }
+                            })
+                        }, 5000)
+                    </script>
+
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">
                             <img src="{{fauth()->user()->photo ? thumbnail(fauth()->user()->photo->path, 'avatar') : asset('assets/images/avatar.jpg')}}" alt="{{fauth()->user()->first_name. ' '.fauth()->user()->last_name}}">
+                        <i class="notify">{{count($notifications) > 0 ? count($notifications) : ''}}</i>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a>{{fauth()->user()->first_name. ' '.fauth()->user()->last_name}}</a></li>
@@ -67,7 +99,7 @@
                             <li><a href="{{route('user.points')}}">{{trans('app.points')}}</a></li>
                             <li role="separator" class="divider"></li>
 
-                            <li><a href="#">{{trans('app.notifications')}}</a></li>
+                            <li><a href="{{route('user.notifications')}}">{{trans('app.notifications')}}<i class="notify">{{count($notifications) > 0 ? count($notifications) : ''}}</i></a></li>
                             <li role="separator" class="divider"></li>
 
                             <li><a href="{{route('user.show')}}">{{trans('app.setting')}}</a></li>

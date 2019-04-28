@@ -36,6 +36,7 @@ return [
     'approve' => 'الموافقة',
     'reject' => 'رفض',
     'required' => 'مطلوب',
+    'rate' => 'التقيم',
 
 
     "not_categorized" => "غير محدد",
@@ -58,7 +59,9 @@ return [
         'address' => 'العنوان',
         'reason' => 'سبب الرفض',
         'created_at' => 'تاريخ الإضافة',
-        'sector_id' => 'القطاع'
+        'sector_id' => 'القطاع',
+        'rate' => 'التقيم',
+
     ],
 
     "events" => [

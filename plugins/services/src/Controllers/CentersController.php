@@ -115,6 +115,10 @@ class CentersController extends Controller
             $center->approved = Request::get('approved');
             $center->reason = Request::get('reason');
 
+            $rate = Request::get('rate') ? Request::get('rate') : 5;
+            $rate = $rate > 5 ? 5 : $rate;
+            $center->rate = $rate < 0 ? 0 : $rate ;
+
             if ($center->approved == 0 && $center->reason == '') {
                 $this->errors->add('reason_reject', trans("services::centers.attributes.reason") . " " . trans("chances::chances.required") . ".");
             }
@@ -167,6 +171,9 @@ class CentersController extends Controller
             $center->status = Request::get('status', 0);
             $center->approved = Request::get('approved');
             $center->reason = Request::get('reason');
+            $rate = Request::get('rate') ? Request::get('rate') : 5;
+            $rate = $rate > 5 ? 5 : $rate;
+            $center->rate = $rate < 0 ? 0 : $rate ;
 
             if ($center->approved == 0 && $center->reason == '') {
                 $this->errors->add('reason_reject', trans("services::centers.attributes.reason") . " " . trans("chances::chances.required") . ".");

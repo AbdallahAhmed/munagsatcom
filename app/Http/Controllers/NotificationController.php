@@ -13,13 +13,19 @@ class NotificationController extends Controller
 
         $limit = $request->get('limit', 15);
         $offset = $request->get('offset', 0);
-        $notifications = Notifications::where('user_id', $request->get('user_id'))
+        $notifications = Notifications::where('user_id',fauth()->user()->id)
             ->limit($limit)
             ->offset($offset)
-            ->get();
+            ->paginate(10);
+        foreach ($notifications as $notification){
+            $notification->isRead = 1;
+            $notification->save();
+        }
         if ($request->ajax()) {
             return response()->json(['notifications' => $notifications, 'count' => count($notifications)]);
         }
+
+        return view('users.notifications', ['notifications'=>$notifications]);
     }
 
     public function getUnreadNotifications(Request $request)
@@ -27,13 +33,9 @@ class NotificationController extends Controller
 
         $notification = Notifications::where([
             ['user_id', fauth()->user()->id],
-            ['read', 0],
+            ['isRead', 0],
             ['created_at', '>', \Carbon\Carbon::now()->subSeconds(40)->toDateTimeString()]
         ])->first();
-        if ($notification) {
-            $notification->isRead = '1';
-            $notification->save();
-        }
         if ($request->ajax()) {
             return response()->json(['notifications' => $notification]);
         }

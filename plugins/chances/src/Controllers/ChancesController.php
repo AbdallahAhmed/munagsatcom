@@ -72,7 +72,7 @@ class ChancesController extends Controller
         return View::make("chances::show", $this->data);
     }
 
-    /*
+    /**
      * Delete chance by id
      * @return mixed
      */
@@ -139,13 +139,14 @@ class ChancesController extends Controller
         }
         $chance = Chance::findOrFail($id);
         if (Request::isMethod("post")) {
+            $oldStatus = $chance->approved;
             $chance->name = Request::get("name");
             $chance->number = Request::get("number");
             $chance->closing_date = Request::get("closing_date") ? Carbon::createFromFormat('Y-m-d', Request::get("closing_date")) : null;
             $chance->file_name = Request::get("file_name", "");
             $chance->file_description = Request::get("file_description", "");
             $chance->status = Request::get("status", 3);
-            $chance->approved = Request::get('approved', 1);
+            $chance->approved = $newStatus = Request::get('approved', $chance->approved);
             $chance->reason = Request::get("reason", "");
             $chance->sector_id = Request::get("sector_id");
             $chance->value = Request::get("value", "");
@@ -191,6 +192,13 @@ class ChancesController extends Controller
                     'quantity' => $units_quantity[$key],
                     'name' => $units_name[$key]
                 ]);
+            }
+            if ($newStatus != $oldStatus) {
+                if ($newStatus == 1) {
+                    pay(option('rules_add_chances', 0), 'chances.add.approved', $chance->id);
+                } else {
+                    refund(option('rules_add_chances', 0), 'chances.add.disapproved', $chance->id);
+                }
             }
             //$chance->units()->sync($syncUnit);
 

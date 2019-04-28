@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
+     */
     public function getUserNotifications(Request $request)
     {
 
@@ -29,6 +33,10 @@ class NotificationController extends Controller
         return view('users.notifications', ['notifications'=>$notifications]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getUnreadNotifications(Request $request)
     {
 

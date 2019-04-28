@@ -289,7 +289,12 @@ return [
         'not_register' => ' Unknown',
         'points_buy' => 'Buy Points',
         'add_chance' => 'Add chance',
-        'add_center' => 'Add center'
+        'add_center' => 'Add center',
+        'center_add_disapproved'=>'The center refused and  retrieve your points',
+        'center_add_approved'=>'Service Center Approved',
+        'chances_add_approved'=>'Changes Approved',
+        'chances_add_disapproved'=>'The change refused and  retrieve your points',
+
     ],
     'account_activated' => 'Account activated',
     'free' => 'Free',

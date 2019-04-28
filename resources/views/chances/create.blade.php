@@ -194,7 +194,7 @@
                                             </div>
                                             @php
                                                 $user=fauth()->user()->in_company?fauth()->user()->company[0]:fauth()->user();
-                                                $points=option('service_center_add',0);
+                                                $points=option('rules_add_chances',0);
                                             @endphp
                                             <div class="modal-body">
                                                 <p> {{trans('app.cb_price')}} : {{$points }} {{trans('app.point')}}</p>

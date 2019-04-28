@@ -73,11 +73,10 @@
                                     <tbody>
                                     @foreach($transactions as $transaction)
                                         <tr>
-                                            <td><a href="{{$transaction->path}}"
-                                                   class="text-primary">{{$transaction->type}}</a></td>
+                                            <td><a href="{{$transaction->path}}" class="text-primary">{{$transaction->type}}</a></td>
                                             <td>{{$transaction->before_points}}</td>
-                                            <td>{{$transaction->action=='points.buy'?$transaction->points:0}}</td>
-                                            <td>{{$transaction->action!='points.buy'?$transaction->points:0}}</td>
+                                            <td>{{$transaction->before_points<$transaction->after_points?$transaction->points:0}}</td>
+                                            <td>{{$transaction->before_points>=$transaction->after_points?$transaction->points:0}}</td>
                                             <td>{{$transaction->after_points}}</td>
                                             <td>{{ $transaction->created_at->format('Y/m/d')}}</td>
                                         </tr>

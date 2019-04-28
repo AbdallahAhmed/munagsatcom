@@ -23,7 +23,7 @@ class Transaction extends Model
      *
      * @var array
      */
-    protected $fillable = ['before_points', 'after_points', 'points', 'user_id', 'action', 'object_id','company_id'];
+    protected $fillable = ['before_points', 'after_points', 'points', 'user_id', 'action', 'object_id', 'company_id'];
 
     /**
      * Add Type
@@ -40,6 +40,14 @@ class Transaction extends Model
                 return trans('app.types.add_chance');
             case 'center.add':
                 return trans('app.types.add_center');
+            case 'center.add.disapproved':
+                return trans('app.types.center_add_disapproved');
+            case 'center.add.approved':
+                return trans('app.types.center_add_approved');
+            case 'chances.add.disapproved':
+                return trans('app.types.chances_add_disapproved');
+            case 'chances.add.approved':
+                return trans('app.types.chances_add_approved');
             default:
                 return trans('app.not_register');
         }

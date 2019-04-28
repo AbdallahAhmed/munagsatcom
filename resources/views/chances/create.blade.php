@@ -74,7 +74,7 @@
                                                     <input name="closing_date" data-date-format="dd-mm-yyyy"
                                                            class="effect-9 form-control" id="date"
                                                            placeholder="dd-mm-yyyy"
-                                                           type="text">
+                                                           type="text" value="{{old('closing_date')}}">
                                                     <span class="add-on"><i class="fa fa-calendar"></i></span>
                                                 </div>
                                             </div>
@@ -87,7 +87,7 @@
                                                 <select type="text" name="sector_id" class="effect-9 form-control">
                                                     <option value="{{null}}">{{trans('app.sectors.choose_sector')}}</option>
                                                     @foreach($sectors as $sector)
-                                                        <option value="{{$sector->id}}">{{$sector->name}}</option>
+                                                        <option value="{{$sector->id}}" {{old('sector_id')==$sector->id?'selected':''}}>{{$sector->name}}</option>
                                                     @endforeach
                                                 </select><span class="focus-border"><i></i></span>
                                             </div>
@@ -141,7 +141,7 @@
                                         </div>
                                         <div class="col-xs-12 col-md-4 new-f-group">
                                             <div class="form-group clearfix">
-                                                <select name="units[]" type="text" class="effect-9 form-control">
+                                                <select name="units[]" class="effect-9 form-control">
                                                     <option value="{{null}}">{{trans('app.units.unit')}}</option>
 
                                                     @foreach($units as $unit)
@@ -172,7 +172,7 @@
                                     </a>
                                 </div>
                                 <div class="form-group-lg text-center">
-                                 <a type="button" data-toggle="modal"
+                                    <a type="button" data-toggle="modal"
                                        data-target="#add_chances"
                                        class="uperc padding-md fbutcenter">{{trans('app.chances.publish')}}</a>
                                 </div>
@@ -181,14 +181,16 @@
                                         margin-top: -24px;
                                     }
                                 </style>
-                                <div class="modal fade" id="add_chances" tabindex="-1" role="dialog" aria-labelledby="add_chances"
+                                <div class="modal fade" id="add_chances" tabindex="-1" role="dialog"
+                                     aria-labelledby="add_chances"
                                      aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title"
                                                     id="exampleModalCenterTitle"> {{trans('app.chances.publish')}}</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>

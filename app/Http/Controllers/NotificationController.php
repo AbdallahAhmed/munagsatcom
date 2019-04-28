@@ -40,29 +40,4 @@ class NotificationController extends Controller
             return response()->json(['notifications' => $notification]);
         }
     }
-
-    public function fetchNotification($id){
-        $notification = Notifications::where($id)->firstOrFail();
-        $data = array();
-        switch ($notification->key){
-            case 'user.register':
-                $data['message'] = trans('notifications.user.register');
-                return $data;
-            case 'password.reset':
-                $data['message'] = trans('notifications.password.reset');
-                return $data;
-            case 'tender.bought':
-                $extra = json_decode($notification->data);
-                $data['message'] = trans('notifications.tender.bought');
-                $data['buyer.id'] = $extra->user_id;
-                $data['tender_id'] = $extra->tender_id;
-                return $data;
-            case 'to.company.tender.bought':
-                $extra = json_decode($notification->data);
-                $data['message'] = preg_replace(':user',User::find($extra->buyer_id)->name,trans('to.company.tender.bought'));
-                $data['buyer.id'] = $extra->buyer_id;
-                $data['tender_id'] = $extra->tender_id;
-                return $data;
-        }
-    }
 }

@@ -26,6 +26,12 @@ class Notifications extends Model
             case 'password.reset':
                 $data['message'] = trans('notifications.password.reset');
                 return $data;
+            case 'password.change':
+                $data['message'] = trans('notifications.password.change');
+                return $data;
+            case 'chance.add':
+                $data['message'] = trans('notifications.chance.add');
+                return $data;
             case 'tender.bought':
                 $extra = json_decode($this->data);
                 $data['message'] = trans('notifications.tender.bought');

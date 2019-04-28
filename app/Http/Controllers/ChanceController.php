@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Chance;
 use App\Models\Company;
+use App\Models\Notifications;
 use Carbon\Carbon;
 use Dot\Chances\Models\Sector;
 use Dot\Chances\Models\Unit;
@@ -224,6 +225,15 @@ class ChanceController extends Controller
                     'name' => $units_name[$key]
                 ]);
             }
+
+            $notification = new Notifications();
+            $notification->key = "chance.add";
+            $notification->user_id = fauth()->id();
+            $notification->isRead = 0;
+            $data = array();
+            $data['chance_id'] = $chance->id;
+            $notification->data = json_encode($data);
+            $notification->save();
 
             pay(option('rules_add_chances', 0), 'add.chance', $chance->id);
 

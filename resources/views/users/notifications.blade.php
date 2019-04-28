@@ -12,7 +12,8 @@
             <div class='col-md-4' style="background: #FFF;padding: 18px;direction: ltr; text-align: center">
                 @if(count($notifications))
                     @foreach($notifications as $notification)
-                        @switch($notification->key)
+
+                        {{--@switch($notification->key)
                             @case('user.register')
                             <p>{{$notification->body['message']}}</p>
                             @break
@@ -25,7 +26,8 @@
                             @case('to.company.tender.bought')
                             <p>{{$notification->body['message']}}</p>
                             @break
-                        @endswitch
+                        @endswitch--}}
+                        <p>{{$notification->body['message']}}</p>
                     @endforeach
                 @else
                     <p>{{trans('app.no_notifications')}}</p>

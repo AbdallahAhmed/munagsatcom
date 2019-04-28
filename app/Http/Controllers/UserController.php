@@ -436,6 +436,13 @@ class UserController extends Controller
         $user = User::where('email', fauth()->user()->email)->first();
         $user->password = $request->get('password');
         $user->save();
+
+        $notification = new Notifications();
+        $notification->key = "password.change";
+        $notification->user_id = fauth()->id();
+        $notification->isRead = 0;
+        $notification->save();
+
         return redirect()->route('user.show')->with('status', trans('app.events.password_changed'));
     }
 

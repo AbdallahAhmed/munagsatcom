@@ -172,8 +172,60 @@
                                     </a>
                                 </div>
                                 <div class="form-group-lg text-center">
-                                    <button type="submit"
-                                            class="uperc padding-md  fbutcenter submit-changes">{{trans('app.chances.publish')}}</button>
+                                 <a type="button" data-toggle="modal"
+                                       data-target="#add_chances"
+                                       class="uperc padding-md fbutcenter">{{trans('app.chances.publish')}}</a>
+                                </div>
+                                <style>
+                                    .modal-header .close {
+                                        margin-top: -24px;
+                                    }
+                                </style>
+                                <div class="modal fade" id="add_chances" tabindex="-1" role="dialog" aria-labelledby="add_chances"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title"
+                                                    id="exampleModalCenterTitle"> {{trans('app.chances.publish')}}</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            @php
+                                                $user=fauth()->user()->in_company?fauth()->user()->company[0]:fauth()->user();
+                                                $points=option('service_center_add',0);
+                                            @endphp
+                                            <div class="modal-body">
+                                                <p> {{trans('app.cb_price')}} : {{$points }} {{trans('app.point')}}</p>
+                                                <hr>
+                                                <p> {{ trans('app.current_points') }}
+                                                    : {{ $user->points }} {{trans('app.point')}}</p>
+                                                <hr>
+                                                <p class="{{$user->points -$points<=0?'text-danger':''}}"> {{ trans('app.points_after_buy') }}
+                                                    : {{ $user->points - $points }} {{trans('app.point')}}</p>
+                                                <hr>
+                                                @if($user->points -$points>=0)
+                                                    <p class="fieldset" style="margin: 0;">
+                                                        <input type="checkbox" name="terms" id="accept-terms">
+                                                        <label for="accept-terms">{{trans('app.accept_with')}} <a
+                                                                    target="_blank"
+                                                                    href="{{route('page.show', ['slug' => 'الشروط والأحكام'])}}"
+                                                                    class="text-primary">{{trans('app.terms')}}</a></label>
+                                                    </p>
+                                                @endif
+                                                <p class="text-danger">{{$user->points - $points<0?trans('app.please_recharge'):''}}</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit"
+                                                        class="btn btn-primary  submit-changes"
+                                                        id="{{$user->points - $points<0?'':'can-buy'}}"
+                                                        disabled>{{trans('app.chances.publish')}}</button>
+                                                <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">{{trans('app.close')}}</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         @else
@@ -202,17 +254,21 @@
     </section>
     @push('scripts')
         <script>
+            $('#accept-terms').change(function (e) {
+                var $base = $('#can-buy');
+                if ($base.length && e.target.checked) {
+                    $base.removeAttr('disabled')
+                } else {
+                    $base.attr('disabled', true)
+                }
+            });
             $('#dp3').datepicker({
                 dateFormat: "dd-mm-yyy"
             });
             $('#date').datepicker({
                 dateFormat: "dd-mm-yyy"
             });
-            $('.submit-changes').click(function () {
-                $(this).attr('disabled', true)
-                $('#form-submit').submit();
-                return true;
-            });
+
             $('#others').on('click', function () {
                 $('                            <div class="form-group-lg row">\n' +
                     '                                <div class="col-xs-12 col-md-4">\n' +

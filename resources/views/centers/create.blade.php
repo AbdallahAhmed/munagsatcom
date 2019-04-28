@@ -182,7 +182,7 @@
                                         <button type="submit"
                                                 class="btn btn-primary"
                                                 id="{{$user->points - $points<0?'':'can-buy'}}"
-                                                disabled>{{trans('app.tenders.buy')}}</button>
+                                                disabled>{{trans('app.centers.add_center')}}</button>
                                         <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">{{trans('app.close')}}</button>
                                     </div>

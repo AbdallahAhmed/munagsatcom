@@ -57,6 +57,7 @@ return [
         "media_id" => "الملف",
         "closing_date" => "تاريخ الاغلاق",
         "file_name" => "اسم الملف",
+        "files" => 'الملفات',
         "file_description" => "تفاصيل الملف",
         "units" => "وحدات القياس",
         "units_names" => "اسامي وحدات القطاع",

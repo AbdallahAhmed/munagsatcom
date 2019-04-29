@@ -93,7 +93,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group-lg row">
+                                    {{--<div class="form-group-lg row">
                                         <label class="col-xs-12 col-md-3"> {{trans('app.file_name')}}</label>
                                         <div class="col-xs-12 col-md-9">
                                             <div class="new-f-group">
@@ -124,7 +124,36 @@
                                     <div class="form-group-lg ">
                                         <label for="upload" class="col-xs-12 col-md-3">{{trans('app.add_file')}}</label>
                                         <input id="" class="col-xs-12 col-md-9" type="file" name="file">
+                                    </div>--}}
+                                </div>
+                                <div class="reg-part">
+                                    <h3>    {{trans('app.add_file')}}</h3>
+
+                                    <div class="form-group-lg row">
+                                        <div class="col-xs-12 col-md-4">
+                                            <div class="new-f-group">
+                                                <div class="form-group clearfix">
+                                                    <input type="text" name="files_names[]" class="effect-9 form-control"
+                                                           placeholder="{{trans('app.file_name')}}">
+                                                    <span class="focus-border"><i></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-4">
+                                            <div class="new-f-group">
+                                                <div class="form-group clearfix">
+                                                    <input type="file" name="files[]"
+                                                           class="effect-9 form-control"
+                                                           placeholder="{{trans('app.file')}}">
+                                                    <span class="focus-border"><i></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <a class="add_field_button" role="button" data-toggle="collapse" id="filess"
+                                       aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-plus"></i>
+                                        {{trans('app.add_file')}}
+                                    </a>
                                 </div>
                                 <div class="reg-part">
                                     <h3>    {{trans('app.units.units')}}</h3>
@@ -239,7 +268,6 @@
                             </div>
                         @endif
 
-
                     @else
                         <div class="alert alert-warning">
                             {{trans('app.you_cannot_add_chance')}}
@@ -330,6 +358,29 @@
                     '                                    </div>\n' +
                     '                                </div>\n' +
                     '                            </div>').insertBefore('#units')
+            })
+            $('#filess').on('click', function () {
+                $("<div class=\"form-group-lg row\">\n" +
+                    "                                        <div class=\"col-xs-12 col-md-4\">\n" +
+                    "                                            <div class=\"new-f-group\">\n" +
+                    "                                                <div class=\"form-group clearfix\">\n" +
+                    "                                                    <input type=\"text\" name=\"files_names[]\" class=\"effect-9 form-control\"\n" +
+                    "                                                           placeholder=\"{{trans('app.file_name')}}\">\n" +
+                    "                                                    <span class=\"focus-border\"><i></i></span>\n" +
+                    "                                                </div>\n" +
+                    "                                            </div>\n" +
+                    "                                        </div>\n" +
+                    "                                        <div class=\"col-xs-12 col-md-4\">\n" +
+                    "                                            <div class=\"new-f-group\">\n" +
+                    "                                                <div class=\"form-group clearfix\">\n" +
+                    "                                                    <input type=\"file\" name=\"files[]\"\n" +
+                    "                                                           class=\"effect-9 form-control\"\n" +
+                    "                                                           placeholder=\"{{trans('app.file')}}\">\n" +
+                    "                                                    <span class=\"focus-border\"><i></i></span>\n" +
+                    "                                                </div>\n" +
+                    "                                            </div>\n" +
+                    "                                        </div>\n" +
+                    "                                    </div>").insertBefore('#filess')
             })
         </script>
     @endpush

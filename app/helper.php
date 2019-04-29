@@ -103,3 +103,40 @@ if (!function_exists('pay')) {
     }
 
 }
+
+if (!function_exists('refund')) {
+    /**
+     *
+     * @return string of points
+     */
+    function refund($points, $action, $object_id)
+    {
+        if (!fauth()->check()) {
+            return -1;
+        }
+
+        $user = fauth()->user();
+        if ($user->in_company) {
+            $user = $user->company[0];
+        }
+        $before_points = $user->points;
+        $after_points = $user->points + $points;
+
+        \App\Models\Transaction::create([
+            'before_points' => $before_points,
+            'after_points' => $after_points,
+            'points' => $points,
+            'object_id' => $object_id,
+            'user_id' => fauth()->id(),
+            'action' => $action,
+            'company_id' => fauth()->user()->in_company ? $user->id : 0
+        ]);
+
+        $user->points = $after_points;
+        $user->spent_points = $user->spent_points - $points;
+        $user->save();
+
+        return 1;
+    }
+
+}

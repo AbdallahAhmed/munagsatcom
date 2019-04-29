@@ -66,7 +66,7 @@ class CentersController extends Controller
         return View::make("services::centers.show", $this->data);
     }
 
-    /*
+    /**
      * Delete center by id
      * @return mixed
      */
@@ -115,9 +115,8 @@ class CentersController extends Controller
             $center->approved = Request::get('approved');
             $center->reason = Request::get('reason');
 
-            $rate = Request::get('rate') ? Request::get('rate') : 5;
-            $rate = $rate > 5 ? 5 : $rate;
-            $center->rate = $rate < 0 ? 0 : $rate ;
+            $center->rate = max(Request::get('rate', 0), 0);
+
 
             if ($center->approved == 0 && $center->reason == '') {
                 $this->errors->add('reason_reject', trans("services::centers.attributes.reason") . " " . trans("chances::chances.required") . ".");
@@ -144,7 +143,7 @@ class CentersController extends Controller
         return View::make("services::centers.edit", $this->data);
     }
 
-    /*
+    /**
      * Edit center by id
      * @param $id
      * @return mixed
@@ -156,7 +155,7 @@ class CentersController extends Controller
 
 
         if (Request::isMethod("post")) {
-
+            $oldStatus = $center->approved;
             $center->name = Request::get("name");
             $center->sector_id = Request::get("sector_id");
             $center->address = Request::get("address");
@@ -169,25 +168,31 @@ class CentersController extends Controller
             $center->lng = Request::get('lng');
             $center->user_id = Auth::user()->id;
             $center->status = Request::get('status', 0);
-            $center->approved = Request::get('approved');
+            $center->approved = $newStatus = Request::get('approved');
             $center->reason = Request::get('reason');
-            $rate = Request::get('rate') ? Request::get('rate') : 5;
-            $rate = $rate > 5 ? 5 : $rate;
-            $center->rate = $rate < 0 ? 0 : $rate ;
+            $center->rate = max(Request::get('rate', 0), 0);
 
-            if ($center->approved == 0 && $center->reason == '') {
+            if ($center->approved == 0 && empty($center->reason)) {
                 $this->errors->add('reason_reject', trans("services::centers.attributes.reason") . " " . trans("chances::chances.required") . ".");
             }
             $center->validate();
-            if ($center->errors() != null)
+            if ($center->errors() != null) {
                 $this->errors->merge($center->errors());
-            if ($this->errors->messages())
+            }
+            if ($this->errors->messages()) {
                 return Redirect::back()->withErrors($this->errors->messages())->withInput(Request::all());
-
+            }
             $center->save();
+
+            if ($newStatus != $oldStatus) {
+                if ($newStatus == 1) {
+                    pay(option('service_center_add', 0), 'center.add.approved', $center->id);
+                } else {
+                    refund(option('service_center_add', 0), 'center.add.disapproved', $center->id);
+                }
+            }
+
             $center->services()->sync(Request::get("centers_services", []));
-
-
             return Redirect::route("admin.centers.edit", array("id" => $id))->with("message", trans("services::centers.events.updated"));
         }
 

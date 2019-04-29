@@ -4,35 +4,28 @@
 
 @section('content')
     <section class="container">
-        <div class='row'>
-            <div class='col-md-4'></div>
-            <script>
-
-            </script>
-            <div class='col-md-4' style="background: #FFF;padding: 18px;direction: ltr;">
+        <div class='row'  style="min-height: 300px;">
+            <div class='col-md-2'></div>
+            <div class='col-md-8' style="background: #FFF;padding: 18px;direction: ltr; text-align: center">
                 @if(count($notifications))
                     @foreach($notifications as $notification)
-                        {{--@switch($notification->key)
-                            @case('user.register')
-                            <p>{{$notification->body['message']}}</p>
-                            @break
-                            @case('password.reset')
-                            <p>{{$notification->body['message']}}</p>
-                            @break
-                            @case('tender.bought')
-                            <p>{{$notification->body['message']}}</p>
-                            @break
-                            @case('to.company.tender.bought')
-                            <p>{{$notification->body['message']}}</p>
-                            @break
-                        @endswitch--}}
-                        <p>{{$notification->body['message']}}</p>
+                        <div class="row border-bottom">
+                            <div class="col-md-8">
+                                {{$notification->body['message']}}
+                            </div>
+                            <div class="col-md-4">
+                                <span class="badge">{{$notification->updated_at->diffForHumans()}}</span>
+                            </div>
+                        </div>
+                        @if(!$loop->last)
+                            <hr>
+                        @endif
                     @endforeach
                 @else
                     <p>{{trans('app.no_notifications')}}</p>
                 @endif
             </div>
-            <div class='col-md-4'></div>
+            <div class='col-md-2'></div>
             {{$notifications->appends(Request::all())->render()}}
             <div class="text-center">
             </div>

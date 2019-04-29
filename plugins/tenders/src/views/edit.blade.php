@@ -211,7 +211,7 @@
                                 <label>{{ trans("tenders::tenders.attributes.address_get_offer") }}</label>
                                 <textarea name="address_get_offer" class="form-control input-lg" rows="1"
                                           id="tender-address_get_offer"
-                                          maxlength="254"
+                                          maxlength="249"
                                           placeholder="{{ trans("tenders::tenders.attributes.address_get_offer") }}">{{ @Request::old("address_get_offer", $tender->address_get_offer) }}</textarea>
                             </div>
 
@@ -219,7 +219,7 @@
                             <div class="form-group">
                                 <label>{{ trans("tenders::tenders.attributes.address_files_open") }}</label>
                                 <textarea name="address_files_open" class="form-control input-lg" rows="1"
-                                          id="tender-address_files_open" maxlength="254" max="254"
+                                          id="tender-address_files_open" maxlength="249" max="249"
                                           placeholder="{{ trans("tenders::tenders.attributes.address_files_open") }}">{{ @Request::old("address_files_open", $tender->address_files_open) }}</textarea>
                             </div>
 
@@ -228,7 +228,7 @@
                                 <label>{{ trans("tenders::tenders.attributes.address_execute") }}</label>
                                 <textarea name="address_execute" class="form-control input-lg" rows="1"
                                           id="tender-address_execute"
-                                          maxlength="254"
+                                          maxlength="249"
                                           placeholder="{{ trans("tenders::tenders.attributes.address_execute") }}">{{ @Request::old("address_execute", $tender->address_execute) }}</textarea>
                             </div>
 

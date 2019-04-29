@@ -9,6 +9,7 @@ class Notifications extends Model
 {
     protected $table = 'notifications';
 
+    protected $dates=['created_at','updated_at'];
     /**
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

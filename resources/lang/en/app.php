@@ -109,6 +109,8 @@ return [
     'register_chance_apply' => 'You have to register to apply on this chance',
     'login_chance_apply' => 'If you have an account, please sign in first using your email and password!',
     'no_notifications' => 'There is notifications right now',
+    'press_save' => 'Click save to keep your changes',
+    'done_approved' => 'Approved',
     'tenders' => [
         'tenders' => 'Government tenders',
         "details" => 'Tender \'s details',

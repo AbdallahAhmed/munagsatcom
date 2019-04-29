@@ -147,9 +147,6 @@
                 <div class="modal-body">
 
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">{{trans('app.save')}}</button>
-                </div>
             </div>
         </div>
     </div>

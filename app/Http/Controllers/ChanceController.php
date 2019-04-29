@@ -116,9 +116,28 @@ class ChanceController extends Controller
         }
         $media = new Media();
         $file_id = $media->saveFile($file);
-        $chance->offers()->attach($file_id, ['user_id' => fauth()->id()]);
+        $chance->offers()->attach($file_id, ['user_id' => fauth()->id(), 'approved' => 0]);
         $chance->increment('offers');
         return response()->json(["success" => true], 200);
+    }
+
+    public function approveOffers(Request $request, $id)
+    {
+        $chance_id = $request->get('chance_id');
+        $user_id = $request->get('user_id');
+
+        DB::table('chances_offers_files')
+            ->where('chance_id', $chance_id)
+            ->update(['approved' => 0]);
+
+        DB::table('chances_offers_files')
+            ->where([
+                ['user_id', $user_id],
+                ['chance_id', $chance_id]
+            ])
+            ->update(['approved' => 1]);
+
+        return response()->json(['success' => true], 200);
     }
 
 
@@ -282,8 +301,12 @@ class ChanceController extends Controller
     {
         $chance = Chance::whereNotIn('status', [3, 5])->where('id', $chance_id)->firstOrFail();
         $offers = DB::table('chances_offers_files')->where('chance_id', $chance->id)->where('user_id', '<>', 0)->get()->groupBy('user_id');
-
-        $view = view('companies.partials.offers', ['offers' => $offers])->render();
+        $approved = DB::table('chances_offers_files')->where([
+            ['chance_id', $chance_id],
+        ['approved', 1]
+        ])->first();
+        $is_approved = $approved ? $approved->user_id : 0;
+        $view = view('companies.partials.offers', ['offers' => $offers, 'company_id' => $id, 'is_approved' => $is_approved])->render();
         return $view;
     }
 }

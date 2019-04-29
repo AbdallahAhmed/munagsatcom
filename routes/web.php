@@ -95,6 +95,7 @@ Route::get('/sss',function (){
         $router->any('company/{id}/chance/create', 'ChanceController@store')->name('chances.create');
         $router->any('company/{id}/center/create', 'CenterController@store')->name('centers.create');
         $router->get('company/{id}/chances/{chance_id}/offers', 'ChanceController@showOffer')->name('chances.offers.show');
+        $router->post('company/{id}/chances/approveOffers', 'ChanceController@approveOffers')->name('chances.offers.approve');
     });
 
     Route::get('page/{slug}', 'PageController@show')->name('page.show');

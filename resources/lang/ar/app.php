@@ -108,6 +108,8 @@ return [
     'available_points' => 'النقاط المتاحة',
     'coming_soon' => 'قريبا',
     'no_notifications' => 'لا يوجد تنبيهات',
+    'press_save' => 'أضغط حفظ للتأكيد',
+    'done_approved' => 'تم الإعتماد',
     'centers' => [
         'centers' => 'مراكز خدمية',
         'center_name' => 'اسم  المنشاه',

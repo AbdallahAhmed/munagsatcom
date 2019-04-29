@@ -92,10 +92,16 @@
                                     <ul>
                                         @foreach($center->services as $service)
                                             <li class="">
-                                                <a href="#" title="{{trans('app.sectors.price_detail')}}"
+                                                {{--<a href="#" title="{{trans('app.sectors.price_detail')}}"
                                                    data-toggle="popover"
                                                    data-trigger="hover" data-placement="bottom"
                                                    data-content="{{trans('app.from').$service->price_from.trans("app.reyal")." : ".trans('app.to').$service->price_to.trans("app.reyal")}}">
+                                                    {{$service->name}}
+                                                </a>--}}
+                                                <a href="#" title="{{trans('app.sectors.price_detail')}}"
+                                                   data-toggle="popover"
+                                                   data-trigger="hover" data-placement="bottom"
+                                                   data-content="{{$service->price_to.trans("app.reyal")}}">
                                                     {{$service->name}}
                                                 </a>
                                             </li>

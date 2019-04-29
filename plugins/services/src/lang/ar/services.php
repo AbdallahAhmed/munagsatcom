@@ -51,7 +51,7 @@ return [
         'status' => 'حالة الخدمة',
         'created_at' => 'تاريخ الإضافة',
         'price_from' => 'السعر من',
-        'price_to' => 'السعر الى'
+        'price_to' => 'السعر'
     ],
 
     "events" => [

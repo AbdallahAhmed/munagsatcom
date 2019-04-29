@@ -3,6 +3,7 @@
 namespace Dot\Services\Controllers;
 
 use Action;
+use App\Models\Notifications;
 use Dot\Blocks\Models\Block;
 use Dot\Chances\Models\Sector;
 use Dot\Platform\Controller;
@@ -187,8 +188,22 @@ class CentersController extends Controller
             if ($newStatus != $oldStatus) {
                 if ($newStatus == 1) {
                     pay(option('service_center_add', 0), 'center.add.approved', $center->id);
+                    $notification = new Notifications();
+                    $notification->key = "center.pay";
+                    $notification->user_id = $center->user_id;
+                    $data = array();
+                    $data['center_id'] = $center->id;
+                    $notification->data = json_encode($data);
+                    $notification->save();
                 } else {
                     refund(option('service_center_add', 0), 'center.add.disapproved', $center->id);
+                    $notification = new Notifications();
+                    $notification->key = "center.refund";
+                    $notification->user_id = $center->user_id;
+                    $data = array();
+                    $data['center_id'] = $center->id;
+                    $notification->data = json_encode($data);
+                    $notification->save();
                 }
             }
 

@@ -3,6 +3,7 @@
 namespace Dot\Chances\Controllers;
 
 use Action;
+use App\Models\Notifications;
 use DateTime;
 use Dot\Blocks\Models\Block;
 use Dot\Chances\Chances;
@@ -196,8 +197,22 @@ class ChancesController extends Controller
             if ($newStatus != $oldStatus) {
                 if ($newStatus == 1) {
                     pay(option('rules_add_chances', 0), 'chances.add.approved', $chance->id);
+                    $notification = new Notifications();
+                    $notification->key = "chance.pay";
+                    $notification->user_id = $chance->user_id;
+                    $data = array();
+                    $data['chance_id'] = $chance->id;
+                    $notification->data = json_encode($data);
+                    $notification->save();
                 } else {
                     refund(option('rules_add_chances', 0), 'chances.add.disapproved', $chance->id);
+                    $notification = new Notifications();
+                    $notification->key = "chance.refund";
+                    $notification->user_id = $chance->user_id;
+                    $data = array();
+                    $data['chance_id'] = $chance->id;
+                    $notification->data = json_encode($data);
+                    $notification->save();
                 }
             }
             //$chance->units()->sync($syncUnit);

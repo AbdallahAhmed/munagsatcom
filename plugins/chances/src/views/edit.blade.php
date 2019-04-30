@@ -68,7 +68,7 @@
                             </div>
                             <div class="form-group">
                                 <label
-                                    for="input-number">{{ trans("chances::chances.attributes.closing_date") }}</label>
+                                        for="input-number">{{ trans("chances::chances.attributes.closing_date") }}</label>
                                 <input name="closing_date" type="date" data-format="YYYY-mm-dd"
                                        value="{{ DateTime::createFromFormat('Y-m-d H:i:s', $chance->closing_date)->format("Y-m-d") }}"
                                        class="chosen-rtl form-control" id="input-name"
@@ -76,7 +76,7 @@
                             </div>
                             <div class="form-group">
                                 <label
-                                    for="input-number">{{ trans("chances::chances.attributes.value") }}</label>
+                                        for="input-number">{{ trans("chances::chances.attributes.value") }}</label>
                                 <input name="value" type="text"
                                        value="{{ @Request::old("value", $chance->value)}}"
                                        class="form-control" id="input-name"
@@ -84,20 +84,22 @@
                             </div>
                             <div class="form-group">
                                 <label
-                                    for="input-number">{{ trans("chances::chances.attributes.file_description") }}</label>
-                                <input name="file_description" type="text"
-                                       value="{{ @Request::old("file_description", $chance->file_description)}}"
-                                       class="form-control" id="input-name"
-                                       placeholder="{{ trans("chances::chances.attributes.file_description") }}">
+                                        for="input-number">{{ trans("chances::chances.attributes.files") }}</label>
+                                <br>
+                                @foreach($chance->files as $file)
+                                    <a href="{{uploads_url().$file->path}}"
+                                       target="_blank">{{$file->pivot->file_name}}</a>
+                                    <br>
+                                @endforeach
                             </div>
-                            <div class="form-group">
+                           {{-- <div class="form-group">
                                 <label
-                                    for="input-number">{{ trans("chances::chances.attributes.file_name") }}</label>
+                                        for="input-number">{{ trans("chances::chances.attributes.file_name") }}</label>
                                 <input name="file_name" type="text"
                                        value="{{ @Request::old("file_name", $chance->file_name)}}"
                                        class="form-control" id="input-name"
                                        placeholder="{{ trans("chances::chances.attributes.file_name") }}">
-                            </div>
+                            </div>--}}
                         </div>
                     </div>
                     <div class="panel panel-default">
@@ -214,7 +216,7 @@
                                 <div id="reason"
                                      style="display: @if($chance->approved == 1) none @else block @endif; margin-top: 20px">
                                     <label
-                                        for="input-number">{{ trans("chances::chances.attributes.reason") }}</label>
+                                            for="input-number">{{ trans("chances::chances.attributes.reason") }}</label>
                                     <input name="reason" type="text"
                                            value="{{$chance->reason}}"
                                            class="form-control" id="input-name"
@@ -253,27 +255,27 @@
                                 <select name="sector_id" class="form-control chosen-select chosen-rtl">
                                     @foreach(\Dot\Chances\Models\Sector::all() as $sector)
                                         <option
-                                            value="{{$sector->id}}" {{ old('sector_id',$sector->id)==$chance->sector_id?'selected':'' }}> {{$sector->name}}</option>
+                                                value="{{$sector->id}}" {{ old('sector_id',$sector->id)==$chance->sector_id?'selected':'' }}> {{$sector->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
 
                     </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-folder"></i>
-                        {{ trans("chances::chances.file_download") }}
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <a href="{{uploads_url().$chance->media->path}}"
-                               target="_blank">{{$chance->file_name}}</a>
-                        </div>
-                    </div>
+                    {{-- <div class="panel panel-default">
+                         <div class="panel-heading">
+                             <i class="fa fa-folder"></i>
+                             {{ trans("chances::chances.file_download") }}
+                         </div>
+                         <div class="panel-body">
+                             <div class="form-group">
+                                 <a href="{{uploads_url().$chance->media->path}}"
+                                    target="_blank">{{$chance->file_name}}</a>
+                             </div>
+                         </div>
+                     </div>--}}
                 </div>
             </div>
-        </div>
         </div>
 
 

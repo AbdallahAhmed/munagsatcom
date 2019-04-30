@@ -53,8 +53,8 @@ class Chance extends Model
         "name" => "required",
         "number" => "required",
         "closing_date" => "required",
-        "file_name" => "required",
-        "file_description" => "required",
+        // "file_name" => "required",
+        // "file_description" => "required",
         "value" => "required"
 
     ];
@@ -66,8 +66,8 @@ class Chance extends Model
         "name" => "required",
         "number" => "required",
         "closing_date" => "required",
-        "file_name" => "required",
-        "file_description" => "required",
+        // "file_name" => "required",
+        // "file_description" => "required",
         "value" => "required"
     ];
 
@@ -122,6 +122,10 @@ class Chance extends Model
 
     public function units(){
         return $this->belongsToMany(Unit::class, "chances_units", "chance_id", "unit_id")->withPivot(['quantity', 'name']);
+    }
+
+    public function files(){
+        return $this->belongsToMany(Media::class, "chances_files", "chance_id", "media_id")->withPivot(['file_name']);
     }
 
     public function user(){

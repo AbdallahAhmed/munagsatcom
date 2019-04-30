@@ -109,6 +109,8 @@ return [
     'register_chance_apply' => 'You have to register to apply on this chance',
     'login_chance_apply' => 'If you have an account, please sign in first using your email and password!',
     'no_notifications' => 'There is notifications right now',
+    'press_save' => 'Click save to keep your changes',
+    'done_approved' => 'Approved',
     'tenders' => [
         'tenders' => 'Government tenders',
         "details" => 'Tender \'s details',
@@ -289,7 +291,12 @@ return [
         'not_register' => ' Unknown',
         'points_buy' => 'Buy Points',
         'add_chance' => 'Add chance',
-        'add_center' => 'Add center'
+        'add_center' => 'Add center',
+        'center_add_disapproved'=>'The center refused and  retrieve your points',
+        'center_add_approved'=>'Service Center Approved',
+        'chances_add_approved'=>'Changes Approved',
+        'chances_add_disapproved'=>'The change refused and  retrieve your points',
+
     ],
     'account_activated' => 'Account activated',
     'free' => 'Free',

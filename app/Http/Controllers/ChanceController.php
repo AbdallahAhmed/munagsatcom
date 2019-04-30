@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Chance;
 use App\Models\Company;
+use App\Models\Notifications;
 use Carbon\Carbon;
 use Dot\Chances\Models\Sector;
 use Dot\Chances\Models\Unit;
@@ -115,9 +116,28 @@ class ChanceController extends Controller
         }
         $media = new Media();
         $file_id = $media->saveFile($file);
-        $chance->offers()->attach($file_id, ['user_id' => fauth()->id()]);
+        $chance->offers()->attach($file_id, ['user_id' => fauth()->id(), 'approved' => 0]);
         $chance->increment('offers');
         return response()->json(["success" => true], 200);
+    }
+
+    public function approveOffers(Request $request, $id)
+    {
+        $chance_id = $request->get('chance_id');
+        $user_id = $request->get('user_id');
+
+        DB::table('chances_offers_files')
+            ->where('chance_id', $chance_id)
+            ->update(['approved' => 0]);
+
+        DB::table('chances_offers_files')
+            ->where([
+                ['user_id', $user_id],
+                ['chance_id', $chance_id]
+            ])
+            ->update(['approved' => 1]);
+
+        return response()->json(['success' => true], 200);
     }
 
 
@@ -137,10 +157,10 @@ class ChanceController extends Controller
                 "name" => 'required',
                 'number' => 'required',
                 'closing_date' => 'required',
-                'file_name' => 'required',
-                'file_description' => 'required',
+              //  'file_name' => 'required',
+              //  'file_description' => 'required',
                 'chance_value' => 'required',
-                'file' => 'required|mimes:jpg,png,jpeg,doc,docx,txt,pdf,zip',
+                'files.*' => 'required|mimes:jpg,png,jpeg,doc,docx,txt,pdf,zip',
                 'sector_id' => 'required'
             ]);
             if ($validator->fails()) {
@@ -154,7 +174,7 @@ class ChanceController extends Controller
             $chance->file_name = $request->get("file_name", "");
             $chance->file_description = $request->get("file_description", "");
             $chance->status = 3;
-            $chance->approved = 0;
+            $chance->approved = 1;
             $chance->company_id = $id;
             $chance->user_id = fauth()->user()->id;
 
@@ -203,9 +223,21 @@ class ChanceController extends Controller
             if ($errors->messages())
                 return redirect()->back()->withErrors($errors)->withInput($request->all());
 
-            $media = new Media();
-            $chance->media_id = $media->saveFile($request->file('file'));
             $chance->save();
+
+            if ($request->file('files')) {
+                foreach (($request->file('files')) as $key => $file) {
+                    $media = new Media();
+                    $mid = $media->saveFile($file);
+                    DB::table('chances_files')->insert([
+                        'chance_id' => $chance->id,
+                        'media_id' => $mid,
+                        'file_name' => $request->get('files_names')[$key] ? $request->get('files_names')[$key] : ''
+                    ]);
+                }
+            }
+       /*     $media = new Media();
+            $chance->media_id = $media->saveFile($request->file('file'));*/
             foreach ($others_units as $key => $unit) {
                 DB::table('other_units')->insert([
                     'chance_id' => $chance->id,
@@ -224,6 +256,15 @@ class ChanceController extends Controller
                     'name' => $units_name[$key]
                 ]);
             }
+
+            $notification = new Notifications();
+            $notification->key = "chance.add";
+            $notification->user_id = fauth()->id();
+            $notification->isRead = 0;
+            $data = array();
+            $data['chance_id'] = $chance->id;
+            $notification->data = json_encode($data);
+            $notification->save();
 
             pay(option('rules_add_chances', 0), 'add.chance', $chance->id);
 
@@ -272,8 +313,12 @@ class ChanceController extends Controller
     {
         $chance = Chance::whereNotIn('status', [3, 5])->where('id', $chance_id)->firstOrFail();
         $offers = DB::table('chances_offers_files')->where('chance_id', $chance->id)->where('user_id', '<>', 0)->get()->groupBy('user_id');
-
-        $view = view('companies.partials.offers', ['offers' => $offers])->render();
+        $approved = DB::table('chances_offers_files')->where([
+            ['chance_id', $chance_id],
+            ['approved', 1]
+        ])->first();
+        $is_approved = $approved ? $approved->user_id : 0;
+        $view = view('companies.partials.offers', ['offers' => $offers, 'company_id' => $id, 'is_approved' => $is_approved])->render();
         return $view;
     }
 }

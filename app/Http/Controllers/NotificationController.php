@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
+     */
     public function getUserNotifications(Request $request)
     {
 
@@ -16,6 +20,7 @@ class NotificationController extends Controller
         $notifications = Notifications::where('user_id',fauth()->user()->id)
             ->limit($limit)
             ->offset($offset)
+            ->orderBy('updated_at','DESC')
             ->paginate(10);
         foreach ($notifications as $notification){
             $notification->isRead = 1;
@@ -28,6 +33,10 @@ class NotificationController extends Controller
         return view('users.notifications', ['notifications'=>$notifications]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getUnreadNotifications(Request $request)
     {
 
@@ -38,31 +47,6 @@ class NotificationController extends Controller
         ])->first();
         if ($request->ajax()) {
             return response()->json(['notifications' => $notification]);
-        }
-    }
-
-    public function fetchNotification($id){
-        $notification = Notifications::where($id)->firstOrFail();
-        $data = array();
-        switch ($notification->key){
-            case 'user.register':
-                $data['message'] = trans('notifications.user.register');
-                return $data;
-            case 'password.reset':
-                $data['message'] = trans('notifications.password.reset');
-                return $data;
-            case 'tender.bought':
-                $extra = json_decode($notification->data);
-                $data['message'] = trans('notifications.tender.bought');
-                $data['buyer.id'] = $extra->user_id;
-                $data['tender_id'] = $extra->tender_id;
-                return $data;
-            case 'to.company.tender.bought':
-                $extra = json_decode($notification->data);
-                $data['message'] = preg_replace(':user',User::find($extra->buyer_id)->name,trans('to.company.tender.bought'));
-                $data['buyer.id'] = $extra->buyer_id;
-                $data['tender_id'] = $extra->tender_id;
-                return $data;
         }
     }
 }

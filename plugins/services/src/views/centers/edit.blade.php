@@ -26,12 +26,12 @@
 
             <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12 text-right">
 
-                @if ($center)
-                    <a href="{{ route("admin.centers.create") }}"
-                       class="btn btn-primary btn-labeled btn-main"> <span
-                                class="btn-label icon fa fa-plus"></span>
-                        {{ trans("services::centers.add_new") }}</a>
-                @endif
+                {{--@if ($center)--}}
+                    {{--<a href="{{ route("admin.centers.create") }}"--}}
+                       {{--class="btn btn-primary btn-labeled btn-main"> <span--}}
+                                {{--class="btn-label icon fa fa-plus"></span>--}}
+                        {{--{{ trans("services::centers.add_new") }}</a>--}}
+                {{--@endif--}}
 
                 <button type="submit" class="btn btn-flat btn-danger btn-main">
                     <i class="fa fa-download" aria-hidden="true"></i>

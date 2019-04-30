@@ -108,6 +108,8 @@ return [
     'available_points' => 'النقاط المتاحة',
     'coming_soon' => 'قريبا',
     'no_notifications' => 'لا يوجد تنبيهات',
+    'press_save' => 'أضغط حفظ للتأكيد',
+    'done_approved' => 'تم الإعتماد',
     'centers' => [
         'centers' => 'مراكز خدمية',
         'center_name' => 'اسم  المنشاه',
@@ -290,7 +292,11 @@ return [
         'tenders_buy' => 'شراء مناقضة',
         'points_buy'=>'شراء نقاط',
         'add_chance'=>'طرح فرصة',
-        'add_center'=>'اضافة مركز خدمى'
+        'add_center'=>'اضافة مركز خدمى',
+        'center_add_disapproved'=>'رفض مركز الخدمة و استرجاع نقاطك',
+        'center_add_approved'=>'تم الموافقة على مركز الخدمى  ',
+        'chances_add_approved'=>'تم الموافقة على طرح المناقصة',
+        'chances_add_disapproved'=>'رفض  الفرصة  و استرجاع نقاطك',
     ],
     'add_points'=>'النقاط المضاقة ',
     'not_register' => 'لم يتم تسجيل العملية ',

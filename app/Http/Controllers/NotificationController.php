@@ -43,7 +43,7 @@ class NotificationController extends Controller
         $notification = Notifications::where([
             ['user_id', fauth()->user()->id],
             ['isRead', 0],
-            ['created_at', '>', \Carbon\Carbon::now()->subSeconds(40)->toDateTimeString()]
+            ['created_at', '>', \Carbon\Carbon::now()->subSeconds(10)->toDateTimeString()]
         ])->first();
         if ($request->ajax()) {
             return response()->json(['notifications' => $notification]);

@@ -67,7 +67,7 @@
                                     alert("Internal Server Error")
                                 }
                             })
-                        }, 30000)
+                        }, 10000)
                     </script>
 
                     <li class="dropdown">

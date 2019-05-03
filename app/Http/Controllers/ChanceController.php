@@ -137,6 +137,20 @@ class ChanceController extends Controller
             ])
             ->update(['approved' => 1]);
 
+        //notification for requested user
+        $notification = new Notifications();
+        $notification->key = "chance.approval";
+        $notification->user_id = $user_id;
+        $notification->data = json_encode(["chance_id" => $chance_id]);
+        $notification->save();
+
+        //notification for owner user
+        $notification = new Notifications();
+        $notification->key = "chance.self.approval";
+        $notification->user_id = fauth()->id();
+        $notification->data = json_encode(["chance_id" => $chance_id, "user_id" => $user_id]);
+        $notification->save();
+
         return response()->json(['success' => true], 200);
     }
 

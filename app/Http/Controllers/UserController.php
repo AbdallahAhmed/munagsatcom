@@ -359,7 +359,7 @@ class UserController extends Controller
 
     /**
      * POST/GET {lang}/forgetPassword
-     * @route forget-password
+     * @route reset-password
      * @param Request $request
      * @return string
      */

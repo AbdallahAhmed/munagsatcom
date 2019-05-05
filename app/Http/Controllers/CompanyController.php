@@ -57,46 +57,49 @@ class CompanyController extends Controller
         $this->data['created_at'] = null;
         $status = $request->get('status');
         $status = $status ? $status : [];
-        $chances = Chance::query()->where('company_id',$id);
+        $chances = Chance::query()->where('company_id', $id);
         $this->data['chosen_status'] = $status;
 
-        $chances->where(function ($query) use ($status) {
+        if ($request->filled('status')) {
+            $chances->where(function ($query) use ($status) {
 
-            foreach ($status as $st) {
-                switch ($st) {
-                    case 0:
-                        $query->orWhere(function ($q) {
-                            $q->opened();
-                        });
-                        break;
-                    case 1:
-                        $query->orWhere(function ($q) {
-                            $q->closed();
-                        });
-                        break;
-                    case 2:
-                        $query->orWhere(function ($q) {
-                            $q->cancelled();
-                        });
-                        break;
-                    case 3:
-                        $query->orWhere(function ($q) {
-                            $q->pending();
-                        });
-                        break;
-                    case 4:
-                        $query->orWhere(function ($q) {
-                            $q->approved();
-                        });
-                        break;
-                    case 5:
-                        $query->orWhere(function ($q) {
-                            $q->rejected();
-                        });
-                        break;
+                foreach ($status as $st) {
+                    switch ($st) {
+                        case 0:
+                            $query->orWhere(function ($q) {
+                                $q->opened();
+                            });
+                            break;
+                        case 1:
+                            $query->orWhere(function ($q) {
+                                $q->closed();
+                            });
+                            break;
+                        case 2:
+                            $query->orWhere(function ($q) {
+                                $q->cancelled();
+                            });
+                            break;
+                        case 3:
+                            $query->orWhere(function ($q) {
+                                $q->pending();
+                            });
+                            break;
+                        case 4:
+                            $query->orWhere(function ($q) {
+                                $q->approved();
+                            });
+                            break;
+                        case 5:
+                            $query->orWhere(function ($q) {
+                                $q->rejected();
+                            });
+                            break;
+                    }
                 }
-            }
-        });
+            });
+
+        }
 
         if ($request->get('q')) {
             $q = trim(urldecode($request->get('q')));
@@ -114,6 +117,23 @@ class CompanyController extends Controller
         $this->data['status'] = [0, 1, 2, 3, 4, 5];
 
         return view('companies.chances', $this->data);
+    }
+
+
+    /**
+     * GET {lang}/chances/{id}/cancel
+     * @route chances.cancel
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function chancesCancel(Request $request, $id)
+    {
+        $chance = Chance::findOrFail($id);
+        if ($chance->can_edit()) {
+            $chance->status = $request->get('canceled') == 1 ? 2 : 0;
+            $chance->save();
+           return back()->with(['message'=>trans('chances::chances.events.updated')]);
+        }
     }
 
     /**

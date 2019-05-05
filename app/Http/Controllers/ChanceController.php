@@ -174,9 +174,9 @@ class ChanceController extends Controller
               //  'file_name' => 'required',
               //  'file_description' => 'required',
                 'chance_value' => 'required',
-                'files.*' => 'required|mimes:jpg,png,jpeg,doc,docx,txt,pdf,zip',
+                'files.*' => 'required|mimes:pdf',
                 'sector_id' => 'required'
-            ]);
+            ],['mimes' => trans('chances.file_type_error')]);
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
             }

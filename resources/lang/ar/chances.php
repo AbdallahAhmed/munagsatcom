@@ -32,7 +32,7 @@ return [
     'required' => "مطلوب",
     "not_categorized" => "غير محدد",
     'add_sector' => "أضف قطاعات",
-
+    'file_type_error' => 'يجب ان تكون الملفات من نوع pdf',
     "yes" => "نعم",
     "no" => "لا",
 

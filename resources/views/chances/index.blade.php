@@ -149,11 +149,11 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="card-price clearfix">
+                            {{--<div class="card-price clearfix">
                                 <div class="light-white one_half padt">{{trans('app.chances.value')}}:
                                     <span class="text-blue"> {{$chance->value}}</span>
                                 </div>
-                            </div>
+                            </div>--}}
                         </div>
                     @endforeach
                     <div class="text-center">

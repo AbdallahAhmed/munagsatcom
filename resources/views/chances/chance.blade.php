@@ -61,10 +61,10 @@
                                                 @endforeach
                                             </div>
                                         </li>
-                                        <li class="clearfix">
+                                       {{-- <li class="clearfix">
                                             <div class="one_xsmall title">{{trans('app.chances.chance_value')}}</div>
                                             <div class="one_xlarg">{{$chance->value}}</div>
-                                        </li>
+                                        </li>--}}
                                         <li class="clearfix">
                                             <div class="one_xsmall title">{{trans('app.chances.rules_book')}}</div>
                                             <div class="one_xlarg"><a class="btn btn-default" target="_blank"

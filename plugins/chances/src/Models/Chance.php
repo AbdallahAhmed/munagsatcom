@@ -55,7 +55,7 @@ class Chance extends Model
         "closing_date" => "required",
         // "file_name" => "required",
         // "file_description" => "required",
-        "value" => "required"
+        //"value" => "required"
 
     ];
 
@@ -68,7 +68,7 @@ class Chance extends Model
         "closing_date" => "required",
         // "file_name" => "required",
         // "file_description" => "required",
-        "value" => "required"
+        //"value" => "required"
     ];
 
     /*

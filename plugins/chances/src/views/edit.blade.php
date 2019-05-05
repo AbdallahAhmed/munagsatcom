@@ -74,32 +74,38 @@
                                        class="chosen-rtl form-control" id="input-name"
                                        placeholder="{{ trans("chances::chances.attributes.closing_date") }}">
                             </div>
-                            <div class="form-group">
+                            {{--<div class="form-group">
                                 <label
                                         for="input-number">{{ trans("chances::chances.attributes.value") }}</label>
                                 <input name="value" type="text"
                                        value="{{ @Request::old("value", $chance->value)}}"
                                        class="form-control" id="input-name"
                                        placeholder="{{ trans("chances::chances.attributes.value") }}">
-                            </div>
+                            </div>--}}
                             <div class="form-group">
                                 <label
                                         for="input-number">{{ trans("chances::chances.attributes.files") }}</label>
                                 <br>
+                                <br>
                                 @foreach($chance->files as $file)
-                                    <a href="{{uploads_url().$file->path}}"
-                                       target="_blank">{{$file->pivot->file_name}}</a>
+                                    <div class="form-group">
+                                        <div class="col-md-6">
+                                            <p>{{$file->pivot->file_name}}</p>
+                                        </div>
+                                        <a href="{{uploads_url().$file->path}}"
+                                           target="_blank">{{trans("chances::chances.file_download")}}</a>
+                                    </div>
                                     <br>
                                 @endforeach
                             </div>
-                           {{-- <div class="form-group">
-                                <label
-                                        for="input-number">{{ trans("chances::chances.attributes.file_name") }}</label>
-                                <input name="file_name" type="text"
-                                       value="{{ @Request::old("file_name", $chance->file_name)}}"
-                                       class="form-control" id="input-name"
-                                       placeholder="{{ trans("chances::chances.attributes.file_name") }}">
-                            </div>--}}
+                            {{-- <div class="form-group">
+                                 <label
+                                         for="input-number">{{ trans("chances::chances.attributes.file_name") }}</label>
+                                 <input name="file_name" type="text"
+                                        value="{{ @Request::old("file_name", $chance->file_name)}}"
+                                        class="form-control" id="input-name"
+                                        placeholder="{{ trans("chances::chances.attributes.file_name") }}">
+                             </div>--}}
                         </div>
                     </div>
                     <div class="panel panel-default">

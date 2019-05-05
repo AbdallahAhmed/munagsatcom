@@ -204,7 +204,7 @@ class UserController extends Controller
                     'password' => $request->get('password'),
                     'backend' => 0,
                     'status' => 1
-                ])) {
+                ], $request->filled('remember_me'))) {
 
                     $error->add('invalid', trans('validation.invalid_login'));
                     return redirect()->back()->withErrors($error->messages())->withInput($request->all());
@@ -359,7 +359,7 @@ class UserController extends Controller
 
     /**
      * POST/GET {lang}/forgetPassword
-     * @route forget-password
+     * @route reset-password
      * @param Request $request
      * @return string
      */
@@ -377,7 +377,7 @@ class UserController extends Controller
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator->errors());
             }
-            if ($user->code != $request->get('code')){
+            if ($user->code != $request->get('code')) {
                 return redirect()->back()->withErrors(new MessageBag(['wrong_conde' => trans('app.wrong_code')]));
 
             }

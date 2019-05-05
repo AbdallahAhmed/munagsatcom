@@ -327,6 +327,7 @@ return [
     'about_company' => 'About Company',
     'company_personal' => 'User/Company',
     'offers' => 'Offers',
-    'faq' => 'F&Q'
+    'faq' => 'F&Q',
+    'remember_me'=>'Remember me'
 
 ];

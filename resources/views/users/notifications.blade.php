@@ -4,7 +4,7 @@
 
 @section('content')
     <section class="container">
-        <div class='row'  style="min-height: 300px;">
+        <div class='row' style="min-height: 300px;">
             <div class='col-md-2'></div>
             <div class='col-md-8' style="background: #FFF;padding: 18px;direction: ltr; text-align: center">
                 @if(count($notifications))
@@ -25,10 +25,16 @@
                     <p>{{trans('app.no_notifications')}}</p>
                 @endif
             </div>
-            <div class='col-md-2'></div>
-            {{$notifications->appends(Request::all())->render()}}
+            <div class='col-md-2'>
+
+            </div>
             <div class="text-center">
             </div>
+        </div>
+    </section>
+    <section>
+        <div class="text-center">
+            {{$notifications->appends(Request::all())->render()}}
         </div>
     </section>
 @endsection

@@ -5,7 +5,7 @@ return [
     'register' => 'Register',
     'my_tender' => 'Tenders were purchased ',
     'mycenters' => 'My service',
-
+    'file_data'=>'File data',
     'government_tenders' => 'Government tenders',
     'service_centers' => 'Service center',
     'investment_chances' => 'Investment chances',

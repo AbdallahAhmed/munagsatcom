@@ -5,6 +5,7 @@ return [
     'register' => 'تسجيل جديد',
     'my_tender' => 'مناقصات تم شراءها ',
     'mycenters' => 'خدماتنا',
+    'file_data'=>'بيان الملف',
     'government_tenders' => 'مناقصات حكومية',
     'service_centers' => 'مراكز خدمية',
     'investment_opportunities' => 'فرص استثمارية',

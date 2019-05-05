@@ -171,8 +171,8 @@ class ChanceController extends Controller
                 "name" => 'required',
                 'number' => 'required',
                 'closing_date' => 'required',
-              //  'file_name' => 'required',
-              //  'file_description' => 'required',
+                //  'file_name' => 'required',
+                //  'file_description' => 'required',
                 'chance_value' => 'required',
                 'files.*' => 'required|mimes:jpg,png,jpeg,doc,docx,txt,pdf,zip',
                 'sector_id' => 'required'
@@ -250,8 +250,8 @@ class ChanceController extends Controller
                     ]);
                 }
             }
-       /*     $media = new Media();
-            $chance->media_id = $media->saveFile($request->file('file'));*/
+            /*     $media = new Media();
+                 $chance->media_id = $media->saveFile($request->file('file'));*/
             foreach ($others_units as $key => $unit) {
                 DB::table('other_units')->insert([
                     'chance_id' => $chance->id,

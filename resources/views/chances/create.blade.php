@@ -130,11 +130,11 @@
                                     <h3>    {{trans('app.add_file')}}</h3>
 
                                     <div class="form-group-lg row">
-                                        <div class="col-xs-12 col-md-4">
+                                        <div class="col-xs-12 col-md-8">
                                             <div class="new-f-group">
                                                 <div class="form-group clearfix">
                                                     <input type="text" name="files_names[]" class="effect-9 form-control"
-                                                           placeholder="{{trans('app.file_name')}}">
+                                                           placeholder="{{trans('app.file_data')}}">
                                                     <span class="focus-border"><i></i></span>
                                                 </div>
                                             </div>
@@ -145,7 +145,6 @@
                                                     <input type="file" name="files[]"
                                                            class="effect-9 form-control"
                                                            placeholder="{{trans('app.file')}}">
-                                                    <span class="focus-border"><i></i></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -361,7 +360,7 @@
             })
             $('#filess').on('click', function () {
                 $("<div class=\"form-group-lg row\">\n" +
-                    "                                        <div class=\"col-xs-12 col-md-4\">\n" +
+                    "                                        <div class=\"col-xs-12 col-md-8\">\n" +
                     "                                            <div class=\"new-f-group\">\n" +
                     "                                                <div class=\"form-group clearfix\">\n" +
                     "                                                    <input type=\"text\" name=\"files_names[]\" class=\"effect-9 form-control\"\n" +
@@ -376,7 +375,6 @@
                     "                                                    <input type=\"file\" name=\"files[]\"\n" +
                     "                                                           class=\"effect-9 form-control\"\n" +
                     "                                                           placeholder=\"{{trans('app.file')}}\">\n" +
-                    "                                                    <span class=\"focus-border\"><i></i></span>\n" +
                     "                                                </div>\n" +
                     "                                            </div>\n" +
                     "                                        </div>\n" +

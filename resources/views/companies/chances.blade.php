@@ -108,7 +108,7 @@
                                     <th scope="col"> {{trans('app.chances.downloads')}}</th>
                                     <th scope="col">{{trans('app.chances.provided_offers')}}</th>
                                     <th scope="col">{{trans('app.chances.accepted')}}</th>
-                                    {{--                                    <th scope="col"> {{trans('app.chances.details')}}</th>--}}
+                                    <th scope="col"> {{trans('app.chances.created_at')}}</th>
                                     <th scope="col"> {{trans('app.chances.status')}}</th>
                                 </tr>
                                 </thead>
@@ -130,17 +130,20 @@
                                         @else
                                             <td>{{$count}}</td>
                                         @endif
-                                        <td>{{$chance->approved ? trans('app.chances.approved') : trans('app.chances.not_approved')}}</td>
-                                        {{--<td>{{$chance->file_description}}</td>--}}
+                                        @php
+                                            $is_approved= DB::table('chances_offers_files')->where([['chance_id', $chance->id],['approved', 1]])->count()?true:false;
+                                        @endphp
+                                        <td>{{$is_approved ? trans('app.chances.approved') : trans('app.chances.not_approved')}}</td>
+                                        <td>{{$chance->created_at}}</td>
                                         <td>
-                                            @if(in_array($chance->status,[2,0])&&!$chance->approved)
+                                            @if(in_array($chance->status,[2,0])&&!$is_approved)
                                                 <a class="text-primary"
                                                    href="{{route('chances.cancel',['id'=>$chance->id,'canceled'=>$chance->status!=2])}}">{{$chance->status==2? trans('app.chances.active') : trans('app.chances.declined')}}</a>
                                             @endif
-                                            @if(in_array($chance->status,[3,5])&&!$chance->approved)
+                                            @if(in_array($chance->status,[3,5])&&!$is_approved)
                                                 <i>{{trans('chances::chances.status.'.$chance->status)}}</i>
                                             @endif
-                                            @if($chance->approved)
+                                            @if($is_approved || $chance->status==4)
                                                 <i>{{trans('app.chances.approved_done')}}</i>
                                             @endif
                                         </td>

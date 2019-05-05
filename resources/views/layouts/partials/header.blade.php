@@ -74,7 +74,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">
                             <img src="{{fauth()->user()->photo ? thumbnail(fauth()->user()->photo->path, 'avatar') : asset('assets/images/avatar.jpg')}}" alt="{{fauth()->user()->first_name. ' '.fauth()->user()->last_name}}">
-                        <i class="notify  badge badge-primary">{{count($notifications) > 0 ? count($notifications) : ''}}</i>
+                        <span class="notify  badge badge-primary">{{count($notifications) > 0 ? count($notifications) : ''}}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a>{{fauth()->user()->first_name. ' '.fauth()->user()->last_name}}</a></li>

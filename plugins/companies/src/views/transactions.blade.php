@@ -52,10 +52,11 @@
                         <div class="form-group">
                             <select name="action" class="form-control chosen-select chosen-rtl">
                                 <option value="">{{trans('app.all_actions')}}</option>
-                                @foreach(['tenders.buy'=>trans('app.types.tenders_buy'),
-                                'points.buy'=>trans('app.types.points_buy'),
-                                'add.chance'=>trans('app.types.add_chance')] as $key=>$val)
-                                    <option value="{{$key}}" {{$key==request('action')?'selected':''}}>{{$val}}</option>
+                                @foreach(['tenders.buy'=>('app.types.tenders_buy'),
+                                'points.buy'=>('app.types.points_buy'),
+                                'add.chance'=>('app.types.add_chance'),
+                                'add.center'=>('app.types.add_center')] as $key=>$val)
+                                    <option value="{{$key}}" {{$key==request('action')?'selected':''}}>{{trans($val)}}</option>
                                 @endforeach
                             </select>
                             <button type="submit"
@@ -178,11 +179,11 @@
                                                     {{$transaction->after_points}}
                                                 </td>
 
-                                            <td>
-                                                <small>{{ $transaction->created_at->format('Y-m-d h:i a')}}</small>
-                                            </td>
+                                                <td>
+                                                    <small>{{ $transaction->created_at->format('Y-m-d h:i a')}}</small>
+                                                </td>
 
-                                        </tr>@endif
+                                            </tr>@endif
                                     @endforeach
                                     </tbody>
                                 </table>
@@ -196,7 +197,7 @@
                                 </div>
                             </div>
                         @else
-                            {{ trans("companies::companies.no_records") }}
+                            {{ trans("companies::companies.transaction_no_records") }}
                         @endif
                     </div>
                 </div>

@@ -4,6 +4,19 @@
  * WEB
  */
 
+
+Route::group([
+    "prefix" => ADMIN,
+    "middleware" => ["web", "auth:backend", "can:companies.transactions"],
+    "namespace" => "Dot\\Companies\\Controllers"
+], function ($route) {
+    $route->group(["prefix" => "companies"], function ($route) {
+        $route->any('/transactions', ["as" => "admin.companies.transactions", "uses" => "CompaniesController@transactions"]);
+    });
+});
+
+
+
 Route::group([
     "prefix" => ADMIN,
     "middleware" => ["web", "auth:backend", "can:companies.manage"],
@@ -16,15 +29,3 @@ Route::group([
         $route->any('/{id}/edit', ["as" => "admin.companies.edit", "uses" => "CompaniesController@edit"]);
     });
 });
-
-
-Route::group([
-    "prefix" => ADMIN,
-    "middleware" => ["web", "auth:backend", "can:companies.transactions"],
-    "namespace" => "Dot\\Companies\\Controllers"
-], function ($route) {
-    $route->group(["prefix" => "companies"], function ($route) {
-        $route->any('/transactions', ["as" => "admin.companies.transactions", "uses" => "CompaniesController@transactions"]);
-    });
-});
-

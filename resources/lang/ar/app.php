@@ -245,10 +245,13 @@ return [
         'declined' => 'الغاء',
         'my_chances' => 'فرصي',
         'details' => 'تفاصيل',
+        'status'=>'الحالة',
         'accepted' => ' اعتماد',
         'posted' => 'فرص تم نشرها',
         'created_successfully' => 'تم إضافة الفرصة بنجاح',
-        'publish' => ' نشر الفرصه'
+        'publish' => ' نشر الفرصه',
+        'active'=>'تفعيل',
+        'approved_done'=>'تم الاعتماد'
     ],
     'fields' => [
         "password" => "كلمة المرور",

@@ -225,6 +225,7 @@ return [
     'chances' => [
         'chances' => 'Chances',
         'chance' => 'Chance',
+        'status' => 'Status',
         'the_chance' => 'Chance',
         'my_chances' => 'My changes',
         'the_chances' => 'Chances',
@@ -261,7 +262,9 @@ return [
         'details' => 'details',
         'accepted' => 'approved',
         'posted' => 'Published chances',
-        'publish' => 'Publish chance'
+        'publish' => 'Publish chance',
+        'active'=>'Activate',
+        'approved_done'=>'Approved'
     ],
     'units' => [
         'unit' => 'Unit',
@@ -292,10 +295,10 @@ return [
         'points_buy' => 'Buy Points',
         'add_chance' => 'Add chance',
         'add_center' => 'Add center',
-        'center_add_disapproved'=>'The center refused and  retrieve your points',
-        'center_add_approved'=>'Service Center Approved',
-        'chances_add_approved'=>'Changes Approved',
-        'chances_add_disapproved'=>'The change refused and  retrieve your points',
+        'center_add_disapproved' => 'The center refused and  retrieve your points',
+        'center_add_approved' => 'Service Center Approved',
+        'chances_add_approved' => 'Changes Approved',
+        'chances_add_disapproved' => 'The change refused and  retrieve your points',
 
     ],
     'account_activated' => 'Account activated',
@@ -328,6 +331,6 @@ return [
     'company_personal' => 'User/Company',
     'offers' => 'Offers',
     'faq' => 'F&Q',
-    'remember_me'=>'Remember me'
+    'remember_me' => 'Remember me'
 
 ];

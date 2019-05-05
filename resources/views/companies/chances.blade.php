@@ -7,6 +7,12 @@
         <div class="row">
             @include('companies.sidebar', ['company_id' => $company->id])
             <div class="col-xs-12 col-md-9">
+                @if(session('message'))
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {{session('message')}}
+                    </div>
+                @endif
                 <div class="profile-box">
 
                     <div class="profile-circle">
@@ -102,8 +108,8 @@
                                     <th scope="col"> {{trans('app.chances.downloads')}}</th>
                                     <th scope="col">{{trans('app.chances.provided_offers')}}</th>
                                     <th scope="col">{{trans('app.chances.accepted')}}</th>
-                                    <th scope="col"> {{trans('app.chances.details')}}</th>
-                                    <th scope="col"> {{trans('app.chances.declined')}}</th>
+                                    {{--                                    <th scope="col"> {{trans('app.chances.details')}}</th>--}}
+                                    <th scope="col"> {{trans('app.chances.status')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -125,8 +131,19 @@
                                             <td>{{$count}}</td>
                                         @endif
                                         <td>{{$chance->approved ? trans('app.chances.approved') : trans('app.chances.not_approved')}}</td>
-                                        <td>{{$chance->file_description}}</td>
-                                        <td>{{$chance->approved ? trans('app.chances.not_approved') : trans('app.chances.declined')}}</td>
+                                        {{--<td>{{$chance->file_description}}</td>--}}
+                                        <td>
+                                            @if(in_array($chance->status,[2,0])&&!$chance->approved)
+                                                <a class="text-primary"
+                                                   href="{{route('chances.cancel',['id'=>$chance->id,'canceled'=>$chance->status!=2])}}">{{$chance->status==2? trans('app.chances.active') : trans('app.chances.declined')}}</a>
+                                            @endif
+                                            @if(in_array($chance->status,[3,5])&&!$chance->approved)
+                                                <i>{{trans('chances::chances.status.'.$chance->status)}}</i>
+                                            @endif
+                                            @if($chance->approved)
+                                                <i>{{trans('app.chances.approved_done')}}</i>
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -161,29 +178,29 @@
                 dateFormat: "yyyy-mm-dd"
             });
             {{--$('#search').on('submit', function (e) {--}}
-                {{--e.preventDefault();--}}
-                {{--var status = [];--}}
-                {{--var search_q = $('[name="search_q"]').val();--}}
-                {{--var created_date = $('#date').datepicker().val();--}}
-                {{--$("input:checkbox[name=status]:checked").each(function () {--}}
+                    {{--e.preventDefault();--}}
+                    {{--var status = [];--}}
+                    {{--var search_q = $('[name="search_q"]').val();--}}
+                    {{--var created_date = $('#date').datepicker().val();--}}
+                    {{--$("input:checkbox[name=status]:checked").each(function () {--}}
                     {{--status.push($(this).val());--}}
-                {{--});--}}
-                {{--var url = "{{route('company.chances', ['id' => $company->id])}}" + "?";--}}
-                {{--url += search_q == !search_q || search_q.length === 0 ||--}}
-                {{--search_q === "" || !/[^\s]/.test(search_q) ||--}}
-                {{--/^\s*$/.test(search_q) || search_q.replace(/\s/g, "") === "" ? "" : "q=" + search_q + "&";--}}
-                {{--url = created_date.length > 0 ? url + "created_at=" + created_date + "&" : url;--}}
-                {{--for (var i = 0; i < status.length; i++) {--}}
+                    {{--});--}}
+                    {{--var url = "{{route('company.chances', ['id' => $company->id])}}" + "?";--}}
+                    {{--url += search_q == !search_q || search_q.length === 0 ||--}}
+                    {{--search_q === "" || !/[^\s]/.test(search_q) ||--}}
+                    {{--/^\s*$/.test(search_q) || search_q.replace(/\s/g, "") === "" ? "" : "q=" + search_q + "&";--}}
+                    {{--url = created_date.length > 0 ? url + "created_at=" + created_date + "&" : url;--}}
+                    {{--for (var i = 0; i < status.length; i++) {--}}
                     {{--url += "status[]=" + status[i];--}}
                     {{--url = i != status.length - 1 ? url + "&" : url;--}}
-                {{--}--}}
-                {{--url = url[url.length - 1] == "&" ? url.slice(0, -1) : url;--}}
+                    {{--}--}}
+                    {{--url = url[url.length - 1] == "&" ? url.slice(0, -1) : url;--}}
 
-                {{--if (url != "{{route('company.chances', ['id' => $company->id])}}" + "?")--}}
+                    {{--if (url != "{{route('company.chances', ['id' => $company->id])}}" + "?")--}}
                     {{--window.location.href = url;--}}
 
-            {{--});--}}
-            $loading = $('<p class="text-center"><i class="fa fa-spinner fa-spin" style="font-size:30px"></i></p>');
+                    {{--});--}}
+                $loading = $('<p class="text-center"><i class="fa fa-spinner fa-spin" style="font-size:30px"></i></p>');
             $('.show-offers').click(function () {
                 $modal = $('#offers');
                 $modal.find('.modal-body').html($loading);

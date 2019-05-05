@@ -78,6 +78,7 @@ class TenderController extends Controller
                 return $query->where('id', $request->get('catgory_id'));
             });
         }
+        $query->where('last_get_offer_at', '>=', Carbon::now());
         $this->data['tenders'] = $query->orderBy('created_at', 'DESC')->paginate(5);
 
         $this->data['cb_downloaded_price_max'] = Tender::max('cb_downloaded_price');

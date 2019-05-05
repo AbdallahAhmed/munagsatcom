@@ -5,6 +5,7 @@ return [
     'register' => 'تسجيل جديد',
     'my_tender' => 'مناقصات تم شراءها ',
     'mycenters' => 'خدماتنا',
+    'file_data'=>'بيان الملف',
     'government_tenders' => 'مناقصات حكومية',
     'service_centers' => 'مراكز خدمية',
     'investment_opportunities' => 'فرص استثمارية',
@@ -218,7 +219,7 @@ return [
         'company_name' => ' أسم المنشأة',
         'chance_name' => 'اسم الفرصة',
         'downloads' => 'عدد التحميل',
-        'provided_offers' => ' عدد العروض المقدمة',
+        'provided_offers' => ' العروض المقدمة',
         'chance_details' => 'تفاصيل  الفرصه',
         'internal_number' => 'الرقم المرجعى الداخلى',
         'closing_date' => 'تاريخ الاغلاق',
@@ -245,10 +246,13 @@ return [
         'declined' => 'الغاء',
         'my_chances' => 'فرصي',
         'details' => 'تفاصيل',
+        'status'=>'الحالة',
         'accepted' => ' اعتماد',
         'posted' => 'فرص تم نشرها',
         'created_successfully' => 'تم إضافة الفرصة بنجاح',
-        'publish' => ' نشر الفرصه'
+        'publish' => ' نشر الفرصه',
+        'active'=>'تفعيل',
+        'approved_done'=>'تم الاعتماد'
     ],
     'fields' => [
         "password" => "كلمة المرور",
@@ -334,6 +338,7 @@ return [
     'approved'=>'اعتماد',
     'offers'=>'العروض المقدمة',
     'faq'=>'الاسئلة الشائعة',
+    'remember_me'=>'تذكرنى'
 
 
 

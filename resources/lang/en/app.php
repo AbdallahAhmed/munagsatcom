@@ -5,7 +5,7 @@ return [
     'register' => 'Register',
     'my_tender' => 'Tenders were purchased ',
     'mycenters' => 'My service',
-
+    'file_data'=>'File data',
     'government_tenders' => 'Government tenders',
     'service_centers' => 'Service center',
     'investment_chances' => 'Investment chances',
@@ -225,6 +225,7 @@ return [
     'chances' => [
         'chances' => 'Chances',
         'chance' => 'Chance',
+        'status' => 'Status',
         'the_chance' => 'Chance',
         'my_chances' => 'My changes',
         'the_chances' => 'Chances',
@@ -261,7 +262,9 @@ return [
         'details' => 'details',
         'accepted' => 'approved',
         'posted' => 'Published chances',
-        'publish' => 'Publish chance'
+        'publish' => 'Publish chance',
+        'active'=>'Activate',
+        'approved_done'=>'Approved'
     ],
     'units' => [
         'unit' => 'Unit',
@@ -292,10 +295,10 @@ return [
         'points_buy' => 'Buy Points',
         'add_chance' => 'Add chance',
         'add_center' => 'Add center',
-        'center_add_disapproved'=>'The center refused and  retrieve your points',
-        'center_add_approved'=>'Service Center Approved',
-        'chances_add_approved'=>'Changes Approved',
-        'chances_add_disapproved'=>'The change refused and  retrieve your points',
+        'center_add_disapproved' => 'The center refused and  retrieve your points',
+        'center_add_approved' => 'Service Center Approved',
+        'chances_add_approved' => 'Changes Approved',
+        'chances_add_disapproved' => 'The change refused and  retrieve your points',
 
     ],
     'account_activated' => 'Account activated',
@@ -327,6 +330,7 @@ return [
     'about_company' => 'About Company',
     'company_personal' => 'User/Company',
     'offers' => 'Offers',
-    'faq' => 'F&Q'
+    'faq' => 'F&Q',
+    'remember_me' => 'Remember me'
 
 ];

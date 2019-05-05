@@ -56,6 +56,7 @@ return [
         'blocked'=>'الحذر',
         'points'=>'النقاط'
     ],
+    'transaction_no_records'=>'لايوجد عمليات ',
     "events" => [
         'created' => 'تم إنشاء منشأة بنجاح',
         'updated' => 'تم حفظ المنشأة بنجاح',

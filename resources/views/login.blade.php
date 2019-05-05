@@ -40,11 +40,25 @@
                                 <span class="focus-border"><i></i></span>
                             </div>
                         </div>
-                        <div class="text-center" style="cursor: pointer">
-                            <a href="{{route('forget-password')}}">{{trans('app.forget_password')}}</a>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-3">
+                                <div class="form-group form-check">
+                                    <input type="checkbox" name="remember_me" value="1" class="form-check-input" id="remember_me">
+                                    <label class="form-check-label"  style="padding: 0;" for="remember_me">{{trans('app.remember_me')}}</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-center" style="cursor: pointer">
+                                    <a href="{{route('forget-password')}}">{{trans('app.forget_password')}}</a>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-                    @if($errors->any())
+
+
+                @if($errors->any())
                         <div class="alert alert-danger">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                             <ul>

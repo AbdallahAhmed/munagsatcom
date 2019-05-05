@@ -70,9 +70,10 @@ Route::get('/sss',function (){
     Route::post('centers/contact', 'CenterController@contact')->name('centers.contact');
 
     Route::get('chances', 'ChanceController@index')->name('chances');
-    Route::get('chances/{slug}', 'ChanceController@show')->name('chances.show');
     Route::post('chances/offers', 'ChanceController@addOffer')->name('chances.offers');
+    Route::get('chances/{slug}', 'ChanceController@show')->name('chances.show');
     Route::get('chances/{id}/download', 'ChanceController@download')->name('chances.download');
+    Route::get('chances/{id}/cancel', 'CompanyController@chancesCancel')->name('chances.cancel');
 
 
     Route::group(['middleware' => ['company']], function ($router) {

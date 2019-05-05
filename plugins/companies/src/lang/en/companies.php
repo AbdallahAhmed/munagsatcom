@@ -53,6 +53,7 @@ return [
         'user_trans'=>'User',
         'points'=>'Points'
     ],
+    'transaction_no_records'=>'No transactions',
     "events" => [
         'created' => 'Company created successfully',
         'updated' => 'Company updated successfully',

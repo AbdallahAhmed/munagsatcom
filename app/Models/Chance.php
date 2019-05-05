@@ -29,7 +29,7 @@ class Chance extends \Dot\Chances\Models\Chance
     public function getProgressAttribute()
     {
         $now = Carbon::now();
-        $diff = max($this->closing_date->diffInDays($this->created_at),1);
+        $diff = max($this->closing_date->diffInDays($this->created_at), 1);
         return max(min(((($diff - max($now->diffInDays($this->closing_date, false), 0)) / $diff) * 100), 100), 1);
     }
 
@@ -47,6 +47,22 @@ class Chance extends \Dot\Chances\Models\Chance
     public function getClosingDateAttribute()
     {
         return Carbon::parse($this->original['closing_date'])->setTimezone('GMT+3');
+    }
+
+
+    /**
+     *
+     */
+    public function can_edit()
+    {
+        if ($this->user_id == fauth()->id()) {
+            return true;
+        }
+        $user = fauth()->user();
+        if ($user->in_company) {
+            return $user->company[0]->id == $this->company_id;
+        }
+        return false;
     }
 
 }

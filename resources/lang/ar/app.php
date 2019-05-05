@@ -218,7 +218,7 @@ return [
         'company_name' => ' أسم المنشأة',
         'chance_name' => 'اسم الفرصة',
         'downloads' => 'عدد التحميل',
-        'provided_offers' => ' عدد العروض المقدمة',
+        'provided_offers' => ' العروض المقدمة',
         'chance_details' => 'تفاصيل  الفرصه',
         'internal_number' => 'الرقم المرجعى الداخلى',
         'closing_date' => 'تاريخ الاغلاق',

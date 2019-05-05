@@ -56,7 +56,7 @@
                                     <div class="form-group-lg clearfix">
                                         @foreach($status as $st)
                                             <div class=" col-md-4">
-                                                <input name="status" value="{{$st}}" type="checkbox"
+                                                <input name="status[]" value="{{$st}}" type="checkbox"
                                                        @if(in_array($st, $chosen_status)) checked @endif>
                                                 <label> {{trans('app.status_array.'.$st)}} </label>
                                             </div>
@@ -160,29 +160,29 @@
             $('#date').datepicker({
                 dateFormat: "yyyy-mm-dd"
             });
-            $('#search').on('submit', function (e) {
-                e.preventDefault();
-                var status = [];
-                var search_q = $('[name="search_q"]').val();
-                var created_date = $('#date').datepicker().val();
-                $("input:checkbox[name=status]:checked").each(function () {
-                    status.push($(this).val());
-                });
-                var url = "{{route('company.chances', ['id' => $company->id])}}" + "?";
-                url += search_q == !search_q || search_q.length === 0 ||
-                search_q === "" || !/[^\s]/.test(search_q) ||
-                /^\s*$/.test(search_q) || search_q.replace(/\s/g, "") === "" ? "" : "q=" + search_q + "&";
-                url = created_date.length > 0 ? url + "created_at=" + created_date + "&" : url;
-                for (var i = 0; i < status.length; i++) {
-                    url += "status[]=" + status[i];
-                    url = i != status.length - 1 ? url + "&" : url;
-                }
-                url = url[url.length - 1] == "&" ? url.slice(0, -1) : url;
+            {{--$('#search').on('submit', function (e) {--}}
+                {{--e.preventDefault();--}}
+                {{--var status = [];--}}
+                {{--var search_q = $('[name="search_q"]').val();--}}
+                {{--var created_date = $('#date').datepicker().val();--}}
+                {{--$("input:checkbox[name=status]:checked").each(function () {--}}
+                    {{--status.push($(this).val());--}}
+                {{--});--}}
+                {{--var url = "{{route('company.chances', ['id' => $company->id])}}" + "?";--}}
+                {{--url += search_q == !search_q || search_q.length === 0 ||--}}
+                {{--search_q === "" || !/[^\s]/.test(search_q) ||--}}
+                {{--/^\s*$/.test(search_q) || search_q.replace(/\s/g, "") === "" ? "" : "q=" + search_q + "&";--}}
+                {{--url = created_date.length > 0 ? url + "created_at=" + created_date + "&" : url;--}}
+                {{--for (var i = 0; i < status.length; i++) {--}}
+                    {{--url += "status[]=" + status[i];--}}
+                    {{--url = i != status.length - 1 ? url + "&" : url;--}}
+                {{--}--}}
+                {{--url = url[url.length - 1] == "&" ? url.slice(0, -1) : url;--}}
 
-                if (url != "{{route('company.chances', ['id' => $company->id])}}" + "?")
-                    window.location.href = url;
+                {{--if (url != "{{route('company.chances', ['id' => $company->id])}}" + "?")--}}
+                    {{--window.location.href = url;--}}
 
-            });
+            {{--});--}}
             $loading = $('<p class="text-center"><i class="fa fa-spinner fa-spin" style="font-size:30px"></i></p>');
             $('.show-offers').click(function () {
                 $modal = $('#offers');

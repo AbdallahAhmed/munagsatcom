@@ -60,43 +60,46 @@ class CompanyController extends Controller
         $chances = Chance::query()->where('company_id',$id);
         $this->data['chosen_status'] = $status;
 
-        $chances->where(function ($query) use ($status) {
+        if($request->filled('status')){
+            $chances->where(function ($query) use ($status) {
 
-            foreach ($status as $st) {
-                switch ($st) {
-                    case 0:
-                        $query->orWhere(function ($q) {
-                            $q->opened();
-                        });
-                        break;
-                    case 1:
-                        $query->orWhere(function ($q) {
-                            $q->closed();
-                        });
-                        break;
-                    case 2:
-                        $query->orWhere(function ($q) {
-                            $q->cancelled();
-                        });
-                        break;
-                    case 3:
-                        $query->orWhere(function ($q) {
-                            $q->pending();
-                        });
-                        break;
-                    case 4:
-                        $query->orWhere(function ($q) {
-                            $q->approved();
-                        });
-                        break;
-                    case 5:
-                        $query->orWhere(function ($q) {
-                            $q->rejected();
-                        });
-                        break;
+                foreach ($status as $st) {
+                    switch ($st) {
+                        case 0:
+                            $query->orWhere(function ($q) {
+                                $q->opened();
+                            });
+                            break;
+                        case 1:
+                            $query->orWhere(function ($q) {
+                                $q->closed();
+                            });
+                            break;
+                        case 2:
+                            $query->orWhere(function ($q) {
+                                $q->cancelled();
+                            });
+                            break;
+                        case 3:
+                            $query->orWhere(function ($q) {
+                                $q->pending();
+                            });
+                            break;
+                        case 4:
+                            $query->orWhere(function ($q) {
+                                $q->approved();
+                            });
+                            break;
+                        case 5:
+                            $query->orWhere(function ($q) {
+                                $q->rejected();
+                            });
+                            break;
+                    }
                 }
-            }
-        });
+            });
+
+        }
 
         if ($request->get('q')) {
             $q = trim(urldecode($request->get('q')));

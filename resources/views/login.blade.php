@@ -45,7 +45,7 @@
                             <div class="col-md-3">
                                 <div class="form-group form-check">
                                     <input type="checkbox" name="remember_me" value="1" class="form-check-input" id="remember_me">
-                                    <label class="form-check-label" for="remember_me">{{trans('app.remember_me')}}</label>
+                                    <label class="form-check-label"  style="padding: 0;" for="remember_me">{{trans('app.remember_me')}}</label>
                                 </div>
                             </div>
                             <div class="col-md-6">

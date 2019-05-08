@@ -102,7 +102,6 @@
                                             </div>
                                             <div class="drop-click-zone">
                                                 <div class="filethumbnail">
-                                                    <img src="{{thumbnail($center->image->path, 'single_center')}}">
                                                 </div>
                                             </div>
                                             <div class="info"></div>

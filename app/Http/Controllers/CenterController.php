@@ -82,7 +82,7 @@ class CenterController extends Controller
             return abort(403);
         }
 
-        if (mypoints() < option('service_center_add', 0)) {
+        if (/*mypoints()*/ 50 < option('service_center_add', 0)) {
             return 'Can\'nt add this center';
         }
         $this->data['company'] = $company = Company::findOrFail($id);
@@ -127,6 +127,54 @@ class CenterController extends Controller
         $this->data['services'] = Service::published()->get();
 
         return view('centers.create', $this->data);
+    }
+
+    /**
+     * POST {lang}/company/{id}/center/update
+     * @route centers.update
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function update(Request $request, $company_id, $id)
+    {
+        $center = Center::findOrFail($id);
+        if ($request->method() == "POST") {
+            $validator = Validator::make($request->all(), [
+                "name" => 'required',
+                'sector_id' => 'required',
+                'address' => 'required',
+                'logo' => 'mimes:jpg,png,jpeg',
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+            }
+            $center->name = $request->get("name");
+            $center->sector_id = $request->get("sector_id");
+            $center->address = $request->get("address");
+            $center->mobile_number = $request->get('mobile_number', "");
+            $center->phone_number = $request->get('phone_number', "");
+            $center->email_address = fauth()->user()->email;
+            $center->lat = $request->get('lat');
+            $center->lng = $request->get('lng');
+            if (!$request->get('image_id')) {
+                if ($request->hasFile('logo')) {
+                    $center->image_id = (new Media())->saveFile($request->file('logo'));
+                }
+            }
+            $center->save();
+            $center->services()->sync(($request->get("services", [])));
+
+            return redirect()->route('centers.update', ['id' => $company_id, 'center_id' => $id])->with('status', trans('app.centers.updated_successfully'));
+        }
+
+        $this->data['sectors'] = Sector::published()->get();
+        $this->data['services'] = Service::published()->get();
+        $this->data['company'] = Company::find($company_id);
+        $this->data['center'] = $center;
+        $this->data["centers_services"] = $center->services->pluck("id")->toArray();
+
+        return view('centers.edit', $this->data);
     }
 
     /**

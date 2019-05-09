@@ -19,6 +19,7 @@ return [
     'setting' => 'Setting',
     'rights' => 'All copyrights reserved',
     'phone' => 'Phone',
+    'edit'=>'Edit',
     'personal' => 'Personal',
     'company' => 'Company',
     'company_details' => 'Company details',
@@ -199,8 +200,9 @@ return [
         'contact' => 'Message center',
         'not_found' => 'Not found Sector',
         'created_successfully' => 'Center created successfully',
-        'user_added' => 'Centers added'
-
+        'user_added' => 'Centers added',
+        'published'=>'Published',
+        'under_review'=>'Under review'
 
     ],
     'events' => [

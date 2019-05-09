@@ -64,15 +64,15 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-md-6">
-                                            <div class="row mar-top20">
-                                                <label class="col-xs-12 col-md-2"> {{trans('app.price')}} </label>
-                                                <div class="col-xs-12 col-md-10">
-                                                    <div class="range">
-                                                        <input class="example" type="range" min="100" max="10000"
-                                                               value="100" name="points" step="10">
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            {{--<div class="row mar-top20">--}}
+                                                {{--<label class="col-xs-12 col-md-2"> {{trans('app.price')}} </label>--}}
+                                                {{--<div class="col-xs-12 col-md-10">--}}
+                                                    {{--<div class="range">--}}
+                                                        {{--<input class="example" type="range" min="100" max="10000"--}}
+                                                               {{--value="100" name="points" step="10">--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
                                         </div>
                                         <div class="col-md-6 text-right">
                                             <button type="submit"
@@ -93,14 +93,20 @@
                                         <th scope="col">{{trans('app.centers.center_name')}}</th>
                                         <th scope="col"> {{trans('app.sectors.sector')}}</th>
                                         <th scope="col"> {{trans('app.services.services')}}</th>
-                                        <th scope="col"> {{trans('app.price')}}</th>
+                                        <th scope="col"> {{trans('app.centers.created_at')}}</th>
+                                        <th scope="col"> {{trans('app.edit')}}</th>
 
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($centers as $center)
                                         <tr>
-                                            <td>{{$center->name}}</td>
+                                            <td>
+                                                <a href="{{$center?$center->path:'javascript:void(0)'}}"
+                                                   class="text-primary">{{$center->name}}</a>
+                                                <br>
+                                                <span class="badge badge-success">{{$center->status==1?trans('app.centers.published'):trans('app.centers.under_review')}}</span>
+                                            </td>
                                             <td>{{$center->sector->name}}</td>
                                             <td>
                                                 <div class=" title-larg">
@@ -111,7 +117,10 @@
                                                     </ul>
                                                 </div>
                                             </td>
-                                            <td>{{trans('app.from').$service->price_from.trans("app.reyal")." : ".trans('app.to').$service->price_from.trans("app.reyal")}}</td>
+                                            <td>{{app()->getLocale()=="ar"?arabic_date($center->created_at->toDayDateTimeString()):$center->created_at->toDayDateTimeString()}}</td>
+                                            <td><a class="text-primary"
+                                                   href="{{route('centers.update',['id'=>$company->id,'center_id'=>$center->id])}}">{{trans('app.edit')}}</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>

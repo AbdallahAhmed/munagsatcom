@@ -81,10 +81,16 @@
                                     </div>
                                     <div class="col-md-10">
                                         <div class="title">
-                                            <p> {{trans('app.chances.chance')}}<span><a href="{{$chance->path}}">{{$chance->name}}</a></span>
+                                            <p> {{trans('app.chances.chance')}}<span><a
+                                                            href="{{$chance->path}}">{{$chance->name}}</a></span>
+                                                {{var_dump($chance->can_edit())}}
                                                 @if($chance->can_edit() && !$chance->approved)
-                                                    <a href="{{route('chances.update', ['id' => $chance->company_id, 'chance_id' => $chance->id])}}"><button class="btn btn-primary"><i class="fa fa-edit"></i></button></a></p>
-                                            @endif
+                                                    <a href="{{route('chances.update', ['id' => $chance->company_id, 'chance_id' => $chance->id])}}">
+                                                        <button class="btn btn-primary"><i class="fa fa-edit"></i>
+                                                        </button>
+                                                    </a>
+                                                @endif
+                                            </p>
                                             <p>{{trans('app.the_company')}}
                                                 <span>{{$chance->company?$chance->company->name:'--'}}</span></p>
                                         </div>
@@ -132,22 +138,26 @@
                                         <p>{{trans('app.chances.closing_date')}}</p>
                                         <p><i class="fa fa-calendar"></i>
                                             <span class="text-grey">{{hijri_date($chance->closing_date)}}</span>
-                                            <small class="center" style="display: block">{{($chance->closing_date->format('Y/m/d'))}}</small>
+                                            <small class="center"
+                                                   style="display: block">{{($chance->closing_date->format('Y/m/d'))}}</small>
 
                                         </p>
                                     @endif
                                 </div>
                                 <div class="item one_thrd">
                                     <p>{{trans('app.chances.due_date')}}</p>
-                                    <p><i class="fa fa-calendar"></i> <span class="text-grey">{{hijri_date($chance->closing_date)}} {{$chance->closing_date->format('H:i')}}</span>
-                                        <small class="center" style="display: block">{{($chance->closing_date->format('Y/m/d'))}}</small>
+                                    <p><i class="fa fa-calendar"></i> <span
+                                                class="text-grey">{{hijri_date($chance->closing_date)}} {{$chance->closing_date->format('H:i')}}</span>
+                                        <small class="center"
+                                               style="display: block">{{($chance->closing_date->format('Y/m/d'))}}</small>
                                     </p>
                                 </div>
                                 <div class="item one_thrd">
                                     <p>{{trans('app.chances.created_at')}}</p>
                                     <p><i class="fa fa-calendar"></i>
                                         <span class="text-grey">{{hijri_date($chance->created_at)}}</span>
-                                        <small class="center" style="display: block">{{($chance->created_at->format('Y/m/d'))}}</small>
+                                        <small class="center"
+                                               style="display: block">{{($chance->created_at->format('Y/m/d'))}}</small>
                                     </p>
                                 </div>
                             </div>

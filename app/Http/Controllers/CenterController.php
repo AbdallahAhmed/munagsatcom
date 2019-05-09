@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\CenterContactEmail;
 use App\Models\Center;
 use App\Models\Company;
+use App\Models\Notifications;
 use App\User;
 use Dot\Auth\Auth;
 use Dot\Chances\Models\Sector;
@@ -164,6 +165,15 @@ class CenterController extends Controller
             }
             $center->save();
             $center->services()->sync(($request->get("services", [])));
+            $notification = new Notifications();
+
+            $notification->key = "center.update";
+            $notification->user_id = fauth()->id();
+            $notification->isRead = 0;
+            $data = array();
+            $data['center_id'] = $center->id;
+            $notification->data = json_encode($data);
+            $notification->save();
 
             return redirect()->route('centers.update', ['id' => $company_id, 'center_id' => $id])->with('status', trans('app.centers.updated_successfully'));
         }

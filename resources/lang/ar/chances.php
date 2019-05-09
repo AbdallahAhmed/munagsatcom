@@ -35,7 +35,8 @@ return [
     'file_type_error' => 'يجب ان تكون الملفات من نوع pdf',
     "yes" => "نعم",
     "no" => "لا",
-
+    "change_file" => "تغير الملف",
+    "add_file" => "إضافة الملف",
 
     'type_post' => "خبر",
     'type_category' => "تصنيف",
@@ -53,6 +54,7 @@ return [
         "sectors" => "القطاعات",
         "value" => "قيمة الفرصة",
         "file" => "الملف",
+        "files" => "الملفات",
         "quantity" => "الكمية"
 
     ],

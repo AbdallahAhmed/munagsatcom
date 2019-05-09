@@ -176,7 +176,7 @@ class ChanceController extends Controller
                 'chance_value' => 'required',
                 'files.*' => 'required|mimes:pdf',
                 'sector_id' => 'required'
-            ],['mimes' => trans('chances.file_type_error')]);
+            ], ['mimes' => trans('chances.file_type_error')]);
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
             }
@@ -195,7 +195,6 @@ class ChanceController extends Controller
             $units = $request->get("units", []);
             $units_quantity = $request->get("units_quantity", []);
             $units_name = $request->get("units_name", []);
-            $sectors = $request->get("sectors", []);
             $syncUnit = array();
             foreach ($units as $key => $unit) {
                 if ($unit != "" && !$units_quantity[$key]) {
@@ -232,8 +231,6 @@ class ChanceController extends Controller
 
             if (!$units || empty($units[0]))
                 $errors->add("units", trans("chances::chances.attributes.units") . " " . trans("chances::chances.required") . ".");
-            /*if (!$sectors)
-                $errors->add("sectors", trans("chances::chances.attributes.sectors") . " " . trans("chances::chances.required") . ".");*/
             if ($errors->messages())
                 return redirect()->back()->withErrors($errors)->withInput($request->all());
 
@@ -250,8 +247,6 @@ class ChanceController extends Controller
                     ]);
                 }
             }
-            /*     $media = new Media();
-                 $chance->media_id = $media->saveFile($request->file('file'));*/
             foreach ($others_units as $key => $unit) {
                 DB::table('other_units')->insert([
                     'chance_id' => $chance->id,
@@ -260,7 +255,6 @@ class ChanceController extends Controller
                     'quantity' => $others_quantity[$key]
                 ]);
             }
-            //$chance->sectors()->sync($sectors);
 
             foreach ($units as $key => $unit) {
                 DB::table('chances_units')->insert([
@@ -294,6 +288,143 @@ class ChanceController extends Controller
 
     }
 
+
+    /** POST {lang}/company/{id}/chance/{chance_id}/update
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function update(Request $request, $company_id, $id)
+    {
+        $errors = new MessageBag();
+        $this->data['chance'] = $chance = Chance::findOrFail($id);
+        $this->data['company'] = $company = Company::findOrFail($company_id);
+        if ($request->method() == "POST") {
+            $validator = Validator::make($request->all(), [
+                "name" => 'required',
+                'number' => 'required',
+                'closing_date' => 'required',
+                'chance_value' => 'required',
+                'files.*' => 'required|mimes:pdf',
+                'sector_id' => 'required'
+            ], ['mimes' => trans('chances.file_type_error')]);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+            }
+            $chance->name = $request->get("name");
+            $chance->number = $request->get("number");
+            $chance->sector_id = $request->get("sector_id");
+            $chance->closing_date = $chance->closing_date = $request->get("closing_date") ? \Illuminate\Support\Carbon::createFromFormat('Y-m-d', $request->get("closing_date")) : null;
+
+            $units = $request->get("units", []);
+            $units_quantity = $request->get("units_quantity", []);
+            $units_name = $request->get("units_name", []);
+            $syncUnit = array();
+            foreach ($units as $key => $unit) {
+                if ($unit != "" && !$units_quantity[$key]) {
+                    $errors->add("units_names", trans("chances::chances.attributes.quantity") . " " . trans("services::centers.required") . ".");
+                    break;
+                }
+                if ($unit != '' && !$units_name[$key]) {
+                    $errors->add("units_names", trans("chances::units.attributes.name") . " " . trans("services::centers.required") . ".");
+                    break;
+                }
+                if ($unit != "")
+                    $syncUnit[$unit] = ["quantity" => $units_quantity[$key], "name" => $units_name[$key]];
+            }
+
+            $others_units = $request->get("others_units", []);
+            if (count($others_units)) {
+                $others_quantity = $request->get("others_quantity", []);
+                $others_names = $request->get("others_name", []);
+                foreach ($others_units as $key => $unit) {
+                    if (!$unit) {
+                        $errors->add("units", trans("chances::units.attributes.name") . " " . trans("services::centers.required") . ".");
+                        break;
+                    }
+                    if (!$others_names[$key] && ($unit != null || !$others_quantity[$key])) {
+                        $errors->add("units_names", trans("chances::units.attributes.name") . " " . trans("services::centers.required") . ".");
+                        break;
+                    }
+                    if (!$others_quantity[$key] && ($unit != null || !$others_names[$key])) {
+                        $errors->add("units_quantity", trans("chances::units.attributes.quantity") . " " . trans("services::centers.required") . ".");
+                        break;
+                    }
+                }
+            }
+            if (!$units || empty($units[0]))
+                $errors->add("units", trans("chances::chances.attributes.units") . " " . trans("chances::chances.required") . ".");
+            if ($errors->messages())
+                return redirect()->back()->withErrors($errors)->withInput($request->all());
+
+            DB::table('chances_units')->where('chance_id', $chance->id)->delete();
+            foreach ($units as $key => $unit) {
+                DB::table('chances_units')->insert([
+                    'chance_id' => $chance->id,
+                    'unit_id' => $unit,
+                    'quantity' => $units_quantity[$key],
+                    'name' => $units_name[$key]
+                ]);
+            }
+
+
+            if ($request->filled('deleted_files')) {
+                foreach ($request->get('deleted_files') as $key => $file) {
+                    if ($file) {
+                        DB::table('chances_files')->where([
+                            ['chance_id', $chance->id],
+                            ['media_id', $request->get('deleted_media')[$key]],
+                            ['file_name', $file]
+                        ])->delete();
+                    }
+                }
+            }
+            if ($request->file('new_files')) {
+                foreach (($request->file('new_files')) as $key => $file) {
+                    if ($request->get('new_names')[$key]) {
+                        $media = new Media();
+                        $mid = $media->saveFile($file);
+                        DB::table('chances_files')->insert([
+                            'chance_id' => $chance->id,
+                            'media_id' => $mid,
+                            'file_name' => $request->get('new_names')[$key] ? $request->get('new_names')[$key] : ''
+                        ]);
+                    }
+                }
+            }
+            foreach ($others_units as $key => $unit) {
+                DB::table('other_units')->insert([
+                    'chance_id' => $chance->id,
+                    'name' => $others_names[$key],
+                    'unit' => $unit,
+                    'quantity' => $others_quantity[$key]
+                ]);
+            }
+
+            $chance->save();
+
+            $notification = new Notifications();
+            $notification->key = "chance.update";
+            $notification->user_id = fauth()->id();
+            $notification->isRead = 0;
+            $data = array();
+            $data['chance_id'] = $chance->id;
+            $notification->data = json_encode($data);
+            $notification->save();
+
+
+            return redirect()->route('chances.update', ['id' => $company->id, 'chance_id' => $chance->id])->with('status', trans('app.chances.updated_successfully'));
+        }
+
+        $this->data["sectors"] = Sector::published()->get();
+
+        $this->data["units"] = Unit::published()->get();
+        $this->data['files'] = $chance->files;
+
+        return view('chances.edit', $this->data);
+//        return view('chances.coming-soon');
+
+    }
 
     /**
      * GET {lang?}/changes/{id}/download

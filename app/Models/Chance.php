@@ -55,6 +55,8 @@ class Chance extends \Dot\Chances\Models\Chance
      */
     public function can_edit()
     {
+        if(!fauth()->user())
+            return false;
         if ($this->user_id == fauth()->id()) {
             return true;
         }

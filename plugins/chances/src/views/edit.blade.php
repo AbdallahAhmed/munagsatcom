@@ -90,6 +90,7 @@
                                 @foreach($chance->files as $file)
                                     <div class="form-group">
                                         <div class="col-md-6">
+                                            <p>{{$file->pivot->file_name}}</p>
                                         </div>
                                         <a href="{{uploads_url().$file->path}}"
                                            target="_blank">{{trans("chances::chances.file_download")}}</a>

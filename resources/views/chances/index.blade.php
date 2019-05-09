@@ -81,8 +81,10 @@
                                     </div>
                                     <div class="col-md-10">
                                         <div class="title">
-                                            <p> {{trans('app.chances.chance')}}<span><a
-                                                            href="{{$chance->path}}">{{$chance->name}}</a></span></p>
+                                            <p> {{trans('app.chances.chance')}}<span><a href="{{$chance->path}}">{{$chance->name}}</a></span>
+                                                @if($chance->can_edit() && !$chance->approved)
+                                                    <a href="{{route('chances.update', ['id' => $chance->company_id, 'chance_id' => $chance->id])}}"><button class="btn btn-primary"><i class="fa fa-edit"></i></button></a></p>
+                                            @endif
                                             <p>{{trans('app.the_company')}}
                                                 <span>{{$chance->company?$chance->company->name:'--'}}</span></p>
                                         </div>

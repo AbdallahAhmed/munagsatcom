@@ -214,7 +214,6 @@ return [
     'chances' => [
         'chances' => 'فرص استثمارية ',
         'the_chances' => 'الفرص',
-        'my_chances' => 'فرصي',
         'chance' => 'الفرصة',
         'chances_est' => 'فرص استثماريه',
         'search' => 'بحث فى الفرص  ',
@@ -252,6 +251,7 @@ return [
         'accepted' => ' اعتماد',
         'posted' => 'فرص تم نشرها',
         'created_successfully' => 'تم إضافة الفرصة بنجاح',
+        'updated_successfully' => 'تم تعديل الفرصة بنجاح',
         'publish' => ' نشر الفرصه',
         'active'=>'تفعيل',
         'approved_done'=>'تم الاعتماد'

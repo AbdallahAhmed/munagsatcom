@@ -121,7 +121,7 @@ class Chance extends Model
     }
 
     public function units(){
-        return $this->belongsToMany(Unit::class, "chances_units", "chance_id", "unit_id")->withPivot(['quantity', 'name']);
+        return $this->belongsToMany(Unit::class, "chances_units", "chance_id", "unit_id")->withPivot(['quantity', 'name', 'id']);
     }
 
     public function files(){

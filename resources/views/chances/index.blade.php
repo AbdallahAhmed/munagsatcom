@@ -83,7 +83,6 @@
                                         <div class="title">
                                             <p> {{trans('app.chances.chance')}}<span><a
                                                             href="{{$chance->path}}">{{$chance->name}}</a></span>
-                                                {{var_dump($chance->can_edit())}}
                                                 @if($chance->can_edit() && !$chance->approved)
                                                     <a href="{{route('chances.update', ['id' => $chance->company_id, 'chance_id' => $chance->id])}}">
                                                         <button class="btn btn-primary"><i class="fa fa-edit"></i>

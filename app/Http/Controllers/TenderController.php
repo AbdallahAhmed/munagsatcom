@@ -79,7 +79,7 @@ class TenderController extends Controller
             });
         }
         $query->where('last_get_offer_at', '>=', Carbon::now());
-        $this->data['tenders'] = $query->orderBy('created_at', 'DESC')->paginate(5);
+        $this->data['tenders'] = $query->orderBy('created_at', 'DESC')->paginate(15);
 
         $this->data['cb_downloaded_price_max'] = Tender::max('cb_downloaded_price');
         return view('tenders.index', $this->data);
@@ -114,7 +114,6 @@ class TenderController extends Controller
         if (!$tender) {
             abort(404);
         }
-
         $user = fauth()->user();
 
         if ($user->in_company) {
@@ -125,28 +124,30 @@ class TenderController extends Controller
             return 'Can\'t buy this twice.';
         }
 
-        if(!fauth()->user()->can_buy){
+        if (!fauth()->user()->can_buy) {
             return 'Can\'t you can buy tenders.';
         }
 
-        if ($tender->points > $user->points) {
+        $paypoints = tax($tender->points, false);
+        if ($paypoints > $user->points) {
             return 'Can\'t buy this you have\'nt points enough.';
         }
 
-        $after_points = $user->points - $tender->points;
+        $after_points = $user->points - $paypoints;
 
         $points = $user->points;
 
         $user->points = $after_points;
-        $user->spent_points = $user->spent_points + $tender->points;
+        $user->spent_points = $user->spent_points + $paypoints;
         $user->save();
 
 
         Transaction::create([
             'before_points' => $points,
             'after_points' => $after_points,
-            'points' => $tender->points,
+            'points' => $paypoints,
             'object_id' => $tender->id,
+            'tax' => tax($tender->points),
             'user_id' => fauth()->id(),
             'action' => 'tenders.buy',
             'company_id' => fauth()->user()->in_company ? $user->id : 0

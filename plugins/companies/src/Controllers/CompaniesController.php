@@ -7,6 +7,7 @@ use App\Mail\CompanyStatusChange;
 use App\Models\Transaction;
 use Dot\Chances\Models\Sector;
 use Dot\Companies\Models\Company;
+use Dot\Platform\Classes\Carbon;
 use Dot\Platform\Controller;
 use Dot\Users\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -159,6 +160,8 @@ class CompaniesController extends Controller
         if (!Auth::user()->can("companies.transactions")) {
             abort(404);
         }
+
+
         $this->data["sort"] = (Request::filled("sort")) ? Request::get("sort") : "created_at";
         $this->data["order"] = (Request::filled("order")) ? Request::get("order") : "DESC";
         $this->data['per_page'] = (Request::filled("per_page")) ? Request::get("per_page") : NULL;
@@ -170,11 +173,24 @@ class CompaniesController extends Controller
         }
 
         if (Request::filled('user_id')) {
-            $query->where('user_id', request('user_id'));
+            $this->data["user"] = $user = \App\User::findOrFail(Request::get('user_id'));
+            $this->data["added_points"] = $user->in_company ? \App\Models\Transaction::where(['company_id' => $user->company[0]->id, 'action' => 'points.buy'])->sum('points')
+                : \App\Models\Transaction::where(['user_id' => $user->id, 'action' => 'points.buy'])->sum('points');
+
+
+            if ($user->in_company) {
+                $query->where('company_id', $user->company[0]->id);
+            } else {
+                $query->where('user_id', request('user_id'));
+            }
+
         }
 
         if (Request::filled('company_id')) {
             $query->where('company_id', request('company_id'));
+            $this->data["user"] = $user = \App\User::findOrFail(\App\Models\Company::findOrFail(request('company_id'))->user_id);
+            $this->data["added_points"] = $user->in_company ? \App\Models\Transaction::where(['company_id' => $user->company[0]->id, 'action' => 'points.buy'])->sum('points')
+                : \App\Models\Transaction::where(['user_id' => $user->id, 'action' => 'points.buy'])->sum('points');
         }
 
         if (Request::filled('q')) {
@@ -187,10 +203,25 @@ class CompaniesController extends Controller
                 $query->where('name', 'LIKE', '%' . request('q') . '%');
             });
         }
+        if (Request::filled('to')) {
+            $query->where('created_at', '<=', request('to'));
+        }
+
+        if (Request::filled('form')) {
+            $query->where('created_at', '>=', request('form'));
+        }
+
 
         $this->data["transactions"] = $query->paginate($this->data['per_page']);
 
         return view("companies::transactions", $this->data);
+    }
+
+    /**
+     *
+     */
+    public function setDataChart($user)
+    {
     }
 
 }

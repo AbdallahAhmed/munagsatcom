@@ -61,10 +61,10 @@
                                                 @endforeach
                                             </div>
                                         </li>
-                                        <li class="clearfix">
-                                            <div class="one_xsmall title">{{trans('app.chances.chance_value')}}</div>
-                                            <div class="one_xlarg">{{$chance->value}}</div>
-                                        </li>
+                                        {{-- <li class="clearfix">
+                                             <div class="one_xsmall title">{{trans('app.chances.chance_value')}}</div>
+                                             <div class="one_xlarg">{{$chance->value}}</div>
+                                         </li>--}}
                                         <li class="clearfix">
                                             <div class="one_xsmall title">{{trans('app.chances.rules_book')}}</div>
                                             <div class="one_xlarg"><a class="btn btn-default" target="_blank"
@@ -98,6 +98,18 @@
                                             {{$unit->pivot->name}}
                                         </td>
                                         <td>{{$unit->pivot->quantity}}</td>
+                                    </tr>
+                                @endforeach
+
+                                @foreach($otherUnits as $unit)
+                                    <tr>
+                                        <td>
+                                            <h3 style="text-align: center;">{{$unit->name }}</h3>
+                                        </td>
+                                        <td>
+                                            {{$unit->unit}}
+                                        </td>
+                                        <td>{{$unit->quantity}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

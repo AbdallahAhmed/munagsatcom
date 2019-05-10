@@ -68,38 +68,44 @@
                             </div>
                             <div class="form-group">
                                 <label
-                                        for="input-number">{{ trans("chances::chances.attributes.closing_date") }}</label>
+                                    for="input-number">{{ trans("chances::chances.attributes.closing_date") }}</label>
                                 <input name="closing_date" type="date" data-format="YYYY-mm-dd"
                                        value="{{ DateTime::createFromFormat('Y-m-d H:i:s', $chance->closing_date)->format("Y-m-d") }}"
                                        class="chosen-rtl form-control" id="input-name"
                                        placeholder="{{ trans("chances::chances.attributes.closing_date") }}">
                             </div>
-                            <div class="form-group">
+                            {{--<div class="form-group">
                                 <label
                                         for="input-number">{{ trans("chances::chances.attributes.value") }}</label>
                                 <input name="value" type="text"
                                        value="{{ @Request::old("value", $chance->value)}}"
                                        class="form-control" id="input-name"
                                        placeholder="{{ trans("chances::chances.attributes.value") }}">
-                            </div>
+                            </div>--}}
                             <div class="form-group">
                                 <label
-                                        for="input-number">{{ trans("chances::chances.attributes.files") }}</label>
+                                    for="input-number">{{ trans("chances::chances.attributes.files") }}</label>
+                                <br>
                                 <br>
                                 @foreach($chance->files as $file)
-                                    <a href="{{uploads_url().$file->path}}"
-                                       target="_blank">{{$file->pivot->file_name}}</a>
+                                    <div class="form-group">
+                                        <div class="col-md-6">
+                                            <p>{{$file->pivot->file_name}}</p>
+                                        </div>
+                                        <a href="{{uploads_url().$file->path}}"
+                                           target="_blank">{{trans("chances::chances.file_download")}}</a>
+                                    </div>
                                     <br>
                                 @endforeach
                             </div>
-                           {{-- <div class="form-group">
-                                <label
-                                        for="input-number">{{ trans("chances::chances.attributes.file_name") }}</label>
-                                <input name="file_name" type="text"
-                                       value="{{ @Request::old("file_name", $chance->file_name)}}"
-                                       class="form-control" id="input-name"
-                                       placeholder="{{ trans("chances::chances.attributes.file_name") }}">
-                            </div>--}}
+                            {{-- <div class="form-group">
+                                 <label
+                                         for="input-number">{{ trans("chances::chances.attributes.file_name") }}</label>
+                                 <input name="file_name" type="text"
+                                        value="{{ @Request::old("file_name", $chance->file_name)}}"
+                                        class="form-control" id="input-name"
+                                        placeholder="{{ trans("chances::chances.attributes.file_name") }}">
+                             </div>--}}
                         </div>
                     </div>
                     <div class="panel panel-default">
@@ -216,7 +222,7 @@
                                 <div id="reason"
                                      style="display: @if($chance->approved == 1) none @else block @endif; margin-top: 20px">
                                     <label
-                                            for="input-number">{{ trans("chances::chances.attributes.reason") }}</label>
+                                        for="input-number">{{ trans("chances::chances.attributes.reason") }}</label>
                                     <input name="reason" type="text"
                                            value="{{$chance->reason}}"
                                            class="form-control" id="input-name"
@@ -255,7 +261,7 @@
                                 <select name="sector_id" class="form-control chosen-select chosen-rtl">
                                     @foreach(\Dot\Chances\Models\Sector::all() as $sector)
                                         <option
-                                                value="{{$sector->id}}" {{ old('sector_id',$sector->id)==$chance->sector_id?'selected':'' }}> {{$sector->name}}</option>
+                                            value="{{$sector->id}}" {{ old('sector_id',$sector->id)==$chance->sector_id?'selected':'' }}> {{$sector->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -384,7 +390,7 @@
                         },
                         success: function (data) {
                             if (data.success) {
-                                item.remove();
+                                item.closest('.meta-rows').fadeOut(300).remove();
                                 var html = '    <div class="meta-row">\n' +
                                     '<input style="width: 30%" name="units_names[]"\n' +
                                     '                                               class="form-control input-md pull-left custom-field-value" value="' + item.data('name') + '" \n' +

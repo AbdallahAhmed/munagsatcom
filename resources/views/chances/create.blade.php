@@ -8,8 +8,8 @@
             <div class="feildcont">
                 @if (!session('status'))
 
-                    @if(fauth()->user()->can_buy)
-                        @if(mypoints()>option('rules_add_chances',0))
+                 {{--   @if(fauth()->user()->can_buy)
+                        @if(mypoints()>option('rules_add_chances',0))--}}
                             <form method="post" id="form-submit"
                                   action="{{route('chances.create', ['id' => $company->id])}}"
                                   enctype="multipart/form-data">
@@ -258,7 +258,7 @@
                                     </div>
                                 </div>
                             </form>
-                        @else
+                       {{-- @else
                             <div class="alert alert-danger">
                                 {{ trans('app.bankrupt') }}
                                 <a href="{{route('user.recharge')}}">
@@ -271,7 +271,7 @@
                         <div class="alert alert-warning">
                             {{trans('app.you_cannot_add_chance')}}
                         </div>
-                    @endif
+                    @endif--}}
                 @else
                     <div class="alert alert-success">
                         {{ session('status') }}

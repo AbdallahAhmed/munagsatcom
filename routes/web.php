@@ -94,7 +94,9 @@ Route::get('/sss',function (){
         $router->get('company/{id}/messages', 'CompanyController@show')->name('company.messages');
         $router->post('company/{id}/password', 'CompanyController@updatePassword')->name('company.password');
         $router->any('company/{id}/chance/create', 'ChanceController@store')->name('chances.create');
+        $router->any('company/{id}/chance/{chance_id}/update', 'ChanceController@update')->name('chances.update');
         $router->any('company/{id}/center/create', 'CenterController@store')->name('centers.create');
+        $router->any('company/{id}/center/{center_id}/update', 'CenterController@update')->name('centers.update');
         $router->get('company/{id}/chances/{chance_id}/offers', 'ChanceController@showOffer')->name('chances.offers.show');
         $router->post('company/{id}/chances/approveOffers', 'ChanceController@approveOffers')->name('chances.offers.approve');
     });

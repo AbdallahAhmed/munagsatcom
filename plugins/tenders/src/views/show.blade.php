@@ -169,7 +169,7 @@
                                         <th>{{ trans("tenders::tenders.attributes.name") }}</th>
                                         <th>{{ trans("tenders::tenders.attributes.created_at") }}</th>
                                         <th>{{ trans("tenders::tenders.user") }}</th>
-                                        <th>{{ trans("tenders::tenders.attributes.status") }}</th>
+                                        <th class="text-center">{{ trans("tenders::tenders.attributes.status") }}</th>
                                         <th>
                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                             {{ trans("tenders::tenders.views") }}
@@ -209,7 +209,7 @@
                                             </td>
 
 
-                                            <td>
+                                            <td class="text-center">
                                                 @if ($tender->status)
                                                     <a data-toggle="tooltip" data-placement="bottom"
                                                        title="{{ trans("tenders::tenders.activated") }}" class="ask"
@@ -225,6 +225,8 @@
                                                         <i class="fa fa-toggle-off text-danger"></i>
                                                     </a>
                                                 @endif
+                                                    <br>
+                                                <span class="badge {{$tender->last_get_offer_at->isPast()?'badge-danger':'badge-success'}}">{{$tender->last_get_offer_at->isPast()?trans('tenders::tenders.expired'):trans('tenders::tenders.opened')}}</span>
                                             </td>
 
                                             <td>
@@ -278,7 +280,11 @@
 @stop
 
 @section("head")
-
+    <style>
+        .badge-success{
+            background-color: green;
+        }
+    </style>
     <link href="{{ assets('admin::css/plugins/datetimepicker/bootstrap-datetimepicker.min.css') }}"
           rel="stylesheet" type="text/css">
 

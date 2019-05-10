@@ -10,7 +10,7 @@
     <section class="container">
         <div class="row">
             <!-------------- Begin:right side -------------->
-            <div class="col-md-4">
+            <div class="col-md-4" id="filter-search">
                 <div class="side-box">
                     <h2>{{trans('app.tenders.search')}}</h2>
                     <div class="feildcont">
@@ -259,10 +259,52 @@
                 speed: 150           // Speed of transition
             });
 
+            if (screen.width >= 991) {
+                var cardClass='.content .card';
+                var listCardClass='.content';
+                $('#filter-search > div').width($('#filter-search').width());
+                $(window).scroll(function (e) {
+                    var $list = $(listCardClass);
+                    var $filterSearch = $('#filter-search');
+                    if ($list.length == 0 || $(cardClass).last().length == 0) {
+                        return;
+                    }
+                    if (($(this).scrollTop() + 70) > $list.offset().top) {
+                        if (!$filterSearch.hasClass('static-filter')) {
+                            $filterSearch.addClass('static-filter')
+                        }
+                        if ((($(this).scrollTop()+$(cardClass).last().height()) >= $(cardClass).last().offset().top+10)) {
+                            $('.static-filter > div').css({
+                                'position': 'absolute',
+                                'top': $(cardClass).last().offset().top - ($('.static-filter > div').height()-28 ) + 'px'
+                            })
+                        } else {
+                            $('.static-filter > div').css({
+                                'position': 'fixed',
+                                'top': '62px'
+                            })
+                        }
+                    } else {
+                        $('.static-filter > div').css({
+                            'position': 'inherit',
+                            'top': 'unset'
+                        })
+                        if ($filterSearch.hasClass('static-filter')) {
+                            $filterSearch.removeClass('static-filter')
+                        }
+                    }
 
-            $(function () {
+                });
+            }
 
-            })
         });
     </script>
+
+    <style>
+        .static-filter > div {
+            position: fixed;
+            top: 62px;
+            /*width: 18%;*/
+        }
+    </style>
 @endpush

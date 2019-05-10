@@ -38,7 +38,8 @@ return [
     'all_categories' => "All Categories",
     'not_image_file' => 'File not allowed',
     'not_media_file' => 'File not allowed',
-
+    'expired'=>'Expired',
+    'opened'=>'Opened',
     'from' => "form",
     'to' => "to",
     'add_files'=>'Add Files',

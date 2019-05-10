@@ -80,6 +80,8 @@ class Tender extends Model
         'number' => 'required'
     ];
 
+    protected $dates=['last_get_offer_at','created_at','updated_at'];
+
     /**
      * The "booting" method of the model.
      *

@@ -19,6 +19,7 @@ return [
     'setting' => 'Setting',
     'rights' => 'All copyrights reserved',
     'phone' => 'Phone',
+    'edit'=>'Edit',
     'personal' => 'Personal',
     'company' => 'Company',
     'company_details' => 'Company details',
@@ -172,6 +173,7 @@ return [
     'coming_soon' => 'Coming  soon',
     'no_attachments_company' => 'No  attachments company',
     'points' => 'points',
+    'tax'=>'Tax',
     'fields' => [
         "username" => "Username",
         "password" => "Password",
@@ -187,6 +189,7 @@ return [
         'code' => 'code'
     ],
     'day' => 'Day',
+    'total'=>'Total',
     'centers' => [
         'centers' => 'Services centers',
         'center_name' => 'Services center \'s name',
@@ -199,8 +202,9 @@ return [
         'contact' => 'Message center',
         'not_found' => 'Not found Sector',
         'created_successfully' => 'Center created successfully',
-        'user_added' => 'Centers added'
-
+        'user_added' => 'Centers added',
+        'published'=>'Published',
+        'under_review'=>'Under review'
 
     ],
     'events' => [

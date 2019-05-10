@@ -80,7 +80,13 @@
                         <div class="col-md-9">
                             <div class="item clearfix">
                                 <div class="one_small title-small">{{trans('app.centers.center_name')}}</div>
-                                <div class="one_larg"><a href="{{$center->path}}">{{$center->name}}</a></div>
+                                <div class="one_larg">
+                                    <a href="{{$center->path}}">{{$center->name}}</a>
+                                    @if($center->can_edit && !$center->approved)
+                                        <a href="{{route('centers.update', ['id' => $center->company_id, 'center_id' => $center->id])}}"><button class="btn btn-primary small"><i class="fa fa-edit"></i></button></a>
+                                    @endif
+                                </div>
+
                             </div>
                             <div class="item clearfix">
                                 <div class="one_small title-small"> {{trans('app.sectors.sector')}} </div>
@@ -132,19 +138,19 @@
         <script>
             $(function () {
                 {{--$('#search').on('submit', function (e) {--}}
-                    {{--e.preventDefault();--}}
-                    {{--var search_q = $('[name="search_q"]').val();--}}
-                    {{--var service_id = $('[name="service_id"]').val();--}}
-                    {{--var sector_id = $('[name="sector_id"]').val();--}}
-                    {{--var url = "{{route("centers")}}" + "?";--}}
-                    {{--url += search_q == !search_q || search_q.length === 0 ||--}}
-                    {{--search_q === "" || !/[^\s]/.test(search_q) ||--}}
-                    {{--/^\s*$/.test(search_q) || search_q.replace(/\s/g, "") === "" ? "" : "q=" + search_q + "&";--}}
-                    {{--url += sector_id == 0 ? "" : "sector_id=" + sector_id + "&";--}}
-                    {{--url += service_id == 0 ? "" : "service_id=" + service_id;--}}
+                {{--e.preventDefault();--}}
+                {{--var search_q = $('[name="search_q"]').val();--}}
+                {{--var service_id = $('[name="service_id"]').val();--}}
+                {{--var sector_id = $('[name="sector_id"]').val();--}}
+                {{--var url = "{{route("centers")}}" + "?";--}}
+                {{--url += search_q == !search_q || search_q.length === 0 ||--}}
+                {{--search_q === "" || !/[^\s]/.test(search_q) ||--}}
+                {{--/^\s*$/.test(search_q) || search_q.replace(/\s/g, "") === "" ? "" : "q=" + search_q + "&";--}}
+                {{--url += sector_id == 0 ? "" : "sector_id=" + sector_id + "&";--}}
+                {{--url += service_id == 0 ? "" : "service_id=" + service_id;--}}
 
-                    {{--if (url != "{{route('centers')}}" + "?")--}}
-                        {{--window.location.href = url;--}}
+                {{--if (url != "{{route('centers')}}" + "?")--}}
+                {{--window.location.href = url;--}}
 
                 {{--})--}}
             });

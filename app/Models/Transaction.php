@@ -23,7 +23,7 @@ class Transaction extends Model
      *
      * @var array
      */
-    protected $fillable = ['before_points', 'after_points', 'points', 'user_id', 'action', 'object_id', 'company_id'];
+    protected $fillable = ['before_points', 'after_points', 'points', 'user_id', 'action', 'object_id', 'company_id','tax'];
 
     /**
      * Add Type

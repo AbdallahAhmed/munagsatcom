@@ -232,16 +232,24 @@
                     </div>
                     @php
                         $user=fauth()->user()->in_company?fauth()->user()->company[0]:fauth()->user();
+                        $points=tax($tender->points,false);
                     @endphp
                     <div class="modal-body">
-                        <p> {{trans('app.cb_price')}} : {{ $tender->points }} {{trans('app.point')}}</p>
+                        <div class="row">
+                            <div class="col-md-6">{{ trans('app.cb_price') }}
+                                :  {{ $tender->points }} {{trans('app.point')}}</div>
+
+                            <div class="col-md-6">{{ trans('app.tax') }}
+                                : {{ tax($tender->points) }} {{trans('app.point')}}</div>
+                        </div>
                         <hr>
-                        <p> {{ trans('app.current_points') }} : {{ $user->points }} {{trans('app.point')}}</p>
+                        <p>{{ trans('app.current_points') }}
+                            : {{ $user->points }} {{trans('app.point')}}</p>
                         <hr>
                         <p class="{{$user->points - $tender->points<=0?'text-danger':''}}"> {{ trans('app.points_after_buy') }}
                             : {{ $user->points - $tender->points }} {{trans('app.point')}}</p>
                         <hr>
-                        @if($user->points - $tender->points>=0)
+                        @if($user->points - $points>=0)
                             <p class="fieldset" style="margin: 0;">
                                 <input type="checkbox" name="terms" id="accept-terms">
                                 <label for="accept-terms">{{trans('app.accept_with')}} <a target="_blank"
@@ -249,7 +257,8 @@
                                                                                           class="text-primary">{{trans('app.terms')}}</a></label>
                             </p>
                         @endif
-                        <p class="text-danger">{{$user->points - $tender->points<0?trans('app.please_recharge'):''}}</p>
+                        <a href="{{route('user.recharge')}}"
+                           class="text-danger">{{$user->points - $points<0?trans('app.please_recharge'):''}}</a>
                     </div>
                     <div class="modal-footer">
                         <form action="{{route('tenders.buy',['id'=>$tender->id,'lang'=>app()->getLocale()])}}"
@@ -257,7 +266,7 @@
                             {{csrf_field()}}
                             <button type="submit"
                                     class="btn btn-primary"
-                                    id="{{$user->points - $tender->points<0?'':'can-buy'}}"
+                                    id="{{$user->points - $points<0?'':'can-buy'}}"
                                     disabled>{{trans('app.tenders.buy')}}</button>
                             <button type="button" class="btn btn-secondary"
                                     data-dismiss="modal">{{trans('app.close')}}</button>

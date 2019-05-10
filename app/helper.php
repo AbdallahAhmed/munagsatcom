@@ -138,5 +138,14 @@ if (!function_exists('refund')) {
 
         return 1;
     }
+}
 
+
+if (!function_exists('tax')) {
+    function tax($points, $taxOnly = true)
+    {
+        $percentage = option('points_tax', 5);
+        $tax = ceil(($points * $percentage) / 100);
+        return $taxOnly ? $tax : $points + $tax;
+    }
 }

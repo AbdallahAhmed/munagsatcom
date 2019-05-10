@@ -173,6 +173,7 @@ return [
     'coming_soon' => 'Coming  soon',
     'no_attachments_company' => 'No  attachments company',
     'points' => 'points',
+    'tax'=>'Tax',
     'fields' => [
         "username" => "Username",
         "password" => "Password",

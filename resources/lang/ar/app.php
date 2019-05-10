@@ -185,6 +185,7 @@ return [
     'cb_price' => 'سعر كراسة الشروط ',
     'current_points' => 'نقاطك الحالية ',
     'spent_points' => 'النقاط التي أنفقت ',
+    'tax'=>'ضربية القيمة المضافة',
     'choose_month' => 'اختار الشهر',
     'transaction_type' => 'نوع العملية',
     'before_transaction' => ' النقاط قبل العملية',

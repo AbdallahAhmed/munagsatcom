@@ -304,7 +304,6 @@ class ChanceController extends Controller
                 "name" => 'required',
                 'number' => 'required',
                 'closing_date' => 'required',
-                'chance_value' => 'required',
                 'files.*' => 'required|mimes:pdf',
                 'sector_id' => 'required'
             ], ['mimes' => trans('chances.file_type_error')]);

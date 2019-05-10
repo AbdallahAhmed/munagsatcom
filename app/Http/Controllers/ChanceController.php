@@ -409,7 +409,7 @@ class ChanceController extends Controller
 
         $this->data["units"] = Unit::published()->get();
         $this->data['files'] = $chance->files;
-        $this->data['otherUnits'] = DB::table('other_units')->where('change_id', $chance->id)->get();
+        $this->data['otherUnits'] = DB::table('other_units')->where('chance_id', $chance->id)->get();
 
         return view('chances.edit', $this->data);
 //        return view('chances.coming-soon');

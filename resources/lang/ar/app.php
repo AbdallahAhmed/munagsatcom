@@ -320,6 +320,7 @@ return [
     'accept_with' => 'أنا أوافق على',
     'attachments_company_add' => '  أضف مرفقات اخرى  ',
     'not_attachments' => 'لا يوجد مرفقات',
+    'total'=>'أجمالى',
     'add_employee' => 'اضافة موظف',
     'can_pay' => 'أمكانية الشراء',
     'employee_created' => 'تم اضافة الموظف , تم ارسال للى البريد الكترونى رمز التفعيل  ',

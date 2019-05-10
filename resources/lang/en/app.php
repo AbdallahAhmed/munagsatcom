@@ -188,6 +188,7 @@ return [
         'code' => 'code'
     ],
     'day' => 'Day',
+    'total'=>'Total',
     'centers' => [
         'centers' => 'Services centers',
         'center_name' => 'Services center \'s name',

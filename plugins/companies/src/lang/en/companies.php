@@ -22,6 +22,7 @@ return [
     'asc' => 'Asc',
     'desc' => 'Desc',
     'actions' => 'Action',
+    'for'=>'for',
     'filter' => 'Filter',
     'sure_delete' => 'Are you sure to delete company?',
     'change_image' => 'Change image',

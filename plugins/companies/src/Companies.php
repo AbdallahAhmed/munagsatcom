@@ -44,22 +44,23 @@ class Companies extends \Dot\Platform\Plugin
             $data['spent_points'] = [];
             $data['add_points'] = [];
             for ($index = 0; $index <= 30; $index++) {
+
                 $data['dates'] [] = $now->subDay()->format('Y/m/d');
-                $data['spent_points'] [] = Transaction::whereYear('created_at', $now->year)
+                $data['spent_points'][] = Transaction::whereYear('created_at', $now->year)
                     ->whereMonth('created_at', $now->month)
-                    ->whereMonth('created_at', $now->day)
+                    ->whereDay('created_at', $now->day)
                     ->where('action', '<>', 'points.buy')
                     ->sum('points');
-                $data['add_points'] [] = Transaction::whereYear('created_at', $now->year)
+                $data['add_points'][] = Transaction::whereYear('created_at', $now->year)
                     ->whereMonth('created_at', $now->month)
-                    ->whereMonth('created_at', $now->day)
+                    ->whereDay('created_at', $now->day)
                     ->where('action', 'points.buy')
                     ->sum('points');
             }
             $data['dates'] = array_reverse($data['dates']);
             $data['spent_points'] = array_reverse($data['spent_points']);
             $data['add_points'] = array_reverse($data['add_points']);
-
+//dd($data);
             return view('companies::widget', $data);
         });
 

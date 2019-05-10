@@ -94,6 +94,7 @@ class ChanceController extends Controller
         $chance = \App\Models\Chance::where('slug', '=', $slug)->firstOrFail();
 
         $this->data['chance'] = $chance;
+        $this->data['otherUnits'] = DB::table('other_units')->where('chance_id', $chance->id)->get();
         return view('chances.chance', $this->data);
     }
 

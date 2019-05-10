@@ -68,7 +68,7 @@
                             </div>
                             <div class="form-group">
                                 <label
-                                        for="input-number">{{ trans("chances::chances.attributes.closing_date") }}</label>
+                                    for="input-number">{{ trans("chances::chances.attributes.closing_date") }}</label>
                                 <input name="closing_date" type="date" data-format="YYYY-mm-dd"
                                        value="{{ DateTime::createFromFormat('Y-m-d H:i:s', $chance->closing_date)->format("Y-m-d") }}"
                                        class="chosen-rtl form-control" id="input-name"
@@ -84,7 +84,7 @@
                             </div>--}}
                             <div class="form-group">
                                 <label
-                                        for="input-number">{{ trans("chances::chances.attributes.files") }}</label>
+                                    for="input-number">{{ trans("chances::chances.attributes.files") }}</label>
                                 <br>
                                 <br>
                                 @foreach($chance->files as $file)
@@ -222,7 +222,7 @@
                                 <div id="reason"
                                      style="display: @if($chance->approved == 1) none @else block @endif; margin-top: 20px">
                                     <label
-                                            for="input-number">{{ trans("chances::chances.attributes.reason") }}</label>
+                                        for="input-number">{{ trans("chances::chances.attributes.reason") }}</label>
                                     <input name="reason" type="text"
                                            value="{{$chance->reason}}"
                                            class="form-control" id="input-name"
@@ -261,7 +261,7 @@
                                 <select name="sector_id" class="form-control chosen-select chosen-rtl">
                                     @foreach(\Dot\Chances\Models\Sector::all() as $sector)
                                         <option
-                                                value="{{$sector->id}}" {{ old('sector_id',$sector->id)==$chance->sector_id?'selected':'' }}> {{$sector->name}}</option>
+                                            value="{{$sector->id}}" {{ old('sector_id',$sector->id)==$chance->sector_id?'selected':'' }}> {{$sector->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -390,7 +390,7 @@
                         },
                         success: function (data) {
                             if (data.success) {
-                                item.remove();
+                                item.closest('.meta-rows').fadeOut(300).remove();
                                 var html = '    <div class="meta-row">\n' +
                                     '<input style="width: 30%" name="units_names[]"\n' +
                                     '                                               class="form-control input-md pull-left custom-field-value" value="' + item.data('name') + '" \n' +

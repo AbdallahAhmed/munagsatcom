@@ -32,7 +32,7 @@ class ChanceController extends Controller
     public function index(Request $request)
     {
         $query = \App\Models\Chance::query()->has('company')
-            ->whereNotIn('status', [3, 5])
+            ->where('status', 0)
             ->orderBy('created_at', 'DESC');
         $this->data['q'] = null;
         $this->data['created_at'] = null;
@@ -91,7 +91,7 @@ class ChanceController extends Controller
     public function show(Request $request, $slug)
     {
 
-        $chance = \App\Models\Chance::where('slug', '=', $slug)->firstOrFail();
+        $chance = \App\Models\Chance::where('slug', '=', $slug)->where('status',0)->firstOrFail();
 
         $this->data['chance'] = $chance;
         $this->data['otherUnits'] = DB::table('other_units')->where('chance_id', $chance->id)->get();

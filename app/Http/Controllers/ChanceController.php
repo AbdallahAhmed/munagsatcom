@@ -402,16 +402,6 @@ class ChanceController extends Controller
 
             $chance->save();
 
-            $notification = new Notifications();
-            $notification->key = "chance.update";
-            $notification->user_id = fauth()->id();
-            $notification->isRead = 0;
-            $data = array();
-            $data['chance_id'] = $chance->id;
-            $notification->data = json_encode($data);
-            $notification->save();
-
-
             return redirect()->route('chances.update', ['id' => $company->id, 'chance_id' => $chance->id])->with('status', trans('app.chances.updated_successfully'));
         }
 
@@ -419,6 +409,7 @@ class ChanceController extends Controller
 
         $this->data["units"] = Unit::published()->get();
         $this->data['files'] = $chance->files;
+        $this->data['otherUnits'] = DB::table('other_units')->where('change_id', $chance->id)->get();
 
         return view('chances.edit', $this->data);
 //        return view('chances.coming-soon');

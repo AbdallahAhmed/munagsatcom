@@ -48,21 +48,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="form-group-lg row">
-                             <label class="col-xs-12 col-md-3"> {{trans('app.chances.chance_value')}}</label>
-                             <div class="col-xs-12 col-md-9">
-                                 <div class="new-f-group">
-                                     <div class="form-group clearfix">
-                                         <input name="chance_value"
-                                                value="{{@Request::old("chance_value", $chance->value)}}"
-                                                type="text"
-                                                placeholder="{{trans('app.chances.chance_value_example')}}"
-                                                class="effect-9 form-control">
-                                         <span class="focus-border"><i></i></span>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>--}}
                         <div class="form-group-lg row">
                             <label class="col-xs-12 col-md-3">{{trans('app.chances.closing_date')}}</label>
                             <div class="col-xs-12 col-md-6 new-f-group">
@@ -179,6 +164,44 @@
                                 </div>
                             </div>
                         @endforeach
+
+                        @foreach($otherUnits as $unit)
+                            <div class="form-group-lg row" id="unit{{$unit->id}}">
+                                <div class="col-xs-12 col-md-4">
+                                    <div class="new-f-group">
+                                        <div class="form-group clearfix">
+                                            <input type="text" name="others_name[]" class="effect-9 form-control"
+                                                   placeholder="{{trans('app.unit_name')}}" value="{{$unit->name}}">
+                                            <span class="focus-border"><i></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-4 new-f-group">
+                                    <div class="form-group clearfix">
+                                        <input type="text" name="others_units[]" class="effect-9 form-control"
+                                               placeholder="{{trans('app.the_unit')}}" value="{{$unit->unit}}">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-2">
+                                    <div class="new-f-group">
+                                        <div class="form-group clearfix">
+                                            <input type="text" name="others_quantity[]" class="effect-9 form-control"
+                                                   placeholder="{{trans('app.quantity')}}" value="{{$unit->quantity}}">
+                                            <span class="focus-border"><i></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-2">
+                                    <div class="new-f-group">
+                                        <div class="form-group clearfix">
+                                            <p data-id="{{$unit->id}}" id="removeUnit" class="btn btn-danger"
+                                               style="cursor: pointer"><i class="fa fa-remove"></i></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
                         <a class="add_field_button" role="button" data-toggle="collapse" id="units"
                            aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-plus"></i>
                             {{trans('app.add_new_units')}}
@@ -192,60 +215,6 @@
                     <div class="form-group-lg text-center">
                         <button type="submit"
                                 class="uperc padding-md fbutcenter">{{trans('chances.edit')}}</button>
-                    </div>
-                    <style>
-                        .modal-header .close {
-                            margin-top: -24px;
-                        }
-                    </style>
-
-                    <div class="modal fade" id="add_chances" tabindex="-1" role="dialog"
-                         aria-labelledby="add_chances"
-                         aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title"
-                                        id="exampleModalCenterTitle"> {{trans('app.chances.publish')}}</h5>
-                                    <button type="button" class="close" data-dismiss="modal"
-                                            aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                @php
-                                    $user=fauth()->user()->in_company?fauth()->user()->company[0]:fauth()->user();
-                                    $points=option('rules_add_chances',0);
-                                @endphp
-                                <div class="modal-body">
-                                    <p> {{trans('app.cb_price')}} : {{$points }} {{trans('app.point')}}</p>
-                                    <hr>
-                                    <p> {{ trans('app.current_points') }}
-                                        : {{ $user->points }} {{trans('app.point')}}</p>
-                                    <hr>
-                                    <p class="{{$user->points -$points<=0?'text-danger':''}}"> {{ trans('app.points_after_buy') }}
-                                        : {{ $user->points - $points }} {{trans('app.point')}}</p>
-                                    <hr>
-                                    @if($user->points -$points>=0)
-                                        <p class="fieldset" style="margin: 0;">
-                                            <input type="checkbox" name="terms" id="accept-terms">
-                                            <label for="accept-terms">{{trans('app.accept_with')}} <a
-                                                        target="_blank"
-                                                        href="{{route('page.show', ['slug' => 'الشروط والأحكام'])}}"
-                                                        class="text-primary">{{trans('app.terms')}}</a></label>
-                                        </p>
-                                    @endif
-                                    <p class="text-danger">{{$user->points - $points<0?trans('app.please_recharge'):''}}</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit"
-                                            class="btn btn-primary  submit-changes"
-                                            id="{{$user->points - $points<0?'':'can-buy'}}"
-                                            disabled>{{trans('app.chances.publish')}}</button>
-                                    <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">{{trans('app.close')}}</button>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </form>
             </div>

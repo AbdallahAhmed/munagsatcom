@@ -142,7 +142,9 @@
                                             @endif
                                             @if(in_array($chance->status,[3,5])&&!$is_approved)
                                                 <i>{{trans('chances::chances.status.'.$chance->status)}}</i>
-                                            @endif
+                                                    <br>
+                                                    <a class="text-primary" href="{{route('chances.update',['id'=>$company->id,'chance_id'=>$chance->id])}}">{{trans('app.edit')}}</a>
+                                                @endif
                                             @if($is_approved || $chance->status==4)
                                                 <i>{{trans('app.chances.approved_done')}}</i>
                                             @endif

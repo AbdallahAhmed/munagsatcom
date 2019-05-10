@@ -273,7 +273,6 @@
                         if (!$filterSearch.hasClass('static-filter')) {
                             $filterSearch.addClass('static-filter')
                         }
-                        console.log(($(this).scrollTop()+$(cardClass).last().height()) , $(cardClass).last().offset().top);
                         if ((($(this).scrollTop()+$(cardClass).last().height()) >= $(cardClass).last().offset().top+10)) {
                             $('.static-filter > div').css({
                                 'position': 'absolute',

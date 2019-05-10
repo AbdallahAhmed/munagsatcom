@@ -86,7 +86,7 @@
                                 @foreach(['tenders.buy'=>('app.types.tenders_buy'),
                                 'points.buy'=>('app.types.points_buy'),
                                 'add.chance'=>('app.types.add_chance'),
-                                'add.center'=>('app.types.add_center')] as $key=>$val)
+                                'center.add'=>('app.types.add_center')] as $key=>$val)
                                     <option
                                         value="{{$key}}" {{$key==request('action')?'selected':''}}>{{trans($val)}}</option>
                                 @endforeach

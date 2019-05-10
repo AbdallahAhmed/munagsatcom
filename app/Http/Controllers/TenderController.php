@@ -79,7 +79,7 @@ class TenderController extends Controller
             });
         }
         $query->where('last_get_offer_at', '>=', Carbon::now());
-        $this->data['tenders'] = $query->orderBy('created_at', 'DESC')->paginate(5);
+        $this->data['tenders'] = $query->orderBy('created_at', 'DESC')->paginate(15);
 
         $this->data['cb_downloaded_price_max'] = Tender::max('cb_downloaded_price');
         return view('tenders.index', $this->data);

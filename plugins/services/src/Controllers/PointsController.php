@@ -47,6 +47,7 @@ class PointsController extends Controller
         $this->data['service_center_add'] = option("service_center_add");
         $this->data['point_per_reyal'] = option("point_per_reyal");
         $this->data['new_user_points'] = option("new_user_points", 0);
+        $this->data['points_tax'] = option("points_tax", 5);
         return view("services::points", $this->data);
     }
 

@@ -54,6 +54,11 @@
                                         <label for="new_user_points">{{trans("services::points.new_user_points")}}</label>
                                         <input name="option[new_user_points]" min="0" type="number" required="required" value="{{$new_user_points}}" class="form-control" id="new_user_points" placeholder="{{trans("services::points.new_user_points")}}">
                                     </div>
+
+                                    <div class="form-group">
+                                        <label for="points_tax">{{trans("services::points.points_tax")}}</label>
+                                        <input name="option[points_tax]" min="0" type="number" required="required" value="{{$points_tax}}" class="form-control" id="points_tax" placeholder="{{trans("services::points.points_tax")}}">
+                                    </div>
                                 </div>
                             </div>
                         </div>

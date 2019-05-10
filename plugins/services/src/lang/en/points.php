@@ -7,6 +7,7 @@ return [
     "service_center_add" => "Add center",
     "point_per_reyal" => "Point per saudi reyal",
     "rules_book_percentage_error" => 'Book percentage should be between 0 and 100',
-    'new_user_points'=>'Points added to each new user'
+    'new_user_points'=>'Points added to each new user' ,
+    'points_tax'=>'Tax'
 
 ];

@@ -91,7 +91,7 @@ class ChanceController extends Controller
     public function show(Request $request, $slug)
     {
 
-        $chance = \App\Models\Chance::where('slug', '=', $slug)->where('status',0)->firstOrFail();
+        $chance = \App\Models\Chance::where('slug', '=', $slug)->where('status', 0)->firstOrFail();
 
         $this->data['chance'] = $chance;
         $this->data['otherUnits'] = DB::table('other_units')->where('chance_id', $chance->id)->get();
@@ -122,10 +122,21 @@ class ChanceController extends Controller
         return response()->json(["success" => true], 200);
     }
 
+    /**
+     * POST {lang}/company/{id}/chances/approveOffers
+     * @route chances.offers.approve
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function approveOffers(Request $request, $id)
     {
         $chance_id = $request->get('chance_id');
         $user_id = $request->get('user_id');
+
+        $chance = Chance::findOrFail($id);
+        $chance->status=4;
+        $chance->save();
 
         DB::table('chances_offers_files')
             ->where('chance_id', $chance_id)
@@ -154,7 +165,6 @@ class ChanceController extends Controller
 
         return response()->json(['success' => true], 200);
     }
-
 
     /** POST {lang}/company/{id}/chance/create
      * @param Request $request
@@ -288,7 +298,6 @@ class ChanceController extends Controller
 //        return view('chances.coming-soon');
 
     }
-
 
     /** POST {lang}/company/{id}/chance/{chance_id}/update
      * @param Request $request

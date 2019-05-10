@@ -391,6 +391,7 @@ class ChanceController extends Controller
                     }
                 }
             }
+            DB::table('other_units')->where(['chance_id' => $chance->id])->delete();
             foreach ($others_units as $key => $unit) {
                 DB::table('other_units')->insert([
                     'chance_id' => $chance->id,

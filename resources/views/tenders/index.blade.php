@@ -262,7 +262,7 @@
             if (screen.width >= 991) {
                 var cardClass='.content .card';
                 var listCardClass='.content';
-                $('#filter-search > div').width($('#filter-search').width() - 25);
+                $('#filter-search > div').width($('#filter-search').width());
                 $(window).scroll(function (e) {
                     var $list = $(listCardClass);
                     var $filterSearch = $('#filter-search');
@@ -273,9 +273,8 @@
                         if (!$filterSearch.hasClass('static-filter')) {
                             $filterSearch.addClass('static-filter')
                         }
-
-                        if ((($(this).scrollTop()+$(cardClass).last().height()) >= $(cardClass).last().offset().top)) {
-                            console.log(($(this).scrollTop() + 166),$(cardClass).last().offset().top);
+                        console.log(($(this).scrollTop()+$(cardClass).last().height()) , $(cardClass).last().offset().top);
+                        if ((($(this).scrollTop()+$(cardClass).last().height()) >= $(cardClass).last().offset().top+10)) {
                             $('.static-filter > div').css({
                                 'position': 'absolute',
                                 'top': $(cardClass).last().offset().top - ($('.static-filter > div').height()-28 ) + 'px'

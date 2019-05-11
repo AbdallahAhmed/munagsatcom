@@ -112,6 +112,7 @@ return [
     'no_notifications' => 'لا يوجد تنبيهات',
     'press_save' => 'أضغط حفظ للتأكيد',
     'done_approved' => 'تم الإعتماد',
+    'register_wait' => 'جاري التحميل، برجاء الإنتظار...',
     'centers' => [
         'centers' => 'مراكز أعمال',
         'center_name' => 'اسم  المنشاه',

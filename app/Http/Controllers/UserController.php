@@ -328,7 +328,11 @@ class UserController extends Controller
             $user->code = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
             $user->save();
             session()->put('email', $request->get('email'));
-            Mail::to($user->email)->send(new VerificationMail($user));
+            try{
+                Mail::to($user->email)->send(new VerificationMail($user));
+            }catch (\Exception $exception){
+
+            }
             return redirect()->route('user.confirm')->with('status', trans('app.check_email'));
         } else
             return redirect()->route('user.confirm-resend')->withErrors(new MessageBag(['wrong_email' => trans('app.email_not_found')]));
@@ -351,7 +355,11 @@ class UserController extends Controller
                 return redirect()->back()->withErrors(new MessageBag(['wrong_email' => trans('app.email_not_found')]));
             $user->code = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
             $user->save();
-            Mail::to($user->email)->send(new ResetPasswordMail($user));
+            try{
+
+            }catch (\Exception $exception){
+                Mail::to($user->email)->send(new ResetPasswordMail($user));
+            }
             return redirect()->route('reset-password');
         }
         return view('forgetpassword');

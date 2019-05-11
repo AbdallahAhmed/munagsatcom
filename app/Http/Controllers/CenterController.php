@@ -207,7 +207,10 @@ class CenterController extends Controller
      */
     public function contact(Request $request)
     {
-        Mail::to($request->get('email'))->send(new CenterContactEmail($request));
+        try{
+            Mail::to($request->get('email'))->send(new CenterContactEmail($request));
+        }catch (\Exception $exception){
+        }
     }
 
 }

@@ -24,6 +24,12 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4"><a class="btn btn-primary" href="{{route('user.recharge')}}" style="width: 100%;">{{trans('app.recharge')}}</a></div>
+                            <div class="col-md-4"></div>
+                        </div>
                     </div>
                     <hr>
                     <div class="profile-item">

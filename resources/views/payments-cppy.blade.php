@@ -3,7 +3,7 @@
 @section('title',trans('app.payments'))
 
 @section('content')
-    <section class="container">
+    <section class="container" style="height: 300px">
         <div class='row'>
             <div class='col-md-4'></div>
             <div class='col-md-4' style="background: #FFF;padding: 18px;">

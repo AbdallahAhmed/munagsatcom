@@ -83,7 +83,7 @@ class CenterController extends Controller
             return abort(403);
         }
 
-        if (/*mypoints()*/ 50 < option('service_center_add', 0)) {
+        if (mypoints() < option('service_center_add', 0)) {
             return 'Can\'nt add this center';
         }
         $this->data['company'] = $company = Company::findOrFail($id);

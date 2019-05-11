@@ -11,25 +11,13 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//})->name("index");
+Route::get('/test', function () {
+    return view('pdf.invoice');
+})->name("test");
 
-//Route::group(['prefix' => 'chances'],function ($route){
-//    $route->get('/create', "ChanceController@create")->name("chance.create");
-//    $route->post('/store', "ChanceController@store")->name("chance.store");
-//    $route->post('/getUnits', "ChanceController@getUnits")->name("chance.units");
-//});
-
-
-use App\Models\Notifications;
 
 Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], function () {
 
-Route::get('/sss',function (){
-   $not = Notifications::find(1);
-
-});
     // tenders
     Route::get('/', 'TenderController@index')->name('index');
     Route::get('tenders/{slug}', 'TenderController@details')->name('tenders.details');

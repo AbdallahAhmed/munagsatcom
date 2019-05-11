@@ -66,8 +66,8 @@ class CenterController extends Controller
         $this->data['services'] = Service::published()->get();
         $this->data['sectors'] = Sector::published()->get();
 
-        return view('centers.index', $this->data);
-//        return view('centers.coming-soon');
+//        return view('centers.index', $this->data);
+        return view('centers.coming-soon');
     }
 
 
@@ -83,7 +83,7 @@ class CenterController extends Controller
             return abort(403);
         }
 
-        if (/*mypoints()*/ 50 < option('service_center_add', 0)) {
+        if (mypoints() < option('service_center_add', 0)) {
             return 'Can\'nt add this center';
         }
         $this->data['company'] = $company = Company::findOrFail($id);

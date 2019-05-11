@@ -66,8 +66,8 @@ class CenterController extends Controller
         $this->data['services'] = Service::published()->get();
         $this->data['sectors'] = Sector::published()->get();
 
-//        return view('centers.index', $this->data);
-        return view('centers.coming-soon');
+        return view('centers.index', $this->data);
+//        return view('centers.coming-soon');
     }
 
 

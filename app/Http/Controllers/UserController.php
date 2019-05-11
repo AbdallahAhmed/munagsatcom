@@ -46,17 +46,13 @@ class UserController extends Controller
         if ($request->method() == 'POST') {
             $rules = [
                 'name' => 'required|min:8',
-//                'last_name' => 'required|alpha|min:3',
                 'email' => 'required|email|unique:users',
-//                'phone_number' => 'min:10',
                 'password' => 'required|confirmed|min:6|max:255',
             ];
             if ($request->get('user_type') == 2) {
                 $rules += [
                     'company_name' => 'required|max:255|min:2',
                     'sector_id' => 'required|exists:sectors,id',
-//                    'details' => 'required|max:255',
-//                    'logo' => 'required|mimes:jpg,png,jpeg',
                     'files.*.mimes' => 'jpg,png,jpeg,doc,docx,txt,pdf,zip'
                 ];
             }
@@ -86,11 +82,6 @@ class UserController extends Controller
             $user->points = option('new_user_points', 0);
             $user->code = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
             $user->type = $request->get('user_type', 1);
-
-//            if ($request->file('logo')) {
-//                $media = new Media();
-//                $user->photo_id = $media->saveFile($request->file('logo'));
-//            }
             $user->save();
 
             // notification
@@ -111,17 +102,6 @@ class UserController extends Controller
                 $company->phone_number = $request->get('phone_number');
                 $company->mobile_number = $request->get('mobile_number');
                 $company->points = option('new_user_points', 0);
-
-//                $media = new Media();
-//                $company->image_id = $media->saveFile($request->file('logo'));
-
-//                $files = array();
-//                if ($request->file('files')) {
-//                    foreach (($request->file('files')) as $file) {
-//                        $media = new Media();
-//                        $files[] = $media->saveFile($file);
-//                    }
-//                }
                 $company->save();
                 Companies_empolyees::create([
                     'company_id' => $company->id,
@@ -130,7 +110,6 @@ class UserController extends Controller
                     'status' => 1,
                     'accepted' => 1
                 ]);
-//                $company->files()->sync($files);
             }
             session()->put('email', $user->email);
             try {
@@ -139,8 +118,6 @@ class UserController extends Controller
 
             }
             return redirect()->route('user.confirm')->with('status', trans('app.check_email'));
-//            return redirect()->route('index')->with(['messages' => [trans('app.events.successfully_register_company')], 'status' => 'success']);
-            //return success or redirect
         }
 
         $this->data['sectors'] = Sector::published()->get();
@@ -351,6 +328,7 @@ class UserController extends Controller
                 return redirect()->back()->withErrors(new MessageBag(['wrong_email' => trans('app.email_not_found')]));
             $user->code = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
             $user->save();
+            session()->put('email', $request->get('email'));
             Mail::to($user->email)->send(new ResetPasswordMail($user));
             return redirect()->route('reset-password');
         }
@@ -377,6 +355,7 @@ class UserController extends Controller
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator->errors());
             }
+
             if ($user->code != $request->get('code')) {
                 return redirect()->back()->withErrors(new MessageBag(['wrong_conde' => trans('app.wrong_code')]));
 
@@ -402,6 +381,7 @@ class UserController extends Controller
             }
             return redirect()->back()->with('status', trans('app.password_changed'));
         }
+
         return view('reset');
     }
 

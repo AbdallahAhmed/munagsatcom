@@ -156,10 +156,17 @@
                                     </div>
                                     @php
                                         $user=fauth()->user()->in_company?fauth()->user()->company[0]:fauth()->user();
-                                        $points=option('service_center_add',0);
+                                        $points=tax(option('service_center_add',0),false);
                                     @endphp
                                     <div class="modal-body">
-                                        <p> {{trans('app.cb_price')}} : {{$points }} {{trans('app.point')}}</p>
+
+                                        <div class="row">
+                                            <div class="col-md-6">{{ trans('app.cb_price') }}
+                                                :  {{ option('service_center_add',0) }} {{trans('app.point')}}</div>
+
+                                            <div class="col-md-6">{{ trans('app.tax') }}
+                                                : {{ tax(option('service_center_add',0)) }} {{trans('app.point')}}</div>
+                                        </div>
                                         <hr>
                                         <p> {{ trans('app.current_points') }}
                                             : {{ $user->points }} {{trans('app.point')}}</p>

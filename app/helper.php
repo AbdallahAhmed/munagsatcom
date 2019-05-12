@@ -79,6 +79,7 @@ if (!function_exists('pay')) {
         if ($user->in_company) {
             $user = $user->company[0];
         }
+        $points = $points + tax($points);
         $before_points = $user->points;
         $after_points = $user->points - $points;
         if ($after_points < 0) {
@@ -92,7 +93,8 @@ if (!function_exists('pay')) {
             'object_id' => $object_id,
             'user_id' => fauth()->id(),
             'action' => $action,
-            'company_id' => fauth()->user()->in_company ? $user->id : 0
+            'company_id' => fauth()->user()->in_company ? $user->id : 0,
+            'tax' => tax($points)
         ]);
 
         $user->points = $after_points;
@@ -119,6 +121,7 @@ if (!function_exists('refund')) {
         if ($user->in_company) {
             $user = $user->company[0];
         }
+        $points += tax($points);
         $before_points = $user->points;
         $after_points = $user->points + $points;
 

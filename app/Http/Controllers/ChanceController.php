@@ -184,7 +184,6 @@ class ChanceController extends Controller
                 'closing_date' => 'required',
                 //  'file_name' => 'required',
                 //  'file_description' => 'required',
-                'chance_value' => 'required',
                 'files.*' => 'required|mimes:pdf',
                 'sector_id' => 'required'
             ], ['mimes' => trans('chances.file_type_error')]);
@@ -193,7 +192,7 @@ class ChanceController extends Controller
             }
             $chance->name = $request->get("name");
             $chance->number = $request->get("number");
-            $chance->value = $request->get("chance_value");
+            $chance->value = $request->get("chance_value",'');
             $chance->sector_id = $request->get("sector_id");
             $chance->closing_date = $request->get("closing_date") ? Carbon::createFromFormat('m-d-Y', $request->get("closing_date")) : null;
             $chance->file_name = $request->get("file_name", "");

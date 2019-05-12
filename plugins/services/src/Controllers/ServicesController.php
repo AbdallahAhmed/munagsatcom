@@ -91,7 +91,7 @@ class ServicesController extends Controller
             $service->name = Request::get("name");
             $service->status = Request::get("status", 0);
             $service->price_from = Request::get("price_from", 0);
-            $service->price_to = Request::get("price_to");
+            $service->price_to = Request::get("price_to", 0);
             $service->status = Request::get("status", 0);
 
             if (!$service->validate()) {
@@ -124,7 +124,7 @@ class ServicesController extends Controller
             $service->name = Request::get("name");
             $service->details = Request::get("details");
             $service->price_from = Request::get("price_from", 0);
-            $service->price_to = Request::get("price_to");
+            $service->price_to = Request::get("price_to", 0);
             $service->status = Request::get("status", 0);
 
 

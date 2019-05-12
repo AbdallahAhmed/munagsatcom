@@ -23,7 +23,7 @@
                                     <input name="email" type="{{!Request::filled('key')?'email':'hidden'}}"
                                            class="effect-9 form-control"
                                            placeholder="{{trans('app.fields.email')}}"
-                                           value="{{\Crypt::decryptString(urldecode(Request::get('key')))}}">
+                                           value="{{Request::filled('key')?  \Crypt::decryptString(urldecode(Request::get('key'))) : session()->get('email')}}">
                                     <span class="focus-border"><i></i></span>
                                 </div>
                             </div>

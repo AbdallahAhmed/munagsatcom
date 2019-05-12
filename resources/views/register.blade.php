@@ -213,9 +213,20 @@
                         {{--</div>--}}
                     </div>
                     <div class="form-group-lg text-center">
-                        <button type="submit" class="uperc padding-md fbutcenter">{{trans('app.register')}}</button>
+                        <button data-toggle="modal"
+                                data-target="#registerModal" type="submit" class="uperc padding-md fbutcenter">{{trans('app.register')}}</button>
                     </div>
                 </form>
+                <div class="modal fade" data-backdrop="static" data-keyboard="false"
+                     id="registerModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <p>{{trans('app.register_wait')}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

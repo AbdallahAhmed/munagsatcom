@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "dompdf/dompdf": "^0.8.3",
         "dot/categories": "^0.2.2",
         "dot/i18n": "^0.2.1",
         "dot/pages": "^0.2.8",

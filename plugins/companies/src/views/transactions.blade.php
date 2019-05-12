@@ -281,6 +281,9 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
+                                                @if(!isset($user)||(isset($user)&&$user->in_company))
+                                                    <td></td>
+                                                @endif
                                                 <td></td>
                                                 <td>{{trans('app.total')}} {{$totalAdded}}</td>
                                                 <td>{{trans('app.total')}} {{$totalSpent}}</td>

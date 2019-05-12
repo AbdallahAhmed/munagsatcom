@@ -11,8 +11,11 @@
 |
 */
 
+use Dompdf\Dompdf;
+
 Route::get('/test', function () {
-    return view('pdf.invoice');
+    header("Content-type:application/pdf");
+    return  view('pdf.invoice');
 })->name("test");
 
 

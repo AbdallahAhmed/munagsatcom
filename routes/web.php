@@ -14,8 +14,61 @@
 use Dompdf\Dompdf;
 
 Route::get('/test', function () {
-    header("Content-type:application/pdf");
-    return  view('pdf.invoice');
+// create new PDF document
+    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_ORIENTATION, true, 'UTF-8', false);
+
+
+// set default monospaced font
+    $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
+// set margins
+    $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+    $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+// set auto page breaks
+    $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+
+// set image scale factor
+    $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+// set some language dependent data:
+    $lg = Array();
+    $lg['a_meta_charset'] = 'UTF-8';
+    $lg['a_meta_dir'] = 'rtl';
+    $lg['a_meta_language'] = 'fa';
+    $lg['w_page'] = 'page';
+
+// set some language-dependent strings (optional)
+    $pdf->setLanguageArray($lg);
+
+// ---------------------------------------------------------
+
+// set font
+    $pdf->SetFont('dejavusans', '', 12);
+
+// add a page
+    $pdf->AddPage();
+
+
+// print newline
+    $pdf->Ln();
+
+// Restore RTL direction
+    $pdf->setRTL(true);
+
+
+// Arabic and English content
+    $htmlcontent = view('pdf.invoice')->render();
+    $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
+
+    $pdf->Ln();
+
+
+//Close and output PDF document
+    $pdf->Output('example_018.pdf', 'I');
+
+//============================================================+
+// END OF FILE
+//============================================================+
 })->name("test");
 
 
@@ -54,6 +107,7 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
         Route::get('user/recharge', 'PaymentsController@index')->name('user.recharge');
         Route::post('user/recharge', 'PaymentsController@recharge')->name('user.recharge');
         Route::get('user/checkout', 'PaymentsController@checkout')->name('user.checkout');
+        Route::get('invoice/{id}', 'InvoiceController@invoices')->name('invoices.pdf');
     });
 
     Route::get('centers', 'CenterController@index')->name('centers');

@@ -7,7 +7,7 @@ return [
     'mycenters' => 'خدماتنا',
     'file_data'=>'بيان الملف',
     'government_tenders' => 'مناقصات حكومية',
-    'service_centers' => 'مراكز أعمال',
+    'service_centers' => 'مراكز الاعمال',
     'investment_opportunities' => 'فرص استثمارية',
     'home' => 'الرئيسية',
     'about_website' => 'حول البوابة',
@@ -114,16 +114,16 @@ return [
     'done_approved' => 'تم الإعتماد',
     'register_wait' => 'جاري التحميل، برجاء الإنتظار...',
     'centers' => [
-        'centers' => 'مراكز أعمال',
+        'centers' => 'مراكز الاعمال',
         'center_name' => 'اسم  المنشاه',
         'search_centers' => 'ابحث فى المراكز الأعمال',
-        'add_center' => 'اضافة مركز أعمال',
-        'edit_center' => 'تعديل مركز أعمال',
-        'search_query' => 'بحث فى مراكز اعمال',
-        'details' => 'تفاصيل   مركز اعمال',
+        'add_center' => 'اضافة مركز الاعمال',
+        'edit_center' => 'تعديل مركز الاعمال',
+        'search_query' => 'بحث فى مراكز الاعمال',
+        'details' => 'تفاصيل   مركز الاعمال',
         'name' => 'اسم المركز',
         'rate' => 'تقيم المركز',
-        'contact' => 'راسل مركز اعمال',
+        'contact' => 'راسل مركز الاعمال',
         'not_found' => 'لا يوجد مراكز خدمة',
         'created_successfully' => 'تم إضافة المركز بنجاح',
         'updated_successfully' => 'تم تعديل المركز بنجاح',
@@ -214,9 +214,9 @@ return [
     'services' => [
         'services' => 'الخدمات',
         'choose_services' => 'اختار الخدمات',
-        'choose_service' => 'اختر اعمال الأعمال',
+        'choose_service' => 'اختر الاعمال الأعمال',
         'name' => 'اسم العمل',
-        'service_provided' => 'اسم اعمال المقدمة',
+        'service_provided' => 'اسم الاعمال المقدمة',
     ],
     'chances' => [
         'chances' => 'فرص استثمارية ',
@@ -305,7 +305,7 @@ return [
         'tenders_buy' => 'شراء مناقضة',
         'points_buy'=>'شراء نقاط',
         'add_chance'=>'طرح فرصة',
-        'add_center'=>'اضافة مركز أعمال',
+        'add_center'=>'اضافة مركز الاعمال',
         'center_add_disapproved'=>'رفض مركز الخدمة و استرجاع نقاطك',
         'center_add_approved'=>'تم الموافقة على مركز الأعمال  ',
         'chances_add_approved'=>'تم الموافقة على طرح المناقصة',
@@ -348,7 +348,9 @@ return [
     'approved'=>'اعتماد',
     'offers'=>'العروض المقدمة',
     'faq'=>'الاسئلة الشائعة',
-    'remember_me'=>'تذكرنى'
+    'remember_me'=>'تذكرنى',
+    'print_invoice'=>'طباعة الفاتورة',
+    'print'=>'طباعة'
 
 
 

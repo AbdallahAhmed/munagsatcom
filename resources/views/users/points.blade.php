@@ -68,17 +68,23 @@
                                         <th scope="col"> {{trans('app.used_points')}}</th>
                                         <th scope="col"> {{trans('app.after_transactions')}}</th>
                                         <th scope="col"> {{trans('app.date_transactions')}}</th>
+                                        <th scope="col"> {{trans('app.print_invoice')}}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($transactions as $transaction)
                                         <tr>
-                                            <td><a href="{{$transaction->path}}" class="text-primary">{{$transaction->type}}</a></td>
+                                            <td><a href="{{$transaction->path}}"
+                                                   class="text-primary">{{$transaction->type}}</a></td>
                                             <td>{{$transaction->before_points}}</td>
                                             <td>{{$transaction->before_points<$transaction->after_points?$transaction->points:0}}</td>
                                             <td>{{$transaction->before_points>=$transaction->after_points?$transaction->points:0}}</td>
                                             <td>{{$transaction->after_points}}</td>
                                             <td>{{ $transaction->created_at->format('Y/m/d')}}</td>
+                                            <td>
+                                                <a {{!in_array($transaction->action, ['tenders.buy', 'add.chance', 'center.add'])?"disabled":''}} href="{{$transaction->invoice_path}}"
+                                                   target="_blank" class="btn btn-link" title="{{trans('app.print')}}"><i class="fa fa-print"></i></a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>

@@ -23,7 +23,7 @@ class Transaction extends Model
      *
      * @var array
      */
-    protected $fillable = ['before_points', 'after_points', 'points', 'user_id', 'action', 'object_id', 'company_id','tax'];
+    protected $fillable = ['before_points', 'after_points', 'points', 'user_id', 'action', 'object_id', 'company_id', 'tax'];
 
     /**
      * Add Type
@@ -94,6 +94,19 @@ class Transaction extends Model
     public function getCreatedAtAttribute()
     {
         return Carbon::parse($this->original['created_at'])->setTimezone('GMT+3');
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getInvoicePathAttribute()
+    {
+        if (in_array($this->action, ['tenders.buy', 'add.chance', 'center.add'])){
+            return route('invoices.pdf', ['lang' => 'ar', 'id' => $this->id]);
+        }else{
+           return  'javascript:void(0)';
+        }
     }
 
 }

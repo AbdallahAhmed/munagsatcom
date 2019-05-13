@@ -335,6 +335,8 @@ return [
     'company_personal' => 'User/Company',
     'offers' => 'Offers',
     'faq' => 'F&Q',
-    'remember_me' => 'Remember me'
+    'remember_me' => 'Remember me',
+    'print_invoice'=>'Invoice print',
+    'print'=>'print'
 
 ];

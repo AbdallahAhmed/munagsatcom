@@ -234,7 +234,7 @@
                  @endif--}}
                 @else
                     <div class="alert alert-success">
-                        {{ session('status') }}
+                        {!! session('status')  !!}
                     </div>
                 @endif
             </div>

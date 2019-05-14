@@ -162,7 +162,7 @@
 
                                         <div class="row">
                                             <div class="col-md-6">{{ trans('app.cb_price') }}
-                                                :  {{ option('service_center_add',0) }} {{trans('app.point')}}</div>
+                                                : {{ option('service_center_add',0) }} {{trans('app.point')}}</div>
 
                                             <div class="col-md-6">{{ trans('app.tax') }}
                                                 : {{ tax(option('service_center_add',0)) }} {{trans('app.point')}}</div>
@@ -205,7 +205,7 @@
                     </form>
                 @else
                     <div class="alert alert-success">
-                        {{ session('status') }}
+                        {!!session('status')   !!}
                     </div>
                 @endif
             </div>

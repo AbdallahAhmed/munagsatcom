@@ -135,7 +135,7 @@ class ChanceController extends Controller
         $user_id = $request->get('user_id');
 
         $chance = Chance::findOrFail($id);
-        $chance->status=4;
+        $chance->status = 4;
         $chance->save();
 
         DB::table('chances_offers_files')
@@ -192,7 +192,7 @@ class ChanceController extends Controller
             }
             $chance->name = $request->get("name");
             $chance->number = $request->get("number");
-            $chance->value = $request->get("chance_value",'');
+            $chance->value = $request->get("chance_value", '');
             $chance->sector_id = $request->get("sector_id");
             $chance->closing_date = $request->get("closing_date") ? Carbon::createFromFormat('m-d-Y', $request->get("closing_date")) : null;
             $chance->file_name = $request->get("file_name", "");
@@ -284,10 +284,10 @@ class ChanceController extends Controller
             $notification->data = json_encode($data);
             $notification->save();
 
-            pay(option('rules_add_chances', 0), 'add.chance', $chance->id);
+            $trans = pay(option('rules_add_chances', 0), 'add.chance', $chance->id);
 
 
-            return redirect()->route('chances.create', ['id' => $company->id])->with('status', trans('app.chances.created_successfully'));
+            return redirect()->route('chances.create', ['id' => $company->id])->with('status', trans('app.chances.created_successfully') . ' <a  class="text-primary" href="' . $trans->invoice_path . '">' . trans('app.invoice') . '</a>');
         }
 
         $this->data["sectors"] = Sector::published()->get();

@@ -204,7 +204,8 @@ return [
         'created_successfully' => 'Center created successfully',
         'user_added' => 'Centers added',
         'published'=>'Published',
-        'under_review'=>'Under review'
+        'under_review'=>'Under review',
+        'message_sent'=>'Message sent'
 
     ],
     'events' => [
@@ -337,6 +338,7 @@ return [
     'faq' => 'F&Q',
     'remember_me' => 'Remember me',
     'print_invoice'=>'Invoice print',
-    'print'=>'print'
+    'print'=>'print',
+    'invoice'=>'invoice'
 
 ];

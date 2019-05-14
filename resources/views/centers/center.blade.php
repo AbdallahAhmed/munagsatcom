@@ -109,7 +109,10 @@
                         <div class="form-marakz">
                             <h3 class=""> {{trans('app.centers.contact')}}</h3>
                             <div class="feildcont">
-                                <form id="contact">
+                                <div class="alert alert-success" id="message_sent" style="display: none">
+                                    <p>{{trans('app.centers.message_sent')}}</p>
+                                </div>
+                                <form id="contact" >
                                     <div class="form-group-lg row">
                                         <label class="col-xs-12 col-md-3">{{trans('app.fields.name')}}</label>
                                         <div class="col-xs-12 col-md-9">
@@ -137,11 +140,12 @@
                                     </div>
 
                                     <div class="form-group-lg row">
-                                        <label class="col-xs-12 col-md-3">{{trans('app.fields.your_message')}}</label>
+                                        <label class="col-xs-12 col-md-3"
+                                               for="your_message">{{trans('app.fields.your_message')}}</label>
                                         <div class="col-xs-12 col-md-9">
                                             <div class="new-f-group">
                                                 <div class="form-group clearfix">
-                                                    <textarea id="{{trans('app.fields.your_message')}}"
+                                                    <textarea id="your_message"
                                                               class="effect-9 form-control" rows="5"
                                                               placeholder="{{trans('app.fields.your_message')}}..."></textarea>
                                                     <span class="focus-border"><i></i></span>
@@ -149,8 +153,10 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-errors">
+                                    </div>
                                     <div class="form-group-lg text-center">
-                                        <button type="submit"
+                                        <button type="submit" id="submit-button"
                                                 class="uperc padding-md fbutcenter"> {{trans('app.login')}}
                                         </button>
                                     </div>
@@ -178,25 +184,10 @@
             $(function () {
                 $('#contact').on('submit', function (e) {
                     e.preventDefault();
-                    var name = $('#name').val();
-                    var email = $('#email').val();
-                    var message = $('#message').val();
-                    regex = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i;
-                    var valid = true;
-
-                    if (!regex.test(email)) {
-                        valid = false;
-                        $("#ee").show();
-                    }
-                    if (name.length < 3) {
-                        valid = false;
-                        $("#en").show();
-                    }
-                    if (message.length < 5) {
-                        valid = false;
-                        $("#em").show();
-                    }
-                    if (!valid) return
+                    $('.form-errors').fadeOut(300).html(' ').fadeIn(300)
+                    var $html=$('#submit-button').html();
+                    $('#submit-button').html('<i class="fa fa-spinner fa-spin"></i>')
+                    $('#submit-button').attr('disabled',true);
                     $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -204,16 +195,26 @@
                     });
                     $.ajax({
                         type: "post",
-                        url: "{{route('centers.contact')}}",
-                        data: {message: message, email: email, name: name},
-                        success: function () {
-                            $('.form-marakz').hide();
-                            $('.message-2').show(200);
+                        url: "{{route('centers.contact',['id'=>$center->id])}}",
+                        data: {message: $('#your_message').val(), email: $('#email').val(), name: $('#name').val()},
+                        success: function (res) {
+                            $('#submit-button').removeAttr('disabled',true);
+                            if (res.status) {
+                                $('#contact').fadeOut();
+                                $('#message_sent').fadeIn(300)
+                            } else {
+                                $('#submit-button').html($html);
+                                $('.form-errors').html('<div class="alert alert-danger"><ul>' + res.errors.map(function (error) {
+                                    return '<li>' + error + '</li>';
+                                }).join('') + '</ul></div>')
+                            }
+
                         },
                         error: function () {
                             alert("Internal server error");
                         }
                     })
+                    return false;
                 })
             })
             var lat = "{{$center->lat}}";

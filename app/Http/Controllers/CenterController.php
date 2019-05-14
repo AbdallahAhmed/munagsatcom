@@ -83,7 +83,7 @@ class CenterController extends Controller
             return abort(403);
         }
 
-        if (mypoints() < option('service_center_add', 0)) {
+        if (mypoints() < (option('service_center_add', 0) + tax(option('service_center_add', 0)))) {
             return 'Can\'nt add this center';
         }
         $this->data['company'] = $company = Company::findOrFail($id);
@@ -119,9 +119,9 @@ class CenterController extends Controller
             $center->save();
             $center->services()->sync(($request->get("services", [])));
 
-            pay(option('service_center_add', 0), 'center.add', $center->id);
+            $trans = pay(option('service_center_add', 0), 'center.add', $center->id);
 
-            return redirect()->route('centers.create', ['id' => $company->id])->with('status', trans('app.centers.created_successfully'));
+            return redirect()->route('centers.create', ['id' => $company->id])->with('status', trans('app.centers.created_successfully') . ' <a  class="text-primary" href="' . $trans->invoice_path . '">' . trans('app.invoice') . '</a>');
         }
 
         $this->data['sectors'] = Sector::published()->get();
@@ -201,16 +201,31 @@ class CenterController extends Controller
     }
 
     /**
-     * POST {lang}/centers/contact
+     * POST {lang}/centers/{$id}/contact
      * @route centers.contact
      * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function contact(Request $request)
+    public function contact(Request $request, $id)
     {
-        try{
-            Mail::to($request->get('email'))->send(new CenterContactEmail($request));
-        }catch (\Exception $exception){
+        $center = Center::findOrFail($id);
+        $company = Company::find($center->company_id);
+        $user = $company ? $company->user : $center->user;
+
+        $validator = Validator::make($request->all(), [
+            "name" => 'required',
+            'email' => 'required|email',
+            'message' => 'required|min:30',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'errors' => $validator->errors()->all()]);
         }
+        try {
+            Mail::to($user->email)->send(new CenterContactEmail($request));
+        } catch (\Exception $exception) {
+        }
+        return response()->json(['status' => true]);
+
     }
 
 }

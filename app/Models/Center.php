@@ -3,6 +3,7 @@
 namespace App\Models;
 
 
+use App\User;
 use Dot\Services\Models\Service;
 
 class Center extends \Dot\Services\Models\Center
@@ -27,6 +28,13 @@ class Center extends \Dot\Services\Models\Center
      */
     public function getCanEditAttribute(){
         return fauth()->user() && ($this->user_id == fauth()->id() || Companies_empolyees::where(['company_id' => $this->company_id, 'employee_id' => fauth()->id(), 'accepted' => 1, 'status' => 1])->count() > 0);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user(){
+        return $this->hasOne(User::class, "id", "user_id");
     }
 
 }

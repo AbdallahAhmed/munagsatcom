@@ -132,7 +132,8 @@ return [
         'add_logo'=>'أضافة شعار المنشاه',
         'created_at'=>'تاريخ النشر',
         'published'=>'تم النشر',
-        'under_review'=>'تحت المراجعة'
+        'under_review'=>'تحت المراجعة',
+        'message_sent'=>'تم ارسال الرسالة إلى مراكز الاعمال'
     ],
 
     'tenders' => [
@@ -350,7 +351,8 @@ return [
     'faq'=>'الاسئلة الشائعة',
     'remember_me'=>'تذكرنى',
     'print_invoice'=>'طباعة الفاتورة',
-    'print'=>'طباعة'
+    'print'=>'طباعة',
+    'invoice'=>'الفاتورة'
 
 
 

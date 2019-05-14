@@ -86,7 +86,7 @@ if (!function_exists('pay')) {
             return 0;
         }
 
-        \App\Models\Transaction::create([
+        $trans = \App\Models\Transaction::create([
             'before_points' => $before_points,
             'after_points' => $after_points,
             'points' => $points,
@@ -101,7 +101,7 @@ if (!function_exists('pay')) {
         $user->spent_points = $user->spent_points + $points;
         $user->save();
 
-        return 1;
+        return $trans;
     }
 
 }

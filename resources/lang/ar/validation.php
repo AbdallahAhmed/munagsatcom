@@ -178,7 +178,8 @@ return array(
         'the_price' => 'السعر '.'<small>بالريار السعودى</small>',
         'point_per_sar' => 'نقطة للى كل ريال سعودى',
         'card'=>'الكارت ',
-        'price'=>'السعر'
+        'price'=>'السعر',
+        'message'=>'الرسالة'
 
     ),
 );

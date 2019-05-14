@@ -65,7 +65,6 @@
                                 <tr>
                                     <th scope="col" style="min-width: 100px;">{{trans('app.services.name')}}</th>
                                     <th scope="col">{{trans('app.details')}}</th>
-                                    <th scope="col"> {{trans('app.price')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -75,7 +74,6 @@
                                         <td>
                                             <p class="break">{{strlen(trim($service->details))!=0?$service->details:'---'}}</p>
                                         </td>
-                                        <td>{{$service->price_to." ".trans('app.reyal')." ".trans('app.saudi')}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

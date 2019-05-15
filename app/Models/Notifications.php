@@ -52,6 +52,13 @@ class Notifications extends Model
                 $data['message'] = str_replace(':center',Center::find($extra->center_id)->name,trans('notifications.'.$this->key));
                 $data['center_id'] = $extra->center_id;
                 return $data;
+            case 'center.contact':
+                $extra = json_decode($this->data);
+                $data['message'] = str_replace(':center',$extra->center,trans('notifications.'.$this->key));
+                $data['message'] = str_replace(':email',$extra->email, $data['message']);
+                $data['message'] = str_replace(':name',$extra->name,$data['message']);
+                $data['message'] = str_replace(':message', $extra->message, $data['message']);
+                return $data;
             case 'chance.approval':
                 $extra = json_decode($this->data);
                 $data['message'] = str_replace(':chance',Chance::find($extra->chance_id)->name,trans('notifications.'.$this->key));

@@ -84,7 +84,7 @@ return [
     'accepted_successfully' => 'تم الحفظ بنجاح',
     'email_not_found' => 'البريد الالكتروني غير صحيح',
     'reset_code_sent' => 'تم ارسال الكود الى البريد الالكتروني الخاص بك',
-    'send' => 'ارسال',
+    'send' => 'إرسال',
     'wrong_code' => 'الكود الذي ادخلته غير صحيح',
     'company_not_verified' => 'لم يتم اعتماد المنشأة حتى الان',
     'forget_password' => 'نسيت كلمة المرور؟',

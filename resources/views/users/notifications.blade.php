@@ -10,7 +10,7 @@
                 @if(count($notifications))
                     @foreach($notifications as $notification)
                         <div class="row border-bottom">
-                            <div class="col-md-8">
+                            <div class="col-md-8" @if(app()->getLocale() == 'ar') style="direction: rtl" @endif>
                                 {{$notification->body['message']}}
                             </div>
                             <div class="col-md-4">

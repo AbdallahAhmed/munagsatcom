@@ -13,7 +13,8 @@ return [
     'chance.refund' => '":chance" تم رفض دفع الفرصة  وإسترجاع المبلغ المدفوع',
     'center.pay' => '":center" تم تأكيد دفع مركز الخدمة',
     'center.update' => 'لقد قمت بتعديل مركز أعمال',
-    'center.refund' => '":center" تم رفض دفع مركز الخدمة وإسترجاع المبلغ المدفوع ',
+    'center.contact' => "تم إرسال رسالة إلى مركز الاعمال ':center' من قبل ':name' من البريد الإلكتروني ':email' - الرسالة: ':message'",
+    'center.refund' => ':center تم رفض دفع مركز الخدمة وإسترجاع المبلغ المدفوع ',
     'chance.approval' => '"تم إعتماد طلباتك على الفرصة ":chance',
     'chance.self.approval' => 'لقد قمت بإعتماد طلبات ":user" على الفرصة ":chance"'
 

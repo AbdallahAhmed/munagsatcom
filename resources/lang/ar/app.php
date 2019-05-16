@@ -124,6 +124,7 @@ return [
         'name' => 'اسم المركز',
         'rate' => 'تقيم المركز',
         'contact' => 'راسل مركز الاعمال',
+        'contact_title' => 'رسالة من مركز الاعمال',
         'not_found' => 'لا يوجد مراكز خدمة',
         'created_successfully' => 'تم إضافة المركز بنجاح',
         'updated_successfully' => 'تم تعديل المركز بنجاح',
@@ -133,7 +134,8 @@ return [
         'created_at'=>'تاريخ النشر',
         'published'=>'تم النشر',
         'under_review'=>'تحت المراجعة',
-        'message_sent'=>'تم ارسال الرسالة إلى مراكز الاعمال'
+        'message_sent'=>'تم ارسال الرسالة إلى مراكز الاعمال',
+        'email_title' => 'تم إرسال رسالة إلى مركز الاعمال :center من قبل'
     ],
 
     'tenders' => [

@@ -221,9 +221,22 @@ class CenterController extends Controller
             return response()->json(['status' => false, 'errors' => $validator->errors()->all()]);
         }
         try {
-            Mail::to($user->email)->send(new CenterContactEmail($request));
+            Mail::to($user->email)->send(new CenterContactEmail($request, $user, $center));
         } catch (\Exception $exception) {
         }
+
+        $notification = new Notifications();
+        $notification->key = 'center.contact';
+        $notification->user_id = $user->id;
+        $data = array();
+        $data['name'] = $request->name;
+        $data['email'] = $request->email;
+        $data['message'] = $request->message;
+        $data['center'] = $center->name;
+        $notification->data = json_encode($data);
+        $notification->isRead = 0;
+        $notification->save();
+
         return response()->json(['status' => true]);
 
     }

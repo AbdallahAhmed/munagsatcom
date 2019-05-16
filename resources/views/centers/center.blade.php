@@ -155,7 +155,7 @@
                                     </div>
                                     <div class="form-group-lg text-center">
                                         <button type="submit" id="submit-button"
-                                                class="uperc padding-md fbutcenter"> {{trans('app.send')}}
+                                                class="uperc padding-md fbutcenter"> {{trans('app.centers.contact')}}
                                         </button>
                                     </div>
                                 </form>

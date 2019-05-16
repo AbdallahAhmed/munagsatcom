@@ -18,7 +18,7 @@
                             {{--<input class='form-control' min="0" id="input-points" placeholder="{{trans('app.points')}}"--}}
                                    {{--name="points" type='number' value="{{old('points')}}">--}}
                             <select name="points" class="form-control" id="input-points">
-                            @foreach([1000,2000,3000,4000,5000,10000,15000] as $price)
+                            @foreach([500,1000,2000,3000,4000,5000,10000,15000] as $price)
                                 <option value="{{$price}}">{{$price}} {{trans('app.point')}}</option>
                                 @endforeach
                             </select>

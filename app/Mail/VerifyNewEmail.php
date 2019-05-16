@@ -32,6 +32,6 @@ class VerifyNewEmail extends Mailable
      */
     public function build()
     {
-        return $this->from('info@munagasatcom.com','منصة مناقصاتكم | تفعيل البريد الإلكتروني')->view('mail.newEmailVerify', ['user' => $this->user, 'email' => $this->email]);
+        return $this->from('info@munagasatcom.com','Munagasatcom| Verify new email')->subject('Munagasatcom| Verify new email')->view('mail.newEmailVerify', ['user' => $this->user, 'email' => $this->email]);
     }
 }

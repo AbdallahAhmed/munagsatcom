@@ -32,6 +32,6 @@ class ResetPasswordMail extends Mailable
      */
     public function build()
     {
-        return $this->from('info@munagasatcom.com', 'Munagasat')->subject('Munagasatcom| Center Feedback')->view('mail.reset', ['user' => $this->user]);
+        return $this->from('info@munagasatcom.com', 'Munagasat')->subject('Munagasatcom| Reset Password')->view('mail.reset', ['user' => $this->user]);
     }
 }

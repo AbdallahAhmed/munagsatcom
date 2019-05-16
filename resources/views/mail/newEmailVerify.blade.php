@@ -509,7 +509,7 @@
                                                                         width="146"><a
                                                                                 href="{{route('user.verify.email',['lang'=>app()->getLocale(),'key'=>urlencode(\Crypt::encryptString($user->email)),'new'=>urlencode(\Crypt::encryptString($email))])}}"
                                                                                 style="color:#ffffff;display:block;text-decoration:none;line-height: 40px;"
-                                                                                zcurl_name="l_1">تفعيل الحساب</a>
+                                                                                zcurl_name="l_1">تفعيل البريد الإلكتروني</a>
                                                                     </td>
                                                                 </tr>
                                                                 </tbody>

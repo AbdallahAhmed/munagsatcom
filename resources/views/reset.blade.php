@@ -68,12 +68,12 @@
                     <div class="form-group-lg text-center">
                         <button type="submit" class="padding-md fbutcenter width"> {{trans('app.enter')}}</button>
                     </div>
+                </form>
                     <div class="form-group text-center">
                         <a style="text-decoration: none;" href="{{route('forget-password')}}">
                             <button class="padding-md fbutcenter width"> {{trans('app.resend_code')}}</button>
                         </a>
                     </div>
-                </form>
             </div>
         </div>
     </section>

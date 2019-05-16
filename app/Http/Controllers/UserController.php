@@ -156,7 +156,11 @@ class UserController extends Controller
         $user->phone_number = $request->get('phone_number');
         $email = $request->filled('email') ? $request->get('email') : null;
         if ($email && ($email != $user->email)) {
-            Mail::to($email)->send(new VerifyNewEmail($user, $email));
+            try {
+                Mail::to($email)->send(new VerifyNewEmail($user, $email));
+            } catch (\Exception $exception) {
+
+            }
             $user->save();
             return redirect()->back()->with('message', trans('app.profile_updated') . ' - ' . trans('app.check_email_to_verify'));
         }
@@ -292,6 +296,12 @@ class UserController extends Controller
             $user->email = \Crypt::decryptString(urldecode($request->get('new')));
             $user->username = $user->email;
             $user->save();
+            $notification = new Notifications();
+            $notification->key = 'email.update';
+            $notification->data = null;
+            $notification->user_id = $user->id;
+            $notification->isRead = 0;
+            $notification->save();
             fauth()->login($user);
             return redirect()->route('index')->with(['messages' => [trans('app.email_updated')], 'status' => 'success']);
         } else {
@@ -360,9 +370,8 @@ class UserController extends Controller
             $user->save();
             session()->put('email', $request->get('email'));
             try {
-
-            } catch (\Exception $exception) {
                 Mail::to($user->email)->send(new ResetPasswordMail($user));
+            } catch (\Exception $exception) {
             }
             return redirect()->route('reset-password');
         }

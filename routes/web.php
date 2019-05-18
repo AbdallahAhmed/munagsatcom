@@ -11,64 +11,30 @@
 |
 */
 
-use Dompdf\Dompdf;
+use App\Mail\NewsLetters;
+use App\Models\Tender;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 Route::get('/test', function () {
-// create new PDF document
-    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_ORIENTATION, true, 'UTF-8', false);
 
+    $tenders = Tender::with(['org', 'org.logo', 'files'])->has('org')->published()
+        ->where('last_get_offer_at', '>=', Carbon::now())
+        ->take(5)
+        ->orderBy('published_at', 'DESC')
+        ->get();
 
-// set default monospaced font
-    $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+    $count = Tender::with(['org', 'org.logo', 'files'])->has('org')->published()
+        ->where('last_get_offer_at', '>=', Carbon::now())
+        ->where('published_at', '>=', Carbon::now()->subWeek())
+        ->count();
 
-// set margins
-    $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-    $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-// set auto page breaks
-    $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+    try {
+        Mail::to('abdo.gamy2010@gmail.com')->send(new NewsLetters($tenders, $count));
+    } catch (\Exception $exception) {
 
-// set image scale factor
-    $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-
-// set some language dependent data:
-    $lg = Array();
-    $lg['a_meta_charset'] = 'UTF-8';
-    $lg['a_meta_dir'] = 'rtl';
-    $lg['a_meta_language'] = 'fa';
-    $lg['w_page'] = 'page';
-
-// set some language-dependent strings (optional)
-    $pdf->setLanguageArray($lg);
-
-// ---------------------------------------------------------
-
-// set font
-    $pdf->SetFont('dejavusans', '', 12);
-
-// add a page
-    $pdf->AddPage();
-
-
-// print newline
-    $pdf->Ln();
-
-// Restore RTL direction
-    $pdf->setRTL(true);
-
-
-// Arabic and English content
-    $htmlcontent = view('pdf.invoice')->render();
-    $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
-
-    $pdf->Ln();
-
-
-//Close and output PDF document
-    $pdf->Output('example_018.pdf', 'I');
-
-//============================================================+
-// END OF FILE
-//============================================================+
+    }
+    return view('mail.newsletter', ['tenders' => $tenders, 'count' => $count]);
 })->name("test");
 
 
@@ -86,6 +52,7 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
     Route::any('reset', 'UserController@reset')->name('reset-password');
     Route::post('verify', 'UserController@verify')->name('user.verify');
     Route::get('verify/link', 'UserController@verifyLink')->name('user.verify.link');
+    Route::get('verify/email', 'UserController@verifyEmail')->name('user.verify.email');
     Route::get('verify', 'UserController@confirm')->name('user.confirm');
     Route::any('verify/resend', 'UserController@confirmResend')->name('user.confirm-resend');
     Route::group(['middleware' => ['fauth']], function () {

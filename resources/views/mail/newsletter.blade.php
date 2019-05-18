@@ -1,7 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head><title>منصة مناقصاتكم | {{trans('app.centers.contact_title')}}</title>
+<head><title>مناقصاتكم | دعوة خاصة</title>
     <style type="text/css">            .ExternalClass {
             width: 100%;
             background-color: #ecedf1;
@@ -98,6 +97,8 @@
         table {
             font-size: 100%
         }</style>
+    <link href="https://fonts.googleapis.com/css?family=Tajawal" rel="stylesheet">
+
 </head>
 <body class="ze_body">
 <table border="0" cellpadding="0" cellspacing="0"
@@ -174,12 +175,12 @@
                                                                                                        style="     mso-table-lspace: 0pt;     border-spacing: 0;font-size:100%;     mso-table-rspace: 0pt;     -webkit-text-size-adjust: 100%;     -ms-text-size-adjust: 100%;border-collapse: collapse;     mso-table-lspace: 0pt;     mso-table-rspace: 0pt;     border-spacing: 0;     -webkit-text-size-adjust: 100%;     -ms-text-size-adjust: 100%;">
                                                                                                     <tbody>
                                                                                                     <tr>
-                                                                                                        <td>
-                                                                                                            <img alt="logo"
-                                                                                                                 height="50"
-                                                                                                                 src="https://munagasatcom.com/ImagesEmail/logo_1.png"
-                                                                                                                 style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
-                                                                                                                 width="80">
+                                                                                                        <td><img
+                                                                                                                    alt="logo"
+                                                                                                                    height="50"
+                                                                                                                    src="https://munagasatcom.com/ImagesEmail/logo_1.png"
+                                                                                                                    style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
+                                                                                                                    width="80">
                                                                                                         </td>
                                                                                                         <td class="width10"
                                                                                                             width="15">
@@ -189,12 +190,12 @@
                                                                                                                  style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
                                                                                                                  width="1">
                                                                                                         </td>
-                                                                                                        <td>
-                                                                                                            <img alt="logo"
-                                                                                                                 height="50"
-                                                                                                                 src="https://munagasatcom.com/ImagesEmail/logo_2.png"
-                                                                                                                 style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
-                                                                                                                 width="80">
+                                                                                                        <td><img
+                                                                                                                    alt="logo"
+                                                                                                                    height="50"
+                                                                                                                    src="https://campaign-image.com/zohocampaigns/3_zc_v2_525883000000534029.png"
+                                                                                                                    style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
+                                                                                                                    width="80">
                                                                                                         </td>
                                                                                                         <td class="width10"
                                                                                                             width="15">
@@ -204,13 +205,13 @@
                                                                                                                  style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
                                                                                                                  width="1">
                                                                                                         </td>
-                                                                                                        <td>
-                                                                                                            <img alt="logo"
-                                                                                                                 height="50"
-                                                                                                                 src="https://munagasatcom.com/ImagesEmail/logo_3.png"
-                                                                                                                 style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
-                                                                                                                 width="80"
-                                                                                                                 class="imghvr">
+                                                                                                        <td><img
+                                                                                                                    alt="logo"
+                                                                                                                    height="50"
+                                                                                                                    src="https://munagasatcom.com/ImagesEmail/logo_3.png"
+                                                                                                                    style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
+                                                                                                                    width="80"
+                                                                                                                    class="imghvr">
                                                                                                         </td>
                                                                                                         <td width="15">
                                                                                                             <img alt="https://munagasatcom.com/ImagesEmail/blank.gif"
@@ -256,10 +257,10 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td align="right" class="align-center" width="244">
-                                                                        <a href="{{asset('/')}}"><img alt="logo" class="" height="50"
-                                                                                                      src="https://munagasatcom.com/ImagesEmail/logo.png"
-                                                                                                      style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
-                                                                                                      width="160"></a></td>
+                                                                        <a href=""><img alt="logo" class="" height="50"
+                                                                                        src="https://munagasatcom.com/ImagesEmail/logo.png"
+                                                                                        style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
+                                                                                        width="160"></a></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td height="18"><img
@@ -290,7 +291,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="background-image:url(https://munagasatcom.com/ImagesEmail/banner.jpg);background-repeat:no-repeat;background-position: center top;background-color:#636468;background-size: cover;"
+                    <td style="background-image:url(https://campaign-image.com/zohocampaigns/1_zc_v3_525883000000042092.jpg);background-repeat:no-repeat;background-position: center top;background-color:#636468;background-size: cover;"
                         valign="top">
                         <div>
                             <table border="0" cellpadding="0" cellspacing="0"
@@ -389,172 +390,128 @@
                         </div>
                     </td>
                 </tr>
-                <tr>
-                    <td style="background: #fff;">
-                        <table border="0" cellpadding="0" cellspacing="0"
-                               style="     mso-table-lspace: 0pt;     border-spacing: 0;font-size:100%;     mso-table-rspace: 0pt;     -webkit-text-size-adjust: 100%;     -ms-text-size-adjust: 100%;border-collapse: collapse;     mso-table-lspace: 0pt;     mso-table-rspace: 0pt;     border-spacing: 0;     -webkit-text-size-adjust: 100%;     -ms-text-size-adjust: 100%;"
-                               width="100%">
-                            <tbody>
+                <tr style="background: #fff;">
+                    <td>
+                        <table class="container-middle" align="center" border="0" cellpadding="0" cellspacing="0"
+                               width="560" bgcolor="F0EFEF">
                             <tr>
-                                <td style="font-size: 0;text-align: center;">
-                                    <table border="0" cellpadding="0" cellspacing="0" class="max-width600"
-                                           style="     border-spacing: 0;font-size:100%;     mso-table-rspace: 0pt;     -webkit-text-size-adjust: 100%;     -ms-text-size-adjust: 100%;mso-table-lspace: 0pt;border-collapse: collapse;     border-spacing: 0;     mso-table-rspace: 0pt;     -webkit-text-size-adjust: 100%;     -ms-text-size-adjust: 100%;max-width:600px; width: 550; display: inline-block; vertical-align: top;"
-                                           dir="rtl">
+                                <td>
+                                    <table class="mainContent" align="center" border="0" cellpadding="0" cellspacing="0"
+                                           width="528">
                                         <tbody>
                                         <tr>
-                                            <td width="20"><img alt="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                height="1"
-                                                                src="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
-                                                                width="1"></td>
-                                            <td width="560">
-                                                <table border="0" cellpadding="0" cellspacing="0"
-                                                       style="     mso-table-lspace: 0pt;     border-spacing: 0;font-size:100%;     mso-table-rspace: 0pt;     -webkit-text-size-adjust: 100%;     -ms-text-size-adjust: 100%;border-collapse: collapse;     mso-table-lspace: 0pt;     mso-table-rspace: 0pt;     border-spacing: 0;     -webkit-text-size-adjust: 100%;     -ms-text-size-adjust: 100%;"
-                                                       width="100%" align="right">
+                                            <td>
+
+                                                <table class="section-item" align="left" border="0" cellpadding="0"
+                                                       cellspacing="0" width="100%">
                                                     <tbody>
-                                                    <tr></tr>
                                                     <tr>
-                                                        <td height="23"><br/><br/></td>
+                                                        <td height="15"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td style="font-size:18px; color:#315d90;font-family: 'Cairo', sans-serif;line-height:24px;text-align: right; font-weight: bold"
-                                                            dir="rtl"> مرحباً/ <span
-                                                                    style="font-size:18px; color:#747474;font-family: 'Cairo', sans-serif;line-height:18px;text-align: right;">{{$user->first_name}}</span>
+                                                        <td style="color: #484848; font-size: 16px; font-weight:bolder; font-family: 'Cairo', sans-serif;"
+                                                            align="center">احدث المناقصات
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td height="3" style="line-height: 0; font-size: 0;"><img
-                                                                    alt="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                    height="1"
-                                                                    src="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                    style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
-                                                                    width="1"></td>
+                                                        <td height="15"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td align="right"><img
-                                                                    alt="https://munagasatcom.com/ImagesEmail/black-line.png"
-                                                                    height="2"
-                                                                    src="https://munagasatcom.com/ImagesEmail/black-line.png"
-                                                                    style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
-                                                                    width="25"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td height="22" style="line-height: 0; font-size: 0;"><img
-                                                                    alt="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                    height="1"
-                                                                    src="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                    style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
-                                                                    width="1"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td height="20" style="line-height: 0; font-size: 0;"><img
-                                                                    alt="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                    height="1"
-                                                                    src="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                    style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
-                                                                    width="1"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <table border="0" cellpadding="0" cellspacing="0" dir="rtl"
-                                                                   style="     mso-table-lspace: 0pt;     border-spacing: 0;font-size:100%;     mso-table-rspace: 0pt;     -webkit-text-size-adjust: 100%;     -ms-text-size-adjust: 100%;border-collapse: collapse;     mso-table-lspace: 0pt;     mso-table-rspace: 0pt;     border-spacing: 0;     -webkit-text-size-adjust: 100%;     -ms-text-size-adjust: 100%;"
-                                                                   width="100%">
-                                                                <tbody>
-                                                                <tr>
-                                                                    <td width="6"><img
-                                                                                alt="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                                height="1"
-                                                                                src="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                                style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
-                                                                                width="1"></td>
-                                                                    <td style="font-size:18px; color:#747474;font-family: 'Cairo', sans-serif;line-height:18px;text-align: right;">
-                                                                        {{str_replace(':center',$center->name, trans('app.centers.email_title'))}} {{$request->name}}
-                                                                    </td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
+                                                        <td style="color: #a4a4a4; line-height: 25px; font-size: 12px; font-weight: normal; font-family: 'Cairo', sans-serif;">
+
+
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td height="8" style="line-height: 0; font-size: 0;"><img
-                                                                    alt="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                    height="1"
-                                                                    src="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                    style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
-                                                                    width="1"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <table border="0" cellpadding="0" cellspacing="0" dir="rtl"
-                                                                   style="     mso-table-lspace: 0pt;     border-spacing: 0;font-size:100%;     mso-table-rspace: 0pt;     -webkit-text-size-adjust: 100%;     -ms-text-size-adjust: 100%;border-collapse: collapse;     mso-table-lspace: 0pt;     mso-table-rspace: 0pt;     border-spacing: 0;     -webkit-text-size-adjust: 100%;     -ms-text-size-adjust: 100%;"
-                                                                   width="100%">
-                                                                <tbody>
-                                                                <tr>
-                                                                    <td width="6"><img
-                                                                                alt="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                                height="1"
-                                                                                src="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                                style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
-                                                                                width="1"></td>
-                                                                    <td style="font-size:18px; color:#747474;font-family: 'Cairo', sans-serif;line-height:25px;text-align: justify;">
-                                                                        من البريد الإلكتروني :<span
-                                                                                style="font-size:18px; color:#315d90;font-family: 'Cairo', sans-serif;line-height:24px;text-align: right; font-weight: bold">{{$request->email}}</span>
-                                                                    </td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td height="8" style="line-height: 0; font-size: 0;"><img
-                                                                    alt="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                    height="1"
-                                                                    src="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                    style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
-                                                                    width="1"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <table border="0" cellpadding="0" cellspacing="0" dir="rtl"
-                                                                   style="     mso-table-lspace: 0pt;     border-spacing: 0;font-size:100%;     mso-table-rspace: 0pt;     -webkit-text-size-adjust: 100%;     -ms-text-size-adjust: 100%;border-collapse: collapse;     mso-table-lspace: 0pt;     mso-table-rspace: 0pt;     border-spacing: 0;     -webkit-text-size-adjust: 100%;     -ms-text-size-adjust: 100%;"
-                                                                   width="100%">
-                                                                <tbody>
-                                                                <tr>
-                                                                    <td width="6"><img
-                                                                                alt="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                                height="1"
-                                                                                src="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                                style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
-                                                                                width="1"></td>
-                                                                    <td style="font-size:18px; color:#747474;font-family: 'Cairo', sans-serif;line-height:25px;text-align: justify;">
-                                                                        الرسالة : {{$request->message}}
-                                                                    </td>
-                                                                </tr>
-                                                                <tr></tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td height="23"><br/><br/></td>
-                                                    </tr>
-                                                    </tbody>
+
+
                                                 </table>
+
+
                                             </td>
-                                            <td width="20"><img alt="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                height="1"
-                                                                src="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
-                                                                width="1"></td>
                                         </tr>
+
+
                                         </tbody>
                                     </table>
                                 </td>
                             </tr>
-                            </tbody>
+
+
                         </table>
                     </td>
                 </tr>
+
+                @include('mail.partials.tender',['tenders'=>$tenders])
+
+                <!--section 4 -->
+                <tr bgcolor="#FFFFFF">
+                    <td>
+                        <table class="container-middle" align="center" border="0" cellpadding="0" cellspacing="0"
+                               width="560" bgcolor="F0EFEF">
+                            <tr>
+                                <td>
+                                    <table class="mainContent" align="center" border="0" cellpadding="0" cellspacing="0"
+                                           width="528">
+                                        <tbody>
+                                        <tr>
+                                            <td height="20"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+
+                                                <table class="section-item" align="left" border="0" cellpadding="0"
+                                                       cellspacing="0" width="100%">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="color: #484848; font-size: 16px; font-weight: normal; font-family: 'Cairo', sans-serif;"
+                                                            align="center">عدد المناقصات الحكومية لهذا الأسبوع
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td height="15"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="color: #315d90; line-height: 50px; font-size: 50px; font-weight: normal; font-family: 'Cairo', sans-serif;"
+                                                            align="center">
+                                                            {{$count}}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td height="30"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="center">
+                                                            <a href="https://munagasatcom.com"
+                                                               style="background-color: #315D90; font-size: 12px; padding: 10px 15px; color: #fff; text-decoration: none;font-family: 'Cairo', sans-serif;">
+                                                                مشاهدة المزيد من المناقصات</a>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td height="30"></td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+
+
+                        </table>
+                    </td>
+                </tr>
+                <!-- end section 4 -->
+
+                <tr bgcolor="#FFFFFF">
+                    <td height="35"></td>
+                </tr>
+
                 <tr>
                     <td style="background: #fff;">
                         <table border="0" cellpadding="0" cellspacing="0"
@@ -872,4 +829,3 @@
 </table>
 </body>
 </html>
-

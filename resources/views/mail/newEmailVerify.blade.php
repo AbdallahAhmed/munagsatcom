@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head><title>منصة مناقصاتكم | {{trans('app.centers.contact_title')}}</title>
+<head><title>منصة مناقصاتكم | تجديد البريد الإلكتروني</title>
     <style type="text/css">            .ExternalClass {
             width: 100%;
             background-color: #ecedf1;
@@ -257,9 +257,9 @@
                                                                 <tr>
                                                                     <td align="right" class="align-center" width="244">
                                                                         <a href="{{asset('/')}}"><img alt="logo" class="" height="50"
-                                                                                                      src="https://munagasatcom.com/ImagesEmail/logo.png"
-                                                                                                      style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
-                                                                                                      width="160"></a></td>
+                                                                                        src="https://munagasatcom.com/ImagesEmail/logo.png"
+                                                                                        style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
+                                                                                        width="160"></a></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td height="18"><img
@@ -455,25 +455,12 @@
                                                                     width="1"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>
-                                                            <table border="0" cellpadding="0" cellspacing="0" dir="rtl"
-                                                                   style="     mso-table-lspace: 0pt;     border-spacing: 0;font-size:100%;     mso-table-rspace: 0pt;     -webkit-text-size-adjust: 100%;     -ms-text-size-adjust: 100%;border-collapse: collapse;     mso-table-lspace: 0pt;     mso-table-rspace: 0pt;     border-spacing: 0;     -webkit-text-size-adjust: 100%;     -ms-text-size-adjust: 100%;"
-                                                                   width="100%">
-                                                                <tbody>
-                                                                <tr>
-                                                                    <td width="6"><img
-                                                                                alt="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                                height="1"
-                                                                                src="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                                style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
-                                                                                width="1"></td>
-                                                                    <td style="font-size:18px; color:#747474;font-family: 'Cairo', sans-serif;line-height:18px;text-align: right;">
-                                                                        {{str_replace(':center',$center->name, trans('app.centers.email_title'))}} {{$request->name}}
-                                                                    </td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </td>
+                                                        <td height="8" style="line-height: 0; font-size: 0;"><img
+                                                                    alt="https://munagasatcom.com/ImagesEmail/blank.gif"
+                                                                    height="1"
+                                                                    src="https://munagasatcom.com/ImagesEmail/blank.gif"
+                                                                    style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
+                                                                    width="1"></td>
                                                     </tr>
                                                     <tr>
                                                         <td height="8" style="line-height: 0; font-size: 0;"><img
@@ -497,37 +484,7 @@
                                                                                 style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
                                                                                 width="1"></td>
                                                                     <td style="font-size:18px; color:#747474;font-family: 'Cairo', sans-serif;line-height:25px;text-align: justify;">
-                                                                        من البريد الإلكتروني :<span
-                                                                                style="font-size:18px; color:#315d90;font-family: 'Cairo', sans-serif;line-height:24px;text-align: right; font-weight: bold">{{$request->email}}</span>
-                                                                    </td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td height="8" style="line-height: 0; font-size: 0;"><img
-                                                                    alt="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                    height="1"
-                                                                    src="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                    style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
-                                                                    width="1"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <table border="0" cellpadding="0" cellspacing="0" dir="rtl"
-                                                                   style="     mso-table-lspace: 0pt;     border-spacing: 0;font-size:100%;     mso-table-rspace: 0pt;     -webkit-text-size-adjust: 100%;     -ms-text-size-adjust: 100%;border-collapse: collapse;     mso-table-lspace: 0pt;     mso-table-rspace: 0pt;     border-spacing: 0;     -webkit-text-size-adjust: 100%;     -ms-text-size-adjust: 100%;"
-                                                                   width="100%">
-                                                                <tbody>
-                                                                <tr>
-                                                                    <td width="6"><img
-                                                                                alt="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                                height="1"
-                                                                                src="https://munagasatcom.com/ImagesEmail/blank.gif"
-                                                                                style="     outline: none;     display: inline-block;     text-decoration: none;     height: auto;border: none;     outline: none;     text-decoration: none;     display: inline-block;     height: auto;"
-                                                                                width="1"></td>
-                                                                    <td style="font-size:18px; color:#747474;font-family: 'Cairo', sans-serif;line-height:25px;text-align: justify;">
-                                                                        الرسالة : {{$request->message}}
+                                                                        يمكنك التفعيل من خلال الرابط التالي :
                                                                     </td>
                                                                 </tr>
                                                                 <tr></tr>
@@ -537,6 +494,27 @@
                                                     </tr>
                                                     <tr>
                                                         <td height="23"><br/><br/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td height="23" style="line-height: 0; font-size: 0;"
+                                                            align="center">
+                                                            <table border="0" cellpadding="0" cellspacing="0"
+                                                                   class="center"
+                                                                   style="     border-spacing: 0;font-size:100%;     mso-table-rspace: 0pt;     -webkit-text-size-adjust: 100%;     -ms-text-size-adjust: 100%;mso-table-lspace: 0pt;border-collapse: collapse;     border-spacing: 0;     mso-table-rspace: 0pt;     -webkit-text-size-adjust: 100%;     -ms-text-size-adjust: 100%;;border-radius: 3px;"
+                                                                   width="146">
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td align="center" height="40"
+                                                                        style="border-radius: 35px; background: rgba(54, 169, 224, .6);;font-size:13px;color:#ffffff;text-transform:uppercase;font-family:'Cairo', sans-serif;font-weight: 700;"
+                                                                        width="146"><a
+                                                                                href="{{route('user.verify.email',['lang'=>app()->getLocale(),'key'=>urlencode(\Crypt::encryptString($user->email)),'new'=>urlencode(\Crypt::encryptString($email))])}}"
+                                                                                style="color:#ffffff;display:block;text-decoration:none;line-height: 40px;"
+                                                                                zcurl_name="l_1">تفعيل البريد الإلكتروني</a>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
                                                     </tr>
                                                     </tbody>
                                                 </table>

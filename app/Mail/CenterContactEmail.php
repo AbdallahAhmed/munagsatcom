@@ -13,14 +13,18 @@ class CenterContactEmail extends Mailable
     use Queueable, SerializesModels;
 
     public $request = array();
+    public $user = array();
+    public $center = array();
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Request $request)
+    public function __construct(Request $request, $user, $center)
     {
         $this->request = $request;
+        $this->user = $user;
+        $this->center = $center;
     }
 
     /**
@@ -30,6 +34,6 @@ class CenterContactEmail extends Mailable
      */
     public function build()
     {
-        return $this->from('info@munagasatcom.com', 'Feedback')->view('mail.centers_contact', ['request' => $this->request]);
+        return $this->from('info@munagasatcom.com', 'Feedback')->subject('')->view('mail.centers_contact', ['request' => $this->request, 'user' => $this->user, 'center' => $this->center]);
     }
 }

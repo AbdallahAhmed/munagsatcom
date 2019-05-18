@@ -52,6 +52,7 @@ Route::group(['prefix' => '/{lang?}', 'middleware' => ['localization']], functio
     Route::any('reset', 'UserController@reset')->name('reset-password');
     Route::post('verify', 'UserController@verify')->name('user.verify');
     Route::get('verify/link', 'UserController@verifyLink')->name('user.verify.link');
+    Route::get('verify/email', 'UserController@verifyEmail')->name('user.verify.email');
     Route::get('verify', 'UserController@confirm')->name('user.confirm');
     Route::any('verify/resend', 'UserController@confirmResend')->name('user.confirm-resend');
     Route::group(['middleware' => ['fauth']], function () {

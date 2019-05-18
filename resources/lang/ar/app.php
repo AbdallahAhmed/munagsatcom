@@ -98,6 +98,8 @@ return [
     'message_min' => 'محتوى الرسالة على الاقل 10 حروف',
     'logo_error' => 'الصورة يجب ان تكون من نوع png,jpeg,jpg',
     'check_email' => 'برجاء الرجوع الى البريد الألكتروني و ادخال الكود المرسل',
+    'check_email_to_verify' => 'برجاء الرجوع الى البريد الألكتروني الجديد للتفعيل',
+    'email_updated' => 'تم تجديد البريد الإلكتروني بنجاح',
     'company_waiting' => 'تم التفعيل بنجاح.',
     'unit_name' => 'اسم الوحدة',
     'add_new_units' => 'اضافة المزيد من الوحدات',
@@ -200,7 +202,7 @@ return [
     'date_transactions' => 'تاريخ العملية',
     'no_transactions' => 'لا يوجد عملية فى هذا الشهر',
     'profile_update' => 'تحديت بياناتك ',
-    'profile_updated' => 'تم تحديث بمنشأةياناتك',
+    'profile_updated' => 'تم تحديث بيانات المنشأة',
     'events' => [
         'successfully_register' => 'مرحبا تم التسجيل بنجاح ',
         'successfully_register_company' => 'تم التسجيل بنجاح ،  حسابك في انتظار التفعيل من قبل الإدارة',

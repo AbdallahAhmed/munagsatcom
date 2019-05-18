@@ -16,6 +16,7 @@ return [
     'center.contact' => "تم إرسال رسالة إلى مركز الاعمال ':center' من قبل ':name' من البريد الإلكتروني ':email' - الرسالة: ':message'",
     'center.refund' => ':center تم رفض دفع مركز الخدمة وإسترجاع المبلغ المدفوع ',
     'chance.approval' => '"تم إعتماد طلباتك على الفرصة ":chance',
-    'chance.self.approval' => 'لقد قمت بإعتماد طلبات ":user" على الفرصة ":chance"'
+    'chance.self.approval' => 'لقد قمت بإعتماد طلبات ":user" على الفرصة ":chance"',
+    'email.update' => 'لقد تم تغير بريدك الإلكتروني إلى :email'
 
 ];

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\ResetPasswordMail;
 use App\Mail\VerificationMail;
+use App\Mail\VerifyNewEmail;
 use App\Mail\WelcomeMail;
 use App\Models\Center;
 use App\Models\Companies_empolyees;
@@ -136,6 +137,7 @@ class UserController extends Controller
             'first_name' => 'required|alpha|min:3',
             'last_name' => 'required|alpha|min:3',
             'phone_number' => 'min:10',
+            'email' => 'unique:users,email,' . fauth()->id()
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -152,6 +154,16 @@ class UserController extends Controller
         $user->first_name = $request->get('first_name');
         $user->last_name = $request->get('last_name');
         $user->phone_number = $request->get('phone_number');
+        $email = $request->filled('email') ? $request->get('email') : null;
+        if ($email && ($email != $user->email)) {
+            try {
+                Mail::to($email)->send(new VerifyNewEmail($user, $email));
+            } catch (\Exception $exception) {
+
+            }
+            $user->save();
+            return redirect()->back()->with('message', trans('app.profile_updated') . ' - ' . trans('app.check_email_to_verify'));
+        }
 
         $user->save();
         return redirect()->back()->with('message', trans('app.profile_updated'));
@@ -253,8 +265,6 @@ class UserController extends Controller
      */
     public function verifyLink(Request $request)
     {
-
-
         $user = User::where('email', \Crypt::decryptString(urldecode($request->get('key'))))->first();
         if ($user) {
             if ($user->code == $request->get('code')) {
@@ -268,6 +278,32 @@ class UserController extends Controller
                 return redirect()->back()->with('waiting', trans('app.company_waiting'));
             } else
                 return redirect()->back()->withErrors(['wrong_code' => trans('app.wrong_code')]);
+        } else {
+            return redirect()->back()->withErrors(['wrong_email' => trans('app.email_not_found')]);
+        }
+    }
+
+    /**
+     * GET {lang}/verify/email
+     * @route user.verify.email
+     * @param Request $request
+     * @return string
+     */
+    public function verifyEmail(Request $request)
+    {
+        $user = User::where('email', \Crypt::decryptString(urldecode($request->get('key'))))->first();
+        if ($user) {
+            $user->email = \Crypt::decryptString(urldecode($request->get('new')));
+            $user->username = $user->email;
+            $user->save();
+            $notification = new Notifications();
+            $notification->key = 'email.update';
+            $notification->data = null;
+            $notification->user_id = $user->id;
+            $notification->isRead = 0;
+            $notification->save();
+            fauth()->login($user);
+            return redirect()->route('index')->with(['messages' => [trans('app.email_updated')], 'status' => 'success']);
         } else {
             return redirect()->back()->withErrors(['wrong_email' => trans('app.email_not_found')]);
         }
@@ -305,9 +341,9 @@ class UserController extends Controller
             $user->code = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
             $user->save();
             session()->put('email', $request->get('email'));
-            try{
+            try {
                 Mail::to($user->email)->send(new VerificationMail($user));
-            }catch (\Exception $exception){
+            } catch (\Exception $exception) {
 
             }
             return redirect()->route('user.confirm')->with('status', trans('app.check_email'));
@@ -333,10 +369,9 @@ class UserController extends Controller
             $user->code = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
             $user->save();
             session()->put('email', $request->get('email'));
-            try{
-
-            }catch (\Exception $exception){
+            try {
                 Mail::to($user->email)->send(new ResetPasswordMail($user));
+            } catch (\Exception $exception) {
             }
             return redirect()->route('reset-password');
         }

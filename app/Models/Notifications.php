@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\User;
+use function GuzzleHttp\Psr7\str;
 use Illuminate\Database\Eloquent\Model;
 
 class Notifications extends Model
@@ -71,7 +72,7 @@ class Notifications extends Model
                 $data['chance_id'] = $extra->chance_id;
                 return $data;
             default:
-                $data['message'] = trans('notifications.'.$this->key);
+                $data['message'] = str_replace(':email', fauth()->user()->email, trans('notifications.'.$this->key));
                 return $data;
         }
     }

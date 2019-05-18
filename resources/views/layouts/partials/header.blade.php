@@ -104,7 +104,7 @@
 
                             <li><a href="{{route('user.show')}}">{{trans('app.setting')}}</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="{{route('user.recharge')}}">{{trans('app.payments')}}</a></li>
+                            <li><a href="{{route('user.recharge')}}" style="font-weight: bold;">{{trans('app.payments')}}</a></li>
                             <li role="separator" class="divider"></li>
                             <li>
                                 <a href="{{ route('flogout') }}"

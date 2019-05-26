@@ -39,7 +39,8 @@
                 </ul>
             </div>
             <div class="col-sm-12 col-md-12">
-                <div class="copyright"><a href="javascript:void(0)"> {{trans('app.rights')}}©{{date('Y')}}  </a></div>
+                <div class="copyright"><a href="javascript:void(0)"> {{trans('app.rights')}}©{{date('Y')}} </a> | Powered by
+                    <a href="http://dubartermisr.com" class="text-white font-bold">DubarterMisr</a></div>
 
             </div>
         </div>

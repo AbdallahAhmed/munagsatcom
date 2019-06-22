@@ -42,7 +42,7 @@ class ServicesController extends Controller
             }
         }
 
-        $this->data["sort"] = $sort = (Request::filled("sort")) ? Request::get("sort") : "id";
+        $this->data["sort"] = $sort = (Request::filled("sort")) ? Request::get("sort") : "created_at";
         $this->data["order"] = $order = (Request::filled("order")) ? Request::get("order") : "DESC";
         $this->data['per_page'] = (Request::filled("per_page")) ? (int)Request::get("per_page") : 40;
 

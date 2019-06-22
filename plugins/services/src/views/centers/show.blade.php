@@ -35,9 +35,9 @@
                     <div class="col-lg-4 col-md-4">
                         <div class="form-group">
                             <select name="sort" class="form-control chosen-select chosen-rtl">
-                                <option
-                                    value="name"
-                                    @if ($sort == "name")  selected='selected' @endif>{{ ucfirst(trans("services::centers.attributes.name")) }}</option>
+                                <option value="created_at" @if ($sort == "created_at")  selected='selected' @endif>{{ ucfirst(trans("services::centers.attributes.created_at")) }}</option>
+
+                                <option value="name" @if ($sort == "name")  selected='selected' @endif>{{ ucfirst(trans("services::centers.attributes.name")) }}</option>
                             </select>
                             <select name="order" class="form-control chosen-select chosen-rtl">
                                 <option

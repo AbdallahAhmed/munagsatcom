@@ -58,7 +58,7 @@ return [
     'enter_employee_name' => 'ادخل اسم الموظف المراد البحث عنه',
     'enter_employee_email' => 'ادخل البريد الالكترونى الموظف المراد البحث عنه',
     'add_chance' => 'طرح فرصة',
-    'add_center' => 'اضافة مركز خدمي',
+    'add_center' => 'اضافة مركز اعمال',
     'view_only' => 'مشاهدة فقط',
     'saved_successfully' => 'تم الحفظ',
     'save' => 'حفظ',

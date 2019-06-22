@@ -203,12 +203,9 @@ class CompaniesController extends Controller
                 $query->where('name', 'LIKE', '%' . request('q') . '%');
             });
         }
-        if (Request::filled('to')) {
-            $query->where('created_at', '<=', request('to'));
-        }
-
-        if (Request::filled('form')) {
-            $query->where('created_at', '>=', request('form'));
+        if (Request::filled('to') && Request::filled('from')) {
+//            $query->where('created_at', '<=', request('to'));
+            $query->whereBetween('created_at',[request('from'),request('to')]);
         }
 
 

@@ -29,7 +29,7 @@
                                 <label class="col-xs-12 col-md-3"> {{trans('app.sectors.sector')}}</label>
                                 <div class="col-xs-12 col-md-9 new-f-group">
                                     <div class="form-group clearfix">
-                                        <select type="text" class="effect-9 form-control" name="sector_id">
+                                        <select class="effect-9 form-control" name="sector_id">
                                             <option value="">{{trans('app.sectors.choose_sector')}}</option>
                                             @foreach($sectors as $sector)
                                                 @if($sector_id == $sector->id)
@@ -47,7 +47,7 @@
                                 <label class="col-xs-12 col-md-3"> {{trans('app.services.services')}}</label>
                                 <div class="col-xs-12 col-md-9 new-f-group">
                                     <div class="form-group clearfix">
-                                        <select type="text" class="effect-9 form-control" name="service_id">
+                                        <select  class="effect-9 form-control" name="service_id">
                                             <option value="0">{{trans('app.services.choose_services')}}</option>
                                             @foreach($services as $service)
                                                 @if($service_id == $service->id)
@@ -104,10 +104,7 @@
                                                    data-content="{{trans('app.from').$service->price_from.trans("app.reyal")." : ".trans('app.to').$service->price_to.trans("app.reyal")}}">
                                                     {{$service->name}}
                                                 </a>--}}
-                                                <a href="#" title="{{trans('app.sectors.price_detail')}}"
-                                                   data-toggle="popover"
-                                                   data-trigger="hover" data-placement="bottom"
-                                                   data-content="{{$service->price_to.trans("app.reyal")}}">
+                                                <a href="javascript:void(0)" title="{{$service->name}}">
                                                     {{$service->name}}
                                                 </a>
                                             </li>

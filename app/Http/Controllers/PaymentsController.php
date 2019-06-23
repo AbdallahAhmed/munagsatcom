@@ -131,7 +131,7 @@ class PaymentsController extends Controller
 
             $user->points = $user->points + $points;
             $user->save();
-            Transaction::create([
+            $transaction = Transaction::create([
                 'before_points' => $before_points,
                 'after_points' => $before_points + $points,
                 'points' => $points,
@@ -140,7 +140,12 @@ class PaymentsController extends Controller
                 'action' => 'points.buy',
                 'company_id' => fauth()->user()->in_company ? $user->id : 0
             ]);
-            return redirect()->route('user.points')->with(['messages' => [trans('app.done_recharge_points') . ' ' . ($points ?? '0') . ' ' . trans('app.point')], 'status' => 'success']);
+            return redirect()->route('user.points')->with(['messages' =>
+                [trans('app.done_recharge_points')
+                    . ' ' . ($points ?? '0') . ' '
+                    . trans('app.point')]
+                . '<a href="' . $transaction->invoice_path . '">' . trans('app.invoice') . '</a>',
+                'status' => 'success']);
         } else {
             return redirect()->route('user.recharge')->withErrors([$result->result->description]);
         }

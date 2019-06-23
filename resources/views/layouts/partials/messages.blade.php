@@ -3,7 +3,7 @@
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <ul class="message-alert">
             @foreach(session('messages') as $message)
-                <li>{{$message}}</li>
+                <li>{!!  $message !!}</li>
             @endforeach
         </ul>
     </div>

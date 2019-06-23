@@ -164,7 +164,11 @@
 
                                 </div>
 
-                                <div class="col-lg-6 col-md-4 hidden-sm hidden-xs"></div>
+                                <div class="col-lg-6 col-md-4 hidden-sm hidden-xs">
+                                    <a class="btn  btn-default btn-icon" href="{{Request::fullUrlWithQuery(['exports'=>true])}}" id="print" >
+                                        <i class="fa fa-file-archive-o"></i>
+                                    </a>
+                                </div>
 
                                 <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
                                     <select class="form-control per_page_filter">
@@ -180,7 +184,7 @@
                             </div>
                             <div class="table-responsive">
                                 <table cellpadding="0" cellspacing="0" border="0"
-                                       class="table table-striped table-hover">
+                                       class="table table-striped table-hover" id="printTable">
                                     <thead>
                                     <tr>
                                         <th style="width:35px"><input type="checkbox" class="i-checks check_all"
@@ -545,8 +549,6 @@
                 $(".filter-form").submit();
             });
         });
-
     </script>
-
 @endpush
 

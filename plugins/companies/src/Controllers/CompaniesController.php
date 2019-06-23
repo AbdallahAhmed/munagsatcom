@@ -3,6 +3,7 @@
 namespace Dot\Companies\Controllers;
 
 use Action;
+use App\Exports\TransactionExporter;
 use App\Mail\CompanyStatusChange;
 use App\Models\Transaction;
 use Dot\Chances\Models\Sector;
@@ -12,6 +13,7 @@ use Dot\Platform\Controller;
 use Dot\Users\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 use Redirect;
 use Request;
 
@@ -161,7 +163,6 @@ class CompaniesController extends Controller
             abort(404);
         }
 
-
         $this->data["sort"] = (Request::filled("sort")) ? Request::get("sort") : "created_at";
         $this->data["order"] = (Request::filled("order")) ? Request::get("order") : "DESC";
         $this->data['per_page'] = (Request::filled("per_page")) ? Request::get("per_page") : NULL;
@@ -205,12 +206,15 @@ class CompaniesController extends Controller
         }
         if (Request::filled('to') && Request::filled('from')) {
 //            $query->where('created_at', '<=', request('to'));
-            $query->whereBetween('created_at',[request('from'),request('to')]);
+            $query->whereBetween('created_at', [request('from'), request('to')]);
         }
 
 
         $this->data["transactions"] = $query->paginate($this->data['per_page']);
 
+        if (Request::filled('exports')) {
+            return Excel::download(new TransactionExporter($this->data["transactions"]), 'transactions.xlsx');
+        }
         return view("companies::transactions", $this->data);
     }
 

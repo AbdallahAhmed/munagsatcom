@@ -15,6 +15,7 @@ Route::group([
     $route->group(["prefix" => "tenders"], function ($route) {
         $route->any('/', ["as" => "admin.tenders.show", "uses" => "TenderController@index"]);
         $route->any('/create', ["as" => "admin.tenders.create", "uses" => "TenderController@create"]);
+        $route->any('/import', ["as" => "admin.tenders.import", "uses" => "TenderController@import"]);
         $route->any('/{id}/edit', ["as" => "admin.tenders.edit", "uses" => "TenderController@edit"]);
         $route->any('/delete', ["as" => "admin.tenders.delete", "uses" => "TenderController@delete"]);
         $route->any('/{status}/status', ["as" => "admin.tenders.status", "uses" => "TenderController@status"]);

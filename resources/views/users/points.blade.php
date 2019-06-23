@@ -82,7 +82,7 @@
                                             <td>{{$transaction->after_points}}</td>
                                             <td>{{ $transaction->created_at->format('Y/m/d')}}</td>
                                             <td>
-                                                <a {{!in_array($transaction->action, ['tenders.buy', 'add.chance', 'center.add'])?"disabled":''}} href="{{$transaction->invoice_path}}"
+                                                <a {{!in_array($transaction->action, ['tenders.buy', 'add.chance', 'center.add','points.buy'])?"disabled":''}} href="{{$transaction->invoice_path}}"
                                                    target="_blank" class="btn btn-link" title="{{trans('app.print')}}"><i class="fa fa-print"></i></a>
                                             </td>
                                         </tr>

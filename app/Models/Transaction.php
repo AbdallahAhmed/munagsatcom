@@ -102,7 +102,7 @@ class Transaction extends Model
      */
     public function getInvoicePathAttribute()
     {
-        if (in_array($this->action, ['tenders.buy', 'add.chance', 'center.add'])){
+        if (in_array($this->action, ['tenders.buy', 'add.chance', 'center.add','points.buy'])){
             return route('invoices.pdf', ['lang' => 'ar', 'id' => $this->id]);
         }else{
            return  'javascript:void(0)';

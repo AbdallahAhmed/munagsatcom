@@ -16,7 +16,7 @@ class InvoiceController extends Controller
      */
     public function invoices(Request $request, $id)
     {
-        $transaction = Transaction::whereIn('action', ['tenders.buy', 'add.chance', 'center.add'])
+        $transaction = Transaction::whereIn('action', ['tenders.buy', 'add.chance', 'center.add','points.buy'])
             ->where('id', $id)
             ->firstOrFail();
         if ($transaction->user_id == fauth()->id() ||

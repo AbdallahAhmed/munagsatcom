@@ -3,11 +3,13 @@
 namespace Dot\Tenders\Controllers;
 
 use Action;
+use App\Imports\TenderImport;
 use Dot\I18n\Models\Place;
+use Dot\Media\Models\Media;
 use Illuminate\Support\Facades\Auth;
 use Dot\Platform\Controller;
 use Dot\Tenders\Models\Tender;
-use Dot\Tenders\Models\TenderMeta;
+use Maatwebsite\Excel\Importer;
 use Redirect;
 use Request;
 use View;
@@ -26,6 +28,13 @@ class TenderController extends Controller
      */
     protected $data = [];
 
+
+    private $importer;
+
+    public function __construct(Importer $importer)
+    {
+        $this->importer = $importer;
+    }
 
     /**
      * Show all posts
@@ -173,7 +182,7 @@ class TenderController extends Controller
             if (!$tender->is_cb_ratio_active) {
                 $tender->cb_downloaded_price = Request::get('cb_downloaded_price');
             } else {
-                $tender->cb_downloaded_price = ((float)((option("rules_book_percentage", 1))/100.0)) * $tender->cb_real_price;
+                $tender->cb_downloaded_price = ((float)((option("rules_book_percentage", 1)) / 100.0)) * $tender->cb_real_price;
             }
 
             $tender->org_id = Request::get('org_id', 0);
@@ -250,7 +259,7 @@ class TenderController extends Controller
             if (!$tender->is_cb_ratio_active) {
                 $tender->cb_downloaded_price = Request::get('cb_downloaded_price');
             } else {
-                $tender->cb_downloaded_price =  ((float)((option("rules_book_percentage", 1))/100.0)) * $tender->cb_real_price;
+                $tender->cb_downloaded_price = ((float)((option("rules_book_percentage", 1)) / 100.0)) * $tender->cb_real_price;
             }
 
             $tender->org_id = Request::get('org_id', 0);
@@ -259,7 +268,7 @@ class TenderController extends Controller
             $tender->activity_id = Request::get('activity_id', 0);
             $tender->number = Request::get("number", 0);
 
-            $tender->status = Request::get("status",  $tender->status);
+            $tender->status = Request::get("status", $tender->status);
 
             //dates
             $tender->published_at = Request::get('published_at', date("Y-m-d H:i:s"));
@@ -307,5 +316,20 @@ class TenderController extends Controller
 
         return json_encode($places);
     }
+
+    /**
+     *
+     */
+    public function import()
+    {
+        if (Request::isMethod("post")) {
+            $media = (new  Media())->saveFile(Request::file('file'));
+            $logs = "dsadasdas";
+            $this->importer->import(new TenderImport($logs), uploads_path(Media::find($media)->path));
+            dd($logs);
+        }
+        return view('tenders::import');
+    }
+
 
 }
